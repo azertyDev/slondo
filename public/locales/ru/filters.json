@@ -1,5 +1,8 @@
 {
   "car": {
+    "color": {
+      "name": "Цвет"
+    },
     "first_position_turbo": {
       "name": "Первая позиция (TURBO)"
     },
@@ -515,11 +518,14 @@
     }
   },
   "transport": {
-    "engine_capacity": {
-      "name": "Объем двигателя"
+    "type": {
+      "name": "Тип транспорта"
     },
-    "year": {
-      "name": "Год выпуска"
+    "color": {
+      "name": "Цвет"
+    },
+    "engine_capacity": {
+      "name": "Объем двигателя в литрах"
     },
     "three_twelve_tone": {
       "name": "От 3,5 до 12 т."
@@ -973,7 +979,7 @@
       "name": "Машиномест"
     },
     "location": {
-      "name": "Тип недвижимости"
+      "name": "Расположение"
     },
     "floor": {
       "name": "Этаж"
@@ -1326,7 +1332,7 @@
     "cargo_passenger": {
       "name": "Грузовой и легковой"
     },
-    "three_or_more ": {
+    "three_or_more": {
       "name": "3 и более"
     },
     "separate": {
@@ -2000,7 +2006,7 @@
     "aviation_industry": {
       "name": "Авиационная промышленность"
     },
-    "Automotive_industry": {
+    "automotive_industry": {
       "name": "Автомобильная промышленность"
     },
     "mining_industry": {
@@ -2345,6 +2351,9 @@
     "experience": {
       "name": "Опыт"
     },
+    "require_experience": {
+      "name": "Требуемый опыт"
+    },
     "free_cshedule": {
       "name": "Свободный график"
     }
@@ -2523,6 +2532,9 @@
     }
   },
   "goods": {
+    "color": {
+      "name": "Цвет"
+    },
     "white": {
       "name": "Белый"
     },
@@ -4232,19 +4244,19 @@
     "housekeepers": {
       "name": "Ключницы"
     },
-    "Stickers": {
+    "stickers": {
       "name": "Наклейки"
     },
-    "candles_and_candle_holders": {
+    "candles_candle_holders": {
       "name": "Свечи и подсвечники"
     },
-    "figurines_and_figurines": {
+    "figurines": {
       "name": "Статуэтки и фигурки"
     },
-    "Photo_albums_and_frames": {
+    "photo_albums_frames": {
       "name": "Фотоальбомы и рамки"
     },
-    "Watch": {
+    "watch": {
       "name": "Часы"
     },
     "screens": {
@@ -4469,7 +4481,7 @@
     "kitchen_accessories": {
       "name": "Кухонные аксессуары"
     },
-    "Other": {
+    "other": {
       "name": "Другое"
     },
     "for_care_of_household_appliances": {
@@ -4849,9 +4861,6 @@
     },
     "used": {
       "name": "Б/У"
-    },
-    "other": {
-      "name": "Другое"
     }
   },
   "electronics": {
@@ -5307,33 +5316,6 @@
     },
     "straps_and_accessories": {
       "name": "Ремешки и аксессуары"
-    },
-    "Amazon": {
-      "name": "Amazon"
-    },
-    "Digma": {
-      "name": "Digma"
-    },
-    "Gmini": {
-      "name": "Gmini"
-    },
-    "Onyx": {
-      "name": "Onyx"
-    },
-    "PocketBook": {
-      "name": "PocketBook"
-    },
-    "Ritmix": {
-      "name": "Ritmix"
-    },
-    "Sony": {
-      "name": "Sony"
-    },
-    "Texet": {
-      "name": "Texet"
-    },
-    "Wexler": {
-      "name": "Wexler"
     },
     "wired": {
       "name": "Проводные"
@@ -6296,7 +6278,7 @@
       "name": "Для планшетов"
     },
     "material": {
-      "name": "Материал"
+      "name": "Материал дома"
     },
     "metal": {
       "name": "Металл"
@@ -7696,6 +7678,10 @@
     }
   },
   "engine_capacity": "Объем двигателя в литрах",
+  "year": "Год выпуска",
+  "mileage": "Пробег в км.",
+  "brand": "Бренд",
+  "season": "Сезон",
   "bayonet": "Байонет",
   "usb_connector": "USB разъем",
   "build_in_speakers": "Встренные динамики",
@@ -7734,13 +7720,9 @@
   "price": "Цена",
   "noSelect": "Не выбрано",
   "example_title": "Название заголовока",
-  "year": "Год выпуска",
-  "mileage": "Пробег в км.",
   "manufacturer": "Производитель",
   "models": "Модели",
   "model": "Модель",
-  "car_engine_type": "Тип двигателя",
-  "car_engine_capacity": "Объем двигателя",
   "comfort_salon_title": "Комфорт и салон",
   "comfort": "Дополнительно",
   "car_climate": "Климат",
@@ -7761,18 +7743,13 @@
   "electricity": "Электричество",
   "water": "Водоснабжение",
   "sewerage": "Канализация",
-  "material": "Материал дома",
   "layout": "Планировка",
   "repair": "Ремонт",
   "transport_type": "Тип транспорта",
   "employment": "Тип занятости",
-  "require_experience": "Требуемый опыт",
   "nature": "Характер работы",
   "place": "Место оказания",
   "specialization": "Специализация",
-  "color": "Цвет",
-  "brand": "Бренд",
-  "season": "Сезон",
   "type": "Тип",
   "sub_type": "Вид",
   "size": "Размер",
@@ -7825,23 +7802,12 @@
   "auto_renewal": "Авто продление",
   "offer_price": "Предлогать цену",
   "display_phone": "Показывать свой номер",
-  "house_furnished": "Мебелирован",
-  "area": "Площадь в м²",
-  "area_in_hundred": "Площадь в сот.",
-  "land_area": "Площадь участка в м²",
-  "general_area": "Общая площадь в м²",
-  "living_area": "Жилая площадь в м²",
-  "kitchen_area": "Площадь кухни в м²",
-  "floor": "Этаж",
-  "floors": "Этажость",
-  "parking_spaces": "Машиномест",
   "posted": "Кто разместил",
   "ceiling_height": "Высота потолков в метрах",
   "number_of_bedrooms": "Количество спален",
   "engine_type": "Тип двигателя",
   "utilities": "Коммунальные услуги включены",
   "with_pledge": "С залогом",
-  "location": "Расположение",
   "heating": "Отопление",
   "lift": "Лифт",
   "metro": "До метро",

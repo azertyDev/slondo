@@ -44,11 +44,12 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                         multiple
                         disableRequire
                         name='estate_type'
-                        labelTxt={t('estate_type')}
                         values={values}
                         onBlur={handleBlur}
+                        transKey='estate.'
                         handleSelect={handleSelect}
                         items={filters.estate_type}
+                        labelTxt={t('estate.estate_type.name')}
                     />
                 </Grid>
                 <Grid
@@ -60,12 +61,13 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                     <DropDownSelect
                         multiple
                         name='room'
-                        labelTxt={t('room')}
                         disableRequire
                         values={values}
                         onBlur={handleBlur}
+                        transKey='estate.'
                         items={filters.room}
                         handleSelect={handleSelect}
+                        labelTxt={t('estate.room.name')}
                     />
                 </Grid>
                 <Grid
@@ -76,7 +78,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                 >
                     <FromToInputs
                         handleInput={handleNumericInput}
-                        labelTxt={t('general_area')}
+                        labelTxt={t('estate.general_area.name')}
                         firstInputProps={{
                             value: values.general_area_from,
                             name: 'general_area_from',
@@ -97,7 +99,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                 >
                     <FromToInputs
                         handleInput={handleNumericInput}
-                        labelTxt={t('land_area')}
+                        labelTxt={t('estate.land_area.name')}
                         firstInputProps={{
                             value: values.land_area_from,
                             name: 'land_area_from',
@@ -128,9 +130,10 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='material'
                             values={values}
                             onBlur={handleBlur}
-                            labelTxt={t('material')}
+                            transKey='estate.'
                             handleSelect={handleSelect}
                             items={filters.material}
+                            labelTxt={t('estate.material.name')}
                         />
                     </Grid>
                     <Grid
@@ -145,9 +148,10 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='metro'
                             values={values}
                             onBlur={handleBlur}
-                            labelTxt={t('metro')}
-                            handleSelect={handleSelect}
+                            transKey='estate.'
                             items={filters.metro}
+                            handleSelect={handleSelect}
+                            labelTxt={t('estate.metro.name')}
                         />
                     </Grid>
                     <Grid
@@ -162,9 +166,10 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='repair'
                             values={values}
                             onBlur={handleBlur}
-                            labelTxt={t('repair')}
+                            transKey='estate.'
                             handleSelect={handleSelect}
                             items={filters.repair}
+                            labelTxt={t('estate.repair.name')}
                         />
                     </Grid>
                     <Grid
@@ -178,10 +183,11 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             disableRequire
                             name='heating'
                             values={values}
+                            transKey='estate.'
                             onBlur={handleBlur}
-                            labelTxt={t('heating')}
                             handleSelect={handleSelect}
                             items={filters.heating}
+                            labelTxt={t('estate.heating.name')}
                         />
                     </Grid>
                     <Grid item container xs={12} sm={8} spacing={1}>
@@ -189,18 +195,18 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             <Grid item container xs={12} sm={4} alignItems='flex-end'>
                                 <CheckboxSelect
                                     name='with_pledge'
-                                    labelTxt={t('filters:with_pledge')}
                                     checked={values.with_pledge}
                                     handleCheckbox={handleCheckbox}
+                                    labelTxt={t('estate.with_pledge.name')}
                                 />
                             </Grid>
                         )}
                         <Grid item container xs={12} sm={8} alignItems='flex-end'>
                             <CheckboxSelect
                                 name='furnished'
-                                labelTxt={t('filters:furnished')}
                                 checked={values.furnished}
                                 handleCheckbox={handleCheckbox}
+                                labelTxt={t('estate.furnished.name')}
                             />
                         </Grid>
                     </Grid>

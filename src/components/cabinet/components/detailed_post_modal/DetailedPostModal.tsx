@@ -67,7 +67,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const {user} = useContext(UserCtx);
 
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
-    const suspendStatus = status === 'suspended';
+    const isNotPassModeration = status === 'blocked' || status === 'reject';
     const blockedStatus = status === 'blocked';
     const inactiveStatus = status === 'archive' || status === 'history' || status === 'sold';
 
@@ -93,7 +93,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         if (hasBuyer && isUserCreator) return 'buyer';
         if (isAuction && winner !== null && isUserCreator) return 'winner';
         if (hasOffer && !winner && isUserCreator) return 'maxOffer';
-        return isUserCreator ? '' : 'seller';
+        return isUserCreator || isNotPassModeration ? '' : 'seller';
     };
 
     if (hasBuyer) {

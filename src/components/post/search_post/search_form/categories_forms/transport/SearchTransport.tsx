@@ -82,7 +82,8 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         formik,
                         handleSelect
                     },
-                    categoryName, true
+                    categoryName,
+                    true
                 )}
                 {hasEngineCapacity && (
                     <Grid

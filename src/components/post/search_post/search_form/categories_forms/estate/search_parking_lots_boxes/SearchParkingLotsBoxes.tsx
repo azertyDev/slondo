@@ -42,9 +42,11 @@ export const SearchParkingLotsBoxes: FC<SubcategoryFormTypes> = (props) => {
                     disableRequire
                     name='estate_type'
                     values={values}
+                    transKey='estate.'
                     onBlur={handleBlur}
                     handleSelect={handleSelect}
                     items={filters.estate_type}
+                    labelTxt={t('estate.estate_type.name')}
                 />
             </Grid>
             <Grid
@@ -55,7 +57,7 @@ export const SearchParkingLotsBoxes: FC<SubcategoryFormTypes> = (props) => {
             >
                 <FromToInputs
                     handleInput={handleNumericInput}
-                    labelTxt={t('parking_spaces')}
+                    labelTxt={t('estate.parking_spaces.name')}
                     firstInputProps={{
                         value: values.parking_spaces_from,
                         name: 'parking_spaces_from',
@@ -76,7 +78,7 @@ export const SearchParkingLotsBoxes: FC<SubcategoryFormTypes> = (props) => {
             >
                 <FromToInputs
                     handleInput={handleNumericInput}
-                    labelTxt={t('area')}
+                    labelTxt={t('estate.area.name')}
                     firstInputProps={{
                         value: values.area_from,
                         name: 'area_from',

@@ -7,6 +7,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {useModal} from '@src/hooks/useModal';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
+import {INCOGNITO_PHONES} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
@@ -39,6 +40,8 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
 
     const isPublic = status === 'public';
 
+    const isIncognito = INCOGNITO_PHONES.some(p => p === authorPhones.phone);
+
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
     const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
@@ -68,12 +71,14 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                 <div className="contact-buttons">
                     <CustomButton color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
-                            <span>{t(showPhoneTxt)}</span>
-                            {showPhone && authorPhones.additional_number && (
+                            {!isIncognito && (
                                 <>
+                                    <span>{t(showPhoneTxt)}</span>
                                     <br/>
-                                    <span>{t(authorPhones.additional_number)}</span>
                                 </>
+                            )}
+                            {showPhone && authorPhones.additional_number && (
+                                <span>{t(authorPhones.additional_number)}</span>
                             )}
                         </Typography>
                     </CustomButton>

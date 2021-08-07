@@ -84,7 +84,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -130,7 +130,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                                 name='engine_capacity'
                                                 value={values.engine_capacity}
                                                 onChange={handleFracInput}
-                                                labelText={t('estate.engine_capacity.name')}
+                                                labelText={t('transport.engine_capacity.name')}
                                                 errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                             />}
                                     </Grid>
@@ -154,7 +154,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                                 name='year'
                                                 value={values.year}
                                                 onChange={handleNumericInput}
-                                                labelText={t('estate.year.name')}
+                                                labelText={t('year')}
                                                 errorMsg={getErrorMsg(errors.year, touched.year, t)}
                                             />}
                                     </Grid>
@@ -178,7 +178,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                                 name='mileage'
                                                 value={values.mileage}
                                                 onChange={handleNumericInput}
-                                                labelText={t('estate.mileage.name')}
+                                                labelText={t('mileage')}
                                                 errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                             />}
                                     </Grid>

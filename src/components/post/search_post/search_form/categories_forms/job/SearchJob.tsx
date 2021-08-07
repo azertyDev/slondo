@@ -29,8 +29,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const categoryName = category.name;
-    const isVacancy = subcategory?.name === 'vacancies';
+    const isVacancy = subcategory?.name === 'vacancy';
 
     const initVals: any = {
         employment: [],
@@ -81,10 +80,10 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                             multiple
                             name='employment'
                             values={values}
-                            transKey={`${categoryName}.`}
+                            transKey='job.'
                             items={filters.employment}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.employment.name`)}
+                            labelTxt={t(`job.employment.name`)}
                         />
                     </Grid>
                     <Grid
@@ -97,9 +96,10 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                             multiple
                             name='experience'
                             values={values}
+                            transKey='job.'
                             items={filters.experience}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`)}
+                            labelTxt={t(`job.${isVacancy ? 'require_experience' : 'experience'}.name`)}
                         />
                     </Grid>
                     <Grid
@@ -111,10 +111,11 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                         <DropDownSelect
                             multiple
                             name='nature'
+                            transKey='job.'
                             values={values}
                             items={filters.nature}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.nature.name`)}
+                            labelTxt={t(`job.nature.name`)}
                         />
                     </Grid>
                 </>}

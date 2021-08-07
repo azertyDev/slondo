@@ -29,12 +29,13 @@ import {AuthCtx, ErrorCtx} from '@src/context';
 import {useTranslation} from "next-i18next";
 import {useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
+import {INCOGNITO_PHONES} from "@src/constants";
 
 type PostContentTypes = {
     post,
     showPhone,
     handleShowPhone,
-    authorPhones: {phone: string, additional_number: string}
+    authorPhones: { phone: string, additional_number: string }
     setFetchedPostData: () => Promise<void>
 };
 
@@ -55,6 +56,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     } = props;
 
     const {t} = useTranslation('post');
+
+    const isIncognito = INCOGNITO_PHONES.some(p => p === authorPhones.phone);
 
     const {setErrorMsg} = useContext(ErrorCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
@@ -341,12 +344,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="contact">
                         <CustomButton color='primary' onClick={handleShowPhone}>
                             <Typography variant='subtitle1' component='p'>
-                                <span>{t(showPhoneTxt)}</span>
-                                {showPhone && authorPhones.additional_number && (
+                                {!isIncognito && (
                                     <>
-                                        <br />
-                                        <span>{t(authorPhones.additional_number)}</span>
+                                        <span>{t(showPhoneTxt)}</span>
+                                        <br/>
                                     </>
+                                )}
+                                {showPhone && authorPhones.additional_number && (
+                                    <span>{t(authorPhones.additional_number)}</span>
                                 )}
                             </Typography>
                         </CustomButton>
@@ -457,6 +462,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <OwnerAuctionInfo
                         post={post}
+                        authorPhones={authorPhones}
                         setFetchedPostData={setFetchedPostData}
                     />
                 </Hidden>

@@ -65,8 +65,8 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                                 <CabinetCard
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleSettingsOpen={handleSettingsOpen(data)}
                                     handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    handleSettingsOpen={!!handleSettingsOpen ? handleSettingsOpen(data) : null}
                                 />
                             </Box>
                         ))}
