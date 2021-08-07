@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect} from 'react';
+import {FC, useContext} from 'react';
 import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
@@ -6,8 +6,6 @@ import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {useStyles} from './useStyles';
-import {useRouter} from 'next/router';
-
 
 type SyncSlidersProps = {
     isCreator: boolean,
@@ -43,15 +41,6 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const {isAuth} = useContext(AuthCtx).auth;
-    const {back} = useRouter();
-
-    useEffect(() => {
-        console.log(window && window.history);
-    }, []);
-
-    const goToPreviousPath = () => async () => {
-        await window.history.back();
-    };
 
     const copyUrl = () => {
         const copiedUrl = window.location.href;
@@ -81,7 +70,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 </CustomSlider>
                 <div className="icon-buttons">
                     <Hidden lgUp>
-                        <IconButton className="backspace-btn" onClick={goToPreviousPath}>
+                        <IconButton className="backspace-btn">
                             <KeyboardBackspace />
                         </IconButton>
                     </Hidden>
