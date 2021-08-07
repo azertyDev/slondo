@@ -10,8 +10,10 @@ import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {Footer} from '@src/components/footer/Footer';
-import {ErrorCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {useModal} from "@src/hooks";
+import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 
 
 export const ShowPostContainer: FC = () => {
@@ -100,9 +102,24 @@ export const ShowPostContainer: FC = () => {
     const [isFetch, setIsFetch] = useState(false);
     const [postData, setPostData] = useState(initialPostData);
     const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
     const {data} = postData;
     const {showPhone} = authorPhones;
+
+    const {
+        modalOpen: safeDealOpen,
+        handleModalOpen: handleOpenSafeDeal,
+        handleModalClose: handleCloseSafeDeal
+    } = useModal();
+
+    const handleSafeDeal = () => {
+        if (isAuth) {
+            handleOpenSafeDeal();
+        } else {
+            setAuthModalOpen(true);
+        }
+    };
 
     const handleShowPhone = async () => {
         try {
@@ -200,8 +217,9 @@ export const ShowPostContainer: FC = () => {
                         <PostContent
                             post={data}
                             showPhone={showPhone}
-                            handleShowPhone={handleShowPhone}
                             authorPhones={authorPhones}
+                            handleSafeDeal={handleSafeDeal}
+                            handleShowPhone={handleShowPhone}
                             setFetchedPostData={setFetchedPostData}
                         />
                     </Grid>
@@ -211,6 +229,7 @@ export const ShowPostContainer: FC = () => {
                                 post={data}
                                 showPhone={showPhone}
                                 authorPhones={authorPhones}
+                                handleSafeDeal={handleSafeDeal}
                                 handleShowPhone={handleShowPhone}
                                 setFetchedPostData={setFetchedPostData}
                             />
@@ -221,8 +240,14 @@ export const ShowPostContainer: FC = () => {
                     </Hidden>
                 </Grid>
             </Container>
-            <Footer />
-            <ErrorModal />
+            <Footer/>
+            <ErrorModal/>
+            <SafeDealModal
+                post={postData}
+                open={safeDealOpen}
+                onClose={handleCloseSafeDeal}
+                handleRefresh={setFetchedPostData}
+            />
         </>
     );
 };

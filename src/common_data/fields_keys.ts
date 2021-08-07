@@ -1,6 +1,7 @@
 export const fieldRequiredTxt = 'fieldIsRequired';
 
 export const noTranslatableFields = [
+    'os',
     'duration',
     'engine_capacity',
     'mileage',

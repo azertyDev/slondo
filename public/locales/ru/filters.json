@@ -4864,6 +4864,9 @@
     }
   },
   "electronics": {
+    "color": {
+      "name": "Цвет"
+    },
     "used": {
       "name": "Б/У"
     },

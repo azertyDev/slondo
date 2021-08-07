@@ -27,9 +27,9 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
 
     return (
         <ResponsiveModal
+            maxWidth='xs'
             openDialog={open}
             handleCloseDialog={handleClose}
-            maxWidth='xs'
         >
             <ModalHeader
                 title={title}

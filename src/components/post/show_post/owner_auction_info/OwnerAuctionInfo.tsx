@@ -1,4 +1,4 @@
-import {FC, useContext, useState} from 'react';
+import {FC, useContext} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
@@ -13,6 +13,7 @@ type OwnerAuctionInfoPropsType = {
     showPhone?,
     authorPhones?,
     handleShowPhone?,
+    handleSafeDeal: () => void,
     setFetchedPostData: () => Promise<void>
 };
 
@@ -22,6 +23,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
         showPhone,
         authorPhones,
         handleShowPhone,
+        handleSafeDeal,
         setFetchedPostData
     } = props;
 
@@ -64,8 +66,8 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 showPhone={showPhone}
                 authorPhones={authorPhones}
                 handleFollow={handleFollow}
+                handleSafeDeal={handleSafeDeal}
                 handleShowPhone={handleShowPhone}
-                setFetchedPostData={setFetchedPostData}
             />
         </div>
     );

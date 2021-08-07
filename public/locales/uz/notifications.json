@@ -13,7 +13,7 @@
     "secure_regular_post_published": "",
     "secure_regular_post_deactivated": "",
     "secure_regular_post_rejected_moderation": "",
-    "secure_purchase_paid": "Xavfsiz Xarid puli to’landi",
+    "secure_purchase_paid": "Xavfsiz xarid puli to’landi",
     "secure_purchase_rejected": "Xavfsiz Xarid bekor qilindi",
     "secure_purchase_successfully": "Xavfsiz Xarid yakunlandi",
     "auc_passed_moderation": "Аuktsion moderatsiydan o’tdi",
@@ -30,6 +30,7 @@
     "auto_renewal_activated": "«Auksion avtouzaytirish» imkoniyati ishga tushdi"
   },
   "descriptions": {
+    "secure_post_failed_moderation": "Xavfsiz xaridli № {{ads_id}} e'lon moderatsiya tomonidan rad etildi",
     "secure_post_successfully": "Tabriklaymiz, № {{ads_id}} Sonli e’lon bo’yicha Xavfsiz Xarid muvaffaqiyatli amalga oshirildi. Mablag’ sotuvchining kartasiga yuborildi",
     "secure_purchase_successfully": "Tabriklaymiz, № {{ads_id}} Sonli e’lon bo’yicha Xavfsiz Xarid muvaffaqiyatli amalga oshirildi. Mablag’ sotuvchining kartasiga yuborildi",
     "new_rating": "{{user_name}} foydalanuvchi sizga {{value}} baho berdi",

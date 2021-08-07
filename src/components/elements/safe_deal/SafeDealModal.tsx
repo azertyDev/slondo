@@ -1,13 +1,12 @@
-import {FC, useContext, useState} from 'react';
-import {Grid} from '@material-ui/core';
-import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {UserPaymentCard} from "./UserPaymentCard";
-import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
-import {myUzCardAPI} from "@src/api/api";
-import {useModal} from "@src/hooks";
-import {ErrorCtx} from "@src/context";
+import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
-import {useTranslation} from "next-i18next";
+import {Grid} from '@material-ui/core';
+import {UserPaymentCard} from "./UserPaymentCard";
+import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
+import {myUzCardAPI} from "@src/api/api";
+import {ErrorCtx} from "@src/context";
+import {PostInfo} from "@src/components/elements/safe_deal/PostInfo";
+import {useUserPaymentCard} from "@src/hooks";
 
 type UserPaymentCardModalProps = {
     post?,
@@ -24,12 +23,16 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
         handleRefresh
     } = props;
 
-    const {t} = useTranslation('post');
-
+    const hasPost = !!post;
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
 
-    const {modalOpen: safeDealOpen, handleModalOpen: handleOpenSafeDeal, handleModalClose: handleCloseSafeDeal} = useModal();
+    const {
+        userCard,
+        fetchUserCard,
+        isFetchUserCard,
+        handleResetUserCard
+    } = useUserPaymentCard();
 
     const createP2pHold = async () => {
         try {
@@ -44,37 +47,49 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
             await handleRefresh();
 
             unstable_batchedUpdates(() => {
-                handleCloseSafeDeal();
+                onClose();
                 setIsFetch(false);
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
+                onClose();
                 setIsFetch(false);
-                handleCloseSafeDeal();
                 setErrorMsg(e.message);
             });
         }
     };
 
+    useEffect(() => {
+        open && fetchUserCard();
+    }, [open]);
+
     return (
         <ResponsiveModal
+            maxWidth='lg'
             openDialog={open}
             handleCloseDialog={onClose}
         >
             <Grid container>
-                <Grid item xs={6}>
-                    <UserPaymentCard/>
-                </Grid>
-                <Grid item xs={6}>
-                    <ConfirmModal
-                        open={safeDealOpen}
-                        title={t('buy_safe_deal')}
-                        confirmTxt={t('common:yes')}
-                        cancelTxt={t('common:no')}
-                        handleConfirm={createP2pHold}
-                        handleClose={handleCloseSafeDeal}
+                <Grid item xs={hasPost ? 8 : 12}>
+                    <UserPaymentCard
+                        onClose={onClose}
+                        hasPost={hasPost}
+                        userCard={userCard}
+                        fetchUserCard={fetchUserCard}
+                        isFetchUserCard={isFetchUserCard}
+                        handleResetUserCard={handleResetUserCard}
                     />
                 </Grid>
+                {hasPost && !isFetchUserCard && (
+                    <Grid item xs={4}>
+                        <PostInfo
+                            price={post.data.price}
+                            author={post.data.author}
+                            createP2P={createP2pHold}
+                            disable={!userCard.cardId || isFetch}
+                        />
+                    </Grid>
+                )}
             </Grid>
         </ResponsiveModal>
     );

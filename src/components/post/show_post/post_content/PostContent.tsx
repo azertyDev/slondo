@@ -35,6 +35,7 @@ type PostContentTypes = {
     post,
     showPhone,
     handleShowPhone,
+    handleSafeDeal: () => void,
     authorPhones: { phone: string, additional_number: string }
     setFetchedPostData: () => Promise<void>
 };
@@ -52,6 +53,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         showPhone,
         authorPhones,
         handleShowPhone,
+        handleSafeDeal,
         setFetchedPostData
     } = props;
 
@@ -263,7 +265,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <div>
                             <Typography variant='h6' className="price">
                                 {numberPrettier(post.price) + ' ' + t(`common:${post.currency.name}`)}
-                                {!post.condition.name && (
+                                {!!post.condition.name && (
                                     <div className="condition">
                                         <Typography variant="h6">{t(`post:${post.model?.condition?.name}`)}</Typography>
                                     </div>
@@ -386,8 +388,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden mdDown>
                     <div className="post-category">
                         <Typography variant="subtitle1" color="initial">
-                            {t(`categories:${transKey}.name`)}
-                            &nbsp;-&nbsp;
+                            {t(`categories:${transKey}.name`)}&nbsp;-&nbsp;
                             {t(`categories:${transKey}.${post.adsable.sub_category.name}.name`)}
                             {
                                 post.adsable?.type &&
@@ -463,6 +464,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <OwnerAuctionInfo
                         post={post}
                         authorPhones={authorPhones}
+                        handleSafeDeal={handleSafeDeal}
                         setFetchedPostData={setFetchedPostData}
                     />
                 </Hidden>

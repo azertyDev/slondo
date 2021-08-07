@@ -10,6 +10,7 @@ import {ServiceItem} from '@src/components/post/create_post/third_step/common_fo
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {useStyles} from './useStyles';
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 
 type PaymentDeliveryPropsType = {
     values,
@@ -35,27 +36,29 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const hasExchange = !!site_services.exchange[categoryName] || !categoryName;
     const hasDelivery = !!site_services.delivery[categoryName] || !categoryName;
 
-    const {userCard, fetchUserCard} = useUserPaymentCard();
-    const hasCard = !!userCard.cardId;
+    const {isFetchUserCard, fetchUserCard} = useUserPaymentCard();
 
-    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const {
+        modalOpen: safeDealOpen,
+        handleModalOpen: handleOpenSafeDeal,
+        handleModalClose: handleCloseSafeDeal
+    } = useModal();
 
-    const handleSafeDealCheckBox = (e) => {
-        if (!isCommonForm || hasCard) {
-            handleCheckbox('safe_deal')(e);
+    const handleSafeDealCheckBox = async (e) => {
+        if (isCommonForm) {
+            if (e.target.checked) {
+                const card = await fetchUserCard();
+                e.target.checked = true;
+                !!card
+                    ? handleCheckbox('safe_deal')(e)
+                    : handleOpenSafeDeal();
+            } else {
+                handleCheckbox('safe_deal')(e);
+            }
         } else {
-            handleModalOpen();
+            handleCheckbox('safe_deal')(e);
         }
     };
-
-    const handleCloseSafeDealModal = () => {
-        fetchUserCard();
-        handleModalClose();
-    };
-
-    useEffect(() => {
-        isCommonForm && fetchUserCard();
-    }, []);
 
     const classes = useStyles();
     return (
@@ -85,12 +88,14 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 alignItems="center"
                                 justifyContent='flex-start'
                             >
-                                <ServiceItem
-                                    icon={<SafeIcon/>}
-                                    serviceText={t('common:safe_deal')}
-                                    checked={values.safe_deal}
-                                    handleCheckbox={handleSafeDealCheckBox}
-                                />
+                                {isFetchUserCard
+                                    ? <CustomCircularProgress/>
+                                    : <ServiceItem
+                                        icon={<SafeIcon/>}
+                                        serviceText={t('common:safe_deal')}
+                                        checked={values.safe_deal}
+                                        handleCheckbox={handleSafeDealCheckBox}
+                                    />}
                             </Grid>
                             {!iconMode && (
                                 <Grid
@@ -210,8 +215,8 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                 </Grid>
             )}
             <SafeDealModal
-                open={modalOpen}
-                onClose={handleCloseSafeDealModal}
+                open={safeDealOpen}
+                onClose={handleCloseSafeDeal}
             />
         </Grid>
     );

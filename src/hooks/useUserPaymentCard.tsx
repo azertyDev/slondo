@@ -39,6 +39,7 @@ export const useUserPaymentCard = () => {
                 number: card.number
             });
             setIsFetchUserCard(false);
+            return card;
         } catch (e) {
             setUserCard(initUserCard);
             setIsFetchUserCard(false);

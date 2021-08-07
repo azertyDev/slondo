@@ -4846,6 +4846,9 @@
     }
   },
   "electronics": {
+    "color": {
+      "name": "Rangi"
+    },
     "used": {
       "name": "Iste’molda bo’lgan"
     },

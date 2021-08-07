@@ -265,7 +265,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     <Typography variant="subtitle1" gutterBottom>
                                         {!isJob && (
                                             <>
-                                                {t('color')}
+                                                {t(`${categoryName}.color.name`)}
                                                 {<span className='error-text'>*&nbsp;</span>}
                                                 <br />
                                             </>
