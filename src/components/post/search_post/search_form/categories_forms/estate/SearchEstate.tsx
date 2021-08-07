@@ -91,7 +91,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
-            case 'commercialProperty':
+            case 'commercial_real_estate':
                 return <SearchCommercialProperty
                     formik={formik}
                     isRent={isRent}
@@ -101,7 +101,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
-            case 'land':
+            case 'land_plots':
                 return <SearchLand
                     formik={formik}
                     filters={filters}
@@ -110,7 +110,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
-            case 'parkingLotsAndBoxes':
+            case 'underground_parking_lots_boxes':
                 return <SearchParkingLotsBoxes
                     formik={formik}
                     filters={filters}

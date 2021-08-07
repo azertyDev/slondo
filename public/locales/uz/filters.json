@@ -54,9 +54,6 @@
     "assistance": {
       "name": "Haydash paytida yordam"
     },
-    "engine_capacity": {
-      "name": "litrda dvigatel hajmi"
-    },
     "body": {
       "name": "Kuzov turi"
     },
@@ -515,6 +512,9 @@
     }
   },
   "transport": {
+    "color": {
+      "name": "Rangi"
+    },
     "white": {
       "name": "Oq"
     },
@@ -693,10 +693,10 @@
       "name": "ishlab chiqaruvchi"
     },
     "condition": {
-      "name": "holat"
+      "name": "Holati"
     },
     "new": {
-      "name": "yangi"
+      "name": "Yangi"
     },
     "used": {
       "name": "Ishlatilgan"
@@ -964,7 +964,7 @@
       "name": "Маshinao’rin"
     },
     "location": {
-      "name": "Ko’chmas mulk turi"
+      "name": "Joylashuvi"
     },
     "three_or_more": {
       "name": "3 va undan ko'p"
@@ -1224,7 +1224,7 @@
     "capital_repairs": {
       "name": "To’liq"
     },
-    "designer": {
+    "designers": {
       "name": "Dizaynerlik"
     },
     "one_room": {
@@ -1313,9 +1313,6 @@
     },
     "cargo_passenger": {
       "name": "Yuk va yengil"
-    },
-    "three_or_more ": {
-      "name": "3 va undan ko'p"
     },
     "separate": {
       "name": "Alohida"
@@ -1988,7 +1985,7 @@
     "aviation_industry": {
       "name": "Aviasozlik"
     },
-    "Automotive_industry": {
+    "automotive_industry": {
       "name": "Avtomobilsozlik"
     },
     "mining_industry": {
@@ -2332,6 +2329,9 @@
     },
     "experience": {
       "name": "Tajriba"
+    },
+    "require_experience": {
+      "name": "Talab qilinadigan tajriba"
     },
     "free_cshedule": {
       "name": "erkin jadval"
@@ -3871,7 +3871,7 @@
       "name": "Boshqalar"
     },
     "condition": {
-      "name": "Holat"
+      "name": "Holati"
     },
     "sub_type": {
       "name": "Turi"
@@ -4202,43 +4202,43 @@
     "floor_lamps": {
       "name": "Torsherlar"
     },
-    "Vases": {
+    "vases": {
       "name": "Vazalar"
     },
-    "Hangers": {
+    "hangers": {
       "name": "Veshalkalar"
     },
-    "Mirrors": {
+    "mirrors": {
       "name": "Oyna, ko’zgu"
     },
-    "Artificial_plants": {
+    "artificial_plants": {
       "name": "Sun’iy o’simliklar"
     },
-    "Paintings_and_posters": {
+    "paintings_posters": {
       "name": "Kartina va posterlar"
     },
-    "Housekeepers": {
+    "housekeepers": {
       "name": "Kalitgorlar"
     },
-    "Stickers": {
+    "stickers": {
       "name": "Nakleykalar"
     },
-    "Candles_and_candle_holders": {
+    "candles_candle_holders": {
       "name": "Sham va shamdonlar"
     },
-    "Figurines_and_figurines": {
+    "figurines": {
       "name": "Haykalchalar va figuralar"
     },
-    "Photo_albums_and_frames": {
+    "photo_albums_frames": {
       "name": "Fotoalbomlar va ramkalar"
     },
-    "Watch": {
+    "watch": {
       "name": "Soatlar"
     },
-    "Screens": {
+    "screens": {
       "name": "Pardalar"
     },
-    "Jewelry_boxes": {
+    "jewelry_boxes": {
       "name": "Qutichalar"
     },
     "intercoms": {
@@ -4454,11 +4454,8 @@
     "tableware_sets": {
       "name": "Idishlar to’plami"
     },
-    "Kitchen_accessories": {
+    "kitchen_accessories": {
       "name": "Oshxona aksessuarlari"
-    },
-    "Other": {
-      "name": "Boshqalar"
     },
     "for_care_of_household_appliances": {
       "name": "Maishiy texnikani parvarishlash uchun"
@@ -4827,7 +4824,7 @@
       "name": "Elektr va benzopilalar"
     },
     "condition": {
-      "name": "Holat"
+      "name": "Holati"
     },
     "new": {
       "name": "Yangi"
@@ -5292,33 +5289,6 @@
     },
     "straps_and_accessories": {
       "name": "Qayish va aksessuarlar"
-    },
-    "Amazon": {
-      "name": "Amazon"
-    },
-    "Digma": {
-      "name": "Digma"
-    },
-    "Gmini": {
-      "name": "Gmini"
-    },
-    "Onyx": {
-      "name": "Onyx"
-    },
-    "PocketBook": {
-      "name": "PocketBook"
-    },
-    "Ritmix": {
-      "name": "Ritmix"
-    },
-    "Sony": {
-      "name": "Sony"
-    },
-    "Texet": {
-      "name": "Texet"
-    },
-    "Wexler": {
-      "name": "Wexler"
     },
     "wired": {
       "name": "Simli"
@@ -7668,19 +7638,24 @@
       "name": "Boshqalar"
     },
     "breed": {
-      "name": ""
+      "name": "Zoti"
     },
     "condition": {
-      "name": ""
+      "name": "Holati"
     },
     "new": {
-      "name": ""
+      "name": "Yangi"
     },
     "used": {
-      "name": ""
+      "name": "Ishlatilgan"
     }
   },
   "engine_capacity": "litrda dvigatel hajmi",
+  "year": "Ishlab chiqarilgan yili ",
+  "mileage": "Kilometrda bosib o’tgan masofasi",
+  "brand": "Brendi",
+  "season": "Mavsum",
+
   "bayonet": "Bayonet",
   "usb_connector": "USB ulagichi",
   "build_in_speakers": "Ichki dinamiklar",
@@ -7705,7 +7680,6 @@
   "view": "Turi",
   "overview": "Yoritkichlar",
   "headlight": "Chiroqlar",
-  "assistance": "Yordamchi",
   "driving_assistance_safety_title": "Haydashda yordam va xavsizlik",
   "upholstery": "Qoplamasi",
   "climate": "Iqlim",
@@ -7726,13 +7700,9 @@
   "price": "Narxi",
   "noSelect": "Tanlanmagan",
   "example_title": "Sarlavha nomi",
-  "year": "Ishlab chiqarilgan yili ",
-  "mileage": "Kilometrda bosib o’tgan masofasi",
   "manufacturer": "Ishlab chiqaruvchi",
   "models": "Model",
   "model": "Model",
-  "car_engine_type": "Dvigatel – motor turi",
-  "car_engine_capacity": "Dvigatel sig'imi ",
   "comfort_title": "Qulaylik",
   "comfort_salon_title": "Qulaylik va salon",
   "comfort": "Qoshimchalar",
@@ -7746,7 +7716,6 @@
   "headlights": "Faralar",
   "transmission": "Uzatish qutisi",
   "drive": "Uzatma",
-  "condition": "Holati",
   "сleared": "Bojxona ruxsatnomasi olingan",
   "rooms_count": "Xonalar soni",
   "balcony": "Balkon",
@@ -7755,19 +7724,13 @@
   "area_value": "Umumiy maydoni",
   "electricity": "Elektr ta'minoti",
   "sewerage": "Kanalizatsiya",
-  "material": "Uy materialli",
   "layout": "Planirovkasi",
   "repair": "Tamir",
   "transport_type": "Transport turi",
   "employment": "Bandlik turi",
-  "experience": "Tajriba",
-  "require_experience": "Talab qilinadigan tajriba",
   "nature": "Ishning tabiati",
   "place": "Xizmat ko'rsatish joyi",
   "specialization": "Ixtisosligi",
-  "color": "Rangi",
-  "brand": "Brendi",
-  "season": "Mavsum",
   "type": "Turi",
   "sub_type": "Ko'rinishi",
   "size": "Razmeri",
@@ -7820,12 +7783,6 @@
   "offer_price": "Narxni taklif qilish",
   "display_phone": "Telefon raqamingizni ko'rsatish",
   "house_furnished": "Jihozlangan",
-  "area": "Maydon m²",
-  "area_in_hundred": "Maydon sotkada",
-  "land_area": "Uchastkadagi maydon m²",
-  "general_area": "Umumiy maydoni m²",
-  "living_area:": "Yashash maydoni m²",
-  "kitchen_area": "Oshxona maydoni m²",
   "parking_spaces": "Mashina joylari",
   "posted": "E'lon egasi",
   "ceiling_height": "Shift balandligi metrda",
@@ -7833,7 +7790,6 @@
   "engine_type": "Dvigatel turi",
   "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
   "with_pledge": "Garov bilan",
-  "location": "Joylashuvi",
   "heating": "Uy isitish",
   "lift": "Lift",
   "metro": "Metrogacha",

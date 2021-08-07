@@ -16,9 +16,9 @@ import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTa
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initCardData} from '@src/common_data/common';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
-import {useStyles} from './useStyles';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {CabinetTabs} from '@src/components/cabinet/components/cabinet_tabs/CabinetTabs';
+import {useStyles} from './useStyles';
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');

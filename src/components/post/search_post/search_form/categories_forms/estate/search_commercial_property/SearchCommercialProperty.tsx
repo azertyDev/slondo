@@ -6,7 +6,6 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {SubcategoryFormTypes} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
 
-
 export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
     const {
         isRent,
@@ -44,8 +43,10 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
                     name='estate_type'
                     values={values}
                     onBlur={handleBlur}
+                    transKey='estate.'
                     handleSelect={handleSelect}
                     items={filters.estate_type}
+                    labelTxt={t('estate.estate_type.name')}
                 />
             </Grid>
             <Grid
@@ -60,8 +61,10 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
                     disableRequire
                     values={values}
                     onBlur={handleBlur}
+                    transKey='estate.'
                     items={filters.location}
                     handleSelect={handleSelect}
+                    labelTxt={t('estate.location.name')}
                 />
             </Grid>
             {isRent && (
@@ -76,9 +79,11 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
                         name='payment'
                         disableRequire
                         values={values}
+                        transKey='estate.'
                         onBlur={handleBlur}
                         items={filters.payment}
                         handleSelect={handleSelect}
+                        labelTxt={t('estate.payment.name')}
                     />
                 </Grid>
             )}
@@ -90,7 +95,7 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
             >
                 <FromToInputs
                     handleInput={handleNumericInput}
-                    labelTxt={t('area')}
+                    labelTxt={t('estate.area.name')}
                     firstInputProps={{
                         value: values.area_from,
                         name: 'area_from',
@@ -115,8 +120,10 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
                     disableRequire
                     values={values}
                     onBlur={handleBlur}
+                    transKey='estate.'
                     items={filters.repair}
                     handleSelect={handleSelect}
+                    labelTxt={t('estate.repair.name')}
                 />
             </Grid>
             <Grid
@@ -130,9 +137,11 @@ export const SearchCommercialProperty: FC<SubcategoryFormTypes> = (props) => {
                     name='posted'
                     disableRequire
                     values={values}
+                    transKey='estate.'
                     onBlur={handleBlur}
                     items={filters.posted}
                     handleSelect={handleSelect}
+                    labelTxt={t('estate.posted.name')}
                 />
             </Grid>
         </Grid>

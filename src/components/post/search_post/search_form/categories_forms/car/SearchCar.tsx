@@ -66,6 +66,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         onBlur={handleBlur}
                         items={filters.manufacturer}
                         handleSelect={handleSelect}
+                        labelTxt={t('manufacturer')}
                     />
                 </Grid>
                 <Grid
@@ -80,6 +81,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         values={values}
                         onBlur={handleBlur}
                         handleSelect={handleSelect}
+                        labelTxt={t('model')}
                         items={values.manufacturer?.models}
                     />
                 </Grid>
@@ -138,6 +140,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         values={values}
                         onBlur={handleBlur}
                         handleSelect={handleSelect}
+                        transKey='car.'
+                        labelTxt={t('car.transmission.name')}
                         items={filters.transmission}
                     />
                 </Grid>
@@ -159,8 +163,10 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                             name='body'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
                             items={filters.body}
+                            handleSelect={handleSelect}
+                            transKey='car.'
+                            labelTxt={t('car.body.name')}
                         />
                     </Grid>
                     <Grid
@@ -177,6 +183,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
                             items={filters.engine_type}
+                            transKey='car.'
+                            labelTxt={t('car.engine_type.name')}
                         />
                     </Grid>
                     <Grid
@@ -212,8 +220,10 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                             name='drive'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
                             items={filters.drive}
+                            transKey='car.'
+                            handleSelect={handleSelect}
+                            labelTxt={t('car.drive.name')}
                         />
                     </Grid>
                     <Grid
@@ -228,8 +238,10 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                             name='color'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
+                            transKey='car.'
                             items={filters.colors}
+                            handleSelect={handleSelect}
+                            labelTxt={t('color')}
                         />
                     </Grid>
                     <Grid
@@ -242,10 +254,10 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                             multiple
                             disableRequire
                             name='other'
-                            labelTxt={t('additional')}
                             values={values}
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
+                            labelTxt={t('additional')}
                             items={filters.other}
                         />
                     </Grid>

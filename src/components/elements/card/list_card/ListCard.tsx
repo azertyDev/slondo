@@ -176,7 +176,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             container
                             alignItems='center'
                             item xs={12} sm={6} md={6}
-                            justify={isXsDown ? 'flex-start' : 'flex-end'}
+                            justifyContent={isXsDown ? 'flex-start' : 'flex-end'}
                         >
                             <Typography variant='subtitle2' component='p'>
                                 <span className='color-silver'>
@@ -193,7 +193,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                         item
                         sm={7}
                         container
-                        justify='center'
+                        justifyContent='center'
                         direction='column'
                         className='location'
                     >

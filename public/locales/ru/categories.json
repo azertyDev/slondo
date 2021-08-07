@@ -651,7 +651,7 @@
       "layout_designer": {
         "name": "Верстальщик"
       },
-      "designer": {
+      "designers": {
         "name": "Дизайнеры"
       },
       "setting_pc": {

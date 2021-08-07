@@ -27,7 +27,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
 
     const {t} = useTranslation('filters');
 
-    const isVacancy = subcategoryName === 'vacancies';
+    const isVacancy = subcategoryName === 'vacancy';
     const hasPosition = !!filters.position;
 
     const {title, params} = useUrlParams();
@@ -134,7 +134,9 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.experience}
                                     transKey={`${categoryName}.`}
                                     handleSelect={handleSelect}
-                                    labelTxt={`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`}
+                                    labelTxt={
+                                        t(`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`)
+                                    }
                                 />
                             </Grid>
                             <Grid
@@ -161,7 +163,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                             >
                                 <CheckboxSelect
                                     name='urgent_work'
-                                    labelTxt={t('filters:urgent_work')}
+                                    labelTxt={t(`${categoryName}.urgent_work.name`)}
                                     checked={!!values?.urgent_work?.id}
                                     handleCheckbox={handleCheckbox}
                                 />

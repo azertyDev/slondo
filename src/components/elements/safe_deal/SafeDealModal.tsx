@@ -1,5 +1,5 @@
 import {FC, useContext, useState} from 'react';
-import {Container, Grid} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import {UserPaymentCard} from "./UserPaymentCard";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";

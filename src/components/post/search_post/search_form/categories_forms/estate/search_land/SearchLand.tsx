@@ -40,11 +40,13 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                 <DropDownSelect
                     multiple
                     disableRequire
-                    name='estate_type'
                     values={values}
+                    transKey='estate.'
+                    name='estate_type'
                     onBlur={handleBlur}
                     handleSelect={handleSelect}
                     items={filters.estate_type}
+                    labelTxt={t('estate.estate_type.name')}
                 />
             </Grid>
             <Grid
@@ -57,10 +59,12 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                     multiple
                     name='location'
                     disableRequire
+                    transKey='estate.'
                     values={values}
                     onBlur={handleBlur}
                     items={filters.location}
                     handleSelect={handleSelect}
+                    labelTxt={t('estate.location.name')}
                 />
             </Grid>
             <Grid
@@ -71,7 +75,7 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
             >
                 <FromToInputs
                     handleInput={handleNumericInput}
-                    labelTxt={t('area_in_hundred')}
+                    labelTxt={t('estate.area_in_hundred.name')}
                     firstInputProps={{
                         value: values.area_from,
                         name: 'area_from',
@@ -94,10 +98,12 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                     multiple
                     disableRequire
                     name='electricity'
+                    transKey='estate.'
                     values={values}
                     onBlur={handleBlur}
                     handleSelect={handleSelect}
                     items={filters.electricity}
+                    labelTxt={t('estate.electricity.name')}
                 />
             </Grid>
             <Grid
@@ -110,10 +116,12 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                     multiple
                     disableRequire
                     name='sewerage'
+                    transKey='estate.'
                     values={values}
                     onBlur={handleBlur}
-                    handleSelect={handleSelect}
                     items={filters.sewerage}
+                    handleSelect={handleSelect}
+                    labelTxt={t('estate.sewerage.name')}
                 />
             </Grid>
             <Grid
@@ -128,8 +136,10 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                     name='gas'
                     values={values}
                     onBlur={handleBlur}
-                    handleSelect={handleSelect}
+                    transKey='estate.'
                     items={filters.gas}
+                    handleSelect={handleSelect}
+                    labelTxt={t('estate.gas.name')}
                 />
             </Grid>
             <Grid
@@ -144,8 +154,10 @@ export const SearchLand: FC<SubcategoryFormTypes> = (props) => {
                     name='water'
                     values={values}
                     onBlur={handleBlur}
-                    handleSelect={handleSelect}
+                    transKey='estate.'
                     items={filters.water}
+                    handleSelect={handleSelect}
+                    labelTxt={t('estate.water.name')}
                 />
             </Grid>
         </Grid>
