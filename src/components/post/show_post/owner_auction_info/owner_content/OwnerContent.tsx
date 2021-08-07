@@ -72,13 +72,13 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     <CustomButton color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             {!isIncognito && (
-                                <span>{t(showPhoneTxt)}</span>
+                                <>
+                                    <span>{t(showPhoneTxt)}</span>
+                                    <br/>
+                                </>
                             )}
                             {showPhone && authorPhones.additional_number && (
-                                <>
-                                    <br/>
-                                    <span>{t(authorPhones.additional_number)}</span>
-                                </>
+                                <span>{t(authorPhones.additional_number)}</span>
                             )}
                         </Typography>
                     </CustomButton>
