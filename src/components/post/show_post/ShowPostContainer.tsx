@@ -14,6 +14,7 @@ import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
+import {AuthContainer} from "@src/components/header/auth/AuthContainer";
 
 
 export const ShowPostContainer: FC<any> = ({referer}) => {
@@ -241,14 +242,15 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
                     </Hidden>
                 </Grid>
             </Container>
-            <Footer/>
-            <ErrorModal/>
             <SafeDealModal
                 post={postData}
                 open={safeDealOpen}
                 onClose={handleCloseSafeDeal}
                 handleRefresh={setFetchedPostData}
             />
+            <ErrorModal/>
+            <AuthContainer/>
+            <Footer/>
         </>
     );
 };
