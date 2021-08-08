@@ -1,6 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
-import {FILTERS_PER_PAGE} from '@src/constants';
+import {ITEMS_PER_PAGE_SEARCH} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
 import {Box, Typography} from '@material-ui/core';
 import {cookies} from '@src/helpers';
@@ -42,7 +42,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             const query: any = {
                 page,
-                itemsPerPage: FILTERS_PER_PAGE,
+                itemsPerPage: ITEMS_PER_PAGE_SEARCH,
                 ...urlParams
             };
 
@@ -92,14 +92,16 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                             data={posts}
                         />
                     </Box>
-                    <Box display='flex' justifyContent='center' mt='70px'>
-                        <CustomPagination
-                            currentPage={page}
-                            totalItems={itemsCount}
-                            itemsPerPage={FILTERS_PER_PAGE}
-                            handlePagePagination={handlePagePagination}
-                        />
-                    </Box>
+                    {itemsCount > ITEMS_PER_PAGE_SEARCH && (
+                        <Box display='flex' justifyContent='center' mt='70px'>
+                            <CustomPagination
+                                currentPage={page}
+                                totalItems={itemsCount}
+                                itemsPerPage={ITEMS_PER_PAGE_SEARCH}
+                                handlePagePagination={handlePagePagination}
+                            />
+                        </Box>
+                    )}
                 </>}
         </div>
     );

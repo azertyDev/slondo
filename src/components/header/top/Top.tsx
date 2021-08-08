@@ -1,6 +1,5 @@
-import {FC, useContext, useState} from 'react';
+import {FC, useContext} from 'react';
 import Link from 'next/link';
-import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
 import {
     Grid,
@@ -17,37 +16,38 @@ import {
     Container,
     Avatar
 } from '@material-ui/core';
-import {LeftDrawer} from './drawer/Drawer';
+import {UserCtx} from '@src/context';
+import {cookieOpts, cookies} from '@src/helpers';
 import {Localization} from './localization/Localization';
-import {
-    Logo,
-    QuestionIcon,
-    SurpriseIcon
-} from '@src/components/elements/icons';
+import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {Location} from '@src/components/elements/location/Location';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import {cookieOpts, cookies} from '@src/helpers';
-import {useStyles} from './useStyles';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
-import {UserCtx} from '@src/context';
+import {useTranslation} from "next-i18next";
+import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
     isAuth: boolean,
-    handleOpenModal: () => void;
-} & WithT;
+    handleOpenModal: () => void,
+    handleDrawerOpen: () => void
+
+};
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
-    const {t, handleOpenModal, isAuth} = props;
+    const {
+        isAuth,
+        handleOpenModal,
+        handleDrawerOpen
+    } = props;
+
+    const {t} = useTranslation('header');
     const {user: {avatar}} = useContext(UserCtx);
 
     const userLocation = cookies.get('user_location');
-    const trigger = useScrollTrigger({
-        threshold: 53
-    });
+    const trigger = useScrollTrigger({threshold: 53});
     const {pathname} = useRouter();
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-    const [isOpen, setIsOpen] = useState(false);
 
     const handleSelectLocation = ({region, city}) => {
         if (region) {
@@ -79,16 +79,6 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             justifyContent="flex-end"
                             className='multiple-actions'
                         >
-                            {/*<Grid item md={2}>*/}
-                            {/*    <Link href="/promotions">*/}
-                            {/*        <a>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                {t('actions')}*/}
-                            {/*            </Typography>*/}
-                            {/*            <SurpriseIcon/>*/}
-                            {/*        </a>*/}
-                            {/*    </Link>*/}
-                            {/*</Grid>*/}
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
@@ -128,7 +118,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     <Grid>
                                         <IconButton
                                             size="small"
-                                            onClick={() => setIsOpen(true)}
+                                            onClick={handleDrawerOpen}
                                         >
                                             <div className="burger-menu">
                                                 <CategorySortIcon/>
@@ -146,7 +136,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         ? <Link href='/cabinet'>
                                             <a>
                                                 <CustomButton className={classes.avatarBlock}>
-                                                    <Avatar alt="Avatar" src={avatar} />
+                                                    <Avatar alt="Avatar" src={avatar}/>
                                                 </CustomButton>
                                             </a>
                                         </Link>
@@ -165,7 +155,6 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             </Box>
                         </AppBar>
                     </Slide>
-                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </div>
             </Hidden>
         </>

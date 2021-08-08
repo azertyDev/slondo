@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';

@@ -21,7 +21,7 @@ import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {LetterIcon, RenewalIcon} from '@src/components/elements/icons';
+import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
@@ -34,6 +34,7 @@ import {INCOGNITO_PHONES} from "@src/constants";
 type PostContentTypes = {
     post,
     showPhone,
+    referer: string,
     handleShowPhone,
     handleSafeDeal: () => void,
     authorPhones: { phone: string, additional_number: string }
@@ -51,6 +52,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
         showPhone,
+        referer,
         authorPhones,
         handleShowPhone,
         handleSafeDeal,
@@ -240,6 +242,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
+                    refererURL={referer}
                     isCreator={post.creator}
                     imgs={post.images}
                     isFavorite={favorite}

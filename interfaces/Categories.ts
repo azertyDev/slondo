@@ -22,11 +22,11 @@ export type AdjustableSeats = {
 }[];
 
 export type CategoryType = IdNameType & {
-    icon: {
+    icon?: {
         url: string;
     },
-    ru_name: string;
-    smallIcon: any;
+    ru_name?: string;
+    smallIcon?: any;
     subcategory?: SubcategoryType[];
 };
 

@@ -14,9 +14,10 @@ import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
+import {AuthContainer} from "@src/components/header/auth/AuthContainer";
 
 
-export const ShowPostContainer: FC = () => {
+export const ShowPostContainer: FC<any> = ({referer}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -216,6 +217,7 @@ export const ShowPostContainer: FC = () => {
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             post={data}
+                            referer={referer}
                             showPhone={showPhone}
                             authorPhones={authorPhones}
                             handleSafeDeal={handleSafeDeal}
@@ -240,14 +242,15 @@ export const ShowPostContainer: FC = () => {
                     </Hidden>
                 </Grid>
             </Container>
-            <Footer/>
-            <ErrorModal/>
             <SafeDealModal
                 post={postData}
                 open={safeDealOpen}
                 onClose={handleCloseSafeDeal}
                 handleRefresh={setFetchedPostData}
             />
+            <ErrorModal/>
+            <AuthContainer/>
+            <Footer/>
         </>
     );
 };
