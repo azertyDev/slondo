@@ -2,6 +2,8 @@
   "additionalServices": "Qo'shimcha xizmatlar",
   "configs": "Sozlamalar",
   "buy_safe_deal": "Xavfsiz xaridni tasdiqlaysizmi?",
+  "priceForService": "Narx “Xavfsiz xarid” xizmatini o'z ichiga oladi",
+  "safeDealRules": "“Sotib olish” tugmachasini bosish orqali siz <0>“Xavfsiz xarid”</0> shartlarini qabul qilasiz.",
   "number_not_available": "Hozir raqam mavjud emas",
   "show_phone": "Raqamni ko'rsatish",
   "category": "Toifa",

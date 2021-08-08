@@ -1,12 +1,14 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
-import {Grid} from '@material-ui/core';
-import {UserPaymentCard} from "./UserPaymentCard";
-import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {myUzCardAPI} from "@src/api/api";
-import {ErrorCtx} from "@src/context";
-import {PostInfo} from "@src/components/elements/safe_deal/PostInfo";
-import {useUserPaymentCard} from "@src/hooks";
+import {unstable_batchedUpdates} from 'react-dom';
+import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
+import {UserPaymentCard} from './UserPaymentCard';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {myUzCardAPI} from '@src/api/api';
+import {ErrorCtx} from '@src/context';
+import {PostInfo} from '@src/components/elements/safe_deal/PostInfo';
+import {useUserPaymentCard} from '@src/hooks';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {useTranslation} from 'react-i18next';
 
 type UserPaymentCardModalProps = {
     post?,
@@ -24,8 +26,10 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
     } = props;
 
     const hasPost = !!post;
+    const {t} = useTranslation('common');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const {
         userCard,
@@ -65,12 +69,13 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
 
     return (
         <ResponsiveModal
-            maxWidth='lg'
+            maxWidth={isMdDown ? 'sm' : 'lg'}
             openDialog={open}
             handleCloseDialog={onClose}
         >
+            <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose} />
             <Grid container>
-                <Grid item xs={hasPost ? 8 : 12}>
+                <Grid item xs={12} lg={6}>
                     <UserPaymentCard
                         onClose={onClose}
                         hasPost={hasPost}
@@ -81,7 +86,7 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
                     />
                 </Grid>
                 {hasPost && !isFetchUserCard && (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} lg={6}>
                         <PostInfo
                             price={post.data.price}
                             author={post.data.author}

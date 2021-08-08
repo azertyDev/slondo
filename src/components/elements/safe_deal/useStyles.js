@@ -2,18 +2,12 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '10px 30px 30px 30px',
-        borderRadius: 10,
+        padding: '15px',
         '& form': {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            '& div.safe-deal-title': {
-                display: 'flex',
-                justifyContent: 'center',
-                marginBottom: '10px'
-            },
             '& label.add-card': {
                 marginLeft: '15px'
             },
@@ -36,8 +30,6 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.MuiTextField-root': {
                 '& input.MuiOutlinedInput-input': {
-                    padding: '9.5px 14px',
-                    background: '#fff',
                     borderRadius: 'inherit',
                     border: '1px solid rgba(213, 213, 213, 1)'
                 }
@@ -58,44 +50,70 @@ export const useStyles = makeStyles((theme) => ({
                     marginTop: '30px'
                 }
             }
-        },
-        '& div.save-btn-wrapper': {
-            display: 'flex',
-            justifyContent: 'flex-end'
         }
     },
     paymentCard: {
-        maxWidth: '650px',
-        minWidth: '296px',
-        padding: '35px 30px 12px',
+        width: '100%',
+        minHeight: '280px',
+        padding: '20px 30px',
         borderRadius: '25px',
-        background: '#F2F2F2',
-        boxShadow: '0px 0px 25px rgba(103, 94, 170, 0.15)',
-        '& div.card-info': {
-            marginBottom: '10px'
+        // background: 'url(/img/card-bg.png)',
+        // backgroundPosition: 'center',
+        // backgroundSize: 'cover',
+        // backgroundRepeat: 'no-repeat',
+        boxShadow: '0px 10px 25px rgba(15, 51, 107, 0.15)',
+        [theme.breakpoints.down('sm')]: {
+            padding: '20px'
         },
-        '& label > h6': {
-            fontSize: '.87rem',
-            marginBottom: '5px'
+        '& > div': {
+            height: '100%'
         },
         '& button': {
-            width: '206px',
-            height: '45px',
-            '&.MuiButtonBase-root.Mui-disabled': {
+            width: '100%',
+            '&:disabled': {
                 backgroundColor: '#E0E0E0',
                 borderRadius: '5px'
             }
         },
-        '& h6.MuiTypography-subtitle2': {
-            marginBottom: '5px'
+        '& label': {
+            '& h6': {
+                [theme.breakpoints.down('md')]: {
+                    fontSize: '0.875rem'
+                },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: '0.75rem'
+                }
+            }
         },
         '& div.MuiTextField-root': {
             '& input': {
                 padding: '12px 14px !important'
             }
         },
+        '& h6.error-text': {
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '0.75rem'
+            }
+        },
         '& p.MuiFormHelperText-root': {
             color: 'rgba(49, 49, 49, 0.6)'
+        }
+    },
+    sellerInfo: {
+        '&, & > div': {
+            height: '100%'
+        },
+        '& .MuiPaper-root': {
+            padding: 15,
+            borderRadius: 10,
+            boxShadow: '0px 10px 25px rgb(15 51 107 / 15%)'
+        },
+        '& button': {
+            width: '100%'
+        },
+        '& a.link': {
+            textDecoration: 'none',
+            color: theme.palette.common.activeTab
         }
     }
 }));

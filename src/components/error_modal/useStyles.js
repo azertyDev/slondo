@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& .error-text': {
             fontWeight: 600,
+            wordBreak: 'break-word',
             [theme.breakpoints.down('xs')]: {
                 fontSize: '1.1rem'
             }

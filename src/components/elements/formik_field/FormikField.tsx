@@ -32,7 +32,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                 {({field}) =>
                     <div>
                         {labelText && (
-                            <label>
+                            <label htmlFor={name}>
                                 <Typography variant='subtitle1' gutterBottom>
                                     {t(`filters:${labelText}`)}&nbsp;
                                     {!disableRequire && isRequired(name) && <span className='error-text'>*</span>}
@@ -65,8 +65,8 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 size='small'
                                 className={errorMsg ? 'error-border' : ''}
                             />}
-                        <Grid container className='helpers-content'>
-                            {errorMsg && (
+                        {errorMsg && (
+                            <Grid container className='helpers-content'>
                                 <Grid item xs={limit ? 9 : 12}>
                                     <Typography variant="subtitle1" className='error-text'>
                                     <span>
@@ -74,15 +74,15 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                     </span>
                                     </Typography>
                                 </Grid>
-                            )}
-                            {!!limit && (
-                                <Grid item xs={errorMsg ? 3 : 12} className='limit-txt'>
-                                    <Typography variant="subtitle1">
-                                        {`${otherProps.value.length}/${limit}`}
-                                    </Typography>
-                                </Grid>
-                            )}
-                        </Grid>
+                                {!!limit && (
+                                    <Grid item xs={errorMsg ? 3 : 12} className='limit-txt'>
+                                        <Typography variant="subtitle1">
+                                            {`${otherProps.value.length}/${limit}`}
+                                        </Typography>
+                                    </Grid>
+                                )}
+                            </Grid>
+                        )}
                     </div>}
             </Field>
         </FormControl>

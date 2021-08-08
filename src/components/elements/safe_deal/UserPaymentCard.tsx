@@ -55,7 +55,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         session: '',
         code: '',
         cardName: '',
-        expireDate: '__/__',
+        expireDate: 'гг/мм',
         phone: '+998(__) ___ __ __',
         cardNumber: '____ ____ ____ ____'
     };
@@ -181,173 +181,189 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
             <FormikProvider value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
                     {isFetchUserCard
-                        ? <CustomCircularProgress/>
-                        : <>
+                        ? <CustomCircularProgress />
+                        : <Grid container spacing={3}>
                             {!hasCard && (
-                                <div className='safe-deal-title'>
-                                    <Typography variant='subtitle1'>
+                                <Grid item xs={12}>
+                                    <Typography variant='subtitle1' component='p' align='center'>
                                         {t('add_card_for_safe_deal')}
                                     </Typography>
-                                </div>
-                            )}
-                            <Card className={classes.paymentCard}>
-                                <Grid container spacing={1} className='card-info'>
-                                    {isSmsConfirm
-                                        ? <>
-                                            <Grid
-                                                item
-                                                xs={12}
-                                            >
-                                                <FormikField
-                                                    t={t}
-                                                    name="code"
-                                                    value={code}
-                                                    placeholder={t('type_sms_code')}
-                                                    onChange={handleNumericInput}
-                                                    errorMsg={getErrorMsg(errors.code, touched.code, t)}
-                                                />
-                                            </Grid>
-                                        </>
-                                        : <>
-                                            <Grid item container xs={12}>
-                                                <Grid
-                                                    item
-                                                    xs={12}
-                                                    lg={6}
-                                                    className='card-name-wrapper'
-                                                >
-                                                    {hasCard
-                                                        ? <Typography variant='subtitle1'>
-                                                            {userCard.cardName}
-                                                        </Typography>
-                                                        : <FormikField
-                                                            t={t}
-                                                            name="cardName"
-                                                            value={cardName}
-                                                            disabled={hasCard}
-                                                            placeholder={t('cardName')}
-                                                            labelText={t('cardName')}
-                                                            onChange={handleInput}
-                                                            errorMsg={getErrorMsg(errors.cardName, touched.cardName, t)}
-                                                        />}
-                                                </Grid>
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                xs={9}
-                                                sm={6}
-                                                className='card-number-input'
-                                            >
-                                                <Typography variant='subtitle2' gutterBottom>
-                                                    {t('card_number')}:&nbsp;
-                                                    {hasCard
-                                                        ? userCard.number
-                                                        : <ReactInputMask
-                                                            alwaysShowMask
-                                                            value={cardNumber}
-                                                            mask='9999 9999 9999 9999'
-                                                            onChange={handleInput}
-                                                        >
-                                                            {() => <TextField
-                                                                fullWidth
-                                                                focused={false}
-                                                                size='small'
-                                                                name="cardNumber"
-                                                                variant="outlined"
-                                                                className={errors.cardNumber && touched.cardNumber ? 'error-border' : ''}
-                                                            />}
-                                                        </ReactInputMask>}
-                                                </Typography>
-                                                {errors.cardNumber && touched.cardNumber && (
-                                                    <Typography variant="subtitle2" className='error-text'>
-                                                <span>
-                                                    {t(`errors:${errors.cardNumber}`)}
-                                                </span>
-                                                    </Typography>
-                                                )}
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                xs={5}
-                                                sm={3}
-                                                className='expire-date-input'
-                                            >
-                                                <Typography variant='subtitle2' gutterBottom>
-                                                    {t('expiration_date')}:&nbsp;
-                                                    {hasCard
-                                                        ? expireDate
-                                                        : <ReactInputMask
-                                                            mask='99/99'
-                                                            alwaysShowMask
-                                                            value={expireDate}
-                                                            onChange={handleInput}
-                                                        >
-                                                            {() => <TextField
-                                                                fullWidth
-                                                                focused={false}
-                                                                size='small'
-                                                                name="expireDate"
-                                                                variant="outlined"
-                                                                className={errors.expireDate && touched.expireDate ? 'error-border' : ''}
-                                                            />}
-                                                        </ReactInputMask>}
-                                                </Typography>
-                                                {errors.expireDate && touched.expireDate && (
-                                                    <Typography variant="subtitle2" className='error-text'>
-                                                        <span>
-                                                            {t(`errors:${errors.expireDate}`)}
-                                                        </span>
-                                                    </Typography>
-                                                )}
-                                            </Grid>
-                                            {hasCard && (
-                                                <Grid
-                                                    item
-                                                    xs={12}
-                                                    sm={4}
-                                                >
-                                                    <Typography variant='subtitle2' gutterBottom>
-                                                        {t('balance')}:&nbsp;
-                                                        {userCard.balance}&nbsp;
-                                                        <span>{t('common:sum')}</span>
-                                                    </Typography>
-                                                </Grid>
-                                            )}
-                                            <Grid
-                                                item
-                                                xs={9}
-                                            >
-                                                {hasCard
-                                                    ? <Typography>{userCard.owner}</Typography>
-                                                    : <>
-                                                        <Typography variant='subtitle2'>
-                                                            {t('auth_reg:enter_phone')}
-                                                        </Typography>
-                                                        <FormikField
-                                                            t={t}
-                                                            type='tel'
-                                                            name="phone"
-                                                            disabled={hasCard}
-                                                            value={expireDate}
-                                                            onChange={handleInput}
-                                                            errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                                                        />
-                                                    </>}
-                                            </Grid>
-                                        </>}
                                 </Grid>
-                                <div className='save-btn-wrapper'>
-                                    <CustomButton
-                                        type='submit'
-                                        disabled={isFetch}
-                                    >
-                                        {t(`common:${hasCard
-                                            ? 'remove'
-                                            : isSmsConfirm ? 'send' : 'save'}`)}
-                                    </CustomButton>
-                                </div>
-                            </Card>
-                        </>}
+                            )}
+                            <Grid container item xs={12}>
+                                <Card className={classes.paymentCard}>
+                                    <Grid container spacing={1} alignContent='space-between'>
+                                        {isSmsConfirm
+                                            ? <>
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    sm={6}
+                                                >
+                                                    <FormikField
+                                                        t={t}
+                                                        name="code"
+                                                        value={code}
+                                                        placeholder={t('type_sms_code')}
+                                                        onChange={handleNumericInput}
+                                                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
+                                                    />
+                                                </Grid>
+                                            </>
+                                            : <>
+                                                <Grid item container xs={12}>
+                                                    <Grid item xs={12} sm={8}>
+                                                        {hasCard
+                                                            ? <Typography variant='subtitle1'>
+                                                                {userCard.cardName}
+                                                            </Typography>
+                                                            : <FormikField
+                                                                t={t}
+                                                                name="cardName"
+                                                                value={cardName}
+                                                                disabled={hasCard}
+                                                                placeholder={t('cardName')}
+                                                                labelText={t('cardName')}
+                                                                onChange={handleInput}
+                                                                errorMsg={getErrorMsg(errors.cardName, touched.cardName, t)}
+                                                            />
+                                                        }
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    sm={hasCard ? 12 : 5}
+                                                >
+                                                    {hasCard
+                                                        ? <Typography variant='subtitle2' gutterBottom>
+                                                            {t('card_number')}:&nbsp; {userCard.number}
+                                                        </Typography>
+                                                        : <>
+                                                            <label htmlFor="cardNumber">
+                                                                <Typography variant="subtitle2" gutterBottom>
+                                                                    {t('card_number')}:
+                                                                </Typography>
+                                                            </label>
+                                                            <ReactInputMask
+                                                                alwaysShowMask
+                                                                value={cardNumber}
+                                                                mask='9999 9999 9999 9999'
+                                                                onChange={handleInput}
+                                                            >
+                                                                {() => <TextField
+                                                                    id='cardNumber'
+                                                                    fullWidth
+                                                                    focused={false}
+                                                                    size='small'
+                                                                    name="cardNumber"
+                                                                    variant="outlined"
+                                                                    className={errors.cardNumber && touched.cardNumber ? 'error-border' : ''}
+                                                                />}
+                                                            </ReactInputMask>
+                                                            {errors.cardNumber && touched.cardNumber && (
+                                                                <Typography variant="subtitle2"
+                                                                            className='error-text'>
+                                                                    {t(`errors:${errors.cardNumber}`)}
+                                                                </Typography>
+                                                            )}
+                                                        </>
+                                                    }
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    xs={hasCard ? 12 : 6}
+                                                    sm={hasCard ? 12 : 3}
+                                                >
+                                                    {hasCard
+                                                        ? <Typography variant='subtitle2' gutterBottom>
+                                                            {t('expiration_date')}:&nbsp; {expireDate}
+                                                        </Typography>
+                                                        : <>
+                                                            <label htmlFor="expireDate">
+                                                                <Typography variant='subtitle2' gutterBottom>
+                                                                    {t('expiration_date')}:
+                                                                </Typography>
+                                                            </label>
+                                                            <ReactInputMask
+                                                                mask='99/99'
+                                                                alwaysShowMask
+                                                                value={expireDate}
+                                                                onChange={handleInput}
+                                                            >
+                                                                {() => <TextField
+                                                                    fullWidth
+                                                                    id='expireDate'
+                                                                    focused={false}
+                                                                    name="expireDate"
+                                                                    variant="outlined"
+                                                                    className={errors.expireDate && touched.expireDate ? 'error-border' : ''}
+                                                                />}
+                                                            </ReactInputMask>
+                                                            {errors.expireDate && touched.expireDate && (
+                                                                <Typography variant="subtitle2" className='error-text'>
+                                                                    {t(`errors:${errors.expireDate}`)}
+                                                                </Typography>
+                                                            )}
+                                                        </>
+                                                    }
+                                                </Grid>
+                                                {hasCard && (
+                                                    <Grid
+                                                        item
+                                                        xs={12}
+                                                        sm={hasCard ? 12 : 4}
+                                                    >
+                                                        <Typography variant='subtitle2' gutterBottom>
+                                                            {t('balance')}:&nbsp;
+                                                            {userCard.balance}&nbsp;
+                                                            <span>{t('common:sum')}</span>
+                                                        </Typography>
+                                                    </Grid>
+                                                )}
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    sm={hasCard ? 12 : 8}
+                                                >
+                                                    {hasCard
+                                                        ? <Typography>{userCard.owner}</Typography>
+                                                        : <>
+                                                            <label htmlFor="phone">
+                                                                <Typography variant='subtitle2' gutterBottom>
+                                                                    {t('auth_reg:enter_phone')}
+                                                                </Typography>
+                                                            </label>
+                                                            <FormikField
+                                                                t={t}
+                                                                id='phone'
+                                                                type='tel'
+                                                                name="phone"
+                                                                disabled={hasCard}
+                                                                value={expireDate}
+                                                                onChange={handleInput}
+                                                                errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
+                                                            />
+                                                        </>}
+                                                </Grid>
+                                            </>}
+                                        <Grid item xs={12} container justifyContent='flex-end'>
+                                            <Grid item xs={4}>
+                                                <CustomButton
+                                                    type='submit'
+                                                    disabled={isFetch}
+                                                >
+                                                    {t(`common:${hasCard
+                                                        ? 'remove'
+                                                        : isSmsConfirm ? 'send' : 'save'}`)}
+                                                </CustomButton>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    }
                 </Form>
             </FormikProvider>
             <ConfirmModal
