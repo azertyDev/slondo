@@ -1,45 +1,43 @@
-import {cloneElement, useState} from 'react';
+import {cloneElement, FC, useState} from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
+import {useTranslation} from "next-i18next";
+import {cookieOpts, cookies} from '@src/helpers';
 import {AppBar, Avatar, Box, Container, Grid, Popover, Hidden, Typography, useScrollTrigger} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
-import {Logo, QuestionIcon, SurpriseIcon} from '@src/components/elements/icons';
+import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
-import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
 import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import {cookieOpts, cookies} from '@src/helpers';
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
-import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
-function ElevationScroll(props) {
-    const {children, window} = props;
-
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: window ? window() : undefined
-    });
-
-    return cloneElement(children, {
-        elevation: trigger ? 4 : 0
-    });
+type BottomProps = {
+    avatar: string,
+    isAuth: boolean,
+    isScrollBreak: boolean,
+    handleOpenModal: () => void,
+    handleDrawerOpen: () => void
 }
 
-const Bottom = (props) => {
-    const userLocation = cookies.get('user_location');
-    const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-    const {pathname} = useRouter();
+const Bottom: FC<BottomProps> = (props) => {
+    const {
+        isAuth,
+        avatar,
+        isScrollBreak,
+        handleOpenModal,
+        handleDrawerOpen
+    } = props;
 
-    const handleDrawerShow = (value) => () => {
-        setDrawerOpen(value);
-    };
+    const {pathname} = useRouter();
+    const {t} = useTranslation('header');
+    const userLocation = cookies.get('user_location');
+
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -50,7 +48,7 @@ const Bottom = (props) => {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const popoverId = open ? 'simple-popover' : undefined;
 
     const handleSelectLocation = ({region, city}) => {
         if (region) {
@@ -109,7 +107,7 @@ const Bottom = (props) => {
                                         <CustomButton
                                             color="primary"
                                             className="bottom-category-button header-button"
-                                            onClick={handleDrawerShow(true)}
+                                            onClick={handleDrawerOpen}
                                         >
                                             <CategorySortIcon/>
                                             <Typography variant="subtitle2">
@@ -153,7 +151,7 @@ const Bottom = (props) => {
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>
-                                            <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'} />
+                                            <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'}/>
                                         </span>
                                         : <CustomButton
                                             className="bottom-sign-button header-button"
@@ -163,7 +161,7 @@ const Bottom = (props) => {
                                             <Typography variant="subtitle2" component='p'>
                                                 {t('auth_reg:signIn')}
                                             </Typography>
-                                            <SignIcon />
+                                            <SignIcon/>
                                         </CustomButton>
                                     }
                                 </Grid>
@@ -194,20 +192,10 @@ const Bottom = (props) => {
                             xs={12}
                             sm={7}
                         >
-                            {/*<Grid item sm={4} md={3}>*/}
-                            {/*    <Link href="/promotions">*/}
-                            {/*        <a>*/}
-                            {/*            <SurpriseIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                {t('actions')}*/}
-                            {/*            </Typography>*/}
-                            {/*        </a>*/}
-                            {/*    </Link>*/}
-                            {/*</Grid>*/}
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon />
+                                        <QuestionIcon/>
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
@@ -218,14 +206,9 @@ const Bottom = (props) => {
                     </Grid>
                 </Container>
             </Hidden>
-            <CustomDrawer
-                position='left'
-                open={drawerOpen}
-                onClose={handleDrawerShow(false)}
-            />
             <Popover
-                id={id}
                 open={open}
+                id={popoverId}
                 anchorEl={anchorEl}
                 onClose={handleClose}
                 className={classes.menu}
@@ -243,5 +226,19 @@ const Bottom = (props) => {
         </div>
     );
 };
+
+function ElevationScroll(props) {
+    const {children, window} = props;
+
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+        target: window ? window() : undefined
+    });
+
+    return cloneElement(children, {
+        elevation: trigger ? 4 : 0
+    });
+}
 
 export default withScrollThreshold(Bottom);

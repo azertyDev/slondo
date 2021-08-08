@@ -12,7 +12,7 @@ export const months = [
     'september',
     'october',
     'november',
-    'december',
+    'december'
 ];
 
 export const WEEK_DAYS = [

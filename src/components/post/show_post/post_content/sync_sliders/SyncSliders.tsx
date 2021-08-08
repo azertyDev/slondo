@@ -1,4 +1,5 @@
 import {FC, useContext} from 'react';
+import {useRouter} from "next/router";
 import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
@@ -9,6 +10,7 @@ import {useStyles} from './useStyles';
 
 type SyncSlidersProps = {
     isCreator: boolean,
+    refererURL: string,
     handleOpenModal: () => void;
     imgs: {
         alt: string;
@@ -23,6 +25,7 @@ type SyncSlidersProps = {
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
         isCreator,
+        refererURL,
         imgs = [],
         handleOpenModal,
         slidersRefs,
@@ -38,13 +41,18 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         slider3
     } = slidersRefs;
 
+    const {push} = useRouter();
+    const {isAuth} = useContext(AuthCtx).auth;
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const {isAuth} = useContext(AuthCtx).auth;
 
     const copyUrl = () => {
         const copiedUrl = window.location.href;
         navigator.clipboard.writeText(copiedUrl);
+    };
+
+    const handlePrevPath = () => {
+        push(refererURL ?? '/');
     };
 
     const classes = useStyles({isFavorite});
@@ -70,15 +78,18 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 </CustomSlider>
                 <div className="icon-buttons">
                     <Hidden lgUp>
-                        <IconButton className="backspace-btn">
-                            <KeyboardBackspace />
+                        <IconButton
+                            onClick={handlePrevPath}
+                            className="backspace-btn"
+                        >
+                            <KeyboardBackspace/>
                         </IconButton>
                     </Hidden>
                     <div className='share-favo-btns'>
                         {isAuth && !isCreator && (
                             <Box className="favorite-count">
                                 <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                    <FavoriteBorder />
+                                    <FavoriteBorder/>
                                 </IconButton>
                                 <div>
                                     <Typography variant='subtitle1'>

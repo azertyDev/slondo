@@ -16,7 +16,7 @@ import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 
 
-export const ShowPostContainer: FC = () => {
+export const ShowPostContainer: FC<any> = ({referer}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -216,6 +216,7 @@ export const ShowPostContainer: FC = () => {
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             post={data}
+                            referer={referer}
                             showPhone={showPhone}
                             authorPhones={authorPhones}
                             handleSafeDeal={handleSafeDeal}

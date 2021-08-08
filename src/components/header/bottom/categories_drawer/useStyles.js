@@ -1,15 +1,22 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         display: 'flex',
         flexDirection: 'row',
-        width: '60%'
+        [theme.breakpoints.down('xs')]: {
+            width: '100%'
+        }
+    },
+    topBtns: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'space-between'
+        }
     },
     drawerList: {
-        width: '35%',
         padding: '20px 10px',
-        borderRight: '.5px solid',
         '& > div.MuiListItem-button': {
             height: 38,
             cursor: 'pointer',
@@ -26,7 +33,7 @@ export const useStyles = makeStyles(() => ({
                     height: '24px'
                 }
             },
-            '&:hover': {
+            '&.hovered': {
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 borderRadius: 100,
                 '& > h6.MuiTypography-subtitle1': {
@@ -46,21 +53,22 @@ export const useStyles = makeStyles(() => ({
         }
     },
     drawerContent: {
-        width: '65%',
         padding: '10px',
         overflow: 'scroll',
         scrollbarWidth: 'thin',
+        borderLeft: '.5px solid',
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+            borderLeft: 0
+        },
         '& div.main-box-wrapper': {
             display: 'flex',
             '& div.box-wrapper': {
                 display: 'flex',
                 flexDirection: 'column',
-                width: '50%'
+                width: '50%',
+                paddingLeft: '10px'
             }
-        },
-        '& div.close-btn-wrapper': {
-            display: 'flex',
-            justifyContent: 'flex-end'
         },
         '& a': {
             textDecoration: 'none',

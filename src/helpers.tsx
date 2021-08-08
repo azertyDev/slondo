@@ -1,21 +1,39 @@
 import {Fragment} from 'react';
+import {WithT} from 'i18next';
 import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
+import {Grid} from '@material-ui/core';
+import {GetServerSidePropsContext} from "next";
+import {IdNameType} from '@root/interfaces/Post';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
+import {HasAuction, site_categories} from '@src/common_data/site_categories';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
-import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {excludeFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
-import {IdNameType} from '@root/interfaces/Post';
-import {Grid} from '@material-ui/core';
-import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {WithT} from 'i18next';
-import {GetServerSidePropsContext} from "next";
+import {transformLocations} from "@root/transformedLocations";
 
 export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
     path: '/',
     sameSite: 'strict'
+};
+
+export const getUserLocationName = () => {
+    let userLocation = 'uzbekistan';
+    const userLocationByCookie = cookies.get('user_location');
+
+    if (userLocationByCookie) {
+        const {region, city} = userLocationByCookie;
+
+        userLocation = transformLocations[region.name].name;
+
+        if (city && region.id !== 1) {
+            userLocation = transformLocations[region.name][city.name];
+        }
+    }
+
+    return userLocation;
 };
 
 export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
