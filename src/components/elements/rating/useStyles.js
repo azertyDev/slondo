@@ -1,16 +1,16 @@
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
-import theme from '@src/theme';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        '& > div:first-child': {
+        '& div.rating': {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row-reverse',
             '& .MuiRating-root': {
+                paddingLeft: '4px',
                 fontSize: '1rem'
             },
             '& .MuiTypography-subtitle1': {
@@ -21,14 +21,14 @@ export const useStyles = makeStyles({
         '& div.ratingCount': {
             marginLeft: theme.spacing(1)
         }
-    },
-})
+    }
+}));
 
 export const StyledRating = withStyles({
     iconFilled: {
-        color: '#AD66D5',
+        color: '#AD66D5'
     },
     iconHover: {
-        color: '#675EAA',
-    },
-})(Rating)
+        color: '#675EAA'
+    }
+})(Rating);

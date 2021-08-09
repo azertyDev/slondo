@@ -1,4 +1,9 @@
 {
+  "min_bet_is": "Min. narx {{value}} so'm",
+  "max_bet_is": "Max. narx {{value}} so'm",
+  "min_bet": "Min. narx",
+  "max_bet": "Max. narx",
+  "place_bet": "Pul tikish",
   "duration": "Davomligi",
   "auc_duration": "Davomligi soatda",
   "last_bet": "Oxirgi narx {{lastBet}} so'm",

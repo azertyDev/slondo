@@ -54,7 +54,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
             {isAuction && (
                 <Hidden mdDown>
                     <AuctionContent
-                        t={t}
                         postData={post}
                         setFetchedPostData={setFetchedPostData}
                     />

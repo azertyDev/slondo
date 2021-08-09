@@ -38,6 +38,8 @@ Disallow: /cabinet
 Disallow: /create
 Disallow: /help
 Disallow: /user
+Disallow: /localhost
+Disallow: /192.*
 
 # Host
 Host: ${serverUrl}

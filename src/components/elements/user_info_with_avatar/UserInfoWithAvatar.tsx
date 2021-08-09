@@ -7,6 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {INCOGNITO_NAMES} from "@src/constants";
+import {dateHelper} from "@src/helpers";
 import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
@@ -31,8 +32,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const isIncognito = INCOGNITO_NAMES.some(n => n === owner.name);
 
     const {t} = useTranslation('cabinet');
-    const date = new Date(owner.created_at);
-    const formatted_date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+    const formatted_date = dateHelper(owner.created_at);
 
     const classes = useStyles();
     return (
@@ -50,9 +50,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                         {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
                     </Typography>
                     <Typography variant="subtitle1" color="initial">
-                        {t('created_at', {
-                            created_at: formatted_date?.toString()
-                        })}
+                        {t('created_at', {created_at: formatted_date})}
                     </Typography>
                     <Rating
                         readOnly

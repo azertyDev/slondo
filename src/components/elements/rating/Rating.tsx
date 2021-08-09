@@ -1,5 +1,5 @@
 import {ChangeEvent, FC} from 'react';
-import {Box, Hidden, Typography} from '@material-ui/core';
+import {Hidden, Typography} from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
 import {useStyles} from './useStyles';
 
@@ -27,13 +27,13 @@ export const Rating: FC<RatingPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={`${classes.root} ${className ?? ''}`}>
-            <div>
+            <div className='rating'>
                 <CustomRating
                     name={name}
-                    readOnly={readOnly ?? true}
-                    value={Math.round(ratingValue)}
                     precision={1}
+                    readOnly={readOnly}
                     onChange={onChangeRating}
+                    value={Math.round(ratingValue)}
                 />
                 {ratingValue && (
                     <Typography variant="subtitle1" component='p'>

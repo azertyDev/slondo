@@ -18,6 +18,7 @@ export const initUser: UserInfo = {
     available_days: [],
     available_start_time: '',
     available_end_time: '',
+    rating: 0,
     observer: {
         number_of_reviews: 0,
         number_of_purchase: 0,

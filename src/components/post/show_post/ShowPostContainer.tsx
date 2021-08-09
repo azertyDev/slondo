@@ -5,7 +5,7 @@ import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
-import {Banner} from '@src/components/elements/banner/Banner';
+// import {Banner} from '@src/components/elements/banner/Banner';
 import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
@@ -15,6 +15,7 @@ import {useStyles} from './useStyles';
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthContainer} from "@src/components/header/auth/AuthContainer";
+import {unstable_batchedUpdates} from "react-dom";
 
 
 export const ShowPostContainer: FC<any> = ({referer}) => {
@@ -50,9 +51,10 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
                 name: '',
                 surname: '',
                 phone: '',
-                created_at: '',
+                created_at: null,
                 avatar: '',
-                available_days: ''
+                available_days: '',
+                rating: 0
             },
             observer: {
                 number_of_views: 0,
@@ -130,23 +132,26 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
                 ? await userAPI.getPostAuthorPhones(postData.data.id)
                 : initAuthorPhones;
 
-            setIsFetch(false);
-
-            setAuthorPhones({
-                ...authorPhones,
-                ...phones,
-                showPhone: !showPhone
-            });
-        } catch ({response: {message}}) {
-            setIsFetch(false);
-            if (message !== 'forbidden:') {
-                setErrorMsg(message);
-            } else {
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
                 setAuthorPhones({
-                    ...initAuthorPhones,
+                    ...authorPhones,
+                    ...phones,
                     showPhone: !showPhone
                 });
-            }
+            });
+        } catch ({response: {data: {message}}}) {
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                if (message !== 'forbidden:') {
+                    setErrorMsg(message);
+                } else {
+                    setAuthorPhones({
+                        ...initAuthorPhones,
+                        showPhone: !showPhone
+                    });
+                }
+            });
         }
     };
 

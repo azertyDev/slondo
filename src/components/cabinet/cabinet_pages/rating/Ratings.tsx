@@ -44,7 +44,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         }
     };
 
-    const {rating, observer: {number_of_ratings}} = useContext(AuthCtx).user;
+    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const [commentData, setCommentData] = useState(initCommentData);
 

@@ -1,5 +1,4 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
 import {userAPI} from '@src/api/api';
 import {AuctionTimer} from './AuctionTimer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
@@ -10,22 +9,23 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type AuctionInfoPropsType = {
     postData,
     setFetchedPostData: () => Promise<void>
-} & WithT;
+};
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
-        t,
         postData,
         setFetchedPostData
     } = props;
 
+    const {t} = useTranslation('post');
     const auctionId = postData.auction.id;
     const isPublic = postData.status === 'public';
 
@@ -109,7 +109,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         <LockIcon/>
                         <div>
                             <Typography variant="subtitle2" color="initial">
-                                {t('post:reservePrice')}:
+                                {t('reservePrice')}:
                             </Typography>
                             <Typography variant="h6" color="initial">
                                 {numberPrettier(postData.auction.reserve_price)}{' '}
@@ -132,7 +132,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                 {isPublic && !postData.creator && (
                     <>
                         <AuctionForm
-                            t={t}
                             lastBet={lastBet}
                             auctionId={auctionId}
                             handleRefresh={setFetchedBetsData}
@@ -146,7 +145,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         </Typography>
                                         <CustomButton onClick={handleModalBuyNow(true)}>
                                             <Typography variant="subtitle1" color="initial">
-                                                {t('post:buyNow')}
+                                                {t('buyNow')}
                                             </Typography>
                                         </CustomButton>
                                     </div>
@@ -157,7 +156,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     handleCloseDialog={handleModalBuyNow(false)}
                                 >
                                     <ModalHeader
-                                        title={t('post:buyNow')}
+                                        title={t('buyNow')}
                                         handleCloseDialog={handleModalBuyNow(false)}
                                     />
                                     <Box
@@ -168,13 +167,13 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             variant='subtitle1'
                                             className='subtitle'
                                         >
-                                            {t('post:buyNowRule.firstPart')}
-                                            &nbsp;<br />
+                                            {t('buyNowRule.firstPart')}
+                                            &nbsp;<br/>
                                             <span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
                                             </span>
                                             &nbsp;
-                                            {t('post:buyNowRule.secondPart')}
+                                            {t('buyNowRule.secondPart')}
                                         </Typography>
                                         <div className='confirm'>
                                             <CustomButton
@@ -200,7 +199,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         >
                                             <CustomButton onClick={handleModalOfferPrice(true)}>
                                                 <Typography variant="subtitle1" color="initial">
-                                                    {t('post:suggestPrice')}
+                                                    {t('suggestPrice')}
                                                 </Typography>
                                             </CustomButton>
                                         </Grid>
@@ -208,7 +207,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
                                             <CustomButton onClick={handleModalBuyNow(true)}>
-                                                <Typography variant='subtitle2'>{t('post:buyNow')}</Typography>
+                                                <Typography variant='subtitle2'>{t('buyNow')}</Typography>
                                             </CustomButton>
                                         </Grid>
                                     )}
@@ -219,7 +218,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     <div className='suggest_price'>
                                         <CustomButton onClick={handleModalOfferPrice(true)}>
                                             <Typography variant="subtitle1" color="initial">
-                                                {t('post:suggestPrice')}
+                                                {t('suggestPrice')}
                                             </Typography>
                                         </CustomButton>
                                     </div>
@@ -231,7 +230,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 handleCloseDialog={handleModalOfferPrice(false)}
                             >
                                 <ModalHeader
-                                    title={t('post:suggestPrice')}
+                                    title={t('suggestPrice')}
                                     handleCloseDialog={handleModalOfferPrice(false)}
                                 />
                                 <Box
@@ -245,7 +244,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     >
                                         <Grid item xs={12}>
                                             <Typography variant='subtitle1' component='p'>
-                                                {t('post:suggestPriceRule')}
+                                                {t('suggestPriceRule')}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
@@ -255,17 +254,18 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                                 id="outlined-basic"
                                                 className='suggest-input'
                                                 onChange={handleOfferPriceInput}
-                                                placeholder={t('post:enterPrice')}
+                                                placeholder={t('enterPrice')}
                                             />
                                         </Grid>
                                         <Grid item xs={12} container alignItems='center'>
                                             <CustomButton
                                                 color='secondary'
+                                                disabled={isFetch}
                                                 onClick={handleOfferPrice}
                                                 className={classes.fullWidth}
                                             >
                                                 <Typography variant="subtitle1" color="initial" component='p'>
-                                                    {t('post:suggest')}
+                                                    {t('suggest')}
                                                 </Typography>
                                             </CustomButton>
                                         </Grid>

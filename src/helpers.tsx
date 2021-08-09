@@ -19,6 +19,18 @@ export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 's
     sameSite: 'strict'
 };
 
+export const dateHelper = (date): string => {
+    const _date = new Date(date);
+
+    let day = _date.getDate();
+    let month = _date.getMonth() + 1;
+    const year = _date.getFullYear();
+
+    const formattedDate = `${day < 9 ? `0${day}` : day}.${month < 9 ? `0${month}` : month}.${year}`;
+
+    return date ? formattedDate : '';
+};
+
 export const getUserLocationName = () => {
     let userLocation = 'uzbekistan';
     const userLocationByCookie = cookies.get('user_location');
