@@ -100,6 +100,10 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     sellerInfo: {
+        '& span.seller-name': {
+            fontSize: '1.2rem',
+            fontWeight: 600
+        },
         '&, & > div': {
             height: '100%'
         },

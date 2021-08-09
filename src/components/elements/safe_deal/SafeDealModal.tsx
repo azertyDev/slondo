@@ -9,6 +9,7 @@ import {PostInfo} from '@src/components/elements/safe_deal/PostInfo';
 import {useUserPaymentCard} from '@src/hooks';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from 'react-i18next';
+import {numberPrettier} from "@src/helpers";
 
 type UserPaymentCardModalProps = {
     post?,
@@ -73,7 +74,7 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
             openDialog={open}
             handleCloseDialog={onClose}
         >
-            <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose} />
+            <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose}/>
             <Grid container>
                 <Grid item xs={12} lg={6}>
                     <UserPaymentCard
@@ -88,10 +89,10 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
                 {hasPost && !isFetchUserCard && (
                     <Grid item xs={12} lg={6}>
                         <PostInfo
-                            price={post.data.price}
                             author={post.data.author}
                             createP2P={createP2pHold}
                             disable={!userCard.cardId || isFetch}
+                            price={numberPrettier(post.data.price)}
                         />
                     </Grid>
                 )}

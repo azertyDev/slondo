@@ -7,7 +7,7 @@ import {useFormik} from 'formik';
 import {codeSchema, passwordConfirmSchema} from '@root/validation_schemas/authRegSchema';
 import {userAPI} from '@src/api/api';
 import {useHandlers} from '@src/hooks';
-import {UserCtx} from '@src/context';
+import {AuthCtx} from '@src/context';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -29,7 +29,7 @@ enum Statuses {
 
 export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handleModalClose}) => {
     const {t} = useTranslation('auth_reg');
-    const {user: userInfo, setUser} = useContext(UserCtx);
+    const {user: userInfo, setUser} = useContext(AuthCtx);
 
     const initVals = {
         code: '',

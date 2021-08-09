@@ -17,7 +17,6 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
 import {AuthCtx} from '@src/context/AuthCtx';
-import {UserCtx} from '@src/context';
 import {useStyles} from './useStyles';
 
 type SidebarMenuPropsType = {
@@ -27,8 +26,7 @@ type SidebarMenuPropsType = {
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
     const {push, asPath, query: {page}} = useRouter();
-    const {setIsAuth} = useContext(AuthCtx);
-    const {user, clearUser} = useContext(UserCtx);
+    const {user, clearUser, setIsAuth} = useContext(AuthCtx);
 
     const {
         observer: {

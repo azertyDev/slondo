@@ -1,4 +1,4 @@
-import {cloneElement, FC, useState} from 'react';
+import {cloneElement, FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
@@ -14,29 +14,24 @@ import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type BottomProps = {
-    avatar: string,
-    isAuth: boolean,
     isScrollBreak: boolean,
-    handleOpenModal: () => void,
     handleDrawerOpen: () => void
 }
 
 const Bottom: FC<BottomProps> = (props) => {
     const {
-        isAuth,
-        avatar,
         isScrollBreak,
-        handleOpenModal,
         handleDrawerOpen
     } = props;
 
     const {pathname} = useRouter();
     const {t} = useTranslation('header');
+    const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
     const userLocation = cookies.get('user_location');
-
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event) => {
@@ -45,6 +40,10 @@ const Bottom: FC<BottomProps> = (props) => {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleAuthModalOpen = () => {
+        setAuthModalOpen(true);
     };
 
     const open = Boolean(anchorEl);
@@ -74,9 +73,9 @@ const Bottom: FC<BottomProps> = (props) => {
                         <Container maxWidth="xl">
                             <Grid
                                 container
-                                justifyContent="space-between"
-                                alignItems="center"
                                 spacing={2}
+                                alignItems="center"
+                                justifyContent="space-between"
                             >
                                 <Grid
                                     container
@@ -149,14 +148,14 @@ const Bottom: FC<BottomProps> = (props) => {
                                     justifyContent="center"
                                     alignItems="center"
                                 >
-                                    {isAuth
+                                    {auth.isAuth
                                         ? <span onClick={handleClick} className='avatar'>
                                             <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'}/>
                                         </span>
                                         : <CustomButton
-                                            className="bottom-sign-button header-button"
-                                            onClick={handleOpenModal}
                                             color='silver'
+                                            onClick={handleAuthModalOpen}
+                                            className="bottom-sign-button header-button"
                                         >
                                             <Typography variant="subtitle2" component='p'>
                                                 {t('auth_reg:signIn')}

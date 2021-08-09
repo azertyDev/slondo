@@ -10,7 +10,7 @@ import {Box, CircularProgress, Typography} from "@material-ui/core";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
 import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
-import {ErrorCtx, UserCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 export type notificationType = {
@@ -29,7 +29,7 @@ export type notificationType = {
 
 export const Notifications: FC = () => {
     const {t} = useTranslation('notifications');
-    const {user} = useContext(UserCtx);
+    const {user} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();

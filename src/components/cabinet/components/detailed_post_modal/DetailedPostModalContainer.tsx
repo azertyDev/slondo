@@ -9,8 +9,7 @@ import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal
 import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
 import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
 import {useTranslation} from "next-i18next";
-import {UserCtx} from "@src/context/UserCtx";
-import {ErrorCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 
 enum ActionStatuses {
     'refusal_win',
@@ -35,7 +34,7 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
     } = props;
 
     const {t} = useTranslation('cabinet');
-    const {user} = useContext(UserCtx);
+    const {user} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {

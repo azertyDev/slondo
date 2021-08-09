@@ -8,7 +8,7 @@ import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/setti
 import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
-import {UserCtx, AuthCtx, ErrorCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {Box, Button, Grid, Typography} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {UserInfo} from "@root/interfaces/Auth";
@@ -18,8 +18,7 @@ import {useStyles} from "./useStyles";
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
-    const {setIsAuth} = useContext(AuthCtx);
-    const {user, setUser} = useContext(UserCtx);
+    const {user, setUser, setIsAuth} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const initUserInfo = {

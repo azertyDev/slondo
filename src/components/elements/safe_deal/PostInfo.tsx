@@ -7,12 +7,12 @@ import Link from 'next/link';
 
 type PostInfoProps = {
     author,
-    price: number,
+    price: string,
     disable: boolean,
     createP2P: () => void,
 }
 
-const LinkText = ({href, children}: {href: string, children?: ReactNode}) => {
+const LinkText = ({href, children}: { href: string, children?: ReactNode }) => {
     return <Link href={href}>
         <a className='link'>
             {children}
@@ -35,20 +35,19 @@ export const PostInfo: FC<PostInfoProps> = (props) => {
         <Box p='15px' className={classes.sellerInfo}>
             <Grid container spacing={1} alignContent='space-between'>
                 <Grid item xs={12}>
-                    <Typography variant='subtitle1' component='p' color='textSecondary' align='right'>
-                        {t('cabinet:seller')}:
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant='h6' component='p' align='right'>
-                        {`${author.name} ${author.surname ?? ''}`}
+                    <Typography
+                        component='p'
+                        variant='subtitle1'
+                        color='textSecondary'
+                    >
+                        {t('cabinet:seller')}:&nbsp;
+                        <span className='seller-name'>
+                            {`${author.name} ${author.surname ?? ''}`}
+                        </span>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper elevation={0}>
-                        <Typography variant='subtitle1' color='textSecondary' align='center' gutterBottom>
-                            {t('post:priceForService')}
-                        </Typography>
                         <Typography variant='h4' align='center' gutterBottom>
                             <strong>
                                 {price} {t('common:sum')}
@@ -75,7 +74,7 @@ export const PostInfo: FC<PostInfoProps> = (props) => {
                             i18nKey="post:safeDealRules"
                             t={t}
                             components={[
-                                <LinkText href='/help/safe_shopping' />
+                                <LinkText href='/help/safe_shopping'/>
                             ]}
                         />
                     </Typography>

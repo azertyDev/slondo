@@ -9,7 +9,6 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {AuthModal} from './AuthModal';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {UserCtx} from "@src/context/UserCtx";
 import {AuthCtx} from "@src/context/AuthCtx";
 import {CONFIRM_SECONDS} from "@src/constants";
 
@@ -22,8 +21,7 @@ export enum FormStatuses {
 
 export const AuthContainer: FC = () => {
     const {t} = useTranslation('auth_reg');
-    const {setUser} = useContext(UserCtx);
-    const {auth: {authModalOpen}, setIsAuth, setAuthModalOpen} = useContext(AuthCtx);
+    const {auth: {authModalOpen}, setIsAuth, setAuthModalOpen, setUser} = useContext(AuthCtx);
 
     const initVals = {
         code: '',

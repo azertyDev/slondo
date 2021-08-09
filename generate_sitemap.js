@@ -51,7 +51,6 @@ Sitemap: ${serverUrl}/sitemap.xml`;
 
     const xml = `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemaps}</sitemapindex>`;
 
-
     fs.writeFile('public/sitemap.xml', xml, (err) => {
         if (err) throw err;
     });

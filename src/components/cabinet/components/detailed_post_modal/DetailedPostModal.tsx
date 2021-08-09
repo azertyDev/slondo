@@ -11,11 +11,11 @@ import {
     RenewalIcon,
     SafeIcon
 } from '@src/components/elements/icons';
+import {AuthCtx} from "@src/context";
+import {numberPrettier} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
-import {numberPrettier} from '@src/helpers';
-import {UserCtx} from "@src/context/UserCtx";
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
 
@@ -64,7 +64,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         reasons = []
     } = post;
 
-    const {user} = useContext(UserCtx);
+    const {user} = useContext(AuthCtx);
 
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
     const isNotPassModeration = status === 'blocked' || status === 'reject';

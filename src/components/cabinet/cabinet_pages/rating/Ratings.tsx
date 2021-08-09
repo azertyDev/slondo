@@ -13,7 +13,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {getErrorMsg} from '@src/helpers';
-import {UserCtx} from "@src/context";
+import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type RatingsPropsType = {
@@ -44,7 +44,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         }
     };
 
-    const {rating, observer: {number_of_ratings}} = useContext(UserCtx).user;
+    const {rating, observer: {number_of_ratings}} = useContext(AuthCtx).user;
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const [commentData, setCommentData] = useState(initCommentData);
 

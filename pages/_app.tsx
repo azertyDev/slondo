@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import {UserCtx, AuthCtx, ErrorCtx, SearchCtx} from "@src/context";
-import {useUser, useAuth, useError, useSearch} from "@src/hooks";
+import {AuthCtx, ErrorCtx, SearchCtx} from "@src/context";
+import {useAuth, useError, useSearch} from "@src/hooks";
 import theme from '@src/theme';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import "../slick.min.css";
@@ -11,7 +11,6 @@ const App = (props) => {
     const {Component, pageProps} = props;
 
     const auth = useAuth();
-    const user = useUser();
     const error = useError();
     const search = useSearch();
 
@@ -27,12 +26,10 @@ const App = (props) => {
         <ErrorCtx.Provider value={error}>
             <AuthCtx.Provider value={auth}>
                 <SearchCtx.Provider value={search}>
-                    <UserCtx.Provider value={user}>
-                        <ThemeProvider theme={theme}>
-                            <CssBaseline/>
-                            <Component {...pageProps} />
-                        </ThemeProvider>
-                    </UserCtx.Provider>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline/>
+                        <Component {...pageProps} />
+                    </ThemeProvider>
                 </SearchCtx.Provider>
             </AuthCtx.Provider>
         </ErrorCtx.Provider>

@@ -125,17 +125,22 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
     const handleShowPhone = async () => {
         try {
             setIsFetch(true);
-            const phones = !showPhone ? await userAPI.getPostAuthorPhones(postData.data.id) : initAuthorPhones;
+
+            const phones = !showPhone
+                ? await userAPI.getPostAuthorPhones(postData.data.id)
+                : initAuthorPhones;
+
             setIsFetch(false);
+
             setAuthorPhones({
                 ...authorPhones,
                 ...phones,
                 showPhone: !showPhone
             });
-        } catch ({response: {post}}) {
+        } catch ({response: {message}}) {
             setIsFetch(false);
-            if (post.message !== 'forbidden:') {
-                setErrorMsg(post.message);
+            if (message !== 'forbidden:') {
+                setErrorMsg(message);
             } else {
                 setAuthorPhones({
                     ...initAuthorPhones,

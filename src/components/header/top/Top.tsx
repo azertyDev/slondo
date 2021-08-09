@@ -16,7 +16,7 @@ import {
     Container,
     Avatar
 } from '@material-ui/core';
-import {UserCtx} from '@src/context';
+import {AuthCtx} from '@src/context';
 import {cookieOpts, cookies} from '@src/helpers';
 import {Localization} from './localization/Localization';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
@@ -28,26 +28,25 @@ import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
-    isAuth: boolean,
-    handleOpenModal: () => void,
     handleDrawerOpen: () => void
-
 };
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {
-        isAuth,
-        handleOpenModal,
         handleDrawerOpen
     } = props;
 
     const {t} = useTranslation('header');
-    const {user: {avatar}} = useContext(UserCtx);
+    const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
 
+    const {pathname} = useRouter();
     const userLocation = cookies.get('user_location');
     const trigger = useScrollTrigger({threshold: 53});
-    const {pathname} = useRouter();
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    const handleAuthModalOpen = () => {
+        setAuthModalOpen(true);
+    };
 
     const handleSelectLocation = ({region, city}) => {
         if (region) {
@@ -132,7 +131,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             </a>
                                         </Link>
                                     </Grid>
-                                    {isAuth
+                                    {auth.isAuth
                                         ? <Link href='/cabinet'>
                                             <a>
                                                 <CustomButton className={classes.avatarBlock}>
@@ -142,7 +141,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </Link>
                                         : <CustomButton
                                             className="btn-sign-mobile"
-                                            onClick={handleOpenModal}
+                                            onClick={handleAuthModalOpen}
                                         >
                                             <Typography variant="subtitle2">
                                                 {t('auth_reg:signIn')}

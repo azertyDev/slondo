@@ -13,7 +13,7 @@ import {paymentCardSchema} from "@root/validation_schemas/paymentCardSchema";
 import {codeSchema} from "@root/validation_schemas/authRegSchema";
 import {myUzCardAPI} from "@src/api/api";
 import {unstable_batchedUpdates} from "react-dom";
-import {ErrorCtx, UserCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
 
@@ -36,7 +36,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         handleResetUserCard
     } = props;
 
-    const {user} = useContext(UserCtx);
+    const {user} = useContext(AuthCtx);
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
