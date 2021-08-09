@@ -366,7 +366,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                     {isAuction && (
                         <AuctionContent
-                            t={t}
                             postData={post}
                             setFetchedPostData={setFetchedPostData}
                         />
