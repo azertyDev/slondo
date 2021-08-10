@@ -3,14 +3,11 @@ import {Box} from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {useStyles} from './useStyles';
 
-export const SEOTextComponent: FC<{text: string}> = ({text}) => {
+export const SEOTextComponent: FC<{ text: string }> = ({text}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <ReadMore
-                minHeight={81}
-                threshold={80}
-            >
+            <ReadMore threshold={50}>
                 <Box
                     component='p'
                     fontSize='0.875rem'

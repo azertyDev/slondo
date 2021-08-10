@@ -25,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
         display: '-webkit-box',
         WebkitLineClamp: 5,
         overflow: 'hidden',
-        WebkitBoxOrient: 'vertical'
+        WebkitBoxOrient: 'vertical',
+        maxHeight: maxHeight => `${maxHeight}px`
     }
 }));

@@ -9,7 +9,6 @@ import {
 import {userAPI} from '@src/api/api';
 import {months} from '@src/common_data/common';
 import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
-import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
 import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
@@ -399,14 +398,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <Typography variant="button" color="initial">
                         {t('description')}:
                     </Typography>
-                    <ReadMore threshold={100}>
-                        <Typography
-                            variant="subtitle1"
-                            className='description'
-                        >
-                            <pre>{post.description}</pre>
-                        </Typography>
-                    </ReadMore>
+                    <Typography
+                        variant="subtitle1"
+                        className='description'
+                    >
+                        <pre>{post.description}</pre>
+                    </Typography>
                 </div>
                 {isAuction && (
                     <div className="started-price">

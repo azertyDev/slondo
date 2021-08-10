@@ -17,7 +17,7 @@ export const ReadMore: FC<ReadMoreTypeProps> = ({threshold, children}) => {
         setDescHeight(document.getElementById('description').clientHeight);
     }, [children]);
 
-    const classes = useStyles();
+    const classes = useStyles(threshold + 1);
     return (
         <div className={classes.root}>
             <div
