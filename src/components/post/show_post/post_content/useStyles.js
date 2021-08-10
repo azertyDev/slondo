@@ -251,7 +251,7 @@ export const useStyles = makeStyles((theme) => ({
                         fontWeight: '700'
                     }
                 }
-            },
+            }
         },
         '& div.contact': {
             display: 'flex',
@@ -281,7 +281,7 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
                     },
-                    padding: '11px 39px',
+                    padding: '11px 39px'
                 },
                 '&:last-child': {
                     '&:disabled': {
@@ -375,13 +375,17 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& h6.description': {
-                fontSize: '1.125rem',
-                paddingRight: '8vw',
                 [theme.breakpoints.down('md')]: {
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',
                     lineHeight: '1rem',
                     padding: 0
+                },
+                '& > pre': {
+                    margin: 0,
+                    fontSize: '1.125rem',
+                    fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
+                    whiteSpace: 'pre-wrap'
                 }
             },
             '& > h6.MuiTypography-subtitle1': {

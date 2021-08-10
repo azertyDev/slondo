@@ -1,27 +1,36 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
+import {useStyles} from './useStyles';
 
 type ReadMoreTypeProps = {
-    descHeight: number,
-    heightLimit: number
+    threshold: number
 };
 
-export const ReadMore: FC<ReadMoreTypeProps> = ({descHeight, heightLimit, children}) => {
+export const ReadMore: FC<ReadMoreTypeProps> = ({threshold, children}) => {
     const {t} = useTranslation('common');
     const [isHidden, setIsHidden] = useState(true);
+    const [descHeight, setDescHeight] = useState(0);
+
+    useEffect(() => {
+        setDescHeight(document.getElementById('description').clientHeight);
+    }, [children]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className={isHidden ? classes.hidden : ''}>{children}</div>
-            {descHeight >= heightLimit && (
+            <div
+                id='description'
+                className={isHidden ? classes.hidden : ''}
+            >
+                {children}
+            </div>
+            {descHeight > threshold && (
                 <CustomButton
                     disableRipple
-                    onClick={() => setIsHidden(!isHidden)}
                     className='show-more-button'
+                    onClick={() => setIsHidden(!isHidden)}
                 >
                     {isHidden
                         ? <Typography variant='subtitle1'>
@@ -34,4 +43,4 @@ export const ReadMore: FC<ReadMoreTypeProps> = ({descHeight, heightLimit, childr
             )}
         </div>
     );
-}
+};

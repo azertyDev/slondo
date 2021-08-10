@@ -1,4 +1,8 @@
 {
+  "first_photo_txt": "Birinchi rasm sizning e'loningizning vizitkasi hisoblanadi",
+  "engine_capacity": "litrda dvigatel hajmi",
+  "year": "Ishlab chiqarilgan yili ",
+  "mileage": "Kilometrda bosib o’tgan masofasi",
   "car": {
     "color": {
       "name": "Rangi"
@@ -1334,6 +1338,9 @@
     }
   },
   "job": {
+    "type": {
+      "name": "Turkum"
+    },
     "employment": {
       "name": "Bandlik turi"
     },
@@ -7671,9 +7678,6 @@
       "name": "Ishlatilgan"
     }
   },
-  "engine_capacity": "litrda dvigatel hajmi",
-  "year": "Ishlab chiqarilgan yili ",
-  "mileage": "Kilometrda bosib o’tgan masofasi",
   "brand": "Brendi",
   "season": "Mavsum",
   "bayonet": "Bayonet",

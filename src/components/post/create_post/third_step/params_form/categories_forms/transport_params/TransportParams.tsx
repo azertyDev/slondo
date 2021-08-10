@@ -153,8 +153,8 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                                 t={t}
                                                 name='year'
                                                 value={values.year}
-                                                onChange={handleNumericInput}
                                                 labelText={t('year')}
+                                                onChange={handleNumericInput}
                                                 errorMsg={getErrorMsg(errors.year, touched.year, t)}
                                             />}
                                     </Grid>

@@ -59,7 +59,7 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleOptionCheckbox} = useHandlers(values, setValues);
+    const {handleSelect, handleFracInput, handleOptionCheckbox} = useHandlers(values, setValues);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
@@ -131,6 +131,7 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                         name='area'
                                         value={values.area ?? ''}
                                         labelText={t('estate.area.name')}
+                                        onChange={handleFracInput}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>

@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {booleanFields, singleFields, stringFields} from '@src/common_data/fields_keys';
+import {booleanFields, singleFields, fractionalFields, stringFields} from '@src/common_data/fields_keys';
 import {fractionRegEx, numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from '@src/helpers';
 
@@ -12,10 +12,14 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
         },
         handleFracInput: ({target: {name, value}}) => {
             if (RegExp(fractionRegEx).test(value)) {
-                if (value.length < 4) {
-                    if (value.length === 2 && value[1] !== '.') {
-                        value = value.replace(/^[^\*]/, `${value[0]}.`);
+                if (fractionalFields.some(f => f === name)) {
+                    if (value.length < 4) {
+                        if (value.length === 2 && value[1] !== '.') {
+                            value = value.replace(/^[^\*]/, `${value[0]}.`);
+                        }
+                        setValues({...values, [name]: value});
                     }
+                } else {
                     setValues({...values, [name]: value});
                 }
             }

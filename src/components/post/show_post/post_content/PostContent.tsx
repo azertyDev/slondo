@@ -34,7 +34,6 @@ import {useStyles} from './useStyles';
 type PostContentTypes = {
     post,
     showPhone,
-    referer: string,
     handleShowPhone,
     handleSafeDeal: () => void,
     authorPhones: { phone: string, additional_number: string }
@@ -52,7 +51,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
         showPhone,
-        referer,
         authorPhones,
         handleShowPhone,
         handleSafeDeal,
@@ -90,7 +88,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
 
     const [favorite, setFavorite] = useState(false);
     const [favCount, setFavCount] = useState(0);
-    const [descHeight, setDescHeight] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
 
     const {
@@ -203,7 +200,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     useEffect(() => {
         setFavorite(post.favorite);
         !!number_of_favorites && setFavCount(number_of_favorites);
-        setDescHeight(document.getElementById('post-description').clientHeight);
     }, [post]);
 
     const classes = useStyles();
@@ -235,14 +231,13 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                     {!!post.model?.condition && (
                         <div className="condition">
-                            <Typography variant="h6">{t(`post:${post.model.condition?.name}`)}</Typography>
+                            <Typography variant="h6">{t(`${post.model.condition?.name}`)}</Typography>
                         </div>
                     )}
                 </div>
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
-                    refererURL={referer}
                     isCreator={post.creator}
                     imgs={post.images}
                     isFavorite={favorite}
@@ -270,7 +265,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 {numberPrettier(post.price) + ' ' + t(`common:${post.currency.name}`)}
                                 {!!post.condition.name && (
                                     <div className="condition">
-                                        <Typography variant="h6">{t(`post:${post.model?.condition?.name}`)}</Typography>
+                                        <Typography variant="h6">{t(`${post.model?.condition?.name}`)}</Typography>
                                     </div>
                                 )}
                             </Typography>
@@ -286,14 +281,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             <span>{t('common:post')} №:</span> {post.id}
                         </Typography>
                         <Typography variant="subtitle1">
-                            {t('post:published')}: {formatted_date}
+                            {t('published')}: {formatted_date}
                         </Typography>
                         <Typography variant="subtitle1">
-                            {t('post:views')}: {number_of_views}
+                            {t('views')}: {number_of_views}
                         </Typography>
                         {!creator && (
                             <Typography variant="subtitle1" onClick={handleComplaintModalOpen}>
-                                {t('post:complain')} <WarningIcon/>
+                                {t('complain')} <WarningIcon/>
                             </Typography>
                         )}
                     </div>
@@ -301,7 +296,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="post-bonus">
                     {!!post.delivery && (
                         <span className="delivery">
-                            <DeliveryIcon />
+                            <DeliveryIcon/>
                             <Typography variant="subtitle1">
                                 {t('common:delivery')}
                             </Typography>
@@ -309,7 +304,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.safe_deal && (
                         <span className="safe_deal">
-                            <SafeIcon />
+                            <SafeIcon/>
                             <Typography variant="subtitle1">
                                 {t('common:safe_deal')}
                             </Typography>
@@ -317,7 +312,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.exchange && (
                         <span className="exchange">
-                            <SwapIcon />
+                            <SwapIcon/>
                             <Typography variant="subtitle1">
                                 {t('common:exchange')}
                             </Typography>
@@ -325,7 +320,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.available_start_time && (
                         <span className="available">
-                            <PhoneIcon />
+                            <PhoneIcon/>
                             {!!post.available_days?.length && (
                                 <Typography variant="subtitle1" color="primary">
                                     {weekDaysHelper(post.available_days, t)}&nbsp;
@@ -338,7 +333,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.auction?.auto_renewal && (
                         <span className="auto-renewal">
-                                <RenewalIcon />
+                                <RenewalIcon/>
                                 <Typography variant="subtitle1">
                                 {t('common:auto_ren')}
                             </Typography>
@@ -361,7 +356,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             </Typography>
                         </CustomButton>
                         <CustomButton disabled color='silver'>
-                            <Typography variant='subtitle1'>{t('post:writeMessage')}</Typography>
+                            <Typography variant='subtitle1'>{t('writeMessage')}</Typography>
                         </CustomButton>
                     </div>
                     {isAuction && (
@@ -374,18 +369,16 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="post-location">
                     <Hidden mdDown>
                         <Typography variant="button" noWrap>
-                            {t(`locations:location`)}
+                            {t(`locations:location`)}:
                         </Typography>
                     </Hidden>
-                    {post.region.name || post.city.name || post.district.name
-                        ? <div className='location-text'>
-                            <LocationIcon/>
-                            <Typography variant="subtitle1">
-                                {`${t(`locations:${post.region.name}.name`) ?? ''}`}
-                                {post.city.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
-                            </Typography>
-                        </div>
-                        : <Typography variant="subtitle1">{t(`locations:notIndicate`)}</Typography>}
+                    <div className='location-text'>
+                        <LocationIcon/>
+                        <Typography variant="subtitle1">
+                            {`${t(`locations:${post.region.name}.name`) ?? ''}`}
+                            {post.city.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
+                        </Typography>
+                    </div>
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
@@ -404,16 +397,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </Hidden>
                 <div className="post-description">
                     <Typography variant="button" color="initial">
-                        {t('post:description')}
+                        {t('description')}:
                     </Typography>
-                    <ReadMore
-                        descHeight={descHeight}
-                        heightLimit={isMdDown ? 75 : 110}
-                    >
+                    <ReadMore threshold={100}>
                         <Typography
-                            className='description'
                             variant="subtitle1"
-                            id="post-description"
+                            className='description'
                         >
                             <pre>{post.description}</pre>
                         </Typography>
@@ -421,7 +410,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 {isAuction && (
                     <div className="started-price">
-                        <Typography variant="button">{t('post:startingPrice')}</Typography>
+                        <Typography variant="button">{t('startingPrice')}</Typography>
                         <span>
                             <Typography variant="body2">
                                 {numberPrettier(post.price)} {t(`common:${post.currency.name}`)}
@@ -432,7 +421,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 {!!parameterItems.length && (
                     <div className="post-parameters">
                         <Typography variant="button" color="initial">
-                            {t('post:parameters')}
+                            {t('parameters')}
                         </Typography>
                         <ul>{parameterItems}</ul>
                     </div>
@@ -445,7 +434,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             </Typography>
                             <Hidden xsDown>
                                 <Typography variant="subtitle1">
-                                    {t('post:published')}: {formatted_date}
+                                    {t('published')}: {formatted_date}
                                 </Typography>
                             </Hidden>
                             <Hidden smUp>
@@ -454,11 +443,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
-                                {t('post:views')}: {number_of_views}
+                                {t('views')}: {number_of_views}
                             </Typography>
                         </div>
                         <CustomButton className="btn-report" onClick={handleComplaintModalOpen}>
-                            {t('post:complain')}
+                            {t('complain')}
                         </CustomButton>
                     </div>
                 </Hidden>

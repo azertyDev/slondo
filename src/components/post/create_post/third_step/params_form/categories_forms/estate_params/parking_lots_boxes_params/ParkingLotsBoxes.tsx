@@ -57,7 +57,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleFracInput} = useHandlers(values, setValues);
 
     const classes = useStyles();
     return (
@@ -98,7 +98,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                         t={t}
                                         name='area'
                                         value={values.area ?? ''}
-                                        onChange={handleNumericInput}
+                                        onChange={handleFracInput}
                                         labelText={t('estate.area.name')}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />

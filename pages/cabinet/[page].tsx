@@ -2,10 +2,9 @@ import {GetServerSideProps} from 'next';
 import Cabinet from '@src/components/cabinet/Cabinet';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps: GetServerSideProps = async ({locale, req}) => {
+export const getServerSideProps: GetServerSideProps = async ({locale}) => {
     return ({
         props: {
-            referrer: req.headers.referer,
             ...await serverSideTranslations(
                 locale,
                 [

@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& button.slick-disabled': {
+            display: 'none'
+        },
         '& div.color-preview': {
             width: 'min-content',
             display: 'flex',
@@ -37,14 +40,15 @@ export const useStyles = makeStyles((theme) => ({
             alignItems: 'center',
             flexDirection: 'column',
             textAlign: 'center',
-            '& span': {
+            cursor: 'pointer',
+            '& span, & img.color-img': {
                 width: '50px',
                 height: '50px',
                 margin: '10px 0px',
                 borderRadius: '50%'
             }
         },
-        '& span.selected-color': {
+        '& .selected-color': {
             boxShadow: '0px 0px 5px 5px #ccc'
         }
     }

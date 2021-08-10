@@ -60,7 +60,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput} = useHandlers(values, setValues);
+    const {handleSelect, handleFracInput} = useHandlers(values, setValues);
 
     const classes = useStyles();
     return (
@@ -111,13 +111,13 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                 {type.id !== 1 && (
                                     <Grid item container xs={12} sm={4}>
                                         <DropDownSelect
-                                            name='payments'
-                                            items={filters.payments}
+                                            name='payment'
+                                            items={filters.payment}
                                             values={values}
                                             onBlur={handleBlur}
-                                            transKey={`${categoryName}.`}
-                                            labelTxt={t(`${categoryName}.payments.name`)}
                                             handleSelect={handleSelect}
+                                            transKey={`${categoryName}.`}
+                                            labelTxt={t(`${categoryName}.payment.name`)}
                                         />
                                     </Grid>
                                 )}
@@ -126,7 +126,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         t={t}
                                         name='area'
                                         value={values.area ?? ''}
-                                        onChange={handleNumericInput}
+                                        onChange={handleFracInput}
                                         labelText={t('estate.area_in_hundred.name')}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />

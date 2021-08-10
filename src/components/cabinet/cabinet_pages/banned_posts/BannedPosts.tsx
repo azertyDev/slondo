@@ -1,21 +1,21 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
+import {ErrorCtx} from '@src/context';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {ArrowBack} from '@material-ui/icons';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {ErrorCtx} from '@src/context';
-import {useStyles} from './useStyles';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initCardData} from '@src/common_data/common';
-import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
-import {unstable_batchedUpdates} from 'react-dom';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {useStyles} from './useStyles';
 
 export const BannedPosts: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -32,10 +32,12 @@ export const BannedPosts: FC = () => {
     const [selectedPost, setSelectedPost] = useState(initCardData);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
-    const [message, setMessage] = useState('');
 
-    const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
-    const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
+    const {
+        modalOpen: detailedModalOpen,
+        handleModalOpen: openDetailedModal,
+        handleModalClose: closeDetailedModal
+    } = useModal();
 
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
@@ -64,17 +66,18 @@ export const BannedPosts: FC = () => {
     };
     const handleDelete = async () => {
         try {
-            const {message} = await userAPI.deleteBlockedPost(selectedPost.id);
-            setMessage(message);
+            setIsFetch(true);
+            await userAPI.deleteBlockedPost(selectedPost.id);
             setModalContentIndex(1);
             closeDetailedModal();
-            handleOpenSnackbar();
             if (tabIndex === 0) {
                 await fetchBannedPostsData('post');
             } else {
                 await fetchBannedPostsData('auc');
             }
+            setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             setErrorMsg(e.message);
         }
     };
@@ -131,43 +134,40 @@ export const BannedPosts: FC = () => {
                 ? <Typography className="title" variant="h6">
                     {t('common:post')} № {selectedPost.id}
                 </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit"/>
-                    </IconButton>
-            }
+                : modalContentIndex !== 5 && (
+                <IconButton
+                    className='prev-btn'
+                    aria-label="back"
+                    size="medium"
+                    onClick={handlePrevMenu}
+                >
+                    <ArrowBack fontSize="inherit"/>
+                </IconButton>
+            )}
             {getModalContent()}
         </>
     );
 
     const bannedPosts = (posts) => (
         <div className={classes.root}>
-            {posts.data.map(data => (
-                <Box mb={3} key={data.id}>
-                    <CabinetCard
-                        cardData={data}
-                        handleDetailedOpen={handleDetailedOpen(data)}
-                    />
-                </Box>
-            ))}
-            <ResponsiveModal
-                openDialog={detailedModalOpen}
-                handleCloseDialog={closeDetailedModal}
-            >
-                <ModalContent />
-            </ResponsiveModal>
-            <CustomSnackbar
-                message={t(message)}
-                openSnackbar={openSnackbar}
-                severity="success"
-                handleCloseSnackbar={handleCloseSnackbar}
-            />
+            {isFetch
+                ? <CustomCircularProgress/>
+                : <>
+                    {posts.data.map(data => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCard
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen(data)}
+                            />
+                        </Box>
+                    ))}
+                    <ResponsiveModal
+                        openDialog={detailedModalOpen}
+                        handleCloseDialog={closeDetailedModal}
+                    >
+                        <ModalContent/>
+                    </ResponsiveModal>
+                </>}
         </div>
     );
 

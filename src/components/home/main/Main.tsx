@@ -15,8 +15,8 @@ import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
 import {useTranslation} from 'next-i18next';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
-import {useStyles} from './useStyles';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
+import {useStyles} from './useStyles';
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');

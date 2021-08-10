@@ -1,7 +1,10 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
+import {useRouter} from 'next/router';
+import {useTranslation} from 'react-i18next';
+import {DropResult} from 'react-beautiful-dnd';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -9,11 +12,8 @@ import {FileType, IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {useTranslation} from 'react-i18next';
-import {useRouter} from 'next/router';
-import {DropResult} from 'react-beautiful-dnd';
-import {useStyles} from './useStyles';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
     categoryName: string,
@@ -36,15 +36,16 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         handleNextFormOpen
     } = props;
 
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
     const sliderSettings = {
         dots: false,
-        arrows: false,
-        infinite: true,
+        infinite: false,
+        arrows: !isXsDown,
         slidesToShow: 10,
         slidesToScroll: 1,
         centerPadding: '0px',
         centerMode: false,
-        focusOnSelect: true,
         adaptiveHeight: false,
         responsive: [
             {
@@ -68,7 +69,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             {
                 breakpoint: 576,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 2.5
                 }
             }
         ]
@@ -81,7 +82,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {images, model} = useRouter().query;
 
     const onSubmit = ({files, color}) => {
-        const appearance: {photos: any, color_id?: number} = {
+        const appearance: { photos: any, color_id?: number } = {
             photos: files.filter(f => !!f).map(f => f.id ?? f.file)
         };
         if (color) appearance.color_id = color.id;
@@ -213,11 +214,11 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             <CustomAccordion
                 icon={<ViewIcon/>}
                 isPreview={isPreview}
-                open={currentFormIndex === formIndex}
-                isEditable={currentFormIndex < formIndex}
-                handleEdit={handleFormOpen(formIndex)}
                 submitTxt='priceDescContacts'
                 title={t('post:appearance')}
+                open={currentFormIndex === formIndex}
+                handleEdit={handleFormOpen(formIndex)}
+                isEditable={currentFormIndex < formIndex}
             >
                 <Grid item container spacing={2} className={classes.root}>
                     {isPreview
@@ -267,30 +268,45 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                             <>
                                                 {t(`${categoryName}.color.name`)}
                                                 {<span className='error-text'>*&nbsp;</span>}
-                                                <br />
+                                                <br/>
                                             </>
                                         )}
-                                        {errors.color
-                                        && touched.color
-                                        && <span className='error-text'>
-                                             {t(`errors:${errors.color}`)}
-                                         </span>}
+                                        {errors.color && touched.color && (
+                                            <span className='error-text'>
+                                                {t(`errors:${errors.color}`)}
+                                            </span>
+                                        )}
                                     </Typography>
                                     <CustomSlider {...sliderSettings}>
-                                        {colors.map(clr =>
-                                            <Box
-                                                key={clr.id}
-                                                className='color-wrapper'
-                                                onClick={handleColor(clr)}
-                                            >
-                                            <span
-                                                className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                style={{backgroundColor: clr.hex_color_code}}
-                                            />
-                                                <Typography variant='subtitle2' component='p'>
-                                                    {t(`${categoryName}.${clr.name}.name`)}
-                                                </Typography>
-                                            </Box>
+                                        {colors.map(clr => {
+                                                const selected = !!color && color.id === clr.id;
+                                                const hexColor = clr.hex_color_code;
+                                                const colorURL = clr.name === 'multi_color'
+                                                    ? '/img/multi_color.png'
+                                                    : clr.name === 'other' ? '/img/other_color.png' : null;
+
+                                                return (
+                                                    <Box
+                                                        key={clr.id}
+                                                        className='color-wrapper'
+                                                        onClick={handleColor(clr)}
+                                                    >
+                                                        {colorURL
+                                                            ? <img
+                                                                src={colorURL}
+                                                                alt='color-image'
+                                                                className={`color-img ${selected ? 'selected-color' : ''}`}
+                                                            />
+                                                            : <span
+                                                                style={{backgroundColor: hexColor}}
+                                                                className={selected ? 'selected-color' : ''}
+                                                            />}
+                                                        <Typography variant='subtitle2' component='p'>
+                                                            {t(`${categoryName}.${clr.name}.name`)}
+                                                        </Typography>
+                                                    </Box>
+                                                );
+                                            }
                                         )}
                                     </CustomSlider>
                                 </Grid>
@@ -305,10 +321,10 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     {!isJob && <span className='error-text'>*</span>}
                                     {errors.files && touched.files && (
                                         <Box
-                                            fontSize='subtitle2.fontSize'
                                             mt={1}
                                             component='p'
                                             className='error-text'
+                                            fontSize='subtitle2.fontSize'
                                         >
                                             &nbsp;{t(`errors:${errors.files as string}`)}
                                         </Box>
@@ -320,7 +336,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     fontSize='subtitle2.fontSize'
                                     mb={2}
                                 >
-                                    Первое фото будет визиткой Вашего объявления. Подберите лучшую фотографию.
+                                    {t('first_photo_txt')}
                                 </Box>
                                 <PreviewPhotos
                                     files={files}
@@ -329,10 +345,10 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     handleOnDragEnd={handleOnDragEnd}
                                 />
                                 <Box
+                                    mt={2}
                                     fontWeight={500}
                                     color='text.disabled'
                                     fontSize='subtitle2.fontSize'
-                                    mt={2}
                                 >
                                     Вы можете загрузить фотографий в формате JPEG или PNG. Размер одной фотографии
                                     не должно превышать - 15 Mb

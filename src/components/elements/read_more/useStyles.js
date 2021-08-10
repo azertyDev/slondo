@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& h6.MuiTypography-subtitle1': {
-            lineHeight: '22px',
+            lineHeight: '22px'
         },
         '& button.show-more-button': {
             background: 'none',
@@ -25,6 +25,6 @@ export const useStyles = makeStyles((theme) => ({
         display: '-webkit-box',
         WebkitLineClamp: 5,
         overflow: 'hidden',
-        WebkitBoxOrient: 'vertical',
-    },
+        WebkitBoxOrient: 'vertical'
+    }
 }));

@@ -194,7 +194,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     t={t}
                                     name='area'
                                     value={values.area ?? ''}
-                                    onChange={handleNumericInput}
+                                    onChange={handleFracInput}
                                     labelText={t('estate.area.name')}
                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                 />
@@ -204,7 +204,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     t={t}
                                     name='living_area'
                                     value={values.living_area ?? ''}
-                                    onChange={handleNumericInput}
+                                    onChange={handleFracInput}
                                     labelText={t('estate.living_area.name')}
                                     errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                                 />
@@ -214,7 +214,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     t={t}
                                     name='kitchen_area'
                                     value={values.kitchen_area ?? ''}
-                                    onChange={handleNumericInput}
+                                    onChange={handleFracInput}
                                     labelText={t('estate.kitchen_area.name')}
                                     errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                                 />

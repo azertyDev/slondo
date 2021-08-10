@@ -69,7 +69,14 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
+    const {
+        handleCheckbox,
+        handleSelect,
+        handleFracInput,
+        handleOptionCheckbox,
+        handleNumericInput
+    } = useHandlers(values, setValues);
+
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
@@ -160,22 +167,22 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                 <Grid item container xs={12} sm={6} md={4} lg={4}>
                                     <NumberSelect
                                         count={5}
-                                        name='number_of_floors'
                                         errors={errors}
                                         touched={touched}
                                         values={values}
                                         setValues={setValues}
+                                        name='number_of_floors'
                                         transKey={`${categoryName}.`}
                                     />
                                 </Grid>
                                 <Grid item container xs={12} sm={6} md={5} lg={4}>
                                     <NumberSelect
                                         count={5}
-                                        name='number_of_bedrooms'
                                         values={values}
                                         setValues={setValues}
                                         errors={errors}
                                         touched={touched}
+                                        name='number_of_bedrooms'
                                         transKey={`${categoryName}.`}
                                     />
                                 </Grid>
@@ -196,6 +203,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='general_area'
+                                    onChange={handleFracInput}
                                     value={values.general_area ?? ''}
                                     labelText={t('estate.general_area.name')}
                                     errorMsg={getErrorMsg(errors.general_area, touched.general_area, t)}
@@ -205,6 +213,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='land_area'
+                                    onChange={handleFracInput}
                                     value={values.land_area ?? ''}
                                     labelText={t('estate.land_area.name')}
                                     errorMsg={getErrorMsg(errors.land_area, touched.land_area, t)}
@@ -214,6 +223,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='living_area'
+                                    onChange={handleFracInput}
                                     value={values.living_area ?? ''}
                                     labelText={t('estate.living_area.name')}
                                     errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
@@ -223,8 +233,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='ceiling_height'
-                                    value={values.ceiling_height ?? ''}
                                     onChange={handleFracInput}
+                                    value={values.ceiling_height ?? ''}
                                     labelText={t('estate.ceiling_height.name')}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />

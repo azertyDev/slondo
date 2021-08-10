@@ -1,26 +1,19 @@
-import {FC, useEffect, useState} from 'react';
-import {Box, useMediaQuery, useTheme} from '@material-ui/core';
-import {useStyles} from './useStyles';
+import {FC} from 'react';
+import {Box} from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
+import {useStyles} from './useStyles';
 
 export const SEOTextComponent: FC<{text: string}> = ({text}) => {
-
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-
-    const [descHeight, setDescHeight] = useState(0);
-
-    useEffect(() => {
-        setDescHeight(document.getElementById('seo-content').clientHeight);
-    }, []);
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <ReadMore descHeight={descHeight} heightLimit={isMdDown ? 50 : 85}>
+            <ReadMore
+                minHeight={81}
+                threshold={80}
+            >
                 <Box
                     component='p'
                     fontSize='0.875rem'
-                    id="seo-content"
                 >
                     {text}
                 </Box>

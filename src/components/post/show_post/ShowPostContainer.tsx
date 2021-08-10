@@ -18,7 +18,7 @@ import {AuthContainer} from "@src/components/header/auth/AuthContainer";
 import {useStyles} from './useStyles';
 
 
-export const ShowPostContainer: FC<any> = ({referer}) => {
+export const ShowPostContainer: FC<any> = () => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -96,6 +96,7 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
             }
         }
     };
+
     const initAuthorPhones = {
         showPhone: false,
         phone: null,
@@ -209,8 +210,8 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
         <>
             <Head>
                 <meta name="robots" content="noindex"/>
-                <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
+                <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:title" content={data.title} key="ogtitle"/>
                 <title>{data.title}</title>
             </Head>
@@ -227,7 +228,6 @@ export const ShowPostContainer: FC<any> = ({referer}) => {
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             post={data}
-                            referer={referer}
                             showPhone={showPhone}
                             authorPhones={authorPhones}
                             handleSafeDeal={handleSafeDeal}

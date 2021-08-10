@@ -2,10 +2,9 @@ import {ShowPostContainer} from '@src/components/post/show_post/ShowPostContaine
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {GetServerSideProps} from 'next';
 
-export const getServerSideProps: GetServerSideProps = async ({locale, req}) => {
+export const getServerSideProps: GetServerSideProps = async ({locale}) => {
     return ({
         props: {
-            referer: req.headers.referer,
             ...await serverSideTranslations(
                 locale,
                 [
