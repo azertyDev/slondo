@@ -16,8 +16,9 @@ import {useTranslation} from 'next-i18next';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
+import {AddIcon} from '@src/components/elements/icons/AddIcon';
 
-export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
+export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
 
@@ -35,9 +36,9 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
                             <Hidden mdDown>
-                                <PostsSliderContainer />
+                                <PostsSliderContainer/>
                             </Hidden>
-                            <PostsTabsContainer />
+                            <PostsTabsContainer/>
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
@@ -60,6 +61,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                                         <Typography variant="subtitle1">
                                             {t('header:createPost')}
                                         </Typography>
+                                        <AddIcon/>
                                     </div>
                                 </Slide>
                             </a>

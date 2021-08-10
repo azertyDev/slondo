@@ -83,7 +83,6 @@ export const useStyles = makeStyles((theme) => ({
                     fill: '#4f4f4f'
                 }
             }
-
         },
         '& button.btn-sign-mobile': {
             background: 'inherit',
@@ -112,5 +111,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-
 }));
