@@ -9,7 +9,6 @@ import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {CategoryType} from '@root/interfaces/Categories';
 import {useStyles} from './useStyles';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 type CustomDrawerPropsType = {
@@ -53,7 +52,7 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
             onClose();
             setHoveredCtgr(initHoveredCtgr);
         };
-        console.log(subctgrName);
+
         const classes = useStyles();
         return (
             <Drawer
@@ -65,7 +64,15 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
                 <>
                     {(!(hasSubctgr && isXsDown) || !isXsDown) && (
                         <div className={classes.drawerList}>
-                            <ModalHeader title={t(isXsDown ? 'header:categories' : '')} handleCloseDialog={handleClose}/>
+                            <Hidden smUp>
+                                <div className='drawer-header'>
+                                    <div></div>
+                                    <Typography variant='subtitle1'>
+                                        {t('header:categories')}
+                                    </Typography>
+                                    <CloseBtn handleClose={handleClose}/>
+                                </div>
+                            </Hidden>
                             {site_categories.map((ctgr) => {
                                     const hovered = ctgr.id === hoveredCtgr.id;
                                     return (
@@ -100,12 +107,21 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
                     {hasSubctgr && (
                         <div className={classes.drawerContent}>
                             <Hidden smUp>
-                                <ModalHeader
-                                    title={t(isXsDown ? 'header:categories' : '')}
-                                    handleCloseDialog={handleClose}
-                                    handlePrevMenu={handlePrev}
-                                    hasPrevBtn={true}
-                                />
+                                <div className='drawer-header'>
+                                    <ArrowBackIosIcon onClick={handlePrev} fontSize='small'/>
+                                    <Typography variant='subtitle1'>
+                                        {subctgrName}
+                                    </Typography>
+                                    <CloseBtn handleClose={handleClose}/>
+                                </div>
+                            </Hidden>
+                            <Hidden xsDown>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
+                                }}>
+                                    <CloseBtn handleClose={handleClose}/>
+                                </div>
                             </Hidden>
                             <div className='main-box-wrapper'>
                                 <div className='box-wrapper'>
@@ -133,20 +149,22 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
                 if (allow) {
                     return (
                         <List key={subctgr.id} className='list-wrapper'>
-                            <Link href={url}>
-                                <a onClick={handleClose} className='bottom-line'>
-                                    <Typography
-                                        variant="h6"
-                                        className='list-title'
-                                        gutterBottom color="secondary"
-                                    >
-                                        {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
-                                        <Hidden smUp>
-                                            <KeyboardArrowRightIcon/>
-                                        </Hidden>
-                                    </Typography>
-                                </a>
-                            </Link>
+                            <ListItem className='list-item-title bottom-line'>
+                                <Link href={url}>
+                                    <a onClick={handleClose}>
+                                        <Typography
+                                            variant="h6"
+                                            className='list-title'
+                                            gutterBottom color="secondary"
+                                        >
+                                            {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
+                                            <Hidden smUp>
+                                                <KeyboardArrowRightIcon/>
+                                            </Hidden>
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </ListItem>
                             {type.map(type => {
                                 const typeName = transformCyrillic(type.ru_name);
                                 const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
