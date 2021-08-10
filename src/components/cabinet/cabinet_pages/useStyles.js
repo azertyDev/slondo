@@ -3,29 +3,52 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     cabinetTabs: {
         marginBottom: 15,
-        height: 28,
+        minHeight: 'auto',
+        '& .MuiTab-root': {
+            borderBottom: '1px solid #838383',
+            padding: 0,
+            minHeight: 28,
+            borderRadius: '3px 3px 0px 0px',
+            '& h6.MuiTypography-subtitle1': {
+                textTransform: 'uppercase'
+            },
+            [theme.breakpoints.down('xs')]: {
+                minHeight: 40,
+                '& h6.MuiTypography-subtitle1': {
+                    fontSize: '0.875rem'
+                }
+            }
+        },
         '& .MuiTabs-indicator': {
             display: 'flex',
             justifyContent: 'center',
-            backgroundColor: (props) =>
-                props.pathname === '/cabinet/auctions'
-                    ? theme.palette.primary.lotBgColor
-                    : props.pathname === '/cabinet/posts' || props.pathname === '/cabinet/purchases'
-                    ? theme.palette.primary.createAdBtnColor
-                    : props.pathname === '/cabinet/favorite' && props.tabIndex === 0
+            backgroundColor: ({page, tabIndex}) =>
+                page === 'auctions'
+                    ? theme.palette.primary.secondary
+                    : page === 'posts' || 'purchases'
+                    ? theme.palette.common.activeTab
+                    : (page === 'favorite' || 'banned') && tabIndex === 0
                         ? theme.palette.primary.createAdBtnColor
                         : theme.palette.primary.lotBgColor
         },
         '& button.Mui-selected': {
+            backgroundColor: ({page, tabIndex}) =>
+                page === 'auctions'
+                    ? theme.palette.primary.secondaryLight
+                    : page === 'posts' || 'purchases'
+                    ? theme.palette.primary.primaryLight
+                    : (page === 'favorite' || 'banned') && tabIndex === 0
+                        ? theme.palette.primary.primaryLight
+                        : theme.palette.primary.secondaryLight,
             '& h6.MuiTypography-subtitle1': {
-                color: (props) =>
-                    props.pathname === '/cabinet/auctions'
-                        ? theme.palette.primary.lotBgColor
-                        : props.pathname === '/cabinet/posts' || props.pathname === '/cabinet/purchases'
-                        ? theme.palette.primary.createAdBtnColor
-                        : props.pathname === '/cabinet/favorite' && props.tabIndex === 0
-                            ? theme.palette.primary.createAdBtnColor
-                            : theme.palette.primary.lotBgColor
+                color: ({page, tabIndex}) =>
+                    page === 'auctions'
+                        ? theme.palette.primary.secondary
+                        : page === 'posts' || 'purchases'
+                        ? theme.palette.common.activeTab
+                        : (page === 'favorite' || 'banned') && tabIndex === 0
+                            ? theme.palette.common.activeTab
+                            : theme.palette.primary.secondary
             }
         }
     }

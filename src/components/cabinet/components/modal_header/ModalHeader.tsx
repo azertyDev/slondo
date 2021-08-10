@@ -3,7 +3,6 @@ import {Box, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import CloseIcon from '@material-ui/icons/Close';
 import {useStyles} from './useStyles';
-import {useTranslation} from 'next-i18next';
 
 type ModalHeaderPropsType = {
     title,

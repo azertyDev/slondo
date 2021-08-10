@@ -36,38 +36,42 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <div className="user-info">
-                <Box>
-                    <UserAvatarComponent
-                        avatar={owner.avatar}
-                        width={width}
-                        height={height}
-                    />
-                </Box>
-                <Box>
-                    <Typography color="initial" variant='subtitle1'>
-                        {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
-                    </Typography>
-                    <Typography variant="subtitle1" color="initial">
-                        {t('created_at', {
-                            created_at: formatted_date?.toString()
-                        })}
-                    </Typography>
-                    <Rating
-                        readOnly
-                        ratingValue={owner.rating}
-                        ratingCount={owner.observer?.number_of_ratings}
-                    />
-                    {!isOwner && !!handleFollow && (
-                        <CustomButton onClick={handleFollow(owner.id)}>
-                            <Typography variant="subtitle2">
-                                {!subscribed ? t('common:follow') : t('common:unFollow')}
-                            </Typography>
-                        </CustomButton>
-                    )}
-                </Box>
-            </div>
-        </div>
+        <Box
+            width={1}
+            display='flex'
+            className={classes.root}
+        >
+            <UserAvatarComponent
+                avatar={owner.avatar}
+                width={width}
+                height={height}
+            />
+            <Box
+                display='flex'
+                flexDirection='column'
+                justifyContent='center'
+            >
+                <Typography color="initial" variant='subtitle1' gutterBottom>
+                    {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
+                </Typography>
+                <Typography variant="subtitle1" color="initial" gutterBottom>
+                    {t('created_at', {
+                        created_at: formatted_date?.toString()
+                    })}
+                </Typography>
+                <Rating
+                    readOnly
+                    ratingValue={owner.rating}
+                    ratingCount={owner.observer?.number_of_ratings}
+                />
+                {!isOwner && !!handleFollow && (
+                    <CustomButton onClick={handleFollow(owner.id)}>
+                        <Typography variant="subtitle2">
+                            {!subscribed ? t('common:follow') : t('common:unFollow')}
+                        </Typography>
+                    </CustomButton>
+                )}
+            </Box>
+        </Box>
     );
 };

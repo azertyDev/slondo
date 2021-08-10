@@ -51,7 +51,7 @@ export const UserCard: FC<UserCardProps> = (props) => {
     const classes = useStyles();
     return (
         <Grid container spacing={2} className={classes.root}>
-            <Grid item xs={7}>
+            <Grid item xs={12} sm={7} container alignItems='center'>
                 <UserInfoWithAvatar
                     isOwner
                     width='50px'
@@ -59,41 +59,33 @@ export const UserCard: FC<UserCardProps> = (props) => {
                     owner={userData}
                 />
             </Grid>
-            <Grid container spacing={1} item xs={5}>
-                <Grid item xs={12}>
-                    <CustomButton onClick={fetchUserPhone}>
-                        {phone
-                            ? <Typography variant='subtitle2' component='p'>
-                                {phone}
+            <Grid item xs={12} sm={5}>
+                <CustomButton disabled={isFetch} onClick={fetchUserPhone}>
+                    {phone
+                        ? <Typography variant='subtitle2' component='p'>
+                            {phone}
+                        </Typography>
+                        : <>
+                            <PhoneIcon />
+                            <Typography variant='subtitle2' component='p'>
+                                {t('post:show_phone')}
                             </Typography>
-                            : isFetch
-                                ? <CustomCircularProgress />
-                                : <>
-                                    <PhoneIcon />
-                                    <Typography variant='subtitle2' component='p'>
-                                        {t('post:show_phone')}
-                                    </Typography>
-                                </>
-                        }
-                    </CustomButton>
-                </Grid>
-                <Grid item xs={12}>
-                    <CustomButton disabled>
-                        <LetterIcon />
+                        </>
+                    }
+                </CustomButton>
+                <CustomButton disabled>
+                    <LetterIcon />
+                    <Typography variant='subtitle2' component='p'>
+                        {t('post:writeMessage')}
+                    </Typography>
+                </CustomButton>
+                {hasUserForRating && (
+                    <CustomButton onClick={handleOpenRating} color='gold'>
+                        <Star />
                         <Typography variant='subtitle2' component='p'>
-                            {t('post:writeMessage')}
+                            {t('give_rating')}
                         </Typography>
                     </CustomButton>
-                </Grid>
-                {hasUserForRating && (
-                    <Grid item xs={12}>
-                        <CustomButton onClick={handleOpenRating}>
-                            <Star />
-                            <Typography variant='subtitle2' component='p'>
-                                {t('give_rating')}
-                            </Typography>
-                        </CustomButton>
-                    </Grid>
                 )}
             </Grid>
         </Grid>

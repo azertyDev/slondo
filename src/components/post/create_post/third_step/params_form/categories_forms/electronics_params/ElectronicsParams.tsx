@@ -75,7 +75,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                 isEditable={currentFormIndex < 3}
                 handleEdit={handleFormOpen(3)}
             >
-                <Grid item xs={!isPreview ? 6 : 12}>
+                <Grid item xs={12} md={8} lg={5}>
                     <PostTitle
                         t={t}
                         formik={formik}

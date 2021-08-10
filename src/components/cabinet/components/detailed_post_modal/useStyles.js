@@ -31,7 +31,10 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '& .MuiTypography-body1': {
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: '.875rem'
+                    }
                 }
             },
             '& div.location': {
@@ -46,13 +49,14 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& button': {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                height: 38,
                 width: '100%',
-                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                 borderRadius: 5,
-                backgroundColor: theme.palette.background.paper,
+                background: theme.palette.background.paper,
+                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                '&:not(:last-child)': {
+                    marginBottom: 5
+                },
                 '& svg': {
                     marginRight: 10
                 }
@@ -88,11 +92,10 @@ export const useStyles = makeStyles((theme) => ({
             color: theme.palette.primary.secondary,
             textDecoration: 'underline',
             cursor: 'pointer'
-        }
-    },
-    actionButtons: {
+        },
         '& button': {
-            width: '100%',
+            height: 38,
+            width: '100%'
         }
     }
 }));

@@ -28,7 +28,10 @@ const colors = {
     aucBgColor: 'rgba(173, 102, 213, 0.65)',
     exAucBgColor: 'rgba(242, 153, 74, 0.65)',
     primaryGradient: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-    secondaryGradient: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%)'
+    secondaryGradient: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%)',
+    goldGradient: 'linear-gradient(90.62deg, #F38522 0.56%, #FFB800 99.49%)',
+    primaryLight: '#DDEBFF',
+    secondaryLight: '#F8F1FF'
 }
 
 // Create a theme instance.
@@ -59,7 +62,10 @@ const theme = createTheme({
             aucBgColor: colors.aucBgColor,
             exAucBgColor: colors.exAucBgColor,
             primaryGradient: colors.primaryGradient,
-            secondaryGradient: colors.secondaryGradient
+            secondaryGradient: colors.secondaryGradient,
+            primaryLight: colors.primaryLight,
+            secondaryLight: colors.secondaryLight,
+            goldGradient: colors.goldGradient
         },
         secondary: {
             main: colors.createAdBtnColor

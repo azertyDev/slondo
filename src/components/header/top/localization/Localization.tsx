@@ -16,6 +16,7 @@ export const Localization: FC = () => {
                 href={asPath}
             >
                 <Typography
+                    component='p'
                     variant="subtitle1"
                     className={locale === 'ru' ? classes.selected : ''}
                 >
@@ -27,6 +28,7 @@ export const Localization: FC = () => {
                 href={asPath}
             >
                 <Typography
+                    component='p'
                     variant="subtitle1"
                     className={locale === 'uz' ? classes.selected : ''}
                 >

@@ -82,7 +82,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <Typography variant="subtitle1">
+                                        <Typography variant="subtitle1" component='p'>
                                             {t('help')}
                                         </Typography>
                                         <QuestionIcon/>
@@ -144,7 +144,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             className="btn-sign-mobile"
                                             onClick={handleOpenModal}
                                         >
-                                            <Typography variant="subtitle2">
+                                            <Typography variant="subtitle2" component='p'>
                                                 {t('auth_reg:signIn')}
                                             </Typography>
                                         </CustomButton>}

@@ -31,15 +31,15 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
             <Typography variant="subtitle2" component='p' color="initial" className='color-silver'>
-                {completed ? 'Торги окончены' : 'Окончание торгов через: '}&nbsp;
+                {completed ? t('auction:auc_end') : `${t('auction:auc_end_across')}: `}&nbsp;
             </Typography>
             {!completed && (
                 <Box display="flex">
                     <Typography variant="subtitle2" component='p' className="timer">
-                        {formatNumber(days)}д &nbsp;
-                        {formatNumber(hours)}ч
-                        : {formatNumber(minutes)}м
-                        : {formatNumber(seconds)}с
+                        {formatNumber(days)}{t('common:d')} &nbsp;
+                        {formatNumber(hours)}{t('common:h')}
+                        : {formatNumber(minutes)}{t('common:m')}
+                        : {formatNumber(seconds)}{t('common:s')}
                     </Typography>
                 </Box>
             )}
@@ -136,14 +136,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 </div>
                             )}
                             {!!cardData.exchange && (
-                                <Tooltip title='Возможен обмен' arrow>
-                                    <div className="exchange">
-                                        <SwapIcon />
-                                        {!isXsDown && <Typography variant="body1">
-                                            {t('common:exchange')}
-                                        </Typography>}
-                                    </div>
-                                </Tooltip>
+                                <div className="exchange">
+                                    <SwapIcon />
+                                    {!isXsDown && <Typography variant="body1">
+                                        {t('common:exchange')}
+                                    </Typography>}
+                                </div>
                             )}
                             {!!cardData.safe_deal && (
                                 <div className="safe_deal">

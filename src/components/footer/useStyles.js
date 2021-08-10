@@ -28,8 +28,8 @@ export const useStyles = makeStyles((theme) => ({
                         margin: 0,
                         listStyle: 'none',
                         '& > li': {
-                            '&:last-child': {
-                                marginBottom: 0
+                            '&:nth-child(even)': {
+                                marginTop: 5
                             },
                             '& > a': {
                                 textDecoration: 'none',

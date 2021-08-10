@@ -9,14 +9,11 @@ export const useStyles = makeStyles((theme) => ({
             paddingBottom: 0
         },
         borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
-        '& a': {
-            textDecoration: 'none'
-        },
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {
                 '& > a': {
-                    '& h6': {
+                    '&:last-child h1': {
                         color: theme.palette.primary.main
                     },
                     '&:hover': {
@@ -208,8 +205,16 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-bonus': {
             display: 'flex',
-            marginBottom: '16px',
             flexWrap: 'wrap',
+            marginBottom: '16px',
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+                }
+            },
             '& span': {
                 display: 'flex',
                 alignItems: 'center',
@@ -230,106 +235,23 @@ export const useStyles = makeStyles((theme) => ({
                 '&:last-child': {
                     marginRight: 0
                 },
-                '&.delivery': {
-                    '& h6': {
-                        [theme.breakpoints.down('md')]: {
-                            color: '#4E4E4E'
-                        }
-                    },
-                    '& svg': {
-                        marginRight: '5px',
-                        '& path': {
-                            fill: '#695EAE',
-                            [theme.breakpoints.down('md')]: {
-                                fill: '#4E4E4E'
-                            }
-                        }
-                    }
-                },
-                '&.safe_deal': {
-                    '& h6': {
-                        [theme.breakpoints.down('md')]: {
-                            color: '#4E4E4E'
-                        }
-                    },
-                    '& svg': {
-                        marginRight: '5px',
-                        '& path': {
-                            [theme.breakpoints.down('md')]: {
-                                fill: '#4E4E4E'
-                            }
-                        }
-                    }
-                },
-                '&.exchange': {
-                    '& h6': {
-                        [theme.breakpoints.down('md')]: {
-                            color: '#4E4E4E'
-                        }
-                    },
-                    '& svg': {
-                        marginRight: '5px',
-                        width: 20,
-                        height: 22,
-                        '& path': {
-                            fill: '#4E4E4E'
-                        }
-                    }
-                },
-                '&.available': {
-                    '& h6': {
-                        [theme.breakpoints.down('md')]: {
-                            color: '#4E4E4E'
-                        }
-                    },
-                    [theme.breakpoints.down('md')]: {
-                        marginRight: '8px',
-                        padding: '9px 10px'
-                    },
-                    '& svg': {
-                        marginRight: 15,
-                        [theme.breakpoints.down('md')]: {
-                            marginRight: '6px'
-                        },
-                        '& > defs > linearGradient': {
-                            '& stop': {
-                                [theme.breakpoints.down('md')]: {
-                                    stopColor: '#4E4E4E',
-                                    boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
-                                }
-                            }
-                        }
-                    }
-                },
-                '&.auto-renewal': {
-                    '& h6': {
-                        [theme.breakpoints.down('md')]: {
-                            color: '#4E4E4E'
-                        }
-                    },
-                    '& svg': {
-                        marginRight: '5px',
-                        '& path': {
-                            fill: '#4E4E4E'
-                        }
+                '& svg': {
+                    marginRight: 5,
+                    width: 20,
+                    height: 20,
+                    '& path': {
+                        fill: '#4E4E4E'
                     }
                 },
                 '& h6.MuiTypography-subtitle1': {
                     color: theme.palette.common.tab,
                     [theme.breakpoints.down('md')]: {
+                        color: '#4E4E4E',
                         fontSize: 'calc(10px + 6 * (100vw / 1280))',
                         fontWeight: '700'
                     }
                 }
             },
-            [theme.breakpoints.down('md')]: {
-                '&:after': {
-                    content: '""',
-                    width: '100%',
-                    height: '0.8px',
-                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
-                }
-            }
         },
         '& div.contact': {
             display: 'flex',

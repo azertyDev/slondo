@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         zIndex: 1,
         '& .title': {
+            fontWeight: 600,
             [theme.breakpoints.down('xs')]: {
                 width: '80%',
                 fontSize: '1rem'
@@ -11,12 +12,12 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button': {
             position: 'absolute',
-            top: 10,
+            top: 5,
             '&.left': {
-                left: '15px'
+                left: '10px'
             },
             '&.right': {
-                right: '15px'
+                right: '10px'
             }
         }
     },
@@ -24,8 +25,8 @@ export const useStyles = makeStyles((theme) => ({
         padding: 5,
         '& svg': {
             [theme.breakpoints.down('xs')]: {
-                width: '18px',
-                height: '18px'
+                width: '25px',
+                height: '25px'
             },
             '& path': {
                 fill: '#28293D'
