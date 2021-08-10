@@ -67,11 +67,18 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const {user} = useContext(AuthCtx);
 
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
-    const isNotPassModeration = status === 'blocked' || status === 'reject';
-    const blockedStatus = status === 'blocked';
+    const isNotPassModeration = status === 'blocked' || status === 'refuse';
     const inactiveStatus = status === 'archive' || status === 'history' || status === 'sold';
 
-    const reasonTxt = t(`${reasons[0]?.reason?.name}`);
+    const reason = reasons.map(({reason}) => {
+        return (
+            <Grid item xs={12}>
+                <Typography variant='subtitle1' component='p' className='error-text'>
+                    {t(`${reason.name}`)}
+                </Typography>
+            </Grid>
+        );
+    });
 
     const auctionId = auction?.id;
     const offer = auction?.offer;
@@ -133,7 +140,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                                 <ExchangeIcon/>
                                             </span>
                                             <Typography variant="body1">
-                                                Возможен обмен
+                                                {t('common:exchange')}
                                             </Typography>
                                         </div>
                                     )}
@@ -143,7 +150,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                             <DeliveryIcon/>
                                         </span>
                                             <Typography variant="body1">
-                                                Есть доставка
+                                                {t('common:delivery')}
                                             </Typography>
                                         </div>
                                     )}
@@ -153,7 +160,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                                 <SafeIcon/>
                                             </span>
                                             <Typography variant="body1">
-                                                Безопасная покупка
+                                                {t('common:safe_deal')}
                                             </Typography>
                                         </div>
                                     )}
@@ -163,7 +170,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                                 <RenewalIcon/>
                                             </span>
                                             <Typography variant="body1">
-                                                Автопродление
+                                                {t('common:auto_ren')}
                                             </Typography>
                                         </div>
                                     )}
@@ -186,100 +193,103 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 </Box>
                             </Paper>
                         </Grid>
-                        <Grid container item spacing={2}>
-                            {isAuction && (
-                                <Grid item xs={12} md={6}>
-                                    {isBetsFetch
-                                        ? <CircularProgress color="primary" />
-                                        : <BetsList
-                                            bets={bets}
-                                            showBetsCount={2}
-                                            betsCount={betsCount}
-                                            auctionId={auctionId}
-                                            handleRefresh={setFetchedBetsData}
-                                            title={t('auction:extremeRates')}
-                                        />}
+                        {isAuction && (
+                            <Grid item xs={12} md={6}>
+                                {isBetsFetch
+                                    ? <CircularProgress color="primary" />
+                                    : <BetsList
+                                        bets={bets}
+                                        showBetsCount={2}
+                                        betsCount={betsCount}
+                                        auctionId={auctionId}
+                                        handleRefresh={setFetchedBetsData}
+                                        title={t('auction:extremeRates')}
+                                    />}
+                            </Grid>
+                        )}
+                        <Grid item xs={12} md={6} container spacing={1} className={classes.userInfoWrapper}>
+                            <Grid item xs={12} container className='user-info-title'>
+                                <Grid item xs={8}>
+                                    <Typography variant='subtitle2'>
+                                        {t(getUserInfoTitle())}
+                                        {hasOffer && !winner && isUserCreator && (
+                                            <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
+                                        )}
+                                    </Typography>
                                 </Grid>
-                            )}
-                            <Grid item xs={12} md={6} container spacing={1} className={classes.userInfoWrapper}>
-                                <Grid item xs={12} container className='user-info-title'>
-                                    <Grid item xs={8}>
-                                        <Typography variant='subtitle2'>
-                                            {t(getUserInfoTitle())}
-                                            {hasOffer && !winner && isUserCreator && (
-                                                <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
-                                            )}
+                                {isUserCreator && hasOffer && !winner && (
+                                    <Grid item xs={4}>
+                                        <Typography
+                                            align='right'
+                                            variant='subtitle2'
+                                            className='all-offers'
+                                            onClick={handleOffersOpen}
+                                        >
+                                            {t('all_offers', {offers: auction?.number_of_offers})}
                                         </Typography>
-                                    </Grid>
-                                    {isUserCreator && hasOffer && !winner && (
-                                        <Grid item xs={4}>
-                                            <Typography
-                                                align='right'
-                                                variant='subtitle2'
-                                                className='all-offers'
-                                                onClick={handleOffersOpen}
-                                            >
-                                                {t('all_offers', {offers: auction?.number_of_offers})}
-                                            </Typography>
-                                        </Grid>
-                                    )}
-                                </Grid>
-                                {(isAuction || hasBuyer) && (
-                                    <Grid item xs={12}>
-                                        <Paper className='paper-block'>
-                                            {userData
-                                                ? <UserCard
-                                                    t={t}
-                                                    userData={userData}
-                                                    hasUserForRating={hasUserForRating}
-                                                    handleOpenRating={handleOpenRating}
-                                                />
-                                                : <Typography
-                                                    variant='subtitle1'>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</Typography>
-                                            }
-                                        </Paper>
-                                    </Grid>
-                                )}
-                                {(isUserCreator || isUserWinner) && !inactiveStatus && (
-                                    <Grid item xs={12} container spacing={1} className={classes.actionButtons}>
-                                        {(isUserWinner || (offerUser && !winner)) && (
-                                            <Grid item xs={4}>
-                                                <CustomButton
-                                                    color='silver'
-                                                    disabled={isFetch}
-                                                    onClick={handleReject}
-                                                >
-                                                    <Typography variant='subtitle1' component='p'>
-                                                        {t(`common:reject`)}
-                                                    </Typography>
-                                                </CustomButton>
-                                            </Grid>
-                                            )}
-                                            {(winner || hasOffer) && isUserCreator && (
-                                                <Grid item xs={8}>
-                                                    <CustomButton
-                                                        color='secondary'
-                                                        disabled={isFetch}
-                                                        onClick={handleAccept}
-                                                    >
-                                                        <Typography variant='subtitle1' component='p'>
-                                                            {t(`common:${winner ? 'finish' : 'accept'}`)}
-                                                        </Typography>
-                                                    </CustomButton>
-                                                </Grid>
-                                            )}
                                     </Grid>
                                 )}
                             </Grid>
-                        </Grid>
-                        {blockedStatus && (
-                            <Grid container>
+                            {(isAuction || hasBuyer) && (
                                 <Grid item xs={12}>
-                                    <Typography>
-                                        {t('ban_reason')}:&nbsp;
-                                        {reasonTxt}
-                                    </Typography>
+                                    <Paper className='paper-block'>
+                                        {userData
+                                            ? <UserCard
+                                                t={t}
+                                                userData={userData}
+                                                hasUserForRating={hasUserForRating}
+                                                handleOpenRating={handleOpenRating}
+                                            />
+                                            : <Typography variant='subtitle1'>
+                                                {t(`auction:last_bet`, {lastBet: bets[0]?.bet})}
+                                            </Typography>
+                                        }
+                                    </Paper>
                                 </Grid>
+                            )}
+                            {(isUserCreator || isUserWinner) && !inactiveStatus && (
+                                <>
+                                    {(isUserWinner || (offerUser && !winner)) && (
+                                        <Grid item xs={!(winner || hasOffer) ? 4 : 12}>
+                                            <CustomButton
+                                                color='silver'
+                                                disabled={isFetch}
+                                                onClick={handleReject}
+                                            >
+                                                <Typography variant='subtitle1' component='p'>
+                                                    {t(`common:reject`)}
+                                                </Typography>
+                                            </CustomButton>
+                                        </Grid>
+                                    )}
+                                    {(winner || hasOffer) && isUserCreator && (
+                                        <Grid item xs={12}>
+                                            <CustomButton
+                                                color='secondary'
+                                                disabled={isFetch}
+                                                onClick={handleAccept}
+                                            >
+                                                <Typography variant='subtitle1' component='p'>
+                                                    {t(`common:${winner ? 'finish' : 'accept'}`)}
+                                                </Typography>
+                                            </CustomButton>
+                                        </Grid>
+                                    )}
+                                </>
+                            )}
+                        </Grid>
+                        {isNotPassModeration && (
+                            <Grid item xs={12} md={6}>
+                                <Paper className='paper-block'>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12}>
+                                            <Typography variant='subtitle1' component='p' gutterBottom>
+                                                {t('ban_reason')}:
+                                            </Typography>
+                                        </Grid>
+                                        {reason}
+                                    </Grid>
+                                </Paper>
                             </Grid>
                         )}
                     </Grid>

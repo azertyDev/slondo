@@ -8,7 +8,10 @@ export const useStyles = makeStyles((theme) => ({
         background: '#F2F2F2',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.04), 1px 0px 2px rgba(0, 0, 0, 0.04)',
         '& h6.MuiTypography-h6': {
-            textAlign: 'center'
+            textAlign: 'center',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '1rem'
+            }
         },
         '& a': {
             textDecoration: 'none',

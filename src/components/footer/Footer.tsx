@@ -15,7 +15,7 @@ export const Footer: FC = () => {
             <div className='footer-wrapper'>
                 <Container maxWidth='xl'>
                     <Grid container className="footer-content" justifyContent="center">
-                        <Grid container className="footer-top">
+                        <Grid container className="footer-top" spacing={1}>
                             <Hidden mdUp>
                                 <Grid item container xs={12} justifyContent="center">
                                     <div className="social-icons adaptive">
@@ -29,8 +29,9 @@ export const Footer: FC = () => {
                                         <Link href="/help/user_agreements">
                                             <a>
                                                 <Typography
-                                                    variant="subtitle1"
+                                                    component='p'
                                                     color="initial"
+                                                    variant="subtitle1"
                                                 >
                                                     {t('userAgreement')}
                                                 </Typography>
@@ -41,8 +42,9 @@ export const Footer: FC = () => {
                                         <Link href="/help">
                                             <a>
                                                 <Typography
-                                                    variant="subtitle1"
+                                                    component='p'
                                                     color="initial"
+                                                    variant="subtitle1"
                                                 >
                                                     {t('advertise')}
                                                 </Typography>
@@ -57,8 +59,9 @@ export const Footer: FC = () => {
                                         <Link href="/help/feedback">
                                             <a>
                                                 <Typography
-                                                    variant="subtitle1"
+                                                    component='p'
                                                     color="initial"
+                                                    variant="subtitle1"
                                                 >
                                                     {t('feedback')}
                                                 </Typography>
@@ -73,8 +76,9 @@ export const Footer: FC = () => {
                                         <Link href="/help">
                                             <a>
                                                 <Typography
-                                                    variant="subtitle1"
+                                                    component='p'
                                                     color="initial"
+                                                    variant="subtitle1"
                                                 >
                                                     {t('help')}
                                                 </Typography>
@@ -96,12 +100,12 @@ export const Footer: FC = () => {
                                 <Logo/>
                             </Grid>
                             <Grid item xs={12} md={6} container justifyContent="center" alignItems='center'>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" component='p' color="initial">
                                     {t('termsOfUse')}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={3} container justifyContent="center" alignItems='center'>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" component='p' color="initial">
                                     Copyright © 2020 Slondo.
                                 </Typography>
                             </Grid>

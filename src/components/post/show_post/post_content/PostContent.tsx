@@ -301,48 +301,48 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="post-bonus">
                     {!!post.delivery && (
                         <span className="delivery">
-                        <DeliveryIcon/>
+                            <DeliveryIcon />
                             <Typography variant="subtitle1">
-                            {t('common:delivery')}
-                        </Typography>
-                    </span>
+                                {t('common:delivery')}
+                            </Typography>
+                        </span>
                     )}
                     {!!post.safe_deal && (
                         <span className="safe_deal">
-                        <SafeIcon/>
+                            <SafeIcon />
                             <Typography variant="subtitle1">
-                            {t('common:safe_deal')}
-                        </Typography>
-                    </span>
+                                {t('common:safe_deal')}
+                            </Typography>
+                        </span>
                     )}
                     {!!post.exchange && (
                         <span className="exchange">
-                        <SwapIcon/>
+                            <SwapIcon />
                             <Typography variant="subtitle1">
-                            {t('common:exchange')}
-                        </Typography>
-                    </span>
+                                {t('common:exchange')}
+                            </Typography>
+                        </span>
                     )}
                     {!!post.available_start_time && (
                         <span className="available">
-                        <PhoneIcon/>
+                            <PhoneIcon />
                             {!!post.available_days?.length && (
                                 <Typography variant="subtitle1" color="primary">
                                     {weekDaysHelper(post.available_days, t)}&nbsp;
                                 </Typography>
                             )}
                             <Typography variant="subtitle1">
-                            {`${post.available_start_time} - ${post.available_end_time}`}
-                        </Typography>
-                    </span>
+                                {`${post.available_start_time} - ${post.available_end_time}`}
+                            </Typography>
+                        </span>
                     )}
                     {!!post.auction?.auto_renewal && (
                         <span className="auto-renewal">
-                            <RenewalIcon/>
-                            <Typography variant="subtitle1">
-                            {t('common:auto_ren')}
-                        </Typography>
-                    </span>
+                                <RenewalIcon />
+                                <Typography variant="subtitle1">
+                                {t('common:auto_ren')}
+                            </Typography>
+                        </span>
                     )}
                 </div>
                 <Hidden lgUp>

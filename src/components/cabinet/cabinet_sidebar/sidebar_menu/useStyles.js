@@ -33,7 +33,10 @@ export const useStyles = makeStyles((theme) => ({
                     flex: 'none'
                 },
                 '& svg': {
-                    marginRight: 10
+                    marginRight: 10,
+                    [theme.breakpoints.between('sm','md')]: {
+                        display: 'none'
+                    }
                 }
             }
         },

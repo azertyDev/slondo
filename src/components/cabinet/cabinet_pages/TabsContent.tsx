@@ -20,7 +20,7 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
         handleTabChange
     } = props;
 
-    const {pathname} = useRouter();
+    const {query: {page}} = useRouter();
     const [firstTabData, secondTabData] = tabsData;
 
     const [firstTabPage, setFirstTabPage] = useState(1);
@@ -36,7 +36,7 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
             : secondTabData.handleFetchByTab(secondTabPage);
     }, [firstTabPage, secondTabPage]);
 
-    const classes = useStyles({pathname, tabIndex});
+    const classes = useStyles({page, tabIndex});
     return (
         <>
             <Tabs

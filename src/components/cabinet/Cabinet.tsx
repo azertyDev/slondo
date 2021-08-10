@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
@@ -16,8 +16,8 @@ import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/Safe
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import ErrorPage from "@root/pages/_error";
-import {PrevArrowIcon} from "@src/components/elements/icons";
+import ErrorPage from '@root/pages/_error';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useStyles} from './useStyles';
 
 enum Pages {
@@ -41,9 +41,9 @@ export type CommonModalType = {
     handleRefresh: () => void
 };
 
-const Cabinet: FC = () => {
+const Cabinet: FC<{referrer: string}> = ({referrer}) => {
     const {t} = useTranslation('cabinet');
-    const {query, push} = useRouter();
+    const {query, push, back} = useRouter();
     const {page} = query;
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
@@ -53,17 +53,19 @@ const Cabinet: FC = () => {
     const title = `${t('my_cabinet')} ${page ? `| ${t(page)}` : ''}`;
 
     const handlePrev = () => {
-        push('/cabinet', undefined, {shallow: true});
+        isRootPage
+            ? push(referrer ?? '/')
+            : back();
     };
 
     const getPage = () => {
         switch (page as keyof typeof Pages) {
             case 'posts':
-                return <MyPosts/>;
+                return <MyPosts />;
             case 'auctions':
-                return <MyAuctions/>;
+                return <MyAuctions />;
             case 'banned':
-                return <BannedPosts/>;
+                return <BannedPosts />;
             case 'favorite':
                 return <FavoriteContainer/>;
             case 'messages':
@@ -73,52 +75,62 @@ const Cabinet: FC = () => {
             case 'purchases' :
                 return <MyPurchases/>;
             case 'rating' :
-                return <RatingsContainer/>;
+                return <RatingsContainer />;
             case 'safe_deal' :
-                return <SafetyDeal/>;
+                return <SafetyDeal />;
             case 'settings' :
-                return <Settings/>;
+                return <Settings />;
             case 'subs':
-                return <Subs/>;
+                return <Subs />;
         }
     };
 
     const classes = useStyles();
+
+    const desktop = (
+        <MainLayout title={title}>
+            <div className={classes.root}>
+                <Grid container>
+                    <Grid item sm={4} md={3}>
+                        <CabinetSidebar />
+                    </Grid>
+                    <Grid item sm={8} md={9} className='pl-16'>
+                        {isRootPage
+                            ? <Typography>
+                                {t('select_page')}
+                            </Typography>
+                            : <>
+                                <Typography variant="h6" className="menu-title">
+                                    {t(page)}
+                                </Typography>
+                                {getPage()}
+                            </>}
+                    </Grid>
+                </Grid>
+            </div>
+        </MainLayout>
+    );
+
+    const mobile = (
+        <>
+            <ModalHeader
+                hasPrevBtn={true}
+                handlePrevMenu={handlePrev}
+                title={t(isRootPage ? 'myCabinet' : page)}
+            />
+            <Box p='15px 10px'>
+                {isRootPage
+                    ? <CabinetSidebar />
+                    : getPage()
+                }
+            </Box>
+        </>
+    );
+
     return (
         existPage
-            ? <MainLayout title={title}>
-                <div className={classes.root}>
-                    <Grid container spacing={1}>
-                        {(isRootPage && isXsDown || !isXsDown) && (
-                            <Grid item xs={12} sm={4} md={3}>
-                                <CabinetSidebar/>
-                            </Grid>
-                        )}
-                        {!(isRootPage && isXsDown) && (
-                            <Grid item xs={12} sm={8} md={9} className='pl-16'>
-                                {isRootPage
-                                    ? <Typography>
-                                        {t('select_page')}
-                                    </Typography>
-                                    : <>
-                                        <Grid item xs={12} container alignItems='center' justifyContent='center'>
-                                            {isXsDown && (
-                                                <PrevArrowIcon onClick={handlePrev} />
-                                            )}
-                                            <Typography variant="h6" className="menu-title" align='center'>
-                                                {t(page)}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {getPage()}
-                                        </Grid>
-                                    </>}
-                            </Grid>
-                        )}
-                    </Grid>
-                </div>
-            </MainLayout>
-            : <ErrorPage statusCode={404}/>
+            ? isXsDown ? mobile : desktop
+            : <ErrorPage statusCode={404} />
     );
 };
 

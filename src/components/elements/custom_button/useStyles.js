@@ -4,14 +4,16 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         color: theme.palette.primary.white,
         padding: '12px',
-        background: (props) =>
-            props.color === 'primary'
+        background: ({color}) =>
+            color === 'primary'
                 ? theme.palette.primary.primaryGradient
-                : props.color === 'secondary'
+                : color === 'secondary'
                 ? theme.palette.primary.createAdBtnColor
-                : props.color === 'silver'
-                    ? '#E9E9E9'
-                    : theme.palette.primary.secondaryGradient,
+                : color === 'gold'
+                    ? theme.palette.primary.goldGradient
+                    : color === 'silver'
+                        ? '#E9E9E9'
+                        : theme.palette.primary.secondaryGradient,
         boxShadow: (props) =>
             props.color === 'primary' ? 'none' : '0px 0px 8px 0px #845CAB 20%',
         borderRadius: '3px',
@@ -34,9 +36,10 @@ export const useStyles = makeStyles((theme) => ({
                     : 'initial'
         },
         '&:disabled': {
-            backgroundColor: theme.palette.primary.gray,
-            '& > h6.MuiTypography-subtitle1': {
-                color: '#ccc'
+            backgroundColor: '#f2f2f2',
+            opacity: 0.5,
+            '& p, h6': {
+                color: theme.palette.primary.black
             },
             '& svg': {
                 '& path': {

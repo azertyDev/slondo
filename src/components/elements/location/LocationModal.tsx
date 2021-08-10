@@ -9,6 +9,7 @@ import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {useStyles} from './useStyles';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type LocationModalPropsType = {
     region,
@@ -53,18 +54,11 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                 {isFetch
                     ? <CustomCircularProgress/>
                     : <>
-                        <div className='modal-top'>
-                            <div className="location-header-wrapper">
-                                <Typography variant="subtitle1">
-                                    {t('location')}
-                                </Typography>
-                            </div>
-                            <CloseBtn handleClose={handleModalClose}/>
-                        </div>
+                        <ModalHeader title={t('location')} handleCloseDialog={handleModalClose} />
                         <div className='local-modal-container'>
                             <div className='locals-input'>
                                 <Hidden xsDown>
-                                    <LocationIcon/>
+                                    <LocationIcon />
                                 </Hidden>
                                 <input
                                     disabled

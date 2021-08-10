@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
         '& a': {
             textDecoration: 'none'
         },
-        '& > h6': {
+        '& > p': {
             lineHeight: 1,
             fontWeight: 500,
             cursor: 'pointer',
