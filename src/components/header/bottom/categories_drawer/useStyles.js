@@ -19,6 +19,19 @@ export const useStyles = makeStyles((theme) => ({
                     background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.35) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
                 }
             }
+        },
+        '& div.drawer-header': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '16px',
+            alignItems: 'center',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+            '& h6': {
+                fontWeight: '500'
+            },
+            '& svg > path': {
+                fill: '#4F4F4F'
+            }
         }
     },
     topBtns: {
@@ -39,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
             padding: '0 25px',
             [theme.breakpoints.down('xs')]: {
                 height: 'auto',
-                padding: '13px 22px 13px 14px',
+                padding: '13px 16px',
                 marginBottom: 0
             },
             '& > h6.MuiTypography-subtitle1': {
@@ -72,7 +85,7 @@ export const useStyles = makeStyles((theme) => ({
             '&.hovered': {
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 borderRadius: 100,
-                '& > h6.MuiTypography-subtitle1': {
+                '& h6.MuiTypography-subtitle1': {
                     color: '#fff'
                 },
                 '& svg': {
@@ -83,6 +96,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '&.all-ctgrs': {
                 '& > h6.MuiTypography-subtitle1': {
+                    color: '#fff',
                     fontWeight: 600
                 }
             },
@@ -149,8 +163,15 @@ export const useStyles = makeStyles((theme) => ({
         '& ul.list-wrapper': {
             '& h6.list-title, li.list-items-wrapper': {
                 [theme.breakpoints.down('xs')]: {
-                    padding: '22px'
+                    padding: '16px'
                 }
+            },
+            '& li.list-item-title': {
+                display: 'block',
+                paddingTop: 0,
+                paddingBottom: 0,
+                paddingRight: 0,
+                paddingLeft: 0
             },
             '& h6.list-title': {
                 fontWeight: '600',
@@ -159,7 +180,6 @@ export const useStyles = makeStyles((theme) => ({
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     marginBottom: 0,
-                    fontSize: '1rem',
                     '& svg > path': {
                         fill: '#838383'
                     }
