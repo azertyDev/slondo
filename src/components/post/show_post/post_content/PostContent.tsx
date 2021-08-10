@@ -25,11 +25,11 @@ import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
+import {INCOGNITO_PHONES} from "@src/constants";
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useTranslation} from "next-i18next";
 import {useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
-import {INCOGNITO_PHONES} from "@src/constants";
 
 type PostContentTypes = {
     post,
@@ -415,7 +415,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             variant="subtitle1"
                             id="post-description"
                         >
-                            {post.description}
+                            <pre>{post.description}</pre>
                         </Typography>
                     </ReadMore>
                 </div>

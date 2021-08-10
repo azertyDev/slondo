@@ -6594,6 +6594,9 @@
     }
   },
   "hobbies": {
+    "keyboards": {
+      "name": "Клавиатуры"
+    },
     "chess_games": {
       "name": "Шахматы"
     },
@@ -7117,7 +7120,7 @@
       "name": "Тематика"
     },
     "business_literature": {
-      "name": "•Бизнес литература"
+      "name": "Бизнес литература"
     },
     "home_and_family": {
       "name": "Дом и семья"

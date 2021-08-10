@@ -1,8 +1,9 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import Head from 'next/head';
+import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {userAPI} from '@src/api/api';
+import {unstable_batchedUpdates} from "react-dom";
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 // import {Banner} from '@src/components/elements/banner/Banner';
@@ -11,11 +12,10 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {Footer} from '@src/components/footer/Footer';
 import {AuthCtx, ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthContainer} from "@src/components/header/auth/AuthContainer";
-import {unstable_batchedUpdates} from "react-dom";
+import {useStyles} from './useStyles';
 
 
 export const ShowPostContainer: FC<any> = ({referer}) => {

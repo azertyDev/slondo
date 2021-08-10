@@ -6576,6 +6576,9 @@
     }
   },
   "hobbies": {
+    "keyboards": {
+      "name": "Klaviaturalar"
+    },
     "chess_games": {
       "name": "Shaxmat o'yinlari"
     },
@@ -7673,7 +7676,6 @@
   "mileage": "Kilometrda bosib o’tgan masofasi",
   "brand": "Brendi",
   "season": "Mavsum",
-
   "bayonet": "Bayonet",
   "usb_connector": "USB ulagichi",
   "build_in_speakers": "Ichki dinamiklar",
