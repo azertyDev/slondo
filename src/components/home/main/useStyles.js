@@ -35,18 +35,26 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         display: 'flex',
         position: 'fixed',
-        marginBottom: '8px',
+        marginBottom: '22px',
         justifyContent: 'center',
         '& > a': {
             textDecoration: 'none',
             '& > div': {
-                padding: '10px 23px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '11px 24px',
                 color: theme.palette.primary.white,
-                backgroundColor: theme.palette.primary.createAdBtnColor,
-                borderRadius: '12px',
+                backgroundColor: '#00AAFF',
+                borderRadius: '100px',
                 '& > h6': {
+                    fontSize: '18px',
                     textAlign: 'center',
-                    color: '#fff'
+                    color: '#fff',
+                    marginRight: '10px'
+                },
+                '& svg': {
+                    width: '20px',
+                    height: '20px'
                 }
             }
         }

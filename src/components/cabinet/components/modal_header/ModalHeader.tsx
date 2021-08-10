@@ -20,7 +20,7 @@ export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
         handleCloseDialog
     } = props;
 
-    const isXs = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
@@ -32,7 +32,7 @@ export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
             position='relative'
             justifyContent='center'
             className={classes.root}
-            boxShadow={isXs ? '0px 1px 2px 0px #00000026' : 'none'}
+            boxShadow={isXsDown ? '0px 1px 2px 0px #00000026' : 'none'}
         >
             {hasPrevBtn && (
                 <IconButton
