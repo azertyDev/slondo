@@ -378,7 +378,6 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',
-                    lineHeight: '1rem',
                     padding: 0
                 },
                 '& > pre': {
