@@ -57,11 +57,16 @@ export const useStyles = makeStyles((theme) => ({
         minHeight: '280px',
         padding: '20px 30px',
         borderRadius: '25px',
+        background: 'rgba( 251, 3, 3, 0.25 )',
+        boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+        backdropFilter: 'saturate(180%) blur(10px)',
+        WebkitBackdropFilter: 'blur( 3.5px )',
+        // borderRadius: '10px',
         // background: 'url(/img/card-bg.png)',
         // backgroundPosition: 'center',
         // backgroundSize: 'cover',
         // backgroundRepeat: 'no-repeat',
-        boxShadow: '0px 10px 25px rgba(15, 51, 107, 0.15)',
+        // boxShadow: '0px 10px 25px rgba(15, 51, 107, 0.15)',
         [theme.breakpoints.down('sm')]: {
             padding: '20px'
         },

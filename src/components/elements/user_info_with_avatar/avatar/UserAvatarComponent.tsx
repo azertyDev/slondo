@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import {StyledBadge, useStyles} from './useStyles';
 import {Box} from '@material-ui/core';
+import {useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
     avatar?: string
@@ -10,8 +10,8 @@ type UserAvatarComponentTypes = {
 };
 
 export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width, height}) => {
-    const classes = useStyles({width, height});
 
+    const classes = useStyles({width, height});
     return (
         <Box
             mr={1}

@@ -84,3 +84,4 @@ export {DoubleCheckIcon} from './DoubleCheckIcon';
 export {GradeIcon} from './GradeIcon';
 export {SupervisorIcon} from './SupervisorIcon';
 export {ErrorIcon} from './ErrorIcon';
+export {BorderErrorIcon} from './BorderErrorIcon';
