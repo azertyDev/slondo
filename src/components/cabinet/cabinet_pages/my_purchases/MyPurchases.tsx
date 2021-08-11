@@ -110,7 +110,6 @@ export const MyPurchases: FC = () => {
     const classes = useStyles();
     const purchasesList = (
         <>
-
             <Tabs
                 aria-label="tabs"
                 value={childTabValue}

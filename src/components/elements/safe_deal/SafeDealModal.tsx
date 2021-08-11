@@ -27,6 +27,7 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
     } = props;
 
     const hasPost = !!post;
+    const {data} = post;
     const {t} = useTranslation('common');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
@@ -42,8 +43,8 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
     const createP2pHold = async () => {
         try {
             const p2pData = JSON.stringify({
-                amount: post.price,
-                extraId: post.id
+                amount: data.price,
+                extraId: data.id
             });
 
             setIsFetch(true);
@@ -70,9 +71,9 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
 
     return (
         <ResponsiveModal
-            maxWidth={isMdDown ? 'sm' : 'lg'}
             openDialog={open}
             handleCloseDialog={onClose}
+            maxWidth={isMdDown ? 'sm' : 'lg'}
         >
             <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose}/>
             <Grid container>
@@ -89,10 +90,10 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
                 {hasPost && !isFetchUserCard && (
                     <Grid item xs={12} lg={6}>
                         <PostInfo
-                            author={post.data.author}
+                            author={data.author}
                             createP2P={createP2pHold}
                             disable={!userCard.cardId || isFetch}
-                            price={numberPrettier(post.data.price)}
+                            price={numberPrettier(data.price)}
                         />
                     </Grid>
                 )}

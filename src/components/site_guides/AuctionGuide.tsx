@@ -73,7 +73,7 @@ export const AuctionGuide: FC<WithT> = (props) => {
                         </Paper>
                     </Grid>
                     <Grid item xs={11}>
-                        <Typography variant='h5' className='fw600' align='center'>
+                        <Typography variant={isXsDown ? 'subtitle2' : 'h5'} className='fw600' align='center'>
                             {t('howItWorks')}
                         </Typography>
                     </Grid>

@@ -63,7 +63,6 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                         }
                         value={1}
                         textColor='inherit'
-                        selected={true}
                     />
                 )}
             </Tabs>
