@@ -5,22 +5,18 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '24px',
-        height: '24px',
-        padding: 0,
+        padding: 5,
         zIndex: '1000',
-        [theme.breakpoints.down('xs')]: {
+        '& svg': {
             width: '20px',
             height: '20px'
         },
-        '& path': {
-            fill: '#494A61'
-        },
-        '&:hover': {
-            backgroundColor: '#EB5757',
-            '& path': {
-                fill: '#fff'
-            }
+        [theme.breakpoints.down('xs')]: {
+            padding: 5,
+            '& svg': {
+                width: '16px',
+                height: '16px'
+            },
         }
     }
 }));
