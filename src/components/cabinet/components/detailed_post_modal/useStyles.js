@@ -54,6 +54,13 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: 5,
                 background: theme.palette.background.paper,
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                '&.ratingBtn': {
+                    background: theme.palette.primary.goldGradient,
+                    boxShadow: '0px 1px 2px 0px #00000026',
+                    '& p': {
+                        color: '#FFFFF'
+                    }
+                },
                 '&:not(:last-child)': {
                     marginBottom: 5
                 },

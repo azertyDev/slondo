@@ -80,7 +80,7 @@ export const UserCard: FC<UserCardProps> = (props) => {
                     </Typography>
                 </CustomButton>
                 {hasUserForRating && (
-                    <CustomButton onClick={handleOpenRating} color='gold'>
+                    <CustomButton onClick={handleOpenRating} className='ratingBtn'>
                         <Star />
                         <Typography variant='subtitle2' component='p'>
                             {t('give_rating')}

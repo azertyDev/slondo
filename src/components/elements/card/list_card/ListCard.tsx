@@ -47,7 +47,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     );
 
     const date = new Date(cardData.created_at);
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+    console.log(date);
+    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours()}:${date.getMinutes()}`;
 
     const translatedTitle = transformCyrillic(cardData.title);
 

@@ -1,7 +1,7 @@
 import {FC, useContext} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {Box, Divider, Typography} from '@material-ui/core';
+import {Box, Divider, Grid, Typography} from '@material-ui/core';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
@@ -13,6 +13,7 @@ import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from "@src/context";
 import {TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type RatingModalPropsType = {
     postId: number,
@@ -84,64 +85,61 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             openDialog={open}
             handleCloseDialog={handleCloseRating}
         >
-            <Box
-                mb={1}
-                display='flex'
-                justifyContent='center'
-            >
-                <Typography variant='h6'>
-                    {t('rating')}
-                </Typography>
+            <ModalHeader title={t('rating')} handleCloseDialog={handleCloseRating} />
+            <Box padding={2} width={1}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <UserInfoWithAvatar owner={user} isOwner={false} />
+                    </Grid>
+                    <Divider className={classes.divider} />
+                    <Grid item xs={12}>
+                        <Typography variant='h6' align='center'>
+                            {t('give_rating')}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormikProvider value={formik}>
+                            <Form onSubmit={handleSubmit}>
+                                <Box
+                                    width={1}
+                                    display='flex'
+                                    alignItems='center'
+                                    flexDirection='column'
+                                >
+                                    <Box my={2}>
+                                        <Rating
+                                            card
+                                            name="rating"
+                                            readOnly={false}
+                                            ratingCount={user.rating}
+                                            ratingValue={values.rating}
+                                            onChangeRating={onChangeRating}
+                                            className={classes.ratingComponent}
+                                        />
+                                    </Box>
+                                    <FormikTextarea
+                                        rows={10}
+                                        name='comment'
+                                        disableRequire
+                                        limit={TEXT_LIMIT}
+                                        onBlur={handleBlur}
+                                        value={values.comment}
+                                        onChange={handleChange}
+                                        labelTxt={t('Оставьте коментарий')}
+                                        placeholder={t('Поделитесь впечатлениями')}
+                                        errorMsg={getErrorMsg(errors.description, touched.description, t)}
+                                    />
+                                    <CustomButton type='submit' disabled={values.rating === 0} color='secondary'>
+                                        <Typography variant='subtitle1' component='p'>
+                                            {t('common:send')}
+                                        </Typography>
+                                    </CustomButton>
+                                </Box>
+                            </Form>
+                        </FormikProvider>
+                    </Grid>
+                </Grid>
             </Box>
-            <Box>
-                <UserInfoWithAvatar owner={user} isOwner={false}/>
-            </Box>
-            <Divider className={classes.divider}/>
-            <Box
-                mb={1}
-                display='flex'
-                justifyContent='center'
-            >
-                <Typography variant='h6'>
-                    {t('give_rating')}
-                </Typography>
-            </Box>
-            <FormikProvider value={formik}>
-                <Form onSubmit={handleSubmit}>
-                    <Box
-                        display='flex'
-                        alignItems='center'
-                        flexDirection='column'
-                    >
-                        <Rating
-                            card
-                            name="rating"
-                            readOnly={false}
-                            ratingCount={user.rating}
-                            ratingValue={values.rating}
-                            onChangeRating={onChangeRating}
-                            className={classes.ratingComponent}
-                        />
-                        <FormikTextarea
-                            rows={10}
-                            name='comment'
-                            disableRequire
-                            limit={TEXT_LIMIT}
-                            onBlur={handleBlur}
-                            value={values.comment}
-                            onChange={handleChange}
-                            labelTxt={t('Оставьте коментарий')}
-                            placeholder={t('Поделитесь впечатлениями')}
-                            errorMsg={getErrorMsg(errors.description, touched.description, t)}
-                        />
-                        <CustomButton type='submit' disabled={values.rating === 0}>
-                            <Typography variant='subtitle1'>
-                                {t('common:send')}
-                            </Typography>
-                        </CustomButton>
-                    </Box>
-                </Form>
-            </FormikProvider>
         </ResponsiveModal>
     );
 };
