@@ -90,7 +90,7 @@ const data2 = [
 const data3 = [
     {id: 1, section: 'Пользовательское соглашение', term: 'user_agreements'},
     {id: 2, section: 'Политика конфиденциальности', term: 'privacy_police'},
-    {id: 3, section: 'Оферта “Безопасный торг”', term: 'safe_auction_offer'},
+    {id: 3, section: 'Оферта “Безопасный торг”', term: 'safe_deal_offer'},
     {id: 4, section: 'Оферта “Поднять в топ”', term: 'top_offer'},
     {id: 5, section: 'Оферта “Продвинутый аукцион”', term: 'advanced_auction_offer'},
     // {id: 6, section: 'Оферта о размещение рекламы', term: 'advertising_offer'}

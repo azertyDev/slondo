@@ -5,7 +5,7 @@ import {isRequired} from '@root/src/helpers';
 
 export const titleValidate = string()
     .required(fieldRequiredTxt)
-    .test('len', 'min_chars', val => !!val && val.length > TITLE_MIN);
+    .test('len', 'min_chars', val => !!val && val.length >= TITLE_MIN);
 
 export const paramsFormSchema = lazy(
     (value) => object({

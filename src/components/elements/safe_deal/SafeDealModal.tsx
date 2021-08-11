@@ -27,7 +27,7 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
     } = props;
 
     const hasPost = !!post;
-    const {data} = post;
+
     const {t} = useTranslation('common');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
@@ -42,9 +42,11 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
 
     const createP2pHold = async () => {
         try {
+            const {data} = post;
+
             const p2pData = JSON.stringify({
-                amount: data.price,
-                extraId: data.id
+                extraId: data.id,
+                amount: data.price
             });
 
             setIsFetch(true);
@@ -73,11 +75,11 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
         <ResponsiveModal
             openDialog={open}
             handleCloseDialog={onClose}
-            maxWidth={isMdDown ? 'sm' : 'lg'}
+            maxWidth={isMdDown ? 'sm' : hasPost ? 'lg' : 'sm'}
         >
             <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose}/>
             <Grid container>
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} md={hasPost ? 6 : 12}>
                     <UserPaymentCard
                         onClose={onClose}
                         hasPost={hasPost}
@@ -88,12 +90,12 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
                     />
                 </Grid>
                 {hasPost && !isFetchUserCard && (
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} md={6}>
                         <PostInfo
-                            author={data.author}
+                            author={post.data.author}
                             createP2P={createP2pHold}
                             disable={!userCard.cardId || isFetch}
-                            price={numberPrettier(data.price)}
+                            price={numberPrettier(post.data.price)}
                         />
                     </Grid>
                 )}

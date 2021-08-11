@@ -1,5 +1,4 @@
 import {FC, Fragment, useEffect, useState} from 'react';
-import {Grid} from '@material-ui/core';
 import {legal_docs} from './LegalDocs';
 import {useStyles} from './useStyles';
 

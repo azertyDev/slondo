@@ -2251,7 +2251,7 @@ export const legal_docs = [
     },
     {
         id: 3,
-        term: 'safe_auction_offer',
+        term: 'safe_deal_offer',
         title:
             <Typography variant='h6' className='title'>
                 Оферта “Безопасный торг”

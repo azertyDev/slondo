@@ -4,9 +4,11 @@ import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTa
 import {CabinetCard} from "@src/components/cabinet/components/cabinet_card/CabinetCard";
 import {useTranslation} from "next-i18next";
 import {useStyles} from "./useStyles";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 
 type CabinetModalPropsType = {
     isFetch: boolean,
+    handleSafeDeal?: (post, perform?: boolean) => () => void,
     onChange,
     fstTabData,
     secTabData,
@@ -23,6 +25,7 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
         fstTabData,
         secTabData,
         childTabValue,
+        handleSafeDeal,
         handleDetailedOpen,
         handleSettingsOpen,
         handleNotificationsOpen
@@ -68,6 +71,16 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                                     handleNotificationsOpen={handleNotificationsOpen(data)}
                                     handleSettingsOpen={!!handleSettingsOpen ? handleSettingsOpen(data) : null}
                                 />
+                                {!!handleSafeDeal && (
+                                    <div>
+                                        <CustomButton onClick={handleSafeDeal(data)}>
+                                            {t('common:reject')}
+                                        </CustomButton>
+                                        <CustomButton onClick={handleSafeDeal(data, true)}>
+                                            {t('common:perform')}
+                                        </CustomButton>
+                                    </div>
+                                )}
                             </Box>
                         ))}
             </CustomTabPanel>
