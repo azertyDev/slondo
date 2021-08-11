@@ -29,7 +29,7 @@ enum Statuses {
 
 export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handleModalClose}) => {
     const {t} = useTranslation('auth_reg');
-    const {user: userInfo, setUser} = useContext(AuthCtx);
+    const {user: userInfo, addUser} = useContext(AuthCtx);
 
     const initVals = {
         code: '',
@@ -98,10 +98,10 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
                 case "new_password":
                     const {token, user} = await userAPI.newPassword(phonePrepare(userInfo.phone), code, password);
                     unstable_batchedUpdates(() => {
+                        closeModal();
+                        addUser(user);
                         cookies.set('slondo_user', user, cookieOpts);
                         cookies.set('slondo_auth', token, cookieOpts);
-                        setUser(user);
-                        closeModal();
                     });
             }
             setIsFetch(false);

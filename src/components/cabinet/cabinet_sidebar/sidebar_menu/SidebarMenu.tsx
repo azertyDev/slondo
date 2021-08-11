@@ -26,7 +26,7 @@ type SidebarMenuPropsType = {
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
     const {push, asPath, query: {page}} = useRouter();
-    const {user, clearUser, setIsAuth} = useContext(AuthCtx);
+    const {user, clearUser} = useContext(AuthCtx);
 
     const {
         observer: {
@@ -54,10 +54,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 await push('/');
             }
 
-            unstable_batchedUpdates(() => {
-                clearUser();
-                setIsAuth(false);
-            });
+            clearUser();
         });
     };
 

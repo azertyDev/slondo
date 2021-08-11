@@ -18,7 +18,7 @@ import {useStyles} from "./useStyles";
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
-    const {user, setUser, setIsAuth} = useContext(AuthCtx);
+    const {user, addUser} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const initUserInfo = {
@@ -62,8 +62,7 @@ export const Settings: FC = () => {
 
             cookies.set('slondo_user', updatedUserInfo, cookieOpts);
             unstable_batchedUpdates(() => {
-                setIsAuth(true);
-                setUser(updatedUserInfo);
+                addUser(updatedUserInfo);
                 setEditable(false);
                 setIsFetch(false);
                 setAvalTimeActive(false);

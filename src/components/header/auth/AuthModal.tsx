@@ -24,7 +24,7 @@ type AuthRegPageModalProps = {
     isFetch: boolean,
     isSignInTab: boolean,
     open: boolean,
-    errorMsg: string,
+    serverError: string,
     tabIndex: number,
     form: ReactNode,
     submitTxt: 'signIn' | 'send' | 'recoverPassword' | 'signUp',
@@ -46,7 +46,7 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
         submitTxt,
         tabsHandler,
         handleForgetPass,
-        errorMsg,
+        serverError,
         open,
         handleCloseModal,
         tabIndex,
@@ -123,9 +123,9 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                             <div className={classes.authReg}>
                                 <div className="form-block">
                                     <div className="server-error">
-                                        {errorMsg && (
+                                        {serverError && (
                                             <Typography variant="body2" className="error-text">
-                                                {t(`errors:${errorMsg}`)}
+                                                {t(`errors:${serverError}`)}
                                             </Typography>
                                         )}
                                     </div>

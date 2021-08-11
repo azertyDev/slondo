@@ -18,6 +18,7 @@ import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import ErrorPage from '@root/pages/_error';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {getSessionItem} from "@src/helpers";
 import {useStyles} from './useStyles';
 
 enum Pages {
@@ -41,7 +42,7 @@ export type CommonModalType = {
     handleRefresh: () => void
 };
 
-const Cabinet: FC<{referrer: string}> = ({referrer}) => {
+const Cabinet: FC<{ referrer: string }> = ({referrer}) => {
     const {t} = useTranslation('cabinet');
     const {query, push, back} = useRouter();
     const {page} = query;
@@ -52,20 +53,25 @@ const Cabinet: FC<{referrer: string}> = ({referrer}) => {
 
     const title = `${t('my_cabinet')} ${page ? `| ${t(page)}` : ''}`;
 
+    const prevPath = getSessionItem('prevPath');
+    const currPath = getSessionItem('currentPath');
+
+    const backURL = prevPath !== currPath ? prevPath : '/';
+
     const handlePrev = () => {
         isRootPage
-            ? push(referrer ?? '/')
+            ? push('/')
             : back();
     };
 
     const getPage = () => {
         switch (page as keyof typeof Pages) {
             case 'posts':
-                return <MyPosts />;
+                return <MyPosts/>;
             case 'auctions':
-                return <MyAuctions />;
+                return <MyAuctions/>;
             case 'banned':
-                return <BannedPosts />;
+                return <BannedPosts/>;
             case 'favorite':
                 return <FavoriteContainer/>;
             case 'messages':
@@ -75,13 +81,13 @@ const Cabinet: FC<{referrer: string}> = ({referrer}) => {
             case 'purchases' :
                 return <MyPurchases/>;
             case 'rating' :
-                return <RatingsContainer />;
+                return <RatingsContainer/>;
             case 'safe_deal' :
-                return <SafetyDeal />;
+                return <SafetyDeal/>;
             case 'settings' :
-                return <Settings />;
+                return <Settings/>;
             case 'subs':
-                return <Subs />;
+                return <Subs/>;
         }
     };
 
@@ -92,7 +98,7 @@ const Cabinet: FC<{referrer: string}> = ({referrer}) => {
             <div className={classes.root}>
                 <Grid container>
                     <Grid item sm={4} md={3}>
-                        <CabinetSidebar />
+                        <CabinetSidebar/>
                     </Grid>
                     <Grid item sm={8} md={9} className='pl-16'>
                         {isRootPage
@@ -120,7 +126,7 @@ const Cabinet: FC<{referrer: string}> = ({referrer}) => {
             />
             <Box p='15px 10px'>
                 {isRootPage
-                    ? <CabinetSidebar />
+                    ? <CabinetSidebar/>
                     : getPage()
                 }
             </Box>
@@ -130,7 +136,7 @@ const Cabinet: FC<{referrer: string}> = ({referrer}) => {
     return (
         existPage
             ? isXsDown ? mobile : desktop
-            : <ErrorPage statusCode={404} />
+            : <ErrorPage statusCode={404}/>
     );
 };
 
