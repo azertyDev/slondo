@@ -1,5 +1,4 @@
 import {FC} from 'react';
-// import Link from 'next/link';
 import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
@@ -38,18 +37,16 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <div className="user-info">
+                <UserAvatarComponent
+                    width={width}
+                    height={height}
+                    avatar={owner.avatar}
+                />
                 <Box>
-                    <UserAvatarComponent
-                        width={width}
-                        height={height}
-                        avatar={owner.avatar}
-                    />
-                </Box>
-                <Box>
-                    <Typography color="initial" variant='subtitle1'>
+                    <Typography color="initial" variant='subtitle1' gutterBottom>
                         {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
                     </Typography>
-                    <Typography variant="subtitle1" color="initial">
+                    <Typography variant="subtitle1" color="initial" gutterBottom>
                         {t('created_at', {created_at: formatted_date})}
                     </Typography>
                     <Rating

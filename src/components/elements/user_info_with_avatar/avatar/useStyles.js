@@ -34,8 +34,8 @@ export const StyledBadge = withStyles((theme) => ({
 export const useStyles = makeStyles(() => ({
     root: {
         '& .MuiAvatar-root': {
-            width: props => props.width ?? '80px',
-            height: props => props.height ?? '80px'
+            width: ({width}) => `${width}` ?? '80px',
+            height: ({height}) => `${height}` ?? '80px'
         }
     },
 }));
