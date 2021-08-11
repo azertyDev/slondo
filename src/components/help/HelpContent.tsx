@@ -48,10 +48,38 @@ import {
 } from './pages'
 import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
 
+enum Pages {
+    'how_to_register',
+    'how_to_participate',
+    'how_to_create_post',
+    'how_to_create_auction',
+    'feedback',
+    'user_agreements',
+    'privacy_police',
+    'safe_auction_offer',
+    'top_offer',
+    'advanced_auction_offer',
+    'access_to_slondo',
+    'personal_data_security',
+    'posts',
+    'site_rules',
+    'auction',
+    'safe_shopping',
+    'user_interaction',
+    'search_in_service',
+
+}
+
 export const HelpContent: FC = () => {
     const {t} = useTranslation();
     const [term, subTerm] = useRouter().query.term as string[];
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+
+
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    const isRootPage = term === undefined;
+    const existPage = isRootPage || Pages[term as string] !== undefined;
 
     const getTermPage = () => {
         switch (term) {
@@ -159,7 +187,7 @@ export const HelpContent: FC = () => {
                 <Hidden mdDown>
                     <HelpSidebar menuStruct={menuStruct}/>
                 </Hidden>
-                <Grid container item xs={isMdDown ? 12 : 9}>
+                <Grid container item xs={isXsDown ? 12 : 9}>
                     {subTerm ? getSubTermPage() : getTermPage()}
                 </Grid>
             </Grid>
