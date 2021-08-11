@@ -48,6 +48,8 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     isOwner={creator}
                     subscribed={subscribed}
                     handleFollow={handleFollow}
+                    width='80px'
+                    height='80px'
                 />
             </Box>
             <Hidden mdDown>
