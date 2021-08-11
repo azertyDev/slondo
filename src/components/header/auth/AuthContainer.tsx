@@ -3,14 +3,16 @@ import {unstable_batchedUpdates} from 'react-dom';
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {AuthModal} from './AuthModal';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {AuthCtx} from "@src/context/AuthCtx";
-import {CONFIRM_SECONDS} from "@src/constants";
+import {AuthCtx} from '@src/context/AuthCtx';
+import {CONFIRM_SECONDS} from '@src/constants';
+import {useStyles} from './useStyles';
+import {BorderErrorIcon} from '@src/components/elements/icons';
 
 export enum FormStatuses {
     reg,
@@ -209,6 +211,12 @@ export const AuthContainer: FC = () => {
                         onChange={handleInput}
                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                     />
+                    <Box mt={1} className={classes.regHint}>
+                        <BorderErrorIcon />
+                        <Typography variant='subtitle2' component='p' color='initial'>
+                            {t('regHint')}
+                        </Typography>
+                    </Box>
                 </div>;
             case 'code':
                 return <div className='code-confirm-form'>
@@ -259,6 +267,7 @@ export const AuthContainer: FC = () => {
         runTimer();
     }, [activeTimer, timer]);
 
+    const classes = useStyles();
     return (
         <AuthModal
             t={t}

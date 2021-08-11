@@ -14,6 +14,5 @@ export const ErrorIcon = () => {
                 </linearGradient>
             </defs>
         </svg>
-
     );
 };

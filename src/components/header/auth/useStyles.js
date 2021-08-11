@@ -229,6 +229,23 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             }
         }
     },
+    regHint: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: 16,
+        background: '#7DBCF6',
+        borderRadius: '4px',
+        [breakpoints.down('xs')]: {
+            padding: 10
+        },
+        '& svg': {
+            width: 40
+        },
+        '& p': {
+            marginLeft: 14,
+            color: '#FFFFFF'
+        }
+    },
     closeBtn: {
         position: 'absolute',
         top: 10,

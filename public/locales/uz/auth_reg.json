@@ -24,6 +24,7 @@
   "createAd": "E'lonlar yarating, sotishni tezlashtirish uchun bonuslardan foydalaning.",
   "createAuction": "Foydalanuvchilar sizning mahsulotingiz uchun eng yuqori narxni berishi mumkin bo'lgan savdo-sotiq yarating.",
   "rating": "Sotuvchini reyting tizimi yordamida tekshiring. Qancha yulduzlari ko'proq, shuncha ishonchliroq.",
+  "regHint": "Sizning raqamingizga login (avtorizatsiya) paroli ko'rsatilgan SMS - xabar keladi",
   "welcome": "Slondoga xush kelibsiz!",
   "authSite": "Saytning barcha xususiyatlaridan foydalanish uchun tizimga kiring.",
   "resetPassTitle": "Parolni qayta tiklash",
