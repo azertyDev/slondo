@@ -58,7 +58,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     return (
         <div className={classes.root}>
             <Link href={url}>
-                <a target='_blank' className='card'>
+                <a target='_blank' className='card' title={cardData.title}>
                     <Grid container>
                         <Grid item xs={6} sm={4} md={3} className="img">
                             <Typography

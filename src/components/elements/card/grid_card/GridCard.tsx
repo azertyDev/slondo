@@ -1,17 +1,17 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
-import {Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
+import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {months} from '@src/common_data/common';
-import {useStyles} from './useStyles';
-import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type CardItemProps = {
     isFetch: boolean

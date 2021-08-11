@@ -6,7 +6,7 @@ import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from './menu_struct';
 import {Feedback} from '@src/components/help/pages/feedback/Feedback';
 import {useStyles} from './useStyles';
-import { useTranslation } from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 import {
     RegistrationRules,
     ParticipatingRules,
@@ -45,7 +45,7 @@ import {
     Chat,
     RatingsReviews,
     SearchInService
-} from './pages'
+} from './pages';
 import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
 
 enum Pages {
@@ -56,7 +56,7 @@ enum Pages {
     'feedback',
     'user_agreements',
     'privacy_police',
-    'safe_auction_offer',
+    'safe_deal_offer',
     'top_offer',
     'advanced_auction_offer',
     'access_to_slondo',
@@ -84,41 +84,41 @@ export const HelpContent: FC = () => {
     const getTermPage = () => {
         switch (term) {
             case 'how_to_register':
-                return <RegistrationRules />;
+                return <RegistrationRules/>;
             case 'how_to_participate':
-                return <ParticipatingRules />;
+                return <ParticipatingRules/>;
             case 'how_to_create_post':
-                return <CreatePostRules />;
+                return <CreatePostRules/>;
             case 'how_to_create_auction':
-                return <CreateAuctionRules />;
+                return <CreateAuctionRules/>;
             case 'feedback':
-                return <Feedback />;
+                return <Feedback/>;
             case 'user_agreements':
-                return <LegalComponent term={term} />;
+                return <LegalComponent term={term}/>;
             case 'privacy_police':
-                return <LegalComponent term={term} />;
-            case 'safe_auction_offer':
-                return <LegalComponent term={term} />;
+                return <LegalComponent term={term}/>;
+            case 'safe_deal_offer':
+                return <LegalComponent term={term}/>;
             case 'top_offer':
-                return <LegalComponent term={term} />;
+                return <LegalComponent term={term}/>;
             case 'advanced_auction_offer':
-                return <LegalComponent term={term} />;
+                return <LegalComponent term={term}/>;
             case 'access_to_slondo':
-                return <AccessToSlondo />;
+                return <AccessToSlondo/>;
             case 'personal_data_security':
-                return <PersonalDataSecurity />;
+                return <PersonalDataSecurity/>;
             case 'posts':
-                return <Posts />;
+                return <Posts/>;
             case 'site_rules':
-                return <SiteRules />;
+                return <SiteRules/>;
             case 'auction':
-                return <Auction />;
+                return <Auction/>;
             case 'safe_shopping':
-                return <SafeShopping />;
+                return <SafeShopping/>;
             case 'user_interaction':
-                return <UserInteraction />;
+                return <UserInteraction/>;
             case 'search_in_service':
-                return <SearchInService />;
+                return <SearchInService/>;
         }
     };
 
@@ -139,7 +139,7 @@ export const HelpContent: FC = () => {
             case 'update':
                 return <Update/>;
             case 'deactivate':
-                    return <Deactivate/>;
+                return <Deactivate/>;
             case 'rejected':
                 return <Reject/>;
             case 'material_requirements':

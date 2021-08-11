@@ -134,7 +134,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <Typography variant="subtitle1" className="key">
                         {t(`filters:${isNoTrans
                             ? `${key}`
-                            : `${transKey}.${key}.name`}`)}
+                            : `${transKey}.${key}.name`}`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {model[key]
@@ -152,7 +152,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}.name`)}
+                        {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {t('common:yes')}
@@ -165,7 +165,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <Typography variant="subtitle1" className="key">
                         {t(`filters:${isNoTrans
                             ? `${key}`
-                            : `${transKey}.${key}.name`}`)}
+                            : `${transKey}.${key}.name`}`)}:
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span
@@ -418,7 +418,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 {!!parameterItems.length && (
                     <div className="post-parameters">
                         <Typography variant="button" color="initial">
-                            {t('parameters')}
+                            {t('parameters')}:
                         </Typography>
                         <ul>{parameterItems}</ul>
                     </div>

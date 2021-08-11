@@ -36,15 +36,17 @@ export const useAuth = () => {
     const [auth, setAuth] = useState(initAuth);
 
     const clearUser = () => {
-        setUser(initUser);
+        unstable_batchedUpdates(() => {
+            setUser(initUser);
+            setAuth({...auth, isAuth: false});
+        });
     };
 
     const addUser = (user) => {
-        setUser(user);
-    };
-
-    const setIsAuth = (isAuth: boolean) => {
-        setAuth({...auth, isAuth});
+        unstable_batchedUpdates(() => {
+            setUser(user);
+            setAuth({...auth, isAuth: true});
+        });
     };
 
     const setAuthModalOpen = (authModalOpen: boolean) => {
@@ -63,7 +65,6 @@ export const useAuth = () => {
         user,
         setUser,
         addUser,
-        setIsAuth,
         clearUser,
         setAuthModalOpen
     };
