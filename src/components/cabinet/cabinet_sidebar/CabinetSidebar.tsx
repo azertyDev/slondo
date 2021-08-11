@@ -16,7 +16,7 @@ export const CabinetSidebar: FC = () => {
                     isOwner
                     owner={user}
                 />
-                <SidebarMenu/>
+                <SidebarMenu />
             </Grid>
         </div>
     );

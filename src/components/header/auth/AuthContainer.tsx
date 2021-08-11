@@ -3,14 +3,16 @@ import {unstable_batchedUpdates} from 'react-dom';
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {AuthModal} from './AuthModal';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {AuthCtx} from "@src/context/AuthCtx";
-import {CONFIRM_SECONDS} from "@src/constants";
+import {BorderErrorIcon} from '@src/components/elements/icons';
+import {AuthCtx} from '@src/context/AuthCtx';
+import {CONFIRM_SECONDS} from '@src/constants';
+import {useStyles} from './useStyles';
 
 export enum FormStatuses {
     reg,
@@ -21,7 +23,7 @@ export enum FormStatuses {
 
 export const AuthContainer: FC = () => {
     const {t} = useTranslation('auth_reg');
-    const {auth: {authModalOpen}, setIsAuth, setAuthModalOpen, setUser} = useContext(AuthCtx);
+    const {auth: {authModalOpen}, setAuthModalOpen, addUser} = useContext(AuthCtx);
 
     const initVals = {
         code: '',
@@ -32,7 +34,7 @@ export const AuthContainer: FC = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
     const isSignInTab = tabIndex === 0;
-    const [errorMsg, setErrorMsg] = useState('');
+    const [serverError, setServerError] = useState('');
     const [isFetch, setIsFetch] = useState(false);
     const [timer, setTimer] = useState(CONFIRM_SECONDS);
     const [activeTimer, setActiveTimer] = useState(false);
@@ -50,7 +52,7 @@ export const AuthContainer: FC = () => {
             setTabIndex(0);
             setErrors({});
             setTouched({});
-            setErrorMsg('');
+            setServerError('');
             setFormStatus('reg');
             setActiveTimer(false);
         });
@@ -79,7 +81,7 @@ export const AuthContainer: FC = () => {
                 }, 1000);
             } else {
                 unstable_batchedUpdates(() => {
-                    setErrorMsg('');
+                    setServerError('');
                     setFormStatus('rec');
                     setActiveTimer(false);
                 });
@@ -95,16 +97,14 @@ export const AuthContainer: FC = () => {
             const preparedPhone = phonePrepare(phone);
 
             unstable_batchedUpdates(() => {
-                setErrorMsg('');
-                setTouched({});
+                setServerError('');
                 setIsFetch(true);
             });
 
             if (isSignInTab) {
                 const {token, user} = await userAPI.login(preparedPhone, password);
                 unstable_batchedUpdates(() => {
-                    setUser(user);
-                    setIsAuth(true);
+                    addUser(user);
                     handleCloseModal();
                     cookies.set('slondo_user', user, cookieOpts);
                     cookies.set('slondo_auth', token, cookieOpts);
@@ -130,7 +130,7 @@ export const AuthContainer: FC = () => {
                         cookies.set('slondo_user', user, cookieOpts);
                         cookies.set('slondo_auth', token, cookieOpts);
                         handleCloseModal();
-                        setUser(user);
+                        addUser(user);
                     });
                 }
                 if (formStatus === 'reg') {
@@ -142,7 +142,7 @@ export const AuthContainer: FC = () => {
             setIsFetch(false);
         } catch (e) {
             unstable_batchedUpdates(() => {
-                setErrorMsg(e.message);
+                setServerError(e.message);
                 setIsFetch(false);
                 setValues({
                     ...values,
@@ -209,6 +209,14 @@ export const AuthContainer: FC = () => {
                         onChange={handleInput}
                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                     />
+                    {formStatus === "reg" && (
+                        <Box mt={1} className={classes.regHint}>
+                            <BorderErrorIcon/>
+                            <Typography variant='subtitle2' component='p' color='initial'>
+                                {t('regHint')}
+                            </Typography>
+                        </Box>
+                    )}
                 </div>;
             case 'code':
                 return <div className='code-confirm-form'>
@@ -259,6 +267,7 @@ export const AuthContainer: FC = () => {
         runTimer();
     }, [activeTimer, timer]);
 
+    const classes = useStyles();
     return (
         <AuthModal
             t={t}
@@ -268,7 +277,7 @@ export const AuthContainer: FC = () => {
             isSignInTab={isSignInTab}
             formik={formik}
             open={authModalOpen}
-            errorMsg={errorMsg}
+            serverError={serverError}
             form={getFormByStatus()}
             submitTxt={getSubmitTxt()}
             tabsHandler={tabsHandler}

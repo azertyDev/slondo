@@ -46,7 +46,10 @@ export const useStyles = makeStyles((theme) => ({
                 border: '1px solid #7DBCF6',
                 borderRadius: '3px',
                 '& .MuiTypography-subtitle2': {
-                    color: '#7DBCF6'
+                    color: '#7DBCF6',
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: '.75rem'
+                    }
                 }
             }
         },

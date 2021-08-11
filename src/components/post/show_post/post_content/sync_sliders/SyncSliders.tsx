@@ -1,9 +1,10 @@
 import {FC, useContext} from 'react';
-import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
+import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
+import {SlidersRefType} from '../PostContent';
+import {useTranslation} from "next-i18next";
 import {AuthCtx} from "@src/context/AuthCtx";
 import {useStyles} from './useStyles';
 
@@ -38,6 +39,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         slider3
     } = slidersRefs;
 
+    const {t} = useTranslation('common');
     const {isAuth} = useContext(AuthCtx).auth;
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
@@ -96,7 +98,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                                 </Box>
                             )}
                             <IconButton className="share-btn" onClick={copyUrl}>
-                                <CustomTooltip title={'Скопировано!'} arrow/>
+                                <CustomTooltip title={t('copied')} arrow/>
                             </IconButton>
                         </div>
                     )}

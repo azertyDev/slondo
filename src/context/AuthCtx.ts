@@ -7,19 +7,17 @@ type AuthCtxType = {
         isAuth: boolean,
         authModalOpen: boolean
     },
-    setIsAuth: Dispatch<SetStateAction<boolean>>,
     setAuthModalOpen: Dispatch<SetStateAction<boolean>>,
     user: UserInfo,
-    setUser: Dispatch<SetStateAction<UserInfo>>,
+    addUser: (user: UserInfo) => void,
     clearUser: () => void
 };
 
 const initCtx: AuthCtxType = {
     auth: initAuth,
-    setIsAuth: (isAuth: boolean) => {},
     setAuthModalOpen: (open: boolean) => {},
     user: initUser,
-    setUser: (user) => {},
+    addUser: (user) => {},
     clearUser: () => {}
 }
 

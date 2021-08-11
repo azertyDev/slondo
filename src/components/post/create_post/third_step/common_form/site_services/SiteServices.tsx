@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {useModal} from "@src/hooks";
@@ -11,6 +11,7 @@ import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {useStyles} from './useStyles';
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {SAFE_DEAL_PERCENT} from "@src/constants";
 
 type PaymentDeliveryPropsType = {
     values,
@@ -107,9 +108,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 >
                                     <Help className="question-mark"/>
                                     <Typography variant="subtitle2">
-                                        Примечание: При подключении услуги «Безопасный
-                                        торг». Ваша сделка защищена. Стоимость
-                                        услуги составляет n%.&nbsp;
+                                        {`При подключении услуги «Безопасный
+                                            торг». Ваша сделка защищена. Стоимость
+                                            услуги составляет ${SAFE_DEAL_PERCENT}%.`}&nbsp;
                                         <Link href="/">
                                             <a>
                                                 <span className="safe-auction-rules">
@@ -156,8 +157,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 >
                                     <Help className="question-mark"/>
                                     <Typography variant="subtitle2">
-                                        Примечание: Вы принимаете предложения от
-                                        других пользователей на обмен.
+                                        {`Вы принимаете предложения от других пользователей на обмен`}
                                     </Typography>
                                 </Grid>
                             )}
@@ -199,9 +199,8 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                         >
                             <Help className="question-mark"/>
                             <Typography variant="subtitle2">
-                                Примечание: Доставка осуществляется
-                                за Ваш счет. В случае невыполнения доставки,
-                                Вы можете быть заблокированы.&nbsp;
+                                {`Доставка осуществляется за Ваш счет. В случае невыполнения доставки,
+                                    Вы можете быть заблокированы.`}&nbsp;
                                 <Link href='/'>
                                     <a>
                                         <span className="safe-auction-rules">

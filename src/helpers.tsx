@@ -1,3 +1,4 @@
+import {browser} from 'process';
 import {Fragment} from 'react';
 import {WithT} from 'i18next';
 import Cookies from 'universal-cookie';
@@ -17,6 +18,13 @@ export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
     path: '/',
     sameSite: 'strict'
+};
+
+export const getSessionItem = (key) => {
+    if (browser) {
+        return window.sessionStorage.getItem(`${key}`);
+    }
+    return null;
 };
 
 export const dateHelper = (date): string => {
