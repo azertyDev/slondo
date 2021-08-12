@@ -27,7 +27,10 @@ export const useStyles = makeStyles((theme) => ({
             alignItems: 'center',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
             '& h6': {
-                fontWeight: '500'
+                fontWeight: '500',
+                [theme.breakpoints.down('xs')]: {
+                    textAlign: 'center'
+                }
             },
             '& svg > path': {
                 fill: '#4F4F4F'
