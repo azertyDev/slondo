@@ -1,24 +1,19 @@
-import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {CircularProgress, Tab, Tabs, Typography} from "@material-ui/core";
 import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import { TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
-import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initCardData} from '@src/common_data/common';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {CabinetTabs} from '@src/components/cabinet/components/cabinet_tabs/CabinetTabs';
-import {useStyles} from './useStyles';
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -107,75 +102,6 @@ export const MyPurchases: FC = () => {
         });
     };
 
-    const classes = useStyles();
-    const purchasesList = (
-        <>
-
-            <Tabs
-                aria-label="tabs"
-                value={childTabValue}
-                className={classes.childTabs}
-                onChange={handleChildTabChange}
-                TabIndicatorProps={{style: {display: 'none'}}}
-            >
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            {t('active')}
-                        </Typography>
-                    }
-                />
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            {t('archive')}
-                        </Typography>
-                    }
-                />
-            </Tabs>
-            <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : purchases.map(post => (
-                        <Fragment key={post.id}>
-                            <CabinetCard
-                                cardData={post}
-                                handleNotificationsOpen={handleNotificationsOpen(post)}
-                            />
-                            <div>
-                                <CustomButton
-                                    disabled={isFetch}
-                                    onClick={confirmModalOpen(post)}
-                                    // color='silver'
-                                >
-                                    {t('common:cancel')}
-                                </CustomButton>
-                                <CustomButton
-                                    disabled={isFetch}
-                                    onClick={confirmModalOpen(post, true)}
-                                    // color='secondary'
-                                >
-                                    {t('common:perform')}
-                                </CustomButton>
-                            </div>
-                        </Fragment>
-                    ))}
-            </CustomTabPanel>
-            <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : archivePurchases.map(post =>
-                        <Fragment key={post.id}>
-                            <CabinetCard
-                                cardData={post}
-                                handleDetailedOpen={handleDetailedOpen(post)}
-                            />
-                        </Fragment>
-                    )}
-            </CustomTabPanel>
-        </>
-    );
-
     const tabsData: TabsDataType = [
         {
             id: 0,
@@ -186,6 +112,7 @@ export const MyPurchases: FC = () => {
                 <CabinetTabs
                     isFetch={isFetch}
                     onChange={handleChildTabChange}
+                    handleSafeDeal={confirmModalOpen}
                     fstTabData={{
                         posts: purchases,
                         emptyPage: <EmptyPage

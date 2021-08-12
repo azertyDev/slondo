@@ -111,7 +111,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                         {`При подключении услуги «Безопасный
                                             торг». Ваша сделка защищена. Стоимость
                                             услуги составляет ${SAFE_DEAL_PERCENT}%.`}&nbsp;
-                                        <Link href="/">
+                                        <Link href="/help/safe_deal_offer">
                                             <a>
                                                 <span className="safe-auction-rules">
                                                     {t('common:safe_deal_rules')}
@@ -157,7 +157,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 >
                                     <Help className="question-mark"/>
                                     <Typography variant="subtitle2">
-                                        {`Вы принимаете предложения от других пользователей на обмен`}
+                                        {`Вы принимаете предложения от других пользователей на обмен.`}
                                     </Typography>
                                 </Grid>
                             )}
@@ -200,14 +200,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             <Help className="question-mark"/>
                             <Typography variant="subtitle2">
                                 {`Доставка осуществляется за Ваш счет. В случае невыполнения доставки,
-                                    Вы можете быть заблокированы.`}&nbsp;
-                                <Link href='/'>
-                                    <a>
-                                        <span className="safe-auction-rules">
-                                            {t('common:delivery_rules')}
-                                        </span>
-                                    </a>
-                                </Link>
+                                    Вы можете быть заблокированы.`}
                             </Typography>
                         </Grid>
                     )}
