@@ -35,34 +35,32 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <div className="user-info">
-                <UserAvatarComponent
-                    width={width}
-                    height={height}
-                    avatar={owner.avatar}
+        <Box className={classes.root}>
+            <UserAvatarComponent
+                width={width}
+                height={height}
+                avatar={owner.avatar}
+            />
+            <Box>
+                <Typography color="initial" variant='subtitle1' gutterBottom>
+                    {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
+                </Typography>
+                <Typography variant="subtitle1" color="initial" gutterBottom>
+                    {t('created_at', {created_at: formatted_date})}
+                </Typography>
+                <Rating
+                    readOnly
+                    ratingValue={owner.rating}
+                    ratingCount={owner.observer?.number_of_ratings}
                 />
-                <Box>
-                    <Typography color="initial" variant='subtitle1' gutterBottom>
-                        {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
-                    </Typography>
-                    <Typography variant="subtitle1" color="initial" gutterBottom>
-                        {t('created_at', {created_at: formatted_date})}
-                    </Typography>
-                    <Rating
-                        readOnly
-                        ratingValue={owner.rating}
-                        ratingCount={owner.observer?.number_of_ratings}
-                    />
-                    {!isOwner && !!handleFollow && (
-                        <CustomButton onClick={handleFollow(owner.id)}>
-                            <Typography variant="subtitle2">
-                                {!subscribed ? t('common:follow') : t('common:unFollow')}
-                            </Typography>
-                        </CustomButton>
-                    )}
-                </Box>
-            </div>
-        </div>
+                {!isOwner && !!handleFollow && (
+                    <CustomButton onClick={handleFollow(owner.id)}>
+                        <Typography variant="subtitle2">
+                            {!subscribed ? t('common:follow') : t('common:unFollow')}
+                        </Typography>
+                    </CustomButton>
+                )}
+            </Box>
+        </Box>
     );
 };

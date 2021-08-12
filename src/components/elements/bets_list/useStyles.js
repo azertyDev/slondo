@@ -2,7 +2,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        // ----------------------------------------- Last changes -----------------------------------------
         '& div.bets-header': {
             display: 'flex',
             justifyContent: 'space-between',
@@ -14,6 +13,16 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)',
             borderRadius: '5px',
             position: 'relative',
+            '& .MuiTableRow-root': {
+                '&:first-child': {
+                    '& .bet': {
+                        '& h6.outbid': {
+                            color: '#90BE27',
+                            fontWeight: 700
+                        }
+                    }
+                }
+            },
             '& .MuiTableCell-root': {
                 padding: '10px'
             },
@@ -36,7 +45,6 @@ export const useStyles = makeStyles((theme) => ({
                     '&.outbid': {
                         color: '#BDBDBD'
                     }
-
                 }
             },
             '& div.dateAndTime': {
@@ -69,19 +77,4 @@ export const useStyles = makeStyles((theme) => ({
             fill: '#4E4E4E'
         }
     },
-    closeBtn: {
-        display: 'block',
-        margin: '5px 5px 0 auto',
-        padding: 5,
-        zIndex: 1000,
-        '& svg': {
-            [theme.breakpoints.down('xs')]: {
-                width: '18px',
-                height: '18px'
-            },
-            '& path': {
-                fill: '#28293D'
-            }
-        }
-    }
 }));

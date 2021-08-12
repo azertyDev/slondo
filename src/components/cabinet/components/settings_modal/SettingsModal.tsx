@@ -235,7 +235,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 </List>;
             case 'sold_on_slondo':
                 return <Grid container spacing={2} className={classes.mt30}>
-                    <Grid item container spacing={2} justify='center'>
+                    <Grid item container spacing={2} justifyContent='center'>
                         <Grid item xs={12} sm={6}>
                             <Box>
                                 <FormikField

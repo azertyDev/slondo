@@ -58,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
                     background: theme.palette.primary.goldGradient,
                     boxShadow: '0px 1px 2px 0px #00000026',
                     '& p': {
-                        color: '#FFFFF'
+                        color: '#FFFFFF'
                     }
                 },
                 '&:not(:last-child)': {
@@ -70,30 +70,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
-    btn: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-        borderRadius: 5,
-        '&.notification': {
-            backgroundColor: '#F9F9F9',
-            marginBottom: 8
-        },
-        '&.settings': {
-            backgroundColor: '#F9F9F9'
-        },
-        '&.advertise': {
-            backgroundColor: '#FFF7E0'
-        },
-        '& .MuiTypography-subtitle1': {
-            color: '#FFB800'
-        },
-        '&:disabled': {
-            backgroundColor: '#f7f7f7'
-        }
-    },
     userInfoWrapper: {
         '& h6.all-offers': {
             color: theme.palette.primary.secondary,
@@ -102,7 +78,12 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button': {
             height: 38,
-            width: '100%'
+            width: '100%',
+            borderRadius: 5,
+            boxShadow: '0px 1px 2px 0px #00000040',
+            '&:disabled': {
+                backgroundColor: '#F9F9F9'
+            }
         }
     }
 }));

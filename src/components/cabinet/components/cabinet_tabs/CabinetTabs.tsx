@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {Box, CircularProgress, Tab, Tabs, Typography} from '@material-ui/core';
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {CabinetCard} from "@src/components/cabinet/components/cabinet_card/CabinetCard";
-import {useTranslation} from "next-i18next";
-import {useStyles} from "./useStyles";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {Box, CircularProgress, Grid, Tab, Tabs, Typography} from '@material-ui/core';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {useTranslation} from 'next-i18next';
+import {useStyles} from './useStyles';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 type CabinetModalPropsType = {
     isFetch: boolean,
@@ -64,7 +64,7 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                     : fstTabData.posts.length === 0
                         ? fstTabData.emptyPage
                         : fstTabData.posts.map((data) => (
-                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+                            <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
@@ -72,14 +72,36 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                                     handleSettingsOpen={!!handleSettingsOpen ? handleSettingsOpen(data) : null}
                                 />
                                 {!!handleSafeDeal && (
-                                    <div>
-                                        <CustomButton onClick={handleSafeDeal(data)}>
-                                            {t('common:reject')}
-                                        </CustomButton>
-                                        <CustomButton onClick={handleSafeDeal(data, true)}>
-                                            {t('common:perform')}
-                                        </CustomButton>
-                                    </div>
+                                    <Box mt={1}>
+                                        <Grid container spacing={1}>
+                                            <Grid item xs={12} sm={9}>
+                                                <CustomButton
+                                                    color='secondary'
+                                                    classes={{
+                                                        root: classes.button
+                                                    }}
+                                                    onClick={handleSafeDeal(data, true)}
+                                                >
+                                                    <Typography variant='subtitle1' component='p'>
+                                                        {t('completePurchase')}
+                                                    </Typography>
+                                                </CustomButton>
+                                            </Grid>
+                                            <Grid item xs={12} sm={3}>
+                                                <CustomButton
+                                                    color='silver'
+                                                    classes={{
+                                                        root: classes.button
+                                                    }}
+                                                    onClick={handleSafeDeal(data)}
+                                                >
+                                                    <Typography variant='subtitle1' component='p'>
+                                                        {t('common:reject')}
+                                                    </Typography>
+                                                </CustomButton>
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
                                 )}
                             </Box>
                         ))}
@@ -90,7 +112,7 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                     : secTabData.posts.length === 0
                         ? secTabData.emptyPage
                         : secTabData.posts.map((data) => (
-                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+                            <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}

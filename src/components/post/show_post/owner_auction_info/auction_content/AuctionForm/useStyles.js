@@ -14,10 +14,13 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& .btn-bet': {
                 width: '100%',
+                '&:disabled': {
+                    backgroundColor: theme.palette.secondary.main
+                },
                 [theme.breakpoints.down('md')]: {
                     '& p': {
                         fontSize: '0.875rem'
-                    },
+                    }
                 }
             },
             '& > div.max-bet': {

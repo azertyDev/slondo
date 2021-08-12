@@ -209,8 +209,8 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         )}
                         <Grid item xs={12} md={6} container spacing={1} className={classes.userInfoWrapper}>
                             <Grid item xs={12} container className='user-info-title'>
-                                <Grid item xs={8}>
-                                    <Typography variant='subtitle2'>
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant='subtitle2' gutterBottom>
                                         {t(getUserInfoTitle())}
                                         {hasOffer && !winner && isUserCreator && (
                                             <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
@@ -218,14 +218,13 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                     </Typography>
                                 </Grid>
                                 {isUserCreator && hasOffer && !winner && (
-                                    <Grid item xs={4}>
+                                    <Grid item xs={12} sm={4}>
                                         <Typography
-                                            align='right'
                                             variant='subtitle2'
                                             className='all-offers'
                                             onClick={handleOffersOpen}
                                         >
-                                            {t('all_offers', {offers: auction?.number_of_offers})}
+                                            {t('all_offers_count', {offers: auction?.number_of_offers})}
                                         </Typography>
                                     </Grid>
                                 )}
@@ -250,7 +249,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             {(isUserCreator || isUserWinner) && !inactiveStatus && (
                                 <>
                                     {(isUserWinner || (offerUser && !winner)) && (
-                                        <Grid item xs={!(winner || hasOffer) ? 4 : 12}>
+                                        <Grid item xs={12}>
                                             <CustomButton
                                                 color='silver'
                                                 disabled={isFetch}
@@ -265,7 +264,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                     {(winner || hasOffer) && isUserCreator && (
                                         <Grid item xs={12}>
                                             <CustomButton
-                                                color='secondary'
+                                                color='primary'
                                                 disabled={isFetch}
                                                 onClick={handleAccept}
                                             >

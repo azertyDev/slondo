@@ -11,7 +11,10 @@ export const useStyles = makeStyles((theme) => ({
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                 '& svg': {
-                    height: '18px'
+                    height: '18px',
+                    '& path': {
+                        fill: '#4e4e4e'
+                    }
                 }
             }
         },
@@ -34,8 +37,10 @@ export const useStyles = makeStyles((theme) => ({
                     textDecorationLine: 'underline'
                 }
             },
-            '& .MuiTypography-subtitle1': {
-                fontSize: '0.75rem',
+            '& p.MuiTypography-subtitle1, h6, h1': {
+                fontSize: '0.75rem'
+            },
+            '& p.MuiTypography-subtitle1': {
                 marginRight: 10,
                 '& span': {
                     color: '#838383'
@@ -43,10 +48,34 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& .status': {
                 padding: '0 20px',
-                border: '1px solid #7DBCF6',
+                border: ({status}) =>
+                    status === 'public'
+                        ? '1px solid #838383'
+                        : status === 'sold'
+                        ? '1px solid #90BE27'
+                        : status === 'blocked'
+                            ? '1px solid #F08F8F'
+                            : status === 'suspended' || status === 'moderation'
+                                ? '1px solid #7DBCF6'
+                                : status === 'archive' || status === 'history'
+                                    ? '1px solid #BDBDBD'
+                                    : '1px solid #7DBCF6',
+
                 borderRadius: '3px',
                 '& .MuiTypography-subtitle2': {
-                    color: '#7DBCF6',
+                    color: ({status}) =>
+                        status === 'public'
+                            ? '#838383'
+                            : status === 'sold'
+                            ? '#90BE27'
+                            : status === 'blocked'
+                                ? '#F08F8F'
+                                : status === 'suspended' || status === 'moderation'
+                                    ? '#7DBCF6'
+                                    : status === 'archive' || status === 'history'
+                                        ? '#BDBDBD'
+                                        : '#7DBCF6',
+
                     [theme.breakpoints.down('xs')]: {
                         fontSize: '.75rem'
                     }
@@ -72,13 +101,12 @@ export const useStyles = makeStyles((theme) => ({
                 '& svg': {
                     height: '18px'
                 },
-                '&.MuiTypography-subtitle1': {
-                    fontSize: theme.typography.caption.fontSize,
-                    color: theme.palette.common.tab
-                },
                 '&.icons': {
                     '& .MuiTypography-subtitle1': {
                         fontSize: '12px'
+                    },
+                    '& svg path': {
+                        fill: '#4e4e4e'
                     },
                     '&:disabled': {
                         '& .MuiTypography-subtitle1': {

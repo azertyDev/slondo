@@ -45,7 +45,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const isSold = status === 'sold';
     const isSuspend = status === 'suspended';
 
-    const classes = useStyles();
+    const classes = useStyles({status});
     return (
         <Box className={classes.root}>
             <Box mb={1}>
@@ -60,17 +60,17 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                     <Box
                         display='flex'
                         alignItems='center'
-                        justifyContent={isXsDown ? 'space-between' : ''}
                         width={isXsDown ? 1 : 'auto'}
+                        justifyContent={isXsDown ? 'space-between' : ''}
                     >
-                        <Typography variant="subtitle1" color="initial">
-                        <span className={ads_type}>
-                            {t(`common:${ads_type}`)} №:&nbsp;
-                        </span>
+                        <Typography variant="subtitle1" color="initial" component='p'>
+                            <span className={ads_type}>
+                                {t(`common:${ads_type}`)} №:&nbsp;
+                            </span>
                             {cardData.id}
                         </Typography>
                         <div className='status'>
-                            <Typography variant='subtitle2'>
+                            <Typography variant='subtitle2' component='p'>
                                 {t(status)}
                             </Typography>
                         </div>
@@ -129,18 +129,18 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1' component='p'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action'/>
+                                <ChevronRight color='action' />
                             </CustomButton>
                         </Grid>
                     )}
                 </Grid>
-                <Hidden mdDown>
+                <Hidden smDown>
                     <div className='card-btns'>
                         {page?.includes('favorite')
                             ? <CustomButton
                                 onClick={handleOpenModal(cardData.id)}
                             >
-                                <CloseIcon/>
+                                <CloseIcon />
                             </CustomButton>
                             : <>
                                 {creator && isPublic && (
