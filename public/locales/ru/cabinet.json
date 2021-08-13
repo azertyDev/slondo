@@ -50,7 +50,7 @@
   "winner": "Победитель",
   "seller": "Продавец",
   "maxOffer": "Макс. предложенная цена:",
-  "offer_price": "{{price}} сум",
+  "offer_price": "<0>{{price}}</0> сум",
   "all_offers_count": "Все предложения ({{offers}})",
   "all_offers": "Все предложения",
   "current_offer_price": "Предложенная цена",

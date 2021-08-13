@@ -12,13 +12,13 @@ export const SocialsBlock: FC = () => {
     return (
         <div className={classes.root}>
             <div>
-                <Link href="#">
-                    <a>
+                <Link href="https://www.facebook.com/Slondo.uz/">
+                    <a target='_blank'>
                         <FacebookIcon/>
                     </a>
                 </Link>
-                <Link href="#">
-                    <a>
+                <Link href="https://www.instagram.com/slondouz/">
+                    <a target='_blank'>
                         <InstagramIcon/>
                     </a>
                 </Link>

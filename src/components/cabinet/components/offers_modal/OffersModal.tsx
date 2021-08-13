@@ -9,6 +9,7 @@ import {CommonModalType} from '@src/components/cabinet/Cabinet';
 import {ErrorCtx} from '@src/context';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
+import {OfferCard} from '@src/components/cabinet/components/offers_modal/OfferCard';
 
 export const OffersModal: FC<CommonModalType> = (props) => {
     const {
@@ -25,6 +26,11 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
+
+    const formattedDate = (date) => {
+        return new Date(date);
+    };
+    console.log(formattedDate);
 
     const fetchOffers = async () => {
         try {
@@ -63,7 +69,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
             handleCloseDialog={onClose}
         >
             <Box className={classes.root}>
-                <Grid container>
+                <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant='subtitle2' align='center'>
                             {`Аукцион №: ${post.id}`}
@@ -71,58 +77,12 @@ export const OffersModal: FC<CommonModalType> = (props) => {
                     </Grid>
                     {offers.map(offer => {
                             return (
-                                <Grid item xs={12}>
-                                    <Box
-                                        p={4}
-                                        width={1}
-                                        display='flex'
-                                        key={offer.id}
-                                    >
-                                        <Grid container>
-                                            <Grid item xs={12} md={6}>
-                                                <UserInfoWithAvatar owner={offer.user} isOwner={true} />
-                                            </Grid>
-                                            <Grid item xs={12} md={6}>
-                                                <Typography variant='subtitle2' align='right'>
-                                                    {offer.created_at}
-                                                </Typography>
-                                                <Box>
-                                                    <Typography variant='subtitle2'>
-                                                        {t('current_offer_price')}
-                                                    </Typography>
-                                                    {offer.price}
-                                                </Box>
-                                                <div>
-                                                    <CustomButton
-                                                        className='accept'
-                                                        disabled={isFetch}
-                                                        onClick={handleOffer(offer.id, true)}
-                                                    >
-                                                        <DoneAllIcon />
-                                                        <Typography
-                                                            variant="subtitle2"
-                                                            color="initial"
-                                                        >
-                                                            Принять
-                                                        </Typography>
-                                                    </CustomButton>
-                                                    <CustomButton
-                                                        className='decline'
-                                                        disabled={isFetch}
-                                                        onClick={handleOffer(offer.id, false)}
-                                                    >
-                                                        <CloseIcon />
-                                                        <Typography
-                                                            variant="subtitle2"
-                                                            color="initial"
-                                                        >
-                                                            Отказать
-                                                        </Typography>
-                                                    </CustomButton>
-                                                </div>
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
+                                <Grid item xs={12} key={offer.id}>
+                                    <OfferCard
+                                        offer={offer}
+                                        isFetch={isFetch}
+                                        handleOffer={handleOffer}
+                                    />
                                 </Grid>
                             );
                         }
