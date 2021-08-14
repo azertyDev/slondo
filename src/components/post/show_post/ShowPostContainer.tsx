@@ -1,5 +1,4 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import Head from 'next/head';
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
@@ -15,10 +14,10 @@ import {AuthCtx, ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthContainer} from "@src/components/header/auth/AuthContainer";
+import {CustomHead} from "@src/components/head/CustomHead";
 import {useStyles} from './useStyles';
 
-
-export const ShowPostContainer: FC<any> = () => {
+export const ShowPostContainer: FC = () => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -208,13 +207,7 @@ export const ShowPostContainer: FC<any> = () => {
     const classes = useStyles();
     return (
         <>
-            <Head>
-                <meta name="robots" content="noindex"/>
-                <meta property="og:type" content="website"/>
-                <meta property="og:site_name" content="Slondo"/>
-                <meta property="og:title" content={data.title} key="ogtitle"/>
-                <title>{data.title}</title>
-            </Head>
+            <CustomHead title={data.title} description={data.description}/>
             <Hidden mdDown>
                 <Header/>
             </Hidden>

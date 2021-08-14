@@ -3,10 +3,11 @@ import {useTranslation} from "react-i18next";
 import {ITEMS_PER_PAGE_SEARCH} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
 import {Box, Typography} from '@material-ui/core';
+import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {ErrorCtx} from '@src/context';
+import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
@@ -22,6 +23,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
         urlParams
     } = props;
 
+    const {asPath} = useRouter();
     const {t} = useTranslation('filters');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -39,18 +41,17 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const getPostsByFilters = async () => {
         try {
             const userLocation = cookies.get('user_location');
+            const {q, ...params} = urlParams;
 
             const query: any = {
                 page,
                 itemsPerPage: ITEMS_PER_PAGE_SEARCH,
-                ...urlParams
+                ...params
             };
 
             if (userLocation) {
-                const {region, city, district} = userLocation;
-                if (district) {
-                    query.district_id = district.id;
-                } else if (city) {
+                const {region, city} = userLocation;
+                if (city) {
                     query.city_id = city.id;
                 } else {
                     query.region_id = region.id;
@@ -78,7 +79,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     useEffect(() => {
         getPostsByFilters();
-    }, [urlParams, page]);
+    }, [asPath, page]);
 
     const classes = useStyles();
     return (

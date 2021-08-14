@@ -62,7 +62,12 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         resetForm
     } = formik;
 
-    const {handleSelect, setValsByParams, handleNumericInput} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        setValsByParams,
+        handleFracInput,
+        handleNumericInput
+    } = useHandlers(values, setValues);
 
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
@@ -75,8 +80,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>
-                {getFieldsByFilters(
-                    {
+                {getFieldsByFilters({
                         t,
                         filters,
                         formik,
@@ -93,7 +97,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         sm={4}
                     >
                         <FromToInputs
-                            handleInput={handleNumericInput}
+                            handleInput={handleFracInput}
                             labelTxt={t('engine_capacity')}
                             firstInputProps={{
                                 value: values.engine_capacity_from,

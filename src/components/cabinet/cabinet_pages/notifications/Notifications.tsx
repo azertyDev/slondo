@@ -28,9 +28,9 @@ export type notificationType = {
 }
 
 export const Notifications: FC = () => {
-    const {t} = useTranslation('notifications');
     const {user} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
+    const {t} = useTranslation('notifications');
 
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 

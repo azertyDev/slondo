@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
@@ -11,29 +11,13 @@ import {FavoriteContainer} from '@src/components/cabinet/cabinet_pages/favorite/
 import {MessagesContainer} from '@src/components/cabinet/cabinet_pages/messages/MessagesContainer';
 import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
-import {RatingsContainer} from '@src/components/cabinet/cabinet_pages/rating/RatingsContainer';
-import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/SafetyDeal';
+import {Ratings} from '@src/components/cabinet/cabinet_pages/rating/Ratings';
+import {SafeDeal} from '@src/components/cabinet/cabinet_pages/safe_deal/SafeDeal';
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import ErrorPage from '@root/pages/_error';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
-import {getSessionItem} from "@src/helpers";
+// import {getSessionItem} from "@src/helpers";
 import {useStyles} from './useStyles';
-
-enum Pages {
-    'posts',
-    'auctions',
-    'banned',
-    'favorite',
-    'messages',
-    'notifications',
-    'purchases',
-    'rating',
-    'safe_deal',
-    'settings',
-    'subs'
-}
 
 export type CommonModalType = {
     post,
@@ -42,30 +26,22 @@ export type CommonModalType = {
     handleRefresh: () => void
 };
 
-const Cabinet: FC<{ referrer: string }> = ({referrer}) => {
+const Cabinet: FC = () => {
+    const {query: {page}, push} = useRouter();
     const {t} = useTranslation('cabinet');
-    const {query, push, back} = useRouter();
-    const {page} = query;
+    const title = `${t('my_cabinet')} | ${t(page)}`;
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
-    const isRootPage = page === undefined;
-    const existPage = isRootPage || Pages[page as string] !== undefined;
-
-    const title = `${t('my_cabinet')} ${page ? `| ${t(page)}` : ''}`;
-
-    const prevPath = getSessionItem('prevPath');
-    const currPath = getSessionItem('currentPath');
-
-    const backURL = prevPath !== currPath ? prevPath : '/';
+    const isMainPage = page === 'main';
+    // const prevPath = getSessionItem('prevPath');
+    // const currPath = getSessionItem('currentPath');
 
     const handlePrev = () => {
-        isRootPage
-            ? push('/')
-            : back();
+        push(isMainPage ? '/': '/cabinet/main');
     };
 
     const getPage = () => {
-        switch (page as keyof typeof Pages) {
+        switch (page) {
             case 'posts':
                 return <MyPosts/>;
             case 'auctions':
@@ -78,13 +54,13 @@ const Cabinet: FC<{ referrer: string }> = ({referrer}) => {
                 return <MessagesContainer/>;
             case 'notifications':
                 return <Notifications/>;
-            case 'purchases' :
+            case 'purchases':
                 return <MyPurchases/>;
-            case 'rating' :
-                return <RatingsContainer/>;
-            case 'safe_deal' :
-                return <SafetyDeal/>;
-            case 'settings' :
+            case 'rating':
+                return <Ratings/>;
+            case 'safe_deal':
+                return <SafeDeal/>;
+            case 'settings':
                 return <Settings/>;
             case 'subs':
                 return <Subs/>;
@@ -92,51 +68,29 @@ const Cabinet: FC<{ referrer: string }> = ({referrer}) => {
     };
 
     const classes = useStyles();
-
-    const desktop = (
-        <MainLayout title={title}>
+    return (
+        <MainLayout
+            title={title}
+            handleBack={handlePrev}
+        >
             <div className={classes.root}>
                 <Grid container>
-                    <Grid item sm={4} md={3}>
-                        <CabinetSidebar/>
-                    </Grid>
-                    <Grid item sm={8} md={9} className='pl-16'>
-                        {isRootPage
-                            ? <Typography>
-                                {t('select_page')}
+                    {(isXsDown && isMainPage || !isXsDown) && (
+                        <Grid item xs={12} sm={4} md={3}>
+                            <CabinetSidebar/>
+                        </Grid>
+                    )}
+                    <Grid item xs={12} sm={8} md={9} className='pl-16'>
+                        <Hidden xsDown>
+                            <Typography variant="h6" className="menu-title">
+                                {t(page)}
                             </Typography>
-                            : <>
-                                <Typography variant="h6" className="menu-title">
-                                    {t(page)}
-                                </Typography>
-                                {getPage()}
-                            </>}
+                        </Hidden>
+                        {getPage()}
                     </Grid>
                 </Grid>
             </div>
         </MainLayout>
-    );
-
-    const mobile = (
-        <>
-            <ModalHeader
-                hasPrevBtn={true}
-                handlePrevMenu={handlePrev}
-                title={t(isRootPage ? 'myCabinet' : page)}
-            />
-            <Box p='15px 10px'>
-                {isRootPage
-                    ? <CabinetSidebar/>
-                    : getPage()
-                }
-            </Box>
-        </>
-    );
-
-    return (
-        existPage
-            ? isXsDown ? mobile : desktop
-            : <ErrorPage statusCode={404}/>
     );
 };
 

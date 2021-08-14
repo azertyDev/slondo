@@ -7,23 +7,23 @@ import Link from 'next/link';
 const cardItemsData = {
     auction: [
         {
-            imgUrl: '/img/safe_shopping/auction/auction1.png',
+            imgUrl: '/img/safe_deal/auction/auction1.png',
             text: 'auction.advice_1'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction2.png',
+            imgUrl: '/img/safe_deal/auction/auction2.png',
             text: 'auction.advice_2'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction3.png',
+            imgUrl: '/img/safe_deal/auction/auction3.png',
             text: 'auction.advice_3'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction4.png',
+            imgUrl: '/img/safe_deal/auction/auction4.png',
             text: 'auction.advice_4'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction5.png',
+            imgUrl: '/img/safe_deal/auction/auction5.png',
             text: 'auction.advice_5'
         }
     ]

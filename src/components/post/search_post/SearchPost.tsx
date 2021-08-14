@@ -1,51 +1,46 @@
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {getSEOContent} from '@src/common_data/seo_content';
-import {getCtgrsByCyrillicNames, getSearchTxt} from '@src/helpers';
+import {getCtgrsByCyrillicNames} from '@src/helpers';
 import {SearchForm} from '@src/components/post/search_post/search_form/SearchForm';
 import {SearchResult} from '@src/components/post/search_post/search_result/SearchResult';
-import {Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
+import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
-import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
+import ErrorPage from "@root/pages/_error";
+import {useRouter} from "next/router";
+import {Header} from "@src/components/header/Header";
+import {SEOTextComponent} from "@src/components/elements/seo_text_component/SEOTextComponent";
+import {Footer} from "@src/components/footer/Footer";
+import {ErrorModal} from "@src/components/error_modal/ErrorModal";
+import {CustomHead} from "@src/components/head/CustomHead";
 import {useStyles} from './useStyles';
 
-type SearchPostsByFiltersPropsType = {
-    query,
-    locale: string,
-    userLocation,
-    locationExist: boolean
-};
+type SearchPostProps = {
+    statusCode: number
+}
 
-export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
-    const {
-        query,
-        locale,
-        userLocation,
-        locationExist
-    } = props;
+export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
+    const {query: {path, ...urlParams}} = useRouter();
+    const is404 = statusCode === 404;
 
-    const theme = useTheme();
-    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+    const [location, ...categories] = path as string[];
 
+    const {locale} = useRouter();
     const {t} = useTranslation('locations');
-    const {user_location, categories, ...urlParams} = query;
-    const {region, city} = userLocation;
+    const isSm = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const translatedLocation = t(`${city?.name ? `${region.name}.${city.name}` : region?.name ? `${region.name}.name` : 'uzbekistan'}`);
+    const ctgrsByCyrName = getCtgrsByCyrillicNames(categories as string[]);
+    const [ctgr, subctgr, typeCtgr] = ctgrsByCyrName;
 
-    const categoriesByCyrillicNames = getCtgrsByCyrillicNames(categories as string[]);
-    const [ctgr, subctgr, typeCtgr] = categoriesByCyrillicNames;
-
-    const searchTermFromUrl = getSearchTxt(categories as string[]);
+    const searchTermFromUrl = urlParams.q as string || '';
 
     // SEO
-    const seoContent = getSEOContent(ctgr, subctgr, typeCtgr, translatedLocation, locale);
+    const seoContent = getSEOContent(ctgr, subctgr, typeCtgr, location, locale);
 
     const seoTxt = seoContent.text;
 
     const description = searchTermFromUrl
-        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
+        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${location}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
         : seoContent.description;
 
     let title = searchTermFromUrl ? `${searchTermFromUrl} - SLONDO.uz` : seoContent.title;
@@ -57,28 +52,50 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     }
 
     const classes = useStyles();
-    return locationExist
-        ? <MainLayout title={title} description={description} seoTxt={seoTxt}>
+    return is404
+        ? <ErrorPage statusCode={statusCode}/>
+        : <>
+            <CustomHead
+                title={title}
+                description={description}
+            />
             <div className={classes.root}>
-                <Grid container spacing={isSm ? 0 : 2}>
-                    <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
-                        <SearchForm
-                            urlParams={urlParams}
-                            categories={categoriesByCyrillicNames}
-                        />
-                        <SearchResult
-                            urlParams={urlParams}
-                            searchTermFromUrl={searchTermFromUrl}
-                            categories={categoriesByCyrillicNames}
-                        />
-                    </Grid>
-                    <Hidden mdDown>
-                        <Grid item xs={3}>
-                            <HomeSidebar/>
-                        </Grid>
-                    </Hidden>
-                </Grid>
+                <Header/>
+                <main>
+                    <Container
+                        maxWidth="xl"
+                        style={{
+                            paddingTop: '48px',
+                            position: 'relative'
+                        }}
+                    >
+                        <div>
+                            <Grid container spacing={isSm ? 0 : 2}>
+                                <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
+                                    <SearchForm
+                                        urlParams={urlParams}
+                                        categories={ctgrsByCyrName}
+                                    />
+                                    <SearchResult
+                                        urlParams={urlParams}
+                                        categories={ctgrsByCyrName}
+                                        searchTermFromUrl={searchTermFromUrl}
+                                    />
+                                </Grid>
+                                <Hidden mdDown>
+                                    <Grid item xs={3}>
+                                        <HomeSidebar/>
+                                    </Grid>
+                                </Hidden>
+                            </Grid>
+                        </div>
+                        {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
+                    </Container>
+                </main>
+                <Hidden xsDown>
+                    <Footer/>
+                </Hidden>
             </div>
-        </MainLayout>
-        : <PageNotFound/>;
+            <ErrorModal/>
+        </>;
 };

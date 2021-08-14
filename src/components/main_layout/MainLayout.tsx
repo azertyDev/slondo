@@ -1,51 +1,63 @@
 import {FC} from 'react';
-import Head from 'next/head';
 import {Header} from '../header/Header';
 import {Footer} from '../footer/Footer';
-import {Container} from '@material-ui/core';
+import {Container, Hidden} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
+import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
+import {CustomHead} from "@src/components/head/CustomHead";
 import {useStyles} from './useStyles';
 
 type MainLayoutPropsType = {
     title?: string,
     description?: string,
-    seoTxt?: string
+    seoTxt?: string,
+    handleBack?: () => void
 };
 
 export const MainLayout: FC<MainLayoutPropsType> = (props) => {
     const title = props.title;
     const description = props.description;
 
-    const classes = useStyles();
     const {
         children,
-        seoTxt
+        seoTxt,
+        handleBack
     } = props;
 
+    const classes = useStyles();
     return (
         <>
-            <Head>
-                <title>{title}</title>
-                {/*<meta name="robots" content="noindex"/>*/}
-                <meta name="description" content={description}/>
-                <meta property="og:site_name" content="Slondo"/>
-                <meta property="og:type" content="website"/>
-                <meta property="og:title" content={title} key="ogtitle"/>
-                <meta property="og:description" content={description} key="ogdesc"/>
-            </Head>
-            <div className={classes.wrapper}>
-                <Header />
+            <CustomHead
+                title={title}
+                description={description}
+            />
+            <div className={classes.root}>
+                <Hidden xsDown>
+                    <Header/>
+                </Hidden>
+                <Hidden smUp>
+                    <ModalHeader
+                        title={title}
+                        hasPrevBtn={true}
+                        handleBack={handleBack}
+                    />
+                </Hidden>
                 <main>
                     <Container
                         maxWidth="xl"
-                        style={{paddingTop: '48px', position: 'relative'}}
+                        style={{
+                            paddingTop: '48px',
+                            position: 'relative'
+                        }}
                     >
                         {children}
-                        {!!seoTxt && <SEOTextComponent text={seoTxt} />}
+                        {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
                     </Container>
                 </main>
-                <Footer />
+                <Hidden xsDown>
+                    <Footer/>
+                </Hidden>
             </div>
             <ErrorModal/>
         </>

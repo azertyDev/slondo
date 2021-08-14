@@ -3128,9 +3128,9 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     title: `Спорттовары ${location} | купить товары для спорта и отдыха`,
                     description: `Товары для отдыха и спорта – ${location} | купить все для туризма, рыбалки и другого активного отдыха | продажа спортивных товаров от частников и магазинов`,
                     text: `Спорт улучшает общее физическое состояние, а также помогает поддерживать здоровье и контролировать эмоции. Для большего комфорта при занятиях, во многих спортивных дисциплин необходима специальная амуниция, а в некоторых видах спорта она является обязательной. Для того чтобы тренировки или активный отдых были еще интереснее и продуктивнее, нужно подобрать качественные спортивные товары. Важно акцентировать свой выбор основываясь на такие факторы как: материал изделия, качество изготовления, удобство и практичность при использовании. Если речь идет об экипировке, нужно исключить возможность аллергических реакций, которые возникают при соприкосновении с кожей. 
-                Говоря об очевидных фактах полезности спорта и активного образа жизни в целом, нельзя не упоминать влияние спорта на интеллект и ясность мысли, что делает его полезным не только для тела, но и для мозга. 
-                Выбрать, узнать цену и купить товар из лучшего предложения, вам поможет slondo.uz`,
-                    sports_protection_bicycles: {
+                        Говоря об очевидных фактах полезности спорта и активного образа жизни в целом, нельзя не упоминать влияние спорта на интеллект и ясность мысли, что делает его полезным не только для тела, но и для мозга. 
+                        Выбрать, узнать цену и купить товар из лучшего предложения, вам поможет slondo.uz`,
+                    sports_protection: {
                         title: `Шлемы для тхэквондо и бокса - ${location} | купить защиту для мма и других единоборств`,
                         description: `Спортивная защита для всех видов спорта: бокс, мма, кикбоксинг, тхэквондо, хоккей и футбол | шлемы, бандажи, защита для ног (голеностопы), рук и других частей тела | ${location}`,
                         text: `Спортивная защита позволяет максимально снизить принимаемый урон во время занятиями единоборствами или другими опасными видами спорта. В отличии от вида дисциплины, защита может состоять из нескольких элементов или представлять собой лишь один шлем, как в боксе. При занятиях другими единоборствами, используются бандажи (с ракушками), защита для рук и ног, голеностопы, а также полная экипировка полевого игрока, как в случае с хоккеем.
@@ -6261,7 +6261,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 }
             },
-            master_hour: {
+            master_for_an_hour: {
                 ru: {
                     description: `Заказать, а также узнать расценки и услуги мастера (мужа) на час, для хозяйственных, ремонтных или других работ по дому | ${location}`,
                     text: `Мастер на час – это мужчина, выполняющий разные мелкие и крупные ремонтные работы по дому. Прикрутить полку, повесить карниз, починить сантехнику или помочь в сборке мебели – все входит в его обязанности. Как правило такого рода услуги заказывают женщины, которым необходимо выполнить различную мужскую работу, в то время как обращаться к мастерам-специалистам будет слишком дорого. Найти лучшего мастера на час, день или неделю Вам поможет slondo.uz! Сравнивайте цены на аналогичные услуги, просматривайте рейтинги, читайте отзывы и отдавайте предпочтение самым ответственным ремонтникам`,
@@ -6764,7 +6764,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Множество предложений от лучших верстальщиков ${location} | junior, middle, senior | заказать услугу от верстальщиков, легче всего на slondo.uz`,
                         text: `Верстальщиком является специалист, основная работа которого заключается в создании и формировании печатного издания, веб-сайта, наполнение его необходимыми текстами, картинками и другими файлами. Найти лучшего верстальщика, вам поможет slondo.uz`
                     },
-                    designer: {
+                    designers: {
                         title: `Услуги графического  дизайнера в ${location} | photoshop, corel`,
                         description: `Множества предложений от графических и других профессиональных дизайнеров в ${location} | найти лучшего дизайнера, вам поможет slondo.uz`,
                         text: `С развитием информационных технологий, услуги графического дизайнера начали пользоваться все большим спросом. Услуги по работе в photoshop, corel draw и в других программах по редактированию картинок, требуется в каждой крупной компании. Выбрать лучшее из множества предложений, вам поможет slondo.uz`
@@ -6816,7 +6816,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Услуги от лучших специалистов по сетевому и системному администрированию в ${location} `,
                         text: `Системное (сетевое) администрирование, подразумевает за собой настройку и поддержку правильной работы локального парка компьютерной / орг. техники, а также бесперебойную работу определенного программного обеспечения. Помимо этого, системный администратор часто отвечает за информационную безопасность. Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                     },
-                    software_nstallation: {
+                    software_installation: {
                         title: `Установка windows и другого ПО в ${location} на выезд | slondo.uz`,
                         description: `Мастера по установке windows, linux, mac OS и других операционных систем. Активация ПО и установка разных программ | ${location}`,
                         text: `В установку программного обеспечения входит, установка операционной системы, драйверов и прикладных программ. Если Вы приобрели компьютер, или решили переустановить операционную систему, найти мастеров по этим услугам легче всего на slondo.uz!`
@@ -6854,7 +6854,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Eng zo’r sahifalovchilarning takliflari ${location}da | junior, middle, senior | sahifalovchilar xizmatlariga buyurtma berishning eng oson yo'li Slondo.uz da`,
                         text: `Sahifalovchilarning asosiy ishiga- nashrni tayyorlash, web-saytni yaratish va shakllantirish, uni kerakli matnlar, rasmlar va boshqa fayllar bilan to'ldirish kabi vazifalar kiradi. Eng yaxshi sahifalovchini topishda Sizga Slondo.uz yordam beradi`
                     },
-                    designer: {
+                    designers: {
                         title: `Grafik dizayner xizmatlari ${location}da | fotoshop, corel, power point`,
                         description: `Grafik va boshqa kuchli dizaynerlardan ko’plab takliflar ${location}da / eng yaxshi dizayner topishda Sizga Slondo.uz yordam beradi`,
                         text: `Axborot texnologiyalari rivojlanishi bilan, grafik dizaynerning xizmatlariga bo’lgan talab kuchaydi. Photoshop, corel draw va boshqa, rasmni tahrirlash dasturlarida ishlash bo'yicha xizmatlarga har bir yirik kompaniyada talab bor. Ko'plab takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
@@ -6908,7 +6908,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Tarmoq va tizim boshqaruvi bo'yicha eng yaxshi mutaxassislardan xizmatlar ${location}da`,
                         text: `Tizim (tarmoq)ni boshqaruvi deganda-mahalliy kompyuter / orgtexnika jamlanmasini sozlash va to’g’ri ishlashini ta’minlashni, shu jumladan, muayyan dasturiy ta'minotning uzluksiz ishlashini ta’minlab berishni tushuniladi. Bundan tashqari, tizim ma'muri ko'pincha axborot xavfsizligi uchun mas'uldir. Ko'p takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
-                    software_nstallation: {
+                    software_installation: {
                         title: `Windows va boshqa dasturiy ta’minotni ${location}da joyiga chiqib o'rnatib berish | Slondo.uz`,
                         description: `Windows, linux, mac OS va boshqa operatsion tizimlarni o'rnatish bo’yicha ustalar. Dasturiy ta'minotni faollashtirish va turli dasturlarni o'rnatish | ${location}`,
                         text: `Dasturiy ta'minotni o'rnatishga- operatsion tizim, drayver va amaliy dasturlarni o’rnatish kiradi. Agar siz kompyuterni sotib olgan bo'lsangiz yoki operatsion tizimni qayta o'rnatishga qaror qilsangiz, ushbu xizmatlar bo'yicha ustalarni topish Slondo.uzda juda oson!`
@@ -7881,7 +7881,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         text: `Фотостудия – это место специально оборудованное под фотосъемку. В услуги фотостудии входят такие виды съемки как: портретная, семейная, промо и многие другие. Стандартная фотостудия снабжена таким оборудованием как: профессиональные фотоаппараты, штативы, софт-боксы, лайт-боксы, хромакей, фоны разных цветов, а также комнаты обставленные под определенные виды интерьера. Некоторые фотостудии предоставляют услуги аренды, где можно выгодно арендовать необходимое помещение под часовую оплату. 
                         Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                     },
-                    other: {
+                    other_services: {
                         title: `Другие услуги в категории «Фото и видеосъемка» - ${location}`,
                         description: `Разные услуги в сфере фото и видеосъемки в ${location} | slondo.uz`,
                         text: `Все услуги касающиеся фото и видеосъемки, не входящие в другие категории.`
@@ -7953,7 +7953,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         Takliflar ichida eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi                         
                         `
                     },
-                    other: {
+                    other_services: {
                         title: `"Foto va video suratga olish" turkumidagi boshqa xizmatlar - ${location}`,
                         description: `Foto va video suratga olish sohasidagi turli xizmatlar ${location}da | Slondo.uz`,
                         text: `Boshqa toifalarga kiritilmagan foto va video suratga olish bilan bog'liq barcha xizmatlar.`
@@ -9675,8 +9675,8 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     title: `Женская одежда в ассортименте ${location} | пальто, платья, юбки, сарафаны, свитера`,
                     description: `Стильная женская одежда: большой выбор элементов женского гардероба на любой вкус. Предложения от магазинов и частных лиц в ${location}, на slondo.uz`,
                     text: `Женская одежда прямо отражает характер девушки или ее настроение на день. Грамотно подобранный стиль, с учетом индивидуальных особенностей фигуры, подчеркнет ваши достоинства, сделает вас уверенней в себе, а в некоторых случаях скроет недостатки: платье является красивым не само по себе, а в соответствии с вашей индивидуальностью. Другими словами, одежда ценится только в том случае, если она преображает вас делая фигуру более красивой и эффектной. 
-                 При выборе женской одежды вы можете выбрать необходимый размер, материал, цену и множество других параметров. 
-                 Выбирайте самое лучшее из множества предложений по продаже одежды от именитых брендов и из сэкондхэнда, при помощи slondo.uz`,
+                     При выборе женской одежды вы можете выбрать необходимый размер, материал, цену и множество других параметров. 
+                     Выбирайте самое лучшее из множества предложений по продаже одежды от именитых брендов и из сэкондхэнда, при помощи slondo.uz`,
                     accessories: {
                         title: `Женские аксессуары: сумки, косметички, клатчи, часы и украшения | ${location}`,
                         description: `Покупайте модные женские аксессуары, предложения из первых рук и магазинов: сумки, часы, клатчи и кошельки.`,
@@ -9850,31 +9850,31 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         title: `Купить платье или юбку в ${location} | летние, выпускные, вечерние платья и сарафаны`,
                         description: `Платья и юбки на любой вкус – выбирайте лучшие предложения на Slondo`,
                         text: `Юбка и платье – это базовые элементы любого женского гардероба. Они могут по праву считаться универсальными предметами образа любой дамы. Грамотно подобранная вещь подчеркнет сильные стороны фигуры и скроет недостатки. На что в первую очередь стоит обратить внимание при выборе такой одежды:  цвет, фасон, материал, стиль и модные тенденции. В зависимости от ситуации вам может подойти вечернее платье, легкий сарафан или строгий образ с юбкой. 
-                Сервис бесплатных объявлений slondo.uz поможет Вам найти любой тип платья или юбки:
-                - Вязаные
-                - Джинсовые
-                - Офисные
-                - Платья-Рубашки
-                - Повседневные
-                - Сарафаны
-                - Свадебные
-                - Туники
-                - Юбки`
+                        Сервис бесплатных объявлений slondo.uz поможет Вам найти любой тип платья или юбки:
+                        - Вязаные
+                        - Джинсовые
+                        - Офисные
+                        - Платья-Рубашки
+                        - Повседневные
+                        - Сарафаны
+                        - Свадебные
+                        - Туники
+                        - Юбки`
                     },
                     sweaters_hoodies: {
                         title: `Женские худи, толстовки, свитшоты, свитера| ${location}`,
                         description: `Купить женскую толстовку, свитер, свитшот или худи по лучшей в ${location} цене, удобнее всего на slondo.uz`,
                         text: `Толстовка перешла в женский гардероб из мужского, и уже перестала считаться атрибутом спортивного стиля. На данный момент толстовка сильно преобразилась, и дала начало для таких предметов гардероба как: свитшот (от англ. sweatshirt), худи и многие другие. Толстовку или худи с ярким принтом можно одеть и в кафе и в кино и в бар. 
-                    Выбрать лучшее из множества предложений, Вам поможет торговая площадка slondo.uz:
-                    - Водолазки
-                    - Джемперы
-                    - Кардиганы 
-                    - Кофты
-                    - Олимпийки
-                    - Пуловеры
-                    - Свитеры
-                    - Твинсеты
-                     Толстовки и худи`
+                        Выбрать лучшее из множества предложений, Вам поможет торговая площадка slondo.uz:
+                        - Водолазки
+                        - Джемперы
+                        - Кардиганы 
+                        - Кофты
+                        - Олимпийки
+                        - Пуловеры
+                        - Свитеры
+                        - Твинсеты
+                         Толстовки и худи`
                     },
                     sportswear: {
                         title: `Спортивные костюмы для женщин: лосины, леггинсы, шорты и топы | ${location}`,
@@ -9895,11 +9895,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         title: `Купить топ или женскую футболку в ${location} | лучшие цены`,
                         description: `Множество предложений по продаже женских топов, футболок и маек. Одевайтесь стильно на slondo`,
                         text: `Для выбора одежды на теплое время года, сложно представить что то более подходящее чем женская футболка или топ. Дамы следящие за течением моды по праву называют их базовым элементом гардероба – стильно, удобно и практично. Они могут отличаться формой выреза, цветом, материалом и фасоном. Бывают майки с зауженной талией, также имеются фасоны типа оверсайз. Выбрать лучшее из множества предложений, вам поможет slondo.uz!
-                - Майки 
-                - Поло
-                - Топы
-                - Футболки
-                - Лонгсливы`
+                    - Майки 
+                    - Поло
+                    - Топы
+                    - Футболки
+                    - Лонгсливы`
                     },
                     pants_and_shorts: {
                         title: `Купить женские шорты, брюки, джоггеры и штаны | ${location}`,
@@ -11248,6 +11248,24 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Sochiq, xalat
                         `
                     },
+                    all_for_the_nur: {
+                        title: `Купить детскую мебель в ${location} | двухъярусные кровати, шкафы, люльки`,
+                        description: `Все для детской комнаты, по лучшим ценам: бешик, колыбели, письменные столы, кроватки и многое другое, от частников, магазинов и производителей`,
+                        text: ` При выборе мебели, мы обычно отдаем свое предпочтение стилю, функциональности и качеству изделий. Но при покупке гарнитура для детской, на первое место переносится безопасность ребенка. Важно чтобы мебель была изготовлена из экологически чистых материалов, розетки в комнатах были заблокированы, а острые края и грубые стекла надежно спрятаны от случайных ударов. На сегодняшний день в магазинах имеется огромное множество различной мебели, с интересным дизайном и приемлемыми ценами. Выбрать лучшее из множества предложений вам поможет slondo.uz:
+                        - Защитные барьеры, накладки
+                        - Бешик
+                        - Качели, шезлонги
+                        - Колыбели, люльки
+                        - Кроватки
+                        - Манежи
+                        - Ночники
+                        - Пеленальные столики
+                        - Постельные принадлежности
+                        - Ростомеры
+                        - Стульчики для кормления
+                        - Ходунки, прыгунки
+                        - Другое`
+                    },
                     nappies_pots: {
                         title: `Taglik va tuvak ${location}da sotib olish / Pampers, Hugges`,
                         description: `Yangi tug'ilgan chaqaloqlar va boshqa yoshdagi bolalar uchun eng yaxshi narxlarda taglik, tuvak va pelenka sotish bo'yicha ko'plab takliflar.`,
@@ -11387,24 +11405,23 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         -Origami
                         -Amigurumi
                         - Boshqa
-                        `
-                },
-                cosmetics: {
-                    title: `Qo'lda ishlangan kosmetika mahsulotlarini ${location}da sotib olish | Sovun, Shampun`,
-                    description: `Qo'lda tayyorlangan kosmetika mahsulotlari, tabiiy tarkibiy qismlardan: uy sharoitida yasalgan sovun, shampun, gellarga va yana ko'p narsalarga buyurtma bering. Eng yaxshi narxlar`,
-                    text: `Qo’lda tayyorlangan kosmetika vositalari bir qator parvarishlash mahsulotlaridan iborat. Bu erda, deyarli har qanday dizayndagi tabiiy sovun, tabiiy moddalardan iborat shampunlar va boshqa ko'p narsalarni topishingiz mumkin. Chiroyli shaklda tayyorlangan sovunni, shamni yaqin kishingizga sovg’a qilish mumkin. Qiziqarli suvenir shakli uchun, ularni servantga olib qo’ymasdan, maqsadga muvofiq ishlatish ham mumkin.
+                        `,
+                    cosmetics: {
+                        title: `Qo'lda ishlangan kosmetika mahsulotlarini ${location}da sotib olish | Sovun, Shampun`,
+                        description: `Qo'lda tayyorlangan kosmetika mahsulotlari, tabiiy tarkibiy qismlardan: uy sharoitida yasalgan sovun, shampun, gellarga va yana ko'p narsalarga buyurtma bering. Eng yaxshi narxlar`,
+                        text: `Qo’lda tayyorlangan kosmetika vositalari bir qator parvarishlash mahsulotlaridan iborat. Bu erda, deyarli har qanday dizayndagi tabiiy sovun, tabiiy moddalardan iborat shampunlar va boshqa ko'p narsalarni topishingiz mumkin. Chiroyli shaklda tayyorlangan sovunni, shamni yaqin kishingizga sovg’a qilish mumkin. Qiziqarli suvenir shakli uchun, ularni servantga olib qo’ymasdan, maqsadga muvofiq ishlatish ham mumkin.
                         Sizga yordam beradigan ko'plab takliflarni slondo.uz da tanlang. 
                         `
-                },
-                decorations: {
-                    title: `Zargarlik buyumlarini sotib olish – ${location} | uzuklar, brasletlar`,
-                    description: `Qo'lda tayyorlangan zargarlik buyumlarini sotish bo'yicha ko'plab reklamalar: kumush va oltin buyumlar, zargarlik buyumlari, marjonlar, zanjir, kulonlar va boshqalar`,
-                    text: `Qo’lda yasalgan zargarlik buyumlari, ustaning buyumga ko’chirgan fantaziyasi, mehri va his-tuyg’usidir. Zargarlik buyumlari juda katta assortimentga ega, chunki bu erda yarim qimmatbaho toshlar va zanglamaydigan po'latdan tayyorlangan oddiy mahsulotlardan tortib, olmos, marvarid, brilliant va boshqa qimmatbaho toshlar yordamida mashhur zargarlardan nozik zargarlik buyumlari ham kiradi. Qo’lda yasalgan bezaklar ichida kumush metalidan yasalgan buyumlar juda xaridorgirdir, ayniqsa 925 probali kumush. Zargarlik do’konlari va butiklaridan tashqari Siz zargarlik buyumlarini internet orqali ham sotib olishingiz va sotishingiz mumkin. Bunda Sizga Slondo.uz yordam beradi.`
-                },
-                dolls_and_toys: {
-                    title: `Qo'g'irchoqlar va qo'lda ishlangan o'yinchoqlar / eksklyuziv hendmeyd mahsulotlari - ${location}`,
-                    description: `${location}da jun, mum, chinni, keramika va boshqa materiallardan tayyorlangan qo'g'irchoqlar va o'yinchoqlarni yasab berish, sotib olish yoki sotishga buyurtma qilish.`,
-                    text: `Qulda yasalgan qo'g'irchoqlar va o'yinchoqlar, do'kondagi nusxalaridan o'ziga xosligi va o'ziga xos g'oyasi bilan farq qiladi. Yaqinlaringizga sovg'a sifatida bunday narsa sotib olganda, ularni albatta, buyumning har birining muayyan parametrlar uchun emas, balki uning yaratilish vaqtida Ustaning hayolida yashaydigan g'oyaga ko'ra va ayni nusxasi yo’qligi, yagonaligi bilan xursand qilasiz.
+                    },
+                    decorations: {
+                        title: `Zargarlik buyumlarini sotib olish – ${location} | uzuklar, brasletlar`,
+                        description: `Qo'lda tayyorlangan zargarlik buyumlarini sotish bo'yicha ko'plab reklamalar: kumush va oltin buyumlar, zargarlik buyumlari, marjonlar, zanjir, kulonlar va boshqalar`,
+                        text: `Qo’lda yasalgan zargarlik buyumlari, ustaning buyumga ko’chirgan fantaziyasi, mehri va his-tuyg’usidir. Zargarlik buyumlari juda katta assortimentga ega, chunki bu erda yarim qimmatbaho toshlar va zanglamaydigan po'latdan tayyorlangan oddiy mahsulotlardan tortib, olmos, marvarid, brilliant va boshqa qimmatbaho toshlar yordamida mashhur zargarlardan nozik zargarlik buyumlari ham kiradi. Qo’lda yasalgan bezaklar ichida kumush metalidan yasalgan buyumlar juda xaridorgirdir, ayniqsa 925 probali kumush. Zargarlik do’konlari va butiklaridan tashqari Siz zargarlik buyumlarini internet orqali ham sotib olishingiz va sotishingiz mumkin. Bunda Sizga Slondo.uz yordam beradi.`
+                    },
+                    dolls_and_toys: {
+                        title: `Qo'g'irchoqlar va qo'lda ishlangan o'yinchoqlar / eksklyuziv hendmeyd mahsulotlari - ${location}`,
+                        description: `${location}da jun, mum, chinni, keramika va boshqa materiallardan tayyorlangan qo'g'irchoqlar va o'yinchoqlarni yasab berish, sotib olish yoki sotishga buyurtma qilish.`,
+                        text: `Qulda yasalgan qo'g'irchoqlar va o'yinchoqlar, do'kondagi nusxalaridan o'ziga xosligi va o'ziga xos g'oyasi bilan farq qiladi. Yaqinlaringizga sovg'a sifatida bunday narsa sotib olganda, ularni albatta, buyumning har birining muayyan parametrlar uchun emas, balki uning yaratilish vaqtida Ustaning hayolida yashaydigan g'oyaga ko'ra va ayni nusxasi yo’qligi, yagonaligi bilan xursand qilasiz.
                         O’zimizning kulollar yaratgan haykalchalarni bilamiz. Lekin Sizni lol qoldira oladigan Yaponiya ustalari qo’lda yasash san’ati turlari bilan Slonda.uzda tanishing:
                         -Origami
                         -Ekibana
@@ -11412,41 +11429,42 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         -Kanzashi 
                         Sizga ma’qul keladigan ko'plab takliflarni slondo.uz da tanlang!
                         `
-                },
-                decoration_of_an_interior: {
-                    title: `Qo'lda ishlangan rasmlar, lampa, sham va esdalik sovg'alari / ${location}`,
-                    description: `Qo’lbola usulda tayyorlangan ichki bezatish buyumlarini sotib olish, sotish yoki buyurtma qilishning eng qulay usuli slondo.uz da: torsher, svetilnik, natyurmort, vazalar va boshqalar`,
-                    text: `Qo'lda tayyorlangan buyumlar zavodnikiga qaraganda ancha qiziqroq ko'rinadi. Hunarmandlar qo’li bilan yasalgan buyumlar sizning uyingizga uslub va o'ziga xoslikni beradi. Xonani bezash uchun maxsus do'konlarni ziyorat qilishning hojati yo'q. Sizga ma’qul bo’lgan ko'plab takliflarni Slondo.uzda tanlang!`
-                },
-                accessories: {
-                    title: `Brelok, sumkalar, koshelyok, qo'lda ishlangan buyumlar / ${location}`,
-                    description: `Qo'lda tayyorlangan aksessuarlarni eng yaxshi narxda sotib oling yoki soting: trikotaj sumkalar, charm kamarlar, hamyon va boshqalar slondo.uz da`,
-                    text: `Honadon uchun qo'lda yasalgan Aksessuarlar, ustalar va havaskorlarning mehr bilan ijod qilib, o'z qo'llari mehnati bilan yasaganliklari sabab, juda sifatli bo’ladi. Ular charm, teri, ipak, mis yoki boshqa materiallardan tayyorlangan mahsulotlar bo'lishi mumkin: Dispenser, organayzer, sumka, kuldon yoki masalan, sharflar. O'z qo'llari bilan tayyorlangan bunday aksessuarlar o'zingizga yoki yaqiningizga ajoyib sovg'a bo'ladi.
+                    },
+                    decoration_of_an_interior: {
+                        title: `Qo'lda ishlangan rasmlar, lampa, sham va esdalik sovg'alari / ${location}`,
+                        description: `Qo’lbola usulda tayyorlangan ichki bezatish buyumlarini sotib olish, sotish yoki buyurtma qilishning eng qulay usuli slondo.uz da: torsher, svetilnik, natyurmort, vazalar va boshqalar`,
+                        text: `Qo'lda tayyorlangan buyumlar zavodnikiga qaraganda ancha qiziqroq ko'rinadi. Hunarmandlar qo’li bilan yasalgan buyumlar sizning uyingizga uslub va o'ziga xoslikni beradi. Xonani bezash uchun maxsus do'konlarni ziyorat qilishning hojati yo'q. Sizga ma’qul bo’lgan ko'plab takliflarni Slondo.uzda tanlang!`
+                    },
+                    accessories: {
+                        title: `Brelok, sumkalar, koshelyok, qo'lda ishlangan buyumlar / ${location}`,
+                        description: `Qo'lda tayyorlangan aksessuarlarni eng yaxshi narxda sotib oling yoki soting: trikotaj sumkalar, charm kamarlar, hamyon va boshqalar slondo.uz da`,
+                        text: `Honadon uchun qo'lda yasalgan Aksessuarlar, ustalar va havaskorlarning mehr bilan ijod qilib, o'z qo'llari mehnati bilan yasaganliklari sabab, juda sifatli bo’ladi. Ular charm, teri, ipak, mis yoki boshqa materiallardan tayyorlangan mahsulotlar bo'lishi mumkin: Dispenser, organayzer, sumka, kuldon yoki masalan, sharflar. O'z qo'llari bilan tayyorlangan bunday aksessuarlar o'zingizga yoki yaqiningizga ajoyib sovg'a bo'ladi.
                         Ko'p takliflarning eng yaxshisini topishda sizga Slondo.uz
                         yordam beradi.
                         `
-                },
-                decoration_of_holidays: {
-                    title: `Otkritkalar, gulchambarlar, sharlar, gullar, musiqa va shirinliklar to'plami / ${location}`,
-                    description: `Bayram tantanalarini qo’lda yasalgan buyumlar bilan bezash, sharlar, lentalar, chiroqlar va boshqalar. Yaxshi narxlarda sotib olish, sotish yoki buyurtma qilish.`,
-                    text: `Bayram, to’y va marosimlar o’tadigan bino yoki xonani bezash har doim qiziqarli va hayajonli jarayondir. Jamoada do'stona muhit yoki xonadonning oilaviy ahilligi, ayniqsa, bayramni o'tkazishni tashkillashtirishdan oldin seziladi. Bezatish jarayonida havo va geliy sharlari, shirinliklar, gullar va boshqalar kabi narsalar keng qo'llaniladi. Qo’lda yasalgan uy-ro'zg'or buyumlarini sotib olish, sotish yoki buyurtma qilishda sizga Slondo.uz yordam beradi!`
-                },
-                office: {
-                    title: `Foto-albomlar, kalendarlar, qo'lda ishlangan bloknotlar | kanstovar sotib olish`,
-                    description: `${location}da qo’lda yasalgan kanselyariya mollari eng yaxshi narxlarda: Chexol, Bloknotlar, Ejednevnik sotib olish yoki sotishda eng qulay sayt - slondo.uz`,
-                    text: `Qo'lda ishlangan kanselyariya mollari deganda chexollar, fotoramkalar, bloknotlar kabi mahsulotlarni nazarda tutadi. Bu erda albom, daftar, kalendarlar, foto ramkalar kabi, ko'plab insonlar o'z qo'llari bilan tayyorlagan tovarlarni topishingiz mumkin. Ko'p takliflardan eng yaxshisini slondo.uz da tanlang!`
-                },
-                dishes: {
-                    title: `Pichoqlar, choynak, piyola – ${location}da |Qo’lda yasalgan oshxona buyumlarini sotib olish`,
-                    description: `Arzon narxlarda qo'lda tayyorlangan idishlar va asboblar sotish bo'yicha ko'plab reklamalar: pichoq, bolta, qoshiq, lagan, nonpar va boshqa narsalarni sotib olish yoki sotish slondo.uz`,
-                    text: `Qo'lda ishlangan idishlar, o’zining erkin uslubi bilan ajralib turadi. Bu yerda siz qiziqarli, keramik krujkalar, naqshli piyolalar, Chust pichoqlari, Rishton laganlari, Marg’ilon do’ppisi shuningdek, kosiblarning nozik dizaynlari, noyob shakllari va sifatlarni ko'rishingiz mumkin.
+                    },
+                    decoration_of_holidays: {
+                        title: `Otkritkalar, gulchambarlar, sharlar, gullar, musiqa va shirinliklar to'plami / ${location}`,
+                        description: `Bayram tantanalarini qo’lda yasalgan buyumlar bilan bezash, sharlar, lentalar, chiroqlar va boshqalar. Yaxshi narxlarda sotib olish, sotish yoki buyurtma qilish.`,
+                        text: `Bayram, to’y va marosimlar o’tadigan bino yoki xonani bezash har doim qiziqarli va hayajonli jarayondir. Jamoada do'stona muhit yoki xonadonning oilaviy ahilligi, ayniqsa, bayramni o'tkazishni tashkillashtirishdan oldin seziladi. Bezatish jarayonida havo va geliy sharlari, shirinliklar, gullar va boshqalar kabi narsalar keng qo'llaniladi. Qo’lda yasalgan uy-ro'zg'or buyumlarini sotib olish, sotish yoki buyurtma qilishda sizga Slondo.uz yordam beradi!`
+                    },
+                    office: {
+                        title: `Foto-albomlar, kalendarlar, qo'lda ishlangan bloknotlar | kanstovar sotib olish`,
+                        description: `${location}da qo’lda yasalgan kanselyariya mollari eng yaxshi narxlarda: Chexol, Bloknotlar, Ejednevnik sotib olish yoki sotishda eng qulay sayt - slondo.uz`,
+                        text: `Qo'lda ishlangan kanselyariya mollari deganda chexollar, fotoramkalar, bloknotlar kabi mahsulotlarni nazarda tutadi. Bu erda albom, daftar, kalendarlar, foto ramkalar kabi, ko'plab insonlar o'z qo'llari bilan tayyorlagan tovarlarni topishingiz mumkin. Ko'p takliflardan eng yaxshisini slondo.uz da tanlang!`
+                    },
+                    dishes: {
+                        title: `Pichoqlar, choynak, piyola – ${location}da |Qo’lda yasalgan oshxona buyumlarini sotib olish`,
+                        description: `Arzon narxlarda qo'lda tayyorlangan idishlar va asboblar sotish bo'yicha ko'plab reklamalar: pichoq, bolta, qoshiq, lagan, nonpar va boshqa narsalarni sotib olish yoki sotish slondo.uz`,
+                        text: `Qo'lda ishlangan idishlar, o’zining erkin uslubi bilan ajralib turadi. Bu yerda siz qiziqarli, keramik krujkalar, naqshli piyolalar, Chust pichoqlari, Rishton laganlari, Marg’ilon do’ppisi shuningdek, kosiblarning nozik dizaynlari, noyob shakllari va sifatlarni ko'rishingiz mumkin.
                         Ko'p takliflardan eng yaxshisini Slondo.uz da tanlang!
                         `
-                },
-                other: {
-                    title: `Ko’plab qo'lda tayyorlangan mahsulotlarni sotish | slondo.uz`,
-                    description: `${location}da" Xendmeyd " toifasida turli tovarlarni sotish bo'yicha e'lonlar`,
-                    text: `Bu erda siz qo'lda tayyorlangan buyumlardan turli xil mahsulotlarning narxlarini ko’rishingiz, sotib olishingiz, sotishingiz yoki o'rganishingiz mumkin.`
+                    },
+                    other: {
+                        title: `Ko’plab qo'lda tayyorlangan mahsulotlarni sotish | slondo.uz`,
+                        description: `${location}da" Xendmeyd " toifasida turli tovarlarni sotish bo'yicha e'lonlar`,
+                        text: `Bu erda siz qo'lda tayyorlangan buyumlardan turli xil mahsulotlarning narxlarini ko’rishingiz, sotib olishingiz, sotishingiz yoki o'rganishingiz mumkin.`
+                    }
                 }
             },
             beauty_health: {
@@ -11622,12 +11640,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Solariy, zagar
                         - Gigiena
                         - Boshqa
-                        `
-                },
-                makeup: {
-                    title: `Pardoz uchun kosmetika vositalari, ${location}da sotib olish | tushlar, tenilar, bleski, konturlar`,
-                    description: `${location}dagi kosmetika va bo’yanish mahsulotlarining keng assortimenti: balzam, pomada, kistochka, gubka, pinset va boshqa mahsulotlar`,
-                    text: `Ajoyib makiyaj deb, birinchi navbatda, yaxshi kosmetika vositalari yordamida, ustaning yengil qo'li bilan sehrli natijaga erishishga aytiladi. Yaxshi kosmetikani tanlash uchun siz taniqli brendlardan turli xil mahsulotlarni sotib olishingiz shart emas, ba'zan buning uchun bir nechta yuqori sifatli mahsulotlar yetarli, ular bilan siz tubdan o'zgarib, o’ta maftunkor ko’rinishga erishasiz! Koreya, Fransiya, Isroil davlatlari va Mac, L'Oreal, Chanel, NYX, Maybelline, Estee Lauder, Lancome, Dior kabi ishlab chiqaruvchilarning mukammal kosmetika va paryumeriya vositalari butun dunyoga mashhur. Ko'pdan kup takliflarning eng yaxshisini topishda sizga slondo.uz yordam beradi!
+                        `,
+                    makeup: {
+                        title: `Pardoz uchun kosmetika vositalari, ${location}da sotib olish | tushlar, tenilar, bleski, konturlar`,
+                        description: `${location}dagi kosmetika va bo’yanish mahsulotlarining keng assortimenti: balzam, pomada, kistochka, gubka, pinset va boshqa mahsulotlar`,
+                        text: `Ajoyib makiyaj deb, birinchi navbatda, yaxshi kosmetika vositalari yordamida, ustaning yengil qo'li bilan sehrli natijaga erishishga aytiladi. Yaxshi kosmetikani tanlash uchun siz taniqli brendlardan turli xil mahsulotlarni sotib olishingiz shart emas, ba'zan buning uchun bir nechta yuqori sifatli mahsulotlar yetarli, ular bilan siz tubdan o'zgarib, o’ta maftunkor ko’rinishga erishasiz! Koreya, Fransiya, Isroil davlatlari va Mac, L'Oreal, Chanel, NYX, Maybelline, Estee Lauder, Lancome, Dior kabi ishlab chiqaruvchilarning mukammal kosmetika va paryumeriya vositalari butun dunyoga mashhur. Ko'pdan kup takliflarning eng yaxshisini topishda sizga slondo.uz yordam beradi!
                         - Balzam
                         - Kistochka, gubka
                         - Konturlar
@@ -11644,11 +11661,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Pinset
                         - Boshqa
                         `
-                },
-                manicure_pedicure: {
-                    title: `Tirnoq uchun Gel va lak sotib oling - ${location} / Manikyur uchun aksessuarlar`,
-                    description: `Manikyur va pedikyur uchun hamma narsa: to'plamlar, lampalar, antiseptik, qaychi, pilka eng yaxshi narxlarda slondo.uz`,
-                    text: `Uy sharoitida manikyur va pedikyur uchun turli xil mahsulotlarni tanlash masalasi, ertami-kechmi har bir qizning boshiga tushadi. Uyda tirnoqlarni chiroyli qilishni o'rganib, salonga tashrif buyurish uchun vaqt va pulni tejashdan tashqari, kelajakda o’zingiz ham boshlang'ich usta bo'lib, buning evaziga yaxshigina pul topishingiz mumkin. Bugungi kunga kelib, ushbu amaliyot uchun turli xil ishlab chiqaruvchilardan katta miqdorda aksessuarlar mavjud. Bundan tashqari, oyoq va qo’l tirnoqlarini parvarish qilish uchun asosiy asbob uskunalar va vositalar ko’p parametrlar bo'yicha bir-biridan kam farq qiladi. Past narxda sifatli jihozlar va asboblarni to'g'ri tanlash muhimdir. Manikyur va pedikyur uchun qimmatbaho yoki arzon vositalarni topishda sizga slondo.uz yordam beradi:
+                    },
+                    manicure_pedicure: {
+                        title: `Tirnoq uchun Gel va lak sotib oling - ${location} / Manikyur uchun aksessuarlar`,
+                        description: `Manikyur va pedikyur uchun hamma narsa: to'plamlar, lampalar, antiseptik, qaychi, pilka eng yaxshi narxlarda slondo.uz`,
+                        text: `Uy sharoitida manikyur va pedikyur uchun turli xil mahsulotlarni tanlash masalasi, ertami-kechmi har bir qizning boshiga tushadi. Uyda tirnoqlarni chiroyli qilishni o'rganib, salonga tashrif buyurish uchun vaqt va pulni tejashdan tashqari, kelajakda o’zingiz ham boshlang'ich usta bo'lib, buning evaziga yaxshigina pul topishingiz mumkin. Bugungi kunga kelib, ushbu amaliyot uchun turli xil ishlab chiqaruvchilardan katta miqdorda aksessuarlar mavjud. Bundan tashqari, oyoq va qo’l tirnoqlarini parvarish qilish uchun asosiy asbob uskunalar va vositalar ko’p parametrlar bo'yicha bir-biridan kam farq qiladi. Past narxda sifatli jihozlar va asboblarni to'g'ri tanlash muhimdir. Manikyur va pedikyur uchun qimmatbaho yoki arzon vositalarni topishda sizga slondo.uz yordam beradi:
                         - Aseton
                         - Asboblar
                         - Nabor
@@ -11660,11 +11677,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Keratolitik
                         -Frezer
                         `
-                },
-                health_products: {
-                    title: `Termometr, ingalyator, ochki va linzalar ${location}da / Sog'liqni saqlash mahsulotlari`,
-                    description: `Sog'liqni saqlash va profilaktika mahsulotlari narxlarini bilish, sotib olish, sotish: tonometr, yulayzer, hassa, korset va ochkilar`,
-                    text: `Salomatlik mahsulotlarini tanlash, maxsus mas'uliyat talab qilib, davolovchi shifokor nazorati ostida bo'lishi kerak. Termometrlar, Tonometrlar yoki vazn o'lchash asboblari aniq ishlashi tekshirilishi kerak, tayoq va hassa sizning o'lchamingizga mos bo'lishi kerak, ochki yoki linzalar ko’rish qobiliyatingiz o’lchamiga to’g’ri kelishi kerak. Bundan tashqari, bemorlarni parvarish qilish yoki sog'likni saqlash uchun, tibbiy mahsulotlar orasida sifat kabi omil juda muhimdir, shuning uchun bunday mahsulotlarni sinalgan, mashhur ishlab chiqaruvchilardan sotib olish kerak.
+                    },
+                    health_products: {
+                        title: `Termometr, ingalyator, ochki va linzalar ${location}da / Sog'liqni saqlash mahsulotlari`,
+                        description: `Sog'liqni saqlash va profilaktika mahsulotlari narxlarini bilish, sotib olish, sotish: tonometr, yulayzer, hassa, korset va ochkilar`,
+                        text: `Salomatlik mahsulotlarini tanlash, maxsus mas'uliyat talab qilib, davolovchi shifokor nazorati ostida bo'lishi kerak. Termometrlar, Tonometrlar yoki vazn o'lchash asboblari aniq ishlashi tekshirilishi kerak, tayoq va hassa sizning o'lchamingizga mos bo'lishi kerak, ochki yoki linzalar ko’rish qobiliyatingiz o’lchamiga to’g’ri kelishi kerak. Bundan tashqari, bemorlarni parvarish qilish yoki sog'likni saqlash uchun, tibbiy mahsulotlar orasida sifat kabi omil juda muhimdir, shuning uchun bunday mahsulotlarni sinalgan, mashhur ishlab chiqaruvchilardan sotib olish kerak.
                         Ko'p takliflarning eng yaxshisini topishda sizga Slondo.uz yordam beradi:
                         - Bandaj, doka
                         - Tonometr
@@ -11679,11 +11696,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Ortopedik poyafzal
                         - Boshqa
                         `
-                },
-                perfumery: {
-                    title: `Chanel, Versace. Ayollar va erkaklar parfyumeriyasi | Parfyumeriya sotib olish`,
-                    description: `Ayollar va erkaklar uchun parfyumeriya turlari, taniqli brendlardan eng yaxshi atirlar: Dior, Escentric, Molecules, Lancome, Gucci va boshqalar`,
-                    text: `Insonning jozibali qiyofasidan tashqari yana bir jihatlardan biri- yoqimli hiddir. Siz o’zingiz uchun mos bo'lgan xushbo'y hidli idishni sotib olganingizdan so'ng, shubhasiz, o'zingizni hurmat qilasiz va o'zingiz uchun o'ziga xos joziba yaratasiz.
+                    },
+                    perfumery: {
+                        title: `Chanel, Versace. Ayollar va erkaklar parfyumeriyasi | Parfyumeriya sotib olish`,
+                        description: `Ayollar va erkaklar uchun parfyumeriya turlari, taniqli brendlardan eng yaxshi atirlar: Dior, Escentric, Molecules, Lancome, Gucci va boshqalar`,
+                        text: `Insonning jozibali qiyofasidan tashqari yana bir jihatlardan biri- yoqimli hiddir. Siz o’zingiz uchun mos bo'lgan xushbo'y hidli idishni sotib olganingizdan so'ng, shubhasiz, o'zingizni hurmat qilasiz va o'zingiz uchun o'ziga xos joziba yaratasiz.
                         Parfyumeriyani yaratilish tarixi o'n to'rtinchi asrga to'g'ri keladi, bu erda Vengriya malikasi uchun birinchi Duxi yaratilgan. Ammo shuni ta'kidlash kerakki, Frantsiya parfyumeriya ishlab chiqarishga katta hissa qo'shdi. Birinchi ingredientlardan biri atirgullar, xushbo'y moylar, bodom, yalpiz, yasmin, lavanda, dolchin va mushk edi.
                         - Odekolon
                         - Duxi
@@ -11694,11 +11711,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Teni, podvodka
                         Eng yaxshi erkaklar va ayollar parfyumeriyasi, odekolon, duxi, mushk (musulmonlar uchun Arab yog 'i) , tualetnaya voda va boshqalarini tanlashda sizga Slondo.uz yordam beradi!
                         `
-                },
-                haircut_hair_removal: {
-                    title: `Soch kesish, soch turmaklash, ustara, trimmer, epilyator | ${location}. britva sotib olish`,
-                    description: `Soch kesish / soch turmaklash va tuklarni qirish uchun asboblar keng assortimenti: lezvie, qaychi, trimmer, pichoq, epilyator va boshqalar`,
-                    text: `O'zingizga g'amxo'rlik qilish uchun eng muhim mahsulotlardan biri-soch kesish yoki turmaklash uchun asboblar va vositalardir. Bular tarkibiga tajribali sartaroshlar va shogirdlar uchun bir marta ishlatiladigan britva va professional mashinkalar ham kiradi. Ayollar uchun lazer va boshqa elektron epilator (depilator) qiziqarli bo'ladi. Ularning yordami bilan siz uy sharoitida salon xizmatlariga muhtoj bo'lmasdan, badaningizdagi ortiqcha tuklardan xalos bo’lishingiz mumkin. Ko'pdan ko’p takliflarning eng yaxshisini tanlang, shuningdek, shunga o'xshash mahsulotlar narxini bilib oling va solishtiring.
+                    },
+                    haircut_hair_removal: {
+                        title: `Soch kesish, soch turmaklash, ustara, trimmer, epilyator | ${location}. britva sotib olish`,
+                        description: `Soch kesish / soch turmaklash va tuklarni qirish uchun asboblar keng assortimenti: lezvie, qaychi, trimmer, pichoq, epilyator va boshqalar`,
+                        text: `O'zingizga g'amxo'rlik qilish uchun eng muhim mahsulotlardan biri-soch kesish yoki turmaklash uchun asboblar va vositalardir. Bular tarkibiga tajribali sartaroshlar va shogirdlar uchun bir marta ishlatiladigan britva va professional mashinkalar ham kiradi. Ayollar uchun lazer va boshqa elektron epilator (depilator) qiziqarli bo'ladi. Ularning yordami bilan siz uy sharoitida salon xizmatlariga muhtoj bo'lmasdan, badaningizdagi ortiqcha tuklardan xalos bo’lishingiz mumkin. Ko'pdan ko’p takliflarning eng yaxshisini tanlang, shuningdek, shunga o'xshash mahsulotlar narxini bilib oling va solishtiring.
                         Slondo.uzda toping:
                         -  Trimmer
                         - Mashinka
@@ -11710,11 +11727,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Fen
                         - Boshqalar
                         `
-                },
-                hair_care: {
-                    title: `Shampun, konditsioner, balzam, zardob va sovun sotib olish / ${location}`,
-                    description: `Soch parvarishi vositalari va aksessuarlari keng assortimentda: maska, yog'lar, zardob, balzam, konditsioner, bo'yoq va shampunlar eng yaxshi narxlarda`,
-                    text: `Sochni parvarish qilish mahsulotlarini sotib olishdan oldin ularning turini aniqlash kerak, chunki har bir kishining sochi o’ziga xosligi sabab, shampun, maska, balzam va boshqa mahsulotlarning ma’lum turlarini tanlashga majbur qiladi. Noto'g'ri shampunni ishlatganda, sochlar va bosh terisi bilan bog'liq vaziyat sezilarli darajada yomonlashishi mumkin. Bu qarama-qarshi ta'sir uchun zarur bo'lgan muayyan fermentlarning ta'siri tufayli yuzaga keladi. Misol uchun, yog'li sochlar uchun balzamdan foydalanganda, quruq sochlar va yuz terisini qurutib qo’yish mumkin.
+                    },
+                    hair_care: {
+                        title: `Shampun, konditsioner, balzam, zardob va sovun sotib olish / ${location}`,
+                        description: `Soch parvarishi vositalari va aksessuarlari keng assortimentda: maska, yog'lar, zardob, balzam, konditsioner, bo'yoq va shampunlar eng yaxshi narxlarda`,
+                        text: `Sochni parvarish qilish mahsulotlarini sotib olishdan oldin ularning turini aniqlash kerak, chunki har bir kishining sochi o’ziga xosligi sabab, shampun, maska, balzam va boshqa mahsulotlarning ma’lum turlarini tanlashga majbur qiladi. Noto'g'ri shampunni ishlatganda, sochlar va bosh terisi bilan bog'liq vaziyat sezilarli darajada yomonlashishi mumkin. Bu qarama-qarshi ta'sir uchun zarur bo'lgan muayyan fermentlarning ta'siri tufayli yuzaga keladi. Misol uchun, yog'li sochlar uchun balzamdan foydalanganda, quruq sochlar va yuz terisini qurutib qo’yish mumkin.
                         Sizga yordam beradigan ko'plab takliflarni Slondo.uzda tanlang:
                         - Balzam
                         - Konditsioner
@@ -11726,11 +11743,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         -Taroq, fen
                         - Boshqalar
                         `
-                },
-                skin_care: {
-                    title: `${location}da yuz parvarishi uchun kosmetika | kremlar, yog'lar, penki`,
-                    description: `Tabiiy va organik birikmalardan tayyorlangan terini parvarish qilish mahsulotlarini sotib oling: Tibet, Koreya kosmetikasi, balzam, maska, los’on va boshqalar`,
-                    text: `Bugungi kunda sotuvda yuz, bo'yin, qo'l, dekolte va tana terisini parvarish qilish uchun juda ko'p turli xil mahsulotlar mavjud. Bunday mo'l-ko'l tanlov bilan xato qilish va noto'g'ri mahsulotni sotib olish oson. Shuni ham unutmaslik kerakki, har bir ayol uchun terini parvarish qilish individual bo'lishi kerak. Buning uchun ketadigan sarf xarajatlar ro'yxatini tuzishdan oldin, siz tanangizning individual xususiyatlarini diqqat bilan o’rganishingiz va mahsulotda allergik reaktsiyaga olib kelishi mumkin bo'lgan moddalar mavjud bo’lmasligini tekshirishingiz kerak. Bundan tashqari, kosmetikani tanlashda yoshni hisobga olish kerak, chunki yosh teri va etuk teriga har xil parvarish kerak bo’ladi. 
+                    },
+                    skin_care: {
+                        title: `${location}da yuz parvarishi uchun kosmetika | kremlar, yog'lar, penki`,
+                        description: `Tabiiy va organik birikmalardan tayyorlangan terini parvarish qilish mahsulotlarini sotib oling: Tibet, Koreya kosmetikasi, balzam, maska, los’on va boshqalar`,
+                        text: `Bugungi kunda sotuvda yuz, bo'yin, qo'l, dekolte va tana terisini parvarish qilish uchun juda ko'p turli xil mahsulotlar mavjud. Bunday mo'l-ko'l tanlov bilan xato qilish va noto'g'ri mahsulotni sotib olish oson. Shuni ham unutmaslik kerakki, har bir ayol uchun terini parvarish qilish individual bo'lishi kerak. Buning uchun ketadigan sarf xarajatlar ro'yxatini tuzishdan oldin, siz tanangizning individual xususiyatlarini diqqat bilan o’rganishingiz va mahsulotda allergik reaktsiyaga olib kelishi mumkin bo'lgan moddalar mavjud bo’lmasligini tekshirishingiz kerak. Bundan tashqari, kosmetikani tanlashda yoshni hisobga olish kerak, chunki yosh teri va etuk teriga har xil parvarish kerak bo’ladi. 
                         TianDe, Mac, L'Oreal, Chanel, NYX, Maybelline, Estee Lauder, Lancome, Dior va boshqa brendlardan Tibet, Koreya, Fransiya, Isroil kosmetikasi kabi taniqli brendlar va turli ishlab chiqaruvchilarning kosmetikasini sotish bo'yicha ko'plab takliflar. Ko'p takliflarning eng yaxshisini topish uchun slondo.uz ga murojaat qiling!
                         - Gel
                         - Skrab
@@ -11742,11 +11759,11 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         -  Losonlar
                          Boshqalar
                         `
-                },
-                hair_dryers_styling: {
-                    title: `Fen, bigudi, dazmol, taroq, qaychi sotib olish | ${location} Soch turmaklash`,
-                    description: `Soch turmagi uchun asbob-uskunalar va aksessuarlar sotish bo'yicha ko'plab reklamalar: fen, bigudi, xino, taroq, parik, shinon va boshqalar`,
-                    text: `Do'kon javonlarida ko'plab soch tumaklash elektr asboblari va vositalsri mavjud. Ular bilan yaxshi ish olib borganingizda, uyda istalgan soch turmagini yaratishingiz mumkin, sochlar hajmini kattartirib, jingalak qilishingiz yoki aksincha ularni to'g'rilashingiz mumkin. Mahsulotlarining ko'pligi va ko'plab ishlab chiqaruvchilardan ba'zan, kerakli turmakni yaratish uchun, to'g'ri vositani tanlash qiyinlashadi. Bundan tashqari, soch xususiyatlar, uzunligi va turni hisobga olish kerak. Stilingizni yaratishda bu holatlar muhim ahamiyatga ega. Ko'p takliflarning eng yaxshisini toping. Slondo.uz:
+                    },
+                    hair_dryers_styling: {
+                        title: `Fen, bigudi, dazmol, taroq, qaychi sotib olish | ${location} Soch turmaklash`,
+                        description: `Soch turmagi uchun asbob-uskunalar va aksessuarlar sotish bo'yicha ko'plab reklamalar: fen, bigudi, xino, taroq, parik, shinon va boshqalar`,
+                        text: `Do'kon javonlarida ko'plab soch tumaklash elektr asboblari va vositalsri mavjud. Ular bilan yaxshi ish olib borganingizda, uyda istalgan soch turmagini yaratishingiz mumkin, sochlar hajmini kattartirib, jingalak qilishingiz yoki aksincha ularni to'g'rilashingiz mumkin. Mahsulotlarining ko'pligi va ko'plab ishlab chiqaruvchilardan ba'zan, kerakli turmakni yaratish uchun, to'g'ri vositani tanlash qiyinlashadi. Bundan tashqari, soch xususiyatlar, uzunligi va turni hisobga olish kerak. Stilingizni yaratishda bu holatlar muhim ahamiyatga ega. Ko'p takliflarning eng yaxshisini toping. Slondo.uz:
                         - Fen
                         - Bigudi
                         - Parik
@@ -11758,26 +11775,26 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Fiksator
                         - Boshqa
                         `
-                },
-                tattoo_permanent_makeup: {
-                    title: `Ko'z va qosh tatusi uchun kosmetika, vaqtinchalik tatu / ${location}`,
-                    description: `Tatuirovka va tatu uchun kosmetika vositalari va aksessuarlar narxini bilish, sotib olish: siyoh (pigment), igna, trafaret va boshqalar`,
-                    text: `Tatuaj, mikrobleyding, permanent makiyaj-tibbiy kosmetologiya sohasida eng so'nggi tendentsiyalar hisoblanadi. Ushbu uch tur ko'pincha parallel ravishda ishlatiladi, chunki ular bir-biriga o'xshamaydi va ba'zi farqlarga ega. Ko'z va qosh tatuaji uchun kosmetika, aksessuarlar, asboblar va sarflanadigan materiallarini, shuningdek, tatuirovka uchun eng yaxshi narxlarni slondo.uz da toping!`
-                },
-                solariums_and_tanning: {
-                    title: `Solyariy va zagar, kremlar sotib olish / ${location} Zagar`,
-                    description: `${location}dagi eng yaxshi narxlarda quyoshdan, autozagardan, solyariy va boshqa ultrabinafsha nurlardan himoya qilish uchun kremlarni sotish bo'yicha ko'plab takliflar`,
-                    text: `Istalgan effektga qarab, turli do'konlardan siz uy sharoitida, quyosh nuridan toblanish effektini kuchaytirib beradigan yoki zaiflashtiradigan ko'plab vositalarni sotib olishingiz mumkin. Bundan tashqari, vaqt etishmasligi sabab, Solyariyga bora olmaydiganlar, lekin chiroyli, bug’doyrang bo’lishni istaganlar uchun ajoyib tanlov, Autozagar sotib oling.
+                    },
+                    tattoo_permanent_makeup: {
+                        title: `Ko'z va qosh tatusi uchun kosmetika, vaqtinchalik tatu / ${location}`,
+                        description: `Tatuirovka va tatu uchun kosmetika vositalari va aksessuarlar narxini bilish, sotib olish: siyoh (pigment), igna, trafaret va boshqalar`,
+                        text: `Tatuaj, mikrobleyding, permanent makiyaj-tibbiy kosmetologiya sohasida eng so'nggi tendentsiyalar hisoblanadi. Ushbu uch tur ko'pincha parallel ravishda ishlatiladi, chunki ular bir-biriga o'xshamaydi va ba'zi farqlarga ega. Ko'z va qosh tatuaji uchun kosmetika, aksessuarlar, asboblar va sarflanadigan materiallarini, shuningdek, tatuirovka uchun eng yaxshi narxlarni slondo.uz da toping!`
+                    },
+                    solariums_and_tanning: {
+                        title: `Solyariy va zagar, kremlar sotib olish / ${location} Zagar`,
+                        description: `${location}dagi eng yaxshi narxlarda quyoshdan, autozagardan, solyariy va boshqa ultrabinafsha nurlardan himoya qilish uchun kremlarni sotish bo'yicha ko'plab takliflar`,
+                        text: `Istalgan effektga qarab, turli do'konlardan siz uy sharoitida, quyosh nuridan toblanish effektini kuchaytirib beradigan yoki zaiflashtiradigan ko'plab vositalarni sotib olishingiz mumkin. Bundan tashqari, vaqt etishmasligi sabab, Solyariyga bora olmaydiganlar, lekin chiroyli, bug’doyrang bo’lishni istaganlar uchun ajoyib tanlov, Autozagar sotib oling.
                         Sizga yordam beradigan ko'plab takliflarni slondo.uzda tanlang:
                         - Solyariy
                         - Autozagar
                         - Kremlar
                         `
-                },
-                hygiene_products: {
-                    title: `Deodorant, zubnaya pasta, sovun – ${location} | gigiena mahsulotlarini sotib oling`,
-                    description: `Shaxsiy gigienaga rioya qilish uchun mahsulotlarning keng tanlovi: salfetka, poroshok, antiseptik, kupik, xususiy savdogarlar, do'konlar va jismoniy shaxslardan`,
-                    text: `Shaxsiy gigiena vositalari shartli ravishda bir necha guruhga bo'linadi:
+                    },
+                    hygiene_products: {
+                        title: `Deodorant, zubnaya pasta, sovun – ${location} | gigiena mahsulotlarini sotib oling`,
+                        description: `Shaxsiy gigienaga rioya qilish uchun mahsulotlarning keng tanlovi: salfetka, poroshok, antiseptik, kupik, xususiy savdogarlar, do'konlar va jismoniy shaxslardan`,
+                        text: `Shaxsiy gigiena vositalari shartli ravishda bir necha guruhga bo'linadi:
                         Vatnaya palochka, salfetka va boshqalarni o'z ichiga olgan paxta momig'i mahsulotlari.
                         Qog'oz mahsulotlari: tualet qog'ozi, qog'oz sochiq, qog’oz salfetka.
                         Og'izni parvarish qilish uchun: Kolgeyt, poroshok, zubochistka.
@@ -11785,11 +11802,12 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         Ayollar gigienasi uchun: prokladka, tampon, intimgel, dezodorant va boshqalar.
                         Sizga yordam beradigan optom yoki chakana savdo takliflarining eng yaxshisini Slondo.uzda tanlang.
                         `
-                },
-                other: {
-                    title: `Go'zallik va salomatlik toifasidagi boshqa mahsulotlarni sotish / slondo.uz`,
-                    description: `${location} shahrida "go'zallik va salomatlik" toifasida turli tovarlarni sotish bo'yicha e'lonlar.`,
-                    text: `Bu erda siz go'zallik va salomatlik uchun turli xil mahsulot narxlarini bilib olishingiz, sotishingiz va sotishingiz mumkin.`
+                    },
+                    other: {
+                        title: `Go'zallik va salomatlik toifasidagi boshqa mahsulotlarni sotish / slondo.uz`,
+                        description: `${location} shahrida "go'zallik va salomatlik" toifasida turli tovarlarni sotish bo'yicha e'lonlar.`,
+                        text: `Bu erda siz go'zallik va salomatlik uchun turli xil mahsulot narxlarini bilib olishingiz, sotishingiz va sotishingiz mumkin.`
+                    }
                 }
             }
         },

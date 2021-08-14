@@ -1,19 +1,19 @@
 import {FC, useContext, useState} from 'react';
+import {useFormik} from 'formik';
+import {unstable_batchedUpdates} from 'react-dom';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {useTranslation} from 'next-i18next';
-import {useFormik} from 'formik';
 import {complaintSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {TEXT_LIMIT} from '@src/constants';
-import {useStyles} from './useStyles';
 import {getErrorMsg} from '@src/helpers';
 import {postAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
-import {unstable_batchedUpdates} from 'react-dom';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {useStyles} from './useStyles';
 
 type ComplaintModalProps = {
     postId: number,

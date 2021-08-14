@@ -11,12 +11,12 @@ export const Sold = () => {
             <Grid item xs={12} className={classes.root}>
                 <Box display='block' mb={2}>
                     <Typography variant='h6' className='title'>
-                        {t('safe_shopping.sold.name')}
+                        {t('safe_deal.sold.name')}
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
                     <Typography variant='subtitle1' component='p' className='color-silver'>
-                        {t('safe_shopping.sold.description')}
+                        {t('safe_deal.sold.description')}
                     </Typography>
                 </Grid>
             </Grid>

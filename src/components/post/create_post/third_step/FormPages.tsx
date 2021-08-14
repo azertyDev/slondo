@@ -1,7 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {useRouter} from 'next/router';
-import {Typography} from '@material-ui/core';
+import {Hidden, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {StepsProgress} from '../steps_progress/StepsProgress';
@@ -187,59 +187,59 @@ export const FormPages: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout>
-            {isSuccess
-                ? <SuccessPage/>
-                : <>
+        isSuccess
+            ? <SuccessPage/>
+            : <>
+                <Hidden smDown>
                     <StepsProgress
                         title={title}
                         handleBack={handleBack}
                         activeStep={isPreview ? 3 : 2}
                     />
-                    <div className={classes.root}>
-                        <ParamsFormContainer
-                            type={type}
-                            filters={filtersData}
+                </Hidden>
+                <div className={classes.root}>
+                    <ParamsFormContainer
+                        type={type}
+                        filters={filtersData}
+                        isPreview={isPreview}
+                        category={category}
+                        subcategory={subcategory}
+                        currentFormIndex={currentFormIndex}
+                        handleSubmit={handleSubmit}
+                        handleFormOpen={handleFormOpen}
+                        handleNextFormOpen={handleNextFormOpen}
+                    />
+                    <div>
+                        <AppearanceForm
+                            categoryName={categoryName}
+                            colors={colors || color}
                             isPreview={isPreview}
-                            category={category}
-                            subcategory={subcategory}
                             currentFormIndex={currentFormIndex}
                             handleSubmit={handleSubmit}
                             handleFormOpen={handleFormOpen}
                             handleNextFormOpen={handleNextFormOpen}
                         />
-                        <div>
-                            <AppearanceForm
-                                categoryName={categoryName}
-                                colors={colors || color}
-                                isPreview={isPreview}
-                                currentFormIndex={currentFormIndex}
-                                handleSubmit={handleSubmit}
-                                handleFormOpen={handleFormOpen}
-                                handleNextFormOpen={handleNextFormOpen}
-                            />
-                        </div>
-                        <div>
-                            <CommonForm
-                                postType={postType}
-                                isPreview={isPreview}
-                                setIsPreview={setIsPreview}
-                                categoryName={categoryName}
-                                handleSubmit={handleSubmit}
-                                currentFormIndex={currentFormIndex}
-                            />
-                        </div>
-                        {isPreview && (
-                            <div className='publish-button-wrapper'>
-                                <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
-                                    <Typography variant='subtitle1' component='p'>
-                                        {t('publish')}
-                                    </Typography>
-                                </CustomButton>
-                            </div>
-                        )}
                     </div>
-                </>}
-        </MainLayout>
+                    <div>
+                        <CommonForm
+                            postType={postType}
+                            isPreview={isPreview}
+                            setIsPreview={setIsPreview}
+                            categoryName={categoryName}
+                            handleSubmit={handleSubmit}
+                            currentFormIndex={currentFormIndex}
+                        />
+                    </div>
+                    {isPreview && (
+                        <div className='publish-button-wrapper'>
+                            <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
+                                <Typography variant='subtitle1' component='p'>
+                                    {t('publish')}
+                                </Typography>
+                            </CustomButton>
+                        </div>
+                    )}
+                </div>
+            </>
     );
 };

@@ -1,11 +1,9 @@
-import {FC, useContext} from 'react';
+import {FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
 import {useTranslation} from "next-i18next";
-import {userAPI} from '@src/api/api';
-import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
@@ -28,17 +26,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('post');
-
-    const {setErrorMsg} = useContext(ErrorCtx);
     const isAuction = post.ads_type.mark === 'auc' || post.ads_type.mark === 'exauc';
-
-    const handleFollow = (userId) => async () => {
-        try {
-            await userAPI.follow(userId);
-        } catch (e) {
-            setErrorMsg(e);
-        }
-    };
 
     const classes = useStyles();
     return (
@@ -64,7 +52,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 postData={post}
                 showPhone={showPhone}
                 authorPhones={authorPhones}
-                handleFollow={handleFollow}
                 handleSafeDeal={handleSafeDeal}
                 handleShowPhone={handleShowPhone}
             />

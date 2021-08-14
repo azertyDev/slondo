@@ -1,11 +1,11 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {Subscribers} from '@src/components/cabinet/cabinet_pages/subs/subscribers/Subscribers';
-import {Subscriptions} from '@src/components/cabinet/cabinet_pages/subs/subscriptions/Subscriptions';
+import {SubsTab} from '@src/components/cabinet/cabinet_pages/subs/subsTab/SubsTab';
 import {userAPI} from '@src/api/api';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {ErrorCtx} from "@src/context";
+import {unstable_batchedUpdates} from "react-dom";
 
 export const Subs: FC = () => {
     const initialState = {
@@ -22,8 +22,8 @@ export const Subs: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const [subs, setSubs] = useState(initialState);
-    const [isFetch, setIsFetch] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
+    const [isFetch, setIsFetch] = useState(false);
 
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
@@ -31,33 +31,35 @@ export const Subs: FC = () => {
     const fetchSubs = async (param) => {
         try {
             const {subscribers, subscriptions} = subs;
-            const isSubscribers = param === 'subscribers';
 
             setIsFetch(true);
-            setSubs({...subs});
 
             const subsData = await userAPI.getSubs(param);
 
-            if (isSubscribers) {
+            if (param === 'subscribers') {
                 subscribers.data = subsData.data;
                 subscribers.total = subsData.total;
             } else {
                 subscriptions.data = subsData.data;
                 subscriptions.total = subsData.total;
             }
-
-            setSubs({...subs});
-
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                setSubs({...subs});
+                setIsFetch(false);
+            });
         } catch (e) {
-            setIsFetch(false)
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
     useEffect(() => {
-        fetchSubs('subscribers');
-        fetchSubs('subscriptions');
+        unstable_batchedUpdates(() => {
+            fetchSubs('subscribers');
+            fetchSubs('subscriptions');
+        });
     }, []);
 
     const tabsData: TabsDataType = [
@@ -66,10 +68,9 @@ export const Subs: FC = () => {
             title: 'Подписки',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscriptions
+            component: <SubsTab
                 isFetch={isFetch}
-                subscriptions={subs.subscriptions.data}
-                handleRefresh={() => fetchSubs('subscriptions')}
+                subs={subs.subscriptions.data}
             />
         },
         {
@@ -77,10 +78,10 @@ export const Subs: FC = () => {
             title: 'Подписчики',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscribers
+            component: <SubsTab
+                subscribers
                 isFetch={isFetch}
-                subscribers={subs.subscribers.data}
-                handleRefresh={() => fetchSubs('subscribers')}
+                subs={subs.subscribers.data}
             />
         }
     ];
@@ -88,8 +89,8 @@ export const Subs: FC = () => {
     return (
         <TabsContent
             tabIndex={tabIndex}
-            handleTabChange={handleTabChange}
             tabsData={tabsData}
+            handleTabChange={handleTabChange}
         />
     );
 };

@@ -10,7 +10,7 @@ export const CabinetSidebar: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar isOwner owner={user} />
+            <UserInfoWithAvatar user={user} />
             <SidebarMenu />
         </div>
     );

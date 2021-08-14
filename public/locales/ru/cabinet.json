@@ -1,5 +1,5 @@
 {
-  "myCabinet": "Личный кабинет",
+  "main": "Личный кабинет",
   "safe_deal_payment_text": "Комиссия платежной системы составляет 1%",
   "balance": "Баланс",
   "accept_offer": "Принять предложение?",
@@ -85,7 +85,6 @@
   "exit": "Выход",
   "banned": "Не прошло модерацию",
   "created_at": "На Slondo с {{created_at}}",
-  "cabinet": "Продал на Slondo",
   "addToArchive": "Добавить в архив",
   "posts": "Объявления",
   "securePosts": "Безопасная покупка",

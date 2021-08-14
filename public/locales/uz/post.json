@@ -1,4 +1,7 @@
 {
+  "select_category": "Yaratish | Turkum",
+  "select_params": "Yaratish | Parameterlar",
+  "select_post": "Yaratish | E'lon turi",
   "additionalServices": "Qo'shimcha xizmatlar",
   "configs": "Sozlamalar",
   "buy_safe_deal": "Xavfsiz xaridni tasdiqlaysizmi?",

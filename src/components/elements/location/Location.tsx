@@ -5,10 +5,10 @@ import {LocationIcon} from '@src/components/elements/icons';
 import {LocationModal} from './LocationModal';
 import {useTranslation} from 'next-i18next';
 import {useModal} from '@src/hooks/useModal';
+import {IdNameType} from "@root/interfaces/Post";
 import {userAPI} from "@src/api/api";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
-import {IdNameType} from "@root/interfaces/Post";
 
 type LocationProps = {
     handleSelectLocation: (loc) => void
@@ -20,6 +20,7 @@ type LocationProps = {
 
 export const Location: FC<LocationProps> = ({handleSelectLocation, userLocation}) => {
     const {t} = useTranslation('locations');
+
     const initLocation = {
         region: null,
         city: null
@@ -100,13 +101,13 @@ export const Location: FC<LocationProps> = ({handleSelectLocation, userLocation}
             </div>
             <LocationModal
                 t={t}
+                region={region}
                 isFetch={isFetch}
                 locations={locations}
                 hasRegion={!!region}
                 modalOpen={modalOpen}
                 prevLocation={prevLocation}
                 locationInputTxt={locationsTxt}
-                region={region}
                 handleModalClose={handleClose}
                 handleLocation={handleLocation}
                 toPrevLocation={toPrevLocation}

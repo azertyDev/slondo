@@ -1,32 +1,26 @@
-import {FC, useContext, useState} from 'react';
-import {WithT} from 'i18next';
-import {Box, Divider, Grid, Typography} from '@material-ui/core';
-import {Rating} from '@src/components/elements/rating/Rating';
-import {months} from '@src/common_data/common';
-import {useModal} from '@src/hooks/useModal';
+import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {userAPI} from '@src/api/api';
-import {Form, FormikProvider, useFormik} from 'formik';
-import {regularFormSchema} from '@root/validation_schemas/postSchemas';
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {getErrorMsg} from '@src/helpers';
-import {AuthCtx} from "@src/context";
-import {useStyles} from './useStyles';
+import {AuthCtx, ErrorCtx} from "@src/context";
+import {unstable_batchedUpdates} from "react-dom";
+import {useModal} from "@src/hooks";
+import {Form, FormikProvider, useFormik} from "formik";
+import {regularFormSchema} from "@root/validation_schemas/postSchemas";
+import {useStyles} from "@src/components/cabinet/cabinet_pages/rating/useStyles";
+import {Box, Divider, Grid, Typography} from "@material-ui/core";
+import {Rating} from "@src/components/elements/rating/Rating";
+import {months} from "@src/common_data/common";
+import {UserAvatarComponent} from "@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
+import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar/UserInfoWithAvatar";
+import {FormikTextarea} from "@src/components/elements/formik_textarea/FormikTextarea";
+import {TEXT_LIMIT} from "@src/constants";
+import {getErrorMsg} from "@src/helpers";
 
-type RatingsPropsType = {
-    data,
-    handleReply: (comment_id: number, comment: string) => () => void
-} & WithT;
-
-export const Ratings: FC<RatingsPropsType> = (props) => {
-    const {
-        t,
-        data,
-        handleReply
-    } = props;
+export const Ratings: FC = () => {
+    const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initCommentData = {
         author: {
@@ -44,36 +38,58 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         }
     };
 
-    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
-    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const [isFetch, setIsFetch] = useState(false);
+    const [userRatings, setUserRatings] = useState([]);
     const [commentData, setCommentData] = useState(initCommentData);
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
 
-    const onReplyBtnClick = (author, comment) => () => {
-        setCommentData({author, comment});
-        handleModalOpen();
+    const fetchUserRatings = async () => {
+        try {
+            setIsFetch(true);
+            const {data} = await userAPI.getAllUserRating();
+            unstable_batchedUpdates(() => {
+                setUserRatings(data);
+                setIsFetch(false);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+                setIsFetch(false);
+            });
+        }
     };
 
-    const handleSubmitReply = async (values, {setSubmitting, setValues}) => {
+    const onReplyBtnClick = (author, comment) => () => {
+        unstable_batchedUpdates(() => {
+            handleModalOpen();
+            setCommentData({author, comment});
+        });
+    };
+
+    const onSubmit = async (values, {setSubmitting, setValues}) => {
         const {comment} = values;
         try {
             setSubmitting(true);
             await userAPI.setReplyComment(commentData.comment.id, comment);
-            setSubmitting(false);
-            setValues({...values, comment});
-            handleModalClose();
+            unstable_batchedUpdates(() => {
+                handleModalClose();
+                setSubmitting(false);
+                setValues({...values, comment});
+            });
         } catch ({message}) {
             setValues({...values, message});
         }
     };
 
-    const txtLimit = 3000;
     const formik = useFormik({
-        onSubmit: handleSubmitReply,
+        onSubmit,
         initialValues: {
             comment: ''
         },
         validationSchema: regularFormSchema
     });
+
     const {
         handleSubmit,
         values,
@@ -83,13 +99,26 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         touched
     } = formik;
 
+    const handleReply = (comment_id: number, comment: string) => async () => {
+        try {
+            await userAPI.setReplyComment(comment_id, comment);
+            fetchUserRatings();
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserRatings();
+    }, []);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid item xs>
                 <Box
-                    component="div"
                     mb={2}
+                    component="div"
                     className='owner-rating'
                     borderColor="transparent"
                     display='inline-block'
@@ -105,16 +134,16 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                     <Typography variant='subtitle1'>
                         Оценки и отзывы
                     </Typography>
-                    {data.map(({comments}) => {
+                    {userRatings.map(({comments}) => {
                         return (
                             <Box key={comments.id}>
                                 {comments.map((commentData, index) => {
                                     const {comment, creator, created_at, author} = commentData;
                                     const date = new Date(created_at);
-                                    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+                                    const formatted_date = `${date.getDate()} ${months[date.getMonth()]}`;
                                     return (
-                                        <>
-                                            <Box className='review-item' key={index}>
+                                        <Fragment key={index}>
+                                            <Box className='review-item'>
                                                 {index === 0 && (
                                                     <UserAvatarComponent
                                                         avatar={author.avatar}
@@ -131,23 +160,23 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                                                     </Typography>
                                                 </Box>
                                                 {index === 0
-                                                    ? (<Typography variant='subtitle2'>
+                                                    ? <Typography variant='subtitle2'>
                                                         {comments[0].comment}
-                                                    </Typography>)
-                                                    : (<>
+                                                    </Typography>
+                                                    : <>
                                                         <Typography variant='subtitle2'>
                                                             {comment}
                                                         </Typography>
-                                                    </>)
-                                                }
+                                                    </>}
                                                 {index === comments.length - 1 && !creator && (
                                                     <CustomButton
-                                                        onClick={onReplyBtnClick(author, commentData)}>
+                                                        onClick={onReplyBtnClick(author, commentData)}
+                                                    >
                                                         Ответить
                                                     </CustomButton>
                                                 )}
                                             </Box>
-                                        </>
+                                        </Fragment>
                                     );
                                 })}
                             </Box>
@@ -161,7 +190,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
             >
                 <Box p='30px 15px'>
                     <Box>
-                        <UserInfoWithAvatar owner={commentData.author}/>
+                        <UserInfoWithAvatar user={commentData.author}/>
                     </Box>
                     <Box>
                         <Typography variant='subtitle2'>
@@ -176,16 +205,16 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                                 flexDirection='column'
                             >
                                 <FormikTextarea
-                                    placeholder='Поделитесь впечатлениями'
-                                    name='comment'
-                                    disableRequire={true}
-                                    onChange={handleChange}
                                     rows={10}
-                                    value={values.comment}
+                                    name='comment'
+                                    limit={TEXT_LIMIT}
                                     onBlur={handleBlur}
+                                    disableRequire={true}
+                                    value={values.comment}
+                                    onChange={handleChange}
+                                    placeholder='Поделитесь впечатлениями'
                                     labelTxt={t('Оставьте коментарий')}
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
-                                    limit={txtLimit}
                                 />
                                 <CustomButton type='submit'>
                                     <Typography variant='subtitle1'>

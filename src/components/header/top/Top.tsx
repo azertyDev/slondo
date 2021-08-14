@@ -132,7 +132,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </Link>
                                     </Grid>
                                     {auth.isAuth
-                                        ? <Link href='/cabinet'>
+                                        ? <Link href='/cabinet/main'>
                                             <a>
                                                 <CustomButton className={classes.avatarBlock}>
                                                     <Avatar alt="Avatar" src={avatar}/>

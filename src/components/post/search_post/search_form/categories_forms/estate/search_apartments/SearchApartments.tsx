@@ -23,7 +23,13 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, setValsByParams, handleCheckbox} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        handleFracInput,
+        handleNumericInput,
+        setValsByParams,
+        handleCheckbox
+    } = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 

@@ -31,7 +31,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         engine_capacity_to: ''
     };
 
-    const formik = useFormik<any>({
+    const formik = useFormik({
         initialValues: initVals,
         onSubmit
     });
@@ -42,9 +42,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, setValsByParams} = useHandlers(values, setValues);
-
     const {t} = useTranslation('filters');
+    const {handleSelect, handleNumericInput, handleFracInput, setValsByParams} = useHandlers(values, setValues);
 
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
@@ -146,123 +145,126 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     />
                 </Grid>
             </Grid>
-            <ShowHide
-                className='add-params'
-                showTxt={t('common:externalParams')}
-            >
-                <Grid item container spacing={2} xs={12}>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            multiple
-                            disableRequire
-                            name='body'
-                            values={values}
-                            onBlur={handleBlur}
-                            items={filters.body}
-                            handleSelect={handleSelect}
-                            transKey='car.'
-                            labelTxt={t('car.body.name')}
-                        />
+            {Object.keys(filters).length !== 0 && (
+                <ShowHide
+                    className='add-params'
+                    showTxt={t('common:externalParams')}
+                >
+                    <Grid item container spacing={2} xs={12}>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='body'
+                                values={values}
+                                onBlur={handleBlur}
+                                items={filters.body}
+                                handleSelect={handleSelect}
+                                transKey='car.'
+                                labelTxt={t('car.body.name')}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='engine_type'
+                                values={values}
+                                onBlur={handleBlur}
+                                handleSelect={handleSelect}
+                                items={filters.engine_type}
+                                transKey='car.'
+                                labelTxt={t('car.engine_type.name')}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <FromToInputs
+                                handleInput={handleFracInput}
+                                labelTxt={t('engine_capacity')}
+                                firstInputProps={{
+                                    value: values.engine_capacity_from,
+                                    name: 'engine_capacity_from',
+                                    placeholder: t(`filters:from`)
+                                }}
+                                secondInputProps={{
+                                    value: values.engine_capacity_to,
+                                    name: 'engine_capacity_to',
+                                    placeholder: t(`filters:to`)
+                                }}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='drive'
+                                values={values}
+                                onBlur={handleBlur}
+                                items={filters.drive}
+                                transKey='car.'
+                                handleSelect={handleSelect}
+                                labelTxt={t('car.drive.name')}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='color'
+                                values={values}
+                                onBlur={handleBlur}
+                                transKey='car.'
+                                items={filters.colors}
+                                handleSelect={handleSelect}
+                                labelTxt={t('car.color.name')}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='other'
+                                transKey='car.'
+                                values={values}
+                                onBlur={handleBlur}
+                                items={filters.other}
+                                handleSelect={handleSelect}
+                                labelTxt={t('additional')}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            multiple
-                            disableRequire
-                            name='engine_type'
-                            values={values}
-                            onBlur={handleBlur}
-                            handleSelect={handleSelect}
-                            items={filters.engine_type}
-                            transKey='car.'
-                            labelTxt={t('car.engine_type.name')}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <FromToInputs
-                            handleInput={handleNumericInput}
-                            labelTxt={t('engine_capacity')}
-                            firstInputProps={{
-                                value: values.engine_capacity_from,
-                                name: 'engine_capacity_from',
-                                placeholder: t(`filters:from`)
-                            }}
-                            secondInputProps={{
-                                value: values.engine_capacity_to,
-                                name: 'engine_capacity_to',
-                                placeholder: t(`filters:to`)
-                            }}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            multiple
-                            disableRequire
-                            name='drive'
-                            values={values}
-                            onBlur={handleBlur}
-                            items={filters.drive}
-                            transKey='car.'
-                            handleSelect={handleSelect}
-                            labelTxt={t('car.drive.name')}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            multiple
-                            disableRequire
-                            name='color'
-                            values={values}
-                            onBlur={handleBlur}
-                            transKey='car.'
-                            items={filters.colors}
-                            handleSelect={handleSelect}
-                            labelTxt={t('color')}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            multiple
-                            disableRequire
-                            name='other'
-                            values={values}
-                            onBlur={handleBlur}
-                            handleSelect={handleSelect}
-                            labelTxt={t('additional')}
-                            items={filters.other}
-                        />
-                    </Grid>
-                </Grid>
-            </ShowHide>
+                </ShowHide>
+            )}
             <Grid item container xs={12}>
                 <ActionButtons handleReset={handleReset}/>
             </Grid>

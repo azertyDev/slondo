@@ -1,9 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {Box, Grid, Typography} from '@material-ui/core';
-import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {CommonModalType} from '@src/components/cabinet/Cabinet';
 import {ErrorCtx} from '@src/context';
@@ -26,11 +23,6 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
-
-    const formattedDate = (date) => {
-        return new Date(date);
-    };
-    console.log(formattedDate);
 
     const fetchOffers = async () => {
         try {
@@ -75,18 +67,15 @@ export const OffersModal: FC<CommonModalType> = (props) => {
                             {`Аукцион №: ${post.id}`}
                         </Typography>
                     </Grid>
-                    {offers.map(offer => {
-                            return (
-                                <Grid item xs={12} key={offer.id}>
-                                    <OfferCard
-                                        offer={offer}
-                                        isFetch={isFetch}
-                                        handleOffer={handleOffer}
-                                    />
-                                </Grid>
-                            );
-                        }
-                    )}
+                    {offers.map(offer => (
+                        <Grid item xs={12} key={offer.id}>
+                            <OfferCard
+                                offer={offer}
+                                isFetch={isFetch}
+                                handleOffer={handleOffer}
+                            />
+                        </Grid>
+                    ))}
                 </Grid>
             </Box>
         </CabinetModal>
