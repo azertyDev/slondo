@@ -825,8 +825,89 @@
     }
   },
   "parts": {
+    "spares_type": {
+      "name": "Тип запчасти"
+    },
     "type": {
-      "name": "Тип"
+      "name": "Вид транспорта"
+    },
+    "electronics_gps_navigators": {
+      "name": "Электроника и GPS-навигаторы"
+    },
+    "motorcycles": {
+      "name": "Для мотоциклов"
+    },
+    "mopeds_scooters": {
+      "name": "Для мопедов и скутеров"
+    },
+    "atvs": {
+      "name": "Для квадроциклов"
+    },
+    "go_karting": {
+      "name": "Для картинга"
+    },
+    "snowmobiles": {
+      "name": "Для снегоходов"
+    },
+    "buggy": {
+      "name": "Для багги"
+    },
+    "buses": {
+      "name": "Для автобусов"
+    },
+    "minibuses": {
+      "name": "Для микроавтобусов"
+    },
+    "refrigerator_truck": {
+      "name": "Для авторефрижераторов"
+    },
+    "motorhome": {
+      "name": "Для автодомов"
+    },
+    "trucks": {
+      "name": "Для грузовиков"
+    },
+    "light_commercial_transport": {
+      "name": "Для легкого коммерческого транспорта"
+    },
+    "trailers": {
+      "name": "Для прицепов"
+    },
+    "tractor_units": {
+      "name": "Для тягачей"
+    },
+    "food_truck": {
+      "name": "Для фудтраков"
+    },
+    "car_towers": {
+      "name": "Для автовышек"
+    },
+    "truck_cranes": {
+      "name": "Для автокранов"
+    },
+    "bulldozers": {
+      "name": "Для бульдозеров"
+    },
+    "utility_equipment": {
+      "name": "Для коммунальной техники"
+    },
+    "loaders": {
+      "name": "Для погрузчиков"
+    },
+    "agricultural_machinery": {
+      "name": "Для сельхозтехники"
+    },
+    "construction_equipment": {
+      "name": "Для строительной техники"
+    },
+    "logging_equipment": {
+      "name": "Для лесозаготовочной техники"
+    },
+    "excavators": {
+      "name": "Для экскаваторов"
+    },
+    "condition": {
+      "name": "Состояние"
     },
     "new": {
       "name": "Новое"
@@ -974,6 +1055,15 @@
     }
   },
   "estate": {
+    "with_pledge": {
+      "name": "С залогом"
+    },
+    "utilities": {
+      "name": "Коммунальные услуги включены"
+    },
+    "payments": {
+      "name": "Выплаты"
+    },
     "type": {
       "name": "Тип продажи"
     },
@@ -1424,7 +1514,7 @@
   },
   "job": {
     "type": {
-      "name": "Тип работы"
+      "name": "Должность"
     },
     "employment": {
       "name": "Тип занятости"
@@ -4252,6 +4342,9 @@
     }
   },
   "home": {
+    "condition": {
+      "name": "Состояние"
+    },
     "type": {
       "name": "Тип"
     },

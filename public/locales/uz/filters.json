@@ -816,17 +816,95 @@
     }
   },
   "parts": {
+    "spares_type": {
+      "name": "Ehtiyot qism hili"
+    },
     "type": {
-      "name": "Turi"
+      "name": "Trsnsport turi"
+    },
+    "electronics_gps_navigators": {
+      "name": "Elektronika va GPS navigatorlar"
+    },
+    "motorcycles": {
+      "name": "Motosikllar uchun"
+    },
+    "mopeds_scooters": {
+      "name": "Moped va skuterlar uchun"
+    },
+    "atvs": {
+      "name": "Kvadrosikillar uchun"
+    },
+    "go_karting": {
+      "name": "Karting uchun"
+    },
+    "snowmobiles": {
+      "name": "Snegoxod - qorda yuradigan avtomashinalar uchun"
+    },
+    "buggy": {
+      "name": "Baggi uchun"
+    },
+    "buses": {
+      "name": "Avtobuslar uchun"
+    },
+    "minibuses": {
+      "name": "Mikroavtobuslar uchun"
+    },
+    "refrigerator_truck": {
+      "name": "Avtosovutgich uchun"
+    },
+    "motorhome": {
+      "name": "Avtouy uchun"
+    },
+    "trucks": {
+      "name": "Yuk mashinalari uchun"
+    },
+    "light_commercial_transport": {
+      "name": "Yengil tijorat transporti uchun"
+    },
+    "trailers": {
+      "name": "Pritseplar uchun"
+    },
+    "tractor_units": {
+      "name": "Tyagachlar uchun"
+    },
+    "food_truck": {
+      "name": "Fudtrak uchun"
+    },
+    "car_towers": {
+      "name": "Avtovishkalar uchun"
+    },
+    "truck_cranes": {
+      "name": "Avtokranlar uchun"
+    },
+    "bulldozers": {
+      "name": "Buldozerlar uchun"
+    },
+    "utility_equipment": {
+      "name": "Kommunal texnika uchun"
+    },
+    "loaders": {
+      "name": "Yuk ortgich uchun"
+    },
+    "agricultural_machinery": {
+      "name": "Qishloq xo’jalik texnikasi uchun"
+    },
+    "construction_equipment": {
+      "name": "Qurilish texnikasi uchun"
+    },
+    "logging_equipment": {
+      "name": "Yog'ochni qayta ishlash texnikasi uchun"
+    },
+    "excavators": {
+      "name": "Ekskavatorlar uchun"
+    },
+    "condition": {
+      "name": "Holati"
     },
     "new": {
       "name": "Yangi"
     },
     "used": {
       "name": "Ishlatilgan"
-    },
-    "condition": {
-      "name": "Holati"
     },
     "spares": {
       "name": "Ehtiyot qismlar"
@@ -968,6 +1046,15 @@
     }
   },
   "estate": {
+    "with_pledge": {
+      "name": "Garov bilan"
+    },
+    "utilities": {
+      "name": "Kommunal hisoblar narx ichiga kiritilgan"
+    },
+    "payments": {
+      "name": "To'lovlar"
+    },
     "type": {
       "name": "Sotuv turi"
     },
@@ -1412,7 +1499,7 @@
   },
   "job": {
     "type": {
-      "name": "Ish turi"
+      "name": "Lavozim"
     },
     "employment": {
       "name": "Bandlik turi"
