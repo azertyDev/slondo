@@ -49,6 +49,7 @@
   "offer_price": "Narxni taklif qilish",
   "display_phone": "Telefon raqamingizni ko'rsatish",
   "archive": "Arxiv",
+  "visibility": "Ko'rinmoq",
   "car": {
     "color": {
       "name": "Rangi"

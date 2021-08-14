@@ -49,6 +49,7 @@
   "view": "Вид",
   "overview": "Обзор",
   "user_name": "Имя",
+  "visibility": "Видимость",
   "car": {
     "color": {
       "name": "Цвет"
