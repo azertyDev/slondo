@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
@@ -7,31 +7,50 @@ import {UserInfo} from '@root/interfaces/Auth';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {INCOGNITO_NAMES} from "@src/constants";
 import {dateHelper} from "@src/helpers";
+import {userAPI} from "@src/api/api";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
-    owner: UserInfo,
-    isOwner?: boolean,
-    handleFollow?: (userId) => () => void,
-    subscribed?: boolean,
+    user: UserInfo,
     width?: string,
     height?: string
 };
 
 export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const {
-        isOwner,
-        owner,
-        subscribed,
-        handleFollow,
+        user,
         width,
         height
     } = props;
 
-    const isIncognito = INCOGNITO_NAMES.some(n => n === owner.name);
+    const isIncognito = INCOGNITO_NAMES.some(n => n === user.name);
 
     const {t} = useTranslation('cabinet');
-    const formatted_date = dateHelper(owner.created_at);
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {setAuthModalOpen, auth, user: siteUser} = useContext(AuthCtx);
+
+    const isSelf = user.id === siteUser.id;
+
+    const [isFollow, setIsFollow] = useState(false);
+    const formatted_date = dateHelper(user.created_at);
+
+    const handleFollow = async () => {
+        try {
+            if (auth.isAuth) {
+                await userAPI.follow(user.id);
+                setIsFollow(!isFollow);
+            } else {
+                setAuthModalOpen(true);
+            }
+        } catch (e) {
+            setErrorMsg(e);
+        }
+    };
+
+    useEffect(() => {
+        setIsFollow(user.signed);
+    }, [user]);
 
     const classes = useStyles();
     return (
@@ -39,24 +58,24 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
             <UserAvatarComponent
                 width={width}
                 height={height}
-                avatar={owner.avatar}
+                avatar={user.avatar}
             />
             <Box>
                 <Typography color="initial" variant='subtitle1' gutterBottom>
-                    {!isIncognito && (`${owner.name ?? ''} ${owner.surname ?? ''}`)}
+                    {!isIncognito && (`${user.name ?? ''} ${user.surname ?? ''}`)}
                 </Typography>
                 <Typography variant="subtitle1" color="initial" gutterBottom>
                     {t('created_at', {created_at: formatted_date})}
                 </Typography>
                 <Rating
                     readOnly
-                    ratingValue={owner.rating}
-                    ratingCount={owner.observer?.number_of_ratings}
+                    ratingValue={user.rating}
+                    ratingCount={user.observer?.number_of_ratings}
                 />
-                {!isOwner && !!handleFollow && (
-                    <CustomButton onClick={handleFollow(owner.id)}>
+                {!isSelf && (
+                    <CustomButton onClick={handleFollow}>
                         <Typography variant="subtitle2">
-                            {!subscribed ? t('common:follow') : t('common:unFollow')}
+                            {t(isFollow ? 'common:unFollow' : 'common:follow')}
                         </Typography>
                     </CustomButton>
                 )}

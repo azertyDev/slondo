@@ -73,7 +73,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const reason = reasons.map(({reason}) => {
         return (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={reason.id}>
                 <Typography variant='subtitle1' component='p' className='error-text'>
                     {t(`${reason.name}`)}
                 </Typography>

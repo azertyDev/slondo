@@ -1,4 +1,5 @@
-const transformLocations = {
+const transformedLocations = {
+    uzb: 'uzbekistan',
     city_tashkent: {
         name: 'tashkent',
         almazar_district: 'almazarskiy-rayon',
@@ -278,4 +279,4 @@ const transformLocations = {
     }
 };
 
-exports.transformLocations = transformLocations;
+exports.transLocations = transformedLocations;

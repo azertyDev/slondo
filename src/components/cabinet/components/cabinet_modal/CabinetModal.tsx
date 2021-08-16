@@ -36,7 +36,7 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
             <ModalHeader
                 title={title}
                 hasPrevBtn={hasPrevBtn}
-                handlePrevMenu={handlePrevMenu}
+                handleBack={handlePrevMenu}
                 handleCloseDialog={handleCloseDialog}
             />
             <Box

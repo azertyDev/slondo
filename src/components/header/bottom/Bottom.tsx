@@ -53,9 +53,9 @@ const Bottom: FC<BottomProps> = (props) => {
         if (region) {
             const userLocation: any = {region};
             if (city) userLocation.city = city;
-            cookies.set('user_location', userLocation, cookieOpts);
+            cookies.set('[...path]', userLocation, cookieOpts);
         } else {
-            cookies.remove('user_location', {path: '/'});
+            cookies.remove('[...path]', {path: '/'});
         }
     };
 

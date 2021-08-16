@@ -34,7 +34,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
         rating: 0,
         comment: '',
         message: ''
-    }
+    };
 
     const {setErrorMsg} = useContext(ErrorCtx);
     const {t} = useTranslation('cabinet');
@@ -85,13 +85,13 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             openDialog={open}
             handleCloseDialog={handleCloseRating}
         >
-            <ModalHeader title={t('rating')} handleCloseDialog={handleCloseRating} />
+            <ModalHeader title={t('rating')} handleCloseDialog={handleCloseRating}/>
             <Box padding={2} width={1}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <UserInfoWithAvatar owner={user} isOwner={false} />
+                        <UserInfoWithAvatar user={user}/>
                     </Grid>
-                    <Divider className={classes.divider} />
+                    <Divider className={classes.divider}/>
                     <Grid item xs={12}>
                         <Typography variant='h6' align='center'>
                             {t('give_rating')}

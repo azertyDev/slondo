@@ -12,7 +12,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {excludeFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
-import {transformLocations} from "@root/transformedLocations";
+import {transLocations} from "@root/transformedLocations";
 
 export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
@@ -41,15 +41,15 @@ export const dateHelper = (date): string => {
 
 export const getUserLocationName = () => {
     let userLocation = 'uzbekistan';
-    const userLocationByCookie = cookies.get('user_location');
+    const userLocationByCookie = cookies.get('[...path]');
 
     if (userLocationByCookie) {
         const {region, city} = userLocationByCookie;
 
-        userLocation = transformLocations[region.name].name;
+        userLocation = transLocations[region.name].name;
 
         if (city && region.id !== 1) {
-            userLocation = transformLocations[region.name][city.name];
+            userLocation = transLocations[region.name][city.name];
         }
     }
 
@@ -153,7 +153,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
                         </Grid>
                         {!!values[key]
                         && !!Object.keys(values[key]).length
-                        && (getFieldsByFilters({
+                        && getFieldsByFilters({
                                 t,
                                 formik,
                                 filters: values[key],
@@ -161,7 +161,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
                             },
                             categoryName,
                             multiple
-                        ))}
+                        )}
                     </Fragment>
                 );
             }
@@ -203,9 +203,11 @@ export const urlByParams = (postData) => {
     return url;
 };
 
-export const toUrlParams = (params) => {
+export const toUrlParams = (params, term?) => {
     if (params) {
         let url = '';
+
+        if (term !== '') url = url.concat(`&q=${term}`);
 
         Object.keys(params).forEach(key => {
             const val = params[key];
@@ -221,7 +223,7 @@ export const toUrlParams = (params) => {
                 url = url.concat(`&${key}=${params[key]}`);
             }
             if (isNoEmptyArray) {
-                url = url.concat(`&${key}=${params[key].map(p => p.id).join(',')}`);
+                url = url.concat(`&${key}=${params[key].map(p => p).join(',')}`);
             }
             if (isObject && !!params[key].id) {
                 url = url.concat(`&${key}=${params[key].id}`);

@@ -386,8 +386,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         <span className='error-text'>*</span>
                                     </Typography>
                                     <Location
-                                        handleSelectLocation={handleLocation}
                                         userLocation={location}
+                                        handleSelectLocation={handleLocation}
                                     />
                                 </Box>
                                 {errors.location && touched.location && (

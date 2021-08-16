@@ -3,6 +3,53 @@
   "engine_capacity": "litrda dvigatel hajmi",
   "year": "Ishlab chiqarilgan yili ",
   "mileage": "Kilometrda bosib o’tgan masofasi",
+  "brand": "Brendi",
+  "free": "Bepul",
+  "additional": "Qo'shimcha",
+  "salary": "Ish haqi",
+  "post_not_found": "«{{searchText}}» so'rovi bo'yicha ma'lumot topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
+  "post": "E'lonlar",
+  "auc": "Auksionlar",
+  "cost": "Narxi",
+  "service_type": "Xizmat turi",
+  "post_type": "E'lon turi",
+  "from": "Dan",
+  "to": "Gacha",
+  "price_from": "Dan (sum)",
+  "price_to": "Gacha (sum)",
+  "apply": "Qabul qilish",
+  "reset": "Qaytarish",
+  "view": "Turi",
+  "overview": "Yoritkichlar",
+  "driving_assistance_safety_title": "Haydashda yordam va xavsizlik",
+  "user_name": "Ism",
+  "user_surname": "Familiya",
+  "phone_number": "Telefon raqam",
+  "category": "Toifa",
+  "subcategory": "Ichki toifa",
+  "title": "E'lon nomi",
+  "price": "Narxi",
+  "noSelect": "Tanlanmagan",
+  "example_title": "Sarlavha nomi",
+  "manufacturer": "Ishlab chiqaruvchi",
+  "models": "Model",
+  "model": "Model",
+  "comfort_salon_title": "Qulaylik va salon",
+  "choiceLocation": "Manzilni tanlang",
+  "safe_deal": "Xavfsiz xarid",
+  "delivery": "Yetkazib berish",
+  "exchange": "Almashish imkoni",
+  "description": "Tavsif",
+  "additional_phone": "Qo'shimcha raqam",
+  "start_price": "Boshlang'ich narx so'mda",
+  "reserve_price": "Zaxira narxi so'mda",
+  "enter_price": "Narxni kiriting",
+  "buy_now": "Hozir sotib olish so'mda",
+  "auto_renewal": "Auksionni avtomatik uzaytirish",
+  "offer_price": "Narxni taklif qilish",
+  "display_phone": "Telefon raqamingizni ko'rsatish",
+  "archive": "Arxiv",
+  "visibility": "Ko'rinmoq",
   "car": {
     "color": {
       "name": "Rangi"
@@ -93,6 +140,27 @@
     },
     "immobilizer": {
       "name": "Immobilayzer"
+    },
+    "roadster": {
+      "name": "Rodster"
+    },
+    "limousine": {
+      "name": "Limuzin"
+    },
+    "targa": {
+      "name": "Targa"
+    },
+    "fastback": {
+      "name": "Fastback"
+    },
+    "hardtop": {
+      "name": "Hardtop"
+    },
+    "liftback": {
+      "name": "Liftback"
+    },
+    "van": {
+      "name": "Van"
     },
     "cabriolet": {
       "name": "Kabriolet"
@@ -749,14 +817,95 @@
     }
   },
   "parts": {
+    "spares_type": {
+      "name": "Ehtiyot qism hili"
+    },
+    "type": {
+      "name": "Trsnsport turi"
+    },
+    "electronics_gps_navigators": {
+      "name": "Elektronika va GPS navigatorlar"
+    },
+    "motorcycles": {
+      "name": "Motosikllar uchun"
+    },
+    "mopeds_scooters": {
+      "name": "Moped va skuterlar uchun"
+    },
+    "atvs": {
+      "name": "Kvadrosikillar uchun"
+    },
+    "go_karting": {
+      "name": "Karting uchun"
+    },
+    "snowmobiles": {
+      "name": "Snegoxod - qorda yuradigan avtomashinalar uchun"
+    },
+    "buggy": {
+      "name": "Baggi uchun"
+    },
+    "buses": {
+      "name": "Avtobuslar uchun"
+    },
+    "minibuses": {
+      "name": "Mikroavtobuslar uchun"
+    },
+    "refrigerator_truck": {
+      "name": "Avtosovutgich uchun"
+    },
+    "motorhome": {
+      "name": "Avtouy uchun"
+    },
+    "trucks": {
+      "name": "Yuk mashinalari uchun"
+    },
+    "light_commercial_transport": {
+      "name": "Yengil tijorat transporti uchun"
+    },
+    "trailers": {
+      "name": "Pritseplar uchun"
+    },
+    "tractor_units": {
+      "name": "Tyagachlar uchun"
+    },
+    "food_truck": {
+      "name": "Fudtrak uchun"
+    },
+    "car_towers": {
+      "name": "Avtovishkalar uchun"
+    },
+    "truck_cranes": {
+      "name": "Avtokranlar uchun"
+    },
+    "bulldozers": {
+      "name": "Buldozerlar uchun"
+    },
+    "utility_equipment": {
+      "name": "Kommunal texnika uchun"
+    },
+    "loaders": {
+      "name": "Yuk ortgich uchun"
+    },
+    "agricultural_machinery": {
+      "name": "Qishloq xo’jalik texnikasi uchun"
+    },
+    "construction_equipment": {
+      "name": "Qurilish texnikasi uchun"
+    },
+    "logging_equipment": {
+      "name": "Yog'ochni qayta ishlash texnikasi uchun"
+    },
+    "excavators": {
+      "name": "Ekskavatorlar uchun"
+    },
+    "condition": {
+      "name": "Holati"
+    },
     "new": {
       "name": "Yangi"
     },
     "used": {
       "name": "Ishlatilgan"
-    },
-    "condition": {
-      "name": "Holati"
     },
     "spares": {
       "name": "Ehtiyot qismlar"
@@ -898,6 +1047,18 @@
     }
   },
   "estate": {
+    "with_pledge": {
+      "name": "Garov bilan"
+    },
+    "utilities": {
+      "name": "Kommunal hisoblar narx ichiga kiritilgan"
+    },
+    "payments": {
+      "name": "To'lovlar"
+    },
+    "type": {
+      "name": "Sotuv turi"
+    },
     "furnished": {
       "name": "Jihozlangan"
     },
@@ -1339,7 +1500,7 @@
   },
   "job": {
     "type": {
-      "name": "Turkum"
+      "name": "Lavozim"
     },
     "employment": {
       "name": "Bandlik turi"
@@ -2337,9 +2498,6 @@
     "in_workshops": {
       "name": "Ustaxonaga"
     },
-    "job_type": {
-      "name": "Ish turi"
-    },
     "experience": {
       "name": "Tajriba"
     },
@@ -2351,6 +2509,9 @@
     }
   },
   "service": {
+    "type": {
+      "name": "Hizmat turi"
+    },
     "computer_services": {
       "name": "Kompyuter xizmatlari"
     },
@@ -2524,6 +2685,9 @@
     }
   },
   "goods": {
+    "type": {
+      "name": "Mahsulot turi"
+    },
     "color": {
       "name": "Rangi"
     },
@@ -3157,8 +3321,8 @@
     "espadrilles": {
       "name": "Espadrilyalar"
     },
-    "blazers": {
-      "name": "Bleyzerlar"
+    "blazers_and_suits": {
+      "name": "Pidjak va kostyumlar"
     },
     "bolero": {
       "name": "Bolerolar"
@@ -4164,6 +4328,9 @@
     }
   },
   "home": {
+    "type": {
+      "name": "Turi"
+    },
     "armchair": {
       "name": "Kreslo"
     },
@@ -4853,6 +5020,12 @@
     }
   },
   "electronics": {
+    "condition": {
+      "name": "Holati"
+    },
+    "type": {
+      "name": "Mahsulot turi"
+    },
     "color": {
       "name": "Rangi"
     },
@@ -6494,15 +6667,6 @@
     "to_six_set": {
       "name": ""
     },
-    "condition": {
-      "name": ""
-    },
-    "New": {
-      "name": ""
-    },
-    "Used": {
-      "name": ""
-    },
     "cleaning": {
       "name": ""
     },
@@ -6583,6 +6747,9 @@
     }
   },
   "hobbies": {
+    "condition": {
+      "name": "Holati"
+    },
     "keyboards": {
       "name": "Klaviaturalar"
     },
@@ -7091,19 +7258,16 @@
       "name": "Sheykerlar, butilkalar"
     },
     "type": {
-      "name": ""
+      "name": "Turi"
     },
     "other": {
-      "name": ""
-    },
-    "condition": {
-      "name": ""
+      "name": "Bo'shqa"
     },
     "new": {
-      "name": ""
+      "name": "Yangi"
     },
     "used": {
-      "name": ""
+      "name": "Ishlatilgan"
     },
     "subject": {
       "name": ""
@@ -7677,206 +7841,5 @@
     "used": {
       "name": "Ishlatilgan"
     }
-  },
-  "brand": "Brendi",
-  "season": "Mavsum",
-  "bayonet": "Bayonet",
-  "usb_connector": "USB ulagichi",
-  "build_in_speakers": "Ichki dinamiklar",
-  "kid_body": "Body",
-  "ws_body": "Body",
-  "for_body": "Tana uchun",
-  "number_of_seats": "O'rindiqlar soni",
-  "additional": "Qo'shimcha",
-  "salary": "Ish haqi",
-  "post_not_found": "«{{searchText}}» so'rovi bo'yicha ma'lumot topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
-  "post": "E'lonlar",
-  "auc": "Auksionlar",
-  "cost": "Narxi",
-  "service_type": "Xizmat turi",
-  "post_type": "E'lon turi",
-  "from": "Dan",
-  "to": "Gacha",
-  "price_from": "Dan (sum)",
-  "price_to": "Gacha (sum)",
-  "apply": "Qabul qilish",
-  "reset": "Qaytarish",
-  "view": "Turi",
-  "overview": "Yoritkichlar",
-  "headlight": "Chiroqlar",
-  "driving_assistance_safety_title": "Haydashda yordam va xavsizlik",
-  "upholstery": "Qoplamasi",
-  "climate": "Iqlim",
-  "send_again": "Parolni qayta yuborish",
-  "enter_sms": "Qabul qilingan ko'dni kiriting",
-  "enter_phone": "Telefon raqamingizni kiriting",
-  "enter_name": "Ismingizni kiriting",
-  "enter_password": "Parolni kiriting",
-  "enter_new_password": "Yangi parolni kiriting",
-  "repeat_new_password": "Yangi parolni qayta kiriting",
-  "user_name": "Ism",
-  "user_surname": "Familiya",
-  "phone_number": "Telefon raqam",
-  "good_type": "Mahsulot turi",
-  "category": "Toifa",
-  "subcategory": "Ichki toifa",
-  "title": "E'lon nomi",
-  "price": "Narxi",
-  "noSelect": "Tanlanmagan",
-  "example_title": "Sarlavha nomi",
-  "manufacturer": "Ishlab chiqaruvchi",
-  "models": "Model",
-  "model": "Model",
-  "comfort_title": "Qulaylik",
-  "comfort_salon_title": "Qulaylik va salon",
-  "comfort": "Qoshimchalar",
-  "car_climate": "Iqlimi",
-  "upholestery": "Salonni qoplash",
-  "seats": "Joylar soni",
-  "airbags": "Xavfsizlik yostiqchalari",
-  "visibility": "Ko'rinish qismlar",
-  "multimedia": "Multimedia",
-  "exterior": "Eksteryer",
-  "headlights": "Faralar",
-  "transmission": "Uzatish qutisi",
-  "drive": "Uzatma",
-  "сleared": "Bojxona ruxsatnomasi olingan",
-  "rooms_count": "Xonalar soni",
-  "balcony": "Balkon",
-  "estate_sale": "Savdo turi",
-  "estate_posted": "Kim joylashtirilgan",
-  "area_value": "Umumiy maydoni",
-  "electricity": "Elektr ta'minoti",
-  "sewerage": "Kanalizatsiya",
-  "layout": "Planirovkasi",
-  "repair": "Tamir",
-  "transport_type": "Transport turi",
-  "employment": "Bandlik turi",
-  "nature": "Ishning tabiati",
-  "place": "Xizmat ko'rsatish joyi",
-  "specialization": "Ixtisosligi",
-  "type": "Turi",
-  "sub_type": "Ko'rinishi",
-  "size": "Razmeri",
-  "gender": "Jinsi",
-  "group": "Guruh",
-  "mount": "Mustahkamlash",
-  "age": "Yoshi",
-  "wheels": "G'ildiraklar turi",
-  "properties": "Xususiyatlari",
-  "regulation": "Sozlash",
-  "os": "Operatsion tizimi",
-  "memory": "Qurilgan xotira",
-  "function": "Funksiyalari",
-  "connector": "Ulagich",
-  "device": "Qurilma",
-  "quality": "Yozuv sifati",
-  "format": "Tashuvchi formati",
-  "connection": "Ulanish",
-  "head": "Burilish boshi",
-  "play": "Videoni qaytadantiklash",
-  "diagonal": "Diagonal",
-  "screen": "Ruxsatnoma",
-  "monitor": "Yordam 3d",
-  "acoustics": "Akustika turi",
-  "display": "Displey turi",
-  "burner": "Konforka turi",
-  "installation": "O'rnatish turi",
-  "holding": "Sig'imi",
-  "cleaning": "Tozalash turi",
-  "spead": "Siqish tezligi",
-  "gaming": "O'yinli",
-  "video_card": "Videokarta",
-  "kids": "Bolalar uchun",
-  "breed": "Turi",
-  "apartments": "Kvartira",
-  "configs": "Sozlamalar",
-  "requireField": "Maydonni toldiring",
-  "cityOrRegionNotFound": "Bunday manzil topilmadi",
-  "choiceLocation": "Manzilni tanlang",
-  "safe_deal": "Xavfsiz xarid",
-  "delivery": "Yetkazib berish",
-  "exchange": "Almashish imkoni",
-  "description": "Tavsif",
-  "own_phone": "Sizning raqamingiz",
-  "additional_phone": "Qo'shimcha raqam",
-  "start_price": "Boshlang'ich narx so'mda",
-  "reserve_price": "Zaxira narxi so'mda",
-  "enter_price": "Narxni kiriting",
-  "buy_now": "Hozir sotib olish so'mda",
-  "auto_renewal": "Auksionni avtomatik uzaytirish",
-  "offer_price": "Narxni taklif qilish",
-  "display_phone": "Telefon raqamingizni ko'rsatish",
-  "house_furnished": "Jihozlangan",
-  "parking_spaces": "Mashina joylari",
-  "posted": "E'lon egasi",
-  "ceiling_height": "Shift balandligi metrda",
-  "number_of_bedrooms": "Yotoq xonalar soni",
-  "engine_type": "Dvigatel turi",
-  "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
-  "with_pledge": "Garov bilan",
-  "heating": "Uy isitish",
-  "lift": "Lift",
-  "metro": "Metrogacha",
-  "garage": "Garaj",
-  "mobile_phones": "Mobil telefonlar ",
-  "tablets": "Planshetlar",
-  "smart_watches_and_wristbands": "Aqlli soat va brasletlar",
-  "e_books": "Elektron kitoblar",
-  "landlines": "Statsionar telefonlar",
-  "walkie_talkies_and_satellite_phones": "Ratsiyalar va sputnik telefonlari",
-  "spare_parts": "Ehtiyot qismlar",
-  "external_batteries": "Tashqi akkumulyatorlar",
-  "chargers": "Zaryadlash qurilmalari",
-  "covers": "G’iloflar",
-  "cameras": "Fotoapparatlar",
-  "video_cameras": "Videokameralar",
-  "lenses": "Obyektivlar",
-  "flash": "Fotochaqnashlar",
-  "tripods_and_stabilizers": "Shtativ va stabilizatorlar",
-  "studio_equipment": "Studiya jihozlari",
-  "digital_cameras": "Raqamli fotoramkalar",
-  "compact_photo_printers": "Kompakt fotoprinterlar",
-  "binoculars_and_optical_instruments": "Binokl va optik asboblar",
-  "tv_sets": "Televizorlar",
-  "projectors": "Proyektorlar",
-  "acoustics_speakers_subwoofers": "Akustika, kolonkalar, sabvuferlar",
-  "home_theaters": "Uy kinoteatrlari",
-  "dvd_blu_ray_and_media_players": "DVD, Blu-ray va mediapleerlar",
-  "music_centers_and_tape_recorders": "Musiqa markazlari va magnitolalar",
-  "mp3_players_and_portable_audio": "MP3-pleerlar va portativ audio",
-  "satellite_and_digital_tv": "Sputnik – yo’ldosh va raqamli TV",
-  "audio_amplifiers_and_receivers": "Ovoz quvvat kuchaytirgichi",
-  "headphones": "Naushnik – quloqchinlar",
-  "microphones": "Mikrofonlar",
-  "scales": "Tarozi",
-  "grinding_and_mixing": "Maydalash va aralashtirish ",
-  "glimate_control_equipment": "Iqlim texnikasi",
-  "coolers_and_water_filters": "Suv uchun kuler va filtrlar",
-  "stoves_and_ovens": "Plita va duxovka shkaflari",
-  "dishwashers": "Idish yuvish mashinalari",
-  "cooking_food": "Ovqat tayyorlash",
-  "preparation_of_drinks": "Ichimliklar tayyorlash",
-  "vacuum_cleaners_and_steam_cleaners": "Changyutkichlar va bug'tozalagichlar",
-  "washing_machines": "Kir yuvish mashinalari",
-  "irons_and_clothing_care": "Dazmollar va kiyimlarni parvarish qilish",
-  "sewing_equipment": "Tikuv uskunalari",
-  "laptops": "Noutbuklar",
-  "computers": "Kompyuterlar",
-  "monitors": "Monitorlar",
-  "keyboards_and_mice": "Klaviatura va mish - sichqonchalar",
-  "office_equipment_and_consumables": "Ofis texnikasi va sarflovchi materiallar",
-  "network_equipment": "Tarmoq jihozlari",
-  "data_storage_and_card_readers": "Ma'lumotlarni saqlash va kartriderlar",
-  "steering_wheels_joysticks_gamepads": "Rullar, joystiklar, geympadalar",
-  "components_and_spare_parts": "To’ldiruvchi va ehtiyot qismlar",
-  "game_consoles_selector": "O'yin konsollari",
-  "games_for_consoles": "Konsollar uchun o'yinlar",
-  "computer_games": "Kompyuterlar uchun o'yinlar",
-  "programs": "Dasturlar",
-  "gray": "Kulrang",
-  "pink": "Pushti",
-  "multi-color": "Rang-barang",
-  "archive": "Arxiv",
-  "repair_construction": "Testoviy"
+  }
 }

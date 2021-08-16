@@ -7,7 +7,7 @@ import {useStyles} from './useStyles';
 type ModalHeaderPropsType = {
     title,
     hasPrevBtn?,
-    handlePrevMenu?,
+    handleBack?,
     handleCloseDialog?
 }
 
@@ -15,7 +15,7 @@ export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
     const {
         title,
         hasPrevBtn,
-        handlePrevMenu,
+        handleBack,
         handleCloseDialog
     } = props;
 
@@ -36,7 +36,7 @@ export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
             {hasPrevBtn && (
                 <IconButton
                     className='left'
-                    onClick={handlePrevMenu}
+                    onClick={handleBack}
                     classes={{root: classes.button}}
                 >
                     <KeyboardArrowLeftIcon />

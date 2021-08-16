@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {useTranslation} from 'next-i18next';
 import {Grid, Step, StepLabel, Stepper, Typography, IconButton, Hidden} from '@material-ui/core';
 import {BackspaceIcon} from '@root/src/components/elements/icons';
@@ -38,7 +38,7 @@ export const StepsProgress: FC<AncmntAuctionTopPropsType> = (props) => {
             <Grid item xs={12} lg={8}>
                 {!isPostTypeStep && <div className='menu-header'>
                     <IconButton className="back-btn" onClick={handleBack}>
-                        <BackspaceIcon />
+                        <BackspaceIcon/>
                     </IconButton>
                     <Typography
                         noWrap

@@ -9,6 +9,7 @@ export interface UserInfo {
     available_start_time?: string,
     available_end_time?: string,
     rating?: number,
+    signed?: boolean,
     observer?: {
         number_of_reviews: number,
         number_of_purchase: number,
@@ -20,8 +21,5 @@ export interface UserInfo {
 
 export type SubscriberType = {
     user_id?: number,
-    user?: UserInfo & {
-        signed: boolean,
-    },
-    handleRefresh: () => void,
+    user?: UserInfo
 }

@@ -5,11 +5,10 @@ import {ArrowBack} from '@material-ui/icons';
 import {LocationIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
-import {useStyles} from './useStyles';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {useStyles} from './useStyles';
 
 type LocationModalPropsType = {
     region,
@@ -98,7 +97,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                                                     <Typography>
                                                         <span>{t(loc.cities ? `${loc.name}.name` : `${region.name}.${loc.name}`)}</span>
                                                     </Typography>
-                                                    {(!!loc?.cities || !!loc?.district?.length) && (
+                                                    {!!loc?.cities && (
                                                         <Hidden smUp>
                                                             <KeyboardArrowRightIcon/>
                                                         </Hidden>

@@ -12,17 +12,17 @@ import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
-import {cookies, getSearchTxt} from '@src/helpers';
+import {cookies} from '@src/helpers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {transformLocations} from '@root/transformedLocations';
+import {transLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 export const HeaderSearchForm: FC = () => {
     const {push} = useRouter();
     const {t} = useTranslation('common');
-    const {categories} = useRouter().query;
     const {setTerm} = useContext(SearchCtx);
-    const searchTermFromUrl = getSearchTxt(categories as string[]);
+    const searchTermFromUrl = useRouter().query.q as string || '';
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const handleSubmit = ({searchTerm}) => {
         const userLocation = cookies.get('user_location');
@@ -31,11 +31,11 @@ export const HeaderSearchForm: FC = () => {
         if (userLocation) {
             const {region, city} = userLocation;
             location = city
-                ? transformLocations[region.name][city.name]
-                : transformLocations[region.name].name;
+                ? transLocations[region.name][city.name]
+                : transLocations[region.name].name;
         }
 
-        const url = `/${location}${searchTerm !== '' ? `/q-${searchTerm}` : ''}`;
+        const url = `/${location}${searchTerm !== '' ? `?q=${searchTerm}` : ''}`;
 
         push(url);
     };
@@ -58,9 +58,7 @@ export const HeaderSearchForm: FC = () => {
     useEffect(() => {
         setTerm(searchTermFromUrl);
         setValues({searchTerm: searchTermFromUrl});
-    }, []);
-
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    }, [searchTermFromUrl]);
 
     const classes = useStyles();
     return (

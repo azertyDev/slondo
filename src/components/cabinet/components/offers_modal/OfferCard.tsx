@@ -33,7 +33,7 @@ export const OfferCard: FC<any> = ({offer, isFetch, handleOffer}) => {
             >
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
-                        <UserInfoWithAvatar owner={offer.user} isOwner={true} />
+                        <UserInfoWithAvatar user={offer.user} />
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Grid container spacing={2}>

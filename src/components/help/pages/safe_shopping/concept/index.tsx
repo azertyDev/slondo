@@ -11,12 +11,12 @@ export const Concept = () => {
             <Grid item xs={12} className={classes.root}>
                 <Box display='block' mb={2}>
                     <Typography variant='h6' className='title'>
-                        {t('safe_shopping.concept.name')}
+                        {t('safe_deal.concept.name')}
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
                     <Typography variant='subtitle1' component='p' className='color-silver'>
-                        {t('safe_shopping.concept.description')}
+                        {t('safe_deal.concept.description')}
                     </Typography>
                 </Grid>
             </Grid>

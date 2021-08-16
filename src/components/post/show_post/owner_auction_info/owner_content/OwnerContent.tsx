@@ -12,7 +12,6 @@ type OwnerPropsType = {
     showPhone: boolean,
     handleSafeDeal: () => void,
     handleShowPhone: () => void,
-    handleFollow: (userId) => () => void,
     authorPhones: { phone: string, additional_number: string }
 } & WithT;
 
@@ -21,7 +20,6 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         t,
         postData,
         authorPhones,
-        handleFollow,
         showPhone,
         handleShowPhone,
         handleSafeDeal
@@ -29,10 +27,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
 
     const {
         status,
-        safe_deal,
         author,
         creator,
-        subscribed
+        safe_deal
     } = postData;
 
     const isPublic = status === 'public';
@@ -44,12 +41,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         <div className={classes.root}>
             <Box padding='10px 0' className='owner' position='relative'>
                 <UserInfoWithAvatar
-                    owner={author}
-                    isOwner={creator}
-                    subscribed={subscribed}
-                    handleFollow={handleFollow}
                     width='80px'
                     height='80px'
+                    user={author}
                 />
             </Box>
             <Hidden mdDown>
@@ -74,7 +68,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 color="primary"
                                 className='contact-btn'
                             >
-                                <LetterIcon />
+                                <LetterIcon/>
                                 <Typography variant="subtitle1" component='p'>
                                     {t('common:writeToSeller')}
                                 </Typography>

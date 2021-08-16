@@ -5,7 +5,7 @@ import {TabsDataType} from '@root/interfaces/Cabinet';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
-import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/subs/subscription_item/SubscriptionItem';
+import {SubsItem} from '@src/components/cabinet/cabinet_pages/subs/subsTab/subs_item/SubsItem';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx} from "@src/context";
 
@@ -59,10 +59,9 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
     const subscribersList = (
         <div>
             {subscribers.data.map(({id, subscriber}) =>
-                <SubscriptionItem
+                <SubsItem
                     key={id}
                     user={subscriber}
-                    handleRefresh={handleRefresh}
                 />
             )}
         </div>
@@ -71,10 +70,9 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
     const subscriptionsList = (
         <div>
             {subscriptions.data.map(({id, subscription}) =>
-                <SubscriptionItem
+                <SubsItem
                     key={id}
                     user={subscription}
-                    handleRefresh={handleRefresh}
                 />
             )}
         </div>

@@ -1719,7 +1719,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 156,
-                        name: 'other',
+                        name: 'other_services',
                         ru_name: 'Другое'
                     }
                 ]

@@ -4,7 +4,7 @@
 
 import {GetServerSideProps} from 'next';
 import {getSitemap, getStringValues, transformCyrillic} from "@src/helpers";
-import {transformLocations} from "@root/transformedLocations";
+import {transLocations} from "@root/transformedLocations";
 import {categories_list} from "@src/common_data/site_categories";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const siteUrl = process.env.SERVER_URL || 'http://localhost:3317';
 
     const location = queryLoc.replace(xmlRegEx, '');
-    const locations = [...getStringValues(transformLocations), 'uzbekistan'];
+    const locations = getStringValues(transLocations);
     const locationExist = locations.some(loc => xmlRegEx.test(queryLoc) && loc === location);
 
     if (locationExist) {
