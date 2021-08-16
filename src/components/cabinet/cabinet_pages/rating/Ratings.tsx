@@ -15,6 +15,7 @@ import {ResponsiveModal} from '@src/components/elements/responsive_modal/Respons
 import {getErrorMsg} from '@src/helpers';
 import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {ReadMore} from '@src/components/elements/read_more/readMore';
 
 type RatingsPropsType = {
     data,
@@ -22,6 +23,7 @@ type RatingsPropsType = {
 } & WithT;
 
 export const Ratings: FC<RatingsPropsType> = (props) => {
+
     const {
         t,
         data,
@@ -85,75 +87,103 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Grid item xs>
-                <Box
-                    component="div"
-                    mb={2}
-                    className='owner-rating'
-                    borderColor="transparent"
-                    display='inline-block'
-                >
-                    <Rating
-                        name="rating"
-                        ratingValue={rating}
-                        ratingCount={number_of_ratings}
-                    />
-                </Box>
-                <Divider variant='fullWidth' light/>
-                <Box>
-                    <Typography variant='subtitle1'>
+        <>
+            <Grid container spacing={2} className={classes.root}>
+                <Grid item xs={12}>
+                    <Box component="div">
+                        <Rating
+                            card
+                            readOnly
+                            name="rating"
+                            ratingValue={rating}
+                            ratingCount={number_of_ratings}
+                        />
+                    </Box>
+                </Grid>
+                <Divider variant='fullWidth' />
+                <Grid item xs={12}>
+                    <Typography variant='h6' gutterBottom>
                         Оценки и отзывы
                     </Typography>
-                    {data.map(({comments}) => {
+                    {data.map(({comments}, index) => {
                         return (
-                            <Box key={comments.id}>
+                            <Box key={index} className='review' pb={2} mb={2}>
                                 {comments.map((commentData, index) => {
                                     const {comment, creator, created_at, author} = commentData;
                                     const date = new Date(created_at);
-                                    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+                                    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
                                     return (
-                                        <>
-                                            <Box className='review-item' key={index}>
-                                                {index === 0 && (
-                                                    <UserAvatarComponent
-                                                        avatar={author.avatar}
-                                                        width='50px'
-                                                        height='50px'
-                                                    />
-                                                )}
-                                                <Box>
-                                                    <Typography variant='subtitle1'>
-                                                        {`${author.name ?? ''} ${author.surname ?? ''}`}
-                                                    </Typography>
-                                                    <Typography variant='subtitle2'>
-                                                        {formatted_date}
-                                                    </Typography>
+                                        <Grid
+                                            container
+                                            key={index}
+                                            spacing={1}
+                                            className='review-item'
+                                            justifyContent='flex-end'
+                                        >
+                                            <Grid
+                                                item
+                                                xs={12}
+                                            >
+                                                <Box display='flex' alignItems='center'>
+                                                    {index === 0 && (
+                                                        <UserAvatarComponent
+                                                            width='50px'
+                                                            height='50px'
+                                                            avatar={author.avatar}
+                                                        />
+                                                    )}
+                                                    <Box>
+                                                        <Typography variant='subtitle1'>
+                                                            {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                        </Typography>
+                                                        <Box display='flex'>
+                                                            <Rating
+                                                                ratingValue={author.rating}
+                                                                readOnly
+                                                            />
+                                                            <Typography variant='subtitle2'>
+                                                                {formatted_date}
+                                                            </Typography>
+                                                        </Box>
+                                                    </Box>
                                                 </Box>
-                                                {index === 0
-                                                    ? (<Typography variant='subtitle2'>
-                                                        {comments[0].comment}
-                                                    </Typography>)
-                                                    : (<>
-                                                        <Typography variant='subtitle2'>
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                xs={12}
+                                            >
+                                                <ReadMore threshold={54}>
+                                                    {index === 0
+                                                        ? <Typography variant='subtitle2'>
+                                                            {comments[0].comment}
+                                                        </Typography>
+                                                        : <Typography variant='subtitle2'>
                                                             {comment}
                                                         </Typography>
-                                                    </>)
-                                                }
-                                                {index === comments.length - 1 && !creator && (
+                                                    }
+                                                </ReadMore>
+                                            </Grid>
+                                            {index === comments.length - 1 && !creator && (
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    container
+                                                    justifyContent='flex-end'
+                                                >
                                                     <CustomButton
-                                                        onClick={onReplyBtnClick(author, commentData)}>
+                                                        onClick={onReplyBtnClick(author, commentData)}
+                                                    >
                                                         Ответить
                                                     </CustomButton>
-                                                )}
-                                            </Box>
-                                        </>
+                                                </Grid>
+                                            )}
+                                        </Grid>
                                     );
                                 })}
                             </Box>
                         );
                     })}
-                </Box>
+                </Grid>
             </Grid>
             <ResponsiveModal
                 openDialog={modalOpen}
@@ -161,7 +191,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
             >
                 <Box p='30px 15px'>
                     <Box>
-                        <UserInfoWithAvatar owner={commentData.author}/>
+                        <UserInfoWithAvatar owner={commentData.author} />
                     </Box>
                     <Box>
                         <Typography variant='subtitle2'>
@@ -197,6 +227,6 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                     </FormikProvider>
                 </Box>
             </ResponsiveModal>
-        </div>
+        </>
     );
 };

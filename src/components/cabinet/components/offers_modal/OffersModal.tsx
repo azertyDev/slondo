@@ -27,11 +27,6 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
 
-    const formattedDate = (date) => {
-        return new Date(date);
-    };
-    console.log(formattedDate);
-
     const fetchOffers = async () => {
         try {
             setIsFetch(true);

@@ -18,6 +18,7 @@ import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/Cab
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
+import {Trans} from 'next-i18next';
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -211,9 +212,14 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             <Grid item xs={12} container className='user-info-title'>
                                 <Grid item xs={12} sm={8}>
                                     <Typography variant='subtitle2' gutterBottom>
-                                        {t(getUserInfoTitle())}
+                                        {t(getUserInfoTitle())}&nbsp;
                                         {hasOffer && !winner && isUserCreator && (
-                                            <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
+                                            <Trans
+                                                t={t}
+                                                i18nKey="offer_price"
+                                                tOptions={{price: numberPrettier(offer?.price)}}
+                                                components={[<strong />]}
+                                            />
                                         )}
                                     </Typography>
                                 </Grid>

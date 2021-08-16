@@ -50,7 +50,7 @@
   "winner": "G'olib",
   "seller": "Sotuvchi",
   "maxOffer": "Eng katta taklif etilgan narx:",
-  "offer_price": "{{price}} so'm",
+  "offer_price": "<0>{{price}}</0> so'm",
   "all_offers_count": "Barcha takliflar ({{offers}})",
   "all_offers": "Barcha takliflar",
   "current_offer_price": "Taklif etilgan narx",
