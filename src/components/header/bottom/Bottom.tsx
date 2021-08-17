@@ -20,12 +20,14 @@ import {useStyles} from './useStyles';
 type BottomProps = {
     isScrollBreak: boolean,
     handleDrawerOpen: () => void
+    handlePageReload: () => void
 }
 
 const Bottom: FC<BottomProps> = (props) => {
     const {
         isScrollBreak,
-        handleDrawerOpen
+        handleDrawerOpen,
+        handlePageReload
     } = props;
 
     const {pathname} = useRouter();
@@ -91,8 +93,8 @@ const Bottom: FC<BottomProps> = (props) => {
                                         className="bottom-logo"
                                     >
                                         <Link href="/">
-                                            <a>
-                                                <Logo/>
+                                            <a onClick={handlePageReload}>
+                                                <Logo />
                                             </a>
                                         </Link>
                                     </Grid>

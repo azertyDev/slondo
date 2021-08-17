@@ -29,11 +29,13 @@ import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
     handleDrawerOpen: () => void
+    handlePageReload: () => void
 };
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {
-        handleDrawerOpen
+        handleDrawerOpen,
+        handlePageReload
     } = props;
 
     const {t} = useTranslation('header');
@@ -126,8 +128,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     </Grid>
                                     <Grid className="top-header-logo">
                                         <Link href="/">
-                                            <a>
-                                                <Logo/>
+                                            <a onClick={handlePageReload}>
+                                                <Logo />
                                             </a>
                                         </Link>
                                     </Grid>

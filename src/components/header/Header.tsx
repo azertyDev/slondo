@@ -5,6 +5,7 @@ import Bottom from './bottom/Bottom';
 import {AuthContainer} from './auth/AuthContainer';
 import {CategoriesDrawer} from "@src/components/header/bottom/categories_drawer/CategoriesDrawer";
 import {useStyles} from './useStyles';
+import {useRouter} from 'next/router';
 
 export const Header: FC = () => {
     const {
@@ -12,13 +13,18 @@ export const Header: FC = () => {
         handleModalOpen: handleDrawerOpen,
         handleModalClose: handleDrawerClose
     } = useModal();
+    const {pathname} = useRouter();
+
+    const handlePageReload = () => {
+        return pathname === '/' && window.location.reload()
+    }
 
     const classes = useStyles();
     return (
         <header className={classes.root} id='back-to-top-anchor'>
             <div className='header-wrapper'>
-                <Top handleDrawerOpen={handleDrawerOpen}/>
-                <Bottom handleDrawerOpen={handleDrawerOpen}/>
+                <Top handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
+                <Bottom handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
                 <div className={classes.modalDialog}>
                     <AuthContainer/>
                 </div>
