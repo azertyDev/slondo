@@ -6,7 +6,10 @@ export const useStyles = makeStyles({
             width: '100%'
         },
         '& .rating': {
-            flexDirection: 'column-reverse!important'
+            flexDirection: 'column-reverse!important',
+            '& p': {
+                fontSize: '3rem'
+            }
         },
         '& .owner-rating': {
             flexDirection: 'column-reverse'
@@ -25,7 +28,19 @@ export const useStyles = makeStyles({
             '& .review-answer': {
                 padding: 10,
                 borderRadius: 5,
-                backgroundColor: '#f0f0f0'
+                backgroundColor: '#f0f0f0',
+                position: 'relative',
+                '&:after': {
+                    left: '2%',
+                    content: '""',
+                    bottom: '100%',
+                    borderWidth: '15px',
+                    position: 'absolute',
+                    pointerEvents: 'none',
+                    border: 'solid transparent',
+                    borderBottomColor: '#f0f0f0',
+                    borderColor: 'rgba(136, 183, 213, 0)'
+                }
             }
         }
     }

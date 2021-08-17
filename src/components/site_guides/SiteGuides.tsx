@@ -1,5 +1,5 @@
 import {cloneElement} from 'react';
-import {AppBar, Container, Grid, Toolbar, Typography, useScrollTrigger} from '@material-ui/core';
+import {AppBar, Container, Grid, Toolbar, useScrollTrigger} from '@material-ui/core';
 import Link from 'next/link';
 import {Logo} from '../elements/icons';
 import {Localization} from '../header/top/localization/Localization';
@@ -8,6 +8,7 @@ import {SafeShoppingGuide} from '@src/components/site_guides/SafeShoppingGuide';
 import {AuctionGuide} from '@src/components/site_guides/AuctionGuide';
 import {useRouter} from 'next/router';
 import ErrorPage from "@root/pages/_error";
+import {Security} from '@src/components/site_guides/security/Security';
 import {useStyles} from './useStyles';
 
 function HideOnScroll(props) {
@@ -34,6 +35,8 @@ export const SiteGuides = (props) => {
                 return <AuctionGuide t={t}/>;
             case 'safe_shopping':
                 return <SafeShoppingGuide t={t}/>;
+            case 'security':
+                return <Security t={t}/>;
             default:
                 return <ErrorPage statusCode={404}/>;
         }

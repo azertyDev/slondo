@@ -73,6 +73,7 @@ export const Ratings: FC = () => {
         try {
             setSubmitting(true);
             await userAPI.setReplyComment(commentData.comment.id, comment);
+            await fetchUserRatings();
             unstable_batchedUpdates(() => {
                 handleModalClose();
                 setSubmitting(false);
@@ -132,58 +133,56 @@ export const Ratings: FC = () => {
                         Оценки и отзывы
                     </Typography>
                     {userRatings.map(({comments, rating}, index) => {
+                        const [mainComment, ...replyComments] = comments;
                         const date = new Date(comments[0].created_at);
                         const formatted_date1 = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
                         return (
                             <Box key={index} className='review' pb={2} mb={2}>
-                                <Grid container>
-                                    <Grid item xs={1}>
-                                        <UserAvatarComponent
-                                            width='50px'
-                                            height='50px'
-                                            avatar={comments[0].author.avatar}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                        <Typography variant='subtitle1' gutterBottom>
-                                            <strong>
-                                                {`${comments[0].author.name ?? ''} ${comments[0].author.surname ?? ''}`}
-                                            </strong>
-                                        </Typography>
-                                        <Typography variant='subtitle2'>
-                                            {formatted_date1}
-                                        </Typography>
-                                        <ReadMore id={comments[0].id} threshold={55}>
-                                            <Typography variant='subtitle2'>
-                                                {comments[0].comment}
+                                <Box mb={2}>
+                                    <Grid container justifyContent='center' alignItems='center'>
+                                        <Grid item xs={1}>
+                                            <UserAvatarComponent
+                                                width='50px'
+                                                height='50px'
+                                                avatar={mainComment.author.avatar}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={9}>
+                                            <Typography variant='subtitle1' gutterBottom>
+                                                <strong>
+                                                    {`${mainComment.author.name ?? ''} ${mainComment.author.surname ?? ''}`}
+                                                </strong>
                                             </Typography>
-                                        </ReadMore>
+                                            <Typography variant='caption' component='p' gutterBottom>
+                                                {formatted_date1}
+                                            </Typography>
+                                            <ReadMore id={mainComment.id} threshold={55}>
+                                                <Typography variant='subtitle2'>
+                                                    {mainComment.comment}
+                                                </Typography>
+                                            </ReadMore>
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <Rating ratingValue={rating} readOnly />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={2}>
-                                        <Rating ratingValue={rating} readOnly />
-                                    </Grid>
-                                </Grid>
-                                {comments.map((commentData, index) => {
-                                    const {id, comment, creator, created_at, author} = commentData;
-                                    const date = new Date(created_at);
-                                    const formatted_date = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
-                                    if (index % 2) {
-                                        return (
-                                            <Grid
-                                                container
-                                                key={id}
-                                                spacing={1}
-                                                justifyContent='flex-end'
-                                            >
-                                                <Grid item xs={12}>
-                                                    <Box className='review-answer'>
+                                </Box>
+                                <Grid container spacing={3} justifyContent='flex-end'>
+                                    {replyComments.map((commentData, index) => {
+                                        const {id, comment, creator, created_at, author, reply} = commentData;
+                                        const date = new Date(created_at);
+                                        const formatted_date = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+                                        if (index % 2) {
+                                            return (
+                                                <Grid item xs={11} key={index}>
+                                                    <Box>
                                                         <Box mb={2}>
                                                             <Typography variant='subtitle1' gutterBottom>
                                                                 <strong>
                                                                     {`${author.name ?? ''} ${author.surname ?? ''}`}
                                                                 </strong>
                                                             </Typography>
-                                                            <Typography variant='subtitle2'>
+                                                            <Typography variant='caption' component='p'>
                                                                 {formatted_date}
                                                             </Typography>
                                                         </Box>
@@ -192,7 +191,7 @@ export const Ratings: FC = () => {
                                                                 {comment}
                                                             </Typography>
                                                         </ReadMore>
-                                                        {index === comments.length - 1 && !creator && (
+                                                        {index === comments.length - 1 && !creator && !reply && (
                                                             <CustomButton
                                                                 onClick={onReplyBtnClick(author, commentData)}
                                                                 color='secondary'
@@ -204,47 +203,41 @@ export const Ratings: FC = () => {
                                                         )}
                                                     </Box>
                                                 </Grid>
+                                            );
+                                        }
+                                        return (
+                                            <Grid item xs={11} key={index}>
+                                                <Box className='review-answer'>
+                                                    <Box mb={2}>
+                                                        <Typography variant='subtitle1' gutterBottom>
+                                                            <strong>
+                                                                {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                            </strong>
+                                                        </Typography>
+                                                        <Typography variant='caption' component='p'>
+                                                            {formatted_date}
+                                                        </Typography>
+                                                    </Box>
+                                                    <ReadMore id={id} threshold={55}>
+                                                        <Typography variant='subtitle2'>
+                                                            {comment}
+                                                        </Typography>
+                                                    </ReadMore>
+                                                    {index === comments.length - 1 && !creator && !reply && (
+                                                        <CustomButton
+                                                            onClick={onReplyBtnClick(author, commentData)}
+                                                            color='secondary'
+                                                        >
+                                                            <Typography variant='subtitle1' component='p'>
+                                                                Ответить
+                                                            </Typography>
+                                                        </CustomButton>
+                                                    )}
+                                                </Box>
                                             </Grid>
                                         );
-                                    }
-                                    return (
-                                        <Grid
-                                            container
-                                            key={id}
-                                            spacing={1}
-                                            className='review-item'
-                                            justifyContent='flex-end'
-                                        >
-                                            <Grid item xs={11}>
-                                                <Box mb={2}>
-                                                    <Typography variant='subtitle1' gutterBottom>
-                                                        <strong>
-                                                            {`${author.name ?? ''} ${author.surname ?? ''}`}
-                                                        </strong>
-                                                    </Typography>
-                                                    <Typography variant='subtitle2'>
-                                                        {formatted_date}
-                                                    </Typography>
-                                                </Box>
-                                                <ReadMore id={id} threshold={55}>
-                                                    <Typography variant='subtitle2'>
-                                                        {comment}
-                                                    </Typography>
-                                                </ReadMore>
-                                                {index === comments.length - 1 && !creator && (
-                                                    <CustomButton
-                                                        onClick={onReplyBtnClick(author, commentData)}
-                                                        color='secondary'
-                                                    >
-                                                        <Typography variant='subtitle1' component='p'>
-                                                            Ответить
-                                                        </Typography>
-                                                    </CustomButton>
-                                                )}
-                                            </Grid>
-                                        </Grid>
-                                    );
-                                })}
+                                    })}
+                                </Grid>
                             </Box>
                         );
                     })}
