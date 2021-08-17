@@ -196,7 +196,17 @@ export const urlByParams = (postData) => {
 
     Object.keys(postData).forEach(key => {
         if (!!postData[key] && postVals.some(k => k === key)) {
-            url = url.concat(`&${key}=${JSON.stringify(postData[key], replacer)}`);
+            let value = postData[key];
+            if (key === 'model') {
+                value = Object.keys(value).reduce((obj, ik) => {
+                    if (/_id$/.test(ik)) {
+                        ik = ik.replace(/_id$/, '');
+                        obj[ik] = {id: value[ik]};
+                    }
+                    return obj;
+                }, {});
+            }
+            url = url.concat(`&${key}=${JSON.stringify(value, replacer)}`);
         }
     });
 

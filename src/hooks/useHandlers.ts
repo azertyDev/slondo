@@ -75,6 +75,15 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
 
             setValues({...values, ...vals});
         },
+        setValsByUrlParams: (urlParams) => {
+            const vals = {};
+            Object.keys(urlParams).forEach(k => {
+                if (!values[k]) {
+                    vals[k] = urlParams[k];
+                }
+            });
+            setValues({...values, ...vals});
+        },
         setRequireVals: (filters) => {
             const reqVals = {};
             Object.keys(filters).forEach(k => {

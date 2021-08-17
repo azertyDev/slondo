@@ -6,10 +6,10 @@ import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {StepsProgress} from '../steps_progress/StepsProgress';
 import {postTypes} from '@src/common_data/post_types';
-import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {
+    urlByParams,
     normalizeFiltersByCategory,
     getCategoriesByParams,
     CategoriesParamsType,
@@ -21,22 +21,31 @@ import {ParamsFormContainer} from './params_form/ParamsFormContainer';
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
-export const FormPages: FC = () => {
+export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {asPath, query, push} = useRouter();
+    const {
+        post_type,
+        main_ctgr,
+        sub_ctgr,
+        type_ctgr,
+        post_id,
+        preview
+    } = query;
 
-    const {post_id} = query;
-    const [_, postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
+    const isPreview = +preview === 1;
+    const postTypeName = post_type as string;
+    const categoryName = main_ctgr as string;
+    const subcategoryName = sub_ctgr as string;
+    const typeName = type_ctgr as string;
 
-    const {category, subcategory, type} = getCategoriesByParams(
-        {
-            categoryName,
-            subcategoryName,
-            typeName
-        } as CategoriesParamsType
-    );
+    const {category, subcategory, type} = getCategoriesByParams({
+        categoryName,
+        subcategoryName,
+        typeName
+    } as CategoriesParamsType);
 
     const isCtgrAnimalFishes = category?.name === 'animal' && subcategory?.name === 'fishes';
 
@@ -45,6 +54,8 @@ export const FormPages: FC = () => {
         ${type ? ` - ${t(`categories:${category.name}.${subcategory.name}.${type.name}.name`)}` : ''}`;
 
     const postType = postTypes.find(type => type.name === postTypeName);
+
+    const formURL = `/create?post_type=${postTypeName}&main_ctgr=${categoryName}&sub_ctgr=${subcategoryName}${typeName ? `&type_ctgr=${typeName}` : ''}`;
 
     const initPost = {
         ads_type_id: postType.id,
@@ -60,7 +71,6 @@ export const FormPages: FC = () => {
 
     const [isFetch, setIsFetch] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
@@ -110,18 +120,24 @@ export const FormPages: FC = () => {
         }
     };
 
-    const handleBack = () => {
-        isPreview
-            ? setIsPreview(false)
-            : push(
-            `/create/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
-            undefined,
-            {shallow: true}
-            );
+    const handleBack = async () => {
+        await push(backURL, undefined, {shallow: true});
     };
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         setPost({...post, ...values});
+        if (currentFormIndex === 1) {
+            const {title, ...params} = post.params;
+            post_id
+                ? await push(`${formURL}&preview=1`)
+                : await push(`${formURL}${
+                    urlByParams({
+                        ...values.commonParams,
+                        title,
+                        model: params
+                    })
+                }&preview=1`);
+        }
     };
 
     const toPublish = async () => {
@@ -211,9 +227,9 @@ export const FormPages: FC = () => {
                     />
                     <div>
                         <AppearanceForm
-                            categoryName={categoryName}
-                            colors={colors || color}
                             isPreview={isPreview}
+                            colors={colors || color}
+                            categoryName={categoryName}
                             currentFormIndex={currentFormIndex}
                             handleSubmit={handleSubmit}
                             handleFormOpen={handleFormOpen}
@@ -223,9 +239,6 @@ export const FormPages: FC = () => {
                     <div>
                         <CommonForm
                             postType={postType}
-                            isPreview={isPreview}
-                            setIsPreview={setIsPreview}
-                            categoryName={categoryName}
                             handleSubmit={handleSubmit}
                             currentFormIndex={currentFormIndex}
                         />

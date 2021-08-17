@@ -12,13 +12,13 @@ type AncmntAuctionTopPropsType = {
 };
 
 export const StepsProgress: FC<AncmntAuctionTopPropsType> = (props) => {
-    const {t} = useTranslation(['post']);
-
     const {
         title,
         activeStep,
         handleBack
     } = props;
+
+    const {t} = useTranslation('post');
 
     const isPostTypeStep = activeStep === 0;
 

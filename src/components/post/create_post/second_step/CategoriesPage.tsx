@@ -2,7 +2,6 @@ import {FC, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {StepsProgress} from '../steps_progress/StepsProgress';
-import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {searchCategory, categoriesByType} from '@src/helpers';
 import {SubcategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography, useTheme, useMediaQuery, Hidden} from '@material-ui/core';
@@ -29,26 +28,27 @@ export const CategoriesPage: FC = () => {
 
     const shallow = {shallow: true};
     const {locale, query, push} = useRouter();
-    const [postTypeName, categoryName, subcategoryName] = query.slug as string[];
+    const {post_type, main_ctgr, sub_ctgr} = query;
 
     const [searchTxt, setSearchTxt] = useState('');
     const [category, setCategory] = useState(initCategory);
     const [subctgrs, setSubctgrs] = useState<SubcategoryType[]>([]);
 
-    const categories = categoriesByType(postTypeName);
+    const categories = categoriesByType(post_type as string);
+    const baseURL = `/create?post_type=${post_type}`;
 
-    const handleCategory = (ctgr) => () => {
-        setSearchTxt('');
-        push(`/create/${postTypeName}/${ctgr.name}`, undefined, shallow);
+    const handleCategory = (ctgr) => async () => {
+        !!searchTxt && setSearchTxt('');
+        await push(`${baseURL}&main_ctgr=${ctgr.name}`, undefined, shallow);
     };
 
-    const handleSubCategory = (ctgr) => async () => {
-        const {type, parents} = ctgr;
-        const [mainCtgr, subCtgr] = parents;
-        const url = `/create${!type || subCtgr ? '/form' : ''}/${postTypeName}/${mainCtgr.name}`;
+    const handleSubCategory = (selectedCtgr) => async () => {
+        const {parents} = selectedCtgr;
+        const [main, sub] = parents;
+        const url = `${baseURL}&main_ctgr=${main.name}&sub_ctgr=${sub?.name ?? selectedCtgr.name}${sub ? `&type_ctgr=${selectedCtgr.name}` : ''}`;
 
-        setSearchTxt('');
-        push(`${url}/${subCtgr ? `${subCtgr.name}/${ctgr.name}` : ctgr.name}`, undefined, shallow);
+        !!searchTxt && setSearchTxt('');
+        await push(url, undefined, shallow);
     };
 
     const setMatchedCtgrs = () => {
@@ -62,12 +62,12 @@ export const CategoriesPage: FC = () => {
     };
 
     const setSubLvlCtgrs = () => {
-        if (categoryName) {
+        if (main_ctgr) {
             categories.forEach(({id, name, subcategory}) => {
-                if (name === categoryName) {
-                    if (subcategoryName) {
+                if (name === main_ctgr) {
+                    if (sub_ctgr) {
                         subcategory.forEach(({name, type}) => {
-                            if (name === subcategoryName) {
+                            if (name === sub_ctgr) {
                                 type ? setSubctgrs(type) : setSubctgrs(subcategory);
                             }
                         });
@@ -80,14 +80,11 @@ export const CategoriesPage: FC = () => {
         }
     };
 
-    const handleBackSubCtgr = async () => {
-        subcategoryName
-            ? await push(`/create/${postTypeName}/${categoryName}`, undefined, shallow)
-            : await push(`/create/${postTypeName}`, undefined, shallow);
-    };
-
-    const handleBack = async () => {
-        await push('/create/type', undefined, shallow);
+    const handleBack = (main = false) => async () => {
+        await push(main
+            ? '/create'
+            : `${baseURL}${sub_ctgr ? `&main_ctgr=${main_ctgr}` : ''}`, undefined, shallow);
+        !main && !sub_ctgr && setSubctgrs([]);
     };
 
     useEffect(() => {
@@ -100,7 +97,7 @@ export const CategoriesPage: FC = () => {
 
     useEffect(() => {
         setSubLvlCtgrs();
-    }, [categoryName, subcategoryName, locale]);
+    }, [main_ctgr, sub_ctgr, locale]);
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
@@ -111,8 +108,8 @@ export const CategoriesPage: FC = () => {
             <Hidden smDown>
                 <StepsProgress
                     activeStep={1}
-                    handleBack={handleBack}
-                    title={t(`common:${postTypeName}`)}
+                    handleBack={handleBack(true)}
+                    title={t(`common:${post_type}`)}
                 />
             </Hidden>
             <Hidden smUp>
@@ -128,7 +125,7 @@ export const CategoriesPage: FC = () => {
                 </div>
             </Hidden>
             <Grid container>
-                {!(categoryName && isSmDown) && (
+                {!(subctgrs.length && isSmDown) && (
                     <Grid
                         item
                         xs={12}
@@ -141,7 +138,7 @@ export const CategoriesPage: FC = () => {
                                     key={i}
                                     disableGutters
                                     onClick={handleCategory(ctgr)}
-                                    className={categoryName === ctgr.name ? 'selected-category' : ''}
+                                    className={main_ctgr === ctgr.name ? 'selected-category' : ''}
                                 >
                                     {ctgr.smallIcon}
                                     <Typography variant="subtitle1">
@@ -152,7 +149,7 @@ export const CategoriesPage: FC = () => {
                         </List>
                     </Grid>
                 )}
-                {((categoryName && isSmDown) || !isSmDown) && (
+                {((subctgrs.length && isSmDown) || !isSmDown) && (
                     <Grid
                         item
                         xs={12}
@@ -173,17 +170,17 @@ export const CategoriesPage: FC = () => {
                         </Hidden>
                         {!!subctgrs.length
                             ? <List disablePadding>
-                                {subcategoryName
-                                    ? <ListItem onClick={handleBackSubCtgr}>
+                                {sub_ctgr
+                                    ? <ListItem onClick={handleBack()}>
                                         <CustomButton className="back-btn">
                                             <BackspaceIcon/>
                                             <Typography variant="subtitle1">
-                                                {t(`${categoryName}.${subcategoryName}.name`)}
+                                                {t(`${main_ctgr}.${sub_ctgr}.name`)}
                                             </Typography>
                                         </CustomButton>
                                     </ListItem>
-                                    : categoryName && isSmDown && (
-                                    <ListItem onClick={handleBackSubCtgr}>
+                                    : main_ctgr && isSmDown && (
+                                    <ListItem onClick={handleBack()}>
                                         <CustomButton className="back-btn">
                                             <BackspaceIcon/>
                                             <Typography variant="subtitle1">

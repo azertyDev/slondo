@@ -3401,7 +3401,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     title: `Сельскохозяйственные животные в ${location} | продажа коров, баранов, куриц`,
                     description: `Продажа сельскохозяйственных животных в ${location} | купить телят, коров, баранов, куриц и других сельхоз. животных | slondo.uz`,
                     text: `Сельскохозяйственные животные - являются источником многих продуктов, без которых невозможно представить прилавки супермаркетов на сегодняшний день. Коровы дают человеку мясо, кожу и молоко, из которого впоследствии изготавливаются другие продукты. Бараны и овцы снабжают нас мясом, а курица приносит яйца. Помимо них, практически ни одна ферма не обходится без перепелов и кроликов, а в некоторых местах Узбекистана, можно встретить фермы со страусами, козами или верблюдами. Верблюжьи фермы производят питательно молоко и специальный жир, которые в дальнейшем будут использоваться для лечения болезней или изготовления мыла. 
-                Выбрать лучшее из множества предложений, вам поможет slondo.uz`
+                    Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
                     title: `Qishloq xo’jaligi xayvonlari ${location}da| sigir,qo’y,parrandalarni sotish`,
@@ -3429,7 +3429,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     title: `Товары для животных ${location} | корм для собак и кошек, игрушки, наполнители`,
                     description: `Продажа товаров для домашних питомцев: собак, кошек, рыбок и других животных | купить или узнать цены на игрушки, наполнитель, лоток, корм, шампуни и другие товары`,
                     text: `Для ухода за домашними питомцами приходится тратить кучу времени, средств и сил. Ситуация усугубляется при наличии животных разных видов, каждому из которых необходим индивидуальный уход. В процессе содержания, роста и развития питомца, приобретается множество различных товаров для животных, будь то лакомство для собак, клетки для птиц, витамины или средства для ухода. Некоторые из них являются необходимыми для содержания, другие товары для питомцев, покупаются в целях создания максимально благоприятной среды. К основным, обязательным товарам можно отнести вольеры: будки, террариумы, аквариумы, клетки; и корма: для собак, кошек, рыбок, живые корма.
-                Выбрать лучшее из множества предложений, вам поможет slondo.uz`
+                    Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
                     title: `Hayvonlar uchun mahsulotlar ${location}da | it va mushuk uchun ozuqa,o’yinchoq va qumlar`,
@@ -11249,22 +11249,23 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         `
                     },
                     all_for_the_nur: {
-                        title: `Купить детскую мебель в ${location} | двухъярусные кровати, шкафы, люльки`,
-                        description: `Все для детской комнаты, по лучшим ценам: бешик, колыбели, письменные столы, кроватки и многое другое, от частников, магазинов и производителей`,
-                        text: ` При выборе мебели, мы обычно отдаем свое предпочтение стилю, функциональности и качеству изделий. Но при покупке гарнитура для детской, на первое место переносится безопасность ребенка. Важно чтобы мебель была изготовлена из экологически чистых материалов, розетки в комнатах были заблокированы, а острые края и грубые стекла надежно спрятаны от случайных ударов. На сегодняшний день в магазинах имеется огромное множество различной мебели, с интересным дизайном и приемлемыми ценами. Выбрать лучшее из множества предложений вам поможет slondo.uz:
-                        - Защитные барьеры, накладки
-                        - Бешик
-                        - Качели, шезлонги
-                        - Колыбели, люльки
-                        - Кроватки
-                        - Манежи
-                        - Ночники
-                        - Пеленальные столики
-                        - Постельные принадлежности
-                        - Ростомеры
-                        - Стульчики для кормления
-                        - Ходунки, прыгунки
-                        - Другое`
+                        title: `Bolalar uchun mebelni ${location}da sotib olish | ikki qavatli krovatlar,taxmonlar, belanchaklar`,
+                        description: `Eng zo'r narxlarda barchasi bolalar xonasi  uchun:beshiklar,belanchaklar, yozuv stollari,krovatcgalar va boshqa ko'plab buyumlar magazinlar, ishlab chiqaruvchilar va ikkilamchi bozordan`,
+                        text: `Odatda Biz mebel tanlayotganimizda, uning qulayligiga, uslubiga va sifatiga o'z e'tiborimizni qaratamiz. Ammo, bolalar xonasi uchun mebel tanlayotganimizda, birirnchi o'rinda kichkintoyning xavfsizligi hisobga olinadi.
+                        Bolalar mebeli ekologik toza xomashyodan yasalgani, xonalardagi elektr rozetkalari bekitilgan bo'lishi, qirrasi o'tkir va shishali tomonlari behos zarbadan bekitilgan bo'lishi juda muhimdir. Bugungi kunda do'konlarda ajoyib uslubda yasalgan va cho'ntakbop narxlarda ko'plab mebellar mavjud. Ko'plab takliflar ichida eng yaxshisini tanlashda Sizga slondo.uz yordam beradi:
+                        -Himoyalovchi to'siq
+                        -Beshik
+                        -Arg'imchoq, shezlong
+                        -Belanchak,gamak
+                        -Krovatchalar
+                        -Manejlar
+                        -Tungi chiroqlar
+                        -Yo'rgaklash stoli
+                        -To'shak va yoping'ichlar
+                        -Bo'y o'lchagich
+                        -O'rindiqchalar
+                        -Yurish va sakrash uchun moslamalar
+                        -Boshqalar`
                     },
                     nappies_pots: {
                         title: `Taglik va tuvak ${location}da sotib olish / Pampers, Hugges`,

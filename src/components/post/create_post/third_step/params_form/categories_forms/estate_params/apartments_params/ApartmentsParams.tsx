@@ -32,7 +32,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-
     const isDailyRent = type.name === 'dailyRent';
     const isRent = type.id === 2 || type.id === 3;
 
@@ -70,19 +69,18 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
+    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
     const isLgUp = useMediaQuery(useTheme().breakpoints.up('lg'));
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
 
     const classes = useStyles();
     return (
         <Grid className={classes.root}>
             <CustomFormikProvider formik={formik}>
                 <CustomAccordion
+                    isPreview={isPreview}
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
-                    isPreview={isPreview}
                     title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
@@ -90,9 +88,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                 >
                     <Grid item xs={12} sm={6}>
                         <PostTitle
-                            isPreview={isPreview}
+                            t={t}
+                            formik={formik}
                             title={values.title}
-                            formik={formik} t={t}
+                            isPreview={isPreview}
                         />
                     </Grid>
                     {isPreview
@@ -131,17 +130,17 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                         <Grid item container xs={12} sm={5} md={5} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='utilities'
-                                                labelTxt={t('filters:utilities')}
                                                 checked={values.utilities}
                                                 handleCheckbox={handleCheckbox}
+                                                labelTxt={t('filters:estate.utilities.name')}
                                             />
                                         </Grid>
                                         <Grid item container xs={12} sm={3} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='with_pledge'
-                                                labelTxt={t('filters:with_pledge')}
                                                 checked={values.with_pledge}
                                                 handleCheckbox={handleCheckbox}
+                                                labelTxt={t('filters:estate.with_pledge.name')}
                                             />
                                         </Grid>
                                     </>
@@ -157,23 +156,23 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid item xs={12} sm={6} md={4}>
                                 <NumberSelect
-                                    count={isLgUp ? 8 : 5}
                                     name='floor'
                                     errors={errors}
                                     touched={touched}
                                     values={values}
                                     setValues={setValues}
+                                    count={isLgUp ? 8 : 5}
                                     transKey={`${categoryName}.`}
                                 />
                             </Grid>
                             <Grid item container xs={12} sm={6} md={4}>
                                 <NumberSelect
-                                    count={isLgUp ? 8 : 5}
                                     name='number_of_floors'
                                     errors={errors}
                                     touched={touched}
                                     values={values}
                                     setValues={setValues}
+                                    count={isLgUp ? 8 : 5}
                                     transKey={`${categoryName}.`}
                                 />
                             </Grid>
