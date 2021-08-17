@@ -74,7 +74,6 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             }
         ]
     };
-
     const formIndex = 2;
     const isJob = categoryName === 'job';
 

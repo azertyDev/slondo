@@ -70,7 +70,12 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
         touched
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleFracInput, setRequireVals} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        handleNumericInput,
+        handleFracInput,
+        setRequireVals
+    } = useHandlers(values, setValues);
 
     useEffect(() => {
         setRequireVals(filters);

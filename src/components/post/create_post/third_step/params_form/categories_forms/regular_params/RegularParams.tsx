@@ -13,6 +13,7 @@ import {PreviewValues} from '@src/components/post/create_post/third_step/params_
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
+import {unstable_batchedUpdates} from "react-dom";
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -32,13 +33,6 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         title
     };
 
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
-
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
@@ -50,10 +44,13 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         setValues
     } = formik;
 
-    const {handleSelect, setRequireVals} = useHandlers(values, setValues);
+    const {handleSelect, setRequireVals, setValsByUrlParams} = useHandlers(values, setValues);
 
     useEffect(() => {
-        setRequireVals(filters);
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            params && setValsByUrlParams(params);
+        });
     }, [filters]);
 
     const classes = useStyles();

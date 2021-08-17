@@ -1,5 +1,7 @@
-import {Dispatch, FC, SetStateAction, useState} from 'react';
+import {FC, useState} from 'react';
 import Link from "next/link";
+import {useFormik} from 'formik';
+import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -7,7 +9,6 @@ import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
 import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
-import {useFormik} from 'formik';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/fields_keys';
 import {
@@ -25,27 +26,20 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
-import {useRouter} from "next/router";
 import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
     postType: PostType,
     currentFormIndex: number,
-    isPreview: boolean,
-    categoryName: string,
-    setIsPreview: Dispatch<SetStateAction<boolean>>,
     handleSubmit: (v) => void
 };
 
 export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
-        isPreview,
-        setIsPreview,
         currentFormIndex,
         postType,
-        handleSubmit,
-        categoryName
+        handleSubmit
     } = props;
 
     const {t} = useTranslation('post');
@@ -62,8 +56,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         currency,
         available_days,
         available_start_time,
-        available_end_time
+        available_end_time,
+        main_ctgr,
+        preview
     } = useRouter().query;
+
+    const isPreview = +preview === 1;
+    const categoryName = main_ctgr as string;
 
     const formIndex = 1;
     const isAdvanceAuction = postType.name === 'exauc';
@@ -179,7 +178,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         };
 
         handleSubmit({commonParams});
-        setIsPreview(true);
     };
 
     const formik = useFormik({

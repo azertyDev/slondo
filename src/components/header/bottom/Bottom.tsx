@@ -3,7 +3,17 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
 import {cookieOpts, cookies} from '@src/helpers';
-import {AppBar, Avatar, Box, Container, Grid, Popover, Hidden, Typography, useScrollTrigger} from '@material-ui/core';
+import {
+    AppBar,
+    Avatar,
+    Box,
+    Container,
+    Grid,
+    Popover,
+    Hidden,
+    Typography,
+    useScrollTrigger
+} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
@@ -53,9 +63,9 @@ const Bottom: FC<BottomProps> = (props) => {
         if (region) {
             const userLocation: any = {region};
             if (city) userLocation.city = city;
-            cookies.set('[...path]', userLocation, cookieOpts);
+            cookies.set('user_location', userLocation, cookieOpts);
         } else {
-            cookies.remove('[...path]', {path: '/'});
+            cookies.remove('user_location', {path: '/'});
         }
     };
 
@@ -127,7 +137,7 @@ const Bottom: FC<BottomProps> = (props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
-                                    <Link href="/create/type">
+                                    <Link href="/create">
                                         <a className='create-post-link'>
                                             <CustomButton
                                                 color="primary"

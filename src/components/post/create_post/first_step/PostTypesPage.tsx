@@ -2,20 +2,18 @@ import {FC} from 'react';
 import {Grid, Hidden, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
-import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {StepsProgress} from '@src/components/post/create_post/steps_progress/StepsProgress';
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
-
 export const PostTypesPage: FC = () => {
     const {t} = useTranslation('post');
     const {push} = useRouter();
 
-    const handlePostType = (url: string) => () => {
-        push(url, null, {shallow: true});
+    const handlePostType = (url: string) => async () => {
+        await push(url, null, {shallow: true});
     };
 
     const classes = useStyles();
@@ -86,7 +84,7 @@ export const PostTypesPage: FC = () => {
                                 </div>
                             </Hidden>
                             <CustomButton
-                                onClick={handlePostType(`/create/${postType.name}`)}
+                                onClick={handlePostType(`/create?post_type=${postType.name}`)}
                             >
                                 {t(`create_${postType.name}`)}
                             </CustomButton>

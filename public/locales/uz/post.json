@@ -1,4 +1,11 @@
 {
+  "Mo": "Du",
+  "Tu": "Se",
+  "We": "Cho",
+  "Th": "Pa",
+  "Fr": "Ju",
+  "Sa": "Sha",
+  "Su": "Ya",
   "select_category": "Yaratish | Turkum",
   "select_params": "Yaratish | Parameterlar",
   "select_post": "Yaratish | E'lon turi",

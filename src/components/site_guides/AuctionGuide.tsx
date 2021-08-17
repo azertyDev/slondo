@@ -55,7 +55,7 @@ export const AuctionGuide: FC<WithT> = (props) => {
                                 </Hidden>
                                 <Grid item xs={12} sm={6} container justifyContent='center'>
                                     <img
-                                        src="/img/safe_shopping/auction/auction0.png"
+                                        src="/img/safe_deal/auction/auction0.png"
                                         alt="auction-img"
                                     />
                                 </Grid>

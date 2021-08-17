@@ -50,6 +50,7 @@
   "display_phone": "Telefon raqamingizni ko'rsatish",
   "archive": "Arxiv",
   "visibility": "Ko'rinmoq",
+  "color": "Rangi",
   "car": {
     "color": {
       "name": "Rangi"

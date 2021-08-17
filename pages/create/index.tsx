@@ -1,8 +1,8 @@
-import {GetServerSideProps} from 'next';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {GetStaticProps} from 'next';
 import CreatePost from '@src/components/post/create_post/CreatePost';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
+export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,

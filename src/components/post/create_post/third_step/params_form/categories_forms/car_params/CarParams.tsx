@@ -39,7 +39,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const {post_id, title, params} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
@@ -201,7 +201,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     useEffect(() => {
-        (post_id !== undefined && params !== undefined)
+        (params !== undefined)
             ? setValsByUrlParams()
             : setRequireParamsVals(
             values,

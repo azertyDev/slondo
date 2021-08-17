@@ -48,7 +48,7 @@
     "auction_ended_with_winner": "Tabriklaymiz! № {{ads_id}} sonli Auktsion  nihoyasiga yetdi, {{user_name}} g’olib deb topildi. Mahsulotni yetkazish va bitimni yakunlash uchun, g’olib bilan bog’laning",
     "auction_ended_without_winner": "№ {{ads_id}} raqamli Auktsion nihoyasiga yetdi, g’olib aniqlanmadi",
     "bet_made": "{{user_name}} foydalanuvchi {{value}} sum tikdi",
-    "post_published": "Tabriklaymiz, Sizning № {{ads_id}} sonli e’loningiz Slondoda chop etildi.",
+    "post_published": "Tabriklaymiz, № {{ads_id}} sonli e’lon Slondoda chop etildi.",
     "auction_published": "Tabriklaymiz, № {{ads_id}} sonli  Auktsion Slondoda chop etildi.",
     "buyer_refused_post": "{{user_name}} foydalanuvchi № {{ads_id}} raqamli e’lon bo’yicha Xavfsiz Xaridni bekor qildi . E’lon yana Slondoda faollashtirildi",
     "buyer_paid_secure_post": "№ {{ads_id}} sonli Xavfsiz Xarid bo’yicha e’lonning  to’lovi {{user_name}} foydalanuvchi tomonidan to’landi.Mahsulotni yetkazish uchun,xaridor bilan bog’laning,bitimni yakunlang",

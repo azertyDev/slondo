@@ -1,69 +1,76 @@
 import {FC} from 'react';
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
-import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 import {PostTypesPage} from "@src/components/post/create_post/first_step/PostTypesPage";
 import {CategoriesPage} from "@src/components/post/create_post/second_step/CategoriesPage";
 import {FormPages} from "@src/components/post/create_post/third_step/FormPages";
 import {MainLayout} from "@src/components/main_layout/MainLayout";
-import {useTranslation} from "next-i18next";
+import {site_categories} from "@src/common_data/site_categories";
 
 const CreatePost: FC = () => {
-    const {query, push} = useRouter();
     const {t} = useTranslation('post');
-    const [url, postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
 
-    const title = (() => {
-        switch (url) {
-            case 'type':
-                return 'select_post';
-            case 'post':
-            case 'auc':
-            case 'exauc':
-                return 'select_category';
-            case 'form':
-                return 'select_params';
+    const {query, push, asPath} = useRouter();
+    const {post_type, main_ctgr, sub_ctgr, type_ctgr, preview} = query;
+    const isPreview = +preview === 1;
+
+    const getBackURL = () => {
+        const ctgrPrevURL = `
+            /create?post_type=${post_type}&main_ctgr=${main_ctgr}${
+            type_ctgr ? `&sub_ctgr=${sub_ctgr}` : ''
+        }`;
+
+        if (isPreview) {
+            return asPath.replace(/&preview=1/, '');
         }
-    })();
+
+        if (sub_ctgr || type_ctgr) {
+            return ctgrPrevURL;
+        }
+
+        return '/create';
+    };
+
+    const getTitle = () => {
+        if (post_type) {
+            return 'select_category';
+        }
+        if (type_ctgr || (!type_ctgr && sub_ctgr)) {
+            return 'select_params';
+        }
+        return 'select_post_type';
+    };
 
     const getPage = () => {
-        switch (url) {
-            case 'type':
-                return <PostTypesPage/>;
-            case 'post':
-            case 'auc':
-            case 'exauc':
-                return <CategoriesPage/>;
-            case 'form':
-                return <FormPages/>;
-            default:
-                return <PageNotFound/>;
+        if (sub_ctgr || type_ctgr) {
+            const hasType = !!site_categories
+                .find(ctgr => ctgr.name === main_ctgr).subcategory
+                .find(sub => sub.name === sub_ctgr).type;
+            return !hasType || type_ctgr
+                ? <FormPages backURL={getBackURL()}/>
+                : <CategoriesPage/>;
         }
+
+        if (post_type) {
+            return <CategoriesPage/>;
+        }
+
+        return <PostTypesPage/>;
     };
 
     const handleBack = async () => {
-        switch (url) {
-            case 'type':
-                await push('/');
-                break;
-            case 'post':
-            case 'auc':
-            case 'exauc':
-                await push('/create/type');
-                break;
-            case 'form':
-                await push(
-                    `/create/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
-                    undefined,
-                    {shallow: true}
-                );
-        }
+        await push(
+            getBackURL(),
+            undefined,
+            {shallow: true}
+        );
     };
 
     return (
         <MainLayout
+            title={t(getTitle())}
             handleBack={handleBack}
-            title={t(title)}
         >
             {getPage()}
         </MainLayout>

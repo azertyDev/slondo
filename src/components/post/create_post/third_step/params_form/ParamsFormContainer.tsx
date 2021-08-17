@@ -73,8 +73,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
 
     const onSubmit = (values) => {
         const params = prepareParamsData({...values});
-        handleNextFormOpen();
         handleSubmit({params});
+        handleNextFormOpen();
     };
 
     const getParamsForm = () => {
