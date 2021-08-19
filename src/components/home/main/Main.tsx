@@ -50,7 +50,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                 </Container>
                 <Hidden lgUp>
                     <div className={classes.createAdBlock}>
-                        <Link href={'/create/type'} shallow>
+                        <Link href={'/create'} shallow>
                             <a>
                                 <Slide
                                     appear={false}

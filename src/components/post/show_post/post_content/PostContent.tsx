@@ -160,7 +160,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}.name`)}:
+                        {t(`filters:${isNoTrans ? `${key}` : `${transKey}.${key}.name`}`)}:
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span
