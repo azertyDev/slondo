@@ -6,7 +6,7 @@ import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typog
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
-import {numberPrettier, transformCyrillic} from '@src/helpers';
+import {checkTimeForZero, numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {months} from '@src/common_data/common';
 import {AuthCtx} from "@src/context/AuthCtx";
@@ -46,14 +46,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
 
     const date = new Date(created_at);
 
-    function checkTime(i) {
-        if (i < 10) {
-            i = '0' + i;
-        }
-        return i;
-    }
 
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
+    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours() + ':' + checkTimeForZero(date.getMinutes())}`;
 
     const url = `/obyavlenie/${translatedTitle}-${id}`;
 

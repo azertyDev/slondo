@@ -14,9 +14,9 @@ import {ResponsiveModal} from '@src/components/elements/responsive_modal/Respons
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {TEXT_LIMIT} from '@src/constants';
-import {getErrorMsg} from '@src/helpers';
+import {checkTimeForZero, getErrorMsg} from '@src/helpers';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
-import {Box, Divider, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 
 export const Ratings: FC = () => {
@@ -44,6 +44,7 @@ export const Ratings: FC = () => {
     const [commentData, setCommentData] = useState(initCommentData);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const fetchUserRatings = async () => {
         try {
@@ -117,64 +118,75 @@ export const Ratings: FC = () => {
     const classes = useStyles();
     return (
         <>
-            <Grid container spacing={2} className={classes.root}>
-                <Grid item xs={12}>
+            <Grid container spacing={isXsDown ? 0 : 2} className={classes.root}>
+                <Grid item xs={12} container justifyContent='center'>
                     <Rating
                         card
                         readOnly
                         name="rating"
                         ratingValue={rating}
                         ratingCount={number_of_ratings}
+                        className='mainRating'
                     />
                 </Grid>
-                <Divider variant='fullWidth' />
                 <Grid item xs={12}>
-                    <Typography variant='h6' gutterBottom>
-                        Оценки и отзывы
-                    </Typography>
+                    <Box width={1} my={2} p='5px 30px' className='ratingHeader'>
+                        <Typography variant='h6'>
+                            {t('reviews_rating')}
+                        </Typography>
+                    </Box>
                     {userRatings.map(({comments, rating}, index) => {
                         const [mainComment, ...replyComments] = comments;
-                        const date = new Date(comments[0].created_at);
-                        const formatted_date1 = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+                        const date = new Date(mainComment?.created_at);
+                        const formatted_date1 = `${checkTimeForZero(date.getHours())}:${checkTimeForZero(date.getMinutes())} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
                         return (
                             <Box key={index} className='review' pb={2} mb={2}>
                                 <Box mb={2}>
-                                    <Grid container justifyContent='center' alignItems='center'>
-                                        <Grid item xs={1}>
-                                            <UserAvatarComponent
-                                                width='50px'
-                                                height='50px'
-                                                avatar={mainComment.author.avatar}
-                                            />
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} md={10} container justifyContent='center'>
+                                            <Grid item xs={2} container justifyContent='center'>
+                                                <UserAvatarComponent
+                                                    width={isXsDown ? '30px' : '50px'}
+                                                    height={isXsDown ? '30px' : '50px'}
+                                                    avatar={mainComment?.author?.avatar}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={10} container alignItems='center'>
+                                                <Grid item xs={12} sm={8}>
+                                                    <Typography variant='subtitle1' gutterBottom>
+                                                        <strong>
+                                                            {`${mainComment?.author?.name ?? ''} ${mainComment?.author?.surname ?? ''}`}
+                                                        </strong>
+                                                    </Typography>
+                                                    <Typography variant='caption' component='p' gutterBottom>
+                                                        {formatted_date1}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={12} sm={4}>
+                                                    <Rating ratingValue={rating} readOnly />
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item xs={9}>
-                                            <Typography variant='subtitle1' gutterBottom>
-                                                <strong>
-                                                    {`${mainComment.author.name ?? ''} ${mainComment.author.surname ?? ''}`}
-                                                </strong>
-                                            </Typography>
-                                            <Typography variant='caption' component='p' gutterBottom>
-                                                {formatted_date1}
-                                            </Typography>
-                                            <ReadMore id={mainComment.id} threshold={55}>
-                                                <Typography variant='subtitle2'>
-                                                    {mainComment.comment}
-                                                </Typography>
-                                            </ReadMore>
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <Rating ratingValue={rating} readOnly />
+                                        <Grid item xs={12} md={10} container justifyContent='flex-end'>
+                                            <Grid item xs={12} sm={10}>
+                                                <ReadMore id={mainComment?.id} threshold={55}>
+                                                    <Typography variant='subtitle2'>
+                                                        {mainComment?.comment}
+                                                    </Typography>
+                                                </ReadMore>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </Box>
-                                <Grid container spacing={3} justifyContent='flex-end'>
+
+                                <Grid item xs={12} md={10} container justifyContent='flex-end' spacing={2}>
                                     {replyComments.map((commentData, index) => {
                                         const {id, comment, creator, created_at, author, reply} = commentData;
                                         const date = new Date(created_at);
                                         const formatted_date = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
                                         if (index % 2) {
                                             return (
-                                                <Grid item xs={11} key={index}>
+                                                <Grid item xs={12} sm={10} key={index}>
                                                     <Box>
                                                         <Box mb={2}>
                                                             <Typography variant='subtitle1' gutterBottom>
@@ -197,7 +209,7 @@ export const Ratings: FC = () => {
                                                                 color='secondary'
                                                             >
                                                                 <Typography variant='subtitle1' component='p'>
-                                                                    Ответить
+                                                                    {t('common:answer')}
                                                                 </Typography>
                                                             </CustomButton>
                                                         )}
@@ -206,7 +218,7 @@ export const Ratings: FC = () => {
                                             );
                                         }
                                         return (
-                                            <Grid item xs={11} key={index}>
+                                            <Grid item xs={12} sm={10} key={index}>
                                                 <Box className='review-answer'>
                                                     <Box mb={2}>
                                                         <Typography variant='subtitle1' gutterBottom>
@@ -229,7 +241,7 @@ export const Ratings: FC = () => {
                                                             color='secondary'
                                                         >
                                                             <Typography variant='subtitle1' component='p'>
-                                                                Ответить
+                                                                {t('common:answer')}
                                                             </Typography>
                                                         </CustomButton>
                                                     )}
@@ -238,6 +250,7 @@ export const Ratings: FC = () => {
                                         );
                                     })}
                                 </Grid>
+
                             </Box>
                         );
                     })}
@@ -271,13 +284,13 @@ export const Ratings: FC = () => {
                                     disableRequire={true}
                                     value={values.comment}
                                     onChange={handleChange}
-                                    placeholder='Поделитесь впечатлениями'
-                                    labelTxt={t('Оставьте коментарий')}
+                                    placeholder={t('shareYourImpression')}
+                                    labelTxt={t('giveComment')}
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                 />
                                 <CustomButton type='submit' color='secondary'>
                                     <Typography variant='subtitle1' component='p'>
-                                        Ответить
+                                        {t('common:send')}
                                     </Typography>
                                 </CustomButton>
                             </Box>

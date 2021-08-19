@@ -5,7 +5,10 @@ export const useStyles = makeStyles((theme) => ({
         '& .pl-16': {
             paddingLeft: 16,
             [theme.breakpoints.down('sm')]: {
-                paddingLeft: 10,
+                paddingLeft: 10
+            },
+            [theme.breakpoints.down('xs')]: {
+                paddingLeft: 0
             }
         },
         '& h6.menu-title': {

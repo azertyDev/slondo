@@ -13,6 +13,7 @@ import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
     user: UserInfo,
+    card?: boolean,
     width?: string,
     height?: string
 };
@@ -20,25 +21,26 @@ type UserInfoWithAvatarPropsType = {
 export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const {
         user,
+        card,
         width,
         height
     } = props;
 
-    const isIncognito = INCOGNITO_NAMES.some(n => n === user.name);
+    const isIncognito = INCOGNITO_NAMES.some(n => n === user?.name);
 
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
     const {setAuthModalOpen, auth, user: siteUser} = useContext(AuthCtx);
 
-    const isSelf = user.id === siteUser.id;
+    const isSelf = user?.id === siteUser.id;
 
     const [isFollow, setIsFollow] = useState(false);
-    const formatted_date = dateHelper(user.created_at);
+    const formatted_date = dateHelper(user?.created_at);
 
     const handleFollow = async () => {
         try {
             if (auth.isAuth) {
-                await userAPI.follow(user.id);
+                await userAPI.follow(user?.id);
                 setIsFollow(!isFollow);
             } else {
                 setAuthModalOpen(true);
@@ -49,7 +51,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     };
 
     useEffect(() => {
-        setIsFollow(user.signed);
+        setIsFollow(user?.signed);
     }, [user]);
 
     const classes = useStyles();
@@ -58,19 +60,20 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
             <UserAvatarComponent
                 width={width}
                 height={height}
-                avatar={user.avatar}
+                avatar={user?.avatar}
             />
             <Box>
                 <Typography color="initial" variant='subtitle1' gutterBottom>
-                    {!isIncognito && (`${user.name ?? ''} ${user.surname ?? ''}`)}
+                    {!isIncognito && (`${user?.name ?? ''} ${user?.surname ?? ''}`)}
                 </Typography>
                 <Typography variant="subtitle1" color="initial" gutterBottom>
                     {t('created_at', {created_at: formatted_date})}
                 </Typography>
                 <Rating
                     readOnly
-                    ratingValue={user.rating}
-                    ratingCount={user.observer?.number_of_ratings}
+                    card={card}
+                    ratingValue={user?.rating}
+                    ratingCount={user?.observer?.number_of_ratings}
                 />
                 {!isSelf && (
                     <CustomButton onClick={handleFollow}>

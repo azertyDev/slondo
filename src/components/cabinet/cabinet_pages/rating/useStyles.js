@@ -1,14 +1,21 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     root: {
-        '& hr': {
-            width: '100%'
+        '& div.ratingHeader': {
+            background: '#F2F2F2',
+            borderRadius: '3px',
+            '& h6': {
+                fontWeight: 600
+            }
         },
-        '& .rating': {
-            flexDirection: 'column-reverse!important',
-            '& p': {
-                fontSize: '3rem'
+        '& .mainRating': {
+            alignItems: 'flex-end',
+            '& .rating': {
+                flexDirection: 'column-reverse!important',
+                '& p': {
+                    fontSize: '3rem'
+                }
             }
         },
         '& .owner-rating': {
@@ -23,7 +30,10 @@ export const useStyles = makeStyles({
                 content: '""',
                 width: '90%',
                 height: '0.8px',
-                background: '#f0f0f0'
+                background: '#f0f0f0',
+                [theme.breakpoints.down('sm')]: {
+                    width: '100%'
+                }
             },
             '& .review-answer': {
                 padding: 10,
@@ -44,4 +54,4 @@ export const useStyles = makeStyles({
             }
         }
     }
-});
+}));

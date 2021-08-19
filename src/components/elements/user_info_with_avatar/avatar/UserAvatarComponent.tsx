@@ -5,8 +5,8 @@ import {useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
     avatar?: string
-    width?: string
-    height?: string
+    width?: string | number,
+    height?: string | number
 };
 
 export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width, height}) => {

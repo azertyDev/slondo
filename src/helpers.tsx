@@ -465,3 +465,10 @@ export const formatNumber = (number: number): string => (
 export const getErrorMsg = (errorMsg, touched, t: TFunction, value?): string => {
     return errorMsg && touched ? t(`errors:${errorMsg}`, {value}) : '';
 };
+
+export const checkTimeForZero = (i) => {
+    if (i < 10) {
+        i = '0' + i;
+    }
+    return i;
+};
