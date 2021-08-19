@@ -37,7 +37,11 @@ const CreatePost: FC = () => {
             return ctgrPrevURL;
         }
 
-        return '/create';
+        if (post_type) {
+            return '/create';
+        }
+
+        return '/';
     };
 
     const getTitle = () => {
