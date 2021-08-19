@@ -1,12 +1,12 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
-import {PreviewValues} from '../../../PreviewValues';
+import {ParamsFormPreview} from '../../../ParamsFormPreview';
 import {getErrorMsg} from '@src/helpers';
 import {NumberSelect} from '@src/components/elements/number_select/NumberSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {CommonParamsPropsType} from '../../../ParamsFormContainer';
+import {CommonParamsPropsType} from '../../../ParamsForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
@@ -18,6 +18,7 @@ import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedS
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
+import {unstable_batchedUpdates} from "react-dom";
 import {useStyles} from './useStyles';
 
 export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
@@ -36,7 +37,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     const isRent = type.id === 2 || type.id === 3;
     const {title, params} = useUrlParams();
 
-    let initVals: any = {
+    const initVals: any = {
         title,
         room: null,
         number_of_floors: null,
@@ -47,13 +48,6 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         with_pledge: false,
         utilities: false
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     const formik = useFormik({
         onSubmit,
@@ -74,10 +68,19 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         handleSelect,
         handleFracInput,
         handleOptionCheckbox,
-        handleNumericInput
+        setRequireVals,
+        setValsByUrlParams
     } = useHandlers(values, setValues);
 
+    const filtersLen = Object.keys(filters).length;
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     const classes = useStyles();
     return (
@@ -96,7 +99,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues
+                        ? <ParamsFormPreview
                             values={values}
                             filters={filters}
                             transKey={t(`${categoryName}.`)}

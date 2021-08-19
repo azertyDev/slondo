@@ -2,8 +2,15 @@ import {FC} from 'react';
 import Box from '@material-ui/core/Box';
 import {Grid, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
-import {DeliveryIcon, ExchangeIcon, PhoneIcon, RenewalIcon, SafeIcon} from '@src/components/elements/icons';
+import {
+    SafeIcon,
+    PhoneIcon,
+    RenewalIcon,
+    DeliveryIcon,
+    ExchangeIcon
+} from '@src/components/elements/icons';
 import {useTranslation} from 'next-i18next';
+import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -24,8 +31,11 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('post');
+    const {main_ctgr} = useRouter().query;
 
     const {auction, avalTime} = values;
+    const isFree = values.price === '0';
+    const isService = main_ctgr === 'service';
     const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
     const hasService = !!values.delivery || !!values.exchange || !!values.auto_renewal || !!auction.auto_renewal || !!auction.offer_the_price || !!values.safe_deal;
 
@@ -41,8 +51,12 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Typography variant="subtitle1">
-                            {numberPrettier(values.price)}&nbsp;
-                            {t(`common:${values.currency.name}`)}
+                            {isFree
+                                ? t(isService ? 'negotiated' : 'for_free')
+                                : <>
+                                    {numberPrettier(values.price)}&nbsp;
+                                    {t(`common:${values.currency.name}`)}
+                                </>}
                         </Typography>
                     </Grid>
                 </Grid>

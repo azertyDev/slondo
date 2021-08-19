@@ -1,5 +1,10 @@
 export const fieldRequiredTxt = 'fieldIsRequired';
 
+export const notRequirePhotosCategories = [
+    'job',
+    'service'
+];
+
 export const noTranslatableFields = [
     'screen',
     'bayonet',
@@ -122,7 +127,8 @@ export const optionFields = [
     'steering',
     'other',
     'comfort',
-    'safety'
+    'safety',
+    'exterior'
 ];
 
 export const singleFields = [

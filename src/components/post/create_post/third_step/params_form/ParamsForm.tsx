@@ -31,7 +31,7 @@ type ParamsFormPropsType = {
     handleFormOpen: (k) => () => void
 };
 
-export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
+export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
     const {
         isPreview,
         filters,
@@ -72,7 +72,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
     };
 
     const onSubmit = (values) => {
-        const params = prepareParamsData({...values});
+        const params = prepareParamsData(values);
         handleSubmit({params});
         handleNextFormOpen();
     };

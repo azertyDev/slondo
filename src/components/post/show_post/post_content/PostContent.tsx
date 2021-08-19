@@ -132,18 +132,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${isNoTrans
-                            ? `${key}`
-                            : `${transKey}.${key}.name`}`)}:
+                        {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {model[key]
                             .map((param) => {
-                                    return t(`filters:${isNoTrans
-                                        ? `${param.name}`
-                                        : `${transKey}.${param.name}.name`}`);
-                                }
-                            )
+                                return t(`filters:${isNoTrans
+                                    ? `${param.name}`
+                                    : `${transKey}.${param.name}.name`}`);
+                            })
                             .join(', ')}
                     </Typography>
                 </li>
@@ -163,10 +160,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${
-                            isNoTrans
-                                ? `${key}`
-                                : `${transKey}.${key}.name`}`)}:
+                        {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span

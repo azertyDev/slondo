@@ -1,14 +1,15 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
+import {getErrorMsg} from '@src/helpers';
+import {unstable_batchedUpdates} from "react-dom";
 import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
-import {PreviewValues} from '../../../PreviewValues';
-import {getErrorMsg} from '@src/helpers';
+import {ParamsFormPreview} from '../../../ParamsFormPreview';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {NumberSelect} from '@src/components/elements/number_select/NumberSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {CommonParamsPropsType} from '../../../ParamsFormContainer';
+import {CommonParamsPropsType} from '../../../ParamsForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
@@ -16,8 +17,8 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
+import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
@@ -37,23 +38,17 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
 
     const {title, params} = useUrlParams();
 
-    let initVals: any = {
+    const initVals: any = {
         title,
+        area: null,
         room: null,
-        number_of_floors: null,
         floor: null,
+        number_of_floors: null,
         estate_type: null,
         furnished: false,
         with_pledge: false,
         utilities: false
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     const formik = useFormik({
         onSubmit,
@@ -69,9 +64,25 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
+    const {
+        handleCheckbox,
+        handleOptionCheckbox,
+        handleSelect,
+        handleFracInput,
+        setValsByUrlParams,
+        setRequireVals
+    } = useHandlers(values, setValues);
+
+    const filtersLen = Object.keys(filters).length;
     const isLgUp = useMediaQuery(useTheme().breakpoints.up('lg'));
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     const classes = useStyles();
     return (
@@ -95,7 +106,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                         />
                     </Grid>
                     {isPreview
-                        ? <PreviewValues
+                        ? <ParamsFormPreview
                             values={values}
                             filters={filters}
                             transKey={t(`${categoryName}.`)}
@@ -130,7 +141,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                         <Grid item container xs={12} sm={5} md={5} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='utilities'
-                                                checked={values.utilities}
+                                                checked={!!values.utilities}
                                                 handleCheckbox={handleCheckbox}
                                                 labelTxt={t('filters:estate.utilities.name')}
                                             />
@@ -138,7 +149,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                         <Grid item container xs={12} sm={3} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='with_pledge'
-                                                checked={values.with_pledge}
+                                                checked={!!values.with_pledge}
                                                 handleCheckbox={handleCheckbox}
                                                 labelTxt={t('filters:estate.with_pledge.name')}
                                             />
@@ -148,7 +159,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <Grid item container xs={12} sm={4} alignItems='flex-end'>
                                     <CheckboxSelect
                                         name='furnished'
-                                        checked={values.furnished}
+                                        checked={!!values.furnished}
                                         handleCheckbox={handleCheckbox}
                                         labelTxt={t('estate.furnished.name')}
                                     />

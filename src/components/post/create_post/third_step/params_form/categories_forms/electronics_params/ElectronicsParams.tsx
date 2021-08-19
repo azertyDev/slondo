@@ -3,16 +3,17 @@ import {Grid} from '@material-ui/core';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsFormContainer';
+import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsForm';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
+import {ParamsFormPreview} from '@src/components/post/create_post/third_step/params_form/ParamsFormPreview';
 import {getFieldsByFilters} from '@src/helpers';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
+import {unstable_batchedUpdates} from "react-dom";
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -29,18 +30,11 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
 
     const isMonitors = type.name === 'monitors';
     const {title, params} = useUrlParams();
+    const filtersLen = Object.keys(filters).length;
 
-
-    let initVals: any = {
+    const initVals: any = {
         title
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     if (isMonitors) {
         initVals.build_in_speakers = false;
@@ -58,11 +52,19 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
         setValues
     } = formik;
 
-    const {handleSelect, handleCheckbox, setRequireVals} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        handleCheckbox,
+        setValsByUrlParams,
+        setRequireVals
+    } = useHandlers(values, setValues);
 
     useEffect(() => {
-        setRequireVals(filters);
-    }, [filters]);
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     return (
         <CustomFormikProvider formik={formik}>
@@ -84,7 +86,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                     />
                 </Grid>
                 {isPreview
-                    ? <PreviewValues
+                    ? <ParamsFormPreview
                         values={values}
                         filters={filters}
                         transKey={`${categoryName}.`}

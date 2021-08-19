@@ -49,7 +49,7 @@
   "offer_price": "Narxni taklif qilish",
   "display_phone": "Telefon raqamingizni ko'rsatish",
   "archive": "Arxiv",
-  "visibility": "Ko'rinmoq",
+  "visibility": "Ko'rinish",
   "color": "Rangi",
   "car": {
     "color": {
@@ -90,6 +90,9 @@
     },
     "power_windows": {
       "name": "Elektr oyna ko'targichlar"
+    },
+    "exterior": {
+      "name": "Tashqi ko'rinish"
     },
     "steering": {
       "name": "Rulni boshqarish"
@@ -6564,187 +6567,181 @@
       "name": "Qaytib bosh"
     },
     "play": {
-      "name": ""
+      "name": "Videoni qo’yish"
     },
     "less_7": {
-      "name": ""
+      "name": "7”dan kichikroq"
     },
     "7_1_to_9": {
-      "name": ""
+      "name": "7.1” dan 9” gacha"
     },
     "9_1_to_12": {
-      "name": ""
+      "name": "9.1” dan 12” gacha"
     },
     "12_1_to_15": {
-      "name": ""
+      "name": "12.1” dan 15” gacha"
     },
     "15_or_more": {
-      "name": ""
+      "name": "15” va undan katta"
     },
     "screen": {
-      "name": ""
+      "name": "Ekran tiniqligi"
     },
     "up_to15": {
-      "name": ""
+      "name": "15” gacha"
     },
     "15_to19_9": {
-      "name": ""
+      "name": "15” dan 19.9”gacha"
     },
     "20to24_9": {
-      "name": ""
+      "name": "20” дan 24.9” gacha"
     },
     "25to29_9": {
-      "name": ""
+      "name": "25” дan 29.9” gacha"
     },
     "30to34_9": {
-      "name": ""
+      "name": "30” dan 34.9” gacha"
     },
     "35to39_9": {
-      "name": ""
+      "name": "35” dan 39.9” gacha"
     },
     "40to44_9": {
-      "name": ""
+      "name": "40” dan 44.9” gacha"
     },
     "45to49_9": {
-      "name": ""
+      "name": "45” dan 49.9” gacha"
     },
     "50to54_9": {
-      "name": ""
+      "name": "50” dan 54.9” gacha"
     },
     "55to59_9": {
-      "name": ""
+      "name": "55” dan 59.9” gacha"
     },
     "60_or_more": {
-      "name": ""
+      "name": "60” dan va yuqori"
     },
     "yes": {
-      "name": ""
+      "name": "Bor"
     },
     "acoustics": {
-      "name": ""
+      "name": "Akustika turi"
     },
     "monitor3d": {
-      "name": ""
+      "name": "3D qo’llovi"
     },
     "area": {
-      "name": ""
+      "name": "Qo’llash ko’lami"
     },
     "outdoor": {
-      "name": ""
+      "name": "Alohida turganlar"
     },
     "kitchen_appliances": {
-      "name": ""
+      "name": "Oshxona uchun"
     },
     "jewelry": {
-      "name": ""
+      "name": "Zargarlik "
     },
     "burner": {
-      "name": ""
+      "name": "Konforkalar turi"
     },
     "gaseosus": {
-      "name": ""
+      "name": "Gazli"
     },
     "induktion": {
-      "name": ""
+      "name": "Induktsion"
     },
     "electrical": {
-      "name": ""
+      "name": "Elektrli"
     },
     "installation": {
-      "name": ""
+      "name": "O'rnatish turi"
     },
     "embedded": {
-      "name": ""
+      "name": "Joylashtiriladigan"
     },
     "holding": {
-      "name": ""
-    },
-    "Set_twelve_more": {
-      "name": ""
+      "name": "Sig'imi"
     },
     "set_nine_eleven": {
-      "name": ""
+      "name": "6-11 to’plamlar"
     },
     "to_six_set": {
-      "name": ""
+      "name": "6 to’plamdan boshlab"
     },
     "cleaning": {
-      "name": ""
+      "name": "Tozalash turi"
     },
     "dry": {
-      "name": ""
+      "name": "Quruq"
     },
     "wet": {
-      "name": ""
+      "name": "Nam"
     },
     "dry_wet": {
-      "name": ""
+      "name": "Quruq va nam "
     },
     "leak_protection": {
-      "name": ""
+      "name": "Chakka o’tishidan saqlash (Tomchilashdan saqlangan)"
     },
     "spead": {
-      "name": ""
+      "name": "Siqish tezligi"
     },
     "to_700_rpm": {
-      "name": ""
+      "name": "700 gacha ay/daq"
     },
     "rpm_700_800": {
-      "name": ""
+      "name": "700-800 ay/daq"
     },
     "rpm_800_900": {
-      "name": ""
+      "name": "800-900 ay/daq"
     },
     "rpm_900_1100": {
-      "name": ""
+      "name": "900-1100 ay/daq"
     },
     "rpm_1100_1200": {
-      "name": ""
+      "name": "1100-1200 ay/daq"
     },
     "to_four_kg": {
-      "name": ""
+      "name": "4 kg gacha"
     },
     "to_five_kg": {
-      "name": ""
+      "name": "5 kg gacha"
     },
     "to_six_kg": {
-      "name": ""
+      "name": "6 kg gacha"
     },
     "to_seven_kg": {
-      "name": ""
+      "name": "7 kg gacha"
     },
     "from_seven_kg": {
-      "name": ""
+      "name": "7 kg dan"
     },
     "gaming": {
-      "name": ""
+      "name": "O’yin uchun"
     },
     "video_card": {
-      "name": ""
+      "name": "Videokarta"
     },
     "discrete": {
-      "name": ""
-    },
-    "Less_14": {
-      "name": ""
+      "name": "Diskretli"
     },
     "one_twings": {
-      "name": ""
+      "name": "1 dona"
     },
     "two_twings": {
-      "name": ""
+      "name": "2 dona"
     },
     "four_twings": {
-      "name": ""
+      "name": "4 dona"
     },
     "for_computers": {
-      "name": ""
+      "name": "Kompyuterlar uchun"
     },
     "for_laptops": {
-      "name": ""
+      "name": "Noutbuklar uchun"
     },
     "platform": {
-      "name": ""
+      "name": "Platforma"
     }
   },
   "hobbies": {
@@ -7271,100 +7268,100 @@
       "name": "Ishlatilgan"
     },
     "subject": {
-      "name": ""
+      "name": "Mavzu"
     },
     "business_literature": {
-      "name": ""
+      "name": "Biznes adabiyotlar"
     },
     "home_and_family": {
-      "name": ""
+      "name": "Uy va oila"
     },
     "art_culture": {
-      "name": ""
+      "name": "San’at, madaniyat"
     },
     "computer_literature": {
-      "name": ""
+      "name": "Kompyuter uchun adabiyot"
     },
     "cooking_recipes": {
-      "name": ""
+      "name": "Oshpazlik, retseptlar"
     },
     "medicine_health": {
-      "name": ""
+      "name": "Tibbiyot, salomatlik"
     },
     "science_technology": {
-      "name": ""
+      "name": "Fan, texnika"
     },
     "poetry": {
-      "name": ""
+      "name": "She’riyat"
     },
     "nature_animals": {
-      "name": ""
+      "name": "Tabiat, hayvonot (hayvonlar)"
     },
     "psychology": {
-      "name": ""
+      "name": "Ruhshunoslik"
     },
     "journalism": {
-      "name": ""
+      "name": "Publitsistika"
     },
     "travel_photos": {
-      "name": ""
+      "name": "Sayohat, foto"
     },
     "religion_esotericism": {
-      "name": ""
+      "name": "Din, ezoterika"
     },
     "garden_and_vegetable_garden": {
-      "name": ""
+      "name": "Bog’ va poliz"
     },
     "sports_fitness": {
-      "name": ""
+      "name": "Sport, fitness"
     },
     "reference_books_encyclopedias": {
-      "name": ""
+      "name": "Ma’lumotnoma, entsiklopediya"
     },
     "educaonal_literature": {
-      "name": ""
+      "name": "O’quv  adabiyoti"
     },
     "hobbies_needlework_creavity": {
-      "name": ""
+      "name": "Xobbi, chevarlik, ijodiyot"
     },
     "fiction": {
-      "name": ""
+      "name": "Badiiy adabiyot"
     },
     "vinyl_records": {
-      "name": ""
+      "name": "Vinil plastinkalar"
     },
     "kids": {
-      "name": ""
+      "name": "Bolalar uchun"
     },
     "yes": {
-      "name": ""
+      "name": "Bor"
     },
     "no": {
-      "name": ""
+      "name": "Yo’q"
     },
     "masks_glasses": {
-      "name": ""
+      "name": "Niqoblar, ko’zoynaklar"
     },
     "boxing_maral_arts": {
-      "name": ""
+      "name": "Boks, yakkakurashlar"
     },
     "cycling": {
-      "name": ""
+      "name": "Velosport"
     },
     "rugby_handball": {
-      "name": ""
+      "name": "Regbi, qo’l to’pi"
     },
     "roller_skates_scooters": {
-      "name": ""
+      "name": "Roliklar, samokatlar, skeytbordlar"
     },
     "sub_type": {
-      "name": ""
+      "name": "Тuri"
     },
     "waterpolo": {
-      "name": ""
+      "name": "Suv polosi"
     },
     "fieldhockey": {
-      "name": ""
+      "name": "Chim xokkeyi"
     }
   },
   "animal": {

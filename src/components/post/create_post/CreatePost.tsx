@@ -7,12 +7,20 @@ import {CategoriesPage} from "@src/components/post/create_post/second_step/Categ
 import {FormPages} from "@src/components/post/create_post/third_step/FormPages";
 import {MainLayout} from "@src/components/main_layout/MainLayout";
 import {site_categories} from "@src/common_data/site_categories";
+import {SuccessPage} from "@src/components/post/create_post/third_step/success_page/SuccessPage";
 
 const CreatePost: FC = () => {
     const {t} = useTranslation('post');
 
     const {query, push, asPath} = useRouter();
-    const {post_type, main_ctgr, sub_ctgr, type_ctgr, preview} = query;
+    const {
+        post_type,
+        main_ctgr,
+        sub_ctgr,
+        type_ctgr,
+        preview,
+        success
+    } = query;
     const isPreview = +preview === 1;
 
     const getBackURL = () => {
@@ -43,6 +51,10 @@ const CreatePost: FC = () => {
     };
 
     const getPage = () => {
+        if (+success === 1) {
+            return <SuccessPage/>;
+        }
+
         if (sub_ctgr || type_ctgr) {
             const hasType = !!site_categories
                 .find(ctgr => ctgr.name === main_ctgr).subcategory

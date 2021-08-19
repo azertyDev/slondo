@@ -1,18 +1,19 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsFormContainer';
+import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsForm';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
-import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
+import {ParamsFormPreview} from '@src/components/post/create_post/third_step/params_form/ParamsFormPreview';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
+import {unstable_batchedUpdates} from "react-dom";
 
 export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -31,17 +32,11 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const hasPosition = !!filters.position;
 
     const {title, params} = useUrlParams();
+    const filtersLen = Object.keys(filters).length;
 
-    let initVals: any = {
+    const initVals: any = {
         title
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     const formik = useFormik({
         onSubmit,
@@ -54,7 +49,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
         setValues
     } = formik;
 
-    const {handleSelect} = useHandlers(values, setValues);
+    const {handleSelect, setRequireVals, setValsByUrlParams} = useHandlers(values, setValues);
 
     const handleCheckbox = ({target}) => {
         setValues({
@@ -62,6 +57,13 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
             urgent_work: target.checked ? filters.urgent_work[0] : null
         });
     };
+
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     return (
         <CustomFormikProvider formik={formik}>
@@ -84,7 +86,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                 </Grid>
                 <Grid item container spacing={1}>
                     {isPreview
-                        ? <PreviewValues
+                        ? <ParamsFormPreview
                             values={values}
                             filters={filters}
                             transKey={`${categoryName}.`}

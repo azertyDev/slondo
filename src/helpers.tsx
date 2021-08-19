@@ -146,9 +146,9 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
                                 disableRequire={multiple}
                                 handleSelect={handleSelect}
                                 transKey={`${categoryName}.`}
-                                labelTxt={t(`filters:${categoryName}.${key}.name`)}
-                                multiple={!isSingleField && (isOptionKey || multiple)}
                                 errorMsg={getErrorMsg(errors[key], touched[key], t)}
+                                multiple={!isSingleField && (isOptionKey || multiple)}
+                                labelTxt={t(`filters:${categoryName}.${key}.name`)}
                             />
                         </Grid>
                         {!!values[key]
@@ -169,7 +169,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
     );
 };
 
-export const urlByParams = (postData) => {
+export const urlByParams = (params) => {
     let url = '';
 
     const postVals = [
@@ -179,8 +179,9 @@ export const urlByParams = (postData) => {
         'delivery',
         'exchange',
         'safe_deal',
-        'currency',
         'price',
+        'currency',
+        'phone',
         'available_days',
         'available_start_time',
         'available_end_time',
@@ -194,14 +195,19 @@ export const urlByParams = (postData) => {
         return v;
     }
 
-    Object.keys(postData).forEach(key => {
-        if (!!postData[key] && postVals.some(k => k === key)) {
-            let value = postData[key];
+    Object.keys(params).forEach(key => {
+        if (!!params[key] && postVals.some(k => k === key)) {
+            let value = params[key];
             if (key === 'model') {
                 value = Object.keys(value).reduce((obj, ik) => {
+                    const iValue = value[ik];
                     if (/_id$/.test(ik)) {
                         ik = ik.replace(/_id$/, '');
-                        obj[ik] = {id: value[ik]};
+                        obj[ik] = {id: iValue};
+                    } else if (Array.isArray(iValue)) {
+                        obj[ik] = iValue.map(v => v.id);
+                    } else {
+                        obj[ik] = iValue;
                     }
                     return obj;
                 }, {});
@@ -247,24 +253,6 @@ export const toUrlParams = (params, term?) => {
 export const getSearchTxt = (queryData: string[] = []): string => (
     queryData?.find(txt => searchTxtRegEx.test(txt))?.replace(searchTxtRegEx, '') || ''
 );
-
-export const setRequireParamsVals = (values, setValues, filters, subcategoryName: string) => {
-    const reqVals: any = {...values};
-    const isHousesCottages = subcategoryName === 'housesCottages';
-
-    Object.keys(filters).forEach(k => {
-        if (!values[k]) {
-            if (typeof values[k] !== 'string' && isRequired(k)) {
-                if (k === 'area') {
-                    if (!isHousesCottages) reqVals.area = null;
-                    reqVals.area_id = filters[k][0].id || null;
-                } else reqVals[k] = null;
-            }
-        }
-    });
-
-    setValues(reqVals);
-};
 
 export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);
 

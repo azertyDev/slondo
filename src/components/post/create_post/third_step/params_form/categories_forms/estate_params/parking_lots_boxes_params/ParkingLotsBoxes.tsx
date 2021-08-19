@@ -1,11 +1,11 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
-import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
+import {ParamsFormPreview} from '@src/components/post/create_post/third_step/params_form/ParamsFormPreview';
 import {getErrorMsg} from '@src/helpers';
-import {CommonParamsPropsType} from '../../../ParamsFormContainer';
+import {CommonParamsPropsType} from '../../../ParamsForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
@@ -15,6 +15,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
+import {unstable_batchedUpdates} from "react-dom";
 import {useStyles} from './useStyles';
 
 export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
@@ -30,18 +31,12 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
     const {t} = useTranslation('filters');
 
     const {title, params} = useUrlParams();
+    const filtersLen = Object.keys(filters).length;
 
-    let initVals: any = {
+    const initVals: any = {
         title,
         estate_type: null
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     const formik = useFormik({
         onSubmit,
@@ -57,7 +52,20 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleFracInput} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        setRequireVals,
+        handleFracInput,
+        handleNumericInput,
+        setValsByUrlParams
+    } = useHandlers(values, setValues);
+
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     const classes = useStyles();
     return (
@@ -76,7 +84,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues
+                        ? <ParamsFormPreview
                             values={values}
                             filters={filters}
                             transKey={t(`${categoryName}.`)}

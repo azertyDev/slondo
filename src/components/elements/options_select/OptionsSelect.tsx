@@ -1,7 +1,7 @@
 import {FC} from 'react';
+import {useTranslation} from "next-i18next";
 import {Checkbox, FormControlLabel, Grid, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
-import {useTranslation} from "next-i18next";
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
 
@@ -75,7 +75,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                         </Grid>
                     );
                 })}
-                    </Grid>
-                    </Grid>
-                    );
-                    };
+            </Grid>
+        </Grid>
+    );
+};

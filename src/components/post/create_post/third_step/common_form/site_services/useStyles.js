@@ -43,6 +43,9 @@ export const useStyles = makeStyles(() => ({
         borderColor: props => props.checked && '#AD66D5',
         '& .MuiButtonBase-root': {
             padding: 0,
+            '&:first-child': {
+                marginRight: '5px'
+            },
             '& svg path': {
                 fill: props => props.checked && '#AD66D5'
             }
@@ -53,12 +56,12 @@ export const useStyles = makeStyles(() => ({
             color:
                 props => props.checked && '#AD66D5',
             '& svg': {
-                margin: '0 10px 0 10px',
                 width: 25,
+                marginRight: '5px',
                 '& path': {
                     fill: props => props.checked && '#AD66D5'
                 }
             }
         }
     }
-}))
+}));

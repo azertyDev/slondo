@@ -1,5 +1,4 @@
 import {FC, useState} from 'react';
-import Link from "next/link";
 import {useFormik} from 'formik';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
@@ -23,11 +22,12 @@ import {StateIcon} from '@src/components/elements/icons';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/third_step/common_form/CommonFormPreview';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {ServiceItem} from "@src/components/post/create_post/third_step/common_form/site_services/ServiceItem";
 import {Location} from '@src/components/elements/location/Location';
 import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
-import {useStyles} from './useStyles';
+import {unstable_batchedUpdates} from "react-dom";
 
 type DefaultParamsPropsType = {
     postType: PostType,
@@ -82,8 +82,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         exchange: !!exchange,
         location: locationFromUrl,
         description: description ? JSON.parse(description as string) : '',
-        phone: phone ?? '',
-        price: price ?? '',
+        phone: phone ? JSON.parse(phone as string) : '',
+        price: price ? JSON.parse(price as string).toString() : '',
         currency: currency ? JSON.parse(currency as string) : postType.currency[0],
         avalTime: {
             available_start_time: available_start_time ? JSON.parse(available_start_time as string) : '09:00',
@@ -103,6 +103,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
+    const [free, setFree] = useState(false);
     const [isSafeDeal, setIsSafeDeal] = useState(false);
     const [avalTimeActive, setAvalTimeActive] = useState(!!available_start_time);
 
@@ -148,22 +149,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.auction = othersAuctionData;
         }
 
-        const {region, city} = location;
-
-        const address: {
-            region_id: number,
-            city_id?: number
-        } = {region_id: region.id};
-
-        if (city) {
-            address.city_id = city.id;
-        }
-
         if (avalTimeActive) {
             const {available_start_time, available_end_time, available_days} = avalTime;
             otherData.available_start_time = available_start_time;
             otherData.available_end_time = available_end_time;
-            otherData.available_days = available_days.map(({id}) => ({id}));
+            otherData.available_days = available_days;
         }
 
         if (!!phone && !RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
@@ -172,8 +162,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         if (exchange) otherData.exchange = exchange;
 
         const commonParams = {
-            ...address,
             ...otherData,
+            ...location,
             currency_id: currency.id
         };
 
@@ -202,6 +192,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         if (isSafeDeal) return safeDealPriceSchema;
         return defaultParamsSchema;
     }
+
+    const handleFree = (_, v) => {
+        unstable_batchedUpdates(() => {
+            setFree(v);
+            setValues({...values, price: '0'});
+        });
+    };
 
     const handleSelect = (key, value) => {
         if (key === 'duration') {
@@ -263,7 +260,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             if (checked) {
                 values.price = '';
                 values.currency = {id: 2, name: 'sum'};
-                setTouched({price: true});
+                unstable_batchedUpdates(() => {
+                    setFree(false);
+                    setTouched({price: true});
+                });
             } else {
                 setTouched({});
             }
@@ -310,7 +310,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
@@ -348,20 +347,34 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         <FormikField
                                             t={t}
                                             name='price'
-                                            labelText={priceLabel}
+                                            disabled={free}
                                             value={values.price}
+                                            labelText={priceLabel}
                                             onChange={handleInput}
                                             errorMsg={getErrorMsg(errors.price, touched.price, t, SAFE_DEAL_LIMIT)}
                                         />
                                     </Grid>
-                                    <Grid item xs={4} sm={2} md={2} lg={1}>
+                                    <Grid item xs={4} sm={2} lg={1}>
                                         <DropDownSelect
                                             name='currency'
                                             values={values}
                                             onBlur={handleBlur}
                                             items={postType.currency}
-                                            disabled={values.safe_deal}
                                             handleSelect={handleSelect}
+                                            disabled={values.safe_deal || free}
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={4}
+                                        sm={2}
+                                    >
+                                        <div style={{height: '22px'}}/>
+                                        <ServiceItem
+                                            checked={free}
+                                            handleCheckbox={handleFree}
+                                            disabled={values.safe_deal}
+                                            serviceText={t(categoryName === 'service' ? 'negotiated' : 'for_free')}
                                         />
                                     </Grid>
                                 </Grid>}
@@ -428,13 +441,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                                 handleAvalDays={handleAvalDays}
                                                 isActive={avalTimeActive}
                                             />
-                                            <Link href='/cabinet/settings'>
-                                                <a className={classes.link}>
-                                                    <Typography variant='subtitle1' component='p'>
-                                                        {t('configs')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
                                         </Grid>
                                     </Grid>
                                 )}

@@ -1,18 +1,20 @@
 import {useEffect} from 'react';
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import {AuthCtx, ErrorCtx, SearchCtx} from "@src/context";
+import {AuthCtx, ErrorCtx, SearchCtx, ExitPromptCtx} from "@src/context";
 import {useAuth, useError, useSearch} from "@src/hooks";
 import {useRouter} from "next/router";
 import theme from '@src/theme';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import "../slick.min.css";
+import {useExitPrompt} from "@src/hooks/useExitPrompt";
 
 const App = (props) => {
     const {Component, pageProps} = props;
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
+    const exitPrompt = useExitPrompt(false);
 
     const router = useRouter();
 
@@ -38,14 +40,16 @@ const App = (props) => {
 
     return (
         <ErrorCtx.Provider value={error}>
-            <AuthCtx.Provider value={auth}>
-                <SearchCtx.Provider value={search}>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline/>
-                        <Component {...pageProps} />
-                    </ThemeProvider>
-                </SearchCtx.Provider>
-            </AuthCtx.Provider>
+            <ExitPromptCtx.Provider value={exitPrompt}>
+                <AuthCtx.Provider value={auth}>
+                    <SearchCtx.Provider value={search}>
+                        <ThemeProvider theme={theme}>
+                            <CssBaseline/>
+                            <Component {...pageProps} />
+                        </ThemeProvider>
+                    </SearchCtx.Provider>
+                </AuthCtx.Provider>
+            </ExitPromptCtx.Provider>
         </ErrorCtx.Provider>
     );
 };

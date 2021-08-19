@@ -7,7 +7,8 @@ type ServiceItemPropsType = {
     serviceText: string,
     handleCheckbox,
     checked,
-    name?: string
+    name?: string,
+    disabled?: boolean
 }
 
 export const ServiceItem: FC<ServiceItemPropsType> = (props) => {
@@ -16,6 +17,7 @@ export const ServiceItem: FC<ServiceItemPropsType> = (props) => {
         icon = null,
         serviceText,
         checked,
+        disabled = false,
         handleCheckbox
     } = props;
 
@@ -28,6 +30,7 @@ export const ServiceItem: FC<ServiceItemPropsType> = (props) => {
                     name={name}
                     color="primary"
                     checked={checked}
+                    disabled={disabled}
                     onChange={handleCheckbox}
                 />
             }
