@@ -5,12 +5,12 @@ import {userAPI} from '@src/api/api';
 import {Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
-import {PreviewValues} from '../../PreviewValues';
-import {getErrorMsg, setRequireParamsVals} from '@src/helpers';
+import {ParamsFormPreview} from '../../ParamsFormPreview';
+import {getErrorMsg} from '@src/helpers';
 import {BodySelect} from '@src/components/elements/body_select/BodySelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {CommonParamsPropsType} from '../../ParamsFormContainer';
+import {CommonParamsPropsType} from '../../ParamsForm';
 import {optionFields} from '@src/common_data/fields_keys';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
@@ -39,7 +39,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const {post_id, title, params} = useUrlParams();
+    const {title, params} = useUrlParams();
+    const filtersLen = Object.keys(filters).length;
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
@@ -201,15 +202,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     useEffect(() => {
-        (post_id !== undefined && params !== undefined)
-            ? setValsByUrlParams()
-            : setRequireParamsVals(
-            values,
-            setValues,
-            filters,
-            subcategoryName
-            );
-    }, [filters]);
+        filtersLen && title && setValsByUrlParams();
+    }, [filtersLen]);
 
     const classes = useStyles();
     return (
@@ -234,7 +228,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     </Grid>
                     <Grid item container spacing={2}>
                         {isPreview
-                            ? <PreviewValues
+                            ? <ParamsFormPreview
                                 values={values}
                                 filters={filters}
                                 transKey={t(`${categoryName}.`)}
@@ -696,8 +690,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <OptionsSelect
-                                                        isApratment={false}
                                                         column
+                                                        isApratment={false}
                                                         name='antitheft'
                                                         values={values}
                                                         transKey={`${categoryName}.`}
@@ -712,6 +706,23 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <Typography variant='h5'>
                                                         <strong>{t('visibility')}</strong>
                                                     </Typography>
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    container
+                                                    sm={4}
+                                                    xs={12}
+                                                >
+                                                    <DropDownSelect
+                                                        multiple
+                                                        name='exterior'
+                                                        values={values}
+                                                        onBlur={handleBlur}
+                                                        items={filters.exterior}
+                                                        handleSelect={handleSelect}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.exterior.name')}
+                                                    />
                                                 </Grid>
                                                 <Grid
                                                     item
@@ -788,13 +799,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             const engine_capacity = engine_capacityParam.name;
 
             if (isMadeInUzb) {
-                const [valsByYear] = (await userAPI.getCarDataByYear(model.id, others.year.id))?.bodies || [{}];
+                const [valsByYear = {}] = (await userAPI.getCarDataByYear(model.id, others.year.id))?.bodies || [];
                 setValuesByYear(valsByYear);
             }
 
             Object.keys(others).forEach(k => {
                 if (filters[k] !== undefined && optionFields.some(f => f === k)) {
-                    others[k] = others[k].map(v => v.id);
+                    others[k] = others[k].map(v => v);
                 }
             });
 

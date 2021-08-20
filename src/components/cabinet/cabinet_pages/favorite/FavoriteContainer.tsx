@@ -1,20 +1,18 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
 import {userAPI} from '@src/api/api';
-import {Box, CircularProgress, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {Box, CircularProgress} from '@material-ui/core';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
-import {CardDataType} from "@root/interfaces/CardData";
-import {ErrorCtx} from "@src/context";
+import {CardDataType} from '@root/interfaces/CardData';
+import {ErrorCtx} from '@src/context';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {initCardData} from "@src/common_data/common";
-import {useStyles} from './useStyles';
+import {initCardData} from '@src/common_data/common';
+import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 
 export const FavoriteContainer: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -31,7 +29,6 @@ export const FavoriteContainer: FC = () => {
     const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
     const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
-    const [modalContentIndex, setModalContentIndex] = useState(1);
 
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
@@ -42,10 +39,6 @@ export const FavoriteContainer: FC = () => {
     const handleOpenModal = (id: number) => () => {
         handleModalOpen();
         setPostId(id);
-    };
-    const handlePrevMenu = () => {
-        const backValue = modalContentIndex === 5 ? 3 : 1;
-        setModalContentIndex(modalContentIndex - backValue);
     };
     const fetchFavoriteData = async (type) => {
         try {
@@ -79,104 +72,18 @@ export const FavoriteContainer: FC = () => {
         }
         handleModalClose();
     };
-    const handleNotificationsOpen = (post: CardDataType) => () => {
-        closeDetailedModal();
+    const handleDetailedModal = (post: CardDataType) => () => {
+        openDetailedModal();
         setSelectedPost(post);
-    };
-
-    const classes = useStyles();
-    const getModalContent = () => {
-        switch (modalContentIndex) {
-            case 1:
-                return <>
-                    <Typography className="title" variant="h6">
-                        {t('common:perform')}
-                    </Typography>
-                    <List
-                        component="nav"
-                        aria-label="main"
-                        className={classes.settingsList}
-                        disablePadding
-                    >
-                        <ListItem
-                            button
-                            onClick={handleRemoveFavorite}
-                        >
-                            <ListItemText
-                                primary={t('common:yes')}
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                        <ListItem
-                            button
-                            onClick={handleModalClose}
-                        >
-                            <ListItemText
-                                primary={t('common:no')}
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                    </List>
-                </>;
-        }
     };
     const handleRefresh = () => {
         fetchFavoriteData('post');
         fetchFavoriteData('auc');
     };
 
-    const ModalContent = () => (
-        <>
-            {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    {t('post')} № {postId}
-                </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit"/>
-                    </IconButton>
-            }
-            {getModalContent()}
-        </>
-    );
-
     useEffect(() => {
         handleRefresh();
     }, []);
-
-    const favoritePostCards = isFetch ? <CircularProgress color="primary" />
-        : favoritePostData.data.length === 0
-            ? <EmptyPage
-                label={t('cabinet:empty.favorite.title')}
-            />
-            : favoritePostData.data.map(data => (
-                <Box mb={3} key={data.id}>
-                    <CabinetCard
-                        cardData={data}
-                        handleOpenModal={handleOpenModal}
-                    />
-                </Box>
-            ));
-
-    const favoriteAucCards = isFetch ? <CircularProgress color="primary" />
-        : favoriteAucData.data.length === 0
-            ? <EmptyPage
-                label={t('cabinet:empty.favorite.title')}
-            />
-            : favoriteAucData.data.map(data => (
-                <Box mb={3} key={data.id}>
-                    <CabinetCard
-                        cardData={data}
-                        handleOpenModal={handleOpenModal}
-                    />
-                </Box>
-            ));
 
     const tabsData: TabsDataType = [
         {
@@ -184,30 +91,44 @@ export const FavoriteContainer: FC = () => {
             title: t('posts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: (
-                <Favorite
-                    openModal={modalOpen}
-                    favoriteCards={favoritePostCards}
-                    ModalContent={ModalContent}
-                    handleClose={handleModalClose}
-                    handleModalOpen={handleOpenModal}
-                />
-            )
+            component: <>
+                {isFetch ? <CircularProgress color="primary" />
+                    : favoritePostData.data.length === 0
+                        ? <EmptyPage
+                            label={t('cabinet:empty.favorite.title')}
+                        />
+                        : favoritePostData.data.map(data => (
+                            <Box mb={3} key={data.id}>
+                                <CabinetCard
+                                    cardData={data}
+                                    handleOpenModal={handleOpenModal}
+                                    handleDetailedOpen={handleDetailedModal(data)}
+                                />
+                            </Box>
+                        ))}
+            </>
         },
         {
             id: 1,
             title: t('auctions'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: (
-                <Favorite
-                    openModal={modalOpen}
-                    favoriteCards={favoriteAucCards}
-                    ModalContent={ModalContent}
-                    handleClose={handleModalClose}
-                    handleModalOpen={handleOpenModal}
-                />
-            )
+            component: <>
+                {isFetch ? <CircularProgress color="primary" />
+                    : favoriteAucData.data.length === 0
+                        ? <EmptyPage
+                            label={t('cabinet:empty.favorite.title')}
+                        />
+                        : favoriteAucData.data.map(data => (
+                            <Box mb={3} key={data.id}>
+                                <CabinetCard
+                                    cardData={data}
+                                    handleOpenModal={handleOpenModal}
+                                    handleDetailedOpen={handleDetailedModal(data)}
+                                />
+                            </Box>
+                        ))}
+            </>
         }
     ];
 
@@ -223,6 +144,14 @@ export const FavoriteContainer: FC = () => {
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
                 handleRefresh={handleRefresh}
+            />
+            <ConfirmModal
+                open={modalOpen}
+                handleClose={handleModalClose}
+                title={t('common:perform')}
+                confirmTxt={t('common:yes')}
+                cancelTxt={t('common:no')}
+                handleConfirm={handleRemoveFavorite}
             />
         </>
     );

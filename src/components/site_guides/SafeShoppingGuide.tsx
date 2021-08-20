@@ -8,61 +8,61 @@ import Link from 'next/link';
 const cardItemsData = {
     forSeller: [
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_1.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_1.png',
             text: 'forSeller.advice_1'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_2.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_2.png',
             text: 'forSeller.advice_2'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_3.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_3.png',
             text: 'forSeller.advice_3'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_4.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_4.png',
             text: 'forSeller.advice_4'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_5.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_5.png',
             text: 'forSeller.advice_5'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_6.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_6.png',
             text: 'forSeller.advice_6'
         },
         {
-            imgUrl: '/img/safe_shopping/for_seller/advice_7.png',
+            imgUrl: '/img/safe_deal/for_seller/advice_7.png',
             text: 'forSeller.advice_7'
         }
     ],
     forBuyer: [
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_1.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_1.png',
             text: 'forBuyer.advice_1'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_2.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_2.png',
             text: 'forBuyer.advice_2'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_3.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_3.png',
             text: 'forBuyer.advice_3'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_4.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_4.png',
             text: 'forBuyer.advice_4'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_5.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_5.png',
             text: 'forBuyer.advice_5'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_6.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_6.png',
             text: 'forBuyer.advice_6'
         },
         {
-            imgUrl: '/img/safe_shopping/for_buyer/advice_7.png',
+            imgUrl: '/img/safe_deal/for_buyer/advice_7.png',
             text: 'forBuyer.advice_7'
         }
     ]

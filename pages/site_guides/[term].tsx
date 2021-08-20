@@ -9,6 +9,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
             [
                 'safe_shopping',
                 'errors',
+                'promotions',
                 'post',
                 'locations',
                 'auction',

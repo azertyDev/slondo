@@ -4,8 +4,7 @@ import {HousesCottagesParams} from '@src/components/post/create_post/third_step/
 import {LandParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/land_params/LandParams';
 import {ParkingLotsBoxes} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/parking_lots_boxes_params/ParkingLotsBoxes';
 import {CommercialPropertyParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/commercial_property_params/CommercialPropertyParams';
-import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsFormContainer';
-import {useTranslation} from "next-i18next";
+import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsForm';
 
 export const EstateParams: FC<CommonParamsPropsType> = (props) => {
     const {

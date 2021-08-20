@@ -5,10 +5,13 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {useStyles} from './useStyles';
+import {useRouter} from "next/router";
 
 
 export const SuccessPage: FC = () => {
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation('post');
+    const {query: {post_type}, locale} = useRouter();
+    const isPost = post_type === 'post';
 
     useEffect(() => {
         window && window.scrollTo(0, 0);
@@ -30,20 +33,32 @@ export const SuccessPage: FC = () => {
                         />
                     </Hidden>
                     <Typography color="initial">
-                        Объявление отправлено на модерацию. <br/>
-                        Статус объявления Вы можете отслеживать в
-                        <Link href="/cabinet/posts">
-                            <a> личном кабинете</a>
-                        </Link>
+                        <span>
+                            {t('post_send_moderation')}
+                        </span>
+                        <br/>
+                        {locale === 'ru'
+                            ? <>
+                                <span>{t('follow_post_status')}</span>&nbsp;
+                                <Link href={`/cabinet/${isPost ? 'posts' : 'auctions'}`}>
+                                    <a>{t('to_cabinet_posts')}</a>
+                                </Link>
+                            </>
+                            : <>
+                                <Link href={`/cabinet/${isPost ? 'posts' : 'auctions'}`}>
+                                    <a>{t('to_cabinet_posts')}</a>
+                                </Link>&nbsp;
+                                <span>{t('follow_post_status')}</span>
+                            </>}
                     </Typography>
                 </div>
             </Paper>
             <div className={classes.buttonBlock}>
                 <div>
-                    <Link href="/create/type/select" shallow>
+                    <Link href="/create" shallow>
                         <a>
                             <CustomButton style={{color: '#fff'}}>
-                                Создать еще
+                                {t('create_more')}
                             </CustomButton>
                         </a>
                     </Link>
@@ -52,7 +67,7 @@ export const SuccessPage: FC = () => {
                     <Link href="/">
                         <a>
                             <CustomButton style={{color: '#fff'}}>
-                                На главную
+                                {t('to_home')}
                             </CustomButton>
                         </a>
                     </Link>

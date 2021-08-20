@@ -3,6 +3,54 @@
   "engine_capacity": "Объем двигателя в литрах",
   "year": "Год выпуска",
   "mileage": "Пробег в км.",
+  "brand": "Бренд",
+  "from": "От",
+  "to": "До",
+  "price_from": "От (сум)",
+  "price_to": "До (сум)",
+  "apply": "Применить",
+  "reset": "Сбросить",
+  "free": "Даром",
+  "archive": "Архив",
+  "additional_phone": "Дополнительный номер",
+  "start_price": "Начальная ставка в сумах",
+  "reserve_price": "Резервная цена",
+  "choiceLocation": "Выберите местоположение",
+  "safe_deal": "Безопастная сделка",
+  "delivery": "Доставка",
+  "exchange": "Возможен обмен",
+  "description": "Описание",
+  "enter_price": "Введите сумму",
+  "buy_now": "Купить сейчас",
+  "auto_renewal": "Авто продление",
+  "offer_price": "Предлагать цену",
+  "display_phone": "Показывать свой номер",
+  "category": "Категория",
+  "subcategory": "Подкатегория",
+  "title": "Заголовок объявления",
+  "price": "Цена",
+  "noSelect": "Не выбрано",
+  "manufacturer": "Производитель",
+  "models": "Модели",
+  "model": "Модель",
+  "comfort_salon_title": "Комфорт и салон",
+  "additional": "Дополнительно",
+  "post_not_found": "По запросу «{{searchText}}» ничего не найдено. Попробуйте изменить условия поиска.",
+  "driving_assistance_safety_title": "Помощь при вождении и безопасность",
+  "user_surname": "Фамилия",
+  "phone_number": "Номер телефона",
+  "example_title": "Название заголовока",
+  "salary": "Зарплата",
+  "post": "Объявления",
+  "auc": "Аукционы",
+  "cost": "Стоимость",
+  "post_type": "Тип объявления",
+  "service_type": "Вид услуги",
+  "view": "Вид",
+  "overview": "Обзор",
+  "user_name": "Имя",
+  "visibility": "Экстерьер и обзор",
+  "color": "Цвет",
   "car": {
     "color": {
       "name": "Цвет"
@@ -42,6 +90,9 @@
     },
     "power_windows": {
       "name": "Электростеклоподъемники"
+    },
+    "exterior": {
+      "name": "Экстерьер"
     },
     "steering": {
       "name": "Регулировка руля"
@@ -96,6 +147,27 @@
     },
     "immobilizer": {
       "name": "Иммобилайзер"
+    },
+    "roadster": {
+      "name": "Родстер"
+    },
+    "limousine": {
+      "name": "Лимузин"
+    },
+    "targa": {
+      "name": "Тарга"
+    },
+    "fastback": {
+      "name": "Фастбэк"
+    },
+    "hardtop": {
+      "name": "Хардтоп"
+    },
+    "liftback": {
+      "name": "Лифтбэк"
+    },
+    "van": {
+      "name": "Ван"
     },
     "cabriolet": {
       "name": "Кабриолет"
@@ -522,6 +594,9 @@
     }
   },
   "transport": {
+    "condition": {
+      "name": "Состояние"
+    },
     "type": {
       "name": "Тип транспорта"
     },
@@ -711,9 +786,6 @@
     "manufacturer": {
       "name": "Производитель"
     },
-    "condition": {
-      "name": "Состояние"
-    },
     "new": {
       "name": "Новые"
     },
@@ -758,14 +830,95 @@
     }
   },
   "parts": {
+    "spares_type": {
+      "name": "Тип запчасти"
+    },
+    "type": {
+      "name": "Вид транспорта"
+    },
+    "electronics_gps_navigators": {
+      "name": "Электроника и GPS-навигаторы"
+    },
+    "motorcycles": {
+      "name": "Для мотоциклов"
+    },
+    "mopeds_scooters": {
+      "name": "Для мопедов и скутеров"
+    },
+    "atvs": {
+      "name": "Для квадроциклов"
+    },
+    "go_karting": {
+      "name": "Для картинга"
+    },
+    "snowmobiles": {
+      "name": "Для снегоходов"
+    },
+    "buggy": {
+      "name": "Для багги"
+    },
+    "buses": {
+      "name": "Для автобусов"
+    },
+    "minibuses": {
+      "name": "Для микроавтобусов"
+    },
+    "refrigerator_truck": {
+      "name": "Для авторефрижераторов"
+    },
+    "motorhome": {
+      "name": "Для автодомов"
+    },
+    "trucks": {
+      "name": "Для грузовиков"
+    },
+    "light_commercial_transport": {
+      "name": "Для легкого коммерческого транспорта"
+    },
+    "trailers": {
+      "name": "Для прицепов"
+    },
+    "tractor_units": {
+      "name": "Для тягачей"
+    },
+    "food_truck": {
+      "name": "Для фудтраков"
+    },
+    "car_towers": {
+      "name": "Для автовышек"
+    },
+    "truck_cranes": {
+      "name": "Для автокранов"
+    },
+    "bulldozers": {
+      "name": "Для бульдозеров"
+    },
+    "utility_equipment": {
+      "name": "Для коммунальной техники"
+    },
+    "loaders": {
+      "name": "Для погрузчиков"
+    },
+    "agricultural_machinery": {
+      "name": "Для сельхозтехники"
+    },
+    "construction_equipment": {
+      "name": "Для строительной техники"
+    },
+    "logging_equipment": {
+      "name": "Для лесозаготовочной техники"
+    },
+    "excavators": {
+      "name": "Для экскаваторов"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
     "new": {
       "name": "Новое"
     },
     "used": {
       "name": "Б/У"
-    },
-    "condition": {
-      "name": "Состояние"
     },
     "spares": {
       "name": "Запчасти"
@@ -907,6 +1060,18 @@
     }
   },
   "estate": {
+    "with_pledge": {
+      "name": "С залогом"
+    },
+    "utilities": {
+      "name": "Коммунальные услуги включены"
+    },
+    "payments": {
+      "name": "Выплаты"
+    },
+    "type": {
+      "name": "Тип продажи"
+    },
     "furnished": {
       "name": "Меблирована"
     },
@@ -923,7 +1088,7 @@
       "name": "Площадь кухни, м2"
     },
     "ceiling_height": {
-      "name": "Высота потолка"
+      "name": "Высота потолков в метрах"
     },
     "posted": {
       "name": "Кем опубликовано"
@@ -1354,7 +1519,7 @@
   },
   "job": {
     "type": {
-      "name": "Рубрика"
+      "name": "Должность"
     },
     "employment": {
       "name": "Тип занятости"
@@ -2352,9 +2517,6 @@
     "in_workshops": {
       "name": "В мастерской"
     },
-    "job_type": {
-      "name": "Тип работы"
-    },
     "experience": {
       "name": "Опыт"
     },
@@ -2366,6 +2528,9 @@
     }
   },
   "service": {
+    "type": {
+      "name": "Тип услуги"
+    },
     "computer_services": {
       "name": "Компьютерные услуги"
     },
@@ -2539,6 +2704,12 @@
     }
   },
   "goods": {
+    "condition": {
+      "name": "Состояние"
+    },
+    "type": {
+      "name": "Тип товара"
+    },
     "color": {
       "name": "Цвет"
     },
@@ -3172,8 +3343,8 @@
     "espadrilles": {
       "name": "Эспадрильи"
     },
-    "blazers": {
-      "name": "Пиджаки"
+    "blazers_and_suits": {
+      "name": "Пиджаки и костюмы"
     },
     "bolero": {
       "name": "Болеро"
@@ -3901,9 +4072,6 @@
     "other": {
       "name": "Другое"
     },
-    "condition": {
-      "name": "Состояние"
-    },
     "sub_type": {
       "name": "Тип"
     },
@@ -4179,6 +4347,12 @@
     }
   },
   "home": {
+    "condition": {
+      "name": "Состояние"
+    },
+    "type": {
+      "name": "Тип"
+    },
     "armchair": {
       "name": "Кресло"
     },
@@ -4860,9 +5034,6 @@
     "sub_type": {
       "name": "Тип"
     },
-    "condition": {
-      "name": "Состояние"
-    },
     "new": {
       "name": "Новое"
     },
@@ -4871,6 +5042,12 @@
     }
   },
   "electronics": {
+    "condition": {
+      "name": "Состояние"
+    },
+    "type": {
+      "name": "Тип"
+    },
     "color": {
       "name": "Цвет"
     },
@@ -6512,9 +6689,6 @@
     "to_six_set": {
       "name": "До 6 комплектов"
     },
-    "condition": {
-      "name": "Состояние"
-    },
     "New": {
       "name": "Новое"
     },
@@ -6601,6 +6775,9 @@
     }
   },
   "hobbies": {
+    "condition": {
+      "name": "Состояние"
+    },
     "keyboards": {
       "name": "Клавиатуры"
     },
@@ -7113,9 +7290,6 @@
     },
     "other": {
       "name": "Другое"
-    },
-    "condition": {
-      "name": "Состояние"
     },
     "new": {
       "name": "Новое"
@@ -7686,207 +7860,11 @@
     "breed": {
       "name": "Порода"
     },
-    "condition": {
-      "name": "Состояние"
-    },
     "new": {
       "name": "Новое"
     },
     "used": {
       "name": "Б/У"
     }
-  },
-  "brand": "Бренд",
-  "season": "Сезон",
-  "bayonet": "Байонет",
-  "usb_connector": "USB разъем",
-  "build_in_speakers": "Встренные динамики",
-  "kid_body": "Боди",
-  "ws_body": "Боди",
-  "for_body": "Для тела",
-  "number_of_seats": "Кол_во мест",
-  "additional": "Дополнительно",
-  "salary": "Зарплата",
-  "post_not_found": "По запросу «{{searchText}}» ничего не найдено. Попробуйте изменить условия поиска.",
-  "post": "Объявления",
-  "auc": "Аукционы",
-  "cost": "Стоимость",
-  "post_type": "Тип объявления",
-  "service_type": "Вид услуги",
-  "from": "От",
-  "to": "До",
-  "price_from": "От (сум)",
-  "price_to": "До (сум)",
-  "apply": "Применить",
-  "reset": "Сбросить",
-  "view": "Вид",
-  "overview": "Обзор",
-  "headlight": "Фары",
-  "assistance": "Помощник",
-  "driving_assistance_safety_title": "Помощь при вождении и безопасность",
-  "upholstery": "Обивка",
-  "climate": "Климат",
-  "user_name": "Имя",
-  "user_surname": "Фамилия",
-  "phone_number": "Номер телефона",
-  "good_type": "Тип товара",
-  "category": "Категория",
-  "subcategory": "Подкатегория",
-  "title": "Заголовок объявления",
-  "price": "Цена",
-  "noSelect": "Не выбрано",
-  "example_title": "Название заголовока",
-  "manufacturer": "Производитель",
-  "models": "Модели",
-  "model": "Модель",
-  "comfort_salon_title": "Комфорт и салон",
-  "comfort": "Дополнительно",
-  "car_climate": "Климат",
-  "upholestery": "Обивка салона",
-  "seats": "Количество мест",
-  "airbags": "Подушка безопасности",
-  "visibility": "Видимость",
-  "exterior": "Экстерьер",
-  "headlights": "Фары",
-  "transmission": "Коробка передач",
-  "drive": "Привод",
-  "сleared": "Растаможена",
-  "rooms_count": "Количество комнат",
-  "balcony": "Балкон",
-  "estate_sale": "Тип продажи",
-  "estate_posted": "Кто разместил",
-  "area_value": "Общая площадь",
-  "electricity": "Электричество",
-  "water": "Водоснабжение",
-  "sewerage": "Канализация",
-  "layout": "Планировка",
-  "repair": "Ремонт",
-  "transport_type": "Тип транспорта",
-  "employment": "Тип занятости",
-  "nature": "Характер работы",
-  "place": "Место оказания",
-  "specialization": "Специализация",
-  "type": "Тип",
-  "sub_type": "Вид",
-  "size": "Размер",
-  "gender": "Пол",
-  "group": "Группа",
-  "mount": "Крепление",
-  "age": "Возраст",
-  "wheels": "Тип колес",
-  "properties": "Особенности",
-  "regulation": "Регулировки",
-  "os": "Операционная система",
-  "memory": "Встроенная память",
-  "function": "Функции",
-  "connector": "Разъем",
-  "device": "Устройство",
-  "quality": "Качество записи",
-  "format": "Формат носителя",
-  "connection": "Подключение",
-  "head": "Поворотная головка",
-  "play": "Воспроизведение видео",
-  "diagonal": "Диагональ",
-  "screen": "Разрешение",
-  "monitor": "Поддержка 3D",
-  "acoustics": "Тип акустики",
-  "display": "Тип дисплея",
-  "burner": "Тип конфорок",
-  "installation": "Тип установки",
-  "holding": "Вместимость",
-  "cleaning": "Тип уборки",
-  "spead": "Скорость отжима",
-  "gaming": "Игровой",
-  "video_card": "Видеокарта",
-  "kids": "Для детей",
-  "breed": "Вид",
-  "apartments": "Квартира",
-  "spares_type": "Тип запчасти",
-  "configs": "Настройки",
-  "requireField": "Поле обязательно к заполнению",
-  "cityOrRegionNotFound": "Адрес не найден",
-  "choiceLocation": "Выберите местоположение",
-  "safe_deal": "Безопастная сделка",
-  "delivery": "Доставка",
-  "exchange": "Возможен обмен",
-  "description": "Описание",
-  "own_phone": "Ваш номер",
-  "additional_phone": "Дополнительный номер",
-  "start_price": "Начальная ставка в сумах",
-  "reserve_price": "Резервная цена",
-  "enter_price": "Введите сумму",
-  "buy_now": "Купить сейчас",
-  "auto_renewal": "Авто продление",
-  "offer_price": "Предлогать цену",
-  "display_phone": "Показывать свой номер",
-  "posted": "Кто разместил",
-  "ceiling_height": "Высота потолков в метрах",
-  "number_of_bedrooms": "Количество спален",
-  "engine_type": "Тип двигателя",
-  "utilities": "Коммунальные услуги включены",
-  "with_pledge": "С залогом",
-  "heating": "Отопление",
-  "lift": "Лифт",
-  "metro": "До метро",
-  "garage": "Гараж",
-  "mobile_phones": "Мобильные телефоны",
-  "tablets": "Планшеты",
-  "smart_watches_and_wristbands": "Умные часы и браслеты",
-  "e_books": "Электронные книги",
-  "landlines": "Стационарные телефоны",
-  "walkie_talkies_and_satellite_phones": "Рации и спутниковые телефоны",
-  "spare_parts": "Запчасти",
-  "external_batteries": "Внешние аккумуляторы",
-  "chargers": "Зарядные устройства",
-  "covers": "Чехлы",
-  "cameras": "Фотоаппараты",
-  "video_cameras": "Видеокамеры",
-  "lenses": "Объективы",
-  "flash": "Фотовспышки",
-  "tripods_and_stabilizers": "Штативы и стабилизаторы",
-  "studio_equipment": "Студийное оборудование",
-  "digital_cameras": "Цифровые фоторамки",
-  "compact_photo_printers": "Компактные фотопринтеры",
-  "binoculars_and_optical_instruments": "Бинокли и оптические приборы",
-  "tv_sets": "Телевизоры",
-  "projectors": "Проекторы",
-  "acoustics_speakers_subwoofers": "Акустика, колонки, сабвуферы",
-  "home_theaters": "Домашние кинотеатры",
-  "dvd_blu_ray_and_media_players": "DVD, Blu-ray и медиаплееры",
-  "music_centers_and_tape_recorders": "Музыкальные центры и магнитолы",
-  "mp3_players_and_portable_audio": "MP3-плееры и портативное аудио",
-  "satellite_and_digital_tv": "Спутниковое и цифровое ТВ",
-  "audio_amplifiers_and_receivers": "Аудиоусилители и ресиверы",
-  "headphones": "Наушники",
-  "microphones": "Микрофоны",
-  "scales": "Весы",
-  "grinding_and_mixing": "Измельчение и смешивание",
-  "glimate_control_equipment": "Климатическая техника",
-  "coolers_and_water_filters": "Кулеры и фильтры для воды",
-  "stoves_and_ovens": "Плиты и духовые шкафы",
-  "dishwashers": "Посудомоечные машины",
-  "cooking_food": "Приготовление еды",
-  "preparation_of_drinks": "Приготовление напитков",
-  "vacuum_cleaners_and_steam_cleaners": "Пылесосы и пароочистители",
-  "washing_machines": "Стиральные машины",
-  "irons_and_clothing_care": "Утюги и уход за одеждой",
-  "sewing_equipment": "Швейное оборудование",
-  "laptops": "Ноутбуки",
-  "computers": "Компьютеры",
-  "monitors": "Мониторы",
-  "keyboards_and_mice": "Клавиатуры и мыши",
-  "office_equipment_and_consumables": "Оргтехника и расходники",
-  "network_equipment": "Сетевое оборудование",
-  "multimedia": "Мультимедиа",
-  "data_storage_and_card_readers": "Накопители данных и картридеры",
-  "steering_wheels_joysticks_gamepads": "Рули, джойстики, геймпады",
-  "components_and_spare_parts": "Комплектующие и запчасти",
-  "game_consoles_selector": "Игровые приставки",
-  "games_for_consoles": "Игры для приставок",
-  "computer_games": "Компьютерные игры",
-  "programs": "Программы",
-  "gray": "Серый",
-  "free": "Даром",
-  "archive": "Архив",
-  "repair_construction": "Тестовый"
+  }
 }

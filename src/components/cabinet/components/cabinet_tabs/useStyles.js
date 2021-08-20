@@ -38,5 +38,10 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '0 0 5px'
             }
         }
+    },
+    button: {
+        width: '100%',
+        borderRadius: 5,
+        boxShadow: '0px 1px 2px 0px #00000026'
     }
 }));

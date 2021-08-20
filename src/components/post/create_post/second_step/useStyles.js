@@ -32,6 +32,20 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+        '& div.search-block': {
+            boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
+            borderRadius: 10,
+            marginBottom: 10,
+            '& > div.MuiInputBase-root': {
+                border: 0,
+                '& > svg': {
+                    margin: '0 20px 0 30px'
+                },
+                '& > input.MuiInputBase-input': {
+                    padding: '10px 0'
+                }
+            }
+        },
         '& div.categories-menu': {
             paddingRight: 20,
             [theme.breakpoints.down('sm')]: {
@@ -39,20 +53,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.subcategories-menu': {
-            '& div.search-block': {
-                boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
-                borderRadius: 10,
-                marginBottom: 10,
-                '& > div.MuiInputBase-root': {
-                    border: 0,
-                    '& > svg': {
-                        margin: '0 20px 0 30px'
-                    },
-                    '& > input.MuiInputBase-input': {
-                        padding: '10px 0'
-                    }
-                }
-            },
             '& h6.subcategories-list-item': {
                 [theme.breakpoints.down('xs')]: {
                     maxWidth: '220px'

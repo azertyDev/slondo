@@ -53,7 +53,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     value={values.price}
                     onChange={handleInput}
                     labelText='start_price'
-                    placeholder={t('filters:enter_price')}
+                    placeholder={t('enter_price')}
                     errorMsg={getErrorMsg(errors.price, touched.price, t)}
                 />
             </Grid>
@@ -65,7 +65,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         labelText='reserve_price'
                         onChange={handleInput}
                         value={auction.reserve_price}
-                        placeholder={t('filters:enter_price')}
+                        placeholder={t('enter_price')}
                     />
                 </Grid>
             )}
@@ -77,7 +77,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 />
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('filters:offer_price')}
+                        {t('offer_price')}
                     </strong>
                 </Typography>
             </Grid>
@@ -91,7 +91,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         />
                         <Typography variant="subtitle1">
                             <strong>
-                                {t('filters:buy_now')}
+                                {t('buy_now')}
                             </strong>
                         </Typography>
                     </Grid>
@@ -100,7 +100,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             t={t}
                             name='price_buy_now'
                             onChange={handleInput}
-                            placeholder={t('filters:enter_price')}
+                            placeholder={t('enter_price')}
                             value={auction.price_buy_now.value}
                             disabled={!auction.price_buy_now.isActive}
                         />
@@ -113,7 +113,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         />
                         <Typography variant="subtitle1">
                             <strong>
-                                {t('filters:auto_renewal')}
+                                {t('auto_renewal')}
                             </strong>
                         </Typography>
                     </Grid>

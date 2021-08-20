@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Card, CardContent, CardMedia, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Card, CardContent, CardMedia, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {useStyles} from '../useStyles';
 import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -44,7 +44,6 @@ export const PromotionCard = () => {
                         xs={12}
                         sm={resize ? 12 : 7}
                         md={resize ? 12 : 8}
-                        lg={resize ? 12 : 8}
                     >
                         <CardContent id='content'>
                             <Typography gutterBottom variant="h5" component="h2" paragraph>

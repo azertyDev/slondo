@@ -42,11 +42,10 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
 
     const createP2pHold = async () => {
         try {
-            const {data} = post;
 
             const p2pData = JSON.stringify({
-                extraId: data.id,
-                amount: data.price
+                extraId: post.id,
+                amount: post.price
             });
 
             setIsFetch(true);
@@ -92,10 +91,10 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
                 {hasPost && !isFetchUserCard && (
                     <Grid item xs={12} md={6}>
                         <PostInfo
-                            author={post.data.author}
+                            author={post.author}
                             createP2P={createP2pHold}
                             disable={!userCard.cardId || isFetch}
-                            price={numberPrettier(post.data.price)}
+                            price={numberPrettier(post.price)}
                         />
                     </Grid>
                 )}

@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {excludeFields, noTranslatableFields} from '@src/common_data/fields_keys';
+import {booleanFields, excludeFields, noTranslatableFields} from '@src/common_data/fields_keys';
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
@@ -11,7 +11,7 @@ type PreviewValuesPropsType = {
     filters
 };
 
-export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
+export const ParamsFormPreview: FC<PreviewValuesPropsType> = (props) => {
     const {
         values,
         filters,
@@ -26,7 +26,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
             {Object.keys(values).map(key => {
                     let value;
                     const isPrimitive = typeof values[key] === 'string' || typeof values[key] === 'number';
-                    const isBoolean = typeof values[key] === 'boolean';
+                    const isBoolean = typeof values[key] === 'boolean' || booleanFields.some(f => f === key);
                     const isArray = Array.isArray(values[key]);
                     const isExcludeKey = excludeFields.some(k => k === key);
                     const noTranslatable = noTranslatableFields.some(f => f === key);
@@ -57,8 +57,8 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                         disabled
                                         checked
                                         name={key}
-                                        labelTxt={t(`${transKey}${key}.name`)}
                                         handleCheckbox={null}
+                                        labelTxt={t(`${transKey}${key}.name`)}
                                     />
                                     : <>
                                         <Grid item xs={12} sm={6}>

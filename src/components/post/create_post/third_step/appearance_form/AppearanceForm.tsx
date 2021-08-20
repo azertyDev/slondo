@@ -14,6 +14,7 @@ import {appearanceSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {useStyles} from './useStyles';
+import {notRequirePhotosCategories} from "@src/common_data/fields_keys";
 
 type AppearanceFormPropsType = {
     categoryName: string,
@@ -74,21 +75,21 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             }
         ]
     };
-
     const formIndex = 2;
-    const isJob = categoryName === 'job';
+    const notReqPhoto = notRequirePhotosCategories.some(c => c === categoryName);
 
     const {t} = useTranslation('filters');
     const {images, model} = useRouter().query;
 
     const onSubmit = ({files, color}) => {
+        const imgs = files.filter(f => !!f);
         const appearance: { photos: any, color_id?: number } = {
-            photos: files.filter(f => !!f).map(f => f.id ?? f.file)
+            photos: imgs
         };
         if (color) appearance.color_id = color.id;
         unstable_batchedUpdates(() => {
-            handleSubmit({appearance});
             handleNextFormOpen();
+            handleSubmit({appearance});
         });
     };
 
@@ -110,7 +111,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         if (images) {
             const imgs = JSON.parse(images as string).map(img => ({
                 id: img.id,
-                url: img.url.default
+                url: img.url?.default
             }));
             const nulls = Array.from({length: UPLOAD_FILES_LIMIT - imgs.length}).map(_ => null);
             return [...imgs, ...nulls];
@@ -125,7 +126,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             color: null,
             files: initPhotos()
         },
-        validationSchema: !isJob ? appearanceSchema : null
+        validationSchema: notReqPhoto ? null : appearanceSchema
     });
 
     const {
@@ -150,7 +151,6 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         const result = Array.from(list);
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
-
         return result;
     };
 
@@ -188,7 +188,10 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
 
         setValues({
             ...values,
-            files: [...photos, ...files]
+            files: [
+                ...photos,
+                ...files
+            ]
         });
     };
 
@@ -199,6 +202,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             ...values,
             files: [...sorted, ...nulls]
         });
+
     };
 
     useEffect(() => {
@@ -243,7 +247,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                             )}
                             <Grid item xs={12}>
                                 <Typography variant="subtitle1" component='p' gutterBottom>
-                                    {t('post:photos')}:
+                                    {t('post:photos')}:&nbsp;
+                                    {files.every(p => p === null) && t('common:no')}
                                 </Typography>
                                 <Grid item container xs={12} spacing={1} className='photos-preview'>
                                     {files.map((photo, i) => (
@@ -264,7 +269,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                             {!!colors && (
                                 <Grid item xs={12}>
                                     <Typography variant="subtitle1" gutterBottom>
-                                        {!isJob && (
+                                        {!notReqPhoto && (
                                             <>
                                                 {t(`${categoryName}.color.name`)}
                                                 {<span className='error-text'>*&nbsp;</span>}
@@ -318,7 +323,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     mb={2}
                                 >
                                     {t('post:photos')}
-                                    {!isJob && <span className='error-text'>*</span>}
+                                    {!notReqPhoto && <span className='error-text'>*</span>}
                                     {errors.files && touched.files && (
                                         <Box
                                             mt={1}

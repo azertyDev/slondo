@@ -1,29 +1,23 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Container, Grid, Hidden, Paper, Typography} from '@material-ui/core';
 import {
     EmailIcon,
     ForeignLinkIcon,
-    Logo,
     PurseIcon,
     SecurityPaymentIcon,
     ShieldIcon
 } from '@src/components/elements/icons';
-import Link from 'next/link';
+import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
-export const Security = () => {
+export const Security: FC<WithT> = () => {
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Container maxWidth='xl'>
-                <Grid container justify='center'>
+                <Grid container justifyContent='center'>
                     <Grid item xs={12} md={9}>
-                        <Link href="/">
-                            <a>
-                                <Logo/>
-                            </a>
-                        </Link>
                         <div className={classes.description}>
                             <div className={classes.hero}>
                                 <Typography variant='h5'>

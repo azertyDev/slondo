@@ -1,13 +1,12 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {userAPI} from "@src/api/api";
-import {Box, Typography} from "@material-ui/core";
-import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar/UserInfoWithAvatar";
-import {CloseIcon, DoneAllIcon} from "@src/components/elements/icons";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {CabinetModal} from "@src/components/cabinet/components/cabinet_modal/CabinetModal";
-import {CommonModalType} from "@src/components/cabinet/Cabinet";
+import {userAPI} from '@src/api/api';
+import {Box, Grid, Typography} from '@material-ui/core';
+import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
+import {CommonModalType} from '@src/components/cabinet/Cabinet';
+import {ErrorCtx} from '@src/context';
+import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {ErrorCtx} from "@src/context";
+import {OfferCard} from '@src/components/cabinet/components/offers_modal/OfferCard';
 
 export const OffersModal: FC<CommonModalType> = (props) => {
     const {
@@ -20,6 +19,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const isPublic = post.status === 'public';
     const auctionId = post.auction.id;
 
+    const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
@@ -56,64 +56,27 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const classes = useStyles();
     return (
         <CabinetModal
+            title={t('all_offers')}
             openDialog={open}
             handleCloseDialog={onClose}
         >
             <Box className={classes.root}>
-                <Box>
-                    <Typography variant='h6'>Все предложения</Typography>
-                    <Typography variant='subtitle2'>{`Аукцион №: ${post.id}`}</Typography>
-                </Box>
-                <Box width={1}>
-                    {offers.map(offer => {
-                        return (
-                            <Box px={5} py={2} display='flex' key={offer.id}>
-                                <Box>
-                                    <UserInfoWithAvatar owner={offer.user} isOwner={true}/>
-                                </Box>
-                                <Box>
-                                    <Typography variant='subtitle2'>
-                                        {offer.created_at}
-                                    </Typography>
-                                    <div>
-                                        <Typography variant='subtitle2'>
-                                            Предложенная цена
-                                        </Typography>
-                                        {offer.price}
-                                    </div>
-                                    <div>
-                                        <CustomButton
-                                            className='accept'
-                                            disabled={isFetch}
-                                            onClick={handleOffer(offer.id, true)}
-                                        >
-                                            <DoneAllIcon/>
-                                            <Typography
-                                                variant="subtitle2"
-                                                color="initial"
-                                            >
-                                                Принять
-                                            </Typography>
-                                        </CustomButton>
-                                        <CustomButton
-                                            className='decline'
-                                            disabled={isFetch}
-                                            onClick={handleOffer(offer.id, false)}
-                                        >
-                                            <CloseIcon/>
-                                            <Typography
-                                                variant="subtitle2"
-                                                color="initial"
-                                            >
-                                                Отказать
-                                            </Typography>
-                                        </CustomButton>
-                                    </div>
-                                </Box>
-                            </Box>
-                        );
-                    })}
-                </Box>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography variant='subtitle2' align='center'>
+                            {`Аукцион №: ${post.id}`}
+                        </Typography>
+                    </Grid>
+                    {offers.map(offer => (
+                        <Grid item xs={12} key={offer.id}>
+                            <OfferCard
+                                offer={offer}
+                                isFetch={isFetch}
+                                handleOffer={handleOffer}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
             </Box>
         </CabinetModal>
     );

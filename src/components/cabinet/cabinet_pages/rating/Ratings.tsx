@@ -1,32 +1,27 @@
-import {FC, useContext, useState} from 'react';
-import {WithT} from 'i18next';
-import {Box, Divider, Grid, Typography} from '@material-ui/core';
-import {Rating} from '@src/components/elements/rating/Rating';
-import {months} from '@src/common_data/common';
-import {useModal} from '@src/hooks/useModal';
+import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {userAPI} from '@src/api/api';
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {useModal} from '@src/hooks';
 import {Form, FormikProvider, useFormik} from 'formik';
+import {unstable_batchedUpdates} from 'react-dom';
 import {regularFormSchema} from '@root/validation_schemas/postSchemas';
+import {useStyles} from '@src/components/cabinet/cabinet_pages/rating/useStyles';
+import {months} from '@src/common_data/common';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {getErrorMsg} from '@src/helpers';
-import {AuthCtx} from "@src/context";
-import {useStyles} from './useStyles';
+import {TEXT_LIMIT} from '@src/constants';
+import {checkTimeForZero, getErrorMsg} from '@src/helpers';
+import {ReadMore} from '@src/components/elements/read_more/readMore';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Rating} from '@src/components/elements/rating/Rating';
 
-type RatingsPropsType = {
-    data,
-    handleReply: (comment_id: number, comment: string) => () => void
-} & WithT;
-
-export const Ratings: FC<RatingsPropsType> = (props) => {
-    const {
-        t,
-        data,
-        handleReply
-    } = props;
+export const Ratings: FC = () => {
+    const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initCommentData = {
         author: {
@@ -44,36 +39,60 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         }
     };
 
-    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
-    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const [isFetch, setIsFetch] = useState(false);
+    const [userRatings, setUserRatings] = useState([]);
     const [commentData, setCommentData] = useState(initCommentData);
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
-    const onReplyBtnClick = (author, comment) => () => {
-        setCommentData({author, comment});
-        handleModalOpen();
+    const fetchUserRatings = async () => {
+        try {
+            setIsFetch(true);
+            const {data} = await userAPI.getAllUserRating();
+            unstable_batchedUpdates(() => {
+                setUserRatings(data);
+                setIsFetch(false);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+                setIsFetch(false);
+            });
+        }
     };
 
-    const handleSubmitReply = async (values, {setSubmitting, setValues}) => {
+    const onReplyBtnClick = (author, comment) => () => {
+        unstable_batchedUpdates(() => {
+            handleModalOpen();
+            setCommentData({author, comment});
+        });
+    };
+
+    const onSubmit = async (values, {setSubmitting, setValues}) => {
         const {comment} = values;
         try {
             setSubmitting(true);
             await userAPI.setReplyComment(commentData.comment.id, comment);
-            setSubmitting(false);
-            setValues({...values, comment});
-            handleModalClose();
+            await fetchUserRatings();
+            unstable_batchedUpdates(() => {
+                handleModalClose();
+                setSubmitting(false);
+                setValues({...values, comment});
+            });
         } catch ({message}) {
             setValues({...values, message});
         }
     };
 
-    const txtLimit = 3000;
     const formik = useFormik({
-        onSubmit: handleSubmitReply,
+        onSubmit,
         initialValues: {
             comment: ''
         },
         validationSchema: regularFormSchema
     });
+
     const {
         handleSubmit,
         values,
@@ -83,77 +102,159 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         touched
     } = formik;
 
+    const handleReply = (comment_id: number, comment: string) => async () => {
+        try {
+            await userAPI.setReplyComment(comment_id, comment);
+            fetchUserRatings();
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserRatings();
+    }, []);
+
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Grid item xs>
-                <Box
-                    component="div"
-                    mb={2}
-                    className='owner-rating'
-                    borderColor="transparent"
-                    display='inline-block'
-                >
+        <>
+            <Grid container spacing={isXsDown ? 0 : 2} className={classes.root}>
+                <Grid item xs={12} container justifyContent='center'>
                     <Rating
+                        card
+                        readOnly
                         name="rating"
                         ratingValue={rating}
                         ratingCount={number_of_ratings}
+                        className='mainRating'
                     />
-                </Box>
-                <Divider variant='fullWidth' light/>
-                <Box>
-                    <Typography variant='subtitle1'>
-                        Оценки и отзывы
-                    </Typography>
-                    {data.map(({comments}) => {
+                </Grid>
+                <Grid item xs={12}>
+                    <Box width={1} my={2} p='5px 30px' className='ratingHeader'>
+                        <Typography variant='h6'>
+                            {t('reviews_rating')}
+                        </Typography>
+                    </Box>
+                    {userRatings.map(({comments, rating}, index) => {
+                        const [mainComment, ...replyComments] = comments;
+                        const date = new Date(mainComment?.created_at);
+                        const formatted_date1 = `${checkTimeForZero(date.getHours())}:${checkTimeForZero(date.getMinutes())} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
                         return (
-                            <Box key={comments.id}>
-                                {comments.map((commentData, index) => {
-                                    const {comment, creator, created_at, author} = commentData;
-                                    const date = new Date(created_at);
-                                    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-                                    return (
-                                        <>
-                                            <Box className='review-item' key={index}>
-                                                {index === 0 && (
-                                                    <UserAvatarComponent
-                                                        avatar={author.avatar}
-                                                        width='50px'
-                                                        height='50px'
-                                                    />
-                                                )}
-                                                <Box>
-                                                    <Typography variant='subtitle1'>
-                                                        {`${author.name ?? ''} ${author.surname ?? ''}`}
+                            <Box key={index} className='review' pb={2} mb={2}>
+                                <Box mb={2}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} md={10} container justifyContent='center'>
+                                            <Grid item xs={2} container justifyContent='center'>
+                                                <UserAvatarComponent
+                                                    width={isXsDown ? '30px' : '50px'}
+                                                    height={isXsDown ? '30px' : '50px'}
+                                                    avatar={mainComment?.author?.avatar}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={10} container alignItems='center'>
+                                                <Grid item xs={12} sm={8}>
+                                                    <Typography variant='subtitle1' gutterBottom>
+                                                        <strong>
+                                                            {`${mainComment?.author?.name ?? ''} ${mainComment?.author?.surname ?? ''}`}
+                                                        </strong>
                                                     </Typography>
+                                                    <Typography variant='caption' component='p' gutterBottom>
+                                                        {formatted_date1}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={12} sm={4}>
+                                                    <Rating ratingValue={rating} readOnly />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item xs={12} md={10} container justifyContent='flex-end'>
+                                            <Grid item xs={12} sm={10}>
+                                                <ReadMore id={mainComment?.id} threshold={55}>
                                                     <Typography variant='subtitle2'>
-                                                        {formatted_date}
+                                                        {mainComment?.comment}
                                                     </Typography>
-                                                </Box>
-                                                {index === 0
-                                                    ? (<Typography variant='subtitle2'>
-                                                        {comments[0].comment}
-                                                    </Typography>)
-                                                    : (<>
+                                                </ReadMore>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+
+                                <Grid item xs={12} md={10} container justifyContent='flex-end' spacing={2}>
+                                    {replyComments.map((commentData, index) => {
+                                        const {id, comment, creator, created_at, author, reply} = commentData;
+                                        const date = new Date(created_at);
+                                        const formatted_date = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+                                        if (index % 2) {
+                                            return (
+                                                <Grid item xs={12} sm={10} key={index}>
+                                                    <Box>
+                                                        <Box mb={2}>
+                                                            <Typography variant='subtitle1' gutterBottom>
+                                                                <strong>
+                                                                    {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                                </strong>
+                                                            </Typography>
+                                                            <Typography variant='caption' component='p'>
+                                                                {formatted_date}
+                                                            </Typography>
+                                                        </Box>
+                                                        <ReadMore id={id} threshold={55}>
+                                                            <Typography variant='subtitle2'>
+                                                                {comment}
+                                                            </Typography>
+                                                        </ReadMore>
+                                                        {index === comments.length - 1 && !creator && !reply && (
+                                                            <CustomButton
+                                                                onClick={onReplyBtnClick(author, commentData)}
+                                                                color='secondary'
+                                                            >
+                                                                <Typography variant='subtitle1' component='p'>
+                                                                    {t('common:answer')}
+                                                                </Typography>
+                                                            </CustomButton>
+                                                        )}
+                                                    </Box>
+                                                </Grid>
+                                            );
+                                        }
+                                        return (
+                                            <Grid item xs={12} sm={10} key={index}>
+                                                <Box className='review-answer'>
+                                                    <Box mb={2}>
+                                                        <Typography variant='subtitle1' gutterBottom>
+                                                            <strong>
+                                                                {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                            </strong>
+                                                        </Typography>
+                                                        <Typography variant='caption' component='p'>
+                                                            {formatted_date}
+                                                        </Typography>
+                                                    </Box>
+                                                    <ReadMore id={id} threshold={55}>
                                                         <Typography variant='subtitle2'>
                                                             {comment}
                                                         </Typography>
-                                                    </>)
-                                                }
-                                                {index === comments.length - 1 && !creator && (
-                                                    <CustomButton
-                                                        onClick={onReplyBtnClick(author, commentData)}>
-                                                        Ответить
-                                                    </CustomButton>
-                                                )}
-                                            </Box>
-                                        </>
-                                    );
-                                })}
+                                                    </ReadMore>
+                                                    {index === comments.length - 1 && !creator && !reply && (
+                                                        <CustomButton
+                                                            onClick={onReplyBtnClick(author, commentData)}
+                                                            color='secondary'
+                                                        >
+                                                            <Typography variant='subtitle1' component='p'>
+                                                                {t('common:answer')}
+                                                            </Typography>
+                                                        </CustomButton>
+                                                    )}
+                                                </Box>
+                                            </Grid>
+                                        );
+                                    })}
+                                </Grid>
+
                             </Box>
                         );
                     })}
-                </Box>
+                </Grid>
             </Grid>
             <ResponsiveModal
                 openDialog={modalOpen}
@@ -161,7 +262,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
             >
                 <Box p='30px 15px'>
                     <Box>
-                        <UserInfoWithAvatar owner={commentData.author}/>
+                        <UserInfoWithAvatar user={commentData.author} />
                     </Box>
                     <Box>
                         <Typography variant='subtitle2'>
@@ -176,20 +277,20 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                                 flexDirection='column'
                             >
                                 <FormikTextarea
-                                    placeholder='Поделитесь впечатлениями'
-                                    name='comment'
-                                    disableRequire={true}
-                                    onChange={handleChange}
                                     rows={10}
-                                    value={values.comment}
+                                    name='comment'
+                                    limit={TEXT_LIMIT}
                                     onBlur={handleBlur}
-                                    labelTxt={t('Оставьте коментарий')}
+                                    disableRequire={true}
+                                    value={values.comment}
+                                    onChange={handleChange}
+                                    placeholder={t('shareYourImpression')}
+                                    labelTxt={t('giveComment')}
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
-                                    limit={txtLimit}
                                 />
-                                <CustomButton type='submit'>
-                                    <Typography variant='subtitle1'>
-                                        Ответить
+                                <CustomButton type='submit' color='secondary'>
+                                    <Typography variant='subtitle1' component='p'>
+                                        {t('common:send')}
                                     </Typography>
                                 </CustomButton>
                             </Box>
@@ -197,6 +298,6 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                     </FormikProvider>
                 </Box>
             </ResponsiveModal>
-        </div>
-    );
-};
+        </>
+    )
+}

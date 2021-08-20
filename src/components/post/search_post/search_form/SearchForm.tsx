@@ -16,7 +16,7 @@ import {
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
-import {transformLocations} from '@root/transformedLocations';
+import {transLocations} from '@root/transformedLocations';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {userAPI} from '@src/api/api';
 import {SearchEstate} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
@@ -31,7 +31,7 @@ export type CommonFiltersType = {
     filters,
     urlParams,
     isRent?: boolean,
-    categoryName: string,
+    categoryName?: string,
     handleReset?: () => void,
     sameWithUrlCtgr: boolean
 };
@@ -49,7 +49,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const {t} = useTranslation('filters');
     const [ctgr, subctgr, typeCtgr] = categories;
-    const categoryName = ctgr?.name;
 
     const {
         post_type,
@@ -161,7 +160,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'transport':
@@ -173,8 +171,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     urlParams={urlFiltersParams}
                     onSubmit={onSubmit}
                     handleReset={handleReset}
-                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
+                    categoryName={values.category?.name}
                 />;
             case 'estate':
                 return <SearchEstate
@@ -183,9 +181,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    categoryName={categoryName}
                     subcategoryName={subcategoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
+                    categoryName={values.category?.name}
                 />;
             case 'job':
                 return <SearchJob
@@ -196,8 +194,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
                     handleReset={handleReset}
-                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
+                    categoryName={values.category?.name}
                 />;
             default:
                 return <SearchRegular
@@ -208,8 +206,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
+                    categoryName={values.category?.name}
                 />;
         }
     };
@@ -230,11 +228,11 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     function urlByParams(values): string {
         let url = '/';
         const userLocation = cookies.get('user_location');
-        const params = toUrlParams({...commonVals, ...values});
+        const params = toUrlParams({...commonVals, ...values}, term);
 
         if (userLocation) {
             const {city} = userLocation;
-            const region = transformLocations[userLocation.region.name];
+            const region = transLocations[userLocation.region.name];
             url = url.concat(city ? `${region[city.name]}/` : `${region.name}/`);
         } else {
             url = url.concat(`uzbekistan/`);
@@ -249,8 +247,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             url = url.concat(categoryName);
         }
 
-        if (type) url = url.concat(`${transformCyrillic(type.ru_name)}/`);
-        if (term) url = url.concat(`q-${term}/`);
+        if (type) url = url.concat(`${transformCyrillic(type.ru_name)}`);
         if (params) url = url.concat(params);
 
         return url;
@@ -357,7 +354,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             values={values}
                             handleSelect={handleSelect}
                             items={values.subcategory.type}
-                            labelTxt={t('type')}
+                            labelTxt={t(`${category?.name}.type.name`)}
                             transKey={`categories:${category?.name}.${subcategory?.name}.`}
                         />
                     </Grid>
@@ -411,8 +408,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 <SiteServices
                     t={t}
                     iconMode
-                    isAuction={false}
                     values={values}
+                    isAuction={false}
                     handleCheckbox={handleCheckbox}
                     categoryName={mainCategoryName}
                 />

@@ -18,6 +18,7 @@ import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/Cab
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
+import {Trans} from 'next-i18next';
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -72,7 +73,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const reason = reasons.map(({reason}) => {
         return (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={reason.id}>
                 <Typography variant='subtitle1' component='p' className='error-text'>
                     {t(`${reason.name}`)}
                 </Typography>
@@ -209,23 +210,27 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         )}
                         <Grid item xs={12} md={6} container spacing={1} className={classes.userInfoWrapper}>
                             <Grid item xs={12} container className='user-info-title'>
-                                <Grid item xs={8}>
-                                    <Typography variant='subtitle2'>
-                                        {t(getUserInfoTitle())}
+                                <Grid item xs={12} sm={8}>
+                                    <Typography variant='subtitle2' gutterBottom>
+                                        {t(getUserInfoTitle())}&nbsp;
                                         {hasOffer && !winner && isUserCreator && (
-                                            <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
+                                            <Trans
+                                                t={t}
+                                                i18nKey="offer_price"
+                                                tOptions={{price: numberPrettier(offer?.price)}}
+                                                components={[<strong />]}
+                                            />
                                         )}
                                     </Typography>
                                 </Grid>
                                 {isUserCreator && hasOffer && !winner && (
-                                    <Grid item xs={4}>
+                                    <Grid item xs={12} sm={4}>
                                         <Typography
-                                            align='right'
                                             variant='subtitle2'
                                             className='all-offers'
                                             onClick={handleOffersOpen}
                                         >
-                                            {t('all_offers', {offers: auction?.number_of_offers})}
+                                            {t('all_offers_count', {offers: auction?.number_of_offers})}
                                         </Typography>
                                     </Grid>
                                 )}
@@ -250,7 +255,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             {(isUserCreator || isUserWinner) && !inactiveStatus && (
                                 <>
                                     {(isUserWinner || (offerUser && !winner)) && (
-                                        <Grid item xs={!(winner || hasOffer) ? 4 : 12}>
+                                        <Grid item xs={12}>
                                             <CustomButton
                                                 color='silver'
                                                 disabled={isFetch}
@@ -265,7 +270,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                     {(winner || hasOffer) && isUserCreator && (
                                         <Grid item xs={12}>
                                             <CustomButton
-                                                color='secondary'
+                                                color='primary'
                                                 disabled={isFetch}
                                                 onClick={handleAccept}
                                             >

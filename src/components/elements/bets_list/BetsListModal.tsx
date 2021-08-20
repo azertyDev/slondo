@@ -19,7 +19,8 @@ import {BETS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type BetsListPropsType = {
     auctionId: number,
@@ -60,15 +61,10 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 handleCloseDialog={handleModalClose}
                 maxWidth='lg'
             >
-                <IconButton
-                    size='small'
-                    onClick={handleModalClose}
-                    className={classes.closeBtn}
-                >
-                    <CloseIcon/>
-                </IconButton>
+                <ModalHeader title={t('allBets')} handleCloseDialog={handleModalClose} />
+
                 {isBetsFetch
-                    ? <CustomCircularProgress/>
+                    ? <CustomCircularProgress />
                     : <>
                         <Box
                             p={2}
@@ -80,9 +76,6 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                 mb={2}
                                 textAlign='center'
                             >
-                                <Typography variant='h6' gutterBottom>
-                                    <strong>{t('allBets')}</strong>
-                                </Typography>
                                 <Typography variant='subtitle2'>
                                     {`${t(`common:auc`)} №: ${auctionId}`}
                                 </Typography>

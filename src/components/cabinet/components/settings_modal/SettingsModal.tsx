@@ -9,14 +9,14 @@ import {
     ListItemText,
     Typography
 } from '@material-ui/core';
+import {useFormik} from "formik";
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {CommonModalType} from "@src/components/cabinet/Cabinet";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
-import {useFormik} from "formik";
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {phoneSchema} from "@root/validation_schemas/authRegSchema";
 import {getErrorMsg, phonePrepare, urlByParams} from "@src/helpers";
 import {ErrorCtx} from "@src/context";
@@ -101,8 +101,8 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     const postType = postData.ads_type.mark;
                     const categoryName = postData.category.name;
                     const subcategoryName = postData.adsable.sub_category.name;
-                    const type = postData.adsable.type ? `/${postData.adsable.type.name}` : '';
-                    push(`/create/form/${postType}/${categoryName}/${subcategoryName}${type}?post_id=${postData.id}${urlByParams(postData)}`);
+                    const type = postData.adsable.type ? `&type_ctgr=${postData.adsable.type.name}` : '';
+                    push(`/create?post_type=${postType}&main_ctgr=${categoryName}&sub_ctgr=${subcategoryName}${type}&post_id=${postData.id}${urlByParams(postData)}`);
                     return;
                 }
             }
@@ -235,7 +235,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 </List>;
             case 'sold_on_slondo':
                 return <Grid container spacing={2} className={classes.mt30}>
-                    <Grid item container spacing={2} justify='center'>
+                    <Grid item container spacing={2} justifyContent='center'>
                         <Grid item xs={12} sm={6}>
                             <Box>
                                 <FormikField

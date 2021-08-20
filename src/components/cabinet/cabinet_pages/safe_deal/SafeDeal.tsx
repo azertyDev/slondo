@@ -1,10 +1,10 @@
 import {FC, useEffect} from 'react';
-import {UserPaymentCard} from '@src/components/elements/safe_deal/UserPaymentCard';
 import {useUserPaymentCard} from "@src/hooks";
+import {UserPaymentCard} from '@src/components/elements/safe_deal/UserPaymentCard';
 import {useStyles} from './useStyles';
 import {Grid} from '@material-ui/core';
 
-export const SafetyDeal: FC = () => {
+export const SafeDeal: FC = () => {
     const {
         userCard,
         fetchUserCard,

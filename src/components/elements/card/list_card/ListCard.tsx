@@ -11,10 +11,10 @@ import Link from 'next/link';
 import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import Countdown from 'react-countdown';
-import {Box, Grid, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
-import {useStyles} from './useStyles';
 import {months} from '@src/common_data/common';
+import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
     cardData: CardDataType
@@ -47,7 +47,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     );
 
     const date = new Date(cardData.created_at);
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours()}:${date.getMinutes()}`;
 
     const translatedTitle = transformCyrillic(cardData.title);
 
@@ -213,20 +213,21 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     container direction='column' alignItems={isXsDown ? 'flex-start' : 'flex-end'}
                                 >
                                     {isAuction
-                                        ? hasBet && <>
-                                        <Typography variant='subtitle1' component='p' className='color-silver'>
-                                            {t('common:currentRate')}
-                                        </Typography>
-                                        <Typography
-                                            variant="h6"
-                                            component='p'
-                                            color="initial"
-                                            noWrap
-                                        >
-                                            {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                            <span>{t(`common:${cardData.currency.name}`)}</span>
-                                        </Typography>
-                                    </>
+                                        ? hasBet &&
+                                        <>
+                                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                                {t('common:currentRate')}
+                                            </Typography>
+                                            <Typography
+                                                variant="h6"
+                                                component='p'
+                                                color="initial"
+                                                noWrap
+                                            >
+                                                {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
+                                                <span>{t(`common:${cardData.currency.name}`)}</span>
+                                            </Typography>
+                                        </>
                                         : <Typography
                                             variant="h6"
                                             component='p'

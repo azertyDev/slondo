@@ -34,29 +34,13 @@ export const UserProfile: FC = () => {
     const getPageContent = () => {
         switch (pageName) {
             case 'profile_posts':
-                return <UserPosts t={t} />;
+                return <UserPosts t={t}/>;
             case 'profile_ratings':
-                return <UserRatingsContainer t={t} />;
+                return <UserRatingsContainer t={t}/>;
             case 'profile_follows':
-                return <UserFollowsList t={t} />;
+                return <UserFollowsList t={t}/>;
         }
     };
-
-    const profileInfo = (
-        <UserInfoWithAvatar
-            isOwner={true}
-            owner={userInfo}
-        />
-    );
-
-    const sidebarMenu = (
-        <SidebarMenu
-            t={t}
-            user={userInfo}
-            setPageName={setPageName}
-            pageName={pageName}
-        />
-    );
 
     useEffect(() => {
         fetchUserById();
@@ -68,8 +52,19 @@ export const UserProfile: FC = () => {
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <Box mb={2}>{profileInfo}</Box>
-                        <Box>{sidebarMenu}</Box>
+                        <Box mb={2}>
+                            <UserInfoWithAvatar
+                                user={userInfo}
+                            />
+                        </Box>
+                        <Box>
+                            <SidebarMenu
+                                t={t}
+                                user={userInfo}
+                                setPageName={setPageName}
+                                pageName={pageName}
+                            />
+                        </Box>
                     </Grid>
                     <Grid item xs={9} container direction='column'>
                         <Typography variant="h6" className="menu-title">

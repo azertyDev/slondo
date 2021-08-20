@@ -1,10 +1,10 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
-import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
-import {CommonParamsPropsType} from '../../../ParamsFormContainer';
+import {ParamsFormPreview} from '@src/components/post/create_post/third_step/params_form/ParamsFormPreview';
+import {CommonParamsPropsType} from '../../../ParamsForm';
 import {getErrorMsg} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
@@ -16,6 +16,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
+import {unstable_batchedUpdates} from "react-dom";
 
 
 export const LandParams: FC<CommonParamsPropsType> = (props) => {
@@ -32,19 +33,13 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
     const {t} = useTranslation('filters');
 
     const {title, params} = useUrlParams();
+    const filtersLen = Object.keys(filters).length;
 
-    let initVals: any = {
+    const initVals: any = {
         title,
         estate_type: null,
         area: ''
     };
-
-    if (params) {
-        initVals = {
-            ...initVals,
-            ...params
-        };
-    }
 
     const formik = useFormik({
         onSubmit,
@@ -60,7 +55,19 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleFracInput} = useHandlers(values, setValues);
+    const {
+        handleSelect,
+        setRequireVals,
+        handleFracInput,
+        setValsByUrlParams
+    } = useHandlers(values, setValues);
+
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            setRequireVals(filters);
+            filtersLen && title && setValsByUrlParams(params);
+        });
+    }, [filtersLen]);
 
     const classes = useStyles();
     return (
@@ -80,7 +87,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                     </Grid>
                     <Grid container item spacing={2}>
                         {isPreview
-                            ? <PreviewValues
+                            ? <ParamsFormPreview
                                 values={values}
                                 filters={filters}
                                 transKey={t(`${categoryName}.`)}

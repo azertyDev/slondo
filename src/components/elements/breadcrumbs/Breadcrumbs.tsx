@@ -4,7 +4,7 @@ import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {cookies, transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
-import {transformLocations} from '@root/transformedLocations';
+import {transLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 type BreadcrumbsPropsType = {
@@ -16,7 +16,7 @@ type BreadcrumbsPropsType = {
 export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {
     const {t} = useTranslation('categories');
 
-    const userLocation = cookies.get('user_location');
+    const userLocation = cookies.get('[path]');
     const [location, setLocation] = useState('uzbekistan');
 
     const mainCtgr = site_categories.find(ctgr => ctgr.name === category);
@@ -35,8 +35,8 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
         if (userLocation) {
             const {region, city} = userLocation;
             setLocation(city
-                ? transformLocations[region.name][city.name]
-                : transformLocations[region.name].name
+                ? transLocations[region.name][city.name]
+                : transLocations[region.name].name
             );
         }
     }, [userLocation]);

@@ -1,8 +1,8 @@
 import {FC} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
+import {useTranslation} from 'react-i18next';
 import {noTranslatableFields} from "@src/common_data/fields_keys";
+import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type CustomSelectPropsType = {
@@ -53,15 +53,14 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
 
     const selectedHandle = (selected: any) => {
         let value = t('noSelect');
-
         if (items.length !== 0 && multiple) {
             value = selected.map(item => {
                 const valName = items.find(v => v.id === item)?.name;
                 return t(`${transKey}${valName}.name`);
             }).join(', ');
         } else if (selected) {
-            const selectedItem = items.find(item => item.id === +selected) || null;
-            if (selectedItem !== null) value = selectedItem[optionKey];
+            const selectedItem = items.find(item => item.id === +selected);
+            if (selectedItem !== undefined) value = selectedItem[optionKey];
         }
 
         return !selected || multiple || noTranslatable
@@ -87,8 +86,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 onChange={onChange}
                 disabled={!items.length || disabled}
                 renderValue={selectedHandle}
-                value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
+                value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
             >
                 {!multiple && !isCurrency && (
                     <MenuItem value={0}>
@@ -97,7 +96,6 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 )}
                 {items.map(item => {
                     const isSelected = multiple && !!values[name]?.some(v => v === item.id);
-
                     return (
                         <MenuItem
                             key={item.id}

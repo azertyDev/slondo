@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-    wrapper: {
+    root: {
         minHeight: '100vh',
         display: 'flex',
         flexFlow: 'column nowrap',

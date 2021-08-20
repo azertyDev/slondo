@@ -502,6 +502,9 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& h6': {
                         '&.key': {
+                            paddingRight: '10px',
+                            fontSize: '1.125rem',
+                            color: '#838383',
                             [theme.breakpoints.up('md')]: {
                                 width: '30%'
                             },
@@ -511,11 +514,10 @@ export const useStyles = makeStyles((theme) => ({
                             [theme.breakpoints.down('sm')]: {
                                 paddingBottom: '8px',
                                 color: '#BDBDBD'
-                            },
-                            fontSize: '1.125rem',
-                            color: '#838383'
+                            }
                         },
                         '&.value': {
+                            width: '100%',
                             [theme.breakpoints.down('md')]: {
                                 fontSize: 'calc(14px + 4 * (100vw / 1280))'
                             }

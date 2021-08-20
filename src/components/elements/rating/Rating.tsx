@@ -45,8 +45,8 @@ export const Rating: FC<RatingPropsType> = (props) => {
                 <Hidden mdDown>
                     <div>
                         <Typography
-                            variant="subtitle1"
                             component='p'
+                            variant="subtitle1"
                             className='ratingCount'
                         >
                             {`(${ratingCount} оценок)`}

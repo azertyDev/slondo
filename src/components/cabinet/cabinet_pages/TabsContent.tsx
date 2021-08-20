@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react';
-import {Grid, Tab, Tabs, Typography} from '@material-ui/core';
+import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {useRouter} from 'next/router';

@@ -2,21 +2,17 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'relative',
         display: 'flex',
-        height: '100%',
-        '& div.user-info': {
+        width: '100%',
+        '& > div:first-child': {
             display: 'flex',
-            width: '100%',
-            '& > div:first-child': {
-                display: 'flex',
-                alignItems: 'center',
-                marginRight: '10px'
-            },
-            '& > div:last-child': {
-                display: 'flex',
-                flexFlow: 'column wrap',
-                justifyContent: 'space-around',
+            alignItems: 'center',
+            marginRight: '10px'
+        },
+        '& > div:last-child': {
+            display: 'flex',
+            flexFlow: 'column wrap',
+            justifyContent: 'space-around',
                 '& > h6:first-child': {
                     [theme.breakpoints.down('md')]: {
                         fontSize: 'calc(16px + 4 * (100vw / 1280))',
@@ -34,13 +30,12 @@ export const useStyles = makeStyles((theme) => ({
                         margin: 0
                     }
                 },
-                '& a': {
-                    display: 'inline-block',
-                    textDecoration: 'none',
-                    '&:hover': {
-                        textDecoration: 'underline',
-                        textDecorationColor: '#000'
-                    }
+            '& a': {
+                display: 'inline-block',
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'underline',
+                    textDecorationColor: '#000'
                 }
             }
         },

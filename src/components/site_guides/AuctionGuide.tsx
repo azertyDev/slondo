@@ -7,23 +7,23 @@ import Link from 'next/link';
 const cardItemsData = {
     auction: [
         {
-            imgUrl: '/img/safe_shopping/auction/auction1.png',
+            imgUrl: '/img/safe_deal/auction/auction1.png',
             text: 'auction.advice_1'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction2.png',
+            imgUrl: '/img/safe_deal/auction/auction2.png',
             text: 'auction.advice_2'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction3.png',
+            imgUrl: '/img/safe_deal/auction/auction3.png',
             text: 'auction.advice_3'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction4.png',
+            imgUrl: '/img/safe_deal/auction/auction4.png',
             text: 'auction.advice_4'
         },
         {
-            imgUrl: '/img/safe_shopping/auction/auction5.png',
+            imgUrl: '/img/safe_deal/auction/auction5.png',
             text: 'auction.advice_5'
         }
     ]
@@ -55,7 +55,7 @@ export const AuctionGuide: FC<WithT> = (props) => {
                                 </Hidden>
                                 <Grid item xs={12} sm={6} container justifyContent='center'>
                                     <img
-                                        src="/img/safe_shopping/auction/auction0.png"
+                                        src="/img/safe_deal/auction/auction0.png"
                                         alt="auction-img"
                                     />
                                 </Grid>

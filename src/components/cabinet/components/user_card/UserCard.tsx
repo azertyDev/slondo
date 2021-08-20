@@ -53,10 +53,9 @@ export const UserCard: FC<UserCardProps> = (props) => {
         <Grid container spacing={2} className={classes.root}>
             <Grid item xs={12} sm={7} container alignItems='center'>
                 <UserInfoWithAvatar
-                    isOwner
                     width='50px'
                     height='50px'
-                    owner={userData}
+                    user={userData}
                 />
             </Grid>
             <Grid item xs={12} sm={5}>
@@ -80,7 +79,7 @@ export const UserCard: FC<UserCardProps> = (props) => {
                     </Typography>
                 </CustomButton>
                 {hasUserForRating && (
-                    <CustomButton onClick={handleOpenRating} color='gold'>
+                    <CustomButton onClick={handleOpenRating} className='ratingBtn'>
                         <Star />
                         <Typography variant='subtitle2' component='p'>
                             {t('give_rating')}

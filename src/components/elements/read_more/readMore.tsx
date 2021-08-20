@@ -5,23 +5,24 @@ import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
 type ReadMoreTypeProps = {
-    threshold: number
+    threshold: number,
+    id?: string
 };
 
-export const ReadMore: FC<ReadMoreTypeProps> = ({threshold, children}) => {
+export const ReadMore: FC<ReadMoreTypeProps> = ({threshold, id, children}) => {
     const {t} = useTranslation('common');
     const [isHidden, setIsHidden] = useState(true);
     const [descHeight, setDescHeight] = useState(0);
 
     useEffect(() => {
-        setDescHeight(document.getElementById('description').clientHeight);
+        setDescHeight(document.getElementById(id ?? 'description').clientHeight);
     }, [children]);
-
+    
     const classes = useStyles(threshold + 1);
     return (
         <div className={classes.root}>
             <div
-                id='description'
+                id={id ?? 'description'}
                 className={isHidden ? classes.hidden : ''}
             >
                 {children}

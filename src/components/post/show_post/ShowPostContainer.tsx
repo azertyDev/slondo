@@ -1,5 +1,4 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import Head from 'next/head';
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
@@ -15,10 +14,11 @@ import {AuthCtx, ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthContainer} from "@src/components/header/auth/AuthContainer";
+import {CustomHead} from "@src/components/head/CustomHead";
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {useStyles} from './useStyles';
 
-
-export const ShowPostContainer: FC<any> = () => {
+export const ShowPostContainer: FC = () => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -28,72 +28,68 @@ export const ShowPostContainer: FC<any> = () => {
 
     const initValues = {id: null, name: ''};
     const initialPostData = {
-        isFetch: false,
-        error: null,
-        data: {
+        id: null,
+        title: '',
+        price: '',
+        currency: initValues,
+        condition: initValues,
+        created_at: null,
+        expiration_at: null,
+        number_of_views: null,
+        sub_category_id: null,
+        favorite: false,
+        creator: false,
+        status: '',
+        subscribed: null,
+        safe_deal: null,
+        params: null,
+        author: {
             id: null,
-            title: '',
-            price: '',
-            currency: initValues,
-            condition: initValues,
+            name: '',
+            surname: '',
+            phone: '',
             created_at: null,
-            expiration_at: null,
-            number_of_views: null,
-            sub_category_id: null,
-            favorite: false,
-            creator: false,
-            status: '',
-            subscribed: null,
-            safe_deal: null,
-            params: null,
-            author: {
+            avatar: '',
+            available_days: '',
+            rating: 0
+        },
+        observer: {
+            number_of_views: 0,
+            number_of_favorites: 0
+        },
+        images: [],
+        description: '',
+        region: initValues,
+        city: initValues,
+        district: initValues,
+        category: {
+            id: null,
+            name: '',
+            mark: ''
+        },
+        adsable: {
+            id: null,
+            sub_category: {
                 id: null,
-                name: '',
-                surname: '',
-                phone: '',
-                created_at: null,
-                avatar: '',
-                available_days: '',
-                rating: 0
+                name: ''
             },
-            observer: {
-                number_of_views: 0,
-                number_of_favorites: 0
-            },
-            images: [],
-            description: '',
-            region: initValues,
-            city: initValues,
-            district: initValues,
-            category: {
+            type: {
                 id: null,
-                name: '',
-                mark: ''
-            },
-            adsable: {
-                id: null,
-                sub_category: {
-                    id: null,
-                    name: ''
-                },
-                type: {
-                    id: null,
-                    name: ''
-                }
-            },
-            ads_type: {
-                id: null,
-                mark: ''
-            },
-            auction: {
-                id: null,
-                duration: '',
-                display_phone: '',
-                reserve_price: '',
-                price_by_now: '',
-                price_buy_now_status: null,
-                offer_the_price: null
+                name: ''
             }
+        },
+        ads_type: {
+            id: null,
+            mark: ''
+        },
+        auction: {
+            id: null,
+            duration: '',
+            display_phone: '',
+            reserve_price: '',
+            price_by_now: '',
+            price_buy_now_status: null,
+            offer_the_price: null
         }
     };
 
@@ -108,7 +104,6 @@ export const ShowPostContainer: FC<any> = () => {
     const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
-    const {data} = postData;
     const {showPhone} = authorPhones;
 
     const {
@@ -127,14 +122,11 @@ export const ShowPostContainer: FC<any> = () => {
 
     const handleShowPhone = async () => {
         try {
-            setIsFetch(true);
-
-            const phones = !showPhone
-                ? await userAPI.getPostAuthorPhones(postData.data.id)
-                : initAuthorPhones;
+            const phones = showPhone
+                ? initAuthorPhones
+                : await userAPI.getPostAuthorPhones(postData.id);
 
             unstable_batchedUpdates(() => {
-                setIsFetch(false);
                 setAuthorPhones({
                     ...authorPhones,
                     ...phones,
@@ -143,7 +135,6 @@ export const ShowPostContainer: FC<any> = () => {
             });
         } catch ({response: {data: {message}}}) {
             unstable_batchedUpdates(() => {
-                setIsFetch(false);
                 if (message !== 'forbidden:') {
                     setErrorMsg(message);
                 } else {
@@ -158,7 +149,7 @@ export const ShowPostContainer: FC<any> = () => {
 
     const setFetchedPostData = async () => {
         try {
-            setPostData({...postData, isFetch: true});
+            setIsFetch(true);
             const {
                 title,
                 currency,
@@ -179,10 +170,9 @@ export const ShowPostContainer: FC<any> = () => {
                 });
             }
 
-            setPostData({
-                ...postData,
-                isFetch: false,
-                data: {
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setPostData({
                     title,
                     images,
                     description,
@@ -192,10 +182,13 @@ export const ShowPostContainer: FC<any> = () => {
                     city: city ?? initValues,
                     district: district ?? initValues,
                     ...otherData
-                }
+                });
             });
         } catch (e) {
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
@@ -208,13 +201,7 @@ export const ShowPostContainer: FC<any> = () => {
     const classes = useStyles();
     return (
         <>
-            <Head>
-                <meta name="robots" content="noindex"/>
-                <meta property="og:type" content="website"/>
-                <meta property="og:site_name" content="Slondo"/>
-                <meta property="og:title" content={data.title} key="ogtitle"/>
-                <title>{data.title}</title>
-            </Head>
+            <CustomHead title={postData.title} description={postData.description}/>
             <Hidden mdDown>
                 <Header/>
             </Hidden>
@@ -225,31 +212,35 @@ export const ShowPostContainer: FC<any> = () => {
                 style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
             >
                 <Grid container spacing={isMdDown ? 0 : 2}>
-                    <Grid item xs={12} lg={9}>
-                        <PostContent
-                            post={data}
-                            showPhone={showPhone}
-                            authorPhones={authorPhones}
-                            handleSafeDeal={handleSafeDeal}
-                            handleShowPhone={handleShowPhone}
-                            setFetchedPostData={setFetchedPostData}
-                        />
-                    </Grid>
-                    <Hidden mdDown>
-                        <Grid item lg={3} xs={12}>
-                            <OwnerAuctionInfo
-                                post={data}
-                                showPhone={showPhone}
-                                authorPhones={authorPhones}
-                                handleSafeDeal={handleSafeDeal}
-                                handleShowPhone={handleShowPhone}
-                                setFetchedPostData={setFetchedPostData}
-                            />
-                            {/*<div className={classes.adBanner}>*/}
-                            {/*    <Banner height="424px" />*/}
-                            {/*</div>*/}
-                        </Grid>
-                    </Hidden>
+                    {isFetch
+                        ? <CustomCircularProgress/>
+                        : <>
+                            <Grid item xs={12} lg={9}>
+                                <PostContent
+                                    post={postData}
+                                    showPhone={showPhone}
+                                    authorPhones={authorPhones}
+                                    handleSafeDeal={handleSafeDeal}
+                                    handleShowPhone={handleShowPhone}
+                                    setFetchedPostData={setFetchedPostData}
+                                />
+                            </Grid>
+                            <Hidden mdDown>
+                                <Grid item lg={3} xs={12}>
+                                    <OwnerAuctionInfo
+                                        post={postData}
+                                        showPhone={showPhone}
+                                        authorPhones={authorPhones}
+                                        handleSafeDeal={handleSafeDeal}
+                                        handleShowPhone={handleShowPhone}
+                                        setFetchedPostData={setFetchedPostData}
+                                    />
+                                    {/*<div className={classes.adBanner}>*/}
+                                    {/*    <Banner height="424px" />*/}
+                                    {/*</div>*/}
+                                </Grid>
+                            </Hidden>
+                        </>}
                 </Grid>
             </Container>
             <SafeDealModal

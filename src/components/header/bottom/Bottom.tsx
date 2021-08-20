@@ -3,7 +3,17 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
 import {cookieOpts, cookies} from '@src/helpers';
-import {AppBar, Avatar, Box, Container, Grid, Popover, Hidden, Typography, useScrollTrigger} from '@material-ui/core';
+import {
+    AppBar,
+    Avatar,
+    Box,
+    Container,
+    Grid,
+    Popover,
+    Hidden,
+    Typography,
+    useScrollTrigger
+} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
@@ -20,12 +30,14 @@ import {useStyles} from './useStyles';
 type BottomProps = {
     isScrollBreak: boolean,
     handleDrawerOpen: () => void
+    handlePageReload: () => void
 }
 
 const Bottom: FC<BottomProps> = (props) => {
     const {
         isScrollBreak,
-        handleDrawerOpen
+        handleDrawerOpen,
+        handlePageReload
     } = props;
 
     const {pathname} = useRouter();
@@ -91,8 +103,8 @@ const Bottom: FC<BottomProps> = (props) => {
                                         className="bottom-logo"
                                     >
                                         <Link href="/">
-                                            <a>
-                                                <Logo/>
+                                            <a onClick={handlePageReload}>
+                                                <Logo />
                                             </a>
                                         </Link>
                                     </Grid>
@@ -127,7 +139,7 @@ const Bottom: FC<BottomProps> = (props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
-                                    <Link href="/create/type">
+                                    <Link href="/create">
                                         <a className='create-post-link'>
                                             <CustomButton
                                                 color="primary"

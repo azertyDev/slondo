@@ -1,42 +1,51 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {useRouter} from 'next/router';
-import {Typography} from '@material-ui/core';
+import {Hidden, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {StepsProgress} from '../steps_progress/StepsProgress';
 import {postTypes} from '@src/common_data/post_types';
-import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {
+    urlByParams,
     normalizeFiltersByCategory,
     getCategoriesByParams,
     CategoriesParamsType,
     manufacturersDataNormalize
 } from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {SuccessPage} from '@src/components/post/create_post/third_step/success_page/SuccessPage';
-import {ParamsFormContainer} from './params_form/ParamsFormContainer';
-import {ErrorCtx} from "@src/context";
+import {ParamsForm} from './params_form/ParamsForm';
+import {ErrorCtx, ExitPromptCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
-export const FormPages: FC = () => {
+export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
+    const [_, setShowExitPrompt] = useContext(ExitPromptCtx);
 
     const {asPath, query, push} = useRouter();
+    const {
+        post_type,
+        main_ctgr,
+        sub_ctgr,
+        type_ctgr,
+        post_id,
+        preview
+    } = query;
 
-    const {post_id} = query;
-    const [_, postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
+    const isPreview = +preview === 1;
+    const postTypeName = post_type as string;
+    const categoryName = main_ctgr as string;
+    const subcategoryName = sub_ctgr as string;
+    const typeName = type_ctgr as string;
 
-    const {category, subcategory, type} = getCategoriesByParams(
-        {
-            categoryName,
-            subcategoryName,
-            typeName
-        } as CategoriesParamsType
-    );
+    const {category, subcategory, type} = getCategoriesByParams({
+        categoryName,
+        subcategoryName,
+        typeName
+    } as CategoriesParamsType);
 
     const isCtgrAnimalFishes = category?.name === 'animal' && subcategory?.name === 'fishes';
 
@@ -45,6 +54,8 @@ export const FormPages: FC = () => {
         ${type ? ` - ${t(`categories:${category.name}.${subcategory.name}.${type.name}.name`)}` : ''}`;
 
     const postType = postTypes.find(type => type.name === postTypeName);
+
+    const formURL = `/create?post_type=${postTypeName}&main_ctgr=${categoryName}&sub_ctgr=${subcategoryName}${typeName ? `&type_ctgr=${typeName}` : ''}`;
 
     const initPost = {
         ads_type_id: postType.id,
@@ -59,9 +70,7 @@ export const FormPages: FC = () => {
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [isPreview, setIsPreview] = useState(false);
-    const [post, setPost] = useState(initPost);
+    const [post, setPost] = useState<any>(initPost);
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
@@ -110,18 +119,45 @@ export const FormPages: FC = () => {
         }
     };
 
-    const handleBack = () => {
-        isPreview
-            ? setIsPreview(false)
-            : push(
-            `/create/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
-            undefined,
-            {shallow: true}
-            );
+    const handleBack = async () => {
+        !isPreview && setShowExitPrompt(false);
+        await push(backURL, undefined, {shallow: true});
     };
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         setPost({...post, ...values});
+
+        if (currentFormIndex === 1) {
+            const {
+                params: {
+                    title,
+                    ...params
+                },
+                appearance: {color_id}
+            } = post;
+
+            const {
+                region,
+                city,
+                ...others
+            } = values.commonParams;
+
+            const postParams = {
+                ...others,
+                title,
+                region,
+                model: params
+            };
+
+            if (color_id) postParams.model.color = {id: color_id};
+            if (city) postParams.city = city;
+
+            await push(
+                `${post_id ? asPath : `${formURL}${urlByParams(postParams)}`}&preview=1`,
+                undefined,
+                {shallow: true}
+            );
+        }
     };
 
     const toPublish = async () => {
@@ -136,28 +172,31 @@ export const FormPages: FC = () => {
 
             const {title, ...otherParams} = params;
             const {photos, color_id} = appearance;
+            const {region, city, ...otherCommonParams} = commonParams;
 
             const data = {
                 title,
                 ...postData,
-                ...commonParams,
+                ...otherCommonParams,
+                region_id: region.id,
                 [categoryName]: {
                     sub_category_id: subcategory.id,
                     ...otherParams
                 }
             };
 
+            if (city) data.city_id = city.id;
             if (type) data[categoryName].type_id = type.id;
             if (color_id) data[categoryName].color_id = color_id;
 
             setIsFetch(true);
 
             form.append('data', JSON.stringify(data));
-            photos.forEach(photo => {
-                if (typeof photo === 'number') {
-                    form.append('images_id[]', photo.toString());
+            photos.forEach(({id, file}) => {
+                if (id) {
+                    form.append('images_id[]', id);
                 } else {
-                    form.append('files[]', photo);
+                    form.append('files[]', file);
                 }
             });
 
@@ -165,7 +204,7 @@ export const FormPages: FC = () => {
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
-                setIsSuccess(true);
+                push(`${formURL}&success=1`, undefined, {shallow: true});
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
@@ -176,70 +215,71 @@ export const FormPages: FC = () => {
     };
 
     useEffect(() => {
-        !isCtgrAnimalFishes
-        && !!category
-        && fetchFilters();
-    }, []);
-
-    useEffect(() => {
         window.scrollTo(0, 0);
     }, [asPath, post]);
 
+    useEffect(() => {
+        unstable_batchedUpdates(() => {
+            !isCtgrAnimalFishes
+            && !!category
+            && fetchFilters();
+            setShowExitPrompt(true);
+        });
+        return () => {
+            setShowExitPrompt(false);
+        };
+    }, []);
+
     const classes = useStyles();
     return (
-        <MainLayout>
-            {isSuccess
-                ? <SuccessPage/>
-                : <>
-                    <StepsProgress
-                        title={title}
-                        handleBack={handleBack}
-                        activeStep={isPreview ? 3 : 2}
+        <>
+            <Hidden smDown>
+                <StepsProgress
+                    title={title}
+                    handleBack={handleBack}
+                    activeStep={isPreview ? 3 : 2}
+                />
+            </Hidden>
+            <div className={classes.root}>
+                <ParamsForm
+                    type={type}
+                    filters={filtersData}
+                    isPreview={isPreview}
+                    category={category}
+                    subcategory={subcategory}
+                    currentFormIndex={currentFormIndex}
+                    handleSubmit={handleSubmit}
+                    handleFormOpen={handleFormOpen}
+                    handleNextFormOpen={handleNextFormOpen}
+                />
+                <div>
+                    <AppearanceForm
+                        isPreview={isPreview}
+                        colors={colors || color}
+                        categoryName={categoryName}
+                        currentFormIndex={currentFormIndex}
+                        handleSubmit={handleSubmit}
+                        handleFormOpen={handleFormOpen}
+                        handleNextFormOpen={handleNextFormOpen}
                     />
-                    <div className={classes.root}>
-                        <ParamsFormContainer
-                            type={type}
-                            filters={filtersData}
-                            isPreview={isPreview}
-                            category={category}
-                            subcategory={subcategory}
-                            currentFormIndex={currentFormIndex}
-                            handleSubmit={handleSubmit}
-                            handleFormOpen={handleFormOpen}
-                            handleNextFormOpen={handleNextFormOpen}
-                        />
-                        <div>
-                            <AppearanceForm
-                                categoryName={categoryName}
-                                colors={colors || color}
-                                isPreview={isPreview}
-                                currentFormIndex={currentFormIndex}
-                                handleSubmit={handleSubmit}
-                                handleFormOpen={handleFormOpen}
-                                handleNextFormOpen={handleNextFormOpen}
-                            />
-                        </div>
-                        <div>
-                            <CommonForm
-                                postType={postType}
-                                isPreview={isPreview}
-                                setIsPreview={setIsPreview}
-                                categoryName={categoryName}
-                                handleSubmit={handleSubmit}
-                                currentFormIndex={currentFormIndex}
-                            />
-                        </div>
-                        {isPreview && (
-                            <div className='publish-button-wrapper'>
-                                <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
-                                    <Typography variant='subtitle1' component='p'>
-                                        {t('publish')}
-                                    </Typography>
-                                </CustomButton>
-                            </div>
-                        )}
+                </div>
+                <div>
+                    <CommonForm
+                        postType={postType}
+                        handleSubmit={handleSubmit}
+                        currentFormIndex={currentFormIndex}
+                    />
+                </div>
+                {isPreview && (
+                    <div className='publish-button-wrapper'>
+                        <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
+                            <Typography variant='subtitle1' component='p'>
+                                {t(post_id ? 'to_edit' : 'publish')}
+                            </Typography>
+                        </CustomButton>
                     </div>
-                </>}
-        </MainLayout>
+                )}
+            </div>
+        </>
     );
 };
