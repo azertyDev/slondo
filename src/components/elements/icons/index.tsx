@@ -85,3 +85,5 @@ export {GradeIcon} from './GradeIcon';
 export {SupervisorIcon} from './SupervisorIcon';
 export {ErrorIcon} from './ErrorIcon';
 export {BorderErrorIcon} from './BorderErrorIcon';
+export {GridViewIcon} from './GridViewIcon';
+export {ListViewIcon} from './ListViewIcon';

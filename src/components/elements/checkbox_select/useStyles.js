@@ -33,10 +33,13 @@ export const useStyles = makeStyles(() => ({
     serviceItem: {
         margin: 0,
         height: 40,
-        padding: '7px 20px',
+        display: 'flex',
         userSelect: 'none',
-        background: '#FFFFFF',
         borderRadius: '5px',
+        padding: '7px 20px',
+        alignItems: 'center',
+        background: '#FFFFFF',
+        justifyContent: 'center',
         border: '1px solid #F2F2F2',
         borderColor: props => props.checked && '#AD66D5',
         '& span.MuiCheckbox-root, & svg': {

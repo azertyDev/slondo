@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
                         ? theme.palette.primary.black
                         : '#4e4e4e'
         },
-        '& > p.MuiTypography-subtitle1': {
+        '& p.MuiTypography-subtitle1': {
             color: ({color}) =>
                 color === 'primary' || color === 'secondary'
                     ? theme.palette.primary.white

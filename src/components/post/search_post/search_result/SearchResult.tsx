@@ -2,13 +2,14 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
 import {ITEMS_PER_PAGE_SEARCH} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
-import {Box, Typography} from '@material-ui/core';
+import {Box, IconButton, Typography} from '@material-ui/core';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
 import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
+import {GridViewIcon, ListViewIcon} from '@src/components/elements/icons';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
@@ -33,6 +34,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const [isNotFound, setIsNotFound] = useState(false);
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
+    const [listView, setListView] = useState(true);
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
@@ -88,8 +90,26 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                 ? <Typography>{t('post_not_found', {searchText: searchTermFromUrl})}</Typography>
                 : <>
                     <Box position='relative'>
+                        <Box
+                            mb={1}
+                            display='flex'
+                            justifyContent='space-between'
+                            alignItems='center'
+                        >
+                            <Typography variant='h5' component='p'>
+                                {t('common:allPosts')}
+                            </Typography>
+                            <Box className='view-btns'>
+                                <IconButton className={listView ? '' : 'selected'} onClick={() => setListView(false)}>
+                                    <GridViewIcon />
+                                </IconButton>
+                                <IconButton className={listView ? 'selected' : ''} onClick={() => setListView(true)}>
+                                    <ListViewIcon />
+                                </IconButton>
+                            </Box>
+                        </Box>
                         <CardView
-                            listMode
+                            listMode={listView}
                             data={posts}
                         />
                     </Box>

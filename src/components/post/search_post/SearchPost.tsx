@@ -1,19 +1,36 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {getSEOContent} from '@src/common_data/seo_content';
-import {getCtgrsByCyrillicNames} from '@src/helpers';
+import {cookies, getCtgrsByCyrillicNames} from '@src/helpers';
 import {SearchForm} from '@src/components/post/search_post/search_form/SearchForm';
 import {SearchResult} from '@src/components/post/search_post/search_result/SearchResult';
-import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
+import {
+    Box,
+    Container,
+    FormControl,
+    Grid,
+    Hidden,
+    Select,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
-import ErrorPage from "@root/pages/_error";
-import {useRouter} from "next/router";
-import {Header} from "@src/components/header/Header";
-import {SEOTextComponent} from "@src/components/elements/seo_text_component/SEOTextComponent";
-import {Footer} from "@src/components/footer/Footer";
-import {ErrorModal} from "@src/components/error_modal/ErrorModal";
-import {CustomHead} from "@src/components/head/CustomHead";
+import ErrorPage from '@root/pages/_error';
+import {useRouter} from 'next/router';
+import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
+import {Footer} from '@src/components/footer/Footer';
+import {ErrorModal} from '@src/components/error_modal/ErrorModal';
+import {CustomHead} from '@src/components/head/CustomHead';
 import {useStyles} from './useStyles';
+import {SearchHeader} from '@src/components/post/search_post/search_header/SearchHeader';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {FilterIcon, FlatIcon} from '@src/components/elements/icons';
+import Drawer from '@material-ui/core/Drawer';
+import {useModal} from '@src/hooks';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {CheckCircle, ExpandMore, KeyboardArrowDown} from '@material-ui/icons';
+import {Location} from '@src/components/elements/location/Location';
 
 type SearchPostProps = {
     statusCode: number
@@ -23,10 +40,27 @@ export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
     const {query: {path, ...urlParams}} = useRouter();
     const is404 = statusCode === 404;
 
-    const [location, ...categories] = path as string[];
+    const [state, setState] = useState({
+        name: ''
+    });
 
+    const handleChange = (event) => {
+        const name = event.target.name;
+        setState({
+            ...state,
+            [name]: event.target.value
+        });
+    };
+
+    const userLocation = cookies.get('user_location');
+    const [location, ...categories] = path as string[];
+    const {
+        modalOpen: drawerOpen,
+        handleModalOpen: handleDrawerOpen,
+        handleModalClose: handleDrawerClose
+    } = useModal();
     const {locale} = useRouter();
-    const {t} = useTranslation('locations');
+    const {t} = useTranslation('common');
     const isSm = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const ctgrsByCyrName = getCtgrsByCyrillicNames(categories as string[]);
@@ -47,7 +81,7 @@ export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
 
     if (ctgr) {
         title = searchTermFromUrl
-            ? `${searchTermFromUrl} - ${t(`site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
+            ? `${searchTermFromUrl} - ${t(`locations:site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
             : seoContent.title;
     }
 
@@ -60,42 +94,112 @@ export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
                 description={description}
             />
             <div className={classes.root}>
-                <Header/>
+                <SearchHeader />
                 <main>
+                    <Hidden mdUp>
+                        <Box pl='10px' className='filter-btns'>
+                            <CustomButton
+                                color='secondary'
+                                className='filter-btn'
+                                onClick={handleDrawerOpen}
+                            >
+                                <Typography variant='caption' component='p'>
+                                    {t('filters')}
+                                </Typography>
+                                <FilterIcon />
+                            </CustomButton>
+                            <CustomButton
+                                className='geo-btn'
+                                onClick={handleDrawerOpen}
+                            >
+                                <Typography variant='caption' component='p'>
+                                    {t('geolocation')}
+                                </Typography>
+                            </CustomButton>
+                            <FormControl
+                                size='small'
+                                variant="outlined"
+                            >
+                                <Select
+                                    native
+                                    defaultValue={1}
+                                    value={state.name}
+                                    onChange={handleChange}
+                                    classes={{
+                                        root: classes.select
+                                    }}
+                                >
+                                    <option value={1}>{t('allPosts')}</option>
+                                    <option value={2}>{t('post')}</option>
+                                    <option value={3}>{t('auc')}</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl
+                                size='small'
+                                variant="outlined"
+                            >
+                                <Select
+                                    native
+                                    defaultValue={1}
+                                    value={state.name}
+                                    onChange={handleChange}
+                                    placeholder={t('sort')}
+                                    classes={{
+                                        root: classes.select
+                                    }}
+                                >
+                                    <option value={1}>{t('sort')}</option>
+                                    <option value={2}>{t('sort')}</option>
+                                    <option value={3}>{t('sort')}</option>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </Hidden>
                     <Container
                         maxWidth="xl"
-                        style={{
-                            paddingTop: '48px',
-                            position: 'relative'
-                        }}
+                        className='layout-container'
                     >
-                        <div>
-                            <Grid container spacing={isSm ? 0 : 2}>
-                                <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
+                        <Grid container spacing={isSm ? 0 : 2}>
+                            <Grid item xs={12} lg={9} zeroMinWidth>
+                                <Hidden smDown>
                                     <SearchForm
                                         urlParams={urlParams}
                                         categories={ctgrsByCyrName}
                                     />
-                                    <SearchResult
-                                        urlParams={urlParams}
-                                        categories={ctgrsByCyrName}
-                                        searchTermFromUrl={searchTermFromUrl}
-                                    />
-                                </Grid>
-                                <Hidden mdDown>
-                                    <Grid item xs={3}>
-                                        <HomeSidebar/>
-                                    </Grid>
                                 </Hidden>
+                                <SearchResult
+                                    urlParams={urlParams}
+                                    categories={ctgrsByCyrName}
+                                    searchTermFromUrl={searchTermFromUrl}
+                                />
                             </Grid>
-                        </div>
-                        {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
+                            <Hidden mdDown>
+                                <Grid item xs={3}>
+                                    <HomeSidebar />
+                                </Grid>
+                            </Hidden>
+                        </Grid>
+                        {!!seoTxt && <SEOTextComponent text={seoTxt} />}
                     </Container>
                 </main>
-                <Hidden xsDown>
-                    <Footer/>
+                <Hidden smDown>
+                    <Footer />
                 </Hidden>
             </div>
-            <ErrorModal/>
+            <ErrorModal />
+            <Drawer
+                anchor='left'
+                open={drawerOpen}
+                onClose={handleDrawerClose}
+            >
+                <ModalHeader
+                    title={t('filters')}
+                    handleCloseDialog={handleDrawerClose}
+                />
+                <SearchForm
+                    urlParams={urlParams}
+                    categories={ctgrsByCyrName}
+                />
+            </Drawer>
         </>;
 };

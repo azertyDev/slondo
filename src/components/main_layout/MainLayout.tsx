@@ -46,10 +46,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                 <main>
                     <Container
                         maxWidth="xl"
-                        style={{
-                            paddingTop: '48px',
-                            position: 'relative'
-                        }}
+                        className='layout-container'
                     >
                         {children}
                         {!!seoTxt && <SEOTextComponent text={seoTxt}/>}

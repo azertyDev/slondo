@@ -10,6 +10,8 @@ import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
     const initPhones = {
@@ -64,23 +66,34 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
     return (
         <>
             <CustomButton className={classes.root} color="primary" onClick={handleOpen}>
-                <Typography variant="subtitle1" color="initial">
-                    {isFetch
-                        ? <CustomCircularProgress color='secondary'/>
-                        : t(phone ?? 'show_phone')}
-                </Typography>
+                {isFetch
+                    ? <CustomCircularProgress color='secondary' />
+                    : <div>
+                        {!isIncognito && (
+                            <Typography component='p' variant='subtitle1'>
+                                {t(phone ?? 'show_phone')}
+                            </Typography>
+                        )}
+                        {additional_number && (
+                            <Typography component='p' variant='subtitle1'>
+                                {additional_number}
+                            </Typography>
+                        )}
+                    </div>
+                }
             </CustomButton>
-            <CustomModal openModal={modalOpen} handleModalClose={handleModalClose}>
+            <ResponsiveModal openDialog={modalOpen} handleCloseDialog={handleModalClose}>
+                <ModalHeader title={t('Позвонить пользователю')} handleBack={handleModalClose}/>
                 <Typography variant="subtitle1" color="initial">
                     {isFetch
-                        ? <CustomCircularProgress color='secondary'/>
+                        ? <CustomCircularProgress color='secondary' />
                         : <>
                             {!isIncognito && (
                                 notAvailable
                                     ? <div>{t('number_not_available')}</div>
                                     : <>
                                         <a href={`tel:${phone}`}>{phone}</a>
-                                        <br/>
+                                        <br />
                                     </>
                             )}
                             {additional_number && (
@@ -90,7 +103,7 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
                             )}
                         </>}
                 </Typography>
-            </CustomModal>
+            </ResponsiveModal>
         </>
     );
 };

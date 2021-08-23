@@ -28,12 +28,14 @@ import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
-    handleDrawerOpen: () => void
+    positionStatic?: boolean,
+    handleDrawerOpen: () => void,
     handlePageReload: () => void
 };
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {
+        positionStatic,
         handleDrawerOpen,
         handlePageReload
     } = props;
@@ -103,10 +105,10 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                     <Slide
                         appear={false}
                         direction="down"
-                        in={!trigger}
+                        in={positionStatic || !trigger}
                     >
                         <AppBar
-                            position='fixed'
+                            position={positionStatic ? 'static' : 'fixed'}
                             color='inherit'
                             elevation={0}
                         >
@@ -151,8 +153,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </CustomButton>}
                                 </Grid>
                             </Toolbar>
-                            <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm/>
+                            <Box px={isXsDown ? '10px' : '24px'} marginBottom='10px'>
+                                <HeaderSearchForm />
                             </Box>
                         </AppBar>
                     </Slide>

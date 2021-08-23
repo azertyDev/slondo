@@ -389,7 +389,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     />
                 </Grid>
                 {!isJob && !isService && (
-                    <Grid item container alignItems='flex-end' xs={3}>
+                    <Grid item container alignItems='flex-end' xs={6} sm={3}>
                         <CheckboxSelect
                             checked={values.free}
                             labelTxt={t('free')}
@@ -398,7 +398,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     </Grid>
                 )}
                 {values.post_type?.name === 'auc' && (
-                    <Grid item container alignItems='flex-end' xs={3}>
+                    <Grid item container alignItems='flex-end' xs={6} sm={3}>
                         <CheckboxSelect
                             checked={values.archive}
                             labelTxt={t('archive')}
@@ -414,7 +414,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     handleCheckbox={handleCheckbox}
                     categoryName={mainCategoryName}
                 />
-                {getFiltersByCtgr()}
+                <Grid item xs={12}>
+                    {getFiltersByCtgr()}
+                </Grid>
             </Grid>
         </div>
     );
