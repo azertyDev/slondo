@@ -87,7 +87,7 @@
   "settings": "Sozlamalar",
   "exit": "Chiqish",
   "banned": "Moderatsiyadan o'tmagan",
-  "created_at": "Slondoda {{created_at}} dan beri",
+  "created_at": "Slondoda {{date}} dan beri",
   "addToArchive": "Аrxivga qo'shish",
   "posts": "E'lonlar",
   "securePosts": "Xavfsiz xarid",

@@ -1,20 +1,19 @@
-import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {userAPI} from '@src/api/api';
 import {AuthCtx, ErrorCtx} from '@src/context';
-import {useModal} from '@src/hooks';
+import {useDate, useModal} from '@src/hooks';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {unstable_batchedUpdates} from 'react-dom';
 import {regularFormSchema} from '@root/validation_schemas/postSchemas';
 import {useStyles} from '@src/components/cabinet/cabinet_pages/rating/useStyles';
-import {months} from '@src/common_data/common';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {TEXT_LIMIT} from '@src/constants';
-import {checkTimeForZero, getErrorMsg} from '@src/helpers';
+import {getErrorMsg} from '@src/helpers';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
@@ -44,6 +43,8 @@ export const Ratings: FC = () => {
     const [commentData, setCommentData] = useState(initCommentData);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
+    const {getDate} = useDate();
+
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const fetchUserRatings = async () => {
@@ -137,8 +138,7 @@ export const Ratings: FC = () => {
                     </Box>
                     {userRatings.map(({comments, rating}, index) => {
                         const [mainComment, ...replyComments] = comments;
-                        const date = new Date(mainComment?.created_at);
-                        const formatted_date1 = `${checkTimeForZero(date.getHours())}:${checkTimeForZero(date.getMinutes())} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+                        const {time} = getDate(mainComment?.created_at);
                         return (
                             <Box key={index} className='review' pb={2} mb={2}>
                                 <Box mb={2}>
@@ -159,11 +159,11 @@ export const Ratings: FC = () => {
                                                         </strong>
                                                     </Typography>
                                                     <Typography variant='caption' component='p' gutterBottom>
-                                                        {formatted_date1}
+                                                        {time}
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12} sm={4}>
-                                                    <Rating ratingValue={rating} readOnly />
+                                                    <Rating ratingValue={rating} readOnly/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -178,12 +178,10 @@ export const Ratings: FC = () => {
                                         </Grid>
                                     </Grid>
                                 </Box>
-
                                 <Grid item xs={12} md={10} container justifyContent='flex-end' spacing={2}>
                                     {replyComments.map((commentData, index) => {
                                         const {id, comment, creator, created_at, author, reply} = commentData;
-                                        const date = new Date(created_at);
-                                        const formatted_date = `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+                                        const {time} = getDate(created_at);
                                         if (index % 2) {
                                             return (
                                                 <Grid item xs={12} sm={10} key={index}>
@@ -195,7 +193,7 @@ export const Ratings: FC = () => {
                                                                 </strong>
                                                             </Typography>
                                                             <Typography variant='caption' component='p'>
-                                                                {formatted_date}
+                                                                {time}
                                                             </Typography>
                                                         </Box>
                                                         <ReadMore id={id} threshold={55}>
@@ -227,7 +225,7 @@ export const Ratings: FC = () => {
                                                             </strong>
                                                         </Typography>
                                                         <Typography variant='caption' component='p'>
-                                                            {formatted_date}
+                                                            {time}
                                                         </Typography>
                                                     </Box>
                                                     <ReadMore id={id} threshold={55}>
@@ -262,7 +260,7 @@ export const Ratings: FC = () => {
             >
                 <Box p='30px 15px'>
                     <Box>
-                        <UserInfoWithAvatar user={commentData.author} />
+                        <UserInfoWithAvatar user={commentData.author}/>
                     </Box>
                     <Box>
                         <Typography variant='subtitle2'>
@@ -299,5 +297,5 @@ export const Ratings: FC = () => {
                 </Box>
             </ResponsiveModal>
         </>
-    )
-}
+    );
+};

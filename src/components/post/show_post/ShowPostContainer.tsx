@@ -93,18 +93,9 @@ export const ShowPostContainer: FC = () => {
         }
     };
 
-    const initAuthorPhones = {
-        showPhone: false,
-        phone: null,
-        additional_number: null
-    };
-
     const [isFetch, setIsFetch] = useState(false);
     const [postData, setPostData] = useState(initialPostData);
-    const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
-
-    const {showPhone} = authorPhones;
 
     const {
         modalOpen: safeDealOpen,
@@ -117,33 +108,6 @@ export const ShowPostContainer: FC = () => {
             handleOpenSafeDeal();
         } else {
             setAuthModalOpen(true);
-        }
-    };
-
-    const handleShowPhone = async () => {
-        try {
-            const phones = showPhone
-                ? initAuthorPhones
-                : await userAPI.getPostAuthorPhones(postData.id);
-
-            unstable_batchedUpdates(() => {
-                setAuthorPhones({
-                    ...authorPhones,
-                    ...phones,
-                    showPhone: !showPhone
-                });
-            });
-        } catch ({response: {data: {message}}}) {
-            unstable_batchedUpdates(() => {
-                if (message !== 'forbidden:') {
-                    setErrorMsg(message);
-                } else {
-                    setAuthorPhones({
-                        ...initAuthorPhones,
-                        showPhone: !showPhone
-                    });
-                }
-            });
         }
     };
 
@@ -218,10 +182,7 @@ export const ShowPostContainer: FC = () => {
                             <Grid item xs={12} lg={9}>
                                 <PostContent
                                     post={postData}
-                                    showPhone={showPhone}
-                                    authorPhones={authorPhones}
                                     handleSafeDeal={handleSafeDeal}
-                                    handleShowPhone={handleShowPhone}
                                     setFetchedPostData={setFetchedPostData}
                                 />
                             </Grid>
@@ -229,10 +190,7 @@ export const ShowPostContainer: FC = () => {
                                 <Grid item lg={3} xs={12}>
                                     <OwnerAuctionInfo
                                         post={postData}
-                                        showPhone={showPhone}
-                                        authorPhones={authorPhones}
                                         handleSafeDeal={handleSafeDeal}
-                                        handleShowPhone={handleShowPhone}
                                         setFetchedPostData={setFetchedPostData}
                                     />
                                     {/*<div className={classes.adBanner}>*/}

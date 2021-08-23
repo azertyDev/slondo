@@ -27,21 +27,9 @@ export const getSessionItem = (key) => {
     return null;
 };
 
-export const dateHelper = (date): string => {
-    const _date = new Date(date);
-
-    let day = _date.getDate();
-    let month = _date.getMonth() + 1;
-    const year = _date.getFullYear();
-
-    const formattedDate = `${day < 9 ? `0${day}` : day}.${month < 9 ? `0${month}` : month}.${year}`;
-
-    return date ? formattedDate : '';
-};
-
 export const getUserLocationName = () => {
     let userLocation = 'uzbekistan';
-    const userLocationByCookie = cookies.get('[...path]');
+    const userLocationByCookie = cookies.get('user_location');
 
     if (userLocationByCookie) {
         const {region, city} = userLocationByCookie;
@@ -212,7 +200,7 @@ export const urlByParams = (params) => {
                     return obj;
                 }, {});
             }
-            url = url.concat(`&${key}=${JSON.stringify(value, replacer)}`);
+            url = url.concat(`&${key}=${encodeURIComponent(JSON.stringify(value, replacer))}`);
         }
     });
 
@@ -260,11 +248,9 @@ export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g,
 
 export const formatCardData = (data: string, isDate = false) => {
     data = data.replace(cardDataRegEx, '');
-
     if (isDate) {
         data = ''.concat(`${data[2]}${data[3]}`).concat(`${data[0]}${data[1]}`);
     }
-
     return data;
 };
 
@@ -452,11 +438,4 @@ export const formatNumber = (number: number): string => (
 
 export const getErrorMsg = (errorMsg, touched, t: TFunction, value?): string => {
     return errorMsg && touched ? t(`errors:${errorMsg}`, {value}) : '';
-};
-
-export const checkTimeForZero = (i) => {
-    if (i < 10) {
-        i = '0' + i;
-    }
-    return i;
 };

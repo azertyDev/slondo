@@ -82,7 +82,7 @@ export const initCardData: CardDataType = {
         id: null,
         name: ''
     },
-    created_at: '',
+    created_at: null,
     creator: false,
     currency: {
         id: null,
@@ -95,7 +95,7 @@ export const initCardData: CardDataType = {
         name: ''
     },
     exchange: null,
-    expiration_at: '',
+    expiration_at: null,
     favorite: false,
     id: null,
     image: '',

@@ -8,12 +8,12 @@ import {
     SafeIcon, SwapIcon
 } from '@src/components/elements/icons';
 import Link from 'next/link';
-import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
-import {useTranslation} from 'react-i18next';
 import Countdown from 'react-countdown';
+import {useTranslation} from 'react-i18next';
+import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
-import {months} from '@src/common_data/common';
+import {useDate} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
@@ -22,11 +22,16 @@ type ListCardPropsType = {
 
 export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
+    const {time = ''} = useDate().getDate(cardData.created_at);
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
-    const hasService = !!cardData.delivery || !!cardData.available_days || !!cardData.exchange || !!cardData.safe_deal || !!cardData.auction?.auto_renewal;
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const hasService = !!cardData.delivery
+        || !!cardData.available_days
+        || !!cardData.exchange
+        || !!cardData.safe_deal
+        || !!cardData.auction?.auto_renewal;
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
@@ -45,9 +50,6 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
             )}
         </Box>
     );
-
-    const date = new Date(cardData.created_at);
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours()}:${date.getMinutes()}`;
 
     const translatedTitle = transformCyrillic(cardData.title);
 
@@ -79,7 +81,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     justifyContent='space-between'
                                 >
                         <span>
-                            <EyeIcon />
+                            <EyeIcon/>
                             <Typography
                                 noWrap
                                 variant="caption"
@@ -89,7 +91,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             </Typography>
                         </span>
                                     <span>
-                            <FavoriteBorderIcon />
+                            <FavoriteBorderIcon/>
                             <Typography
                                 noWrap
                                 variant="caption"
@@ -119,7 +121,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     : <Box className='services'>
                                         {!!cardData.delivery && (
                                             <div className="delivery">
-                                                <DeliveryIcon />
+                                                <DeliveryIcon/>
                                                 {!isXsDown && <Typography variant="body1">
                                                     {t('common:delivery')}
                                                 </Typography>}
@@ -127,7 +129,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         )}
                                         {!!cardData.available_days && (
                                             <div className="available">
-                                                <PhoneIcon />
+                                                <PhoneIcon/>
                                                 {!isXsDown && <Typography variant="body1">
                                                     {weekDaysHelper(cardData.available_days, t)}&nbsp;
                                                     {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
@@ -136,7 +138,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         )}
                                         {!!cardData.exchange && (
                                             <div className="exchange">
-                                                <SwapIcon />
+                                                <SwapIcon/>
                                                 {!isXsDown && <Typography variant="body1">
                                                     {t('common:exchange')}
                                                 </Typography>}
@@ -144,7 +146,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         )}
                                         {!!cardData.safe_deal && (
                                             <div className="safe_deal">
-                                                <SafeIcon />
+                                                <SafeIcon/>
                                                 {!isXsDown && <Typography variant="body1">
                                                     {t('common:safe_deal')}
                                                 </Typography>}
@@ -152,7 +154,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         )}
                                         {!!cardData.auction?.auto_renewal && (
                                             <div className="safe_deal">
-                                                <RenewalIcon />
+                                                <RenewalIcon/>
                                                 {!isXsDown && <Typography variant="body1">
                                                     {t('common:auto_ren')}
                                                 </Typography>}
@@ -195,7 +197,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     className='location'
                                 >
                                     <Typography variant='subtitle2' component='p' noWrap>
-                                        {formatted_date}
+                                        {time}
                                     </Typography>
                                     <Typography
                                         variant="subtitle2" component='p'

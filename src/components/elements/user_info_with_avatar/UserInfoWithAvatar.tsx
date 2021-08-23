@@ -6,9 +6,9 @@ import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {INCOGNITO_NAMES} from "@src/constants";
-import {dateHelper} from "@src/helpers";
-import {userAPI} from "@src/api/api";
 import {AuthCtx, ErrorCtx} from "@src/context";
+import {userAPI} from "@src/api/api";
+import {useDate} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
@@ -35,7 +35,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const isSelf = user?.id === siteUser.id;
 
     const [isFollow, setIsFollow] = useState(false);
-    const formatted_date = dateHelper(user?.created_at);
+    const {date = ''} = useDate().getFullDate(user.created_at);
 
     const handleFollow = async () => {
         try {
@@ -67,7 +67,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                     {!isIncognito && (`${user?.name ?? ''} ${user?.surname ?? ''}`)}
                 </Typography>
                 <Typography variant="subtitle1" color="initial" gutterBottom>
-                    {t('created_at', {created_at: formatted_date})}
+                    {t('created_at', {date})}
                 </Typography>
                 <Rating
                     readOnly

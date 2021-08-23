@@ -4,24 +4,18 @@ import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {LetterIcon, SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {INCOGNITO_PHONES} from "@src/constants";
+import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
 import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
     postData,
-    showPhone: boolean,
-    handleSafeDeal: () => void,
-    handleShowPhone: () => void,
-    authorPhones: { phone: string, additional_number: string }
+    handleSafeDeal: () => void
 } & WithT;
 
 export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         t,
         postData,
-        authorPhones,
-        showPhone,
-        handleShowPhone,
         handleSafeDeal
     } = props;
 
@@ -33,8 +27,6 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     } = postData;
 
     const isPublic = status === 'public';
-    const isIncognito = INCOGNITO_PHONES.some(p => p === authorPhones.phone);
-    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
 
     const classes = useStyles();
     return (
@@ -48,19 +40,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
             </Box>
             <Hidden mdDown>
                 <div className="contact-buttons">
-                    <CustomButton color="primary" onClick={handleShowPhone}>
-                        <Typography variant="subtitle1" color="initial">
-                            {!isIncognito && (
-                                <>
-                                    <span>{t(showPhoneTxt)}</span>
-                                    <br/>
-                                </>
-                            )}
-                            {showPhone && authorPhones.additional_number && (
-                                <span>{t(authorPhones.additional_number)}</span>
-                            )}
-                        </Typography>
-                    </CustomButton>
+                    <ShowPhone postId={postData.id}/>
                     {isPublic && !creator && (
                         <>
                             <CustomButton

@@ -16,7 +16,7 @@ type BreadcrumbsPropsType = {
 export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {
     const {t} = useTranslation('categories');
 
-    const userLocation = cookies.get('[path]');
+    const userLocation = cookies.get('user_location');
     const [location, setLocation] = useState('uzbekistan');
 
     const mainCtgr = site_categories.find(ctgr => ctgr.name === category);

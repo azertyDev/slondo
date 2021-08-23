@@ -107,7 +107,7 @@ export const defaultParamsSchema = object({
     price: number().required(fieldRequiredTxt),
     description: string()
         .required(fieldRequiredTxt)
-        .test('len', 'min_chars', val => !!val && val.length > DESC_MIN),
+        .test('len', 'min_chars', val => !!val && val.length >= DESC_MIN),
     location: object()
         .nullable()
         .required(fieldRequiredTxt)

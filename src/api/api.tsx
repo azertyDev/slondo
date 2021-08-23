@@ -310,7 +310,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getPostAuthorPhones: (postId: string): Promise<any> => {
+    getPostAuthorPhones: (postId: number): Promise<any> => {
         return instance.get(`getPhone/${postId}`)
             .then(res => res.data)
             .catch(err => {

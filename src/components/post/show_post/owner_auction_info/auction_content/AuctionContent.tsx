@@ -12,6 +12,7 @@ import {ResponsiveModal} from '@src/components/elements/responsive_modal/Respons
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
+import {useDate} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type AuctionInfoPropsType = {
@@ -30,10 +31,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const isPublic = postData.status === 'public';
 
     const {setErrorMsg} = useContext(ErrorCtx);
-    const date = new Date(postData.expiration_at).getTime();
+    const {milliSeconds} = useDate().getDate(postData.expiration_at);
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
-
     const [isFetch, setIsFetch] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
@@ -118,9 +118,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         </div>
                     </div>
                 )}
-                <div className="lot-timer">
-                    {!!date && <AuctionTimer date={date}/>}
-                </div>
+                {!!milliSeconds && (
+                    <div className="lot-timer">
+                        <AuctionTimer date={milliSeconds}/>
+                    </div>
+                )}
                 <BetsList
                     bets={bets}
                     showBetsCount={5}

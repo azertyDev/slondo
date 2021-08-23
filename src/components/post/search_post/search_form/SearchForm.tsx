@@ -11,7 +11,8 @@ import {
     cookies,
     toUrlParams,
     transformCyrillic,
-    normalizeFiltersByCategory, manufacturersDataNormalize
+    normalizeFiltersByCategory,
+    manufacturersDataNormalize
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';

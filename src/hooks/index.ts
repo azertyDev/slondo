@@ -7,3 +7,4 @@ export {useUser} from './useUser';
 export {useUserPaymentCard} from './useUserPaymentCard';
 export {useSearch} from './useSearch';
 export {useUrlParams} from './useUrlParams';
+export {useDate} from './useDate';

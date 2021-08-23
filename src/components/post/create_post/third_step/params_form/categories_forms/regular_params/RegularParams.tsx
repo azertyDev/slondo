@@ -59,8 +59,8 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
             <CustomFormikProvider formik={formik}>
                 <CustomAccordion
                     submitTxt='appearance'
-                    icon={<ParametersIcon/>}
                     isPreview={isPreview}
+                    icon={<ParametersIcon/>}
                     title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}

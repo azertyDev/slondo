@@ -66,20 +66,22 @@ enum Pages {
     'auction',
     'safe_shopping',
     'user_interaction',
-    'search_in_service',
-
+    'search_in_service'
 }
 
 export const HelpContent: FC = () => {
     const {t} = useTranslation();
-    const [term, subTerm] = useRouter().query.term as string[];
+    const {query, push} = useRouter();
+    const [term, subTerm] = query.term as string[];
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-
-
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const isRootPage = term === undefined;
     const existPage = isRootPage || Pages[term as string] !== undefined;
+
+    const handleBack = async () => {
+        await push('/help', undefined, {shallow: true});
+    };
 
     const getTermPage = () => {
         switch (term) {
@@ -179,7 +181,7 @@ export const HelpContent: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={t('header:help')}>
+        <MainLayout title={t('header:help')} handleBack={handleBack}>
             <Typography variant="h6" color="initial" className={classes.title}>
                 {t('header:help')}
             </Typography>

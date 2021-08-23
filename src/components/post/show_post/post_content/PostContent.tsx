@@ -7,7 +7,6 @@ import {
     useTheme
 } from '@material-ui/core';
 import {userAPI} from '@src/api/api';
-import {months} from '@src/common_data/common';
 import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
@@ -24,18 +23,15 @@ import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
-import {INCOGNITO_PHONES} from "@src/constants";
+import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useTranslation} from "next-i18next";
-import {useModal} from "@src/hooks";
+import {useDate, useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     post,
-    showPhone,
-    handleShowPhone,
     handleSafeDeal: () => void,
-    authorPhones: { phone: string, additional_number: string }
     setFetchedPostData: () => Promise<void>
 };
 
@@ -49,22 +45,15 @@ export type SlidersRefType = {
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
-        showPhone,
-        authorPhones,
-        handleShowPhone,
         handleSafeDeal,
         setFetchedPostData
     } = props;
 
     const {t} = useTranslation('post');
-
-    const isIncognito = INCOGNITO_PHONES.some(p => p === authorPhones.phone);
-
     const {setErrorMsg} = useContext(ErrorCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isExAuc = post.ads_type.mark === 'exauc';
     const isAuction = post.ads_type.mark === 'auc' || isExAuc;
-
     const transKey = post.category.name;
 
     const {
@@ -101,10 +90,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         handleModalOpen: handleSliderOpen
     } = useModal();
 
-    const date = new Date(post.created_at);
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
-    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
-
+    const {time = ''} = useDate().getDate(post.created_at);
 
     const handleComplaintModalOpen = () => {
         if (isAuth) {
@@ -276,7 +262,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             <span>{t('common:post')} №:</span> {post.id}
                         </Typography>
                         <Typography variant="subtitle1">
-                            {t('published')}: {formatted_date}
+                            {t('published')}: {time}
                         </Typography>
                         <Typography variant="subtitle1">
                             {t('views')}: {number_of_views}
@@ -337,19 +323,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 <Hidden lgUp>
                     <div className="contact">
-                        <CustomButton color='primary' onClick={handleShowPhone}>
-                            <Typography variant='subtitle1' component='p'>
-                                {!isIncognito && (
-                                    <>
-                                        <span>{t(showPhoneTxt)}</span>
-                                        <br/>
-                                    </>
-                                )}
-                                {showPhone && authorPhones.additional_number && (
-                                    <span>{t(authorPhones.additional_number)}</span>
-                                )}
-                            </Typography>
-                        </CustomButton>
+                        <ShowPhone postId={post.id}/>
                         <CustomButton disabled color='silver'>
                             <Typography variant='subtitle1'>{t('writeMessage')}</Typography>
                         </CustomButton>
@@ -427,12 +401,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             </Typography>
                             <Hidden xsDown>
                                 <Typography variant="subtitle1">
-                                    {t('published')}: {formatted_date}
+                                    {t('published')}: {time}
                                 </Typography>
                             </Hidden>
                             <Hidden smUp>
                                 <Typography variant="subtitle1">
-                                    {formatted_date}
+                                    {time}
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
@@ -447,7 +421,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <OwnerAuctionInfo
                         post={post}
-                        authorPhones={authorPhones}
                         handleSafeDeal={handleSafeDeal}
                         setFetchedPostData={setFetchedPostData}
                     />

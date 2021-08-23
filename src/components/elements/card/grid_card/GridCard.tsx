@@ -6,12 +6,12 @@ import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typog
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
-import {checkTimeForZero, numberPrettier, transformCyrillic} from '@src/helpers';
+import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {months} from '@src/common_data/common';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {useDate} from "@src/hooks";
 
 type CardItemProps = {
     isFetch: boolean
@@ -43,11 +43,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const {auth: {isAuth}} = useContext(AuthCtx);
     const translatedTitle = transformCyrillic(title);
     const [liked, setLiked] = useState(favorite);
-
-    const date = new Date(created_at);
-
-
-    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours() + ':' + checkTimeForZero(date.getMinutes())}`;
+    const {time = ''} = useDate().getDate(created_at);
 
     const url = `/obyavlenie/${translatedTitle}-${id}`;
 
@@ -102,7 +98,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 arrow
                                             >
                                                 <span>
-                                                    <DeliveryIcon />
+                                                    <DeliveryIcon/>
                                                 </span>
                                             </Tooltip>
                                         )}
@@ -122,7 +118,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 arrow
                                             >
                                                 <span>
-                                                    <SwapIcon />
+                                                    <SwapIcon/>
                                                 </span>
                                             </Tooltip>
                                         )}
@@ -160,11 +156,16 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             {numberPrettier(price)}
                                             <span> {t(`common:${currency.name}`)}</span>
                                         </Typography>
-                                        <Typography variant="caption" noWrap component='p' classes={{root: classes.mobileFont}}>
+                                        <Typography variant="caption" noWrap component='p'
+                                                    classes={{root: classes.mobileFont}}>
                                             {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
                                         </Typography>
-                                        <Typography variant="caption" component='p' classes={{root: classes.mobileFont}}>
-                                            {formatted_date}
+                                        <Typography
+                                            component='p'
+                                            variant="caption"
+                                            classes={{root: classes.mobileFont}}
+                                        >
+                                            {time}
                                         </Typography>
                                     </>}
                             </CardContent>

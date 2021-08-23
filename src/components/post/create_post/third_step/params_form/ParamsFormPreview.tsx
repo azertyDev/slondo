@@ -77,8 +77,7 @@ export const ParamsFormPreview: FC<PreviewValuesPropsType> = (props) => {
                                                 {value}
                                             </Typography>
                                         </Grid>
-                                    </>
-                                }
+                                    </>}
                             </Grid>
                         );
                     }

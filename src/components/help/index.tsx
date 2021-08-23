@@ -5,14 +5,20 @@ import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from '@src/components/help/menu_struct';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {useTranslation} from "next-i18next";
+import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
 
 export const HelpPage: FC = () => {
     const {t} = useTranslation('help');
+    const {push} = useRouter();
+
+    const handleBack = async () => {
+        await push('/');
+    };
 
     const classes = useStyles();
     return (
-        <MainLayout title={t('header:help')}>
+        <MainLayout title={t('header:help')} handleBack={handleBack}>
             <Typography variant="h6" color="initial" className={classes.title}>
                 {t('header:help')}
             </Typography>

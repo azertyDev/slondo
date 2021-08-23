@@ -14,7 +14,7 @@ export const initUser: UserInfo = {
     surname: '',
     phone: '',
     avatar: '',
-    created_at: '',
+    created_at: null,
     available_days: [],
     available_start_time: '',
     available_end_time: '',

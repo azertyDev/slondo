@@ -87,7 +87,7 @@
   "settings": "Настройки",
   "exit": "Выход",
   "banned": "Не прошло модерацию",
-  "created_at": "На Slondo с {{created_at}}",
+  "created_at": "На Slondo с {{date}}",
   "addToArchive": "Добавить в архив",
   "posts": "Объявления",
   "securePosts": "Безопасная покупка",

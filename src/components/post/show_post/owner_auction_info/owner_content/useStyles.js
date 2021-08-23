@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
                 border: 'none',
                 height: 44,
                 boxShadow: ' 0px 1px 2px rgb(0 0 0 / 25%)',
-                '&:not(:last-child)': {
+                '&:first-child': {
                     marginBottom: '10px'
                 },
                 '&.contact-btn': {

@@ -8,9 +8,6 @@ import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
     post: any,
-    showPhone?,
-    authorPhones?,
-    handleShowPhone?,
     handleSafeDeal: () => void,
     setFetchedPostData: () => Promise<void>
 };
@@ -18,9 +15,6 @@ type OwnerAuctionInfoPropsType = {
 export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
         post,
-        showPhone,
-        authorPhones,
-        handleShowPhone,
         handleSafeDeal,
         setFetchedPostData
     } = props;
@@ -50,10 +44,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
             <OwnerContent
                 t={t}
                 postData={post}
-                showPhone={showPhone}
-                authorPhones={authorPhones}
                 handleSafeDeal={handleSafeDeal}
-                handleShowPhone={handleShowPhone}
             />
         </div>
     );
