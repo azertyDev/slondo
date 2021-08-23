@@ -58,19 +58,31 @@ export const useStyles = makeStyles((theme) => ({
                 height: 50,
                 background: 'rgba(0, 0, 0, 0.5)',
                 borderRadius: '100%',
+                padding: 0,
                 [theme.breakpoints.down('xs')]: {
-                    width: '32px',
-                    height: '32px'
+                    width: '40px',
+                    height: '40px'
                 },
-                '& svg': {
-                    width: 30,
-                    height: 'auto',
-                    [theme.breakpoints.down('xs')]: {
-                        width: '19px'
+                '&.share-btn': {
+                    '& svg': {
+                        width: 30,
+                        height: 'auto',
+                        [theme.breakpoints.down('xs')]: {
+                            width: '25px'
+                        },
+                        '& path': {
+                            fill: '#fff'
+                        }
                     },
-                    '& path': {
-                        fill: '#fff'
-                    }
+                },
+                '&.backspace-btn': {
+                    '& svg': {
+                        width: 40,
+                        height: 'auto',
+                        '& path': {
+                            fill: '#fff'
+                        }
+                    },
                 },
                 '&:hover': {
                     background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -90,6 +102,7 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'space-between'
                 },
                 '& button.favorite-btn': {
+                    padding: 0,
                     background: ({isFavorite}) => isFavorite && 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                     '& svg path': {
                         fill: ({isFavorite}) => isFavorite && '#fff'
@@ -119,8 +132,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& .backspace-btn': {
                 background: 'none',
+                padding: 0,
                 '& span > svg ': {
-                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))',
+                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))'
                 }
             }
         },

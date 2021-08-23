@@ -1,28 +1,39 @@
 import {FC, useContext} from 'react';
-import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
-import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {KeyboardBackspace, FavoriteBorder, Share} from '@material-ui/icons';
+import {
+    Box, ClickAwayListener,
+    Hidden,
+    IconButton, Tooltip,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
 import {SlidersRefType} from '../PostContent';
-import {useTranslation} from "next-i18next";
-import {AuthCtx} from "@src/context/AuthCtx";
+import {AuthCtx} from '@src/context/AuthCtx';
 import {useStyles} from './useStyles';
+import {ErrorCtx} from '@src/context';
+import {useTranslation} from 'next-i18next';
+import {useModal} from '@src/hooks';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 
 type SyncSlidersProps = {
+    title: string,
     isCreator: boolean,
-    handleOpenModal: () => void;
+    handleOpenModal: () => void,
     imgs: {
         alt: string;
-        url: { default: string, extra: string };
-    }[];
-    slidersRefs: SlidersRefType;
-    handleFavorite: () => void;
-    isFavorite: boolean;
-    favoriteCount: number;
+        url: {default: string, extra: string};
+    }[],
+    slidersRefs: SlidersRefType,
+    handleFavorite: () => void,
+    isFavorite: boolean,
+    favoriteCount: number
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
+        title,
         isCreator,
         imgs = [],
         handleOpenModal,
@@ -32,25 +43,36 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         favoriteCount
     } = props;
 
-
     const {
         slider1,
         slider2,
         slider3
     } = slidersRefs;
 
-    const {t} = useTranslation('common');
+    const {t} = useTranslation('errors');
     const {isAuth} = useContext(AuthCtx).auth;
+    const {setErrorMsg} = useContext(ErrorCtx);
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-
-    const copyUrl = () => {
-        const copiedUrl = window.location.href;
-        navigator.clipboard.writeText(copiedUrl);
-    };
+    const {modalOpen: openTooltip, handleModalOpen: handleOpenTooltip, handleModalClose: handleCloseTooltip} = useModal();
 
     const handlePrevPath = () => {
         window.close();
+    };
+
+    const handleShare = async () => {
+        if (navigator.share && isMdDown) {
+            await navigator.share({
+                title: title,
+                url: window.location.href
+            })
+                .catch(function() {
+                    setErrorMsg(t('shareError'));
+                });
+        } else {
+            await navigator.clipboard.writeText(window.location.href);
+            handleOpenTooltip();
+        }
     };
 
     const classes = useStyles({isFavorite});
@@ -80,7 +102,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                             onClick={handlePrevPath}
                             className="backspace-btn"
                         >
-                            <KeyboardBackspace/>
+                            <KeyboardArrowLeftIcon />
                         </IconButton>
                     </Hidden>
                     {!!imgs.length && (
@@ -88,7 +110,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                             {isAuth && !isCreator && (
                                 <Box className="favorite-count">
                                     <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                        <FavoriteBorder/>
+                                        <FavoriteBorder />
                                     </IconButton>
                                     <div>
                                         <Typography variant='subtitle1'>
@@ -97,9 +119,25 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                                     </div>
                                 </Box>
                             )}
-                            <IconButton className="share-btn" onClick={copyUrl}>
-                                <CustomTooltip title={t('copied')} arrow/>
-                            </IconButton>
+                            <ClickAwayListener onClickAway={handleCloseTooltip}>
+                                <Tooltip
+                                    arrow
+                                    placement='bottom'
+                                    PopperProps={{
+                                        disablePortal: true
+                                    }}
+                                    onClose={handleCloseTooltip}
+                                    open={openTooltip}
+                                    disableFocusListener
+                                    disableHoverListener
+                                    disableTouchListener
+                                    title={t('common:copied')}
+                                >
+                                    <IconButton className="share-btn" onClick={handleShare}>
+                                        <Share />
+                                    </IconButton>
+                                </Tooltip>
+                            </ClickAwayListener>
                         </div>
                     )}
                 </div>
@@ -114,7 +152,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         arrows={false}
                     >
                         {imgs.map(({url, alt}, i) =>
-                            <img key={i} alt={alt} src={url.extra}/>
+                            <img key={i} alt={alt} src={url.extra} />
                         )}
                     </CustomSlider>
                 </div>

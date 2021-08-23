@@ -18,5 +18,6 @@
   "passwordMustMinEightChars": "Parol kamida 8 ta simvoldan iborat bo'lishi kerak",
   "passwordsDifferent": "Parollar xar-xil",
   "addPhotos": "Iltimos, rasm qo'shing",
-  "error": "Xato"
+  "error": "Xato",
+  "shareError": "Jarayon xatosi"
 }

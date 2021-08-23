@@ -1,19 +1,18 @@
 import {FC, useContext, useState} from 'react';
-import {userAPI} from "@src/api/api";
-import {Typography, useMediaQuery, useTheme} from "@material-ui/core";
-import {INCOGNITO_PHONES} from "@src/constants";
-import {unstable_batchedUpdates} from "react-dom";
-import {ErrorCtx} from "@src/context";
-import {useTranslation} from "next-i18next";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
-import {useModal} from "@src/hooks";
+import {userAPI} from '@src/api/api';
+import {Box, Typography, Button, useMediaQuery, useTheme} from '@material-ui/core';
+import {INCOGNITO_PHONES} from '@src/constants';
+import {unstable_batchedUpdates} from 'react-dom';
+import {ErrorCtx} from '@src/context';
+import {useTranslation} from 'next-i18next';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {useModal} from '@src/hooks';
 import {useStyles} from './useStyles';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {PhoneIcon} from '@src/components/elements/icons';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 
-export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
+export const ShowPhone: FC<{postId: number}> = ({postId}) => {
     const initPhones = {
         phone: null,
         additional_number: null
@@ -82,28 +81,44 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
                     </div>
                 }
             </CustomButton>
-            <ResponsiveModal openDialog={modalOpen} handleCloseDialog={handleModalClose}>
-                <ModalHeader title={t('Позвонить пользователю')} handleBack={handleModalClose}/>
-                <Typography variant="subtitle1" color="initial">
+            <CustomModal openModal={modalOpen} handleModalClose={handleModalClose}>
+                <Box
+                    width={1}
+                    display='flex'
+                    alignItems='center'
+                    flexDirection='column'
+                >
+                    <Typography variant='subtitle1' gutterBottom color='textSecondary'>
+                        {t('post:callToUser')}
+                    </Typography>
                     {isFetch
                         ? <CustomCircularProgress color='secondary' />
                         : <>
                             {!isIncognito && (
                                 notAvailable
                                     ? <div>{t('number_not_available')}</div>
-                                    : <>
-                                        <a href={`tel:${phone}`}>{phone}</a>
-                                        <br />
-                                    </>
+                                    : <div className={classes.phoneWrapper}>
+                                        <Typography variant="subtitle1" color="initial">
+                                            <a href={`tel:${phone}`}>{phone}</a>
+                                        </Typography>
+                                        <Button href={`tel:${phone}`}>
+                                            <PhoneIcon />
+                                        </Button>
+                                    </div>
                             )}
                             {additional_number && (
-                                <span>
-                                    <a href={`tel:${additional_number}`}>{additional_number}</a>
-                                </span>
+                                <div className={classes.phoneWrapper}>
+                                    <Typography variant="subtitle1" color="initial">
+                                        <a href={`tel:${additional_number}`}>{additional_number}</a>
+                                    </Typography>
+                                    <Button href={`tel:${additional_number}`}>
+                                        <PhoneIcon />
+                                    </Button>
+                                </div>
                             )}
                         </>}
-                </Typography>
-            </ResponsiveModal>
+                </Box>
+            </CustomModal>
         </>
     );
 };
