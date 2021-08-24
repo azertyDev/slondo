@@ -63,6 +63,19 @@ export const useStyles = makeStyles((theme) => ({
                     width: '40px',
                     height: '40px'
                 },
+                '&.favorite-btn': {
+                    background: ({isFavorite}) => isFavorite ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)' : 'rgba(0, 0, 0, 0.5)',
+                    '& svg': {
+                        width: 30,
+                        height: 'auto',
+                        [theme.breakpoints.down('xs')]: {
+                            width: '25px'
+                        },
+                        '& path': {
+                            fill: '#fff'
+                        }
+                    }
+                },
                 '&.share-btn': {
                     '& svg': {
                         width: 30,
@@ -76,13 +89,16 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
                 '&.backspace-btn': {
+                    background: 'none',
+                    padding: 0,
                     '& svg': {
                         width: 40,
                         height: 'auto',
+                        filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))',
                         '& path': {
                             fill: '#fff'
                         }
-                    },
+                    }
                 },
                 '&:hover': {
                     background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -100,13 +116,6 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.up('lg')]: {
                     width: '100%',
                     justifyContent: 'space-between'
-                },
-                '& button.favorite-btn': {
-                    padding: 0,
-                    background: ({isFavorite}) => isFavorite && 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                    '& svg path': {
-                        fill: ({isFavorite}) => isFavorite && '#fff'
-                    }
                 },
                 '& .favorite-count': {
                     display: 'flex',
@@ -130,13 +139,6 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-            '& .backspace-btn': {
-                background: 'none',
-                padding: 0,
-                '& span > svg ': {
-                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))'
-                }
-            }
         },
         '& div.slick-track': {
             display: 'flex',

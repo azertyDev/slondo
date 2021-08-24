@@ -7,6 +7,7 @@
   "must_less_than_20": "{{value}} превышать 20 символов",
   "must_more_than_3": "{{value}} не должно быть меньше 3 символов",
   "code_has_already_been_sent": "Код был уже отправлен. Пожалуйста попробуйте позже",
+  "password_has_already_been_sent": "Пароль был уже отправлен. Проверьте входящие смс",
   "incorrect_code": "Неверный код",
   "incorrect_pwd": "Неверный Пароль",
   "pageNotFound": "Страница не найдена",
@@ -19,5 +20,6 @@
   "passwordsDifferent": "Пароли не совпадают",
   "addPhotos": "Пожалуйста добавьте фото",
   "error": "Ошибка",
-  "shareError": "Ошибка процесса"
+  "shareError": "Ошибка процесса",
+  "your_account_blocked": "Ваш аккунт заблокирован"
 }

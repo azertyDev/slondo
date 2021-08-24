@@ -80,28 +80,28 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     className='observer-block'
                                     justifyContent='space-between'
                                 >
-                        <span>
-                            <EyeIcon/>
-                            <Typography
-                                noWrap
-                                variant="caption"
-                                color="initial"
-                            >
-                                {cardData.observer?.number_of_views}
-                            </Typography>
-                        </span>
                                     <span>
-                            <FavoriteBorderIcon/>
-                            <Typography
-                                noWrap
-                                variant="caption"
-                                color="initial"
-                            >
-                                {cardData.observer?.number_of_favorites}
-                            </Typography>
-                        </span>
-                                </Box>)
-                            }
+                                        <EyeIcon />
+                                        <Typography
+                                            noWrap
+                                            variant="caption"
+                                            color="initial"
+                                        >
+                                            {cardData.observer?.number_of_views}
+                                        </Typography>
+                                    </span>
+                                    <span>
+                                        <FavoriteBorderIcon />
+                                        <Typography
+                                            noWrap
+                                            variant="caption"
+                                            color="initial"
+                                        >
+                                            {cardData.observer?.number_of_favorites}
+                                        </Typography>
+                                    </span>
+                                </Box>
+                            )}
                         </Grid>
                         <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
                             <Grid item xs={12} sm={12} lg={7}>
@@ -187,23 +187,20 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 </Grid>
                             )}
                             <Grid item xs={12} container>
-                                {!isXsDown &&
-                                <Grid
+                                {!isAuction
+                                && <Grid
                                     item
+                                    xs={12}
                                     sm={7}
                                     container
-                                    justifyContent='center'
                                     direction='column'
                                     className='location'
+                                    justifyContent='center'
                                 >
                                     <Typography variant='subtitle2' component='p' noWrap>
                                         {time}
                                     </Typography>
-                                    <Typography
-                                        variant="subtitle2" component='p'
-                                        color="initial"
-                                        noWrap
-                                    >
+                                    <Typography variant="subtitle2" component='p' color="initial" noWrap>
                                         {`${t(`locations:${cardData.region.name}.name`) ?? ''}`}
                                         {cardData.city?.name ? `, ${t(`locations:${cardData.region.name}.${cardData.city.name}`)}` : ''}
                                     </Typography>

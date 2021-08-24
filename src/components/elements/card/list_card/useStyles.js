@@ -120,8 +120,11 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& .location': {
                     display: 'block',
-                    '& .MuiTypography-subtitle2': {
-                        color: '#838383'
+                    '& p.MuiTypography-subtitle2': {
+                        color: '#838383',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: '.75rem'
+                        }
                     }
                 },
                 '& .color-silver': {
