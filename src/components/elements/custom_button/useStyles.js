@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
                     : 'initial'
         },
         '&:disabled': {
-            backgroundColor: '#f2f2f2',
+            background: '#f2f2f2',
             opacity: 0.5,
             '& p, h6': {
                 color: theme.palette.primary.black

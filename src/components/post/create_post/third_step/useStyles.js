@@ -13,13 +13,19 @@ export const useStyles = makeStyles((theme) => ({
         '& div.publish-button-wrapper': {
             display: 'flex',
             justifyContent: 'flex-end',
+            '& > button': {
+                width: '120px',
+                '&:disabled': {
+                    opacity: 1
+                }
+            },
             [theme.breakpoints.down('xs')]: {
                 justifyContent: 'center',
                 marginBottom: '40px',
                 '& > button': {
-                    position: 'fixed',
                     bottom: 0,
-                    width: '100%'
+                    width: '100%',
+                    position: 'fixed',
                 }
             }
         }
