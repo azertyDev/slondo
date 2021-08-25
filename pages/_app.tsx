@@ -3,7 +3,6 @@ import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import {AuthCtx, ErrorCtx, SearchCtx, ExitPromptCtx} from "@src/context";
 import {useAuth, useError, useSearch} from "@src/hooks";
-import {useRouter} from "next/router";
 import theme from '@src/theme';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import "../slick.min.css";
@@ -15,20 +14,6 @@ const App = (props) => {
     const error = useError();
     const search = useSearch();
     const exitPrompt = useExitPrompt(false);
-
-    const router = useRouter();
-
-    const storePathValues = () => {
-        const storage = globalThis?.sessionStorage;
-        if (!storage) return;
-        // Set the previous path as the value of the current path.
-        const prevPath = storage.getItem("currentPath");
-        storage.setItem("prevPath", prevPath);
-        // Set the current path value by looking at the browser's location object.
-        storage.setItem("currentPath", globalThis.location.pathname);
-    };
-
-    useEffect(() => storePathValues, [router.asPath]);
 
     useEffect(() => {
         // Remove the server-side injected CSS.

@@ -75,36 +75,48 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                     <Hidden smDown>
                         <Grid item xs={5}>
                             <div className='info-block'>
-                                <div>
-                                    <BonusIcon/>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {t('bonus')}
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <SafeBuyingIcon/>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {t('safeBuying')}
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <AdsIcon/>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {t('createAd')}
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <TorgIcon/>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {t('createAuction')}
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <RatingIcon/>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {t('rating')}
-                                    </Typography>
-                                </div>
+                                <Grid container spacing={2} alignItems='center'>
+                                    <Grid container alignItems='center' item xs={12}>
+                                        <Grid item xs={2}><BonusIcon /></Grid>
+                                        <Grid item xs={10}>
+                                            <Typography variant="subtitle2" color="initial">
+                                                {t('bonus')}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems='center' item xs={12}>
+                                        <Grid item xs={2}><SafeBuyingIcon /></Grid>
+                                        <Grid item xs={10}>
+                                            <Typography variant="subtitle2" color="initial">
+                                                {t('safeBuying')}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems='center' item xs={12}>
+                                        <Grid item xs={2}><AdsIcon /></Grid>
+                                        <Grid item xs={10}>
+                                            <Typography variant="subtitle2" color="initial">
+                                                {t('createAd')}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems='center' item xs={12}>
+                                        <Grid item xs={2}><TorgIcon /></Grid>
+                                        <Grid item xs={10}>
+                                            <Typography variant="subtitle2" color="initial">
+                                                {t('createAuction')}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container alignItems='center' item xs={12}>
+                                        <Grid item xs={2}><RatingIcon /></Grid>
+                                        <Grid item xs={10}>
+                                            <Typography variant="subtitle2" color="initial">
+                                                {t('rating')}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </div>
                         </Grid>
                     </Hidden>

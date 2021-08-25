@@ -31,11 +31,10 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
     } = props;
 
     const {t} = useTranslation('main');
-
     const isPostsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
     const isAuctionsExist = auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1;
 
-    const classes = useStyles();
+    const classes = useStyles({tabValue});
     return (
         <div className={classes.root}>
             <Hidden mdDown>
@@ -45,9 +44,8 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
             </Hidden>
             <Tabs
                 value={tabValue}
-                onChange={handleTabChange}
-                indicatorColor="primary"
                 variant="fullWidth"
+                onChange={handleTabChange}
             >
                 <Tab
                     label={<Typography variant="h6">{t('posts')}</Typography>}
