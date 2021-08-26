@@ -9,6 +9,7 @@ import {BackspaceIcon, Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {IdNameType} from '@root/interfaces/Post';
 import {useStyles} from './useStyles';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 type CategoryStateType = {
     subcategory: IdNameType
@@ -140,10 +141,13 @@ export const CategoriesPage: FC = () => {
                                     onClick={handleCategory(ctgr)}
                                     className={main_ctgr === ctgr.name ? 'selected-category' : ''}
                                 >
-                                    {ctgr.smallIcon}
                                     <Typography variant="subtitle1">
+                                        {ctgr.smallIcon}
                                         {t(`${ctgr.name}.name`)}
                                     </Typography>
+                                    <Hidden smUp>
+                                        <KeyboardArrowRightIcon/>
+                                    </Hidden>
                                 </ListItem>
                             )}
                         </List>
@@ -194,24 +198,23 @@ export const CategoriesPage: FC = () => {
                                     const transCtgrName = t(`${ctgr.name}${subctgr ? `.${subctgr.name}` : ''}.${typeCtgr.name}.name`);
                                     return (
                                         <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
-                                            <div>
+                                            <Typography
+                                                noWrap
+                                                variant="subtitle1"
+                                                className='subcategories-list-item'
+                                            >
+                                                {transCtgrName}
+                                            </Typography>
+                                            {!!searchTxt && (
                                                 <Typography
-                                                    noWrap
-                                                    variant="subtitle1"
-                                                    className='subcategories-list-item'
+                                                    variant="subtitle2"
+                                                    className="parent-category"
                                                 >
-                                                    {transCtgrName}
+                                                    {t(`categories:${typeCtgr.parents[0].name}.name`)}
+                                                    {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
                                                 </Typography>
-                                                {!!searchTxt && (
-                                                    <Typography
-                                                        variant="subtitle2"
-                                                        className="parent-category"
-                                                    >
-                                                        {t(`categories:${typeCtgr.parents[0].name}.name`)}
-                                                        {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
-                                                    </Typography>
-                                                )}
-                                            </div>
+                                            )}
+                                            <KeyboardArrowRightIcon/>
                                         </ListItem>
                                     );
                                 })}

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Grid, Hidden, Typography} from '@material-ui/core';
+import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
 import {StepsProgress} from '@src/components/post/create_post/steps_progress/StepsProgress';
@@ -7,6 +7,7 @@ import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 export const PostTypesPage: FC = () => {
     const {t} = useTranslation('post');
@@ -16,13 +17,15 @@ export const PostTypesPage: FC = () => {
         await push(url, null, {shallow: true});
     };
 
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Hidden mdDown>
                 <StepsProgress activeStep={0}/>
             </Hidden>
-            <Grid container spacing={2}>
+            <Grid container spacing={isXsDown ? 1 : 2}>
                 {postTypes.map((postType, i) =>
                     <Grid
                         item
@@ -86,7 +89,12 @@ export const PostTypesPage: FC = () => {
                             <CustomButton
                                 onClick={handlePostType(`/create?post_type=${postType.name}`)}
                             >
-                                {t(`create_${postType.name}`)}
+                                <Typography variant="subtitle1">
+                                    {t(`create_${postType.name}`)}
+                                    <Hidden smUp>
+                                        <ArrowForwardIosIcon/>
+                                    </Hidden>
+                                </Typography>
                             </CustomButton>
                         </div>
                         <Hidden smDown>

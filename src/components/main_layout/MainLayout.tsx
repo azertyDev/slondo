@@ -4,8 +4,8 @@ import {Footer} from '../footer/Footer';
 import {Container, Hidden} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
-import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
-import {CustomHead} from "@src/components/head/CustomHead";
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {CustomHead} from '@src/components/head/CustomHead';
 import {useStyles} from './useStyles';
 
 type MainLayoutPropsType = {
@@ -46,10 +46,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                 <main>
                     <Container
                         maxWidth="xl"
-                        style={{
-                            paddingTop: '48px',
-                            position: 'relative'
-                        }}
+                        className='layout-container'
                     >
                         {children}
                         {!!seoTxt && <SEOTextComponent text={seoTxt}/>}

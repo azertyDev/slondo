@@ -3,6 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '30px',
+        [theme.breakpoints.down('md')]: {
+            marginBottom: '8px'
+        },
         '& div.MuiGrid-item': {
             '& div.post': {
                 background: 'linear-gradient(270deg, rgba(47, 196, 243, 0.2) 0%, rgba(58, 76, 233, 0.2) 100%)'
@@ -21,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
                 height: '613px',
                 marginBottom: '30px',
                 borderRadius: '25px',
-                boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
+                boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
                 [theme.breakpoints.down('md')]: {
                     height: '450px'
@@ -31,6 +34,7 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '10px'
                 },
                 [theme.breakpoints.down('xs')]: {
+                    border: '0.6px solid #E0E0E0',
                     background: '#F9F9F9',
                     height: '196px',
                     marginBottom: 0
@@ -111,8 +115,25 @@ export const useStyles = makeStyles((theme) => ({
                         marginBottom: '14px'
                     },
                     [theme.breakpoints.down('xs')]: {
-                        marginBottom: '6px'
+                        marginBottom: '5px',
+                        margin: '5px'
+                    },
+                    '& h6': {
+                        fontSize: '14px',
+                        [theme.breakpoints.down('xs')]: {
+                            display: 'flex',
+                            alignItems: 'center'
+                        },
+                        '& svg': {
+                            marginLeft: '5px',
+                            width: '18px',
+                            height: '18px',
+                            '& path': {
+                                fill: '#828282'
+                            }
+                        }
                     }
+
                 }
             },
             '& > div.guide': {

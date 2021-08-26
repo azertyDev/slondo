@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import {useFormik} from 'formik';
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -24,10 +24,10 @@ import {CommonFormPreview} from '@src/components/post/create_post/third_step/com
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {ServiceItem} from "@src/components/post/create_post/third_step/common_form/site_services/ServiceItem";
+import {ServiceItem} from '@src/components/post/create_post/third_step/common_form/site_services/ServiceItem';
 import {Location} from '@src/components/elements/location/Location';
-import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
-import {unstable_batchedUpdates} from "react-dom";
+import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from '@src/constants';
+import {unstable_batchedUpdates} from 'react-dom';
 
 type DefaultParamsPropsType = {
     postType: PostType,

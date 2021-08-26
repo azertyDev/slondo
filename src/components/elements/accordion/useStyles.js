@@ -38,7 +38,8 @@ export const useStyles = makeStyles((theme) => ({
             padding: 7,
             background: theme.palette.primary.createAdBtnColor,
             [theme.breakpoints.down('xs')]: {
-                marginTop: '20px'
+                marginTop: '20px',
+                width: '100%'
             },
             '& > p': {
                 [theme.breakpoints.down('xs')]: {

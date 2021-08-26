@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.payment-delivery': {
             display: 'flex',
@@ -15,6 +15,9 @@ export const useStyles = makeStyles(() => ({
             },
             '& svg.question-mark': {
                 marginLeft: '5px',
+                [theme.breakpoints.down('xs')]: {
+                    marginLeft: 0
+                },
                 '& path': {
                     fill: '#9a64d0'
                 }
