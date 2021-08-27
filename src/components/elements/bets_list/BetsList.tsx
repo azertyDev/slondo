@@ -53,7 +53,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                         {bet.number_of_bets && <span>({bet.number_of_bets})</span>}
                                     </Typography>
                                     <Box display='flex' className='dateAndTime'>
-                                        <Box width={0.5}>
+                                        <Box width={0.4}>
                                             <Typography
                                                 variant="subtitle2"
                                                 className="bet-time"
@@ -61,7 +61,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                                 {bet.created_at?.slice(11, 16)}
                                             </Typography>
                                         </Box>
-                                        <Box width={0.5} textAlign='end'>
+                                        <Box width={0.6} textAlign='end'>
                                             <Typography
                                                 variant="subtitle2"
                                                 className="bet-date"

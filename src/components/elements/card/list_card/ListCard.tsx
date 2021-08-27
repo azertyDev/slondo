@@ -1,20 +1,18 @@
-import {FC} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {
-    DeliveryIcon,
-    EyeIcon,
-    FavoriteBorderIcon,
-    PhoneIcon,
-    RenewalIcon,
-    SafeIcon, SwapIcon
+    SwapIcon,
+    SafeIcon,
+    DeliveryIcon, FavoriteIcon, FavoritedIcon
 } from '@src/components/elements/icons';
 import Link from 'next/link';
-import Countdown from 'react-countdown';
 import {useTranslation} from 'react-i18next';
-import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
-import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {numberPrettier, transformCyrillic} from '@src/helpers';
+import {Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
-import {useDate} from "@src/hooks";
+import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {userAPI} from '@src/api/api';
 
 type ListCardPropsType = {
     cardData: CardDataType
@@ -24,40 +22,59 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
     const {time = ''} = useDate().getDate(cardData.created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {auth: {isAuth}} = useContext(AuthCtx);
+    const [liked, setLiked] = useState(cardData.favorite);
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
     const hasService = !!cardData.delivery
-        || !!cardData.available_days
         || !!cardData.exchange
-        || !!cardData.safe_deal
-        || !!cardData.auction?.auto_renewal;
+        || !!cardData.safe_deal;
 
-    const timer = ({days, hours, minutes, seconds, completed}) => (
-        <Box>
-            <Typography variant="subtitle2" component='p' color="initial" className='color-silver'>
-                {completed ? t('auction:auc_end') : `${t('auction:auc_end_across')}: `}&nbsp;
-            </Typography>
-            {!completed && (
-                <Box display="flex">
-                    <Typography variant="subtitle2" component='p' className="timer">
-                        {formatNumber(days)}{t('common:d')} &nbsp;
-                        {formatNumber(hours)}{t('common:h')}
-                        : {formatNumber(minutes)}{t('common:m')}
-                        : {formatNumber(seconds)}{t('common:s')}
-                    </Typography>
-                </Box>
-            )}
-        </Box>
-    );
 
     const translatedTitle = transformCyrillic(cardData.title);
 
     const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
 
+    const price = cardData.price;
+    const ctgrName = cardData.category.mark;
+    const jobOrService = ctgrName === 'job' || ctgrName === 'service';
+    const excludePrice = jobOrService || price === 0;
+
+    const priceTransform = (): string => {
+        return price === 0
+            ? jobOrService ? 'negotiated' : 'for_free'
+            : numberPrettier(price);
+    };
+
+    const handleFavorite = async () => {
+        try {
+            await userAPI.favoriteAds(cardData.id);
+            setLiked(!liked);
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    useEffect(() => {
+        setLiked(cardData.favorite);
+    }, [cardData.favorite]);
+
     const classes = useStyles({cardData});
     return (
         <div className={classes.root}>
+            {isAuth && !cardData.creator && (
+                <IconButton
+                    className="favorite-btn"
+                    onClick={handleFavorite}
+                >
+                    {liked
+                        ? <FavoriteIcon />
+                        : <FavoritedIcon />
+                    }
+                </IconButton>
+            )}
             <Link href={url}>
                 <a target='_blank' className='card' title={cardData.title}>
                     <Grid container>
@@ -70,149 +87,76 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             >
                                 {t(cardData.ads_type === 'exauc' && isXsDown ? 'common:auc' : cardData.ads_type)}
                             </Typography>
-                            {cardData.observer && (
-                                <Box
-                                    width={1}
-                                    bottom={0}
-                                    padding='5px'
-                                    display='flex'
-                                    position='absolute'
-                                    className='observer-block'
-                                    justifyContent='space-between'
-                                >
-                        <span>
-                            <EyeIcon/>
-                            <Typography
-                                noWrap
-                                variant="caption"
-                                color="initial"
-                            >
-                                {cardData.observer?.number_of_views}
-                            </Typography>
-                        </span>
-                                    <span>
-                            <FavoriteBorderIcon/>
-                            <Typography
-                                noWrap
-                                variant="caption"
-                                color="initial"
-                            >
-                                {cardData.observer?.number_of_favorites}
-                            </Typography>
-                        </span>
-                                </Box>)
-                            }
+                            {hasService && (
+                                <div className="icons">
+                                    {!!cardData.delivery && (
+                                        <Tooltip
+                                            arrow
+                                            title={t('common:delivery')}
+                                        >
+                                        <span>
+                                            <DeliveryIcon />
+                                        </span>
+                                        </Tooltip>
+                                    )}
+                                    {!!cardData.safe_deal && (
+                                        <Tooltip
+                                            arrow
+                                            title={t('common:safe_deal')}
+                                        >
+                                        <span>
+                                            <SafeIcon />
+                                        </span>
+                                        </Tooltip>
+                                    )}
+                                    {!!cardData.exchange && (
+                                        <Tooltip
+                                            arrow
+                                            title={t('common:exchange')}
+                                        >
+                                        <span>
+                                            <SwapIcon />
+                                        </span>
+                                        </Tooltip>
+                                    )}
+                                </div>
+                            )}
                         </Grid>
                         <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
-                            <Grid item xs={12} sm={12} lg={7}>
+                            <Grid item xs={11} sm={10} lg={7}>
                                 <Typography
-                                    noWrap
                                     variant="h3"
                                     color="initial"
                                 >
                                     {cardData.title}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={8} className="description">
-                                {!hasService
-                                    ? <Typography variant='subtitle2' component='p'>
-                                        {cardData.description}
-                                    </Typography>
-                                    : <Box className='services'>
-                                        {!!cardData.delivery && (
-                                            <div className="delivery">
-                                                <DeliveryIcon/>
-                                                {!isXsDown && <Typography variant="body1">
-                                                    {t('common:delivery')}
-                                                </Typography>}
-                                            </div>
-                                        )}
-                                        {!!cardData.available_days && (
-                                            <div className="available">
-                                                <PhoneIcon/>
-                                                {!isXsDown && <Typography variant="body1">
-                                                    {weekDaysHelper(cardData.available_days, t)}&nbsp;
-                                                    {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
-                                                </Typography>}
-                                            </div>
-                                        )}
-                                        {!!cardData.exchange && (
-                                            <div className="exchange">
-                                                <SwapIcon/>
-                                                {!isXsDown && <Typography variant="body1">
-                                                    {t('common:exchange')}
-                                                </Typography>}
-                                            </div>
-                                        )}
-                                        {!!cardData.safe_deal && (
-                                            <div className="safe_deal">
-                                                <SafeIcon/>
-                                                {!isXsDown && <Typography variant="body1">
-                                                    {t('common:safe_deal')}
-                                                </Typography>}
-                                            </div>
-                                        )}
-                                        {!!cardData.auction?.auto_renewal && (
-                                            <div className="safe_deal">
-                                                <RenewalIcon/>
-                                                {!isXsDown && <Typography variant="body1">
-                                                    {t('common:auto_ren')}
-                                                </Typography>}
-                                            </div>
-                                        )}
-                                    </Box>
-                                }
-                            </Grid>
-                            {isAuction && (
-                                <Grid item xs={12} container spacing={isXsDown ? 1 : 0}>
-                                    <Grid item xs={12} sm={6} md={6}>
-                                        <Countdown
-                                            date={new Date(cardData.expiration_at).getTime()}
-                                            renderer={timer}
-                                        />
-                                    </Grid>
-                                    <Grid
-                                        container
-                                        alignItems='center'
-                                        item xs={12} sm={6} md={6}
-                                        justifyContent={isXsDown ? 'flex-start' : 'flex-end'}
-                                    >
-                                        <Typography variant='subtitle2' component='p'>
-                                <span className='color-silver'>
-                                    {t('auction:bets')}:
-                                </span>&nbsp;
-                                            {cardData.auction?.number_of_bets}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            )}
                             <Grid item xs={12} container>
-                                {!isXsDown &&
                                 <Grid
                                     item
-                                    sm={7}
+                                    xs={12}
+                                    sm={6}
                                     container
-                                    justifyContent='center'
                                     direction='column'
                                     className='location'
+                                    justifyContent='center'
                                 >
-                                    <Typography variant='subtitle2' component='p' noWrap>
-                                        {time}
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle2" component='p'
-                                        color="initial"
-                                        noWrap
-                                    >
+                                    <Typography variant="subtitle2" component='p' color="initial" noWrap>
                                         {`${t(`locations:${cardData.region.name}.name`) ?? ''}`}
                                         {cardData.city?.name ? `, ${t(`locations:${cardData.region.name}.${cardData.city.name}`)}` : ''}
                                     </Typography>
+                                    <Typography variant='subtitle2' component='p' noWrap>
+                                        {time}
+                                    </Typography>
                                 </Grid>
-                                }
                                 <Grid
+                                    item
+                                    xs={12}
+                                    sm={6}
+                                    container
                                     zeroMinWidth
-                                    item xs={12} sm={5}
-                                    container direction='column' alignItems={isXsDown ? 'flex-start' : 'flex-end'}
+                                    direction='column'
+                                    alignItems={isXsDown ? 'flex-start' : 'flex-end'}
                                 >
                                     {isAuction
                                         ? hasBet &&
@@ -236,8 +180,10 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             color="initial"
                                             noWrap
                                         >
-                                            {numberPrettier(cardData.price)}&nbsp;
-                                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                                            {t(`post:${priceTransform()}`)}&nbsp;
+                                            {!excludePrice && (
+                                                <span>{t(`common:${cardData.currency.name}`)}</span>
+                                            )}
                                         </Typography>}
                                 </Grid>
                             </Grid>

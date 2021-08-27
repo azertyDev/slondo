@@ -11,35 +11,25 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         },
         '& div.info-block': {
             display: 'flex',
-            flexDirection: 'column',
             height: '100%',
-            padding: '45px 0',
+            padding: '45px 20px',
             backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
-            '& svg': {
-                marginRight: 20,
-                width: '70px',
-                height: '40px'
-            },
-            '& h6.MuiTypography-root': {
-                lineHeight: '14px',
-                color: '#fff'
-            },
-            '& > div': {
-                display: 'flex',
-                alignItems: 'center',
-                height: '90px',
-                padding: '20px',
-                '& > img': {
-                    minWidth: '40px',
-                    height: '40px',
-                    marginRight: '15px'
-                },
-                '& > h6.MuiTypography-subtitle2': {
-                    lineHeight: '17px',
-                    fontWeight: 400
-                }
+            // '& svg': {
+            //     marginRight: 20
+            // },
+            '& h6.MuiTypography-subtitle2': {
+                color: '#fff',
+                fontWeight: 400,
+                lineHeight: '17px'
             }
+            // '& > div': {
+            //     display: 'flex',
+            //     alignItems: 'center',
+            //     height: '90px',
+            //     padding: '20px',
+            //
+            // }
         },
         '& div.auth-reg-block': {
             position: 'relative',

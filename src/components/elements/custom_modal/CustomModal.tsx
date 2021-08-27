@@ -33,9 +33,11 @@ export const CustomModal: FC<ModalPropsType> = (props) => {
                     <div className={classes.paper}>
                         <IconButton
                             onClick={handleModalClose}
-                            className={classes.closeBtn}
+                            classes={{
+                                root: classes.button
+                            }}
                         >
-                            <CloseIcon/>
+                            <CloseIcon />
                         </IconButton>
                         {children}
                     </div>

@@ -65,11 +65,12 @@ export const GridCard: FC<CardItemProps> = (props) => {
         <div className={classes.root}>
             {isAuth && !creator && (
                 <IconButton
-                    className="favorite-btn" onClick={handleFavorite}
+                    className="favorite-btn"
+                    onClick={handleFavorite}
                 >
                     {liked
-                        ? <FavoriteIcon/>
-                        : <FavoritedIcon/>
+                        ? <FavoriteIcon />
+                        : <FavoritedIcon />
                     }
                 </IconButton>
             )}

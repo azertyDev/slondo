@@ -114,7 +114,7 @@ export const postAPI = {
 export const userAPI = {
     getPostsByFilters: (params): Promise<any> => {
         return instance
-            .get('posts/filter', {params})
+            .get('posts/filter', {params, ...setTokenToHeader()})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;

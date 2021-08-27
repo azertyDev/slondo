@@ -1,7 +1,6 @@
 import {FC, useContext} from 'react';
 import {WithT} from "i18next";
 import {CardDataType} from '@root/interfaces/CardData';
-import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {Box, CircularProgress, Grid, Paper, Typography} from '@material-ui/core';
 import {
     DeliveryIcon,
@@ -19,6 +18,7 @@ import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
 import {Trans} from 'next-i18next';
+import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -120,7 +120,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                 <div className={classes.root}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <ListCard cardData={post}/>
+                            <CabinetCard cardData={post}/>
                         </Grid>
                         {hasServices && (
                             <Grid item xs={12} md={6}>

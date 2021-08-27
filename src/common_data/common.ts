@@ -99,7 +99,7 @@ export const initCardData: CardDataType = {
     favorite: false,
     id: null,
     image: '',
-    price: '',
+    price: null,
     region: {
         id: null,
         name: ''

@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: 25,
         borderRadius: 10,
+        [theme.breakpoints.down('xs')]: {
+            width: '90%'
+        },
         '& .MuiCheckbox-root': {
             padding: 0
         },
@@ -55,22 +58,19 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
-    closeBtn: {
-        width: 24,
-        height: 24,
-        padding: 7,
-        backgroundColor: '#EBEBF0',
+    button: {
         position: 'absolute',
-        top: '-5px',
-        right: '-5px',
-        '& path': {
-            fill: '#28293D'
-        },
-        '&:hover': {
-            backgroundColor: '#EB5757',
+        right: 0,
+        top: 0,
+        padding: 8,
+        '& svg': {
+            [theme.breakpoints.down('xs')]: {
+                width: '20px',
+                height: '20px'
+            },
             '& path': {
-                fill: '#fff'
+                fill: '#28293D'
             }
         }
-    },
+    }
 }))

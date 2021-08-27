@@ -17,29 +17,34 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.MuiTabs-flexContainer': {
                 borderBottom: `1px solid ${theme.palette.common.tab}`,
-                '& h6': {
-                    textTransform: 'uppercase',
-                    color: theme.palette.common.tab,
-                    [theme.breakpoints.down('md')]: {
-                        textTransform: 'none',
-                        color: '#838383 !important',
-                        fontSize: '1rem'
+                '& button.MuiTab-root': {
+                    borderRadius: '3px 3px 0px 0px',
+                    '& h6': {
+                        textTransform: 'uppercase',
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: '1rem',
+                            textTransform: 'none'
+                        }
+                    },
+                    '&.Mui-selected': {
+                        backgroundColor: ({tabValue}) =>
+                            tabValue === 0
+                                ? theme.palette.primary.primaryLight
+                                : theme.palette.primary.secondaryLight,
+                        '& h6': {
+                            color: ({tabValue}) =>
+                                tabValue === 0
+                                    ? theme.palette.common.activeTab
+                                    : theme.palette.primary.lotBgColor
+                        }
                     }
                 }
             },
-            '& button.Mui-selected': {
-                '& h6.MuiTypography-h6': {
-                    color: theme.palette.primary.secondary,
-                    [theme.breakpoints.down('md')]: {
-                        color: '#4E4E4E !important',
-                    }
-                }
-            },
-            '& span.MuiTabs-indicator': {
-                backgroundColor: theme.palette.primary.secondary,
-                [theme.breakpoints.down('md')]: {
-                    backgroundColor: `#675EAA`
-                }
+            '& .MuiTabs-indicator': {
+                backgroundColor: ({tabValue}) =>
+                    tabValue === 0
+                        ? theme.palette.common.activeTab
+                        : theme.palette.primary.lotBgColor
             }
         },
         '& div.tabs-content': {
@@ -86,3 +91,5 @@ export const useStyles = makeStyles((theme) => ({
         }
     }
 }));
+
+

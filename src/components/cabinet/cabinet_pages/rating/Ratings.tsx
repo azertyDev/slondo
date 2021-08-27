@@ -120,7 +120,7 @@ export const Ratings: FC = () => {
     return (
         <>
             <Grid container spacing={isXsDown ? 0 : 2} className={classes.root}>
-                <Grid item xs={12} container justifyContent='center'>
+                <Grid item xs={12} container>
                     <Rating
                         card
                         readOnly

@@ -261,6 +261,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '6px',
                 borderRadius: '5px',
                 width: '50%',
+                padding: 0,
                 '& > p': {
                     color: '#fff',
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
@@ -281,7 +282,6 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
                     },
-                    padding: '11px 39px'
                 },
                 '&:last-child': {
                     '&:disabled': {
@@ -294,7 +294,6 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
                     },
-                    padding: '11px 44px',
                     background: '#fff',
                     border: '1px solid #845CAB',
                     marginRight: 0,
@@ -302,7 +301,6 @@ export const useStyles = makeStyles((theme) => ({
                         color: '#845CAB'
                     }
                 }
-
             },
             [theme.breakpoints.down('md')]: {
                 '&:after': {

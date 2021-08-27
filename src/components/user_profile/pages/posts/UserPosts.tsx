@@ -13,7 +13,7 @@ import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {CardDataType} from "@root/interfaces/CardData";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
-import {CabinetCard} from "@src/components/cabinet/components/cabinet_card/CabinetCard";
+import {CabinetCardWrapper} from "@src/components/cabinet/components/cabinet_card_wrapper/CabinetCardWrapper";
 
 export const UserPosts: FC<WithT> = ({t}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -120,7 +120,7 @@ export const UserPosts: FC<WithT> = ({t}) => {
     //                         />
     //                         : fstTabPosts.map((data) => (
     //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-    //                                 <CabinetCard
+    //                                 <CabinetCardWrapper
     //                                     cardData={data}
     //                                     handleDetailedOpen={handleDetailedOpen(data)}
     //                                     handleSettingsOpen={handleSettingsOpen(data)}
@@ -136,7 +136,7 @@ export const UserPosts: FC<WithT> = ({t}) => {
     //                         ? <EmptyPage label={t('cabinet:empty.archive')}/>
     //                         : secTabPosts.map((data) => (
     //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-    //                                 <CabinetCard
+    //                                 <CabinetCardWrapper
     //                                     cardData={data}
     //                                     handleNotificationsOpen={handleNotificationsOpen(data)}
     //                                 />

@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Box, CircularProgress, Grid, Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card_wrapper/CabinetCardWrapper';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -65,7 +65,7 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                         ? fstTabData.emptyPage
                         : fstTabData.posts.map((data) => (
                             <Box mb={3} key={data.id}>
-                                <CabinetCard
+                                <CabinetCardWrapper
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
                                     handleNotificationsOpen={handleNotificationsOpen(data)}
@@ -113,7 +113,7 @@ export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
                         ? secTabData.emptyPage
                         : secTabData.posts.map((data) => (
                             <Box mb={3} key={data.id}>
-                                <CabinetCard
+                                <CabinetCardWrapper
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
                                     handleNotificationsOpen={handleNotificationsOpen(data)}

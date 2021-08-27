@@ -7,16 +7,20 @@
   "must_less_than_20": "{{value}} превышать 20 символов",
   "must_more_than_3": "{{value}} не должно быть меньше 3 символов",
   "code_has_already_been_sent": "Код был уже отправлен. Пожалуйста попробуйте позже",
+  "password_has_already_been_sent": "Пароль был уже отправлен. Проверьте входящие смс",
   "incorrect_code": "Неверный код",
   "incorrect_pwd": "Неверный Пароль",
   "pageNotFound": "Страница не найдена",
   "user_already_registered": "Ошибка регистрации, возможно вы уже зарегистрированы в системе",
-  "unauthorised": "Ошибка авторизации",
+  "unauthorised": "Неверный номер телефона или пароль",
   "server_error": "Ошибка сервера, попробуйте позже",
   "fieldIsRequired": "Поле обязательно для заполнения",
   "wrongFormat": "Неверный формат",
   "passwordMustMinEightChars": "Пароль должен быть не менее 8 символов",
   "passwordsDifferent": "Пароли не совпадают",
   "addPhotos": "Пожалуйста добавьте фото",
-  "error": "Ошибка"
+  "error": "Ошибка",
+  "shareError": "Ошибка процесса",
+  "your_account_blocked": "Ваш аккунт заблокирован",
+  "user_not_found": "Номер не зарегистрирован в системе"
 }
