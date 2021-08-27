@@ -3,14 +3,13 @@ import {browser} from 'process';
 import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
 import Drawer from '@material-ui/core/Drawer';
-import {cookies, transformCyrillic} from '@src/helpers';
+import {getUserLocationName, transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
 import {Hidden, List, ListItem, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {CategoryType} from '@root/interfaces/Categories';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import {RegionType} from "@root/interfaces/Locations";
 import {useStyles} from './useStyles';
 
 type CustomDrawerPropsType = {
@@ -76,7 +75,6 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
                     <div className={classes.drawerList}>
                         <Hidden smUp>
                             <div className='drawer-header'>
-                                <div></div>
                                 <Typography variant='subtitle1'>
                                     {t('header:categories')}
                                 </Typography>
@@ -199,26 +197,3 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
         });
     }
 };
-
-function getUserLocationName(locations: RegionType[]) {
-    let userLocation = 'uzbekistan';
-    const userLocationByCookie = cookies.get('user_location');
-
-    if (userLocationByCookie) {
-        const {region, city} = userLocationByCookie;
-
-        locations.forEach(r => {
-            const cityName = city
-                ? r.cities.find(c => c.id === city.id)?.ru_name
-                : null;
-
-            if (cityName) {
-                userLocation = cityName;
-            } else if (r.id === region.id) {
-                userLocation = r.ru_name;
-            }
-        });
-    }
-
-    return userLocation;
-}

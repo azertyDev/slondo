@@ -1,22 +1,30 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
+import {browser} from "process";
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
 import {site_categories} from '@src/common_data/site_categories';
-import {cookies, transformCyrillic} from '@root/src/helpers';
+import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
+import {getUserLocationName, transformCyrillic} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
 export const CategoriesSlider: FC = () => {
-    let location = 'uzbekistan';
     const {t} = useTranslation('main');
-    const userLocation = cookies.get('user_location');
+    const [update, setUpdate] = useState(true);
+    const [userLocation, setUserLocation] = useState('uzbekistan');
 
-    if (userLocation) {
-        const {region, city} = userLocation;
-        location = city ? city.ru_name : region.ru_name;
-    }
+    useEffect(() => {
+        if (browser) {
+            const regions = JSON.parse(localStorage.getItem('regions')) || [];
+            const location = getUserLocationName(regions);
+            unstable_batchedUpdates(() => {
+                location !== userLocation && setUserLocation(location);
+                !update && setUpdate(true);
+            });
+        }
+    }, [update]);
 
     const classes = useStyles();
     return (
@@ -29,7 +37,10 @@ export const CategoriesSlider: FC = () => {
                     {site_categories.map((category) => {
                         const ctgrName = t(`categories:${category.name}.name`);
                         return (
-                            <Link href={`/${location}/${transformCyrillic(category.ru_name)}`} key={category.id}>
+                            <Link
+                                key={category.id}
+                                href={`/${userLocation}/${transformCyrillic(category.ru_name)}`}
+                            >
                                 <a title={ctgrName}>
                                     <div className="category">
                                         <div className="bg-layer">
