@@ -7,7 +7,7 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import {ArrowBack} from '@material-ui/icons';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
-import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card_wrapper/CabinetCardWrapper';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import {ITEMS_PER_PAGE} from '@src/constants';
@@ -155,7 +155,7 @@ export const BannedPosts: FC = () => {
                 : <>
                     {posts.data.map(data => (
                         <Box mb={3} key={data.id}>
-                            <CabinetCard
+                            <CabinetCardWrapper
                                 cardData={data}
                                 handleDetailedOpen={handleDetailedOpen(data)}
                             />

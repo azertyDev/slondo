@@ -93,11 +93,11 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                         <Box
                             mb={1}
                             display='flex'
-                            justifyContent='space-between'
                             alignItems='center'
+                            justifyContent='space-between'
                         >
                             <Typography variant='h5' component='p'>
-                                {t('common:allPosts')}
+                                {t('common:result')}
                             </Typography>
                             <Box className='view-btns'>
                                 <IconButton className={listView ? '' : 'selected'} onClick={() => setListView(false)}>

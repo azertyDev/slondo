@@ -67,7 +67,7 @@ export type CardDataType = {
     favorite: boolean,
     id: number,
     image: string,
-    price: string,
+    price: number,
     region: IdNameType,
     safe_deal: number,
     status: string,

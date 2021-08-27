@@ -3,11 +3,10 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         border: 0,
-        zIndex: 20,
-        position: 'relative',
         height: 176,
-        borderRadius: '10px',
         background: '#FFF',
+        position: 'relative',
+        borderRadius: '10px',
         boxShadow: '0px 1px 6px rgb(0 0 0 / 10%)',
         [theme.breakpoints.down('sm')]: {
             height: 165
@@ -16,10 +15,43 @@ export const useStyles = makeStyles((theme) => ({
             cursor: 'pointer',
             background: '#fcfcfc',
             transition: 'all 0.05s ease-out',
-            WebkitTransition: 'all 0.05s ease-out',
+            WebkitTransition: 'box-shadow 2s ease-out',
             MozTransition: 'all 0.05s ease-out',
             OTransition: 'all 0.05s ease-out',
             boxShadow: 'rgb(0 0 0 / 11%) 0px 4px 14px 0px'
+        },
+        '& button.favorite-btn': {
+            zIndex: 1,
+            top: '10px',
+            right: '10px',
+            padding: '0',
+            position: 'absolute',
+            boxShadow: '0px 0px 15px 0px #0000001A',
+            [theme.breakpoints.down('xs')]: {
+                width: '25px',
+                height: '25px'
+            },
+            [theme.breakpoints.between('480', '567')]: {
+                top: '5px',
+                left: '44%'
+            },
+            [theme.breakpoints.down('480')]: {
+                top: '5px',
+                left: '42%'
+            },
+            [theme.breakpoints.down('430')]: {
+                left: '41%'
+            },
+            [theme.breakpoints.down('360')]: {
+                left: '39.5%'
+            },
+
+            '&:hover': {
+                '& svg': {
+                    transform: 'scale(1.1)',
+                    transition: 'transform .3s cubic-bezier(.5,0,.5,3)'
+                }
+            }
         },
         '& a.card': {
             textDecoration: 'none',
@@ -50,17 +82,22 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: theme.palette.primary.exAucBgColor
                         }
                     },
-                    '& div.observer-block': {
+                    '& div.icons': {
+                        left: '5px',
+                        bottom: '5px',
+                        position: 'absolute',
+                        display: 'flex',
                         '& > span': {
+                            width: '25px',
+                            height: '25px',
                             display: 'flex',
-                            justifyContent: 'space-between',
+                            marginRight: '5px',
+                            borderRadius: '100%',
                             alignItems: 'center',
-                            padding: '3px',
-                            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                            borderRadius: '5px',
-                            '& > svg': {
-                                marginRight: '5px',
-                                height: '12px'
+                            justifyContent: 'center',
+                            background: 'rgba(255, 255, 255, 0.6)',
+                            '& svg': {
+                                width: '15px'
                             }
                         }
                     }
@@ -71,59 +108,26 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('md')]: {
                         padding: '10px'
                     },
+                    '& .location': {
+                        display: 'block',
+                        '& p.MuiTypography-subtitle2': {
+                            color: '#838383',
+                            [theme.breakpoints.down('xs')]: {
+                                fontSize: '.75rem'
+                            }
+                        }
+                    },
                     '& h3': {
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        overflow: 'hidden',
+                        WebkitBoxOrient: 'vertical',
                         fontSize: theme.typography.h6.fontSize,
                         [theme.breakpoints.down('lg')]: {
                             fontSize: theme.typography.pxToRem(16)
                         },
                         [theme.breakpoints.down('sm')]: {
                             fontSize: theme.typography.pxToRem(14)
-                        }
-                    }
-                },
-                '& .description': {
-                    '& .MuiTypography-subtitle2': {
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        overflow: 'hidden',
-                        WebkitBoxOrient: 'vertical'
-                    },
-                    '& div.services': {
-                        '& div': {
-                            height: '25px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            float: 'left',
-                            padding: '0 15px',
-                            borderRadius: '100px',
-                            backgroundColor: '#F2F2F2',
-                            cursor: 'default',
-                            userSelect: 'none',
-                            margin: '2px 10px 2px 0',
-                            [theme.breakpoints.down('xs')]: {
-                                padding: 0,
-                                width: 25
-                            },
-                            '& p.MuiTypography-body1': {
-                                marginLeft: '12px',
-                                fontSize: theme.typography.pxToRem(12)
-                            },
-                            '& svg': {
-                                [theme.breakpoints.down('xs')]: {
-                                    height: '12px'
-                                }
-                            }
-                        }
-                    }
-                },
-                '& .location': {
-                    display: 'block',
-                    '& p.MuiTypography-subtitle2': {
-                        color: '#838383',
-                        [theme.breakpoints.down('xs')]: {
-                            fontSize: '.75rem'
                         }
                     }
                 },

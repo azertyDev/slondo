@@ -19,7 +19,7 @@ export const CardView: FC<ViewPropsType> = (props) => {
             ? <>
                 {data.map(cardData => {
                         return (
-                            <Box mb={2} key={cardData.id}>
+                            <Box mb={1} key={cardData.id}>
                                 <ListCard cardData={cardData} />
                             </Box>
                         );

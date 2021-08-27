@@ -1,178 +1,247 @@
 import {FC} from 'react';
-import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {ChevronRight} from '@material-ui/icons';
-import {CardDataType} from '@root/interfaces/CardData';
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {ListCard} from '@src/components/elements/card/list_card/ListCard';
+import {
+    DeliveryIcon,
+    EyeIcon,
+    FavoriteBorderIcon,
+    PhoneIcon,
+    RenewalIcon,
+    SafeIcon, SwapIcon
+} from '@src/components/elements/icons';
+import Link from 'next/link';
+import Countdown from 'react-countdown';
 import {useTranslation} from 'react-i18next';
-import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
-import {useRouter} from 'next/router';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {CardDataType} from '@root/interfaces/CardData';
+import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
 
-type CabinetCardPropsType = {
-    cardData: CardDataType,
-    handleOpenModal?: (id: number) => () => void,
-    handleDetailedOpen?: () => void,
-    handleSettingsOpen?: () => void,
-    handleNotificationsOpen?: () => void
+type ListCardPropsType = {
+    cardData: CardDataType
 }
 
-export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
-    const {
-        cardData,
-        handleOpenModal,
-        handleDetailedOpen,
-        handleSettingsOpen,
-        handleNotificationsOpen
-    } = props;
-
-    const {query: {page}} = useRouter();
-    const {t} = useTranslation('cabinet');
-
-    const {
-        observer,
-        category,
-        adsable,
-        ads_type,
-        status,
-        creator
-    } = cardData;
-
+export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
+    const {t} = useTranslation('common');
+    const {time = ''} = useDate().getDate(cardData.created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-    const isPublic = status === 'public';
-    const isModeration = status === 'moderation';
-    const isSold = status === 'sold';
-    const isSuspend = status === 'suspended';
+    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const classes = useStyles({status});
-    return (
-        <Box className={classes.root}>
-            <Box mb={1}>
-                <div className='breadcrumbs'>
-                    <Hidden xsDown>
-                        <BreadcrumbsComponent
-                            category={category.name}
-                            type={adsable?.type?.name}
-                            subcategory={adsable?.sub_category.name}
-                        />
-                    </Hidden>
-                    <Box
-                        display='flex'
-                        alignItems='center'
-                        width={isXsDown ? 1 : 'auto'}
-                        justifyContent={isXsDown ? 'space-between' : ''}
-                    >
-                        <Typography variant="subtitle1" color="initial" component='p'>
-                            <span className={ads_type}>
-                                {t(`common:${ads_type}`)} №:&nbsp;
-                            </span>
-                            {cardData.id}
-                        </Typography>
-                        <div className='status'>
-                            <Typography variant='subtitle2' component='p'>
-                                {t(status)}
-                            </Typography>
-                        </div>
-                    </Box>
-                </div>
-            </Box>
-            <Box position='relative'>
-                <ListCard cardData={cardData}/>
-                <Grid container spacing={1} className='bottom-btns'>
-                    <Hidden mdUp>
-                        <Grid item xs={5} sm={4} container justifyContent='center'>
-                            {page?.includes('favorite')
-                                ? <Grid item xs={6} container justifyContent='center'>
-                                    <CustomButton
-                                        onClick={handleOpenModal(cardData.id)}
-                                    >
-                                        <CloseIcon/>
-                                    </CustomButton>
-                                </Grid>
-                                : <>
-                                    {handleNotificationsOpen && (
-                                        <Grid item xs={6} container justifyContent='center'>
-                                            <CustomButton
-                                                className='icons'
-                                                onClick={handleNotificationsOpen}
-                                                // disabled={!observer?.number_of_notifications}
-                                            >
-                                                <NotificationIcon/>
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
-                                    {creator && isPublic && (
-                                        <Grid item xs={6} container justifyContent='center'>
-                                            <CustomButton
-                                                className='icons'
-                                                onClick={handleSettingsOpen}
-                                            >
-                                                <SettingsIcon/>
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
-                                </>}
-                        </Grid>
-                    </Hidden>
-                    {handleDetailedOpen && (
-                        <Grid
-                            item
-                            xs={isPublic || isModeration || isSold || isSuspend ? 7 : 12}
-                            sm={isPublic || isModeration || isSuspend ? 8 : 12}
-                            md={12}
-                        >
-                            <CustomButton
-                                className='unfold-btn'
-                                onClick={handleDetailedOpen}
-                            >
-                                <Typography variant='subtitle1' component='p'>
-                                    {t('cabinet:unfold')}
-                                </Typography>&nbsp;
-                                <ChevronRight color='action' />
-                            </CustomButton>
-                        </Grid>
-                    )}
-                </Grid>
-                <Hidden smDown>
-                    <div className='card-btns'>
-                        {page?.includes('favorite')
-                            ? <CustomButton
-                                onClick={handleOpenModal(cardData.id)}
-                            >
-                                <CloseIcon />
-                            </CustomButton>
-                            : <>
-                                {creator && isPublic && (
-                                    <>
-                                        <CustomButton
-                                            disabled
-                                            className='icons'
-                                        >
-                                            <RocketIcon/>
-                                            <Typography variant='subtitle1' component='p'>
-                                                Рекламировать
-                                            </Typography>
-                                        </CustomButton>
-                                        <CustomButton
-                                            className='icons'
-                                            onClick={handleSettingsOpen}
-                                        >
-                                            <SettingsIcon/>
-                                        </CustomButton>
-                                    </>
-                                )}
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleNotificationsOpen}
-                                    // disabled={!observer.number_of_notifications}
-                                >
-                                    <NotificationIcon/>
-                                </CustomButton>
-                            </>}
-                    </div>
-                </Hidden>
-            </Box>
+    const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
+    const hasBet = !!cardData.auction?.number_of_bets;
+    const hasService = !!cardData.delivery
+        || !!cardData.available_days
+        || !!cardData.exchange
+        || !!cardData.safe_deal
+        || !!cardData.auction?.auto_renewal;
+
+    const timer = ({days, hours, minutes, seconds, completed}) => (
+        <Box>
+            <Typography variant={isXsDown ? 'subtitle2' : 'subtitle1'} component='p' className='color-silver'>
+                {completed ? t('auction:auc_end') : `${t('auction:auc_end_across')}: `}&nbsp;
+            </Typography>
+            {!completed && (
+                <Box display="flex">
+                    <Typography variant={isXsDown ? 'subtitle2' : 'subtitle1'} component='p'>
+                        {formatNumber(days)}{t('common:d')} &nbsp;
+                        {formatNumber(hours)}{t('common:h')}
+                        : {formatNumber(minutes)}{t('common:m')}
+                        : {formatNumber(seconds)}{t('common:s')}
+                    </Typography>
+                </Box>
+            )}
         </Box>
     );
+
+    const translatedTitle = transformCyrillic(cardData.title);
+
+    const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
+
+    const price = cardData.price;
+    const ctgrName = cardData.category.mark;
+    const jobOrService = ctgrName === 'job' || ctgrName === 'service';
+    const excludePrice = jobOrService || price === 0;
+
+    const priceTransform = (): string => {
+        return price === 0
+            ? jobOrService ? 'negotiated' : 'for_free'
+            : numberPrettier(price);
+    };
+
+    const classes = useStyles({cardData});
+    return (
+        <div className={classes.root}>
+            <Link href={url}>
+                <a target='_blank' className='card' title={cardData.title}>
+                    <Grid container>
+                        <Grid item xs={6} sm={4} md={3} className="img">
+                            <Typography
+                                noWrap
+                                color="initial"
+                                variant="caption"
+                                className={cardData.ads_type}
+                            >
+                                {t(cardData.ads_type === 'exauc' && isXsDown ? 'common:auc' : cardData.ads_type)}
+                            </Typography>
+                            {cardData.observer && (
+                                <Box
+                                    width={1}
+                                    bottom={0}
+                                    padding='5px'
+                                    display='flex'
+                                    position='absolute'
+                                    className='observer-block'
+                                    justifyContent='space-between'
+                                >
+                                    <span>
+                                        <EyeIcon />
+                                        <Typography
+                                            noWrap
+                                            variant="caption"
+                                            color="initial"
+                                        >
+                                            {cardData.observer?.number_of_views}
+                                        </Typography>
+                                    </span>
+                                    <span>
+                                        <FavoriteBorderIcon />
+                                        <Typography
+                                            noWrap
+                                            variant="caption"
+                                            color="initial"
+                                        >
+                                            {cardData.observer?.number_of_favorites}
+                                        </Typography>
+                                    </span>
+                                </Box>
+                            )}
+                        </Grid>
+                        <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
+                            <Grid item xs={12} md={7} lg={8}>
+                                <Typography
+                                    noWrap
+                                    variant="h3"
+                                    color="initial"
+                                >
+                                    {cardData.title}
+                                </Typography>
+                            </Grid>
+                            {!isAuction && (
+                                <Grid item xs={12} sm={8} className="description">
+                                    {!hasService
+                                        ? <Typography variant='subtitle2' component='p'>
+                                            {cardData.description}
+                                        </Typography>
+                                        : <Box className='services'>
+                                            {!!cardData.delivery && (
+                                                <div className="delivery">
+                                                    <DeliveryIcon />
+                                                    {!isXsDown && <Typography variant="body1">
+                                                        {t('common:delivery')}
+                                                    </Typography>}
+                                                </div>
+                                            )}
+                                            {!!cardData.available_days && (
+                                                <div className="available">
+                                                    <PhoneIcon />
+                                                    {!isXsDown && <Typography variant="body1">
+                                                        {weekDaysHelper(cardData.available_days, t)}&nbsp;
+                                                        {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
+                                                    </Typography>}
+                                                </div>
+                                            )}
+                                            {!!cardData.exchange && (
+                                                <div className="exchange">
+                                                    <SwapIcon />
+                                                    {!isXsDown && <Typography variant="body1">
+                                                        {t('common:exchange')}
+                                                    </Typography>}
+                                                </div>
+                                            )}
+                                            {!!cardData.safe_deal && (
+                                                <div className="safe_deal">
+                                                    <SafeIcon />
+                                                    {!isXsDown && <Typography variant="body1">
+                                                        {t('common:safe_deal')}
+                                                    </Typography>}
+                                                </div>
+                                            )}
+                                            {!!cardData.auction?.auto_renewal && (
+                                                <div className="safe_deal">
+                                                    <RenewalIcon />
+                                                    {!isXsDown && <Typography variant="body1">
+                                                        {t('common:auto_ren')}
+                                                    </Typography>}
+                                                </div>
+                                            )}
+                                        </Box>
+                                    }
+                                </Grid>
+                            )}
+                            {isAuction && (
+                                <Grid
+                                    item
+                                    xs={12}
+                                    container
+                                    alignItems='center'
+                                >
+                                    <Typography variant='subtitle2' component='p'>
+                                            <span className='color-silver'>
+                                                {t('auction:bets')}:
+                                            </span>&nbsp;
+                                        {cardData.auction?.number_of_bets}
+                                    </Typography>
+                                </Grid>
+                            )}
+                            {isAuction && (
+                                <Grid item xs={12} md={6}>
+                                    <Countdown
+                                        date={new Date(cardData.expiration_at).getTime()}
+                                        renderer={timer}
+                                    />
+                                </Grid>
+                            )}
+                            <Grid
+                                item
+                                xs={12}
+                                md={isAuction ? 6 : 12}
+                                container
+                                zeroMinWidth
+                                direction='column'
+                                alignItems={isSmDown ? 'flex-start' : 'flex-end'}
+                            >
+                                {isAuction
+                                    ? hasBet &&
+                                    <>
+                                        <Typography variant='subtitle1' component='p' className='color-silver'>
+                                            {t('common:currentRate')}
+                                        </Typography>
+                                        <Typography
+                                            noWrap
+                                            variant="h6"
+                                            component='p'
+                                            color="initial"
+                                        >
+                                            {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
+                                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                                        </Typography>
+                                    </>
+                                    : <Typography
+                                        noWrap
+                                        variant="h6"
+                                        component='p'
+                                        color="initial"
+                                    >
+                                        {t(`post:${priceTransform()}`)}&nbsp;
+                                        {!excludePrice && (
+                                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                                        )}
+                                    </Typography>}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </a>
+            </Link>
+        </div>
+    );
 };
+

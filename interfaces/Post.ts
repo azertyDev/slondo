@@ -66,6 +66,7 @@ export type LocationType = {
 export type IdNameType = {
     id: number;
     name: string;
+    mark?: string;
     ru_name?: string;
 };
 

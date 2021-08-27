@@ -20,6 +20,7 @@
   "moderation": "Moderatsiyada",
   "blocked": "Bloklangan",
   "public": "E'lon qilingan",
+  "reject": "Rad etildi",
   "violates_photo_publish_rules": "E'lon suratlari Slondo sayt suratlar talablarini buzmoqda",
   "violates_publish_rules": "E'lon joylashtirish qoidalari buzilgan",
   "violates_service_rules": "E'lon ma'lumotlari Slondo sayt xizmat qoidalarini buzmoqda",

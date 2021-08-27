@@ -2,124 +2,124 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.bottom-btns': {
-            marginTop: '10px',
-            '& button': {
-                height: '32px',
-                padding: '2px 18px',
-                borderRadius: 5,
-                background: '#F5F5F5',
-                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                '& svg': {
-                    height: '18px',
-                    '& path': {
-                        fill: '#4e4e4e'
-                    }
-                }
-            }
+        border: 0,
+        zIndex: 20,
+        position: 'relative',
+        height: 176,
+        borderRadius: '10px',
+        background: '#FFF',
+        boxShadow: '0px 1px 6px rgb(0 0 0 / 10%)',
+        [theme.breakpoints.down('sm')]: {
+            height: 165
         },
-        '& .unfold-btn': {
-            borderRadius: '5px',
-            width: '100%',
-            boxShadow: '0px 1px 2px 0px #00000026',
-            '& svg': {
-                fill: '#4e4e4e'
-            }
+        '&:hover': {
+            cursor: 'pointer',
+            background: '#fcfcfc',
+            transition: 'all 0.05s ease-out',
+            WebkitTransition: 'all 0.05s ease-out',
+            MozTransition: 'all 0.05s ease-out',
+            OTransition: 'all 0.05s ease-out',
+            boxShadow: 'rgb(0 0 0 / 11%) 0px 4px 14px 0px'
         },
-        '& .breadcrumbs': {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 10,
-            '& a': {
-                fontSize: '0.75rem',
-                '&:hover': {
-                    textDecorationLine: 'underline'
-                }
-            },
-            '& p.MuiTypography-subtitle1, h6, h1': {
-                fontSize: '0.75rem'
-            },
-            '& p.MuiTypography-subtitle1': {
-                marginRight: 10,
-                '& span': {
-                    color: '#838383'
-                }
-            },
-            '& .status': {
-                padding: '0 20px',
-                border: ({status}) =>
-                    status === 'public'
-                        ? '1px solid #838383'
-                        : status === 'sold'
-                        ? '1px solid #90BE27'
-                        : status === 'blocked'
-                            ? '1px solid #F08F8F'
-                            : status === 'suspended' || status === 'moderation'
-                                ? '1px solid #7DBCF6'
-                                : status === 'archive' || status === 'history'
-                                    ? '1px solid #BDBDBD'
-                                    : '1px solid #7DBCF6',
-
-                borderRadius: '3px',
-                '& .MuiTypography-subtitle2': {
-                    color: ({status}) =>
-                        status === 'public'
-                            ? '#838383'
-                            : status === 'sold'
-                            ? '#90BE27'
-                            : status === 'blocked'
-                                ? '#F08F8F'
-                                : status === 'suspended' || status === 'moderation'
-                                    ? '#7DBCF6'
-                                    : status === 'archive' || status === 'history'
-                                        ? '#BDBDBD'
-                                        : '#7DBCF6',
-
-                    [theme.breakpoints.down('xs')]: {
-                        fontSize: '.75rem'
-                    }
-                }
-            }
-        },
-        '& .card-btns': {
-            display: 'flex',
-            position: 'absolute',
-            top: 0,
-            right: 15,
-            zIndex: 30,
-            '& button': {
-                background: '#F5F5F5',
-                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                borderRadius: '0px 0px 10px 10px',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '11px 12px',
-                '&:not(:last-child)': {
-                    marginRight: 5
-                },
-                '& svg': {
-                    height: '18px'
-                },
-                '&.icons': {
-                    '& .MuiTypography-subtitle1': {
-                        fontSize: '12px'
+        '& a.card': {
+            textDecoration: 'none',
+            '& > div': {
+                height: '100%',
+                '& .img': {
+                    position: 'relative',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    borderRadius: '10px 0px 0px 10px',
+                    backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/Vector.png'})`,
+                    '& > span.MuiTypography-caption': {
+                        position: 'absolute',
+                        top: '3px',
+                        left: '3px',
+                        borderRadius: '5px',
+                        padding: '2px 10px',
+                        letterSpacing: '0.4px',
+                        color: '#fff',
+                        '&.post': {
+                            backgroundColor: theme.palette.primary.postBgColor
+                        },
+                        '&.auc': {
+                            backgroundColor: theme.palette.primary.aucBgColor
+                        },
+                        '&.exauc': {
+                            backgroundColor: theme.palette.primary.exAucBgColor
+                        }
                     },
-                    '& svg path': {
-                        fill: '#4e4e4e'
-                    },
-                    '&:disabled': {
-                        '& .MuiTypography-subtitle1': {
-                            opacity: .5
+                    '& div.observer-block': {
+                        '& > span': {
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '3px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                            borderRadius: '5px',
+                            '& > svg': {
+                                marginRight: '5px',
+                                height: '12px'
+                            }
                         }
                     }
                 },
-                '&:hover': {
-                    cursor: 'pointer',
-                    background: '#E0E0E0',
-                    '& svg': {
-                        height: '18px'
+                '& .content': {
+                    padding: '10px 15px',
+                    position: 'relative',
+                    [theme.breakpoints.down('md')]: {
+                        padding: '10px'
+                    },
+                    '& h3': {
+                        fontSize: theme.typography.h6.fontSize,
+                        [theme.breakpoints.down('lg')]: {
+                            fontSize: theme.typography.pxToRem(16)
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: theme.typography.pxToRem(14)
+                        }
                     }
+                },
+                '& .description': {
+                    '& .MuiTypography-subtitle2': {
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        overflow: 'hidden',
+                        WebkitBoxOrient: 'vertical'
+                    },
+                    '& div.services': {
+                        '& div': {
+                            height: '25px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            float: 'left',
+                            padding: '0 15px',
+                            borderRadius: '100px',
+                            backgroundColor: '#F2F2F2',
+                            cursor: 'default',
+                            userSelect: 'none',
+                            margin: '2px 10px 2px 0',
+                            [theme.breakpoints.down('xs')]: {
+                                padding: 0,
+                                width: 25
+                            },
+                            '& p.MuiTypography-body1': {
+                                marginLeft: '12px',
+                                fontSize: theme.typography.pxToRem(12)
+                            },
+                            '& svg': {
+                                [theme.breakpoints.down('xs')]: {
+                                    height: '12px'
+                                }
+                            }
+                        }
+                    }
+                },
+                '& .color-silver': {
+                    color: '#BDBDBD'
                 }
             }
         }
