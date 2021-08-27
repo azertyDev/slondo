@@ -27,7 +27,10 @@ export const useStyles = makeStyles((theme) => ({
             alignItems: 'center',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
             '& h6': {
-                fontWeight: '500'
+                fontWeight: '500',
+                [theme.breakpoints.down('xs')]: {
+                    textAlign: 'center'
+                }
             },
             '& svg > path': {
                 fill: '#4F4F4F'
@@ -65,9 +68,12 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.list-content > div.icon': {
                 width: '15%',
+                [theme.breakpoints.down('sm')]: {
+                    width: 'auto',
+                    marginRight: '15px'
+                },
                 [theme.breakpoints.down('xs')]: {
                     display: 'flex',
-                    width: 'auto',
                     marginRight: '12px',
                     padding: '8px',
                     background: 'rgba(242, 242, 242, 0.8)',
@@ -120,7 +126,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.main-box-wrapper': {
             display: 'flex',
-            [theme.breakpoints.down('xs')]: {
+            [theme.breakpoints.down('sm')]: {
                 display: 'block'
             },
             '& div.box-wrapper': {
@@ -128,7 +134,7 @@ export const useStyles = makeStyles((theme) => ({
                 flexDirection: 'column',
                 width: '50%',
                 paddingLeft: '10px',
-                [theme.breakpoints.down('xs')]: {
+                [theme.breakpoints.down('sm')]: {
                     width: '100%',
                     paddingLeft: 0
                 }

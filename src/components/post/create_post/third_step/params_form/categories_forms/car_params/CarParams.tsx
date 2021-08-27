@@ -2,7 +2,7 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {ParamsFormPreview} from '../../ParamsFormPreview';
@@ -200,6 +200,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             setErrorMsg(e.message);
         }
     };
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
 
     useEffect(() => {
         filtersLen && title && setValsByUrlParams();
@@ -419,7 +421,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     item
                                                     xs={12}
                                                 >
-                                                    <Typography variant='h5'>
+                                                    <Typography variant={isXsDown ? 'subtitle1' : 'h5'}>
                                                         <strong>{t('comfort_salon_title')}</strong>
                                                     </Typography>
                                                 </Grid>
@@ -607,7 +609,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     item
                                                     xs={12}
                                                 >
-                                                    <Typography variant='h5'>
+                                                    <Typography variant={isXsDown ? 'subtitle1' : 'h5'}>
                                                         <strong>{t('driving_assistance_safety_title')}</strong>
                                                     </Typography>
                                                 </Grid>
@@ -703,7 +705,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     item
                                                     xs={12}
                                                 >
-                                                    <Typography variant='h5'>
+                                                    <Typography variant={isXsDown ? 'subtitle1' : 'h5'}>
                                                         <strong>{t('visibility')}</strong>
                                                     </Typography>
                                                 </Grid>

@@ -99,6 +99,7 @@ export const useStyles = makeStyles((theme) => ({
                         background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         borderRadius: '100px',
                         [theme.breakpoints.down('xs')]: {
+                            marginBottom: '5px',
                             width: '80px',
                             height: '80px'
                         }
@@ -114,8 +115,8 @@ export const useStyles = makeStyles((theme) => ({
                             objectFit: 'contain'
                         },
                         [theme.breakpoints.down('xs')]: {
-                            width: '77px',
-                            height: '77px'
+                            width: '80px',
+                            height: '80px'
                         }
                     }
                 }

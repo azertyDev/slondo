@@ -6,7 +6,7 @@ import {LocationIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useStyles} from './useStyles';
 
@@ -40,7 +40,6 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
         handleModalClose
     } = props;
 
-
     const separatedLocations = separateByThree(locations);
 
     const classes = useStyles({hasRegion});
@@ -53,11 +52,11 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                 {isFetch
                     ? <CustomCircularProgress/>
                     : <>
-                        <ModalHeader title={t('location')} handleCloseDialog={handleModalClose} />
+                        <ModalHeader title={t('location')} handleCloseDialog={handleModalClose}/>
                         <div className='local-modal-container'>
                             <div className='locals-input'>
                                 <Hidden xsDown>
-                                    <LocationIcon />
+                                    <LocationIcon/>
                                 </Hidden>
                                 <input
                                     disabled

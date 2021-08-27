@@ -6,17 +6,50 @@ export const useStyles = makeStyles((theme) => ({
             '& > ul': {
                 background: '#F2F2F2',
                 borderRadius: '10px',
-                padding: 15,
+                padding: '15px',
+                [theme.breakpoints.down('xs')]: {
+                    padding: 0,
+                    background: 'inherit',
+                    borderRadius: 0
+                },
                 '& > li': {
-                    height: 38,
+                    height: '38px',
                     cursor: 'pointer',
                     backgroundColor: '#fff',
-                    marginBottom: 5,
+                    marginBottom: '5px',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                     boxSizing: 'border-box',
                     borderRadius: '5px',
-                    '& > svg': {
-                        margin: '0 15px'
+                    [theme.breakpoints.down('xs')]: {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        height: '62px',
+                        marginBottom: 0,
+                        backgroundColor: 'inherit',
+                        boxShadow: 'none',
+                        borderRadius: 0,
+                        paddingTop: '13px',
+                        paddingBottom: '13px',
+                        '&:after': {
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            content: '""',
+                            width: '100%',
+                            height: '0.8px',
+                            background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.35) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                        },
+                        '& > svg > path': {
+                            fill: '#838383'
+                        }
+                    },
+                    '& h6': {
+                        display: 'flex',
+                        alignItems: 'center',
+                        '& > svg': {
+                            margin: '0 15px'
+                        }
                     },
                     '&.selected-category': {
                         border: '1px solid #845CAB',
@@ -36,6 +69,9 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
             borderRadius: 10,
             marginBottom: 10,
+            [theme.breakpoints.down('xs')]: {
+                marginBottom: 0
+            },
             '& > div.MuiInputBase-root': {
                 border: 0,
                 '& > svg': {
