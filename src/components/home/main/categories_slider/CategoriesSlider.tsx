@@ -4,13 +4,19 @@ import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
 import {site_categories} from '@src/common_data/site_categories';
-import {transformCyrillic} from '@root/src/helpers';
-import {useStyles} from './useStyles';
+import {cookies, transformCyrillic} from '@root/src/helpers';
 import {useTranslation} from 'next-i18next';
+import {useStyles} from './useStyles';
 
 export const CategoriesSlider: FC = () => {
-    const location = 'uzbekistan';
+    let location = 'uzbekistan';
     const {t} = useTranslation('main');
+    const userLocation = cookies.get('user_location');
+
+    if (userLocation) {
+        const {region, city} = userLocation;
+        location = city ? city.ru_name : region.ru_name;
+    }
 
     const classes = useStyles();
     return (

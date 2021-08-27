@@ -12,9 +12,9 @@ export const ActionButtons: FC<ActionButtonsPropsType> = (props) => {
     const {
         handleReset
     } = props;
+
     const {t} = useTranslation('filters');
-    const theme = useTheme();
-    const isXs = useMediaQuery(theme.breakpoints.down('xs'));
+    const isXs = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles({isXs});
     return (

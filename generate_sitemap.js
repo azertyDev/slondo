@@ -1,5 +1,5 @@
 const fs = require('fs');
-const transformLocations = require('./transformedLocations');
+const transformLocations = require('./transLocations');
 
 const getStringValues = (obj) => {
     const values = [];

@@ -1,15 +1,18 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {browser} from "process";
 import {useTranslation} from "react-i18next";
 import {ITEMS_PER_PAGE_SEARCH} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
 import {Box, IconButton, Typography} from '@material-ui/core';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
-import {cookies} from '@src/helpers';
+import {GridViewIcon, ListViewIcon} from '@src/components/elements/icons';
+import {unstable_batchedUpdates} from "react-dom";
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
 import {useRouter} from "next/router";
+import {getLocationByURL} from "@src/helpers";
 import {useStyles} from './useStyles';
-import {GridViewIcon, ListViewIcon} from '@src/components/elements/icons';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
@@ -24,17 +27,20 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
         urlParams
     } = props;
 
-    const {asPath} = useRouter();
+    const {asPath, query} = useRouter();
+    const [queryLoc] = query.path as string[];
+
     const {t} = useTranslation('filters');
     const {setErrorMsg} = useContext(ErrorCtx);
-
     const [ctgr, subCtgr, typeCtgr] = categories;
 
+    const [regions, setRegions] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [isNotFound, setIsNotFound] = useState(false);
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
-    const [listView, setListView] = useState(true);
+    const [isFetch, setIsFetch] = useState(false);
+    const [gridView, setGridView] = useState(false);
+    const [isNotFound, setIsNotFound] = useState(false);
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
@@ -42,22 +48,19 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     const getPostsByFilters = async () => {
         try {
-            const userLocation = cookies.get('user_location');
-            const {q, ...params} = urlParams;
+            const {q, by_filtering = 'created_at', ...params} = urlParams;
 
             const query: any = {
                 page,
                 itemsPerPage: ITEMS_PER_PAGE_SEARCH,
+                by_filtering,
                 ...params
             };
 
-            if (userLocation) {
-                const {region, city} = userLocation;
-                if (city) {
-                    query.city_id = city.id;
-                } else {
-                    query.region_id = region.id;
-                }
+            if (queryLoc !== 'uzbekistan' && regions.length) {
+                const {region, city} = getLocationByURL(queryLoc, regions);
+                query.region_id = region.id;
+                if (city) query.city_id = city.id;
             }
 
             if (searchTermFromUrl) query.title = searchTermFromUrl;
@@ -65,7 +68,11 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
             if (subCtgr) query.sub_category_id = subCtgr.id;
             if (typeCtgr) query.type_id = typeCtgr.id;
 
+            setIsFetch(true);
+
             const {data, total} = await userAPI.getPostsByFilters(query);
+
+            setIsFetch(false);
 
             if (total) {
                 setPosts(data);
@@ -75,54 +82,79 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                 setIsNotFound(true);
             }
         } catch (e) {
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
     useEffect(() => {
-        getPostsByFilters();
-    }, [asPath, page]);
+        if (browser) {
+            const storeRegions = JSON.parse(localStorage.getItem('regions'));
+            storeRegions && !regions.length && setRegions(storeRegions);
+        }
+    }, []);
+
+    useEffect(() => {
+        !!regions.length && getPostsByFilters();
+    }, [asPath, regions, page]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {isNotFound
-                ? <Typography>{t('post_not_found', {searchText: searchTermFromUrl})}</Typography>
+            {isFetch
+                ? <CustomCircularProgress/>
                 : <>
-                    <Box position='relative'>
-                        <Box
-                            mb={1}
-                            display='flex'
-                            justifyContent='space-between'
-                            alignItems='center'
-                        >
-                            <Typography variant='h5' component='p'>
-                                {t('common:allPosts')}
-                            </Typography>
-                            <Box className='view-btns'>
-                                <IconButton className={listView ? '' : 'selected'} onClick={() => setListView(false)}>
-                                    <GridViewIcon />
-                                </IconButton>
-                                <IconButton className={listView ? 'selected' : ''} onClick={() => setListView(true)}>
-                                    <ListViewIcon />
-                                </IconButton>
+                    {isNotFound
+                        ? <Typography>
+                            {searchTermFromUrl !== ''
+                                ? t('post_by_term_not_found', {searchText: searchTermFromUrl})
+                                : t('post_not_found')
+                            }
+                        </Typography>
+                        : <>
+                            <Box position='relative'>
+                                <Box
+                                    mb={1}
+                                    display='flex'
+                                    alignItems='center'
+                                    justifyContent='space-between'
+                                >
+                                    <Typography variant='h5' component='p'>
+                                        {t('common:allPosts')}
+                                    </Typography>
+                                    <Box className='view-btns'>
+                                        <IconButton
+                                            className={gridView ? 'selected' : ''}
+                                            onClick={() => setGridView(true)}
+                                        >
+                                            <GridViewIcon/>
+                                        </IconButton>
+                                        <IconButton
+                                            className={gridView ? '' : 'selected'}
+                                            onClick={() => setGridView(false)}
+                                        >
+                                            <ListViewIcon/>
+                                        </IconButton>
+                                    </Box>
+                                </Box>
+                                <CardView
+                                    data={posts}
+                                    listMode={!gridView}
+                                />
                             </Box>
-                        </Box>
-                        <CardView
-                            listMode={listView}
-                            data={posts}
-                        />
-                    </Box>
-                    {itemsCount > ITEMS_PER_PAGE_SEARCH && (
-                        <Box display='flex' justifyContent='center' mt='70px'>
-                            <CustomPagination
-                                currentPage={page}
-                                totalItems={itemsCount}
-                                itemsPerPage={ITEMS_PER_PAGE_SEARCH}
-                                handlePagePagination={handlePagePagination}
-                            />
-                        </Box>
-                    )}
+                            {itemsCount > ITEMS_PER_PAGE_SEARCH && (
+                                <Box display='flex' justifyContent='center' mt='70px'>
+                                    <CustomPagination
+                                        currentPage={page}
+                                        totalItems={itemsCount}
+                                        itemsPerPage={ITEMS_PER_PAGE_SEARCH}
+                                        handlePagePagination={handlePagePagination}
+                                    />
+                                </Box>
+                            )}
+                        </>}
                 </>}
         </div>
     );

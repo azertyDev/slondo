@@ -4,8 +4,8 @@ import {useModal} from "@src/hooks";
 import Bottom from './bottom/Bottom';
 import {AuthContainer} from './auth/AuthContainer';
 import {CategoriesDrawer} from "@src/components/header/bottom/categories_drawer/CategoriesDrawer";
-import {useStyles} from './useStyles';
 import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
 export const Header: FC = () => {
     const {
@@ -16,8 +16,8 @@ export const Header: FC = () => {
     const {pathname} = useRouter();
 
     const handlePageReload = () => {
-        return pathname === '/' && window.location.reload()
-    }
+        return pathname === '/' && window.location.reload();
+    };
 
     const classes = useStyles();
     return (

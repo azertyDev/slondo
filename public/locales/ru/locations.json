@@ -2,7 +2,7 @@
   "uzbekistan": "Узбекистан",
   "location": "Местоположение",
   "allUzb": "Весь Узбекистан",
-  "notIndicate": "Не указано",
+  "selectLocation": "Выберите местоположение",
   "city_tashkent": {
     "name": "г. Ташкент",
     "almazar_district": "Алмазарский р-н",
@@ -124,7 +124,7 @@
     "yangikurgan": "Янгикурган"
   },
   "republic_karakalpakstan": {
-    "name": "Республика Каракалпакстан",
+    "name": "Р. Каракалпакстан",
     "nukus": "Нукус",
     "akmangit": "Акмангит",
     "beruni": "Беруни",

@@ -1,4 +1,8 @@
 {
+  "sort_of": "Saralash",
+  "by_date": "Sana bo'yicha",
+  "by_price":"Narx bo'yicha",
+  "filters": "Filterlar",
   "first_photo_txt": "Birinchi rasm sizning e'loningizning vizitkasi hisoblanadi",
   "engine_capacity": "litrda dvigatel hajmi",
   "year": "Ishlab chiqarilgan yili ",
@@ -7,7 +11,8 @@
   "free": "Bepul",
   "additional": "Qo'shimcha",
   "salary": "Ish haqi",
-  "post_not_found": "«{{searchText}}» so'rovi bo'yicha ma'lumot topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
+  "post_by_term_not_found": "«{{searchText}}» so'rovi bo'yicha ma'lumot topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
+  "post_not_found": "So'rovingiz bo'yicha e'lonlar (auksion) topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
   "post": "E'lonlar",
   "auc": "Auksionlar",
   "cost": "Narxi",
@@ -3324,6 +3329,9 @@
     },
     "espadrilles": {
       "name": "Espadrilyalar"
+    },
+    "blazers": {
+      "name": "Bleyzerlar"
     },
     "blazers_and_suits": {
       "name": "Pidjak va kostyumlar"

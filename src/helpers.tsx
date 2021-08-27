@@ -1,4 +1,3 @@
-import {browser} from 'process';
 import {Fragment} from 'react';
 import {WithT} from 'i18next';
 import Cookies from 'universal-cookie';
@@ -12,7 +11,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {excludeFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
-import {transLocations} from "@root/transformedLocations";
+import {CityType, RegionType} from "@root/interfaces/Locations";
 
 export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
@@ -20,28 +19,20 @@ export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 's
     sameSite: 'strict'
 };
 
-export const getSessionItem = (key) => {
-    if (browser) {
-        return window.sessionStorage.getItem(`${key}`);
-    }
-    return null;
-};
+export const getLocationByURL = (locName, regions: RegionType[]): { region: RegionType, city?: CityType } => {
+    return regions.reduce((loc: any, {id, name, ru_name, cities}) => {
+        const region = {id, name, ru_name};
 
-export const getUserLocationName = () => {
-    let userLocation = 'uzbekistan';
-    const userLocationByCookie = cookies.get('user_location');
-
-    if (userLocationByCookie) {
-        const {region, city} = userLocationByCookie;
-
-        userLocation = transLocations[region.name].name;
-
-        if (city && region.id !== 1) {
-            userLocation = transLocations[region.name][city.name];
+        if (ru_name === locName) {
+            loc = {region};
+        } else {
+            cities.forEach(city => {
+                if (city.ru_name === locName) loc = {region, city};
+            });
         }
-    }
 
-    return userLocation;
+        return loc;
+    }, {});
 };
 
 export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
@@ -50,13 +41,11 @@ export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
             ${fields.map(({loc, alternateRefs}) => {
-        return `
-                    <url>
-                        <loc>${loc}</loc>
-                        <lastmod>${new Date().toISOString()}</lastmod>
-                        ${alternateRefs.map(obj => `<xhtml:link rel="alternate" href="${obj.href}" hreflang="${obj.hreflang}" />`, '').join('')}
-                    </url>
-                    `;
+        return `<url>
+                    <loc>${loc}</loc>
+                    <lastmod>${new Date().toISOString()}</lastmod>
+                    ${alternateRefs.map(obj => `<xhtml:link rel="alternate" href="${obj.href}" hreflang="${obj.hreflang}" />`, '').join('')}
+                </url>`;
     }).join('')}
         </urlset>
     `.replace(/(\r?\n|\r|\t)/gm, '').replace(/>\s+</gm, '><').trim();
@@ -69,23 +58,6 @@ export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
     return {
         props: {}
     };
-};
-
-export const getStringValues = (obj): string[] => {
-    const values: string[] = [];
-    const keys = Object.keys(obj);
-
-    if (keys.length !== 0) {
-        keys.forEach(k => {
-            if (typeof obj[k] === 'string') {
-                values.push(obj[k]);
-            } else if (typeof obj[k] === 'object') {
-                values.push(...getStringValues(obj[k]));
-            }
-        });
-    }
-
-    return values;
 };
 
 type GetFieldsByFiltersProps = {
@@ -256,7 +228,6 @@ export const formatCardData = (data: string, isDate = false) => {
 
 export const transformCyrillic = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
-
     return transform(title)
         .toLowerCase()
         .replace(punctuationMarksRegEx, ' ')

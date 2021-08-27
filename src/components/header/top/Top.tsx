@@ -17,14 +17,14 @@ import {
     Avatar
 } from '@material-ui/core';
 import {AuthCtx} from '@src/context';
-import {cookieOpts, cookies} from '@src/helpers';
+import {cookies} from '@src/helpers';
 import {Localization} from './localization/Localization';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
-import {Location} from '@src/components/elements/location/Location';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {useTranslation} from "next-i18next";
+import {useLocation} from "@src/hooks/use_location/useLocation";
 import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
@@ -44,7 +44,6 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
 
     const {pathname} = useRouter();
-    const userLocation = cookies.get('user_location');
     const trigger = useScrollTrigger({threshold: 53});
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
@@ -52,15 +51,10 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
         setAuthModalOpen(true);
     };
 
-    const handleSelectLocation = ({region, city}) => {
-        if (region) {
-            const userLocation: any = {region};
-            if (city) userLocation.city = city;
-            cookies.set('user_location', userLocation, cookieOpts);
-        } else {
-            cookies.remove('user_location', {path: '/'});
-        }
-    };
+    const {
+        locElement,
+        locationModal
+    } = useLocation(cookies.get('user_location'), null, true);
 
     const classes = useStyles();
     return (
@@ -69,10 +63,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                 <Container maxWidth="xl" className={classes.root}>
                     <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item md={6}>
-                            <Location
-                                userLocation={userLocation}
-                                handleSelectLocation={handleSelectLocation}
-                            />
+                            {locElement}
+                            {locationModal}
                         </Grid>
                         <Grid
                             item
@@ -131,7 +123,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     <Grid className="top-header-logo">
                                         <Link href="/">
                                             <a onClick={handlePageReload}>
-                                                <Logo />
+                                                <Logo/>
                                             </a>
                                         </Link>
                                     </Grid>
@@ -154,7 +146,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '10px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm />
+                                <HeaderSearchForm/>
                             </Box>
                         </AppBar>
                     </Slide>

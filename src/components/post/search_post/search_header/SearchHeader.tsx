@@ -4,9 +4,9 @@ import {useModal} from '@src/hooks';
 import Bottom from '@src/components/header/bottom/Bottom';
 import {AuthContainer} from '@src/components/header/auth/AuthContainer';
 import {CategoriesDrawer} from '@src/components/header/bottom/categories_drawer/CategoriesDrawer';
-import {useStyles} from './useStyles';
-import {useRouter} from 'next/router';
 import {Hidden} from '@material-ui/core';
+import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
 export const SearchHeader: FC = () => {
     const {

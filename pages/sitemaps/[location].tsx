@@ -1,31 +1,34 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
+import {userAPI} from "@src/api/api";
 import {GetServerSideProps} from 'next';
-import {getSitemap, getStringValues, transformCyrillic} from "@src/helpers";
-import {transLocations} from "@root/transformedLocations";
+import {getSitemap, transformCyrillic} from "@src/helpers";
 import {categories_list} from "@src/common_data/site_categories";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const xmlRegEx = new RegExp(/\.xml$/);
     const queryLoc = ctx.query.location as string;
+    const locationName = queryLoc.replace(xmlRegEx, '');
     const siteUrl = process.env.SERVER_URL || 'http://localhost:3317';
 
-    const location = queryLoc.replace(xmlRegEx, '');
-    const locations = getStringValues(transLocations);
-    const locationExist = locations.some(loc => xmlRegEx.test(queryLoc) && loc === location);
+    const regions = await userAPI.getLocations();
 
-    if (locationExist) {
+    const locationExist = xmlRegEx.test(queryLoc) && regions.some(loc => {
+        if (loc.ru_name === locationName) return true;
+        if (loc.cities.some(c => c.ru_name === locationName)) return true;
+    });
+
+    if (locationName === 'uzbekistan' || locationExist) {
         const fields = categories_list.reduce((fieldsAcc, ctgr) => {
             const fields = [
-                getSitemapParams(`${location}/${transformCyrillic(ctgr.ru_name)}`)
+                getSitemapParams(`${locationName}/${transformCyrillic(ctgr.ru_name)}`)
             ];
 
             ctgr.subcategory.forEach(subctgr => {
-                const mainCtgrUrl = `${location}/${transformCyrillic(ctgr.ru_name)}`;
+                const mainCtgrUrl = `${locationName}/${transformCyrillic(ctgr.ru_name)}`;
                 const subctgrCyrillicName = transformCyrillic(subctgr.ru_name);
 
                 fields.push(
@@ -45,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             return [...fieldsAcc, ...fields];
         }, []);
 
-        return getSitemap(ctx, [getSitemapParams(location), ...fields]);
+        return getSitemap(ctx, [getSitemapParams(locationName), ...fields]);
     } else {
         const locale = ctx.locale;
         ctx.res.statusCode = 404;
@@ -54,9 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             props: {
                 ...await serverSideTranslations(
                     locale,
-                    [
-                        'errors'
-                    ]
+                    ['errors']
                 )
             }
         };

@@ -1953,7 +1953,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        name: 'dresses_and_skirts',
+                        name: 'dresses_and_ski',
                         ru_name: 'Платья и юбки'
                     },
                     {

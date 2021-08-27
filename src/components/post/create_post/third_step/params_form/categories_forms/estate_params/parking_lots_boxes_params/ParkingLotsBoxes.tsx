@@ -15,7 +15,6 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
-import {unstable_batchedUpdates} from "react-dom";
 import {useStyles} from './useStyles';
 
 export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
@@ -35,7 +34,8 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
 
     const initVals: any = {
         title,
-        estate_type: null
+        estate_type: null,
+        area: null
     };
 
     const formik = useFormik({
@@ -54,17 +54,13 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
 
     const {
         handleSelect,
-        setRequireVals,
         handleFracInput,
         handleNumericInput,
         setValsByUrlParams
     } = useHandlers(values, setValues);
 
     useEffect(() => {
-        unstable_batchedUpdates(() => {
-            setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
-        });
+        filtersLen && title && setValsByUrlParams(params);
     }, [filtersLen]);
 
     const classes = useStyles();

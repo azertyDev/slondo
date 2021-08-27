@@ -214,7 +214,9 @@ export const CategoriesPage: FC = () => {
                                                     {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
                                                 </Typography>
                                             )}
-                                            <KeyboardArrowRightIcon/>
+                                            <Hidden smUp>
+                                                <KeyboardArrowRightIcon/>
+                                            </Hidden>
                                         </ListItem>
                                     );
                                 })}

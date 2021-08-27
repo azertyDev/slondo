@@ -1,4 +1,4 @@
-const transformedLocations = {
+const transLocations = {
     uzb: 'uzbekistan',
     city_tashkent: {
         name: 'tashkent',
@@ -279,4 +279,4 @@ const transformedLocations = {
     }
 };
 
-exports.transLocations = transformedLocations;
+exports.transLocations = transLocations;

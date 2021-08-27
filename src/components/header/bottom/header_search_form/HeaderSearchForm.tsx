@@ -12,27 +12,22 @@ import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
-import {cookies} from '@src/helpers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {transLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 export const HeaderSearchForm: FC = () => {
-    const {push} = useRouter();
+    const {push, query: {path}} = useRouter();
     const {t} = useTranslation('common');
     const {setTerm} = useContext(SearchCtx);
     const searchTermFromUrl = useRouter().query.q as string || '';
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const handleSubmit = ({searchTerm}) => {
-        const userLocation = cookies.get('user_location');
+        const [userLocation] = path as string[] || [];
         let location = 'uzbekistan';
 
         if (userLocation) {
-            const {region, city} = userLocation;
-            location = city
-                ? transLocations[region.name][city.name]
-                : transLocations[region.name].name;
+            location = userLocation
         }
 
         const url = `/${location}${searchTerm !== '' ? `?q=${searchTerm}` : ''}`;
@@ -62,33 +57,31 @@ export const HeaderSearchForm: FC = () => {
 
     const classes = useStyles();
     return (
-        <>
-            <CustomFormikProvider formik={formik}>
-                <Paper component="div" className={classes.root} elevation={0}>
-                    <IconButton
-                        className={classes.iconButton}
-                        aria-label="search"
-                        disabled
-                    >
-                        <Search_icon/>
-                    </IconButton>
-                    <InputBase
-                        id="input-base"
-                        onChange={handleChange}
-                        value={values.searchTerm}
-                        className={classes.input}
-                        placeholder={isMdDown ? '' : t('searchText')}
-                        inputProps={{'aria-label': 'search category'}}
-                    />
-                    <Hidden mdDown>
-                        <CustomButton type='submit' className={classes.searchButton} color='silver'>
-                            <Typography variant="subtitle2" component='p'>
-                                {t('searchBtn')}
-                            </Typography>
-                        </CustomButton>
-                    </Hidden>
-                </Paper>
-            </CustomFormikProvider>
-        </>
+        <CustomFormikProvider formik={formik}>
+            <Paper component="div" className={classes.root} elevation={0}>
+                <IconButton
+                    className={classes.iconButton}
+                    aria-label="search"
+                    disabled
+                >
+                    <Search_icon/>
+                </IconButton>
+                <InputBase
+                    id="input-base"
+                    onChange={handleChange}
+                    value={values.searchTerm}
+                    className={classes.input}
+                    placeholder={isMdDown ? '' : t('searchText')}
+                    inputProps={{'aria-label': 'search category'}}
+                />
+                <Hidden mdDown>
+                    <CustomButton type='submit' className={classes.searchButton} color='silver'>
+                        <Typography variant="subtitle2" component='p'>
+                            {t('searchBtn')}
+                        </Typography>
+                    </CustomButton>
+                </Hidden>
+            </Paper>
+        </CustomFormikProvider>
     );
 };

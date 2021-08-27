@@ -16,7 +16,6 @@ import {SafeDeal} from '@src/components/cabinet/cabinet_pages/safe_deal/SafeDeal
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-// import {getSessionItem} from "@src/helpers";
 import {useStyles} from './useStyles';
 
 export type CommonModalType = {

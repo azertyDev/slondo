@@ -1,13 +1,17 @@
 import {GetServerSideProps} from 'next';
-import {getStringValues} from "@src/helpers";
-import {transLocations} from "@root/transformedLocations";
 import {SearchPost} from "@src/components/post/search_post/SearchPost";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {userAPI} from "@src/api/api";
+import {transformCyrillic} from "@src/helpers";
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, res}) => {
-    if (!checkQuery(query.path[0])) {
+    const locationName = query.path[0];
+    const regions = await userAPI.getLocations();
+
+    if (locationName !== 'uzbekistan' && !checkQuery(locationName, regions)) {
         res.statusCode = 404;
     }
+
     return ({
         props: {
             statusCode: res.statusCode,
@@ -33,8 +37,14 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, res
     });
 };
 
-function checkQuery(loc: string): boolean {
-    return getStringValues(transLocations).some(l => l === loc);
+function checkQuery(loc: string, locs): boolean {
+    return locs.some(l => {
+        if (transformCyrillic(l.ru_name) === loc) {
+            return true;
+        } else if (l.cities) {
+            return checkQuery(loc, l.cities);
+        }
+    });
 }
 
 export default SearchPost;

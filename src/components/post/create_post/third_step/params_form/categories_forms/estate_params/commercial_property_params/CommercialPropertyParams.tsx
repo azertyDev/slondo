@@ -17,7 +17,6 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
-import {unstable_batchedUpdates} from "react-dom";
 
 export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -57,16 +56,12 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
         handleSelect,
         handleFracInput,
         handleOptionCheckbox,
-        setValsByUrlParams,
-        setRequireVals
+        setValsByUrlParams
     } = useHandlers(values, setValues);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     useEffect(() => {
-        unstable_batchedUpdates(() => {
-            setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
-        });
+        filtersLen && title && setValsByUrlParams(params);
     }, [filtersLen]);
 
     const classes = useStyles();

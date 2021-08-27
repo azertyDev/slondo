@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction} from 'react';
-import {booleanFields, singleFields, fractionalFields, stringFields} from '@src/common_data/fields_keys';
-import {fractionRegEx, numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from '@src/helpers';
+import {fractionRegEx, numberRegEx} from '@src/common_data/reg_exs';
+import {booleanFields, singleFields, fractionalFields, stringFields} from '@src/common_data/fields_keys';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
     return {

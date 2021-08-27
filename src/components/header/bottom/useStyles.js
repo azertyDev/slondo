@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         transition: 'box-shadow 0.5s',
         [theme.breakpoints.down('md')]: {
             height: '100%',
-            marginBottom: '10px',
+            marginBottom: '10px'
         },
         [theme.breakpoints.down('xs')]: {
             marginTop: '104px'
@@ -98,9 +98,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         // Adaptive
-        '& div.bottom-logo > a': {
-            '& svg': {}
-        },
         '& div.category-menu > button, & div.select-menu, & div.create-ad, button.bottom-sign-button': {
             '& h6': {
                 [theme.breakpoints.down('lg')]: {
@@ -181,7 +178,7 @@ export const useStyles = makeStyles((theme) => ({
         '& .MuiPaper-root': {
             width: '290px',
             padding: '10px',
-            backgroundColor: '#fff',
+            backgroundColor: '#fff'
         },
         '& .menu-item': {
             padding: '5px',
@@ -192,6 +189,5 @@ export const useStyles = makeStyles((theme) => ({
                 background: '#f2f2f2'
             }
         }
-
     }
 }));

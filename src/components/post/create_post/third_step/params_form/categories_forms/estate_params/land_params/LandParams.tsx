@@ -16,8 +16,6 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
-import {unstable_batchedUpdates} from "react-dom";
-
 
 export const LandParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -57,16 +55,12 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
 
     const {
         handleSelect,
-        setRequireVals,
         handleFracInput,
         setValsByUrlParams
     } = useHandlers(values, setValues);
 
     useEffect(() => {
-        unstable_batchedUpdates(() => {
-            setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
-        });
+        filtersLen && title && setValsByUrlParams(params);
     }, [filtersLen]);
 
     const classes = useStyles();

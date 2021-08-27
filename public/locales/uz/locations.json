@@ -2,6 +2,7 @@
   "uzbekistan": "O'zbekiston",
   "location": "Joylashuv",
   "allUzb": "Butun O'zbekiston",
+  "selectLocation": "Joylashuvni tanlang",
   "city_tashkent": {
     "name": "Toshkent shaxri",
     "almazar_district": "Olmazor tumani",
@@ -122,7 +123,7 @@
     "yangikurgan": "Yangiqo'rg'on"
   },
   "republic_karakalpakstan": {
-    "name": "Qoraqalpog'iston Respublikasi",
+    "name": "Qoraqalpog'iston",
     "nukus": "Nukus shaxri",
     "akmangit": "Oqmang'it",
     "beruni": "Beruniy",

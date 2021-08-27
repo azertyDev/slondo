@@ -1,6 +1,5 @@
 import {FC, useEffect} from 'react';
 import {getErrorMsg} from '@src/helpers';
-import {unstable_batchedUpdates} from "react-dom";
 import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
@@ -69,8 +68,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         handleOptionCheckbox,
         handleSelect,
         handleFracInput,
-        setValsByUrlParams,
-        setRequireVals
+        setValsByUrlParams
     } = useHandlers(values, setValues);
 
     const filtersLen = Object.keys(filters).length;
@@ -78,10 +76,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     useEffect(() => {
-        unstable_batchedUpdates(() => {
-            setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
-        });
+        filtersLen && title && setValsByUrlParams(params);
     }, [filtersLen]);
 
     const classes = useStyles();

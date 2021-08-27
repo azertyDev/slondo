@@ -1,10 +1,10 @@
 import Axios from 'axios';
-import {cookies} from '@src/helpers';
+import {cookies, transformCyrillic} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
-import {LocationsType} from "@root/interfaces/Locations";
+import {CityType, RegionType} from "@root/interfaces/Locations";
 
 const production = 'https://backend.slondo.uz/api/';
 const testb = 'https://backend.testb.uz/api/';
@@ -272,9 +272,19 @@ export const userAPI = {
                 throw err;
             });
     },
-    getLocations: (): Promise<LocationsType[]> => {
+    getLocations: (): Promise<RegionType[]> => {
+        const transFromCyrillic = (locations: RegionType[] | CityType[]) => {
+            return locations.map((l: RegionType) => {
+                l.ru_name = transformCyrillic(l.ru_name);
+                if (l.cities) {
+                    l.cities = transFromCyrillic(l.cities);
+                }
+                return l;
+            });
+        };
+
         return instance.get(`location`)
-            .then(res => res.data)
+            .then(res => transFromCyrillic(res.data))
             .catch(err => {
                 throw err;
             });

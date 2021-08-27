@@ -2,7 +2,7 @@ import {cloneElement, FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
-import {cookieOpts, cookies} from '@src/helpers';
+import {cookies} from '@src/helpers';
 import {
     AppBar,
     Avatar,
@@ -20,10 +20,10 @@ import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
-import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
@@ -43,7 +43,6 @@ const Bottom: FC<BottomProps> = (props) => {
     const {pathname} = useRouter();
     const {t} = useTranslation('header');
     const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
-    const userLocation = cookies.get('user_location');
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event) => {
@@ -60,18 +59,12 @@ const Bottom: FC<BottomProps> = (props) => {
 
     const open = Boolean(anchorEl);
     const popoverId = open ? 'simple-popover' : undefined;
+    const {
+        locElement,
+        locationModal
+    } = useLocation(cookies.get('user_location'), null, true);
 
-    const handleSelectLocation = ({region, city}) => {
-        if (region) {
-            const userLocation: any = {region};
-            if (city) userLocation.city = city;
-            cookies.set('user_location', userLocation, cookieOpts);
-        } else {
-            cookies.remove('user_location', {path: '/'});
-        }
-    };
-
-    const classes = useStyles(props);
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Hidden mdDown>
@@ -104,7 +97,7 @@ const Bottom: FC<BottomProps> = (props) => {
                                     >
                                         <Link href="/">
                                             <a onClick={handlePageReload}>
-                                                <Logo />
+                                                <Logo/>
                                             </a>
                                         </Link>
                                     </Grid>
@@ -117,8 +110,8 @@ const Bottom: FC<BottomProps> = (props) => {
                                     >
                                         <CustomButton
                                             color="primary"
-                                            className="bottom-category-button header-button"
                                             onClick={handleDrawerOpen}
+                                            className="bottom-category-button header-button"
                                         >
                                             <CategorySortIcon/>
                                             <Typography variant="subtitle2">
@@ -187,19 +180,17 @@ const Bottom: FC<BottomProps> = (props) => {
                     <Grid container spacing={1}>
                         <Grid item xs={12} className="translate-local">
                             <Box width='80%'>
-                                <Location
-                                    userLocation={userLocation}
-                                    handleSelectLocation={handleSelectLocation}
-                                />
+                                {locElement}
+                                {locationModal}
                             </Box>
                             <Localization/>
                         </Grid>
                         <Grid
                             item
                             container
+                            spacing={1}
                             alignItems="center"
                             className='multi-actions'
-                            spacing={1}
                             xs={12}
                             sm={7}
                         >

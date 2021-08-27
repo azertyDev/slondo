@@ -1,10 +1,9 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import Link from 'next/link';
 import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
-import {cookies, transformCyrillic} from '@src/helpers';
+import {transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
-import {transLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 type BreadcrumbsPropsType = {
@@ -16,9 +15,6 @@ type BreadcrumbsPropsType = {
 export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {
     const {t} = useTranslation('categories');
 
-    const userLocation = cookies.get('user_location');
-    const [location, setLocation] = useState('uzbekistan');
-
     const mainCtgr = site_categories.find(ctgr => ctgr.name === category);
     const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
     const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === type);
@@ -27,19 +23,9 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
     const subCategoryName = transformCyrillic(subCtgr?.ru_name);
     const typeName = transformCyrillic(typeCtgr?.ru_name);
 
-    const categoryLink = `/${location}/${categoryName}`;
+    const categoryLink = `/uzbekistan/${categoryName}`;
     const subCategoryLink = `${categoryLink}/${subCategoryName}`;
     const subCategoryTypeLink = `${subCategoryLink}/${typeName}`;
-
-    useEffect(() => {
-        if (userLocation) {
-            const {region, city} = userLocation;
-            setLocation(city
-                ? transLocations[region.name][city.name]
-                : transLocations[region.name].name
-            );
-        }
-    }, [userLocation]);
 
     const classes = useStyles();
     return (

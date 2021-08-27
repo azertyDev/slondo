@@ -1,29 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    location: {
-        display: 'flex',
-        alignItems: 'center',
-        '& > h6.MuiTypography-subtitle1': {
-            cursor: 'pointer',
-            fontWeight: 500,
-            color: '#838383',
-            [theme.breakpoints.down('xs')]: {
-                fontSize: '12px',
-                letterSpacing: '0.4px'
-            },
-            [theme.breakpoints.up('md')]: {
-                borderBottom: '1px solid #838383'
-            }
-        },
-        '& > svg': {
-            marginRight: '12px',
-            [theme.breakpoints.down('md')]: {
-                marginRight: '5px'
-            }
-        }
-    },
-    locationModal: {
+    root: {
         width: '100%',
         '& div.modal-top': {
             padding: '20px 35px',
@@ -157,6 +135,34 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 }
+            }
+        }
+    },
+    locationButton: {
+        padding: '9px 10px',
+        background: '#f8f8f8',
+        border: '1px solid rgba(0, 0, 0, 0.23)',
+        '& p': {
+            fontSize: '.87rem'
+        }
+    },
+    location: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > h6.MuiTypography-subtitle1': {
+            cursor: 'pointer',
+            fontWeight: 500,
+            color: '#838383',
+            textDecoration: 'underline',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '12px',
+                letterSpacing: '.4px'
+            }
+        },
+        '& > svg': {
+            marginRight: '12px',
+            [theme.breakpoints.down('md')]: {
+                marginRight: '5px'
             }
         }
     }

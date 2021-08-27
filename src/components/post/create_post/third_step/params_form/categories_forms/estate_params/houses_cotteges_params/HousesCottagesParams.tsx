@@ -18,7 +18,6 @@ import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedS
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
-import {unstable_batchedUpdates} from "react-dom";
 import {useStyles} from './useStyles';
 
 export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
@@ -68,7 +67,6 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         handleSelect,
         handleFracInput,
         handleOptionCheckbox,
-        setRequireVals,
         setValsByUrlParams
     } = useHandlers(values, setValues);
 
@@ -76,10 +74,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     useEffect(() => {
-        unstable_batchedUpdates(() => {
-            setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
-        });
+        filtersLen && title && setValsByUrlParams(params);
     }, [filtersLen]);
 
     const classes = useStyles();
@@ -143,7 +138,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     <Grid item container xs={12} md={4} alignItems='flex-end'>
                                         <CheckboxSelect
                                             name='utilities'
-                                            labelTxt={t('filters:utilities')}
+                                            labelTxt={t('estate.utilities.name')}
                                             checked={values.utilities}
                                             handleCheckbox={handleCheckbox}
                                         />
@@ -151,7 +146,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     <Grid item container xs={12} sm={4} md={4} alignItems='flex-end'>
                                         <CheckboxSelect
                                             name='with_pledge'
-                                            labelTxt={t('filters:with_pledge')}
+                                            labelTxt={t('estate.with_pledge.name')}
                                             checked={values.with_pledge}
                                             handleCheckbox={handleCheckbox}
                                         />

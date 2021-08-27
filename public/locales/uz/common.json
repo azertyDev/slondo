@@ -1,5 +1,4 @@
 {
-  "filters": "Filterlar",
   "copied": "Nusxalangan!",
   "back": "Qaytish",
   "finish": "Tugatish",
@@ -50,8 +49,6 @@
   "auctionExpirationAt": "Auksion tugash vaqti",
   "auctionExpired": "Auksion tugadi",
   "edit": "O'zgartirish",
-  "selectGeolocation": "Joylashuvni tanlang",
-  "geolocation": "Joylashuv",
   "weInSocial": "Biz ijtimoiy tarmoqlarda",
   "youLookingFor": "Siz izlayotgan edingiz",
   "call_times": "Qo'ng'iroq qilish vaqti",

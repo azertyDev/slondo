@@ -56,7 +56,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         if (items.length !== 0 && multiple) {
             value = selected.map(item => {
                 const valName = items.find(v => v.id === item)?.name;
-                return t(`${transKey}${valName}.name`);
+                return t(noTranslatable ? valName : `${transKey}${valName}.name`);
             }).join(', ');
         } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected);

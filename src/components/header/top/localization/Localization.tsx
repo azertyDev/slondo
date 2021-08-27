@@ -1,9 +1,8 @@
-import React, {FC} from "react";
+import {FC} from "react";
 import {Typography} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {useStyles} from './useStyles';
-
 
 export const Localization: FC = () => {
     const {asPath, locale} = useRouter();

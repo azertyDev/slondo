@@ -21,6 +21,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
 
     const initVals = {
         manufacturer: null,
+        model: null,
         params: null,
         transmission: [],
         year_from: '',
@@ -32,8 +33,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     };
 
     const formik = useFormik({
-        initialValues: initVals,
-        onSubmit
+        onSubmit,
+        initialValues: initVals
     });
 
     const {
@@ -43,7 +44,21 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     } = formik;
 
     const {t} = useTranslation('filters');
-    const {handleSelect, handleNumericInput, handleFracInput, setValsByParams} = useHandlers(values, setValues);
+
+    const {
+        handleSelect,
+        handleNumericInput,
+        handleFracInput,
+        setValsByParams
+    } = useHandlers(values, setValues);
+
+    const handleManufacturer = (_, value) => {
+        setValues({
+            ...values,
+            manufacturer: value,
+            model: null
+        });
+    };
 
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
@@ -64,7 +79,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         values={values}
                         onBlur={handleBlur}
                         items={filters.manufacturer}
-                        handleSelect={handleSelect}
+                        handleSelect={handleManufacturer}
                         labelTxt={t('manufacturer')}
                     />
                 </Grid>
@@ -79,8 +94,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         disableRequire
                         values={values}
                         onBlur={handleBlur}
-                        handleSelect={handleSelect}
                         labelTxt={t('model')}
+                        handleSelect={handleSelect}
                         items={values.manufacturer?.models}
                     />
                 </Grid>
@@ -265,7 +280,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </ShowHide>
             )}
-            <ActionButtons handleReset={handleReset} />
+            <ActionButtons handleReset={handleReset}/>
         </CustomFormikProvider>
     );
 };

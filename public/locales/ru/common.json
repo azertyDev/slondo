@@ -1,5 +1,4 @@
 {
-  "filters": "Фильтры",
   "copied": "Скопировано!",
   "back": "Назад",
   "finish": "Завершить",
@@ -50,8 +49,6 @@
   "auctionExpirationAt": "Окончание торгов через",
   "auctionExpired": "Аукцион закрыт",
   "edit": "Изменить",
-  "selectGeolocation": "Выберите местоположение",
-  "geolocation": "Местоположение",
   "weInSocial": "Мы в социальных сетях",
   "youLookingFor": "Вы искали",
   "call_times": "Время звонков",
