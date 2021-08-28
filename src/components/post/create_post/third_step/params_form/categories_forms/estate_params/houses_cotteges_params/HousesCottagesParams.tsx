@@ -233,7 +233,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     name='ceiling_height'
                                     onChange={handleFracInput}
                                     value={values.ceiling_height ?? ''}
-                                    labelText={t('estate.ceiling_height.name')}
+                                    labelText={t('ceiling_height')}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />
                             </Grid>

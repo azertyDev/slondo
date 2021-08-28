@@ -350,21 +350,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </div>
                 </div>
-                <Hidden mdDown>
-                    <div className="post-category">
-                        <Typography variant="subtitle1" color="initial">
-                            {t(`categories:${transKey}.name`)}&nbsp;-&nbsp;
-                            {t(`categories:${transKey}.${post.adsable.sub_category.name}.name`)}
-                            {
-                                post.adsable?.type &&
-                                <span>
-                                    &nbsp;-&nbsp;
-                                    {t(`categories:${transKey}.${post.adsable.sub_category.name}.${post.adsable.type.name}.name`)}
-                                </span>
-                            }
-                        </Typography>
-                    </div>
-                </Hidden>
                 <div className="post-description">
                     <Typography variant="button" color="initial">
                         {t('description')}:

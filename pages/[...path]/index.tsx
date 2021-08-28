@@ -14,6 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, res
 
     return ({
         props: {
+            regions,
             statusCode: res.statusCode,
             ...await serverSideTranslations(
                 locale,

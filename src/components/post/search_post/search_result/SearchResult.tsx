@@ -100,6 +100,10 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
         !!regions.length && getPostsByFilters();
     }, [asPath, regions, page]);
 
+    useEffect(() => {
+        page !== 1 && setPage(1);
+    }, [categories]);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>

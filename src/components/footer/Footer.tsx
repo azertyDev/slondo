@@ -8,7 +8,7 @@ import {useStyles} from './useStyles';
 
 export const Footer: FC = () => {
     const {t} = useTranslation('footer');
-
+    const year = new Date().getFullYear();
     const classes = useStyles();
     return (
         <footer className={classes.root}>
@@ -106,7 +106,7 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item xs={12} md={3} container justifyContent="center" alignItems='center'>
                                 <Typography variant="subtitle1" component='p' color="initial">
-                                    Copyright © 2020 Slondo.
+                                    {`Copyright © ${year} Slondo.`}
                                 </Typography>
                             </Grid>
                         </Grid>

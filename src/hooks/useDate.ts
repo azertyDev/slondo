@@ -41,6 +41,6 @@ export const useDate = () => {
     return {getDate, getFullDate};
 
     function zeroFormat(num) {
-        return num < 9 ? `0${num}` : num;
+        return num < 10 ? `0${num}` : num;
     }
 };

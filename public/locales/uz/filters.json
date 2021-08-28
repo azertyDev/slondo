@@ -1,4 +1,5 @@
 {
+  "ceiling_height": "Shift balandligi metrda",
   "sort_of": "Saralash",
   "by_date": "Sana bo'yicha",
   "by_price":"Narx bo'yicha",
@@ -1082,9 +1083,6 @@
     },
     "kitchen_area": {
       "name": "Oshxona maydoni м²"
-    },
-    "ceiling_height": {
-      "name": "Shift balandligi metrda"
     },
     "posted": {
       "name": "E'lon egasi"

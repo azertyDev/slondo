@@ -2,7 +2,7 @@ import {FC} from 'react';
 import ErrorPage from '@root/pages/_error';
 import {useTranslation} from 'react-i18next';
 import {getSEOContent} from '@src/common_data/seo_content';
-import {getCtgrsByCyrillicNames} from '@src/helpers';
+import {getCtgrsByCyrillicNames, getLocationByURL} from '@src/helpers';
 import {SearchForm} from '@src/components/post/search_post/search_form/SearchForm';
 import {SearchResult} from '@src/components/post/search_post/search_result/SearchResult';
 import {
@@ -27,12 +27,20 @@ type SearchPostProps = {
     statusCode: number
 }
 
-export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
+export const SearchPost: FC<SearchPostProps> = ({statusCode, regions}) => {
+    const {t} = useTranslation('locations');
+    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
     const {query: {path, ...urlParams}, locale} = useRouter();
     const [location, ...categories] = path as string[];
+    const {region, city} = getLocationByURL(location, regions);
 
-    const {t} = useTranslation('common');
-    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
+    let userLocation = t('uzbekistan');
+
+    if (region) {
+        userLocation = t(city && region.name !== 'city_tashkent'
+            ? `${region.name}.${city.name}`
+            : `${region.name}.name`);
+    }
 
     const ctgrsByCyrName = getCtgrsByCyrillicNames(categories as string[]);
     const [ctgr, subctgr, typeCtgr] = ctgrsByCyrName;
@@ -40,17 +48,17 @@ export const SearchPost: FC<SearchPostProps> = ({statusCode}) => {
     const searchTermFromUrl = urlParams.q as string || '';
 
     // SEO
-    const seoContent = getSEOContent(ctgr, subctgr, typeCtgr, location, locale);
+    const seoContent = getSEOContent(ctgr, subctgr, typeCtgr, userLocation, locale);
     const seoTxt = seoContent.text;
     const description = searchTermFromUrl
-        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${location}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
+        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${userLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
         : seoContent.description;
 
     let title = searchTermFromUrl ? `${searchTermFromUrl} - SLONDO.uz` : seoContent.title;
 
     if (ctgr) {
         title = searchTermFromUrl
-            ? `${searchTermFromUrl} - ${t(`categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
+            ? `${searchTermFromUrl} - ${t(`common:categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
             : seoContent.title;
     }
 
