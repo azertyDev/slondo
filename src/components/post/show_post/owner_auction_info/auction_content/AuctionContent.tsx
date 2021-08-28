@@ -1,17 +1,18 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {AuctionTimer} from './AuctionTimer';
-import {BetsList} from '@src/components/elements/bets_list/BetsList';
+import {unstable_batchedUpdates} from "react-dom";
 import {Box, Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {LockIcon} from '@src/components/elements/icons';
+import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from "next-i18next";
-import {ErrorCtx} from "@src/context";
+import {AuthCtx, ErrorCtx} from "@src/context";
 import {useDate} from "@src/hooks";
 import {useStyles} from './useStyles';
 
@@ -31,13 +32,14 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const isPublic = postData.status === 'public';
 
     const {setErrorMsg} = useContext(ErrorCtx);
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const {milliSeconds} = useDate().getDate(postData.expiration_at);
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
+    const [offerPrice, setOfferPrice] = useState('');
     const [isFetch, setIsFetch] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
-    const [offerPrice, setOfferPrice] = useState('');
 
     const {bets, betsCount, setFetchedBetsData} = useBetsData(
         {
@@ -52,23 +54,31 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
 
     const handleModalBuyNow = value => () => {
-        setOpenBuyNow(value);
+        isAuth
+            ? setOpenOfferPrice(value)
+            : setOpenBuyNow(value);
     };
 
     const handleModalOfferPrice = value => () => {
-        setOpenOfferPrice(value);
+        isAuth
+            ? setOpenOfferPrice(value)
+            : setAuthModalOpen(true);
     };
 
     const handleOfferPrice = async () => {
         try {
             setIsFetch(true);
             await userAPI.offerThePrice(postData.auction.id, offerPrice);
-            setOfferPrice('');
-            setIsFetch(false);
-            setOpenOfferPrice(false);
+            unstable_batchedUpdates(() => {
+                setOfferPrice('');
+                setIsFetch(false);
+                setOpenOfferPrice(false);
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
@@ -77,11 +87,15 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             setIsFetch(true);
             await userAPI.buyNow(postData.auction.id, postData.id);
             await setFetchedPostData();
-            setOpenBuyNow(false);
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                setOpenBuyNow(false);
+                setIsFetch(false);
+            });
         } catch ({response}) {
-            setIsFetch(false);
-            setErrorMsg(response.data.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(response.data.message);
+            });
         }
     };
 

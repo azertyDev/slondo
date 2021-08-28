@@ -28,7 +28,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('auction');
-    const {user} = useContext(AuthCtx);
+    const {user, auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
 
@@ -37,15 +37,19 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const handleBet = async (bet) => {
-        try {
-            setIsFetch(true);
-            await userAPI.betAuction(bet, auctionId);
-            setIsFetch(false);
-        } catch ({response}) {
-            unstable_batchedUpdates(() => {
+        if (isAuth) {
+            try {
+                setIsFetch(true);
+                await userAPI.betAuction(bet, auctionId);
                 setIsFetch(false);
-                setErrorMsg(response.data.message);
-            });
+            } catch ({response}) {
+                unstable_batchedUpdates(() => {
+                    setIsFetch(false);
+                    setErrorMsg(response.data.message);
+                });
+            }
+        } else {
+            setAuthModalOpen(true);
         }
     };
 

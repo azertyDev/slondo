@@ -17,7 +17,7 @@ import {DeliveryIcon} from '@src/components/elements/icons/services_icons/Delive
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {numberPrettier, weekDaysHelper} from '@src/helpers';
+import {numberPrettier, priceTransform, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
@@ -77,6 +77,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const [favorite, setFavorite] = useState(false);
     const [favCount, setFavCount] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
+
+    const jobOrService = post.category.name === 'job' || post.category.name === 'service';
+    const excludePrice = jobOrService || post.price === 0;
 
     const {
         modalOpen: complainOpen,
@@ -244,7 +247,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-header">
                         <div>
                             <Typography variant='h6' className="price">
-                                {numberPrettier(post.price) + ' ' + t(`common:${post.currency.name}`)}
+                                {t(priceTransform(post.price, jobOrService))}&nbsp;
+                                {!excludePrice && (
+                                    t(`common:${post.currency.name}`)
+                                )}
                                 {!!post.condition.name && (
                                     <div className="condition">
                                         <Typography variant="h6">{t(`${post.model?.condition?.name}`)}</Typography>

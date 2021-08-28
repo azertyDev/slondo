@@ -6,8 +6,8 @@ import {
 } from '@src/components/elements/icons';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
-import {numberPrettier, transformCyrillic} from '@src/helpers';
-import {Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
+import {Grid, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
@@ -42,12 +42,6 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
     const excludePrice = jobOrService || price === 0;
 
-    const priceTransform = (): string => {
-        return price === 0
-            ? jobOrService ? 'negotiated' : 'for_free'
-            : numberPrettier(price);
-    };
-
     const handleFavorite = async () => {
         try {
             await userAPI.favoriteAds(cardData.id);
@@ -70,8 +64,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     onClick={handleFavorite}
                 >
                     {liked
-                        ? <FavoriteIcon />
-                        : <FavoritedIcon />
+                        ? <FavoriteIcon/>
+                        : <FavoritedIcon/>
                     }
                 </IconButton>
             )}
@@ -95,7 +89,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             title={t('common:delivery')}
                                         >
                                         <span>
-                                            <DeliveryIcon />
+                                            <DeliveryIcon/>
                                         </span>
                                         </Tooltip>
                                     )}
@@ -105,7 +99,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             title={t('common:safe_deal')}
                                         >
                                         <span>
-                                            <SafeIcon />
+                                            <SafeIcon/>
                                         </span>
                                         </Tooltip>
                                     )}
@@ -115,7 +109,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             title={t('common:exchange')}
                                         >
                                         <span>
-                                            <SwapIcon />
+                                            <SwapIcon/>
                                         </span>
                                         </Tooltip>
                                     )}
@@ -180,7 +174,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             color="initial"
                                             noWrap
                                         >
-                                            {t(`post:${priceTransform()}`)}&nbsp;
+                                            {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                             {!excludePrice && (
                                                 <span>{t(`common:${cardData.currency.name}`)}</span>
                                             )}

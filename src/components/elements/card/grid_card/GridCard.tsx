@@ -6,12 +6,12 @@ import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typog
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
-import {numberPrettier, transformCyrillic} from '@src/helpers';
+import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {useDate} from "@src/hooks";
+import {useStyles} from './useStyles';
 
 type CardItemProps = {
     isFetch: boolean
@@ -33,7 +33,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
         region,
         city,
         creator,
-        favorite
+        favorite,
+        category
     } = props;
 
     const isFavorite = true;
@@ -46,6 +47,11 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const {time = ''} = useDate().getDate(created_at);
 
     const url = `/obyavlenie/${translatedTitle}-${id}`;
+
+    const ctgrName = category.mark;
+
+    const jobOrService = ctgrName === 'job' || ctgrName === 'service';
+    const excludePrice = jobOrService || price === 0;
 
     const handleFavorite = async () => {
         try {
@@ -69,8 +75,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                     onClick={handleFavorite}
                 >
                     {liked
-                        ? <FavoriteIcon />
-                        : <FavoritedIcon />
+                        ? <FavoriteIcon/>
+                        : <FavoritedIcon/>
                     }
                 </IconButton>
             )}
@@ -89,13 +95,13 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                 <div className="card-header">
                                     <div className="post_type">
                                         <Typography variant="subtitle2" component='p'>
-                                            {t(ads_type === 'exauc' ? 'common:auc' : `common:${ads_type}`)}
+                                            {t(ads_type === 'exauc' ? 'auc' : `${ads_type}`)}
                                         </Typography>
                                     </div>
                                     <div className="icons">
                                         {!!delivery && (
                                             <Tooltip
-                                                title={t('common:delivery')}
+                                                title={t('delivery')}
                                                 arrow
                                             >
                                                 <span>
@@ -105,7 +111,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         )}
                                         {!!safe_deal && (
                                             <Tooltip
-                                                title={t('common:safe_deal')}
+                                                title={t('safe_deal')}
                                                 arrow
                                             >
                                                 <span>
@@ -115,7 +121,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         )}
                                         {!!exchange && (
                                             <Tooltip
-                                                title={t('common:exchange')}
+                                                title={t('exchange')}
                                                 arrow
                                             >
                                                 <span>
@@ -154,8 +160,10 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             className='price'
                                             variant='subtitle1'
                                         >
-                                            {numberPrettier(price)}
-                                            <span> {t(`common:${currency.name}`)}</span>
+                                            {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
+                                            {!excludePrice && (
+                                                <span>{t(`${currency.name}`)}</span>
+                                            )}
                                         </Typography>
                                         <Typography variant="caption" noWrap component='p'
                                                     classes={{root: classes.mobileFont}}>

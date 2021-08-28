@@ -19,6 +19,12 @@ export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 's
     sameSite: 'strict'
 };
 
+export const priceTransform = (price, jobOrService): string => {
+    return price === 0
+        ? jobOrService ? 'negotiated' : 'for_free'
+        : numberPrettier(price);
+};
+
 export const getUserLocationName = (locations: RegionType[]) => {
     let userLocation = 'uzbekistan';
     const userLocationByCookie = cookies.get('user_location');

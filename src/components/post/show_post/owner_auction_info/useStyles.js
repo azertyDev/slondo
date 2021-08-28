@@ -2,12 +2,12 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '20px',
+        marginTop: '31px',
         [theme.breakpoints.down('md')]: {
             marginTop: 0
         },
         '& > div.price': {
-            marginBottom: 10,
+            marginBottom: '10px',
             '& > h4': {
                 '& span': {
                     fontWeight: '600',

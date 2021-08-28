@@ -9,6 +9,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
             [
                 'main',
                 'locations',
+                'post',
                 'footer',
                 'header',
                 'errors',
