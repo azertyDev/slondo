@@ -221,7 +221,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         locationName,
         locationModal,
         handleLocModalOpen
-    } = useLocation(null, handleSelectLocation);
+    } = useLocation({handleSelectLocation});
 
     const getFiltersByCtgr = (): ReactNode => {
         switch (mainCategoryName) {

@@ -1,25 +1,30 @@
 import {browser} from 'process';
 import {useRouter} from "next/router";
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {useTranslation} from 'next-i18next';
 import {unstable_batchedUpdates} from 'react-dom';
 import {IdNameType} from "@root/interfaces/Post";
 import {LocationModal} from './LocationModal';
 import {useModal} from '@src/hooks/useModal';
-import {cookieOpts, cookies, getLocationByURL} from "@src/helpers";
+import {getLocationByURL} from "@src/helpers";
 import {LocationIcon} from "@src/components/elements/icons";
 import {Typography} from "@material-ui/core";
+import {UserLocationCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {RegionType} from "@root/interfaces/Locations";
 
 type LocationType = {
     region: IdNameType
     city?: IdNameType
 }
 
-type UseLocation = (
-    initLocation?: LocationType,
-    handleSelect?: (v) => void,
+type UseLocationProps = {
+    handleSelectLocation?: (v) => void,
     saveToCookies?: boolean
+}
+
+type UseLocation = (
+    props: UseLocationProps
 ) => {
     locationName: string,
     locElement: JSX.Element,
@@ -28,14 +33,10 @@ type UseLocation = (
     handleLocModalOpen: () => void
 };
 
-const initLocation = {
-    region: null,
-    city: null
-};
-
-export const useLocation: UseLocation = (location, handleSelect, saveToCookies = false) => {
-    const {query: {path}, asPath} = useRouter();
+export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = false}) => {
     const {t} = useTranslation('locations');
+    const {query: {path}, asPath} = useRouter();
+    const {userLocation, addUserLocation, removeUserLocation} = useContext(UserLocationCtx);
 
     const {
         modalOpen,
@@ -43,8 +44,10 @@ export const useLocation: UseLocation = (location, handleSelect, saveToCookies =
         handleModalOpen: handleLocModalOpen
     } = useModal();
 
+    const initCurLocation = {region: null, city: null};
+
     const [locations, setLocations] = useState([]);
-    const [currLoc, setCurrLoc] = useState(location || initLocation);
+    const [currLoc, setCurrLoc] = useState<LocationType>(initCurLocation);
     const {region, city} = currLoc;
 
     const locationName = city
@@ -57,28 +60,23 @@ export const useLocation: UseLocation = (location, handleSelect, saveToCookies =
 
     const selectedLocations = locations.find(reg => reg.id === region?.id)?.cities ?? locations;
 
-    const handleSaveToCookies = ({region, city}: LocationType) => {
+    const handleSaveToCookies = ({region, city = null}: LocationType) => {
         if (region) {
-            const userLocation: any = {region};
-            if (city) userLocation.city = city;
-            cookies.set('user_location', userLocation, cookieOpts);
+            addUserLocation({region, city});
         } else {
-            cookies.remove('user_location', {path: '/'});
+            removeUserLocation();
         }
     };
 
-    const handleLocation = loc => () => {
-        const hasCity = !!loc.cities;
-        const value = hasCity
-            ? {region: {id: loc.id, name: loc.name, ru_name: loc.ru_name}}
-            : {city: {id: loc.id, name: loc.name, ru_name: loc.ru_name}};
-        const selectedLoc = {...currLoc, ...value};
+    const handleLocation = ({cities, ...location}: RegionType) => () => {
+        const value = cities ? {region: location} : {city: location};
 
+        const selectedLoc = {...currLoc, ...value};
         setCurrLoc(selectedLoc);
 
-        !hasCity && unstable_batchedUpdates(() => {
+        !cities && unstable_batchedUpdates(() => {
             handleModalClose();
-            !!handleSelect && handleSelect(selectedLoc);
+            !!handleSelectLocation && handleSelectLocation(selectedLoc);
             saveToCookies && handleSaveToCookies(selectedLoc);
         });
     };
@@ -87,18 +85,18 @@ export const useLocation: UseLocation = (location, handleSelect, saveToCookies =
     const handleClose = () => {
         unstable_batchedUpdates(() => {
             handleModalClose();
-            saveToCookies && setCurrLoc(location || getLocationByURL(path[0], locations));
+            saveToCookies && setCurrLoc(userLocation || getLocationByURL(path[0], locations));
         });
     };
 
     const toPrevLocation = () => {
-        setCurrLoc(initLocation);
+        setCurrLoc(initCurLocation);
     };
 
     const handleChoiceLocation = () => {
         unstable_batchedUpdates(() => {
             handleModalClose();
-            !!handleSelect && handleSelect(currLoc);
+            !!handleSelectLocation && handleSelectLocation(currLoc);
             saveToCookies && handleSaveToCookies(currLoc);
         });
     };
@@ -128,6 +126,10 @@ export const useLocation: UseLocation = (location, handleSelect, saveToCookies =
     );
 
     useEffect(() => {
+        setCurrLoc(userLocation);
+    }, [userLocation]);
+
+    useEffect(() => {
         if (browser) {
             const regions = JSON.parse(localStorage.getItem('regions'));
             regions && !locations.length && setLocations(regions);
@@ -135,7 +137,7 @@ export const useLocation: UseLocation = (location, handleSelect, saveToCookies =
     }, [modalOpen]);
 
     useEffect(() => {
-        if (!location && !saveToCookies && path) {
+        if (!saveToCookies && path) {
             const locationByURL = getLocationByURL(path[0], locations);
             setCurrLoc(locationByURL);
         }

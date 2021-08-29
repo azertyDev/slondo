@@ -10,24 +10,22 @@ export const useStyles = makeStyles(() => ({
     phoneWrapper: {
         display: 'flex',
         alignItems: 'center',
+        width: '100%',
+        marginTop: '10px',
+        textDecoration: 'none',
         background: '#f0f0f0',
         borderRadius: 5,
-        marginTop: 10,
-        width: '100%',
+        cursor: 'pointer',
         '& h6.MuiTypography-subtitle1': {
             flex: 1,
             textAlign: 'center'
         },
-        '& a': {
-            textDecoration: 'none',
-            color: '#4e4e4e',
-            '&.MuiButtonBase-root': {
-                padding: '10px 25px',
-                borderRadius: '0px 5px 5px 0px',
-                background: '#43B51F',
-                '& svg path': {
-                    fill: '#fff'
-                }
+        '& button.MuiButtonBase-root': {
+            padding: '10px 25px',
+            borderRadius: '0px 5px 5px 0px',
+            background: '#43B51F',
+            '& svg path': {
+                fill: '#fff'
             }
         }
     }

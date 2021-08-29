@@ -61,7 +61,11 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& span.avatar': {
-            cursor: 'pointer'
+            cursor: 'pointer',
+            '& > div.MuiAvatar-root': {
+                width: '45px',
+                height: '45px'
+            }
         },
         '& button.bottom-sign-button': {
             '& svg': {

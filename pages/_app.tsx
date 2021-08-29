@@ -3,8 +3,8 @@ import {useEffect} from 'react';
 import theme from '@src/theme';
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import {AuthCtx, ErrorCtx, SearchCtx, ExitPromptCtx} from "@src/context";
-import {useAuth, useError, useSearch} from "@src/hooks";
+import {AuthCtx, ErrorCtx, SearchCtx, ExitPromptCtx, UserLocationCtx} from "@src/context";
+import {useAuth, useError, useSearch, useUserLocation} from "@src/hooks";
 import {useExitPrompt} from "@src/hooks/useExitPrompt";
 import {userAPI} from "@src/api/api";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
@@ -16,6 +16,7 @@ const App = (props) => {
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
+    const userLocation = useUserLocation();
     const exitPrompt = useExitPrompt(false);
 
     if (browser) {
@@ -38,12 +39,14 @@ const App = (props) => {
         <ErrorCtx.Provider value={error}>
             <ExitPromptCtx.Provider value={exitPrompt}>
                 <AuthCtx.Provider value={auth}>
-                    <SearchCtx.Provider value={search}>
-                        <ThemeProvider theme={theme}>
-                            <CssBaseline/>
-                            <Component {...pageProps} />
-                        </ThemeProvider>
-                    </SearchCtx.Provider>
+                    <UserLocationCtx.Provider value={userLocation}>
+                        <SearchCtx.Provider value={search}>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline/>
+                                <Component {...pageProps} />
+                            </ThemeProvider>
+                        </SearchCtx.Provider>
+                    </UserLocationCtx.Provider>
                 </AuthCtx.Provider>
             </ExitPromptCtx.Provider>
         </ErrorCtx.Provider>

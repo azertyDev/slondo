@@ -54,7 +54,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const {
         locElement,
         locationModal
-    } = useLocation(cookies.get('user_location'), null, true);
+    } = useLocation({saveToCookies: true});
 
     const classes = useStyles();
     return (

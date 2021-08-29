@@ -42,7 +42,7 @@ const Bottom: FC<BottomProps> = (props) => {
 
     const {pathname} = useRouter();
     const {t} = useTranslation('header');
-    const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
+    const {user: {avatar}, auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event) => {
@@ -62,7 +62,7 @@ const Bottom: FC<BottomProps> = (props) => {
     const {
         locElement,
         locationModal
-    } = useLocation(cookies.get('user_location'), null, true);
+    } = useLocation({saveToCookies: true});
 
     const classes = useStyles();
     return (
@@ -153,7 +153,7 @@ const Bottom: FC<BottomProps> = (props) => {
                                     justifyContent="center"
                                     alignItems="center"
                                 >
-                                    {auth.isAuth
+                                    {isAuth
                                         ? <span onClick={handleClick} className='avatar'>
                                             <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'}/>
                                         </span>

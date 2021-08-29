@@ -25,29 +25,6 @@ export const priceTransform = (price, jobOrService): string => {
         : numberPrettier(price);
 };
 
-export const getUserLocationName = (locations: RegionType[]) => {
-    let userLocation = 'uzbekistan';
-    const userLocationByCookie = cookies.get('user_location');
-
-    if (userLocationByCookie) {
-        const {region, city} = userLocationByCookie;
-
-        locations.forEach(r => {
-            const cityName = city
-                ? r.cities.find(c => c.id === city.id)?.ru_name
-                : null;
-
-            if (cityName) {
-                userLocation = cityName;
-            } else if (r.id === region.id) {
-                userLocation = r.ru_name;
-            }
-        });
-    }
-
-    return userLocation;
-};
-
 export const getLocationByURL = (locName, regions: RegionType[]): { region: RegionType, city?: CityType } => {
     return regions.reduce((loc: any, {id, name, ru_name, cities}) => {
         const region = {id, name, ru_name};

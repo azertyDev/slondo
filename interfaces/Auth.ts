@@ -1,3 +1,5 @@
+import {IdNameType} from "@root/interfaces/Post";
+
 export interface UserInfo {
     id?: number,
     name: string,
@@ -5,7 +7,7 @@ export interface UserInfo {
     phone: string,
     avatar: string,
     created_at?: string,
-    available_days: { id: number, name: string }[],
+    available_days: IdNameType[],
     available_start_time?: string,
     available_end_time?: string,
     rating?: number,

@@ -73,7 +73,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         location: userLoc,
         locElement,
         locationModal
-    } = useLocation(cookies.get('user_location'), handleLocation);
+    } = useLocation({handleSelectLocation});
 
     const locationFromUrl = region
         ? {
@@ -312,7 +312,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    function handleLocation(location) {
+    function handleSelectLocation(location) {
         setValues({...values, location});
     }
 

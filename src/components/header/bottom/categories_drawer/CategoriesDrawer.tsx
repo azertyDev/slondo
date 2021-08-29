@@ -1,9 +1,8 @@
-import {FC, useEffect, useState} from 'react';
-import {browser} from 'process';
+import {FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
 import Drawer from '@material-ui/core/Drawer';
-import {getUserLocationName, transformCyrillic} from '@src/helpers';
+import {transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
 import {Hidden, List, ListItem, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
@@ -11,6 +10,7 @@ import {CategoryType} from '@root/interfaces/Categories';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {useStyles} from './useStyles';
+import {UserLocationCtx} from "@src/context";
 
 type CustomDrawerPropsType = {
     open: boolean,
@@ -26,7 +26,11 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('categories');
-    const [userLocation, setUserLocation] = useState('uzbekistan');
+    const {region, city} = useContext(UserLocationCtx).userLocation;
+    const userLocation = region
+        ? city ? city.ru_name : region.ru_name
+        : 'uzbekistan';
+
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const initHoveredCtgr: CategoryType = {
@@ -53,14 +57,6 @@ export const CategoriesDrawer: FC<CustomDrawerPropsType> = (props) => {
         onClose();
         setHoveredCtgr(initHoveredCtgr);
     };
-
-    useEffect(() => {
-        if (browser) {
-            const regions = JSON.parse(localStorage.getItem('regions')) || [];
-            const location = getUserLocationName(regions);
-            location !== userLocation && setUserLocation(location);
-        }
-    }, [open]);
 
     const classes = useStyles();
     return (

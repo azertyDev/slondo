@@ -1,21 +1,22 @@
 import {FC, useContext} from 'react';
-import {KeyboardBackspace, FavoriteBorder, Share} from '@material-ui/icons';
+import {FavoriteBorder, Share} from '@material-ui/icons';
 import {
-    Box, ClickAwayListener,
+    Box,
     Hidden,
-    IconButton, Tooltip,
+    IconButton,
+    Tooltip,
     Typography,
+    ClickAwayListener,
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import {SlidersRefType} from '../PostContent';
 import {AuthCtx} from '@src/context/AuthCtx';
-import {useStyles} from './useStyles';
-import {ErrorCtx} from '@src/context';
 import {useTranslation} from 'next-i18next';
 import {useModal} from '@src/hooks';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import {useStyles} from './useStyles';
 
 type SyncSlidersProps = {
     title: string,
@@ -23,7 +24,7 @@ type SyncSlidersProps = {
     handleOpenModal: () => void,
     imgs: {
         alt: string;
-        url: {default: string, extra: string};
+        url: { default: string, extra: string };
     }[],
     slidersRefs: SlidersRefType,
     handleFavorite: () => void,
@@ -51,7 +52,6 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const {t} = useTranslation('errors');
     const {isAuth} = useContext(AuthCtx).auth;
-    const {setErrorMsg} = useContext(ErrorCtx);
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const {modalOpen: openTooltip, handleModalOpen: handleOpenTooltip, handleModalClose: handleCloseTooltip} = useModal();
@@ -66,9 +66,6 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 title: title,
                 url: window.location.href
             })
-                .catch(function() {
-                    setErrorMsg(t('shareError'));
-                });
         } else {
             await navigator.clipboard.writeText(window.location.href);
             handleOpenTooltip();
@@ -102,7 +99,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                             onClick={handlePrevPath}
                             className="backspace-btn"
                         >
-                            <KeyboardArrowLeftIcon />
+                            <KeyboardArrowLeftIcon/>
                         </IconButton>
                     </Hidden>
                     {!!imgs.length && (
@@ -110,7 +107,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                             {isAuth && !isCreator && (
                                 <Box className="favorite-count">
                                     <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                        <FavoriteBorder />
+                                        <FavoriteBorder/>
                                     </IconButton>
                                     <div>
                                         <Typography variant='subtitle1'>
@@ -134,7 +131,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                                     title={t('common:copied')}
                                 >
                                     <IconButton className="share-btn" onClick={handleShare}>
-                                        <Share />
+                                        <Share/>
                                     </IconButton>
                                 </Tooltip>
                             </ClickAwayListener>
@@ -152,7 +149,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         arrows={false}
                     >
                         {imgs.map(({url, alt}, i) =>
-                            <img key={i} alt={alt} src={url.extra} />
+                            <img key={i} alt={alt} src={url.extra}/>
                         )}
                     </CustomSlider>
                 </div>

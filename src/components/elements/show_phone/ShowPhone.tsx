@@ -8,11 +8,11 @@ import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {useModal} from '@src/hooks';
-import {useStyles} from './useStyles';
 import {PhoneIcon} from '@src/components/elements/icons';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {useStyles} from './useStyles';
 
-export const ShowPhone: FC<{postId: number}> = ({postId}) => {
+export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
     const initPhones = {
         phone: null,
         additional_number: null
@@ -22,7 +22,7 @@ export const ShowPhone: FC<{postId: number}> = ({postId}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const [phones, setPhones] = useState(initPhones);
     const {phone, additional_number} = phones;
-    const notAvailable = phone === 'number_not_available';
+    const [notAvail, setNotAvail] = useState(false);
 
     const [isFetch, setIsFetch] = useState(false);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
@@ -30,7 +30,7 @@ export const ShowPhone: FC<{postId: number}> = ({postId}) => {
 
     const isIncognito = INCOGNITO_PHONES.some(p => p === phone);
 
-    const handleShowPhone = async () => {
+    const fetchShowPhone = async () => {
         try {
             setIsFetch(true);
             const phones = await userAPI.getPostAuthorPhones(postId);
@@ -38,48 +38,45 @@ export const ShowPhone: FC<{postId: number}> = ({postId}) => {
             unstable_batchedUpdates(() => {
                 setPhones(phones);
                 setIsFetch(false);
+                isXsDown && handleModalOpen();
             });
-        } catch ({response: {data: {message}}}) {
+        } catch ({response}) {
+            const {message} = response.data;
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
                 if (message !== 'forbidden:') {
                     setErrorMsg(message);
                 } else {
-                    setPhones({
-                        ...phones,
-                        phone: t('number_not_available')
-                    });
+                    setNotAvail(true);
                 }
             });
         }
     };
 
-    const handleOpen = () => {
-        unstable_batchedUpdates(() => {
-            !phone && handleShowPhone();
-            isXsDown && handleModalOpen();
-        });
+    const handleShowPhone = () => {
+        !phone && fetchShowPhone();
     };
 
     const classes = useStyles();
     return (
         <>
-            <CustomButton className={classes.root} color="primary" onClick={handleOpen}>
+            <CustomButton className={classes.root} color="primary" onClick={handleShowPhone}>
                 {isFetch
-                    ? <CustomCircularProgress color='secondary' />
-                    : <div>
-                        {!isIncognito && (
-                            <Typography component='p' variant='subtitle1'>
-                                {t(phone ?? 'show_phone')}
-                            </Typography>
-                        )}
-                        {additional_number && (
-                            <Typography component='p' variant='subtitle1'>
-                                {additional_number}
-                            </Typography>
-                        )}
-                    </div>
-                }
+                    ? <CustomCircularProgress color='secondary'/>
+                    : notAvail
+                        ? <div>{t('number_not_available')}</div>
+                        : <div>
+                            {!isIncognito && (
+                                <Typography component='p' variant='subtitle1'>
+                                    {t(phone ?? 'show_phone')}
+                                </Typography>
+                            )}
+                            {additional_number && (
+                                <Typography component='p' variant='subtitle1'>
+                                    {additional_number}
+                                </Typography>
+                            )}
+                        </div>}
             </CustomButton>
             <CustomModal openModal={modalOpen} handleModalClose={handleModalClose}>
                 <Box
@@ -88,33 +85,31 @@ export const ShowPhone: FC<{postId: number}> = ({postId}) => {
                     alignItems='center'
                     flexDirection='column'
                 >
-                    <Typography variant='subtitle1' gutterBottom color='textSecondary'>
+                    <Typography variant='subtitle1' gutterBottom>
                         {t('post:callToUser')}
                     </Typography>
                     {isFetch
-                        ? <CustomCircularProgress color='secondary' />
+                        ? <CustomCircularProgress color='secondary'/>
                         : <>
                             {!isIncognito && (
-                                notAvailable
-                                    ? <div>{t('number_not_available')}</div>
-                                    : <div className={classes.phoneWrapper}>
-                                        <Typography variant="subtitle1" color="initial">
-                                            <a href={`tel:${phone}`}>{phone}</a>
-                                        </Typography>
-                                        <Button href={`tel:${phone}`}>
-                                            <PhoneIcon />
-                                        </Button>
-                                    </div>
+                                <a href={`tel:${phone}`} className={classes.phoneWrapper}>
+                                    <Typography variant="subtitle1" color="initial">
+                                        {phone}
+                                    </Typography>
+                                    <Button>
+                                        <PhoneIcon/>
+                                    </Button>
+                                </a>
                             )}
                             {additional_number && (
-                                <div className={classes.phoneWrapper}>
+                                <a href={`tel:${additional_number}`} className={classes.phoneWrapper}>
                                     <Typography variant="subtitle1" color="initial">
-                                        <a href={`tel:${additional_number}`}>{additional_number}</a>
+                                        {additional_number}
                                     </Typography>
-                                    <Button href={`tel:${additional_number}`}>
-                                        <PhoneIcon />
+                                    <Button>
+                                        <PhoneIcon/>
                                     </Button>
-                                </div>
+                                </a>
                             )}
                         </>}
                 </Box>
