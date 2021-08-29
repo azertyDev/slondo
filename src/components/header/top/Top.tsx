@@ -17,7 +17,6 @@ import {
     Avatar
 } from '@material-ui/core';
 import {AuthCtx} from '@src/context';
-import {cookies} from '@src/helpers';
 import {Localization} from './localization/Localization';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';

@@ -6,7 +6,7 @@ import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typog
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
-import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
+import {priceTransform, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
@@ -14,13 +14,13 @@ import {useDate} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type CardItemProps = {
-    isFetch: boolean
+    isFetch?: boolean
 } & CardDataType;
 
 export const GridCard: FC<CardItemProps> = (props) => {
     const {
         id,
-        isFetch,
+        isFetch = false,
         image,
         delivery,
         safe_deal,

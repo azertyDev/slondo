@@ -48,7 +48,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.tabs-content': {
-            marginBottom: '40px',
             '& div.MuiGrid-container': {
                 width: 'calc(100% + 14px)',
                 margin: '-7px',
@@ -58,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
                         padding: '4px'
                     }
                 }
+            },
+            '& > div > div:first-child': {
+                marginBottom: '40px'
             }
         },
         '& div.pagination': {

@@ -22,17 +22,17 @@ export const HeaderSearchForm: FC = () => {
     const searchTermFromUrl = useRouter().query.q as string || '';
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
-    const handleSubmit = ({searchTerm}) => {
+    const handleSubmit = async ({searchTerm}) => {
         const [userLocation] = path as string[] || [];
         let location = 'uzbekistan';
 
         if (userLocation) {
-            location = userLocation
+            location = userLocation;
         }
 
         const url = `/${location}${searchTerm !== '' ? `?q=${searchTerm}` : ''}`;
 
-        push(url);
+        await push(url);
     };
 
     const handleChange = ({target: {value}}) => {

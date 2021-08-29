@@ -2,7 +2,7 @@ export const settings = {
     dots: false,
     infinite: false,
     slidesToShow: 9,
-    slidesToScroll: 2,
+    swipeToSlide: true,
     responsive: [
         {
             breakpoint: 1200,
@@ -16,7 +16,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 5,
-                slidesToScroll: 1
             }
         },
         {
@@ -24,7 +23,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 4.4,
-                slidesToScroll: 1
             }
         },
         {
@@ -32,7 +30,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 3.5,
-                slidesToScroll: 1
             }
         },
         {
@@ -40,7 +37,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 5,
-                slidesToScroll: 1
             }
         },
         {
@@ -48,7 +44,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 4.4,
-                slidesToScroll: 1
             }
         },
         {
@@ -56,7 +51,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 3.6,
-                slidesToScroll: 1
             }
         },
         {
@@ -64,7 +58,6 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 3.3,
-                slidesToScroll: 1
             }
         }
     ]

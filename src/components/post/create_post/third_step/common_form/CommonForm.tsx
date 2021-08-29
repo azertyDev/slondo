@@ -15,7 +15,7 @@ import {
     defaultParamsSchema,
     safeDealPriceSchema
 } from '@root/validation_schemas/postSchemas';
-import {clearWhiteSpaces, cookies, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
+import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';

@@ -1,6 +1,5 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext} from 'react';
 import Link from 'next/link';
-import {browser} from "process";
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';

@@ -11,31 +11,28 @@ export type ViewPropsType = {
     handleModalOpen?: (value?, id?) => void
 };
 
-export const CardView: FC<ViewPropsType> = (props) => {
-    const {listMode, data, isFetch} = props;
-
+export const CardView: FC<ViewPropsType> = ({listMode, data, isFetch}) => {
     return (
-        listMode
-            ? <>
-                {data.map(cardData => {
-                        return (
-                            <Box mb={1} key={cardData.id}>
-                                <ListCard cardData={cardData} />
-                            </Box>
-                        );
-                    }
-                )}
-            </>
-            : <Grid container spacing={2}>
-                {data.map((cardData, i) => (
-                    <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
-                        <GridCard
-                        {...cardData}
-                        isFetch={isFetch}
-                    />
-                </Grid>
-            ))}
-        </Grid>
+        <>
+            {listMode
+                ? data.map(cardData => {
+                    return (
+                        <Box mb={1} key={cardData.id}>
+                            <ListCard cardData={cardData}/>
+                        </Box>
+                    );
+                })
+                : <Grid container spacing={2}>
+                    {data.map((cardData, i) => (
+                        <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
+                            <GridCard
+                                {...cardData}
+                                isFetch={isFetch}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>}
+        </>
     );
 
 };

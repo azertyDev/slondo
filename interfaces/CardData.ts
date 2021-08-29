@@ -2,13 +2,8 @@ import {UserInfo} from '@root/interfaces/Auth';
 import {IdNameType} from '@root/interfaces/Post';
 
 export interface CardData {
-    isFetch: boolean;
-    isShowMoreFetch?: boolean;
-    error?: unknown;
-    data: {
-        cards: CardDataType[];
-        total: number;
-    };
+    cards: CardDataType[];
+    total: number;
 }
 
 export type CardDataType = {

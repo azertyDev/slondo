@@ -2,7 +2,6 @@ import {cloneElement, FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
-import {cookies} from '@src/helpers';
 import {
     AppBar,
     Avatar,
