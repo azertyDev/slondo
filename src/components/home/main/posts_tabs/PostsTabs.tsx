@@ -2,7 +2,7 @@ import {FC, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
-import {initCards} from '../posts_slider/PostsSliderContainer';
+import {initCards} from '../posts_slider/PostsSlider';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {unstable_batchedUpdates} from "react-dom";
 import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography} from "@material-ui/core";
@@ -37,7 +37,7 @@ export const PostsTabs: FC = () => {
     const postObserver = useRef<any>();
     const aucObserver = useRef<any>();
 
-    const lastCardElementRef = (observer, isAuc = false) => useCallback(node => {
+    const GetCardRef = (observer, isAuc = false) => useCallback(node => {
         if (isFetch) return;
         if (observer.current) observer.current.disconnect();
 
@@ -52,8 +52,8 @@ export const PostsTabs: FC = () => {
         if (node) observer.current.observe(node);
     }, [isFetch, hasMorePosts]);
 
-    const lastPostCardRef = lastCardElementRef(postObserver);
-    const lastAucCardRef = lastCardElementRef(aucObserver, true);
+    const lastPostCardRef = GetCardRef(postObserver);
+    const lastAucCardRef = GetCardRef(aucObserver, true);
 
     const fetchCardData = async (currentPage, type) => {
         try {
