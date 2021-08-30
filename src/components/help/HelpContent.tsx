@@ -182,12 +182,14 @@ export const HelpContent: FC = () => {
     const classes = useStyles();
     return (
         <MainLayout title={t('header:help')} handleBack={handleBack}>
-            <Typography variant="h6" color="initial" className={classes.title}>
-                {t('header:help')}
-            </Typography>
+            <Hidden xsDown>
+                <Typography variant="h6" color="initial" className={classes.title}>
+                    {t('header:help')}
+                </Typography>
+            </Hidden>
             <Grid container spacing={2}>
                 <Hidden mdDown>
-                    <HelpSidebar menuStruct={menuStruct}/>
+                    <HelpSidebar menuStruct={menuStruct} />
                 </Hidden>
                 <Grid container item xs={isXsDown ? 12 : 9}>
                     {subTerm ? getSubTermPage() : getTermPage()}

@@ -36,7 +36,7 @@ export const useStyles = makeStyles(() => ({
         display: 'flex',
         userSelect: 'none',
         borderRadius: '5px',
-        padding: '7px 20px',
+        padding: '7px 10px',
         alignItems: 'center',
         background: '#FFFFFF',
         justifyContent: 'center',

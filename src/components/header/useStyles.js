@@ -5,6 +5,9 @@ export const useStyles = makeStyles((theme) => ({
         '& > div.header-wrapper': {
             paddingTop: '10px',
             [theme.breakpoints.down('md')]: {
+                paddingTop: '115px'
+            },
+            [theme.breakpoints.down('xs')]: {
                 paddingTop: '0'
             }
         },

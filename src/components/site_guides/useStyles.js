@@ -1,15 +1,53 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({breakpoints, palette}) => ({
     root: {
         marginBottom: 100,
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             padding: '10px 0'
         },
+        '& div.tariff-info': {
+            '& > div': {
+                '&:first-child': {
+                    backgroundColor: '#FFDC40'
+                },
+                '&:last-child': {
+                    backgroundColor: '#F2F2F2'
+                }
+            },
+            '& .tariff': {
+                fontWeight: '600',
+                '& span': {
+                    fontSize: '1.625rem'
+                }
+            }
+        },
+        '& div.phone-info': {
+            borderRadius: '10px',
+            boxShadow: '0px 1.3779762983322144px 2.7559525966644287px 0px #00000026',
+            '& > div': {
+                '&:first-child': {
+                    backgroundColor: '#F2F2F2'
+                },
+                '&:last-child': {
+                    backgroundColor: '#FFDC40'
+                }
+            }
+        },
+        '& div.partner': {
+            '& img': {
+                width: '100%',
+                visibility: 'hidden'
+            },
+            background: 'url("/img/yandex_1.png")',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+        },
         '& div.preview': {
             padding: '18px',
-            [theme.breakpoints.down('sm')]: {
+            [breakpoints.down('sm')]: {
                 background: 'none'
             }
         },
@@ -18,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: 30,
             borderRadius: 10,
             padding: '18px 18px 0 18px',
-            [theme.breakpoints.down('sm')]: {
+            [breakpoints.down('sm')]: {
                 '& h3': {
                     fontSize: '1.125rem'
                 },
@@ -49,13 +87,39 @@ export const useStyles = makeStyles((theme) => ({
     },
     link: {
         textDecoration: 'none',
-        color: theme.palette.common.activeTab,
+        color: palette.common.activeTab,
         display: 'inline-block',
         '&:hover': {
             textDecoration: 'underline'
         },
         '& p': {
-            color: theme.palette.common.activeTab
+            color: palette.common.activeTab
+        }
+    },
+    phoneWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        width: 'fit-content',
+        textDecoration: 'none',
+        background: '#f0f0f0',
+        borderRadius: 10,
+        cursor: 'pointer',
+        '& h5': {
+            flex: 1,
+            padding: '0 25px',
+            textAlign: 'center'
+        },
+        '& button.MuiButtonBase-root': {
+            padding: '10px 35px',
+            borderRadius: '0px 10px 10px 0px',
+            background: '#FFDC40',
+            '& svg': {
+                width: '20',
+                height: '20',
+                '& path': {
+                    fill: '#000000'
+                }
+            }
         }
     }
 }))

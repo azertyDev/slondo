@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import Link from 'next/link';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography} from '@material-ui/core';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from '@src/components/help/menu_struct';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
@@ -19,12 +19,16 @@ export const HelpPage: FC = () => {
     const classes = useStyles();
     return (
         <MainLayout title={t('header:help')} handleBack={handleBack}>
-            <Typography variant="h6" color="initial" className={classes.title}>
-                {t('header:help')}
-            </Typography>
+            <Hidden xsDown>
+                <Typography variant="h6" color="initial" className={classes.title}>
+                    {t('header:help')}
+                </Typography>
+            </Hidden>
             <Grid container spacing={2}>
-                <HelpSidebar menuStruct={menuStruct}/>
-                <Grid container item xs={9}>
+                <Hidden xsDown>
+                    <HelpSidebar menuStruct={menuStruct} />
+                </Hidden>
+                <Grid container item xs={12} sm={9}>
                     <Box>
                         <Typography variant='subtitle1' gutterBottom>
                             {t('help:main.title')}

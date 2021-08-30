@@ -9,6 +9,9 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: '1.125rem',
             color: 'rgba(49, 49, 49, 0.6)',
             marginBottom: 30,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: 'initial'
+            }
         },
         '& > div.feedback-form': {
             '& > form > div': {
@@ -16,10 +19,13 @@ export const useStyles = makeStyles((theme) => ({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
+                    flexWrap: 'wrap'
                 },
                 '& div.MuiFormControl-root': {
-                    marginTop: 5,
                     marginBottom: 20,
+                    [theme.breakpoints.down('xs')]: {
+                        marginBottom: 15
+                    }
                 },
             },
         },

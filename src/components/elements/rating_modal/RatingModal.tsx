@@ -125,8 +125,8 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                                         onBlur={handleBlur}
                                         value={values.comment}
                                         onChange={handleChange}
-                                        labelTxt={t('Оставьте коментарий')}
-                                        placeholder={t('Поделитесь впечатлениями')}
+                                        labelTxt={t('cabinet:giveComment')}
+                                        placeholder={t('cabinet:shareYourImpression')}
                                         errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                     />
                                     <CustomButton type='submit' disabled={values.rating === 0} color='secondary'>

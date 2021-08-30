@@ -43,7 +43,6 @@ export const FormikTextarea: FC<FormikTextareaPropsType> = (props) => {
                         name={name}
                         {...textareaProps}
                         classes={{
-
                             root: classes.textArea
                         }}
                         variant="outlined"

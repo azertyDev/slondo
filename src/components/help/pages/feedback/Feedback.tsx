@@ -6,28 +6,37 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
+import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
+import {getErrorMsg} from '@src/helpers';
 
 
 export const Feedback: FC = () => {
-    const {t} = useTranslation('filters');
+    const {t} = useTranslation('help');
 
     const onSubmit = (values) => {
         console.log(values);
     };
 
     const formik = useFormik({
-        initialValues: {},
+        initialValues: {
+            description: ''
+        },
         validationSchema: filterInputSchema,
         onSubmit
     });
 
+    const {
+        values,
+        errors,
+        touched
+    } = formik;
+
     const classes = useStyles();
     return (
-        <Grid item xs={7} className={classes.root}>
-            <Typography variant='h6'>Обратная связь</Typography>
-            <Typography variant='subtitle1'>Если вы не нашли нужную информацию в разделах Помощь, вы можете найти ее
-                ниже или задать вопрос Службе поддержки через форму обратной связи. Уточните, с чем связан
-                вопрос:
+        <Grid item xs={12} className={classes.root}>
+            <Typography variant='h6'>{t('feedback.name')}</Typography>
+            <Typography variant='subtitle1'>
+                {t('feedback.description')}
             </Typography>
             <div className="feedback-form">
                 <FormikProvider value={formik}>
@@ -35,50 +44,45 @@ export const Feedback: FC = () => {
                         <div>
                             <FormikField
                                 t={t}
-                                labelText='*Персональные данные'
-                                placeholder="Введите Имя"
+                                labelText={t('common:personalData')}
+                                placeholder={t('common:enterName')}
                                 size="small"
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
+                                InputLabelProps={{shrink: true}}
                             />
                             <FormikField
                                 t={t}
-                                labelText='*Почта'
+                                labelText={t('common:mail')}
                                 placeholder="example@gmail.com"
                                 size="small"
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
+                                InputLabelProps={{shrink: true}}
                             />
                             <FormikField
                                 t={t}
-                                labelText='*Номер телефона'
+                                labelText={t('common:phoneNumber')}
                                 placeholder="+998  "
                                 size="small"
-                                InputLabelProps={{
-                                    shrink: true
-                                }}
+                                InputLabelProps={{shrink: true}}
                             />
                         </div>
                         <div>
-                            <label>*Сообщение</label>
-                            <FormikField
-                                t={t}
-                                multiline
+                            <FormikTextarea
                                 rows={10}
-                                variant="outlined"
-                                fullWidth
-                                helperText='Описание не должно превышать 3000 символов'
+                                limit={3000}
+                                name='description'
+                                value={values.description}
+                                labelTxt={t('post:description')}
+                                errorMsg={getErrorMsg(errors.description, touched.description, t)}
                             />
                         </div>
                         <div className='upload'>
                             <label className='file-upload'>
-                                Фото или скриншот
-                                <input type='file'/>
+                                <Typography variant='subtitle1' gutterBottom>
+                                    {t('common:photoOrScreenshot')}
+                                </Typography>
+                                <input type='file' />
                             </label>
                             <CustomButton>
-                                Отправить
+                                {t('common:send')}
                             </CustomButton>
                         </div>
                     </Form>

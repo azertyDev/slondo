@@ -54,7 +54,8 @@
     "2": "Barcha maydonchalarni to'ldirgandan so'ng, “Keyingi“ tugmasini bosing, barcha maydonchalar to'g'ri to'ldirilganligini tekshiring va “Nashr qilish“ tugmasini bosing - auktsion moderatsiyaga o'tadi va keyin saytda paydo bo'ladi."
   },
   "feedback": {
-    "name": "Qayta a'loqa"
+    "name": "Qayta a'loqa",
+    "description": "Agar siz kerakli ma'lumotlarni “Yordam“ bo'limida topa olmagan bo'lsangiz, uni quyida topishingiz yoki qayta aloqa shakli orqali Yordam xizmatidan so'rashingiz mumkin. Savol nima bilan bog'liqligini aniqlang:"
   },
   "user_agreements": {
     "name": "Foydalanuvchi shartnomasi"

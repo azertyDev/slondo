@@ -10,6 +10,7 @@ import {useRouter} from 'next/router';
 import ErrorPage from "@root/pages/_error";
 import {Security} from '@src/components/site_guides/security/Security';
 import {useStyles} from './useStyles';
+import {Partners} from '@src/components/site_guides/Partners';
 
 function HideOnScroll(props) {
     const {children, window} = props;
@@ -32,13 +33,15 @@ export const SiteGuides = (props) => {
     const getPageByTerm = () => {
         switch (term) {
             case 'auction':
-                return <AuctionGuide t={t}/>;
+                return <AuctionGuide t={t} />;
             case 'safe_shopping':
-                return <SafeShoppingGuide t={t}/>;
+                return <SafeShoppingGuide t={t} />;
             case 'security':
-                return <Security t={t}/>;
+                return <Security t={t} />;
+            case 'yandex':
+                return <Partners t={t} />;
             default:
-                return <ErrorPage statusCode={404}/>;
+                return <ErrorPage statusCode={404} />;
         }
     };
 
