@@ -23,41 +23,52 @@ export const Partners: FC<WithT> = (props) => {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                        <Box width={0.72} ml='60px' mt='65px'>
-                            <Typography variant='h3' className='fw600' color='textPrimary'>
-                                Подключение к Яндекс Go
-                            </Typography>
-                            <Box display='flex' mt='60px' className='tariff-info' flexWrap='wrap'>
-                                <Box width={0.7} padding='15px 45px'>
-                                    <Typography variant='h4' className='tariff' color='textPrimary' gutterBottom>
-                                        Комиссия всего
+                        <Box className='info'>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Typography variant='h3' className='fw600 title' color='textPrimary'>
+                                        {t('help:yandex.title')}
                                     </Typography>
-                                    <Typography variant='h3' className='tariff' color='textPrimary'>
-                                        2%&nbsp;
-                                        <span>
-                                        + Бонус при подключении!
-                                    </span>
-                                    </Typography>
-                                </Box>
-                                <Box
-                                    width={0.3}
-                                    display='flex'
-                                    paddingLeft='22px'
-                                    flexDirection='column'
-                                    justifyContent='center'
-                                >
-                                    <Typography variant='h5' color='textPrimary'>
-                                        тариф
-                                    </Typography>
-                                    <Typography variant='h4' className='fw600' color='textPrimary'>
-                                        ГРУЗОВОЙ
-                                    </Typography>
-                                </Box>
-                            </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box display='flex' className='tariff-info' flexWrap='wrap'>
+                                        <Box padding='15px 45px'>
+                                            <Typography
+                                                variant='h4'
+                                                className='tariff'
+                                                color='textPrimary'
+                                                gutterBottom
+                                            >
+                                                {t('help:yandex.sale.title')}
+                                            </Typography>
+                                            <Typography variant='h3' className='tariff' color='textPrimary'>
+                                                {t('help:yandex.sale.desc.percent')}&nbsp;
+                                                <span>
+                                                    {t('help:yandex.sale.desc.name')}
+                                                </span>
+                                            </Typography>
+                                        </Box>
+                                        <Box
+                                            display='flex'
+                                            pl='22px'
+                                            pr='22px'
+                                            flexDirection='column'
+                                            justifyContent='center'
+                                        >
+                                            <Typography variant='h5' color='textPrimary' gutterBottom>
+                                                {t('help:yandex.tariff.name')}
+                                            </Typography>
+                                            <Typography variant='h4' className='fw600' color='textPrimary'>
+                                                {t('help:yandex.tariff.desc')}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </Box>
-                        <Box width={0.72} ml='60px' mt='65px'>
+                        <Box className='contact-phone'>
                             <Typography variant='h5' className='fw600' gutterBottom>
-                                Комиссия всего
+                                {t('help:yandex.phone')}
                             </Typography>
                             <a href='tel:+998951705555' className={classes.phoneWrapper}>
                                 <Typography variant="h5" className='fw600' color="textPrimary">

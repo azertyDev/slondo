@@ -7,19 +7,65 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             background: '#fafafa',
             padding: '10px 0'
         },
+        '& .info': {
+            margin: '65px 0 0 60px',
+            [breakpoints.down('xs')]: {
+                margin: '30px 0 0 0px'
+            },
+            '& .title': {
+                marginBottom: '24px',
+                [breakpoints.down('xs')]: {
+                    fontSize: '1.2rem',
+                    textAlign: 'center'
+                }
+            }
+        },
         '& div.tariff-info': {
             '& > div': {
                 '&:first-child': {
-                    backgroundColor: '#FFDC40'
+                    backgroundColor: '#FFDC40',
+                    [breakpoints.down('xs')]: {
+                        padding: '15px 20px',
+                        width: '100%',
+                        '& h4': {
+                            fontSize: '1.4rem'
+                        },
+                        '& h3': {
+                            fontSize: '2.5rem',
+                            '& span': {
+                                fontSize: '1rem'
+                            }
+                        }
+                    }
                 },
                 '&:last-child': {
-                    backgroundColor: '#F2F2F2'
+                    backgroundColor: '#F2F2F2',
+                    [breakpoints.down('xs')]: {
+                        width: '100%',
+                        padding: '15px 20px',
+                        '& h5': {
+                            fontSize: '1.125rem'
+                        },
+                        '& h4': {
+                            fontSize: '1.5rem'
+                        },
+                    }
                 }
             },
             '& .tariff': {
                 fontWeight: '600',
                 '& span': {
                     fontSize: '1.625rem'
+                }
+            }
+        },
+        '& div.contact-phone': {
+            margin: '65px 0 0 60px',
+            [breakpoints.down('xs')]: {
+                margin: '65px 0 0 0px',
+                '& h5': {
+                    padding: '0 20px',
+                    fontSize: '1.2rem'
                 }
             }
         },
@@ -82,7 +128,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             }
         },
         '& .fw600': {
-            fontWeight: '600'
+            fontWeight: '700'
         }
     },
     link: {

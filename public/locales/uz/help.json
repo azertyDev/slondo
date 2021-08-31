@@ -389,5 +389,20 @@
       "6": "Narxlar farqi-filtr sizni qiziqtirmagan variantlarni olib tashlashga yordam beradi,",
       "7": "Faqat siz obuna bo'lgan sotuvchilar orasida qidirish."
     }
+  },
+  "yandex": {
+    "title": "Yandex Goga ulanish",
+    "phone": "Telefon raqam orqali ulanish:",
+    "sale": {
+      "title": "Komissiya bor yo'g'i",
+      "desc": {
+        "percent": "2%",
+        "name": "+ Ulangandan so'ng bonus!"
+      }
+    },
+    "tariff": {
+      "name": "tarif",
+      "desc": "Yuk tashish"
+    }
   }
 }
