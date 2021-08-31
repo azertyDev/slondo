@@ -67,7 +67,7 @@ export const Partners: FC<WithT> = (props) => {
                             </Grid>
                         </Box>
                         <Box className='contact-phone'>
-                            <Typography variant='h5' className='fw600' gutterBottom>
+                            <Typography variant='h5' component='p' gutterBottom>
                                 {t('help:yandex.phone')}
                             </Typography>
                             <a href='tel:+998951705555' className={classes.phoneWrapper}>

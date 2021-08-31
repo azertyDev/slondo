@@ -42,7 +42,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
                     backgroundColor: '#F2F2F2',
                     [breakpoints.down('xs')]: {
                         width: '100%',
-                        padding: '15px 20px',
+                        padding: '25px 20px',
                         '& h5': {
                             fontSize: '1.125rem'
                         },
@@ -63,9 +63,15 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             margin: '65px 0 0 60px',
             [breakpoints.down('xs')]: {
                 margin: '65px 0 0 0px',
+                '& p': {
+                    fontSize: '1rem'
+                },
                 '& h5': {
                     padding: '0 20px',
                     fontSize: '1.2rem'
+                },
+                '& button.MuiButtonBase-root': {
+                    padding: '15px 35px'
                 }
             }
         },
