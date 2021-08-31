@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Top} from './top/Top';
 import {useModal} from "@src/hooks";
 import Bottom from './bottom/Bottom';
-import {AuthContainer} from './auth/AuthContainer';
+import {AuthModal} from './auth/AuthModal';
 import {CategoriesDrawer} from "@src/components/header/bottom/categories_drawer/CategoriesDrawer";
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
@@ -26,7 +26,7 @@ export const Header: FC = () => {
                 <Top handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
                 <Bottom handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
                 <div className={classes.modalDialog}>
-                    <AuthContainer/>
+                    <AuthModal/>
                 </div>
                 <CategoriesDrawer
                     position='left'

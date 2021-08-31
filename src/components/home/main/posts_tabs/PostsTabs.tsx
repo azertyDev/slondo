@@ -58,7 +58,6 @@ export const PostsTabs: FC = () => {
     const fetchCardData = async (currentPage, type) => {
         try {
             const isAuc = type === 'auc';
-
             const params = {
                 itemsPerPage: ITEMS_PER_PAGE,
                 page: currentPage,

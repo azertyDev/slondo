@@ -136,21 +136,13 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
                 appearance: {color_id}
             } = post;
 
-            const {
-                region,
-                city,
-                ...others
-            } = values.commonParams;
-
             const postParams = {
-                ...others,
+                ...values.commonParams,
                 title,
-                region,
                 model: params
             };
 
             if (color_id) postParams.model.color = {id: color_id};
-            if (city) postParams.city = city;
 
             await push(
                 `${post_id ? asPath : `${formURL}${urlByParams(postParams)}`}&preview=1`,
@@ -275,7 +267,7 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
                         <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
                             {
                                 isFetch
-                                    ? <CircularProgress size={24} color='secondary' />
+                                    ? <CircularProgress size={24} color='secondary'/>
                                     : <Typography variant='subtitle1' component='p'>
                                         {t(post_id ? 'to_edit' : 'publish')}
                                     </Typography>

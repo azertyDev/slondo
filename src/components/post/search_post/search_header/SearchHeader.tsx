@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Top} from '@src/components/header/top/Top';
 import {useModal} from '@src/hooks';
 import Bottom from '@src/components/header/bottom/Bottom';
-import {AuthContainer} from '@src/components/header/auth/AuthContainer';
+import {AuthModal} from '@src/components/header/auth/AuthModal';
 import {CategoriesDrawer} from '@src/components/header/bottom/categories_drawer/CategoriesDrawer';
 import {Hidden} from '@material-ui/core';
 import {useRouter} from 'next/router';
@@ -33,7 +33,7 @@ export const SearchHeader: FC = () => {
                     <Bottom handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload} />
                 </Hidden>
                 <div className={classes.modalDialog}>
-                    <AuthContainer />
+                    <AuthModal />
                 </div>
                 <CategoriesDrawer
                     position='left'

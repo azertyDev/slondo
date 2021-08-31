@@ -12,7 +12,7 @@ export const userInfoSchema = object().shape({
 });
 
 export const phoneSchema = object({
-    phone: string().required(fieldRequiredTxt).test('len', wrongFormat, val => !RegExp(bottomDashRegEx).test(val))
+    phone: string().test('format', wrongFormat, val => !RegExp(bottomDashRegEx).test(val))
 });
 
 export const passwordSchema = object({
@@ -23,7 +23,7 @@ export const codeSchema = object({
     code: string().required(fieldRequiredTxt)
 });
 
-export const authSchema = object().concat(phoneSchema).concat(passwordSchema);
+export const signInSchema = object({}).concat(phoneSchema).concat(passwordSchema);
 
 export const passwordConfirmSchema = object({
     password: string().required(fieldRequiredTxt).min(8, passwordMin),

@@ -1,4 +1,4 @@
-import {FeedbackContainer} from '@src/components/help/pages/feedback/FeedbackContainer';
+import {Feedback} from '@src/components/help/pages/feedback/Feedback';
 import {GetStaticProps} from 'next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
@@ -22,4 +22,4 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     }
 });
 
-export default FeedbackContainer;
+export default Feedback;

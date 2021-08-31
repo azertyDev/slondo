@@ -15,21 +15,11 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             padding: '45px 20px',
             backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
-            // '& svg': {
-            //     marginRight: 20
-            // },
             '& h6.MuiTypography-subtitle2': {
                 color: '#fff',
                 fontWeight: 400,
                 lineHeight: '17px'
             }
-            // '& > div': {
-            //     display: 'flex',
-            //     alignItems: 'center',
-            //     height: '90px',
-            //     padding: '20px',
-            //
-            // }
         },
         '& div.auth-reg-block': {
             position: 'relative',
@@ -74,6 +64,9 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         [breakpoints.down('sm')]: {
             marginBottom: 0
         },
+        '& p.error-text': {
+            height: '14px'
+        },
         '& div.formik-num-pass': {
             '& > div:first-child': {
                 marginBottom: '10px'
@@ -89,10 +82,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         },
         '& div.form-block': {
             '& div.server-error': {
-                margin: '20px 0',
-                [breakpoints.down('sm')]: {
-                    margin: '30px 0'
-                },
+                margin: '10px 0',
                 '& p': {
                     textAlign: 'center',
                     fontSize: '0.875rem'
@@ -101,9 +91,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             '& div.tabs-container': {
                 '& div.tabs': {
                     width: '100%',
-                    [breakpoints.down('sm')]: {
-                        marginBottom: '15px'
-                    },
+                    marginBottom: '15px',
                     '& div.MuiTabs-flexContainer': {
                         justifyContent: 'center'
                     },
@@ -222,7 +210,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
     regHint: {
         display: 'flex',
         alignItems: 'center',
-        padding: 16,
+        padding: '9px',
         background: '#7DBCF6',
         borderRadius: '4px',
         [breakpoints.down('xs')]: {

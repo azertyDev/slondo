@@ -5,7 +5,6 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from './menu_struct';
 import {Feedback} from '@src/components/help/pages/feedback/Feedback';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
 import {
     RegistrationRules,
@@ -47,6 +46,7 @@ import {
     SearchInService
 } from './pages';
 import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
+import {useStyles} from './useStyles';
 
 enum Pages {
     'how_to_register',

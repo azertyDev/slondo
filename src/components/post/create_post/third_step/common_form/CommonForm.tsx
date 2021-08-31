@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
@@ -45,8 +45,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {t} = useTranslation('post');
 
     const {
-        region,
-        city,
         safe_deal,
         delivery,
         exchange,
@@ -75,18 +73,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         locationModal
     } = useLocation({handleSelectLocation});
 
-    const locationFromUrl = region
-        ? {
-            region: JSON.parse(region as string),
-            city: city ? JSON.parse(city as string) : null
-        }
-        : null;
-
     const initForm = {
         safe_deal: !!safe_deal,
         delivery: !!delivery,
         exchange: !!exchange,
-        location: locationFromUrl ?? userLoc,
+        location: null,
         description: description ? JSON.parse(description as string) : '',
         phone: phone ? JSON.parse(phone as string) : '',
         price: price ? JSON.parse(price as string).toString() : '',
@@ -315,6 +306,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     function handleSelectLocation(location) {
         setValues({...values, location});
     }
+
+    useEffect(() => {
+        !!userLoc && setValues({...values, location: userLoc});
+    }, [userLoc]);
 
     return (
         <CustomFormikProvider formik={formik}>
