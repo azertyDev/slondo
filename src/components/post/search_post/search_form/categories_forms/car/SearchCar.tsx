@@ -63,42 +63,10 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
-
+    console.log(filters);
     return (
         <CustomFormikProvider formik={formik}>
             <Grid item container spacing={2}>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <DropDownSelect
-                        name='manufacturer'
-                        disableRequire
-                        values={values}
-                        onBlur={handleBlur}
-                        items={filters.manufacturer}
-                        handleSelect={handleManufacturer}
-                        labelTxt={t('manufacturer')}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <DropDownSelect
-                        name='model'
-                        disableRequire
-                        values={values}
-                        onBlur={handleBlur}
-                        labelTxt={t('model')}
-                        handleSelect={handleSelect}
-                        items={values.manufacturer?.models}
-                    />
-                </Grid>
                 <Grid
                     item
                     container
@@ -141,24 +109,60 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <DropDownSelect
-                        multiple
-                        disableRequire
-                        name='transmission'
-                        values={values}
-                        onBlur={handleBlur}
-                        handleSelect={handleSelect}
-                        transKey='car.'
-                        labelTxt={t('car.transmission.name')}
-                        items={filters.transmission}
-                    />
-                </Grid>
+                {Object.keys(filters).length !== 0 && (
+                    <>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                name='manufacturer'
+                                disableRequire
+                                values={values}
+                                onBlur={handleBlur}
+                                items={filters.manufacturer}
+                                handleSelect={handleManufacturer}
+                                labelTxt={t('manufacturer')}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                name='model'
+                                disableRequire
+                                values={values}
+                                onBlur={handleBlur}
+                                labelTxt={t('model')}
+                                handleSelect={handleSelect}
+                                items={values.manufacturer?.models}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <DropDownSelect
+                                multiple
+                                disableRequire
+                                name='transmission'
+                                values={values}
+                                onBlur={handleBlur}
+                                handleSelect={handleSelect}
+                                transKey='car.'
+                                labelTxt={t('car.transmission.name')}
+                                items={filters.transmission}
+                            />
+                        </Grid>
+                    </>
+                )}
             </Grid>
             {Object.keys(filters).length !== 0 && (
                 <ShowHide

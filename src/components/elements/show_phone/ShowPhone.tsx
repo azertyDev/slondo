@@ -54,7 +54,7 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
     };
 
     const handleShowPhone = () => {
-        !phone && fetchShowPhone();
+        (!phone || isXsDown) && fetchShowPhone();
     };
 
     const classes = useStyles();

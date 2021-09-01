@@ -382,7 +382,8 @@ export const useStyles = makeStyles((theme) => ({
                     margin: 0,
                     fontSize: '1.125rem',
                     fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
-                    whiteSpace: 'pre-wrap'
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-all'
                 }
             },
             '& > h6.MuiTypography-subtitle1': {
