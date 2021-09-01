@@ -13,7 +13,7 @@ import {Footer} from '@src/components/footer/Footer';
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
-import {AuthModal} from "@src/components/header/auth/AuthModal";
+import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CustomHead} from "@src/components/head/CustomHead";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {useStyles} from './useStyles';

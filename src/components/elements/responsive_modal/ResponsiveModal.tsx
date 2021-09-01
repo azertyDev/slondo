@@ -6,6 +6,7 @@ import {useStyles} from './useStyles';
 
 type ResponsiveDialogPropsType = {
     openDialog: boolean,
+    keepMounted?: boolean,
     handleCloseDialog: () => void,
     maxWidth?,
     fullWidth?: boolean
@@ -14,6 +15,7 @@ type ResponsiveDialogPropsType = {
 
 export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const {
+        keepMounted,
         openDialog,
         handleCloseDialog,
         fullScreen,
@@ -26,6 +28,7 @@ export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const classes = useStyles();
     return (
         <Dialog
+            keepMounted={keepMounted}
             open={openDialog}
             maxWidth={maxWidth}
             fullWidth={fullWidth}

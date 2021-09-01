@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Top} from '@src/components/header/top/Top';
 import {useModal} from '@src/hooks';
 import Bottom from '@src/components/header/bottom/Bottom';
-import {AuthModal} from '@src/components/header/auth/AuthModal';
+import {AuthModal} from '@src/components/header/auth_modal/AuthModal';
 import {CategoriesDrawer} from '@src/components/header/bottom/categories_drawer/CategoriesDrawer';
 import {Hidden} from '@material-ui/core';
 import {useRouter} from 'next/router';

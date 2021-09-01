@@ -4,7 +4,7 @@ import {Form, FormikProvider, useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
-import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
+import {cookieOpts, cookies, getErrorMsg, getTime, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {signInSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
@@ -52,13 +52,14 @@ export const AuthModal: FC = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState('');
     const [timer, setTimer] = useState(CONFIRM_SECONDS);
+    const time = getTime(timer);
     const [isFetch, setIsFetch] = useState(false);
     const [activeTimer, setActiveTimer] = useState(false);
     const [formStatus, setFormStatus] = useState<FormStatusesType>('reg');
     const isSignInTab = tabIndex === 0;
 
     const tabsHandler = (_, newValue) => {
-        unstable_batchedUpdates(() => {
+        tabIndex !== newValue && unstable_batchedUpdates(() => {
             setTabIndex(newValue);
             setTouched({});
             setErrorMsg('');
@@ -245,9 +246,10 @@ export const AuthModal: FC = () => {
                         t={t}
                         type="tel"
                         name="phone"
-                        labelText={t('enter_phone')}
+                        autoFocus
                         value={values.phone}
                         onChange={handleInput}
+                        labelText={t('enter_phone')}
                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                     />
                     <FormikField
@@ -277,7 +279,9 @@ export const AuthModal: FC = () => {
                         variant="subtitle2"
                         className="resendTxt"
                     >
-                        {t(`resendSms`, {timer: timer})}
+                        {
+                            t(`resendSms`, {timer: `${time.minutes}:${time.seconds}`})
+                        }
                     </Typography>
                 )}
             </div>
@@ -287,6 +291,7 @@ export const AuthModal: FC = () => {
     const regForm = (
         <FormikField
             t={t}
+            autoFocus
             type="tel"
             name="phone"
             onChange={handleInput}
@@ -303,7 +308,7 @@ export const AuthModal: FC = () => {
             case 'rec':
                 return <div>
                     {regForm}
-                    <Box mt={1} className={classes.regHint}>
+                    <Box mt={2} className={classes.regHint}>
                         <BorderErrorIcon/>
                         <Typography variant='subtitle2' component='p' color='initial'>
                             {t(formStatus === 'reg' ? 'regHint' : 'recHint')}
@@ -315,17 +320,17 @@ export const AuthModal: FC = () => {
                     <div className="formik-code-confirm">
                         <FormikField
                             t={t}
+                            autoFocus
                             name="code"
-                            labelText={t('enter_sms')}
-                            placeholder={t('enter_sms')}
                             onChange={handleInput}
+                            placeholder={t('enter_sms')}
                             errorMsg={getErrorMsg(errors.code, touched.code, t)}
                         />
                         <Typography
                             variant="subtitle2"
                             className="resendTxt"
                         >
-                            {t(`resendSms`, {timer: timer})}
+                            {t(`resendSms`, {timer: `${time.minutes}:${time.seconds}`})}
                         </Typography>
                     </div>
                 </div>;
@@ -334,6 +339,7 @@ export const AuthModal: FC = () => {
                     <div className="formik-num-pass">
                         <FormikField
                             t={t}
+                            autoFocus
                             type="password"
                             name="password"
                             onChange={handleInput}
@@ -407,7 +413,9 @@ export const AuthModal: FC = () => {
                                         </Grid>
                                     </Grid>
                                     <Grid container alignItems='center' item xs={12}>
-                                        <Grid item xs={2}><RatingIcon/></Grid>
+                                        <Grid item xs={2}>
+                                            <RatingIcon/>
+                                        </Grid>
                                         <Grid item xs={10}>
                                             <Typography variant="subtitle2" color="initial">
                                                 {t('rating')}
@@ -441,10 +449,10 @@ export const AuthModal: FC = () => {
                                         <FormikProvider value={formik}>
                                             <Form onSubmit={formik.handleSubmit}>
                                                 <Tabs
+                                                    className="tabs"
                                                     value={tabIndex}
                                                     onChange={tabsHandler}
                                                     indicatorColor="primary"
-                                                    className="tabs"
                                                 >
                                                     <Tab
                                                         value={0}

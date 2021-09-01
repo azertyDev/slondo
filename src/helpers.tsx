@@ -19,6 +19,22 @@ export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 's
     sameSite: 'strict'
 };
 
+export const getTime = (sec: number) => {
+    const date = new Date(sec * 1000);
+
+    const days = Math.round(sec / 3600 / 24);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    return {
+        days,
+        hours: hours < 10 ? `0${hours}` : hours,
+        minutes: minutes < 10 ? `0${minutes}` : minutes,
+        seconds: seconds < 10 ? `0${seconds}` : seconds
+    };
+};
+
 export const priceTransform = (price, jobOrService): string => {
     return price === 0
         ? jobOrService ? 'negotiated' : 'for_free'

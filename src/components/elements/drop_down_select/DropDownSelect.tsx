@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {isRequired} from '@src/helpers';
+import {getTime, isRequired} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import {noTranslatableFields} from "@src/common_data/fields_keys";
 import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
@@ -37,7 +37,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {t} = useTranslation('filters');
 
     const isCurrency = name === 'currency';
-    const optionKey = name === 'duration' ? 'hours' : 'name';
+    const isDuration = name === 'duration';
+    const optionKey = isDuration ? 'hours' : 'name';
     const noTranslatable = noTranslatableFields.some(f => f === name);
 
     const onChange = ({target}) => {
@@ -64,7 +65,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         }
 
         return !selected || multiple || noTranslatable
-            ? value : isCurrency
+            ? isDuration && typeof value !== 'string'
+                ? getTime(+value * 3600).days : value
+            : isCurrency
                 ? t(`common:${value}`) : t(`${transKey}${value}.name`);
     };
 
@@ -110,7 +113,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                             )}
                             {t(transKey && !noTranslatable
                                 ? `${transKey}${item[optionKey]}.name`
-                                : isCurrency ? t(`common:${item[optionKey]}`) : item[optionKey])}
+                                : isCurrency
+                                    ? t(`common:${item[optionKey]}`)
+                                    : isDuration ? `${getTime(item[optionKey] * 3600).days}` : item[optionKey])}
                         </MenuItem>
                     );
                 })}

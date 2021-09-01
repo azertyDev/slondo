@@ -5,7 +5,7 @@
   "max_bet": "Max. narx",
   "place_bet": "Pul tikish",
   "duration": "Davomligi",
-  "auc_duration": "Davomligi soatda",
+  "auc_duration": "Davomligi kunda",
   "auc_end": "Savdo tugadi",
   "auc_end_across": "Savdo tugash vaqti",
   "last_bet": "Oxirgi narx {{lastBet}} so'm",

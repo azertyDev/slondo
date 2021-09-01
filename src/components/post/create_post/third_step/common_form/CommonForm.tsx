@@ -182,7 +182,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {auction, location, avalTime} = values;
+    const {auction, avalTime} = values;
 
     function getSchema() {
         if (isAuction) return auctionParamsSchema;
@@ -315,9 +315,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
                 submitTxt='next'
-                title={t('priceDescContacts')}
                 icon={<StateIcon/>}
                 isPreview={isPreview}
+                title={t('priceDescContacts')}
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
             >
@@ -325,7 +325,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                     {isPreview
                         ? <CommonFormPreview
                             values={values}
-                            location={location}
                             isAuction={isAuction}
                             priceLabel={priceLabel}
                             avalTimeActive={avalTimeActive}

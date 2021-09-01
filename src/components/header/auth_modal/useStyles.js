@@ -60,7 +60,6 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         }
     },
     authReg: {
-        marginBottom: '20px',
         [breakpoints.down('sm')]: {
             marginBottom: 0
         },
@@ -182,6 +181,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             }
         },
         '& .resendTxt': {
+            paddingTop: '2px',
             color: 'black',
             fontWeight: '400',
             opacity: '0.4'

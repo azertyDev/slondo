@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import Box from '@material-ui/core/Box';
 import {Grid, Typography} from '@material-ui/core';
-import {numberPrettier, weekDaysHelper} from '@src/helpers';
+import {getTime, numberPrettier, weekDaysHelper} from '@src/helpers';
 import {
     SafeIcon,
     PhoneIcon,
@@ -17,26 +17,27 @@ type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
     avalTimeActive: boolean,
-    priceLabel: string,
-    location
+    priceLabel: string
 };
 
 export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {
         values,
-        location,
         isAuction,
         priceLabel,
         avalTimeActive
     } = props;
 
     const {t} = useTranslation('post');
-    const {main_ctgr} = useRouter().query;
+    const {main_ctgr, region, city} = useRouter().query;
+
+    const urlRegion = JSON.parse(region as string);
+    const urlCity = JSON.parse(city as string);
 
     const {auction, avalTime} = values;
     const isFree = values.price === '0';
     const isService = main_ctgr === 'service';
-    const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
+    const locationText = `${t(`locations:${urlRegion.name}.name`)}${urlCity ? `, ${t(`locations:${urlRegion.name}.${urlCity.name}`)}` : ''}`;
     const hasService = !!values.delivery || !!values.exchange || !!values.auto_renewal || !!auction.auto_renewal || !!auction.offer_the_price || !!values.safe_deal;
 
     const classes = useStyles();
@@ -45,7 +46,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {!isAuction && (
                 <Grid container item spacing={2}>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="subtitle1" color='textSecondary'>
+                        <Typography variant="subtitle1">
                             {t(`filters:${priceLabel}`)}:
                         </Typography>
                     </Grid>
@@ -66,7 +67,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     {values.price && (
                         <Grid container item spacing={2}>
                             <Grid item xs={12} sm={4}>
-                                <Typography variant="subtitle1" color='textSecondary'>
+                                <Typography variant="subtitle1">
                                     {t('filters:start_price')}:
                                 </Typography>
                             </Grid>
@@ -87,7 +88,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             </Grid>
                             <Grid item xs={12} sm={8}>
                                 <Typography variant="subtitle1">
-                                    {auction?.duration?.hours}
+                                    {getTime(auction?.duration?.hours * 3600).days}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -95,7 +96,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     {auction.reserve_price && (
                         <Grid container item spacing={2}>
                             <Grid item xs={12} sm={4}>
-                                <Typography variant="subtitle1" color='textSecondary'>
+                                <Typography variant="subtitle1">
                                     {t('filters:reserve_price')}:
                                 </Typography>
                             </Grid>
@@ -111,7 +112,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {auction.price_buy_now.value && (
                 <Grid container item spacing={2}>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="subtitle1" color='textSecondary'>
+                        <Typography variant="subtitle1">
                             {t('filters:buy_now')}:
                         </Typography>
                     </Grid>
@@ -125,7 +126,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {hasService && (
                 <Grid container item>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="subtitle1" color='textSecondary'>
+                        <Typography variant="subtitle1">
                             {t('additionalServices')}
                         </Typography>
                     </Grid>
@@ -174,7 +175,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             )}
             <Grid container item spacing={2}>
                 <Grid item xs={12} sm={4}>
-                    <Typography variant="subtitle1" color='textSecondary'>
+                    <Typography variant="subtitle1">
                         {t('locations:location')}:
                     </Typography>
                 </Grid>
@@ -187,7 +188,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {!!values.phone && !RegExp(/_/g).test(values.phone) && (
                 <Grid container item spacing={2}>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="subtitle1" color='textSecondary'>
+                        <Typography variant="subtitle1">
                             {t('filters:additional_phone')}:
                         </Typography>
                     </Grid>
@@ -201,7 +202,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {avalTimeActive && (
                 <Grid container item spacing={2}>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="subtitle1" color='textSecondary'>
+                        <Typography variant="subtitle1">
                             {t('common:call_times')}:
                         </Typography>
                     </Grid>
@@ -217,15 +218,15 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 </Grid>
             )}
             <Grid container item spacing={2}>
-                <Grid item xs={12} sm={4}>
-                    <Typography variant="subtitle1" color='textSecondary'>
+                <Grid item xs={12}>
+                    <Typography variant="subtitle1">
                         {t('description')}:
                     </Typography>
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                    <Typography variant="subtitle1">
-                        {values.description}
-                    </Typography>
+                    <pre style={{margin: 0, padding: '0 10px'}}>
+                        <Typography variant="subtitle1">
+                            {values.description}
+                        </Typography>
+                    </pre>
                 </Grid>
             </Grid>
         </>

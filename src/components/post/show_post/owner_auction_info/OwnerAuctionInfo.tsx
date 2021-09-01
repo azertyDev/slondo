@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
-import {numberPrettier, priceTransform} from '@src/helpers';
+import {priceTransform} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
 import {useTranslation} from "next-i18next";

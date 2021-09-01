@@ -7,6 +7,7 @@ import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
+    autoFocus?: boolean,
     disableRequire?: boolean,
     limit?: number,
     errorMsg?: string,
@@ -21,6 +22,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
         errorMsg,
         labelText,
         limit,
+        autoFocus,
         disableRequire,
         ...otherProps
     } = props;
@@ -52,6 +54,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                     focused={false}
                                     size='small'
                                     variant="outlined"
+                                    autoFocus={autoFocus}
                                     className={errorMsg ? 'error-border' : ''}
                                 />}
                             </ReactInputMask>
@@ -63,6 +66,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 focused={false}
                                 variant="outlined"
                                 size='small'
+                                autoFocus={autoFocus}
                                 className={errorMsg ? 'error-border' : ''}
                             />}
                         {errorMsg && (
