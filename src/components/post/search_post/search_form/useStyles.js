@@ -2,9 +2,15 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#F2F2F2',
-        borderRadius: '10px',
         padding: '15px',
+        borderRadius: '10px',
+        backgroundColor: '#F2F2F2',
+        [theme.breakpoints.down('sm')]: {
+            padding: 0,
+            borderRadius: 0,
+            marginBottom: 10,
+            backgroundColor: 'inherit'
+        },
         '& form': {
             width: '100%'
         },

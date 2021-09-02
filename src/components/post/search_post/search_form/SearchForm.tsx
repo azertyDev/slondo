@@ -557,9 +557,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             </Hidden>
             <Hidden mdUp>
                 <Box
-                    pl='10px'
-                    display='flex'
                     height='38px'
+                    display='flex'
                     alignItems='flex-end'
                     className='filter-btns'
                 >
