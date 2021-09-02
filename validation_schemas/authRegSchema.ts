@@ -1,8 +1,7 @@
 import {string, object, ref} from 'yup';
-import {fieldRequiredTxt} from '@src/common_data/fields_keys';
+import {fieldRequiredTxt, invalidFormat} from "./index";
 import {bottomDashRegEx} from "@src/common_data/reg_exs";
 
-export const wrongFormat = 'wrongFormat';
 const passwordMin = 'passwordMustMinEightChars';
 const passwordsDifferent = 'passwordsDifferent';
 
@@ -12,7 +11,7 @@ export const userInfoSchema = object().shape({
 });
 
 export const phoneSchema = object({
-    phone: string().test('format', wrongFormat, val => !RegExp(bottomDashRegEx).test(val))
+    phone: string().test('format', invalidFormat, val => !RegExp(bottomDashRegEx).test(val))
 });
 
 export const passwordSchema = object({

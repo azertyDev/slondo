@@ -8,11 +8,11 @@ import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {numberRegEx, whiteSpacesRegEx} from '@src/common_data/reg_exs';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {fieldRequiredTxt} from "@src/common_data/fields_keys";
 import {useTranslation} from "next-i18next";
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
+import {fieldRequiredTxt} from "@root/validation_schemas";
 
 type AuctionFromPropsType = {
     lastBet,

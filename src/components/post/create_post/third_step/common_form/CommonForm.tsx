@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
@@ -7,15 +7,16 @@ import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
-import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
+import {handleTimeRegEx, numberRegEx} from '@src/common_data/reg_exs';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/fields_keys';
 import {
+    avalTimeSchema,
     auctionParamsSchema,
     defaultParamsSchema,
     safeDealPriceSchema
 } from '@root/validation_schemas/postSchemas';
-import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
+import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare, timeFormat} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
@@ -28,6 +29,7 @@ import {ServiceItem} from "@src/components/post/create_post/third_step/common_fo
 import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
 import {unstable_batchedUpdates} from "react-dom";
 import {useLocation} from "@src/hooks/use_location/useLocation";
+import {AuthCtx} from "@src/context";
 
 type DefaultParamsPropsType = {
     postType: PostType,
@@ -42,27 +44,23 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         handleSubmit
     } = props;
 
+    const query = useRouter().query;
     const {t} = useTranslation('post');
+    const {user} = useContext(AuthCtx);
 
-    const {
-        safe_deal,
-        delivery,
-        exchange,
-        description,
-        phone,
-        price,
-        currency,
-        available_days,
-        available_start_time,
-        available_end_time,
-        main_ctgr,
-        preview
-    } = useRouter().query;
+    const initAvalTime = {
+        available_start_time: query.available_start_time
+            ? JSON.parse(query.available_start_time as string)
+            : user?.available_start_time ?? '09:00',
+        available_end_time: query.available_end_time
+            ? JSON.parse(query.available_end_time as string)
+            : user?.available_end_time ?? '18:00'
+    };
 
-    const isPreview = +preview === 1;
-    const categoryName = main_ctgr as string;
-    const isJobOrService = categoryName === 'service' || categoryName === 'job';
     const formIndex = 1;
+    const isPreview = +query.preview === 1;
+    const categoryName = query.main_ctgr as string;
+    const isJobOrService = categoryName === 'service' || categoryName === 'job';
     const isAdvanceAuction = postType.name === 'exauc';
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
     const priceLabel = categoryName === 'job' ? 'salary' : 'price';
@@ -74,19 +72,15 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     } = useLocation({handleSelectLocation});
 
     const initForm = {
-        safe_deal: !!safe_deal,
-        delivery: !!delivery,
-        exchange: !!exchange,
+        safe_deal: !!query.safe_deal,
+        delivery: !!query.delivery,
+        exchange: !!query.exchange,
         location: null,
-        description: description ? JSON.parse(description as string) : '',
-        phone: phone ? JSON.parse(phone as string) : '',
-        price: price ? JSON.parse(price as string).toString() : '',
-        currency: currency ? JSON.parse(currency as string) : postType.currency[0],
-        avalTime: {
-            available_start_time: available_start_time ? JSON.parse(available_start_time as string) : '09:00',
-            available_end_time: available_end_time ? JSON.parse(available_end_time as string) : '18:00',
-            available_days: available_days ? JSON.parse(available_days as string) : [...WEEK_DAYS]
-        },
+        description: query.description ? JSON.parse(query.description as string) : '',
+        phone: query.phone ? JSON.parse(query.phone as string) : '',
+        price: query.price ? JSON.parse(query.price as string).toString() : '',
+        currency: query.currency ? JSON.parse(query.currency as string) : postType.currency[0],
+        available_days: query.available_days ? JSON.parse(query.available_days as string) : [...WEEK_DAYS],
         auction: {
             duration: null,
             reserve_price: '',
@@ -97,16 +91,17 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 isActive: false,
                 value: ''
             }
-        }
+        },
+        ...initAvalTime
     };
 
     const [free, setFree] = useState(false);
     const [isSafeDeal, setIsSafeDeal] = useState(false);
-    const [avalTimeActive, setAvalTimeActive] = useState(!!available_start_time);
+    const [avalTimeActive, setAvalTimeActive] = useState(!!query.available_start_time);
 
     const onSubmit = (values) => {
-        const createData = {...values};
-        createData.price = Number.parseInt(clearWhiteSpaces(createData.price));
+        const commonData = {...values};
+        commonData.price = Number.parseInt(clearWhiteSpaces(commonData.price));
 
         const {
             auction,
@@ -116,9 +111,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             safe_deal,
             delivery,
             exchange,
-            avalTime,
+            available_days,
+            available_end_time,
+            available_start_time,
             ...otherData
-        } = createData;
+        } = commonData;
 
         if (isAuction) {
             const {
@@ -147,9 +144,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
 
         if (avalTimeActive) {
-            const {available_start_time, available_end_time, available_days} = avalTime;
-            otherData.available_start_time = available_start_time;
-            otherData.available_end_time = available_end_time;
+            otherData.available_start_time = timeFormat(available_start_time);
+            otherData.available_end_time = timeFormat(available_end_time);
             otherData.available_days = available_days;
         }
 
@@ -182,11 +178,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {auction, avalTime} = values;
+    const {auction, available_days} = values;
 
     function getSchema() {
         if (isAuction) return auctionParamsSchema;
         if (isSafeDeal) return safeDealPriceSchema;
+        if (avalTimeActive) return defaultParamsSchema.concat(avalTimeSchema);
         return defaultParamsSchema;
     }
 
@@ -283,23 +280,22 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     };
 
     const handleAvalDays = day => () => {
-        const isExstDay = avalTime.available_days.some(({id}) => id === day.id);
+        const isExstDay = available_days.some(({id}) => id === day.id);
         if (isExstDay) {
-            avalTime.available_days.map(({id}, index) => {
+            available_days.map(({id}, index) => {
                 if (id === day.id) {
-                    avalTime.available_days.splice(index, 1);
+                    available_days.splice(index, 1);
                 }
             });
         } else {
-            avalTime.available_days.push(day);
+            available_days.push(day);
         }
         setValues({...values});
     };
 
     const handleTime = ({target: {value, name}}) => {
-        if (RegExp(timeRegEx).test(value)) {
-            value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            setValues({...values, avalTime: {...avalTime, [name]: value}});
+        if (RegExp(handleTimeRegEx).test(value)) {
+            setValues({...values, [name]: value});
         }
     };
 
@@ -436,12 +432,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         <Grid item xs={12} sm={12} lg={8}>
                                             <AvailableDays
                                                 t={t}
-                                                time={values.avalTime}
-                                                handleBlur={handleBlur}
+                                                time={values}
+                                                errors={errors}
+                                                touched={touched}
+                                                isActive={avalTimeActive}
                                                 handleTime={handleTime}
                                                 switchActive={switchActive}
                                                 handleAvalDays={handleAvalDays}
-                                                isActive={avalTimeActive}
                                             />
                                         </Grid>
                                     </Grid>

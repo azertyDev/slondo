@@ -4,7 +4,7 @@ export interface UserInfo {
     id?: number,
     name: string,
     surname: string,
-    phone: string,
+    phone?: string,
     avatar: string,
     created_at?: string,
     available_days: IdNameType[],

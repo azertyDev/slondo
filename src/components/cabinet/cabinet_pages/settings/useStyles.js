@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
+import {blue} from "@material-ui/core/colors";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,6 +14,15 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: '0.75rem'
         }
     },
+    form: {
+        '& button': {
+            position: 'relative'
+        },
+        '& .user-avatar': {
+            width: 60,
+            height: 60
+        }
+    },
     editButton: {
         width: 'fit-content',
         backgroundColor: '#fff',
@@ -24,6 +34,40 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& svg': {
             color: theme.palette.secondary
+        }
+    },
+    checkbox: {
+        padding: 5
+    },
+    button: {
+        width: '100%',
+        '& .MuiTypography-subtitle1': {
+            color: '#fff'
+        }
+    },
+    icon: {
+        width: 24,
+        height: 24,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '100px',
+        backgroundColor: '#F2F2F2'
+    },
+    progress: {
+        color: blue[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12
+    },
+    recoveryBtn: {
+        backgroundColor: '#fff',
+        boxShadow: '0px 1px 2px 0px #00000014',
+        borderRadius: '100px',
+        '& .MuiTypography-subtitle1': {
+            color: '#838383'
         }
     }
 }));

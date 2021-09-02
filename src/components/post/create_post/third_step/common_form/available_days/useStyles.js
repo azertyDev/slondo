@@ -32,12 +32,13 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.available-time': {
                 display: 'flex',
+                width: '258px',
                 '& > div': {
                     display: 'flex',
                     alignItems: 'center'
                 },
                 '& input.MuiOutlinedInput-input': {
-                    maxWidth: '40px',
+                    maxWidth: '100%',
                     padding: '10px 15px'
                 }
             }

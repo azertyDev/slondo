@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import Box from '@material-ui/core/Box';
 import {Grid, Typography} from '@material-ui/core';
-import {getTime, numberPrettier, weekDaysHelper} from '@src/helpers';
+import {getTime, numberPrettier, timeFormat, weekDaysHelper} from '@src/helpers';
 import {
     SafeIcon,
     PhoneIcon,
@@ -34,7 +34,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const urlRegion = JSON.parse(region as string);
     const urlCity = JSON.parse(city as string);
 
-    const {auction, avalTime} = values;
+    const {
+        auction,
+        available_days,
+        available_end_time,
+        available_start_time
+    } = values;
+
     const isFree = values.price === '0';
     const isService = main_ctgr === 'service';
     const locationText = `${t(`locations:${urlRegion.name}.name`)}${urlCity ? `, ${t(`locations:${urlRegion.name}.${urlCity.name}`)}` : ''}`;
@@ -210,8 +216,8 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                         <Box className={classes.serviceItem}>
                             <PhoneIcon/>
                             <Typography variant="subtitle1">
-                                {`${avalTime.available_start_time} - ${avalTime.available_end_time}`}&nbsp;
-                                ({weekDaysHelper(avalTime.available_days, t)})
+                                {`${timeFormat(available_start_time)} - ${timeFormat(available_end_time)}`}&nbsp;
+                                ({weekDaysHelper(available_days, t)})
                             </Typography>
                         </Box>
                     </Grid>

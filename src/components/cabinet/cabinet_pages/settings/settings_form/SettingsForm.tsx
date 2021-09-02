@@ -1,5 +1,4 @@
 import {FC, ReactNode} from 'react';
-import {WithT} from 'i18next';
 import {getErrorMsg} from '@src/helpers';
 import {Form, FormikContextType, FormikProvider} from 'formik';
 import {Button, CircularProgress, Grid, Typography} from '@material-ui/core';
@@ -8,10 +7,11 @@ import {AvailableDays} from '@src/components/post/create_post/third_step/common_
 import {SettingsButton, useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
 import LockIcon from '@material-ui/icons/Lock';
+import {useTranslation} from "react-i18next";
 
 type SettingsFormPropsType = {
     editable: boolean,
-    avalTimeActive: boolean,
+    timeEditable: boolean,
     formik: FormikContextType<UserInfo>,
     uploadAvatarForm: ReactNode,
     handleTime: (value, name) => void,
@@ -19,13 +19,12 @@ type SettingsFormPropsType = {
     handleOpenModal?: () => void,
     handleCancel: () => void,
     switchAvalDaysActive: (_, v) => void,
-} & WithT;
+};
 
 export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
     const {
-        t,
         editable,
-        avalTimeActive,
+        timeEditable,
         switchAvalDaysActive,
         formik,
         uploadAvatarForm,
@@ -35,14 +34,15 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         handleCancel
     } = props;
 
+    const {t} = useTranslation('cabinet');
+
     const {
         values,
         errors,
         touched,
         handleSubmit,
         handleChange,
-        isSubmitting,
-        handleBlur
+        isSubmitting
     } = formik;
 
     const {
@@ -53,7 +53,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         available_end_time
     } = values;
 
-    const classes = useStyles({props});
+    const classes = useStyles();
     return (
         <>
             <FormikProvider value={formik}>
@@ -80,7 +80,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                                         errors.name,
                                         touched.name,
                                         t,
-                                        {value: t('name_must')}
+                                        t('name_must')
                                     )}
                                 />
                             </Grid>
@@ -96,7 +96,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                                         errors.surname,
                                         touched.surname,
                                         t,
-                                        {value: t('surname_must')}
+                                        t('surname_must')
                                     )}
                                 />
                             </Grid>
@@ -121,7 +121,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                                 className={classes.recoveryBtn}
                                 startIcon={
                                     <span className={classes.icon}>
-                                        <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small' />
+                                        <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small'/>
                                     </span>
                                 }
                             >
@@ -133,11 +133,12 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} sm={8} md={8} lg={6}>
                             <AvailableDays
                                 t={t}
-                                isActive={editable && avalTimeActive}
+                                isActive={editable && timeEditable}
                                 handleTime={handleTime}
-                                handleBlur={handleBlur}
                                 handleAvalDays={handleAvalDays}
                                 switchActive={switchAvalDaysActive}
+                                errors={errors}
+                                touched={touched}
                                 time={{
                                     available_days,
                                     available_start_time,
@@ -178,7 +179,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                                         disabled={isSubmitting || !editable}
                                         startIcon={
                                             isSubmitting &&
-                                            <CircularProgress size={24} className={classes.progress} />
+                                            <CircularProgress size={24} className={classes.progress}/>
                                         }
                                     >
                                         <Typography variant='subtitle1'>

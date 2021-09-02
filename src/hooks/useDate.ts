@@ -5,20 +5,22 @@ export const useDate = () => {
     const {t} = useTranslation('common');
 
     const getDate = (date) => {
+        const today = new Date().getDate();
+
         if (date) {
             date = new Date(date.replace(/-/g, '/'));
         } else {
             return {};
         }
 
-        const day = zeroFormat(date.getDate());
+        const day = date.getDate();
         const month = months[date.getMonth()] ?? '';
         const hours = zeroFormat(date.getHours());
         const minutes = zeroFormat(date.getMinutes());
 
         return {
             milliSeconds: date ? date.getTime() : '',
-            time: `${day} ${t(month)} ${hours}:${minutes}`
+            time: `${today === day ? `${t('today')}` : `${day} ${t(month)}`} ${hours}:${minutes}`
         };
     };
 

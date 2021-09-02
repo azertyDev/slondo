@@ -425,6 +425,13 @@ export const getCategoriesByParams = (params: CategoriesParamsType) => {
     }, {});
 };
 
+export const timeFormat = (time) => {
+    return time.split(':').map(num => {
+        if (num.length === 1 && +num < 10) num = `0${num}`;
+        return num;
+    }).join(':');
+};
+
 export const formatNumber = (number: number): string => (
     number <= 9 ? `0${number}` : number.toString()
 );

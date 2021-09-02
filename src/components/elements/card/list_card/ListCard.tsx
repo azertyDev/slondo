@@ -159,20 +159,22 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                                 {t('common:currentRate')}
                                             </Typography>
                                             <Typography
+                                                noWrap
                                                 variant="h6"
                                                 component='p'
                                                 color="initial"
-                                                noWrap
+                                                className='price'
                                             >
                                                 {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
                                                 <span>{t(`common:${cardData.currency.name}`)}</span>
                                             </Typography>
                                         </>
                                         : <Typography
+                                            noWrap
                                             variant="h6"
                                             component='p'
                                             color="initial"
-                                            noWrap
+                                            className='price'
                                         >
                                             {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                             {!excludePrice && (

@@ -117,18 +117,17 @@ export const useStyles = makeStyles((theme) => ({
                             }
                         }
                     },
+                    '& p.price': {
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '1.2rem'
+                        }
+                    },
                     '& h3': {
                         display: '-webkit-box',
                         WebkitLineClamp: 2,
                         overflow: 'hidden',
                         WebkitBoxOrient: 'vertical',
-                        fontSize: theme.typography.h6.fontSize,
-                        [theme.breakpoints.down('lg')]: {
-                            fontSize: theme.typography.pxToRem(16)
-                        },
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: theme.typography.pxToRem(14)
-                        }
+                        fontSize: '1.2rem'
                     }
                 },
                 '& .color-silver': {

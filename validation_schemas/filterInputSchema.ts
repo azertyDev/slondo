@@ -1,5 +1,5 @@
 import {string, object} from 'yup';
-import {fieldRequiredTxt} from "@src/common_data/fields_keys";
+import {fieldRequiredTxt} from "./index";
 
 export const filterInputSchema = object({
     phone: string().required(fieldRequiredTxt),

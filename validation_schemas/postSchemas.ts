@@ -1,7 +1,9 @@
 import {object, string, array, lazy, number} from 'yup';
-import {fieldRequiredTxt, fractionalFields} from '@src/common_data/fields_keys';
+import {fractionalFields} from '@src/common_data/fields_keys';
 import {DESC_MIN, SAFE_DEAL_LIMIT, TITLE_MIN} from "@src/constants";
 import {isRequired} from '@root/src/helpers';
+import {timeRegEx} from "@src/common_data/reg_exs";
+import {fieldRequiredTxt, invalidFormat} from "./index";
 
 export const titleValidate = string()
     .required(fieldRequiredTxt)
@@ -113,14 +115,19 @@ export const defaultParamsSchema = object({
         .required(fieldRequiredTxt)
 });
 
+export const avalTimeSchema = object({
+    available_start_time: string()
+        .required(fieldRequiredTxt)
+        .test('format', invalidFormat, val => RegExp(timeRegEx).test(val)),
+    available_end_time: string()
+        .required(fieldRequiredTxt)
+        .test('format', invalidFormat, val => RegExp(timeRegEx).test(val))
+});
+
 export const auctionParamsSchema = defaultParamsSchema.shape({
     auction: object<{ duration: any }>()
         .nullable()
-        .test(
-            '',
-            fieldRequiredTxt,
-            auction => !!auction.duration?.id
-        )
+        .test('', fieldRequiredTxt, auction => !!auction.duration?.id)
 });
 
 export const safeDealPriceSchema = defaultParamsSchema.concat(object({

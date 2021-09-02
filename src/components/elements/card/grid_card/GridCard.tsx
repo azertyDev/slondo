@@ -101,8 +101,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                     <div className="icons">
                                         {!!delivery && (
                                             <Tooltip
-                                                title={t('delivery')}
                                                 arrow
+                                                title={t('delivery')}
                                             >
                                                 <span>
                                                     <DeliveryIcon/>
@@ -111,8 +111,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         )}
                                         {!!safe_deal && (
                                             <Tooltip
-                                                title={t('safe_deal')}
                                                 arrow
+                                                title={t('safe_deal')}
                                             >
                                                 <span>
                                                     <SafeIcon/>
@@ -121,8 +121,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         )}
                                         {!!exchange && (
                                             <Tooltip
-                                                title={t('exchange')}
                                                 arrow
+                                                title={t('exchange')}
                                             >
                                                 <span>
                                                     <SwapIcon/>
@@ -165,8 +165,12 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 <span>{t(`${currency.name}`)}</span>
                                             )}
                                         </Typography>
-                                        <Typography variant="caption" noWrap component='p'
-                                                    classes={{root: classes.mobileFont}}>
+                                        <Typography
+                                            noWrap
+                                            component='p'
+                                            variant="caption"
+                                            classes={{root: classes.mobileFont}}
+                                        >
                                             {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
                                         </Typography>
                                         <Typography

@@ -2,7 +2,7 @@ import {makeStyles, withStyles} from '@material-ui/core/styles';
 import {blue} from '@material-ui/core/colors';
 import {Button, Switch} from '@material-ui/core';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         '& .MuiTextField-root': {
         },

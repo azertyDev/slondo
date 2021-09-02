@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         [theme.breakpoints.down('md')]: {
             '& input': {
-                padding: '11.5px 14px',
+                padding: '11.5px 7px',
                 fontSize: 'calc(14px + 2 * (100vw / 1280))'
             }
         },

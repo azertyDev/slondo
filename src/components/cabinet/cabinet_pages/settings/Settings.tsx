@@ -2,19 +2,23 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {useTranslation} from 'react-i18next';
 import {userAPI} from '@src/api/api';
-import {cookieOpts, cookies} from '@src/helpers';
-import {useFormik} from 'formik';
+import {cookieOpts, cookies, getErrorMsg, timeFormat} from '@src/helpers';
+import {Form, FormikProvider, useFormik} from 'formik';
 import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
 import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
-import {timeRegEx} from '@src/common_data/reg_exs';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {AuthCtx, ErrorCtx} from "@src/context";
-import {Box, Button, Grid, Typography} from "@material-ui/core";
+import {Box, Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {UserInfo} from "@root/interfaces/Auth";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {ChangePasswordModal} from "./settings_form/change_password_modal/ChangePasswordModal";
+import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
 import {useStyles} from "./useStyles";
+import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import LockIcon from "@material-ui/icons/Lock";
+import {AvailableDays} from "@src/components/post/create_post/third_step/common_form/available_days/AvailableDays";
+import {SettingsButton} from "@src/components/cabinet/cabinet_pages/settings/settings_form/useStyles";
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -25,7 +29,6 @@ export const Settings: FC = () => {
         name: user.name,
         surname: user.surname ?? '',
         avatar: user.avatar,
-        phone: user.phone,
         available_start_time: user.available_start_time ?? '09:00',
         available_end_time: user.available_end_time ?? '18:00',
         available_days: user.available_days ?? [...WEEK_DAYS]
@@ -33,20 +36,21 @@ export const Settings: FC = () => {
 
     const [isFetch, setIsFetch] = useState(false);
     const [editable, setEditable] = useState(false);
-    const [avalTimeActive, setAvalTimeActive] = useState(false);
+    const [timeEditable, setEditableTime] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
     const onSubmit = async (values: UserInfo) => {
         try {
             const {
-                phone,
+                name,
+                surname,
                 avatar,
-                ...otherData
+                available_start_time,
+                available_end_time,
+                available_days
             } = values;
 
-            const newUserInfo: any = {
-                ...otherData
-            };
+            const newUserInfo: any = {name};
 
             setIsFetch(true);
 
@@ -58,6 +62,16 @@ export const Settings: FC = () => {
                 await userAPI.deleteUserAvatar(user.id);
             }
 
+            if (surname !== '') {
+                newUserInfo.surname = surname;
+            }
+
+            if (timeEditable) {
+                newUserInfo.available_start_time = timeFormat(available_start_time);
+                newUserInfo.available_end_time = timeFormat(available_end_time);
+                newUserInfo.available_days = available_days;
+            }
+
             const updatedUserInfo = await userAPI.changeUserInfo(newUserInfo);
 
             cookies.set('slondo_user', updatedUserInfo, cookieOpts);
@@ -65,7 +79,7 @@ export const Settings: FC = () => {
                 addUser(updatedUserInfo);
                 setEditable(false);
                 setIsFetch(false);
-                setAvalTimeActive(false);
+                setEditableTime(false);
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
@@ -79,19 +93,24 @@ export const Settings: FC = () => {
         unstable_batchedUpdates(() => {
             setValues(initUserInfo);
             setEditable(false);
-            setAvalTimeActive(false);
+            setEditableTime(false);
         });
     };
 
     const formik = useFormik<UserInfo>({
         initialValues: initUserInfo,
-        validationSchema: userInfoSchema,
+        validationSchema: timeEditable ? userInfoSchema.concat(avalTimeSchema) : userInfoSchema,
         onSubmit
     });
 
     const {
         values,
-        setValues
+        setValues,
+        errors,
+        touched,
+        handleSubmit,
+        handleChange,
+        isSubmitting
     } = formik;
 
     const {available_days} = values;
@@ -117,7 +136,7 @@ export const Settings: FC = () => {
     };
 
     const switchAvalDaysActive = (_, val) => {
-        editable && setAvalTimeActive(val);
+        editable && setEditableTime(val);
     };
 
     const handleAvalDays = day => () => {
@@ -141,10 +160,7 @@ export const Settings: FC = () => {
     };
 
     const handleTime = ({target: {value, name}}) => {
-        if (timeRegEx.test(value)) {
-            value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            setValues({...values, [name]: value});
-        }
+        setValues({...values, [name]: value});
     };
 
     const uploadAvatarForm = (
@@ -160,7 +176,8 @@ export const Settings: FC = () => {
     useEffect(() => {
         setValues(initUserInfo);
     }, [user]);
-
+    console.log(values);
+    console.log(timeEditable);
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -192,7 +209,7 @@ export const Settings: FC = () => {
                             color='secondary'
                             onClick={handleAllowEdit}
                             className={classes.editButton}
-                            startIcon={!editable && <EditIcon fontSize='small' />}
+                            startIcon={!editable && <EditIcon fontSize='small'/>}
                         >
                             <Typography variant='subtitle1'>
                                 {editable ? t('cabinet:revoke') : t('cabinet:edit')}
@@ -201,18 +218,153 @@ export const Settings: FC = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <SettingsForm
-                        t={t}
-                        formik={formik}
-                        editable={editable}
-                        avalTimeActive={avalTimeActive}
-                        switchAvalDaysActive={switchAvalDaysActive}
-                        uploadAvatarForm={uploadAvatarForm}
-                        handleTime={handleTime}
-                        handleAvalDays={handleAvalDays}
-                        handleOpenModal={handleOpenModal}
-                        handleCancel={handleCancel}
-                    />
+                    {/*<SettingsForm*/}
+                    {/*    formik={formik}*/}
+                    {/*    editable={editable}*/}
+                    {/*    timeEditable={timeEditable}*/}
+                    {/*    switchAvalDaysActive={switchAvalDaysActive}*/}
+                    {/*    uploadAvatarForm={uploadAvatarForm}*/}
+                    {/*    handleTime={handleTime}*/}
+                    {/*    handleAvalDays={handleAvalDays}*/}
+                    {/*    handleOpenModal={handleOpenModal}*/}
+                    {/*    handleCancel={handleCancel}*/}
+                    {/*/>*/}
+                    <FormikProvider value={formik}>
+                        <Form onSubmit={handleSubmit}>
+                            <Grid
+                                item
+                                container
+                                spacing={3}
+                                className={classes.form}
+                            >
+                                <Grid item xs={12}>
+                                    {uploadAvatarForm}
+                                </Grid>
+                                <Grid item container xs={12} sm={8} md={8} lg={6} spacing={2}>
+                                    <Grid item xs={12}>
+                                        <FormikField
+                                            t={t}
+                                            name='name'
+                                            labelText='user_name'
+                                            value={values.name}
+                                            onChange={handleChange}
+                                            disabled={!editable}
+                                            errorMsg={getErrorMsg(
+                                                errors.name,
+                                                touched.name,
+                                                t,
+                                                t('name_must')
+                                            )}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <FormikField
+                                            t={t}
+                                            name='surname'
+                                            labelText='user_surname'
+                                            value={values.surname}
+                                            onChange={handleChange}
+                                            disabled={!editable}
+                                            errorMsg={getErrorMsg(
+                                                errors.surname,
+                                                touched.surname,
+                                                t,
+                                                t('surname_must')
+                                            )}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <FormikField
+                                            t={t}
+                                            disabled
+                                            name='phone'
+                                            value={values.phone}
+                                            onChange={handleChange}
+                                            labelText='phone_number'
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant='text'
+                                        color='secondary'
+                                        disabled={!editable}
+                                        component='span'
+                                        onClick={handleOpenModal}
+                                        className={classes.recoveryBtn}
+                                        startIcon={
+                                            <span className={classes.icon}>
+                                        <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small'/>
+                                    </span>
+                                        }
+                                    >
+                                        <Typography variant='subtitle1'>
+                                            {t('auth_reg:change_password')}
+                                        </Typography>
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={8} md={8} lg={6}>
+                                    <AvailableDays
+                                        t={t}
+                                        isActive={editable && timeEditable}
+                                        handleTime={handleTime}
+                                        handleAvalDays={handleAvalDays}
+                                        switchActive={switchAvalDaysActive}
+                                        errors={errors}
+                                        touched={touched}
+                                        time={{
+                                            available_days: values.available_days,
+                                            available_start_time: values.available_start_time,
+                                            available_end_time: values.available_end_time
+                                        }}
+                                    />
+                                </Grid>
+                                {editable && (
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={8}
+                                        md={8}
+                                        lg={12}
+                                        container
+                                        spacing={2}
+                                    >
+                                        <Grid item xs={6} sm={6} lg={3}>
+                                            <SettingsButton
+                                                disableElevation
+                                                color='secondary'
+                                                disabled={!editable}
+                                                className={classes.button}
+                                                onClick={handleCancel}
+                                            >
+                                                <Typography variant='subtitle1'>
+                                                    {t('common:cancel')}
+                                                </Typography>
+                                            </SettingsButton>
+                                        </Grid>
+                                        <Grid item xs={6} sm={6} lg={3}>
+                                            <SettingsButton
+                                                type='submit'
+                                                color='primary'
+                                                size="large"
+                                                disableElevation
+                                                className={classes.button}
+                                                disabled={isSubmitting || !editable}
+                                                startIcon={
+                                                    isSubmitting &&
+                                                    <CircularProgress size={24} className={classes.progress}/>
+                                                }
+                                            >
+                                                <Typography variant='subtitle1'>
+                                                    {t('common:accept')}
+                                                </Typography>
+                                            </SettingsButton>
+                                        </Grid>
+                                    </Grid>
+                                )}
+                            </Grid>
+                        </Form>
+                    </FormikProvider>
                 </Grid>
             </Grid>
             <ChangePasswordModal

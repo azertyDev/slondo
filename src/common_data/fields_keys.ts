@@ -1,5 +1,3 @@
-export const fieldRequiredTxt = 'fieldIsRequired';
-
 export const notRequirePhotosCategories = [
     'job',
     'service'

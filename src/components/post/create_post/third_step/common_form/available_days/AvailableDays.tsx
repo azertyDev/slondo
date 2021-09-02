@@ -1,8 +1,10 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {WEEK_DAYS} from '@src/common_data/common';
-import {Box, Checkbox, Paper, Switch, TextField, Typography} from '@material-ui/core';
+import {Box, Checkbox, Paper, Switch, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
+import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import {getErrorMsg} from "@src/helpers";
 
 type AvailableDaysPropsType = {
     isActive: boolean,
@@ -10,19 +12,26 @@ type AvailableDaysPropsType = {
     handleTime,
     handleAvalDays,
     switchActive: (_, v) => void,
-    handleBlur
+    touched,
+    errors
 } & WithT;
 
 export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
     const {
         t,
-        isActive,
+        errors,
+        touched,
         time,
+        isActive,
         handleTime,
         handleAvalDays,
-        switchActive,
-        handleBlur
+        switchActive
     } = props;
+
+    const {
+        available_start_time,
+        available_end_time
+    } = errors;
 
     const classes = useStyles();
     return (
@@ -65,28 +74,28 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                         >
                             {t(`common:from`)}
                         </Box>
-                        <TextField
-                            variant='outlined'
-                            name='available_start_time'
+                        <FormikField
+                            t={t}
                             disabled={!isActive}
                             onChange={handleTime}
-                            onBlur={handleBlur}
+                            name='available_start_time'
                             value={time.available_start_time}
+                            errorMsg={getErrorMsg(available_start_time, touched.available_start_time, t)}
                         />
                         <Box
                             mx={1}
-                            fontSize='subtitle2.fontSize'
                             component='p'
+                            fontSize='subtitle2.fontSize'
                         >
                             {t(`common:to`)}
                         </Box>
-                        <TextField
-                            name='available_end_time'
-                            variant='outlined'
+                        <FormikField
+                            t={t}
                             disabled={!isActive}
-                            onBlur={handleBlur}
                             onChange={handleTime}
+                            name='available_end_time'
                             value={time.available_end_time}
+                            errorMsg={getErrorMsg(available_end_time, touched.available_end_time, t)}
                         />
                     </div>
                 </div>

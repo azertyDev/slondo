@@ -6,17 +6,15 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: '#F2F2F2',
         borderRadius: '100px 100px 0px 0px',
         [theme.breakpoints.down('sm')]: {
-            marginBottom: '84px',
             borderRadius: '30px 30px 0px 0px'
         },
         '& div.footer-content': {
-            padding: '60px 0',
             [theme.breakpoints.down('sm')]: {
                 padding: '24px 0 12px',
                 textAlign: 'center'
             },
             '& div.footer-top': {
-                paddingBottom: 90,
+                paddingBottom: '30px',
                 mixBlendMode: 'normal',
                 borderBottom: '1px solid #E0E0E0',
                 [theme.breakpoints.down('sm')]: {
