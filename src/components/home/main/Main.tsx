@@ -49,24 +49,22 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                     <SEOTextComponent text={seoTxt}/>
                 </Container>
                 <Hidden lgUp>
-                    <div className={classes.createAdBlock}>
-                        <Link href={'/create'} shallow>
-                            <a>
-                                <Slide
-                                    appear={false}
-                                    direction="up"
-                                    in={!trigger}
-                                >
-                                    <div>
-                                        <Typography variant="subtitle1">
-                                            {t('header:createPost')}
-                                        </Typography>
-                                        <AddIcon/>
-                                    </div>
-                                </Slide>
-                            </a>
-                        </Link>
-                    </div>
+                    <Slide
+                        appear={false}
+                        direction="up"
+                        in={!trigger}
+                    >
+                        <div className={classes.createPostBtn}>
+                            <Link href={'/create'} shallow>
+                                <a>
+                                    <Typography variant="subtitle1">
+                                        {t('header:createPost')}
+                                    </Typography>
+                                    <AddIcon/>
+                                </a>
+                            </Link>
+                        </div>
+                    </Slide>
                 </Hidden>
             </div>
         </main>

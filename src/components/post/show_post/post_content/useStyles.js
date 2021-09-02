@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
             borderBottom: 'none',
             paddingBottom: 0
         },
-        borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {

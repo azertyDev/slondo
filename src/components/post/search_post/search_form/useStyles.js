@@ -83,5 +83,10 @@ export const useStyles = makeStyles((theme) => ({
             width: 'auto',
             height: 'auto'
         }
+    },
+    drawer: {
+        '& .MuiDrawer-paper': {
+            overflowX: 'hidden'
+        }
     }
 }));

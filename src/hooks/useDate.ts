@@ -30,7 +30,7 @@ export const useDate = () => {
         }
 
         const day = zeroFormat(date.getDate());
-        const month = zeroFormat(date.getMonth());
+        const month = zeroFormat(date.getMonth() + 1);
         const year = date.getFullYear();
 
         return {

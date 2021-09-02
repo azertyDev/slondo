@@ -19,19 +19,10 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width
             alignItems='center'
             className={classes.root}
         >
-            {/*<StyledBadge*/}
-            {/*    variant="dot"*/}
-            {/*    overlap="circular"*/}
-            {/*    anchorOrigin={{*/}
-            {/*        vertical: 'bottom',*/}
-            {/*        horizontal: 'right'*/}
-            {/*    }}*/}
-            {/*>*/}
             <Avatar
                 alt="avatar"
                 src={avatar ?? '/img/avatar.svg'}
             />
-            {/*</StyledBadge>*/}
         </Box>
     );
 };

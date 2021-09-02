@@ -601,6 +601,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 anchor='left'
                 open={drawerOpen}
                 onClose={handleDrawerClose}
+                classes={{root: classes.drawer}}
             >
                 <ModalHeader
                     title={t('filters')}

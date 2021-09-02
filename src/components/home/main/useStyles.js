@@ -29,9 +29,8 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
-    createAdBlock: {
+    createPostBtn: {
         bottom: 0,
-        zIndex: 30,
         width: '100%',
         display: 'flex',
         position: 'fixed',
@@ -39,23 +38,21 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         '& > a': {
             textDecoration: 'none',
-            '& > div': {
-                display: 'flex',
-                alignItems: 'center',
-                padding: '11px 24px',
-                color: theme.palette.primary.white,
-                backgroundColor: '#00AAFF',
-                borderRadius: '100px',
-                '& > h6': {
-                    fontSize: '18px',
-                    textAlign: 'center',
-                    color: '#fff',
-                    marginRight: '10px'
-                },
-                '& svg': {
-                    width: '20px',
-                    height: '20px'
-                }
+            display: 'flex',
+            alignItems: 'center',
+            padding: '11px 24px',
+            color: theme.palette.primary.white,
+            backgroundColor: '#00AAFF',
+            borderRadius: '100px',
+            '& > h6': {
+                fontSize: '18px',
+                textAlign: 'center',
+                color: '#fff',
+                marginRight: '10px'
+            },
+            '& svg': {
+                width: '20px',
+                height: '20px'
             }
         }
     }
