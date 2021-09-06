@@ -362,8 +362,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     </Grid>
                                     <Grid
                                         item
-                                        xs={4}
-                                        sm={2}
+                                        xs={12}
+                                        sm={4}
                                     >
                                         <div style={{height: '22px'}}/>
                                         <ServiceItem

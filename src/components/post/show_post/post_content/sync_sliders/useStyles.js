@@ -89,7 +89,6 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
                 '&.backspace-btn': {
-                    background: 'none',
                     padding: 0,
                     '& svg': {
                         width: 40,
