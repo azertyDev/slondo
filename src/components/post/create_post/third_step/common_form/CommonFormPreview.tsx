@@ -32,7 +32,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {main_ctgr, region, city} = useRouter().query;
 
     const urlRegion = JSON.parse(region as string);
-    const urlCity = JSON.parse(city as string);
+    const urlCity = city ? JSON.parse(city as string) : null;
 
     const {
         auction,

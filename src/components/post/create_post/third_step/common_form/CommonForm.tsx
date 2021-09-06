@@ -1,6 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import {useRouter} from "next/router";
+import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -27,7 +28,6 @@ import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTex
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ServiceItem} from "@src/components/post/create_post/third_step/common_form/site_services/ServiceItem";
 import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
-import {unstable_batchedUpdates} from "react-dom";
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 
@@ -39,14 +39,15 @@ type DefaultParamsPropsType = {
 
 export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
-        currentFormIndex,
         postType,
-        handleSubmit
+        handleSubmit,
+        currentFormIndex
     } = props;
 
     const query = useRouter().query;
-    const {t} = useTranslation('post');
+    const {region, city = null} = query;
     const {user} = useContext(AuthCtx);
+    const {t} = useTranslation('post');
 
     const initAvalTime = {
         available_start_time: query.available_start_time
@@ -56,6 +57,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             ? JSON.parse(query.available_end_time as string)
             : user?.available_end_time ?? '18:00'
     };
+
+    const location = region
+        ? {
+            region: JSON.parse(region as string),
+            city: city ? JSON.parse(city as string) : null
+        }
+        : null;
 
     const formIndex = 1;
     const isPreview = +query.preview === 1;
@@ -69,13 +77,16 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         location: userLoc,
         locElement,
         locationModal
-    } = useLocation({handleSelectLocation});
+    } = useLocation({
+        initLocation: location,
+        handleSelectLocation
+    });
 
     const initForm = {
         safe_deal: !!query.safe_deal,
         delivery: !!query.delivery,
         exchange: !!query.exchange,
-        location: null,
+        location,
         description: query.description ? JSON.parse(query.description as string) : '',
         phone: query.phone ? JSON.parse(query.phone as string) : '',
         price: query.price ? JSON.parse(query.price as string).toString() : '',
@@ -304,7 +315,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     }
 
     useEffect(() => {
-        !!userLoc && setValues({...values, location: userLoc});
+        !region
+        && !!userLoc
+        && setValues({
+            ...values,
+            location: userLoc
+        });
     }, [userLoc]);
 
     return (

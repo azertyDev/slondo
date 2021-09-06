@@ -72,7 +72,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                 <Grid container spacing={2}>
                     {props.children}
                     {!isPreview && (
-                        <Grid item xs={12} container>
+                        <Grid item xs={12} justifyContent='flex-end' container>
                             <CustomButton
                                 type='submit'
                                 disabled={isFetch}
@@ -82,7 +82,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                                 <Typography variant='subtitle1' component='p'>
                                     {t(`post:${submitTxt}`)}
                                 </Typography>
-                                <ArrowForwardIcon />
+                                <ArrowForwardIcon/>
                             </CustomButton>
                         </Grid>
                     )}

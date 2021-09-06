@@ -1,23 +1,22 @@
 import {FC} from 'react';
-import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {StepsProgress} from '@src/components/post/create_post/steps_progress/StepsProgress';
-import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 export const PostTypesPage: FC = () => {
-    const {t} = useTranslation('post');
     const {push} = useRouter();
+    const {t} = useTranslation('post');
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const handlePostType = (url: string) => async () => {
         await push(url, null, {shallow: true});
     };
-
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
@@ -33,9 +32,7 @@ export const PostTypesPage: FC = () => {
                         md={4}
                         xs={12}
                     >
-                        <div
-                            className={`${postType.name} post-wrapper`}
-                        >
+                        <div className={`${postType.name} post-wrapper`}>
                             <Hidden smDown>
                                 <div className='post-title-text'>
                                     <Typography variant="subtitle1">

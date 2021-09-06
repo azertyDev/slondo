@@ -1,4 +1,4 @@
-import {FC, MutableRefObject, useContext, useEffect, useRef, useState} from 'react';
+import {FC, useContext, useEffect, useRef, useState} from 'react';
 import {
     Container,
     Hidden,
@@ -15,7 +15,6 @@ import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
 import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/services_icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
-import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, priceTransform, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -33,13 +32,6 @@ type PostContentTypes = {
     post,
     handleSafeDeal: () => void,
     setFetchedPostData: () => Promise<void>
-};
-
-export type SlidersRefType = {
-    slider1?: MutableRefObject<any>;
-    slider2?: MutableRefObject<any>;
-    slider3?: MutableRefObject<any>;
-    slider4?: MutableRefObject<any>;
 };
 
 export const PostContent: FC<PostContentTypes> = (props) => {
@@ -65,18 +57,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         }
     } = post;
 
-    const initSlidersRefs: SlidersRefType = {
-        slider1: useRef(),
-        slider2: useRef(),
-        slider3: useRef(),
-        slider4: useRef()
-    };
-
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
-    const [favorite, setFavorite] = useState(false);
     const [favCount, setFavCount] = useState(0);
-    const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
+    const [favorite, setFavorite] = useState(false);
 
     const jobOrService = post.category.name === 'job' || post.category.name === 'service';
     const excludePrice = jobOrService || post.price === 0;
@@ -85,12 +69,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         modalOpen: complainOpen,
         handleModalClose: handleComplainClose,
         handleModalOpen: handleComplainOpen
-    } = useModal();
-
-    const {
-        modalOpen: sliderOpen,
-        handleModalClose: handleSliderClose,
-        handleModalOpen: handleSliderOpen
     } = useModal();
 
     const {time = ''} = useDate().getDate(post.created_at);
@@ -178,10 +156,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     }, []);
 
     useEffect(() => {
-        setSlidersRefs(initSlidersRefs);
-    }, []);
-
-    useEffect(() => {
         setFavorite(post.favorite);
         !!number_of_favorites && setFavCount(number_of_favorites);
     }, [post]);
@@ -193,8 +167,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent
                         category={transKey}
-                        subcategory={post.adsable?.sub_category.name}
                         type={post.adsable?.type?.name}
+                        subcategory={post.adsable?.sub_category.name}
                     />
                 </div>
             </Hidden>
@@ -223,13 +197,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             <div className="slider-wrapper">
                 <SyncSliders
                     title={post.title}
-                    isCreator={post.creator}
                     imgs={post.images}
                     isFavorite={favorite}
-                    slidersRefs={slidersRefs}
                     favoriteCount={favCount}
+                    isCreator={post.creator}
                     handleFavorite={handleFavorite}
-                    handleOpenModal={handleSliderOpen}
                 />
                 <Hidden lgUp>
                     <div className='post-type-adaptive'>
@@ -417,13 +389,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         setFetchedPostData={setFetchedPostData}
                     />
                 </Hidden>
-                <ModalSyncSliders
-                    open={sliderOpen}
-                    imgs={post.images}
-                    title={post.title}
-                    slidersRefs={slidersRefs}
-                    onClose={handleSliderClose}
-                />
             </Container>
             <ComplaintModal
                 postId={post.id}

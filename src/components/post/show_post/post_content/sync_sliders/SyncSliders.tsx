@@ -1,5 +1,6 @@
-import {FC, useContext} from 'react';
+import {FC, useContext, useRef} from 'react';
 import {FavoriteBorder, Share} from '@material-ui/icons';
+import InnerImageZoom from 'react-inner-image-zoom';
 import {
     Box,
     Hidden,
@@ -8,11 +9,13 @@ import {
     Typography,
     ClickAwayListener,
     useMediaQuery,
-    useTheme
+    useTheme,
+    Container,
+    Modal
 } from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import {SlidersRefType} from '../PostContent';
+import {CloseIcon} from "@src/components/elements/icons";
 import {AuthCtx} from '@src/context/AuthCtx';
 import {useTranslation} from 'next-i18next';
 import {useModal} from '@src/hooks';
@@ -21,40 +24,46 @@ import {useStyles} from './useStyles';
 type SyncSlidersProps = {
     title: string,
     isCreator: boolean,
-    handleOpenModal: () => void,
     imgs: {
         alt: string;
         url: { default: string, extra: string };
     }[],
-    slidersRefs: SlidersRefType,
     handleFavorite: () => void,
     isFavorite: boolean,
     favoriteCount: number
 };
 
-export const SyncSliders: FC<SyncSlidersProps> = (props) => {
+export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
     const {
         title,
         isCreator,
         imgs = [],
-        handleOpenModal,
-        slidersRefs,
         handleFavorite,
         isFavorite,
         favoriteCount
     } = props;
 
-    const {
-        slider1,
-        slider2,
-        slider3
-    } = slidersRefs;
+    const ref1 = useRef();
+    const ref2 = useRef();
+    const ref3 = useRef();
+    const ref4 = useRef();
 
     const {t} = useTranslation('errors');
     const {isAuth} = useContext(AuthCtx).auth;
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const {modalOpen: openTooltip, handleModalOpen: handleOpenTooltip, handleModalClose: handleCloseTooltip} = useModal();
+
+    const {
+        modalOpen: openTooltip,
+        handleModalOpen: handleOpenTooltip,
+        handleModalClose: handleCloseTooltip
+    } = useModal();
+
+    const {
+        modalOpen: sliderOpen,
+        handleModalOpen: handleSliderOpen,
+        handleModalClose: handleSliderClose
+    } = useModal();
 
     const handlePrevPath = () => {
         window.close();
@@ -65,31 +74,31 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
             await navigator.share({
                 title: title,
                 url: window.location.href
-            })
+            });
         } else {
             await navigator.clipboard.writeText(window.location.href);
             handleOpenTooltip();
         }
     };
-
+    console.log(ref1);
     const classes = useStyles({isFavorite});
     return (
         <div className={classes.root}>
-            <div className={classes.firstSlider}>
+            <div className='first-slider'>
                 <CustomSlider
+                    ref={ref1}
+                    asNavFor={isMdDown ? ref3.current : ref2.current}
                     variableWidth
                     focusOnSelect={true}
                     arrows={!isMdDown}
-                    ref={slider1}
                     dots={isMdDown}
-                    asNavFor={isMdDown ? null : slider2.current}
                 >
                     {imgs.map((img, i) =>
                         <img
                             key={i}
                             alt={img.alt}
                             src={img.url.extra}
-                            onClick={handleOpenModal}
+                            onClick={handleSliderOpen}
                         />
                     )}
                 </CustomSlider>
@@ -120,15 +129,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                                 <Tooltip
                                     arrow
                                     placement='bottom'
-                                    PopperProps={{
-                                        disablePortal: true
-                                    }}
-                                    onClose={handleCloseTooltip}
                                     open={openTooltip}
                                     disableFocusListener
                                     disableHoverListener
                                     disableTouchListener
+                                    onClose={handleCloseTooltip}
                                     title={t('common:copied')}
+                                    PopperProps={{disablePortal: true}}
                                 >
                                     <IconButton className="share-btn" onClick={handleShare}>
                                         <Share/>
@@ -140,13 +147,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 </div>
             </div>
             {!isMdDown && imgsCount > 1 && (
-                <div className={classes.secondSlider}>
+                <div className='second-slider'>
                     <CustomSlider
-                        ref={slider2}
-                        asNavFor={slider3.current}
-                        slidesToShow={imgsCount > 3 ? 4 : imgsCount}
-                        focusOnSelect={true}
+                        ref={ref2}
+                        asNavFor={ref3.current}
                         arrows={false}
+                        focusOnSelect={true}
+                        slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     >
                         {imgs.map(({url, alt}, i) =>
                             <img key={i} alt={alt} src={url.extra}/>
@@ -154,6 +161,61 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     </CustomSlider>
                 </div>
             )}
+            <Modal
+                keepMounted
+                open={sliderOpen}
+                className={classes.modal}
+                onClose={handleSliderClose}
+            >
+                <div className='modal-root'>
+                    <div className='close-title'>
+                        <div className="close-wrapper">
+                            <IconButton onClick={handleSliderClose}>
+                                <CloseIcon/>
+                            </IconButton>
+                        </div>
+                        <Typography className="title" variant="h6">
+                            {title}
+                        </Typography>
+                    </div>
+                    <div className='first-slider'>
+                        <CustomSlider
+                            ref={ref3}
+                            asNavFor={isMdDown ? ref1.current : ref4.current}
+                            dots={isMdDown}
+                            arrows={!isMdDown}
+                            centerMode={!isMdDown}
+                        >
+                            {imgs?.map((img, i) =>
+                                <InnerImageZoom
+                                    key={i}
+                                    moveType="drag"
+                                    zoomScale={1.7}
+                                    src={img.url.extra}
+                                    className="image-zoom"
+                                    fullscreenOnMobile={true}
+                                />
+                            )}
+                        </CustomSlider>
+                    </div>
+                    {!isMdDown && imgsCount > 1 && (
+                        <Container maxWidth='lg' className='second-slider'>
+                            <CustomSlider
+                                ref={ref4}
+                                asNavFor={ref1.current}
+                                arrows={false}
+                                focusOnSelect={true}
+                                slidesToShow={imgsCount > 3 ? 4 : imgsCount}
+                            >
+                                {imgs?.map(({url, alt}, i) =>
+                                    <img key={i} alt={alt} src={url.extra}/>
+                                )}
+                            </CustomSlider>
+                        </Container>
+                    )}
+                </div>
+            </Modal>
         </div>
+
     );
 };

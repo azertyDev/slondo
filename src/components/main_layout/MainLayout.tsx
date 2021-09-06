@@ -43,7 +43,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                         handleBack={handleBack}
                     />
                 </Hidden>
-                <main>
+                <main style={{marginBottom: '20px'}}>
                     <Container
                         maxWidth="xl"
                         className='layout-container'
