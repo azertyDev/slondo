@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,7 +18,15 @@ export const useStyles = makeStyles((theme) => ({
                         height: 65
                     }
                 }
+            },
+            [theme.breakpoints.down('xs')]: {
+                flexDirection: 'row',
+                alignItems: 'center',
+                '& div:first-child': {
+                    margin: 0,
+                    marginRight: '6px'
+                }
             }
         }
-    },
+    }
 }));
