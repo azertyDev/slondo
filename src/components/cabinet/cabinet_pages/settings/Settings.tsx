@@ -176,8 +176,7 @@ export const Settings: FC = () => {
     useEffect(() => {
         setValues(initUserInfo);
     }, [user]);
-    console.log(values);
-    console.log(timeEditable);
+
     const classes = useStyles();
     return (
         <Box className={classes.root}>

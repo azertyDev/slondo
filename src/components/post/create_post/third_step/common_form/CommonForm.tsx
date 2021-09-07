@@ -85,7 +85,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         exchange: !!query.exchange,
         location,
         description: query.description ? JSON.parse(query.description as string) : '',
-        phone: query.phone ? JSON.parse(query.phone as string) : '',
+        phone: query.phone ? JSON.parse(query.phone as string) : '+998(__) ___ __ __',
         price: query.price ? JSON.parse(query.price as string).toString() : '',
         currency: query.currency ? JSON.parse(query.currency as string) : postType.currency[0],
         available_days: query.available_days ? JSON.parse(query.available_days as string) : [...WEEK_DAYS],
@@ -120,6 +120,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             available_days,
             available_end_time,
             available_start_time,
+            description,
             ...otherData
         } = commonData;
 
@@ -157,10 +158,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.available_days = available_days;
         }
 
-        if (!!phone && !RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
+        if (!RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
         if (safe_deal) otherData.safe_deal = safe_deal;
         if (delivery) otherData.delivery = delivery;
         if (exchange) otherData.exchange = exchange;
+
+        otherData.description = description.trim();
 
         const commonParams = {
             ...otherData,
@@ -169,6 +172,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         };
 
         handleSubmit({commonParams});
+    };
+
+    const getSchema = () => {
+        if (isAuction) return defaultParamsSchema.concat(auctionParamsSchema);
+        if (isSafeDeal) return defaultParamsSchema.concat(safeDealPriceSchema);
+        if (avalTimeActive) return defaultParamsSchema.concat(avalTimeSchema);
+        return defaultParamsSchema;
     };
 
     const formik = useFormik({
@@ -187,13 +197,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     } = formik;
 
     const {auction, available_days} = values;
-
-    function getSchema() {
-        if (isAuction) return auctionParamsSchema;
-        if (isSafeDeal) return safeDealPriceSchema;
-        if (avalTimeActive) return defaultParamsSchema.concat(avalTimeSchema);
-        return defaultParamsSchema;
-    }
 
     const handleFree = (_, v) => {
         unstable_batchedUpdates(() => {

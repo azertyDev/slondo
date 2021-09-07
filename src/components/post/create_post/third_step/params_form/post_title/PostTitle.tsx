@@ -35,22 +35,22 @@ export const PostTitle: FC<PostTitlePropsType> = (props) => {
     return (
         <div>
             {isPreview
-             ? <Typography variant="subtitle1">
-                 <strong>
-                     {t('filters:title')}:&nbsp;
-                 </strong>
-                 {title}
-             </Typography>
-             : <FormikField
-                 t={t}
-                 name='title'
-                 labelText='title'
-                 value={title}
-                 limit={TITLE_LIMIT}
-                 onChange={handleTitle}
-                 placeholder={t('filters:example_title')}
-                 errorMsg={getErrorMsg(errors.title, touched.title, t, TITLE_MIN)}
-             />}
+                ? <Typography variant="subtitle1">
+                    <strong>
+                        {t('filters:title')}:&nbsp;
+                    </strong>
+                    {title.trim()}
+                </Typography>
+                : <FormikField
+                    t={t}
+                    name='title'
+                    labelText='title'
+                    value={title}
+                    limit={TITLE_LIMIT}
+                    onChange={handleTitle}
+                    placeholder={t('filters:example_title')}
+                    errorMsg={getErrorMsg(errors.title, touched.title, t, TITLE_MIN)}
+                />}
         </div>
     );
 };

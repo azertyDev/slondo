@@ -98,7 +98,6 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             <CustomButton
                                                 className='icons'
                                                 onClick={handleNotificationsOpen}
-                                                // disabled={!observer?.number_of_notifications}
                                             >
                                                 <NotificationIcon/>
                                             </CustomButton>

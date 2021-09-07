@@ -70,8 +70,8 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 autoFocus={autoFocus}
                                 className={errorMsg ? 'error-border' : ''}
                             />}
-                        {errorMsg && (
-                            <Grid container className='helpers-content'>
+                        <Grid container className='helpers-content'>
+                            {errorMsg && (
                                 <Grid item xs={limit ? 9 : 12}>
                                     <Typography variant="subtitle1" className='error-text'>
                                     <span>
@@ -79,15 +79,15 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                     </span>
                                     </Typography>
                                 </Grid>
-                                {!!limit && (
-                                    <Grid item xs={errorMsg ? 3 : 12} className='limit-txt'>
-                                        <Typography variant="subtitle1">
-                                            {`${otherProps.value.length}/${limit}`}
-                                        </Typography>
-                                    </Grid>
-                                )}
-                            </Grid>
-                        )}
+                            )}
+                            {!!limit && (
+                                <Grid item xs={errorMsg ? 3 : 12} className='limit-txt'>
+                                    <Typography variant="subtitle1">
+                                        {`${otherProps.value.length}/${limit}`}
+                                    </Typography>
+                                </Grid>
+                            )}
+                        </Grid>
                     </div>}
             </Field>
         </FormControl>

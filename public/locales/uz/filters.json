@@ -1,8 +1,11 @@
 {
+  "build_in_speakers": "O'rnatilgan dinamiklar",
+  "usb_connector": "USB ulagich",
+  "os": "Operatsion tizim",
   "ceiling_height": "Shift balandligi metrda",
   "sort_of": "Saralash",
   "by_date": "Sana bo'yicha",
-  "by_price":"Narx bo'yicha",
+  "by_price": "Narx bo'yicha",
   "filters": "Filterlar",
   "first_photo_txt": "Birinchi rasm sizning e'loningizning vizitkasi hisoblanadi",
   "engine_capacity": "litrda dvigatel hajmi",

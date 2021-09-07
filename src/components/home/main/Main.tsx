@@ -55,7 +55,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         in={!trigger}
                     >
                         <div className={classes.createPostBtn}>
-                            <Link href={'/create'} shallow>
+                            <Link href='/create' shallow>
                                 <a>
                                     <Typography variant="subtitle1">
                                         {t('header:createPost')}

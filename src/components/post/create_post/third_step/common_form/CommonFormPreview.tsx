@@ -230,7 +230,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Typography>
                     <pre>
                         <Typography variant="subtitle1">
-                            {values.description}
+                            {values.description.trim()}
                         </Typography>
                     </pre>
                 </Grid>

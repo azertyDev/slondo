@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
             color: '#D5D5D5',
             '&:first-child': {
                 paddingRight: '4px',
-                borderRight: '1px #000 solid'
+                borderRight: `1px ${theme.palette.primary.main} solid`
             },
             '&:last-child': {
                 paddingLeft: '4px'
@@ -27,6 +27,6 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     selected: {
-        color: `${theme.palette.common.tab}!important`
+        color: `${theme.palette.primary.main}!important`
     }
 }));

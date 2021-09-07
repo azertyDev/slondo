@@ -8,9 +8,8 @@ import {FormPages} from "@src/components/post/create_post/third_step/FormPages";
 import {MainLayout} from "@src/components/main_layout/MainLayout";
 import {site_categories} from "@src/common_data/site_categories";
 import {SuccessPage} from "@src/components/post/create_post/third_step/success_page/SuccessPage";
-import {RegionType} from "@root/interfaces/Locations";
 
-const CreatePost: FC<{ regions: RegionType[] }> = ({regions}) => {
+const CreatePost: FC = () => {
     const {t} = useTranslation('post');
 
     const {query, push, asPath} = useRouter();

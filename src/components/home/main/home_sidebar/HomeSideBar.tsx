@@ -7,22 +7,21 @@ import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
-
 export const HomeSidebar: FC = () => {
     const {t} = useTranslation(['common', 'main']);
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <section className="faq-wrapper">
-                <FaqComponent t={t} />
+                <FaqComponent t={t}/>
                 <Typography variant="subtitle1" color="initial">
                     {t('weInSocial')}:
                 </Typography>
                 <SocialsBlock/>
             </section>
-            {/*<section className="banner-wrapper">*/}
-            {/*    <Banner height="483px"/>*/}
-            {/*</section>*/}
+            <section className="banner-wrapper">
+                <Banner height="483px"/>
+            </section>
             <ScrollTop/>
         </div>
     );

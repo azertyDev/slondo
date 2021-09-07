@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect, useRef, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {
     Container,
     Hidden,
@@ -336,7 +336,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         variant="subtitle1"
                         className='description'
                     >
-                        <pre>{post.description}</pre>
+                        <pre>{post.description.trim()}</pre>
                     </Typography>
                 </div>
                 {isAuction && (

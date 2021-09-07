@@ -91,7 +91,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.subcategories-menu': {
             '& h6.subcategories-list-item': {
                 [theme.breakpoints.down('xs')]: {
-                    maxWidth: '220px'
+                    maxWidth: '260px',
+                    wordBreak: 'break-word',
+                    whiteSpace: 'pre-wrap'
                 }
             },
             '& button.back-btn': {

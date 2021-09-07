@@ -7,7 +7,8 @@ import {fieldRequiredTxt, invalidFormat} from "./index";
 
 export const titleValidate = string()
     .required(fieldRequiredTxt)
-    .test('len', 'min_chars', val => !!val && val.length >= TITLE_MIN);
+    .test('white_spaces', fieldRequiredTxt, val => !!val?.trim())
+    .test('len', 'min_chars', val => !!val && val.trim().length >= TITLE_MIN);
 
 export const paramsFormSchema = lazy(
     (value) => object({
@@ -190,10 +191,14 @@ export const defaultParamsSchema = object({
     price: number().required(fieldRequiredTxt),
     description: string()
         .required(fieldRequiredTxt)
-        .test('len', 'min_chars', val => !!val && val.length >= DESC_MIN),
-    location: object()
+        .test('len', 'min_chars', val => !!val && val.trim().length >= DESC_MIN),
+    location: object<any>()
         .nullable()
-        .required(fieldRequiredTxt)
+        .test(
+            '',
+            fieldRequiredTxt,
+            loc => !!loc && !!loc.region?.id
+        )
 });
 
 export const avalTimeSchema = object({
