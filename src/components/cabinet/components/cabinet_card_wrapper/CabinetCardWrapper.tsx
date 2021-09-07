@@ -44,7 +44,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
     const isModeration = status === 'moderation';
     const isSold = status === 'sold';
     const isSuspend = status === 'suspended';
-    const isArchive = status === 'archive';
+    const isArchive = status === 'archive' || 'history';
+    const isReject = status === 'reject' || 'refuse';
 
     const classes = useStyles({status});
     return (
@@ -119,8 +120,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                     {handleDetailedOpen && (
                         <Grid
                             item
-                            xs={isPublic || isModeration || isSold || isSuspend ? 7 : 12}
-                            sm={isPublic || isModeration || isSuspend || isArchive ? 8 : 12}
+                            xs={isPublic || isModeration || isSold || isSuspend || isReject ? 7 : 12}
+                            sm={isPublic || isModeration || isSuspend || isArchive || isReject ? 8 : 12}
                             md={12}
                         >
                             <CustomButton
