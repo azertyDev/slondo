@@ -1,5 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
+import {object} from "yup";
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
@@ -13,7 +14,7 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {CommonParamsPropsType} from '../../ParamsForm';
 import {optionFields} from '@src/common_data/fields_keys';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
+import {carSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -22,6 +23,7 @@ import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
+import {fieldRequiredTxt} from "@root/validation_schemas";
 
 type CarParamsPropsType = {
     subcategoryName: string
@@ -42,6 +44,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     const {title, params} = useUrlParams();
     const filtersLen = Object.keys(filters).length;
 
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
 
@@ -66,7 +69,18 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
-        validationSchema: paramsFormSchema
+        validationSchema: isMadeInUzb
+            ? carSchema
+                .concat(object({
+                    position: object<{ id: number }>()
+                        .nullable()
+                        .test(
+                            '',
+                            fieldRequiredTxt,
+                            value => !!value && !!value.id
+                        )
+                }))
+            : carSchema
     });
 
     const {
@@ -79,7 +93,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = formik;
 
     const [valuesByYear, setValuesByYear] = useState<any>({});
-
     const {
         handleCheckbox,
         handleFracInput,
@@ -200,8 +213,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             setErrorMsg(e.message);
         }
     };
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
 
     useEffect(() => {
         filtersLen && title && setValsByUrlParams();
@@ -243,6 +254,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                     xs={12}
                                 >
                                     <DropDownSelect
+                                        isRequire
                                         name='manufacturer'
                                         values={values}
                                         onBlur={handleBlur}

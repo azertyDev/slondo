@@ -198,22 +198,24 @@ export const CategoriesPage: FC = () => {
                                     const transCtgrName = t(`${ctgr.name}${subctgr ? `.${subctgr.name}` : ''}.${typeCtgr.name}.name`);
                                     return (
                                         <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
-                                            <Typography
-                                                noWrap
-                                                variant="subtitle1"
-                                                className='subcategories-list-item'
-                                            >
-                                                {transCtgrName}
-                                            </Typography>
-                                            {!!searchTxt && (
+                                            <div>
                                                 <Typography
-                                                    variant="subtitle2"
-                                                    className="parent-category"
+                                                    noWrap
+                                                    variant="subtitle1"
+                                                    className='subcategories-list-item'
                                                 >
-                                                    {t(`categories:${typeCtgr.parents[0].name}.name`)}
-                                                    {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
+                                                    {transCtgrName}
                                                 </Typography>
-                                            )}
+                                                {!!searchTxt && (
+                                                    <Typography
+                                                        variant="subtitle2"
+                                                        className="parent-category"
+                                                    >
+                                                        {t(`categories:${typeCtgr.parents[0].name}.name`)}
+                                                        {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
+                                                    </Typography>
+                                                )}
+                                            </div>
                                             <Hidden smUp>
                                                 <KeyboardArrowRightIcon/>
                                             </Hidden>

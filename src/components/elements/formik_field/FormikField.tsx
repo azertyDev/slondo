@@ -49,6 +49,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 onChange={otherProps.onChange}
                             >
                                 {() => <TextField
+                                    type='tel'
                                     fullWidth
                                     name={name}
                                     focused={false}

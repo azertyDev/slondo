@@ -25,7 +25,6 @@ export const requireFields = [
     'year',
     'mileage',
     'body',
-    'manufacturer',
     'models',
     'colors',
     'car_engine_type',

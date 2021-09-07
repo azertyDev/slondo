@@ -1,4 +1,5 @@
 {
+  "incorrect_year": "Yil yoki diapazon noto'g'ri",
   "phone_no_available": "Raqam hozircha mavjud emas",
   "min_chars": "Min. belgilar soni {{value}}",
   "price_not_bee_less": "Narx {{value}} dan kam bo'lmasligi kerak",

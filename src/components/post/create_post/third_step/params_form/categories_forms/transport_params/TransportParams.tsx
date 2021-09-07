@@ -44,9 +44,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
     const {title, params} = useUrlParams();
     const filtersLen = Object.keys(filters).length;
 
-    const initVals: any = {
-        title
-    };
+    const initVals: any = {title};
 
     if (!isYearExclude) initVals.year = '';
     if (hasEngineCapacity) initVals.engine_capacity = '';

@@ -24,6 +24,13 @@ export const paramsFormSchema = lazy(
                             );
                     } else if (key === 'title') {
                         acc[key] = titleValidate;
+                    } else if (key === 'year') {
+                        acc[key] = string()
+                            .test(
+                                'less_1900',
+                                'not_be_less_1900',
+                                value => +value > 1900
+                            );
                     } else if (key === 'engine_capacity') {
                         acc[key] = string()
                             .required(fieldRequiredTxt)
@@ -48,6 +55,67 @@ export const paramsFormSchema = lazy(
     })
 );
 
+export const carSchema = object({
+    title: titleValidate,
+    manufacturer: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    model: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    year: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    body: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    transmission: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    drive: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    engine_type: object<{ id: number }>()
+        .nullable()
+        .test(
+            '',
+            fieldRequiredTxt,
+            value => !!value && !!value.id
+        ),
+    engine_capacity: string().required(fieldRequiredTxt)
+        .test(
+            '',
+            'notMustBeLess0.8',
+            value => +value >= 0.8
+        ),
+    mileage: string().required(fieldRequiredTxt),
+    broken: string().required(fieldRequiredTxt)
+});
+
 export const transportParamsSchema = lazy(
     (value) => object({
         ...Object.entries(value)
@@ -63,6 +131,19 @@ export const transportParamsSchema = lazy(
                             );
                     } else if (key === 'title') {
                         acc[key] = titleValidate;
+                    } else if (key === 'year') {
+                        acc[key] = string()
+                            .required(fieldRequiredTxt)
+                            .test(
+                                'less_1900',
+                                'incorrect_year',
+                                value => +value >= 1900
+                            )
+                            .test(
+                                'greater_this_year',
+                                'incorrect_year',
+                                value => +value <= new Date().getFullYear()
+                            );
                     } else {
                         acc[key] = string().required(fieldRequiredTxt);
                     }

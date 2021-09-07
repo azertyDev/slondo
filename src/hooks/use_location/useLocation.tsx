@@ -19,7 +19,6 @@ type LocationType = {
 }
 
 type UseLocationProps = {
-    initLocation?: LocationType,
     handleSelectLocation?: (v) => void,
     saveToCookies?: boolean
 }
@@ -32,7 +31,7 @@ type UseLocation = (props: UseLocationProps) => {
     handleLocModalOpen: () => void
 };
 
-export const useLocation: UseLocation = ({initLocation, handleSelectLocation, saveToCookies = false}) => {
+export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = false}) => {
     const {t} = useTranslation('locations');
     const {query: {path}, asPath} = useRouter();
     const {userLocation, addUserLocation, removeUserLocation} = useContext(UserLocationCtx);
@@ -46,12 +45,12 @@ export const useLocation: UseLocation = ({initLocation, handleSelectLocation, sa
     const initCurLocation = {region: null, city: null};
 
     const [locations, setLocations] = useState([]);
-    const [currLoc, setCurrLoc] = useState<LocationType>(initLocation || initCurLocation);
+    const [currLoc, setCurrLoc] = useState<LocationType>(initCurLocation);
     const {region, city} = currLoc;
 
     const locationName = city
         ? `${t(`${region.name}.${city.name}`)}, ${t(`${region.name}.name`)}`
-        : region ? `${t(`${region.name}.name`)}` : t(saveToCookies ? 'location' : 'allUzb');
+        : region ? `${t(`${region.name}.name`)}` : t('location');
 
     const prevLocation = !!region
         ? `${t(`${city?.name ? `${region.name}.${city.name}` : `${region.name}.name`}`)}`
@@ -125,7 +124,7 @@ export const useLocation: UseLocation = ({initLocation, handleSelectLocation, sa
     );
 
     useEffect(() => {
-        !initLocation && setCurrLoc(userLocation);
+        setCurrLoc(userLocation);
     }, [userLocation]);
 
     useEffect(() => {

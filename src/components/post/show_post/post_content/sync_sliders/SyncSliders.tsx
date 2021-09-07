@@ -80,7 +80,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
             handleOpenTooltip();
         }
     };
-    console.log(ref1);
+
     const classes = useStyles({isFavorite});
     return (
         <div className={classes.root}>

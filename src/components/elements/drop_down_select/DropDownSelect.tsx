@@ -6,6 +6,7 @@ import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/
 import {useStyles} from './useStyles';
 
 type CustomSelectPropsType = {
+    isRequire?: boolean,
     disabled?: boolean,
     transKey?: string,
     name: string;
@@ -21,6 +22,7 @@ type CustomSelectPropsType = {
 
 export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
+        isRequire = false,
         disabled,
         name,
         transKey,
@@ -35,7 +37,6 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-
     const isCurrency = name === 'currency';
     const isDuration = name === 'duration';
     const optionKey = isDuration ? 'hours' : 'name';
@@ -54,6 +55,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
 
     const selectedHandle = (selected: any) => {
         let value = t('noSelect');
+
         if (items.length !== 0 && multiple) {
             value = selected.map(item => {
                 const valName = items.find(v => v.id === item)?.name;
@@ -77,7 +79,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             <label htmlFor={name}>
                 <Typography variant='subtitle1' gutterBottom>
                     {labelTxt}
-                    {!isCurrency && !disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                    {((!isCurrency && !disableRequire && isRequired(name)) || isRequire)
+                    && <span className='error-text'>*&nbsp;</span>}
                 </Typography>
             </label>
             <Select
@@ -87,8 +90,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 onBlur={onBlur}
                 multiple={multiple}
                 onChange={onChange}
-                disabled={!items.length || disabled}
                 renderValue={selectedHandle}
+                disabled={!items.length || disabled}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
                 value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
             >

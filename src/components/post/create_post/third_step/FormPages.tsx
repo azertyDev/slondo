@@ -13,12 +13,14 @@ import {
     normalizeFiltersByCategory,
     getCategoriesByParams,
     CategoriesParamsType,
-    manufacturersDataNormalize
+    manufacturersDataNormalize,
+    clearWhiteSpaces
 } from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ParamsForm} from './params_form/ParamsForm';
 import {ErrorCtx, ExitPromptCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {numericFields} from "@src/common_data/fields_keys";
 
 export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
     const {t} = useTranslation('post');
@@ -125,19 +127,32 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
     };
 
     const handleSubmit = async (values) => {
-        setPost({...post, ...values});
+        const postData = {...post, ...values};
+        setPost(postData);
+
+        if (currentFormIndex === 3) {
+            Object.keys(postData.params).forEach(k => {
+                const isNumeric = numericFields.some(f => f === k);
+                if (isNumeric) {
+                    postData.params[k] = +clearWhiteSpaces(postData.params[k]);
+                }
+            });
+        }
 
         if (currentFormIndex === 1) {
             const {
+                commonParams,
                 params: {
                     title,
                     ...params
                 },
                 appearance: {color_id}
-            } = post;
+            } = postData;
+
+            commonParams.price = +clearWhiteSpaces(commonParams.price);
 
             const postParams = {
-                ...values.commonParams,
+                ...commonParams,
                 title,
                 model: params
             };
@@ -184,6 +199,7 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
             setIsFetch(true);
 
             form.append('data', JSON.stringify(data));
+
             photos.forEach(({id, file}) => {
                 if (id) {
                     form.append('images_id[]', id);
@@ -192,7 +208,9 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
                 }
             });
 
-            post_id ? await userAPI.editPost(form, post_id) : await userAPI.createPost(form);
+            post_id
+                ? await userAPI.editPost(form, post_id)
+                : await userAPI.createPost(form);
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);

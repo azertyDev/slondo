@@ -42,6 +42,11 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
     const excludePrice = jobOrService || price === 0;
 
+    const {city, region} = cardData;
+
+    const regionName = t(`locations:${region.name}.name`);
+    const locationName = city ? `${t(`locations:${region.name}.${city.name}`)}, ${regionName}` : regionName;
+
     const handleFavorite = async () => {
         try {
             await userAPI.favoriteAds(cardData.id);
@@ -136,8 +141,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     justifyContent='center'
                                 >
                                     <Typography variant="subtitle2" component='p' color="initial" noWrap>
-                                        {`${t(`locations:${cardData.region.name}.name`) ?? ''}`}
-                                        {cardData.city?.name ? `, ${t(`locations:${cardData.region.name}.${cardData.city.name}`)}` : ''}
+                                        {locationName}
                                     </Typography>
                                     <Typography variant='subtitle2' component='p' noWrap>
                                         {time}

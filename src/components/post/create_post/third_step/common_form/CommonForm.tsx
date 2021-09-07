@@ -17,7 +17,7 @@ import {
     defaultParamsSchema,
     safeDealPriceSchema
 } from '@root/validation_schemas/postSchemas';
-import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare, timeFormat} from '@src/helpers';
+import {getErrorMsg, numberPrettier, phonePrepare, timeFormat} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
@@ -77,10 +77,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         location: userLoc,
         locElement,
         locationModal
-    } = useLocation({
-        initLocation: location,
-        handleSelectLocation
-    });
+    } = useLocation({handleSelectLocation});
 
     const initForm = {
         safe_deal: !!query.safe_deal,
@@ -112,8 +109,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
 
     const onSubmit = (values) => {
         const commonData = {...values};
-        commonData.price = Number.parseInt(clearWhiteSpaces(commonData.price));
-
         const {
             auction,
             currency,
@@ -135,23 +130,25 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 reserve_price,
                 auto_renewal,
                 offer_the_price,
-                ...othersAuctionData
+                ...other
             } = auction;
 
-            othersAuctionData.duration_id = duration.id;
-            othersAuctionData.offer_the_price = offer_the_price;
+            other.duration_id = duration.id;
+            other.offer_the_price = offer_the_price;
 
             if (isAdvanceAuction) {
                 if (price_buy_now.isActive) {
-                    othersAuctionData.price_buy_now = Number.parseInt(clearWhiteSpaces(price_buy_now.value));
+                    other.price_buy_now = price_buy_now.value;
                 }
                 if (reserve_price) {
-                    othersAuctionData.reserve_price = Number.parseInt(clearWhiteSpaces(reserve_price));
+                    other.reserve_price = reserve_price;
                 }
-                othersAuctionData.auto_renewal = auto_renewal;
+                if (auto_renewal) {
+                    other.auto_renewal = auto_renewal;
+                }
             }
 
-            otherData.auction = othersAuctionData;
+            otherData.auction = other;
         }
 
         if (avalTimeActive) {

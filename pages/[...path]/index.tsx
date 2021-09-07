@@ -2,7 +2,6 @@ import {GetServerSideProps} from 'next';
 import {SearchPost} from "@src/components/post/search_post/SearchPost";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {userAPI} from "@src/api/api";
-import {transformCyrillic} from "@src/helpers";
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, res}) => {
     const locationName = query.path[0];
@@ -40,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, res
 
 function checkQuery(loc: string, locs): boolean {
     return locs.some(l => {
-        if (transformCyrillic(l.ru_name) === loc) {
+        if (l.ru_name === loc) {
             return true;
         } else if (l.cities) {
             return checkQuery(loc, l.cities);

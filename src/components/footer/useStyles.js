@@ -48,10 +48,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.footer-bottom': {
                 display: 'flex',
-                paddingTop: '25px',
+                padding: '25px 0',
                 [theme.breakpoints.down('sm')]: {
-                    display: 'block',
-                    paddingTop: '16px'
+                    display: 'block'
                 },
                 '& div': {
                     '&:nth-child(2)': {

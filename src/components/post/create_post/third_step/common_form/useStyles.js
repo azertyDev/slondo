@@ -1,34 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        '& div.auction-params': {
-            display: 'flex',
-            alignItems: 'center'
-        },
-        '& div.post-options': {
-            '& svg.MuiSvgIcon-root': {
-                fill: '#9a64d0'
-            },
-            '& > div': {
-                display: 'flex',
-                alignItems: 'center'
-            },
-            margin: '11px 0'
-        }
-    },
-    link: {
-        marginTop: 5,
-        float: 'right',
-        textDecoration: 'none',
-        display: 'inline-block',
-        '& p': {
-            textAlign: 'end',
-            color: '#675EAA'
-        },
-        '&:hover': {
-            textDecoration: 'underline'
+export const useStyles = makeStyles(() => ({
+    description: {
+        '& > pre': {
+            margin: 0,
+            padding: '0 10px',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word'
         }
     },
     serviceItem: {
