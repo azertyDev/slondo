@@ -2,10 +2,12 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.payment-delivery': {
-            display: 'flex',
-            alignItems: 'center',
-            flexFlow: 'row',
+        '& div.service-desc': {
+            padding: 8,
+            margin: '10px 0 10px',
+            borderRadius: 10,
+            backgroundColor: '#fff',
+            boxShadow: '0px 1px 2px 0px #00000026',
             '& a': {
                 textDecoration: 'none'
             },
@@ -21,10 +23,6 @@ export const useStyles = makeStyles((theme) => ({
                 '& path': {
                     fill: '#9a64d0'
                 }
-            },
-            '& h6.MuiTypography-subtitle2': {
-                fontSize: '12px',
-                marginLeft: '5px'
             },
             '& span.safe-auction-rules': {
                 color: '#9a64d0'

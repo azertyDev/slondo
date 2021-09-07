@@ -14,7 +14,7 @@
   "user_already_registered": "Ro‘yxatdan o'tish xatosi. Bu raqam muqaddam ro‘yxatga olingan",
   "unauthorised": "Raqam yoki parol noto'g'ri kiritilgan",
   "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
-  "fieldIsRequired": "Maydon to'ldirilishi shart",
+  "fieldIsRequired": "Maydonni to'ldiring",
   "invalidFormat": "Noto'g'ri farmat",
   "passwordMustMinEightChars": "Parol kamida 8 ta simvoldan iborat bo'lishi kerak",
   "passwordsDifferent": "Parollar xar-xil",
