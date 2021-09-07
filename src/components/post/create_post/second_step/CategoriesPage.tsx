@@ -17,6 +17,8 @@ type CategoryStateType = {
 
 export const CategoriesPage: FC = () => {
     const {t} = useTranslation('categories');
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const initCategory: CategoryStateType = {
         id: null,
@@ -99,9 +101,6 @@ export const CategoriesPage: FC = () => {
     useEffect(() => {
         setSubLvlCtgrs();
     }, [main_ctgr, sub_ctgr, locale]);
-
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const classes = useStyles();
     return (
