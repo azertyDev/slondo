@@ -336,7 +336,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         variant="subtitle1"
                         className='description'
                     >
-                        <pre>{post.description.trim()}</pre>
+                        <pre>{post.description}</pre>
                     </Typography>
                 </div>
                 {isAuction && (
