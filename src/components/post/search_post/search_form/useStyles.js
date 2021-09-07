@@ -66,6 +66,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     select: {
         width: '100%',
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'rgba(0, 0, 0, 0.23)',
+            borderWidth: 1
+        },
         '& div.MuiSelect-select': {
             display: 'flex',
             alignItems: 'center',
