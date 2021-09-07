@@ -5,7 +5,6 @@ import {useTranslation} from 'next-i18next';
 import {unstable_batchedUpdates} from "react-dom";
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
-// import {Banner} from '@src/components/elements/banner/Banner';
 import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
@@ -193,9 +192,6 @@ export const ShowPostContainer: FC = () => {
                                         handleSafeDeal={handleSafeDeal}
                                         setFetchedPostData={setFetchedPostData}
                                     />
-                                    {/*<div className={classes.adBanner}>*/}
-                                    {/*    <Banner height="424px" />*/}
-                                    {/*</div>*/}
                                 </Grid>
                             </Hidden>
                         </>}

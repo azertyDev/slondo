@@ -280,7 +280,7 @@ export const useStyles = makeStyles((theme) => ({
                 '&:first-child': {
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
-                    },
+                    }
                 },
                 '&:last-child': {
                     '&:disabled': {
@@ -382,7 +382,7 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: '1.125rem',
                     fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
                     whiteSpace: 'pre-wrap',
-                    wordBreak: 'break-all'
+                    wordBreak: 'break-word'
                 }
             },
             '& > h6.MuiTypography-subtitle1': {

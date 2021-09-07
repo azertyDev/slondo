@@ -1,9 +1,9 @@
 import {FC, useEffect} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useFormik} from 'formik';
 import {Grid} from '@material-ui/core';
+import {useTranslation} from 'react-i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
-import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
@@ -63,7 +63,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
-    console.log(filters);
+
     return (
         <CustomFormikProvider formik={formik}>
             <Grid item container spacing={2}>

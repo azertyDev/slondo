@@ -145,7 +145,7 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
             if (color_id) postParams.model.color = {id: color_id};
 
             await push(
-                `${post_id ? asPath : `${formURL}${urlByParams(postParams)}`}&preview=1`,
+                `${formURL}${urlByParams(postParams)}${post_id ? `&post_id=${post_id}` : ''}&preview=1`,
                 undefined,
                 {shallow: true}
             );
@@ -265,13 +265,11 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
                 {isPreview && (
                     <div className='publish-button-wrapper'>
                         <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
-                            {
-                                isFetch
-                                    ? <CircularProgress size={24} color='secondary'/>
-                                    : <Typography variant='subtitle1' component='p'>
-                                        {t(post_id ? 'to_edit' : 'publish')}
-                                    </Typography>
-                            }
+                            {isFetch
+                                ? <CircularProgress size={24} color='secondary'/>
+                                : <Typography variant='subtitle1' component='p'>
+                                    {t(post_id ? 'to_edit' : 'publish')}
+                                </Typography>}
                         </CustomButton>
                     </div>
                 )}

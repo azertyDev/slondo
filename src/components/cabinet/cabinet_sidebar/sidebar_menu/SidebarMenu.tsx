@@ -1,6 +1,6 @@
 import {FC, useContext} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Grid, List, ListItem, ListItemText} from '@material-ui/core';
+import {Grid, List, ListItem, ListItemText, useMediaQuery, useTheme} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
@@ -58,11 +58,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
         });
     };
 
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12}>
                         <CustomBadge badgeContent={user.observer.number_of_reviews}>
                             <ListItem
@@ -96,7 +98,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 </Grid>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12}>
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
@@ -116,7 +118,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 </Grid>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12}>
                         <ListItem
                             button
@@ -180,7 +182,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 </Grid>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12}>
                         <CustomBadge badgeContent={number_of_notifications} color='error'>
                             <ListItem
@@ -217,7 +219,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 </Grid>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12}>
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
@@ -254,7 +256,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 </Grid>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <Grid container spacing={1}>
+                <Grid container spacing={isXsDown ? 0 : 1}>
                     <Grid item xs={12} md={6}>
                         <ListItem
                             button

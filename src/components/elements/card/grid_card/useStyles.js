@@ -145,7 +145,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& .price': {
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             fontWeight: 500,
             [theme.breakpoints.down('sm')]: {
                 fontSize: '1rem'

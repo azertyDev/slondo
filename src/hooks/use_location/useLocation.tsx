@@ -19,13 +19,12 @@ type LocationType = {
 }
 
 type UseLocationProps = {
+    initLocation?: LocationType,
     handleSelectLocation?: (v) => void,
     saveToCookies?: boolean
 }
 
-type UseLocation = (
-    props: UseLocationProps
-) => {
+type UseLocation = (props: UseLocationProps) => {
     locationName: string,
     locElement: JSX.Element,
     locationModal: JSX.Element,
@@ -33,7 +32,7 @@ type UseLocation = (
     handleLocModalOpen: () => void
 };
 
-export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = false}) => {
+export const useLocation: UseLocation = ({initLocation, handleSelectLocation, saveToCookies = false}) => {
     const {t} = useTranslation('locations');
     const {query: {path}, asPath} = useRouter();
     const {userLocation, addUserLocation, removeUserLocation} = useContext(UserLocationCtx);
@@ -47,7 +46,7 @@ export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = 
     const initCurLocation = {region: null, city: null};
 
     const [locations, setLocations] = useState([]);
-    const [currLoc, setCurrLoc] = useState<LocationType>(initCurLocation);
+    const [currLoc, setCurrLoc] = useState<LocationType>(initLocation || initCurLocation);
     const {region, city} = currLoc;
 
     const locationName = city
@@ -126,7 +125,7 @@ export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = 
     );
 
     useEffect(() => {
-        setCurrLoc(userLocation);
+        !initLocation && setCurrLoc(userLocation);
     }, [userLocation]);
 
     useEffect(() => {
@@ -144,9 +143,9 @@ export const useLocation: UseLocation = ({handleSelectLocation, saveToCookies = 
     }, [asPath, locations]);
 
     return {
+        locElement,
         locationName,
         handleLocModalOpen,
-        locElement,
         locationModal: locModal,
         location: region ? currLoc : null
     };

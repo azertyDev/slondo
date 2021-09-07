@@ -51,7 +51,6 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const ctgrName = category.mark;
 
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
-    const excludePrice = jobOrService || price === 0;
 
     const handleFavorite = async () => {
         try {
@@ -76,8 +75,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                 >
                     {liked
                         ? <FavoriteIcon/>
-                        : <FavoritedIcon/>
-                    }
+                        : <FavoritedIcon/>}
                 </IconButton>
             )}
             <Link href={url}>
@@ -161,7 +159,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             variant='subtitle1'
                                         >
                                             {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
-                                            {!excludePrice && (
+                                            {price !== 0 && (
                                                 <span>{t(`${currency.name}`)}</span>
                                             )}
                                         </Typography>
