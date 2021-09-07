@@ -36,6 +36,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         marginBottom: '22px',
         justifyContent: 'center',
+        zIndex: 100,
         '& > a': {
             textDecoration: 'none',
             display: 'flex',
