@@ -168,12 +168,12 @@ export const HelpContent: FC = () => {
             </Hidden>
             <Grid container spacing={2}>
                 {((!subTerm && hasSubterm && isXsDown) || !isXsDown) && (
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={5} md={4} lg={3}>
                         <HelpSidebar menuStruct={menuStruct} />
                     </Grid>
                 )}
                 {(((subTerm || !hasSubterm) && isXsDown) || !isXsDown) && (
-                    <Grid container item xs={isXsDown ? 12 : 9}>
+                    <Grid container item xs={isXsDown ? 12 : 9} sm={7} md={8} lg={9}>
                         {subTerm ? getSubTermPage() : getTermPage()}
                     </Grid>
                 )}
