@@ -59,15 +59,19 @@ export const HelpContent: FC = () => {
     ));
 
     const handleBack = async () => {
-        await push('/help', undefined, {shallow: true});
+        await push(
+            `/help${hasSubterm && subTerm ? `/${term}` : ''}`,
+            undefined,
+            {shallow: true}
+        );
     };
 
     const getTermPage = () => {
         switch (term) {
             case 'how_to_register':
-                return <RegistrationRules />;
+                return <RegistrationRules/>;
             case 'how_to_participate':
-                return <ParticipatingRules />;
+                return <ParticipatingRules/>;
             case 'how_to_create_post':
                 return <CreatePostRules/>;
             case 'how_to_create_auction':
@@ -169,10 +173,11 @@ export const HelpContent: FC = () => {
             <Grid container spacing={2}>
                 {((!subTerm && hasSubterm && isXsDown) || !isXsDown) && (
                     <Grid item xs={12} sm={5} md={4} lg={3}>
-                        <HelpSidebar menuStruct={menuStruct} />
+                        <HelpSidebar menuStruct={menuStruct}/>
                     </Grid>
                 )}
-                {(((subTerm || !hasSubterm) && isXsDown) || !isXsDown) && (
+                {(
+                    ((subTerm || !hasSubterm) && isXsDown) || !isXsDown) && (
                     <Grid container item xs={isXsDown ? 12 : 9} sm={7} md={8} lg={9}>
                         {subTerm ? getSubTermPage() : getTermPage()}
                     </Grid>

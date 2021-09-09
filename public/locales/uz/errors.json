@@ -1,4 +1,8 @@
 {
+  "error_modal": {
+    "text": "Qandaydir xatolik yuz berdi",
+    "feedback_link_text": "Xatolik haqida bizlarga xabar bering"
+  },
   "incorrect_year": "Yil yoki diapazon noto'g'ri",
   "phone_no_available": "Raqam hozircha mavjud emas",
   "min_chars": "Min. belgilar soni {{value}}",
