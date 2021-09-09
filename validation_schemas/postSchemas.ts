@@ -3,7 +3,7 @@ import {fractionalFields} from '@src/common_data/fields_keys';
 import {DESC_MIN, SAFE_DEAL_LIMIT, TITLE_MIN} from "@src/constants";
 import {isRequired} from '@root/src/helpers';
 import {timeRegEx} from "@src/common_data/reg_exs";
-import {fieldRequiredTxt, invalidFormat} from "./index";
+import {fieldRequiredTxt, invalidFormat} from "./validateMessages";
 
 export const titleValidate = string()
     .required(fieldRequiredTxt)

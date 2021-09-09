@@ -12,7 +12,7 @@ import {useTranslation} from "next-i18next";
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
-import {fieldRequiredTxt} from "@root/validation_schemas";
+import {fieldRequiredTxt} from "@root/validation_schemas/validateMessages";
 
 type AuctionFromPropsType = {
     lastBet,

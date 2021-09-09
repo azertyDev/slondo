@@ -27,12 +27,12 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
             id="upload-box"
         >
             <input
-                id="icon-button-file"
                 type="file"
+                id="icon-button-file"
                 style={{display: 'none'}}
+                disabled={!editable}
                 onChange={handleUpload}
                 accept='image/jpeg, image/png'
-                disabled={!editable}
             />
             <Avatar
                 className={classes.small}
@@ -62,9 +62,7 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
                                 />
                             </span>
                         }
-                        classes={{
-                            root: classes.button
-                        }}
+                        classes={{root: classes.button}}
                     >
                         <Typography variant='subtitle1' component='p' color='textSecondary'>
                             {avatar
@@ -80,14 +78,12 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
                     aria-label="upload picture"
                     onClick={handleDeleteAvatar}
                     disabled={!editable || !avatar}
+                    classes={{root: classes.button}}
                     startIcon={
                         <span className={classes.icon}>
-                            <Close color='error' fontSize='small' />
+                            <Close color='error' fontSize='small'/>
                         </span>
                     }
-                    classes={{
-                        root: classes.button
-                    }}
                 >
                     <Typography variant='subtitle1' component='p' color='textSecondary'>
                         {t('cabinet:deleteAvatar')}

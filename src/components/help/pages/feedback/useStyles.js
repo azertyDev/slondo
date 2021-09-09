@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& > h6.MuiTypography-h6': {
-            marginBottom: 10,
+            marginBottom: 10
         },
         '& > h6.MuiTypography-subtitle1': {
             fontSize: '1.125rem',
@@ -14,24 +14,34 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& > div.feedback-form': {
-            '& > form > div': {
-                '&.upload': {
+            '& div.upload-submit': {
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'column',
+                '& div.img-wrapper': {
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexWrap: 'wrap'
-                },
-                '& div.MuiFormControl-root': {
-                    marginBottom: 20,
-                    [theme.breakpoints.down('xs')]: {
-                        marginBottom: 15
+                    flexDirection: 'column',
+                    '& > button': {
+                        width: '90px'
+                    },
+                    '& img.file': {
+                        width: '290px',
+                        height: '130px',
+                        objectFit: 'cover'
                     }
-                },
+                }
             },
+            '& > form > div': {
+                marginBottom: '20px'
+            }
         },
         '& label.file-upload': {
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'column'
         },
-    },
-}))
+        '& div.submit-wrapper': {
+            display: 'flex',
+            justifyContent: 'flex-end'
+        }
+    }
+}));

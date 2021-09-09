@@ -1,5 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import {blue} from "@material-ui/core/colors";
+import {Button} from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,3 +72,27 @@ export const useStyles = makeStyles((theme) => ({
         }
     }
 }));
+
+export const SettingsButton = withStyles((theme) => ({
+    root: {
+        height: 38,
+        backgroundColor: (props) =>
+            props.color === 'primary'
+                ? theme.palette.secondary.main
+                : theme.palette.error.light
+        ,
+        '& .MuiTypography-subtitle1': {
+            color: '#fff'
+        },
+        '&:disabled': {
+            backgroundColor: '#ccc'
+        },
+        '&:hover': {
+            backgroundColor: (props) =>
+                props.color === 'primary'
+                    ? theme.palette.secondary.dark
+                    : theme.palette.error.dark
+
+        }
+    }
+}))(Button);

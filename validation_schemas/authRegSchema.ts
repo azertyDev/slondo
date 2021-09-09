@@ -1,17 +1,22 @@
 import {string, object, ref} from 'yup';
-import {fieldRequiredTxt, invalidFormat} from "./index";
+import {fieldRequiredTxt, invalidFormat} from "./validateMessages";
 import {bottomDashRegEx} from "@src/common_data/reg_exs";
 
 const passwordMin = 'passwordMustMinEightChars';
 const passwordsDifferent = 'passwordsDifferent';
 
 export const userInfoSchema = object().shape({
-    name: string().min(3, 'must_more_than_3').max(20, 'must_less_than_20').required(fieldRequiredTxt),
-    surname: string().max(20, 'must_less_than_20')
+    name: string()
+        .min(3, 'must_more_than_3')
+        .max(20, 'must_less_than_20')
+        .required(fieldRequiredTxt),
+    surname: string()
+        .max(20, 'must_less_than_20')
 });
 
 export const phoneSchema = object({
-    phone: string().test('format', invalidFormat, val => !RegExp(bottomDashRegEx).test(val))
+    phone: string()
+        .test('format', invalidFormat, val => !RegExp(bottomDashRegEx).test(val))
 });
 
 export const passwordSchema = object({

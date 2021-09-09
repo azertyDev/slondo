@@ -1,5 +1,5 @@
 import {object, string} from 'yup';
-import {fieldRequiredTxt, invalidFormat} from "./index";
+import {fieldRequiredTxt, invalidFormat} from "./validateMessages";
 import {bottomDashRegEx} from "@src/common_data/reg_exs";
 
 export const paymentCardSchema = object({

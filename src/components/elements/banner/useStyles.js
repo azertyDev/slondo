@@ -2,8 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        width: '100%',
-        height: '100%',
+        position: ({isScrollBreak}) => isScrollBreak ? 'fixed' : 'unset',
+        top: ({isScrollBreak}) => isScrollBreak && '63px',
+        width: ({isScrollBreak, isXlUp}) => isScrollBreak ? isXlUp ? '308px' : '244px' : '100%',
         '& > div.MuiPaper-rounded': {
             display: 'flex',
             alignItems: 'center',
@@ -16,5 +17,5 @@ export const useStyles = makeStyles(() => ({
                 fontWeight: '700'
             }
         }
-    },
+    }
 }));

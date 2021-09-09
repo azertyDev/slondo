@@ -1,17 +1,16 @@
 #!/usr/bin/env node
-/* eslint-disable @typescript-eslint/no-var-requires */
-const {cpus} = require('os');
-const numCPUs = cpus().length;
-const cluster = require('cluster');
-const process = require('process');
+/* eslint-disable @typescript-eslint/no-varrom s */
+import next from 'next';
+import cluster from 'cluster';
+import {cpus} from 'os';
+import {parse} from 'url';
+import {createServer} from 'http';
 
 const port = 3317;
 const serverUrl = 'http://localhost';
-const {createServer} = require('http');
-const {parse} = require('url');
-const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
+const numCPUs = cpus().length;
 const handle = app.getRequestHandler();
 
 console.log('dev mode: ' + dev);

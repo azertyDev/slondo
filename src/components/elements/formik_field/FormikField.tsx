@@ -7,6 +7,7 @@ import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
+    required?: boolean,
     autoFocus?: boolean,
     disableRequire?: boolean,
     limit?: number,
@@ -23,6 +24,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
         labelText,
         limit,
         autoFocus,
+        required,
         disableRequire,
         ...otherProps
     } = props;
@@ -37,7 +39,8 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             <label htmlFor={name}>
                                 <Typography variant='subtitle1' gutterBottom>
                                     {t(`filters:${labelText}`)}&nbsp;
-                                    {!disableRequire && isRequired(name) && <span className='error-text'>*</span>}
+                                    {((!disableRequire && isRequired(name)) || required)
+                                    && <span className='error-text'>*</span>}
                                 </Typography>
                             </label>
                         )}

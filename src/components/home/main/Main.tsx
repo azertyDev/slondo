@@ -17,6 +17,8 @@ import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOT
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {useStyles} from './useStyles';
+import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
+import {Banner} from "@src/components/elements/banner/Banner";
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
@@ -43,6 +45,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <HomeSidebar/>
+                                <Banner height="483px" threshold={1140}/>
                             </Grid>
                         </Hidden>
                     </Grid>
@@ -55,7 +58,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         in={!trigger}
                     >
                         <div className={classes.createPostBtn}>
-                            <Link href='/create' shallow>
+                            <Link href='/create'>
                                 <a>
                                     <Typography variant="subtitle1">
                                         {t('header:createPost')}
@@ -66,6 +69,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         </div>
                     </Slide>
                 </Hidden>
+                <ScrollTop/>
             </div>
         </main>
     );

@@ -23,7 +23,7 @@ import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
-import {fieldRequiredTxt} from "@root/validation_schemas";
+import {fieldRequiredTxt} from "@root/validation_schemas/validateMessages";
 
 type CarParamsPropsType = {
     subcategoryName: string

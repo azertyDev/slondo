@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node --max-old-space-size=4096 server.js",
     "build": "next build",
-    "postbuild": "node generate_sitemap.js"
+    "start": "node --max-old-space-size=4096 server.mjs",
+    "postbuild": "node generate_sitemap.mjs"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",

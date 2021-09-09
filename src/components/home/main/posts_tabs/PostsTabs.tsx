@@ -1,16 +1,17 @@
-import {FC, useCallback, useContext, useEffect, useRef, useState} from 'react';
+import {FC, Fragment, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSlider';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {unstable_batchedUpdates} from "react-dom";
-import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography} from "@material-ui/core";
+import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {useTranslation} from "next-i18next";
 import {useStyles} from "./useStyles";
+import {Banner} from "@src/components/elements/banner/Banner";
 
 const initCardData: CardData = {
     cards: initCards,
@@ -20,7 +21,7 @@ const initCardData: CardData = {
 export const PostsTabs: FC = () => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
-
+    const isSmUp = useMediaQuery(useTheme().breakpoints.up('sm'));
     const [isFetch, setIsFetch] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string>(null);
     const [tabValue, setTabValue] = useState(0);
@@ -34,15 +35,12 @@ export const PostsTabs: FC = () => {
     const isFirstPostPage = postCurrPage === 1;
     const isFirstAucPage = auctionCurrPage === 1;
 
-    const postObserver = useRef<any>();
-    const aucObserver = useRef<any>();
-
     const GetCardRef = (observer, isAuc = false) => useCallback(node => {
         if (isFetch) return;
         if (observer.current) observer.current.disconnect();
 
         observer.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting && hasMorePosts && !isFirstPostPage) {
+            if (!isFirstPostPage && entries[0].isIntersecting && hasMorePosts) {
                 isAuc
                     ? setAuctionCurrPage(prevPageNumber => prevPageNumber + 1)
                     : setPostCurrPage(prevPageNumber => prevPageNumber + 1);
@@ -52,16 +50,16 @@ export const PostsTabs: FC = () => {
         if (node) observer.current.observe(node);
     }, [isFetch, hasMorePosts]);
 
-    const lastPostCardRef = GetCardRef(postObserver);
-    const lastAucCardRef = GetCardRef(aucObserver, true);
+    const lastPostCardRef = GetCardRef(useRef());
+    const lastAucCardRef = GetCardRef(useRef(), true);
 
     const fetchCardData = async (currentPage, type) => {
         try {
             const isAuc = type === 'auc';
             const params = {
-                itemsPerPage: ITEMS_PER_PAGE,
+                type,
                 page: currentPage,
-                type
+                itemsPerPage: ITEMS_PER_PAGE
             };
 
             setIsFetch(true);
@@ -135,18 +133,31 @@ export const PostsTabs: FC = () => {
                         </Typography>
                         : <Grid container spacing={2}>
                             {postCards.cards.map((cardData, i) => {
-                                const isLastCard = postCards.cards.length === i + 1;
+                                const cardsLen = postCards.cards.length;
+                                const isLastCard = cardsLen === i + 1;
                                 return (
-                                    <Grid
-                                        item
-                                        key={i}
-                                        xs={6}
-                                        md={4}
-                                        lg={3}
-                                        ref={isLastCard ? lastPostCardRef : null}
-                                    >
-                                        <GridCard{...cardData}/>
-                                    </Grid>
+                                    <Fragment key={i}>
+                                        {(isSmUp ? 3 : 4) === i && (
+                                            <Hidden lgUp>
+                                                <Grid
+                                                    item
+                                                    key={i}
+                                                    xs={12}
+                                                >
+                                                    <Banner height='240px'/>
+                                                </Grid>
+                                            </Hidden>
+                                        )}
+                                        <Grid
+                                            item
+                                            xs={6}
+                                            sm={4}
+                                            lg={3}
+                                            ref={isLastCard ? lastPostCardRef : null}
+                                        >
+                                            <GridCard{...cardData}/>
+                                        </Grid>
+                                    </Fragment>
                                 );
                             })}
                         </Grid>}

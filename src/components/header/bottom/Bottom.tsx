@@ -14,7 +14,6 @@ import {
     useScrollTrigger
 } from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
@@ -27,14 +26,12 @@ import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type BottomProps = {
-    isScrollBreak: boolean,
     handleDrawerOpen: () => void
     handlePageReload: () => void
 }
 
-const Bottom: FC<BottomProps> = (props) => {
+export const Bottom: FC<BottomProps> = (props) => {
     const {
-        isScrollBreak,
         handleDrawerOpen,
         handlePageReload
     } = props;
@@ -43,6 +40,7 @@ const Bottom: FC<BottomProps> = (props) => {
     const {t} = useTranslation('header');
     const {user: {avatar}, auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const isScrollBreak = useScrollTrigger({disableHysteresis: true, threshold: 53});
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -241,5 +239,3 @@ function ElevationScroll(props) {
         elevation: trigger ? 4 : 0
     });
 }
-
-export default withScrollThreshold(Bottom);

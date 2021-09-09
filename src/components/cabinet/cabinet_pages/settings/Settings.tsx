@@ -4,21 +4,19 @@ import {useTranslation} from 'react-i18next';
 import {userAPI} from '@src/api/api';
 import {cookieOpts, cookies, getErrorMsg, timeFormat} from '@src/helpers';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
-import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
+import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/upload_avatar_form/UploadAvatarForm';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {Box, Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {UserInfo} from "@root/interfaces/Auth";
 import {WEEK_DAYS} from "@src/common_data/common";
-import {ChangePasswordModal} from "./settings_form/change_password_modal/ChangePasswordModal";
+import {ChangePasswordModal} from "./change_password_modal/ChangePasswordModal";
 import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
-import {useStyles} from "./useStyles";
+import {useStyles, SettingsButton} from "./useStyles";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import LockIcon from "@material-ui/icons/Lock";
 import {AvailableDays} from "@src/components/post/create_post/third_step/common_form/available_days/AvailableDays";
-import {SettingsButton} from "@src/components/cabinet/cabinet_pages/settings/settings_form/useStyles";
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -202,32 +200,23 @@ export const Settings: FC = () => {
                             </span>
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            variant='text'
-                            color='secondary'
-                            onClick={handleAllowEdit}
-                            className={classes.editButton}
-                            startIcon={!editable && <EditIcon fontSize='small'/>}
-                        >
-                            <Typography variant='subtitle1'>
-                                {editable ? t('cabinet:revoke') : t('cabinet:edit')}
-                            </Typography>
-                        </Button>
-                    </Grid>
+                    {!editable && (
+                        <Grid item xs={12}>
+                            <Button
+                                variant='text'
+                                color='secondary'
+                                onClick={handleAllowEdit}
+                                className={classes.editButton}
+                                startIcon={!editable && <EditIcon fontSize='small'/>}
+                            >
+                                <Typography variant='subtitle1'>
+                                    {t('cabinet:edit')}
+                                </Typography>
+                            </Button>
+                        </Grid>
+                    )}
                 </Grid>
                 <Grid item xs={12}>
-                    {/*<SettingsForm*/}
-                    {/*    formik={formik}*/}
-                    {/*    editable={editable}*/}
-                    {/*    timeEditable={timeEditable}*/}
-                    {/*    switchAvalDaysActive={switchAvalDaysActive}*/}
-                    {/*    uploadAvatarForm={uploadAvatarForm}*/}
-                    {/*    handleTime={handleTime}*/}
-                    {/*    handleAvalDays={handleAvalDays}*/}
-                    {/*    handleOpenModal={handleOpenModal}*/}
-                    {/*    handleCancel={handleCancel}*/}
-                    {/*/>*/}
                     <FormikProvider value={formik}>
                         <Form onSubmit={handleSubmit}>
                             <Grid

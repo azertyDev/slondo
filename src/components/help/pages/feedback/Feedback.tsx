@@ -1,92 +1,183 @@
-import {FC} from 'react';
-import {Grid, Typography} from '@material-ui/core';
-import {Form, FormikProvider, useFormik} from 'formik';
-import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {FC, useContext, useState} from 'react';
+import {useFormik} from 'formik';
+import {object, string} from "yup";
 import {useTranslation} from 'react-i18next';
-import {useStyles} from './useStyles';
+import {Grid, Typography} from '@material-ui/core';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
-import {getErrorMsg} from '@src/helpers';
-
+import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
+import {getErrorMsg, phonePrepare} from '@src/helpers';
+import {AuthCtx, ErrorCtx} from "@src/context";
+import {useHandlers} from "@src/hooks";
+import {useStyles} from './useStyles';
+import {userAPI} from "@src/api/api";
+import {unstable_batchedUpdates} from "react-dom";
+import {fieldRequiredTxt, invalidFormat} from "@root/validation_schemas/validateMessages";
+import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import {bottomDashRegEx} from "@src/common_data/reg_exs";
 
 export const Feedback: FC = () => {
-    const {t} = useTranslation('help');
+    const {user} = useContext(AuthCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const hasPhone = user.phone !== '';
+    const {t} = useTranslation('help');
+    const [file, setFile] = useState(null);
+
+    const onSubmit = async (values) => {
+        try {
+            const form = new FormData();
+            const {
+                name,
+                email,
+                phone,
+                message
+            } = values;
+
+            if (file) form.append('files[]', file);
+            if (email !== '') form.append('email', email);
+
+            form.append('message', message);
+            form.append('name', hasPhone ? user.name : name);
+            form.append('phone', hasPhone ? user.phone : phonePrepare(phone));
+
+            await userAPI.feedback(form);
+            unstable_batchedUpdates(() => {
+                setFile(null);
+                setTouched({});
+                setValues(initialValues);
+            });
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
     };
 
+    const initialValues = {
+        name: '',
+        email: '',
+        message: '',
+        phone: '+998(__) ___ __ __'
+    };
+
+    const feedbackSchema = object({
+        message: string().test('text', fieldRequiredTxt, val => !!val && val.trim() !== ''),
+        email: string()
+            .email('invalidFormat')
+            .test('text', fieldRequiredTxt, val => !!val && val.trim() !== '')
+    });
+
     const formik = useFormik({
-        initialValues: {
-            description: ''
-        },
-        validationSchema: filterInputSchema,
-        onSubmit
+        onSubmit,
+        initialValues,
+        validationSchema: hasPhone
+            ? feedbackSchema
+            : feedbackSchema.concat(object({
+                name: string()
+                    .test('text', fieldRequiredTxt, val => !!val && val.trim() !== ''),
+                phone: string()
+                    .test('phone', invalidFormat, val => !RegExp(bottomDashRegEx).test(val))
+            }))
     });
 
     const {
         values,
+        setValues,
+        setTouched,
         errors,
         touched
     } = formik;
 
+    const {handleInput} = useHandlers(values, setValues);
+
+    const handleUpload = (event) => {
+        setFile(event.target.files[0]);
+    };
+
+    const handleCancel = () => {
+        setFile(null);
+    };
+
     const classes = useStyles();
     return (
         <Grid item xs={12} className={classes.root}>
-            <Typography variant='h6'>{t('feedback.name')}</Typography>
+            <Typography variant='h6'>
+                {t('feedback.name')}
+            </Typography>
             <Typography variant='subtitle1'>
                 {t('feedback.description')}
             </Typography>
             <div className="feedback-form">
-                <FormikProvider value={formik}>
-                    <Form onSubmit={formik.handleSubmit}>
-                        <div>
+                <CustomFormikProvider formik={formik}>
+                    {!hasPhone && (
+                        <>
                             <FormikField
                                 t={t}
+                                required
+                                name='name'
+                                value={values.name}
+                                onChange={handleInput}
                                 labelText={t('common:personalData')}
                                 placeholder={t('common:enterName')}
-                                size="small"
-                                InputLabelProps={{shrink: true}}
+                                errorMsg={getErrorMsg(errors.name, touched.name, t)}
                             />
                             <FormikField
                                 t={t}
-                                labelText={t('common:mail')}
-                                placeholder="example@gmail.com"
-                                size="small"
-                                InputLabelProps={{shrink: true}}
-                            />
-                            <FormikField
-                                t={t}
+                                required
+                                name='phone'
+                                type='tel'
                                 labelText={t('common:phoneNumber')}
-                                placeholder="+998  "
-                                size="small"
-                                InputLabelProps={{shrink: true}}
+                                placeholder={t('common:enterName')}
+                                value={values.phone}
+                                onChange={handleInput}
+                                errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                             />
-                        </div>
-                        <div>
-                            <FormikTextarea
-                                rows={10}
-                                limit={3000}
-                                name='description'
-                                value={values.description}
-                                labelTxt={t('post:description')}
-                                errorMsg={getErrorMsg(errors.description, touched.description, t)}
-                            />
-                        </div>
-                        <div className='upload'>
-                            <label className='file-upload'>
-                                <Typography variant='subtitle1' gutterBottom>
-                                    {t('common:photoOrScreenshot')}
-                                </Typography>
-                                <input type='file' />
-                            </label>
-                            <CustomButton>
-                                {t('common:send')}
-                            </CustomButton>
-                        </div>
-                    </Form>
-                </FormikProvider>
+                        </>
+                    )}
+                    <FormikField
+                        t={t}
+                        required
+                        name='email'
+                        type='email'
+                        labelText={t('common:mail')}
+                        placeholder="slondo@mail.com"
+                        value={values.email}
+                        onChange={handleInput}
+                        errorMsg={getErrorMsg(errors.email, touched.email, t)}
+                    />
+                    <FormikTextarea
+                        rows={10}
+                        limit={3000}
+                        name='message'
+                        value={values.message}
+                        onChange={handleInput}
+                        labelTxt={t('post:description')}
+                        errorMsg={getErrorMsg(errors.message, touched.message, t)}
+                    />
+                    <div className='upload-submit'>
+                        <label className='file-upload'>
+                            <Typography variant='subtitle1' gutterBottom>
+                                {t('common:photoOrScreenshot')}
+                            </Typography>
+                            <input type='file' onChange={handleUpload}/>
+                        </label>
+                        {file && (
+                            <div className='img-wrapper'>
+                                <CustomButton onClick={handleCancel}>
+                                    {t('cancel')}
+                                </CustomButton>
+                                <img
+                                    className='file'
+                                    src={URL.createObjectURL(file)}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className='submit-wrapper'>
+                        <CustomButton type='submit'>
+                            {t('common:send')}
+                        </CustomButton>
+                    </div>
+                </CustomFormikProvider>
             </div>
         </Grid>
     );

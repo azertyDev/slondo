@@ -112,6 +112,12 @@ export const postAPI = {
 };
 
 export const userAPI = {
+    feedback: (form): Promise<any> => {
+        return instance.post(`feedback`, form)
+            .catch(err => {
+                throw err;
+            });
+    },
     getPostsByFilters: (params): Promise<any> => {
         return instance
             .get('posts/filter', {params, ...setTokenToHeader()})

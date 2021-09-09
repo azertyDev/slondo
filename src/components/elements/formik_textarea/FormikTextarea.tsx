@@ -1,8 +1,7 @@
 import {FC} from 'react';
-import {TextareaAutosizeProps, TextField, Typography} from '@material-ui/core';
 import {Field} from 'formik';
+import {TextareaAutosizeProps, TextField, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
-
 
 type FormikTextareaPropsType = {
     value: string,
@@ -39,16 +38,12 @@ export const FormikTextarea: FC<FormikTextareaPropsType> = (props) => {
                     <TextField
                         fullWidth
                         multiline
-                        {...field}
                         name={name}
-                        {...textareaProps}
-                        classes={{
-                            root: classes.textArea
-                        }}
+                        {...field}
                         variant="outlined"
-                        helperText={
-                            `${textareaProps.value.length}/${limit}`
-                        }
+                        {...textareaProps}
+                        classes={{root: classes.textArea}}
+                        helperText={`${textareaProps.value.length}/${limit}`}
                         className={`description-area ${errorMsg ? 'error-border' : ''}`}
                     />
                 </div>
