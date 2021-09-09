@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {
-    Collapse,
+    Collapse, Hidden,
     List,
     ListItem,
     ListItemText,
@@ -9,6 +9,8 @@ import {
 import {useRouter} from 'next/router';
 import {useStyles} from '../useStyles';
 import {useTranslation} from 'next-i18next';
+import {ExpandLess} from '@material-ui/icons';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 type MenuItemPropsType = {
     data: any,
@@ -42,6 +44,9 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
                         </Typography>
                     }
                 />
+                <Hidden smUp>
+                    {isOpen ? <ExpandLess /> : <ChevronRightIcon />}
+                </Hidden>
             </ListItem>
             {data.subSections && <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List component="nav" disablePadding className={classes.subMenu}>
@@ -51,15 +56,21 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
                                 button
                                 key={index}
                                 selected={subTerm === subData.term}
-                                onClick={handleClick(subData.term)}>
-                                <ListItemText primary={
-                                    <Typography
-                                        variant="subtitle2"
-                                        color="textPrimary"
-                                    >
-                                        {t(`${data.term}.${subData.term}.name`)}
-                                    </Typography>
-                                }/>
+                                onClick={handleClick(subData.term)}
+                            >
+                                <ListItemText
+                                    primary={
+                                        <Typography
+                                            variant="subtitle2"
+                                            color="textPrimary"
+                                        >
+                                            {t(`${data.term}.${subData.term}.name`)}
+                                        </Typography>
+                                    }
+                                />
+                                <Hidden smUp>
+                                    <ChevronRightIcon />
+                                </Hidden>
                             </ListItem>
                         );
                     })}

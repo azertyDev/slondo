@@ -13,7 +13,6 @@ export const useStyles = makeStyles((theme) => ({
                 textDecoration: 'none'
             }
         }
-
     },
     searchInput: {
         boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
@@ -41,6 +40,17 @@ export const useStyles = makeStyles((theme) => ({
         background: '#F2F2F2',
         borderRadius: '10px',
         padding: '15px',
+        [theme.breakpoints.down('xs')]: {
+            padding: 0,
+            background: 'none',
+            '& div.MuiListItem-button': {
+                border: 'none',
+                paddingLeft: 5,
+                paddingRight: 5,
+                background: 'none!important',
+                boxShadow: 'none!important'
+            }
+        },
         '& .Mui-selected': {
             border: '1px solid #AD66D5',
             '& .MuiTypography-subtitle1, .MuiTypography-subtitle2': {
@@ -85,6 +95,12 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'flex-end',
         marginBottom: 10,
+        [theme.breakpoints.down('xs')]: {
+            '& div.MuiListItem-button': {
+                width: '100%!important',
+                padding: '8px 5px 8px 16px!important'
+            }
+        },
         '& div.MuiListItem-button': {
             width: '90%',
             padding: '5px 10px',
