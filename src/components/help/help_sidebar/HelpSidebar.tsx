@@ -1,12 +1,5 @@
 import {FC, Fragment} from 'react';
-import {
-    // FormControl,
-    // InputAdornment,
-    // OutlinedInput,
-    Grid,
-    List
-} from '@material-ui/core';
-// import {Search_icon} from '@src/components/elements/icons';
+import {List} from '@material-ui/core';
 import {MenuItem} from '@src/components/help/help_sidebar/MenuItem/MenuItem';
 import {useStyles} from './useStyles';
 
@@ -17,18 +10,7 @@ type ThemesMenuPropsType = {
 export const HelpSidebar: FC<ThemesMenuPropsType> = ({menuStruct}) => {
     const classes = useStyles();
     return (
-        <Grid item xs={3} className={classes.root}>
-            {/*<FormControl fullWidth className={classes.searchInput} variant="outlined">*/}
-            {/*    <OutlinedInput*/}
-            {/*        id="outlined-adornment-amount"*/}
-            {/*        placeholder="Поиск"*/}
-            {/*        startAdornment={*/}
-            {/*            <InputAdornment position="start">*/}
-            {/*                <Search_icon/>*/}
-            {/*            </InputAdornment>*/}
-            {/*        }*/}
-            {/*    />*/}
-            {/*</FormControl>*/}
+        <div className={classes.root}>
             {menuStruct.map((data, index) => {
                 return (
                     <List
@@ -39,13 +21,13 @@ export const HelpSidebar: FC<ThemesMenuPropsType> = ({menuStruct}) => {
                         {data.map(el => {
                             return (
                                 <Fragment key={el.id}>
-                                    <MenuItem data={el}/>
+                                    <MenuItem data={el} />
                                 </Fragment>
                             );
                         })}
                     </List>
                 );
             })}
-        </Grid>
+        </div>
     );
 };

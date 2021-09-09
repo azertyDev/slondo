@@ -25,24 +25,26 @@ export const HelpPage: FC = () => {
                 </Typography>
             </Hidden>
             <Grid container spacing={2}>
-                <Hidden xsDown>
+                <Grid item xs={12} sm={5} md={4}>
                     <HelpSidebar menuStruct={menuStruct} />
-                </Hidden>
-                <Grid container item xs={12} sm={9}>
-                    <Box>
-                        <Typography variant='subtitle1' gutterBottom>
-                            {t('help:main.title')}
-                        </Typography>
-                        <Typography>
-                            {t('help:main.subtitle')}&nbsp;
-                            <Link href='/help/feedback'>
-                                <a className={classes.link}>
-                                    {t('help:feedback.name')}
-                                </a>
-                            </Link>
-                        </Typography>
-                    </Box>
                 </Grid>
+                <Hidden xsDown>
+                    <Grid item sm={7} md={8}>
+                        <Box>
+                            <Typography variant='subtitle1' gutterBottom>
+                                {t('help:main.title')}
+                            </Typography>
+                            <Typography>
+                                {t('help:main.subtitle')}&nbsp;
+                                <Link href='/help/feedback'>
+                                    <a className={classes.link}>
+                                        {t('help:feedback.name')}
+                                    </a>
+                                </Link>
+                            </Typography>
+                        </Box>
+                    </Grid>
+                </Hidden>
             </Grid>
         </MainLayout>
     );

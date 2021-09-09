@@ -48,36 +48,15 @@ import {
 import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
 import {useStyles} from './useStyles';
 
-enum Pages {
-    'how_to_register',
-    'how_to_participate',
-    'how_to_create_post',
-    'how_to_create_auction',
-    'feedback',
-    'user_agreements',
-    'privacy_police',
-    'safe_deal_offer',
-    'top_offer',
-    'advanced_auction_offer',
-    'access_to_slondo',
-    'personal_data_security',
-    'posts',
-    'site_rules',
-    'auction',
-    'safe_shopping',
-    'user_interaction',
-    'search_in_service'
-}
-
 export const HelpContent: FC = () => {
     const {t} = useTranslation();
     const {query, push} = useRouter();
     const [term, subTerm] = query.term as string[];
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
-    const isRootPage = term === undefined;
-    const existPage = isRootPage || Pages[term as string] !== undefined;
+    const hasSubterm = menuStruct[0].some(struct => (
+        struct.term === term && struct.subSections
+    ));
 
     const handleBack = async () => {
         await push('/help', undefined, {shallow: true});
@@ -86,9 +65,9 @@ export const HelpContent: FC = () => {
     const getTermPage = () => {
         switch (term) {
             case 'how_to_register':
-                return <RegistrationRules/>;
+                return <RegistrationRules />;
             case 'how_to_participate':
-                return <ParticipatingRules/>;
+                return <ParticipatingRules />;
             case 'how_to_create_post':
                 return <CreatePostRules/>;
             case 'how_to_create_auction':
@@ -188,12 +167,16 @@ export const HelpContent: FC = () => {
                 </Typography>
             </Hidden>
             <Grid container spacing={2}>
-                <Hidden mdDown>
-                    <HelpSidebar menuStruct={menuStruct} />
-                </Hidden>
-                <Grid container item xs={isXsDown ? 12 : 9}>
-                    {subTerm ? getSubTermPage() : getTermPage()}
-                </Grid>
+                {((!subTerm && hasSubterm && isXsDown) || !isXsDown) && (
+                    <Grid item xs={12} sm={3}>
+                        <HelpSidebar menuStruct={menuStruct} />
+                    </Grid>
+                )}
+                {(((subTerm || !hasSubterm) && isXsDown) || !isXsDown) && (
+                    <Grid container item xs={isXsDown ? 12 : 9}>
+                        {subTerm ? getSubTermPage() : getTermPage()}
+                    </Grid>
+                )}
             </Grid>
         </MainLayout>
     );

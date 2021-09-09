@@ -1,4 +1,14 @@
-const data = [
+type StructType = {
+    id?: number,
+    section: string,
+    term: string
+}
+
+export type DataStructType = {
+    subSections?: StructType[]
+} & StructType;
+
+const data  = [
     {
         id: 1,
         section: 'Доступ к Slondo',
@@ -8,7 +18,7 @@ const data = [
             {section: 'Вход в аккаунт (Авторизация на сайте)', term: 'sign_in'},
             {section: 'Забыл пароль', term: 'forgot_password'},
             {section: 'Сменить пароль', term: 'change_password'}
-        ],
+        ]
     },
     {
         id: 2,
@@ -92,7 +102,7 @@ const data3 = [
     {id: 2, section: 'Политика конфиденциальности', term: 'privacy_police'},
     {id: 3, section: 'Оферта “Безопасный торг”', term: 'safe_deal_offer'},
     {id: 4, section: 'Оферта “Поднять в топ”', term: 'top_offer'},
-    {id: 5, section: 'Оферта “Продвинутый аукцион”', term: 'advanced_auction_offer'},
+    {id: 5, section: 'Оферта “Продвинутый аукцион”', term: 'advanced_auction_offer'}
     // {id: 6, section: 'Оферта о размещение рекламы', term: 'advertising_offer'}
 ];
 
@@ -100,9 +110,6 @@ const data4 = [
     {id: 1, section: 'Обратная связь', term: 'feedback'}
 ];
 
-export default [
-    data,
-    data2,
-    data3,
-    data4
-];
+const dataStructs: DataStructType[][] = [data, data2, data3, data4];
+
+export default dataStructs;

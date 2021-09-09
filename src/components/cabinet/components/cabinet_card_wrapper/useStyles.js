@@ -50,31 +50,27 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '0 20px',
                 border: ({status}) =>
                     status === 'public'
-                        ? '1px solid #838383'
-                        : status === 'sold'
                         ? '1px solid #90BE27'
-                        : status === 'blocked'
+                        : status === 'blocked' || status === 'reject' || status === 'refuse'
                             ? '1px solid #F08F8F'
                             : status === 'suspended' || status === 'moderation'
-                                ? '1px solid #7DBCF6'
-                                : status === 'archive' || status === 'history'
-                                    ? '1px solid #BDBDBD'
-                                    : '1px solid #7DBCF6',
+                            ? '1px solid #7DBCF6'
+                            : status === 'archive' || status === 'history' || status === 'sold'
+                                ? '1px solid #BDBDBD'
+                                : '1px solid #7DBCF6',
 
                 borderRadius: '3px',
                 '& .MuiTypography-subtitle2': {
                     color: ({status}) =>
                         status === 'public'
-                            ? '#838383'
-                            : status === 'sold'
                             ? '#90BE27'
-                            : status === 'blocked'
+                            : status === 'blocked' || status === 'reject' || status === 'refuse'
                                 ? '#F08F8F'
                                 : status === 'suspended' || status === 'moderation'
-                                    ? '#7DBCF6'
-                                    : status === 'archive' || status === 'history'
-                                        ? '#BDBDBD'
-                                        : '#7DBCF6',
+                                ? '#7DBCF6'
+                                : status === 'archive' || status === 'history' || status === 'sold'
+                                    ? '#BDBDBD'
+                                    : '#7DBCF6',
 
                     [theme.breakpoints.down('xs')]: {
                         fontSize: '.75rem'

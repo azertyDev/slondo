@@ -71,9 +71,9 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const isNotPassModeration = status === 'blocked' || status === 'refuse';
     const inactiveStatus = status === 'archive' || status === 'history' || status === 'sold';
 
-    const reason = reasons.map(({reason}) => {
+    const reason = reasons.map(({reason}, index) => {
         return (
-            <Grid item xs={12} key={reason.id}>
+            <Grid item xs={12} key={index}>
                 <Typography variant='subtitle1' component='p' className='error-text'>
                     {t(`${reason.name}`)}
                 </Typography>
