@@ -25,11 +25,11 @@ export const HelpPage: FC = () => {
                 </Typography>
             </Hidden>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={5} md={4}>
+                <Grid item xs={12} sm={5} md={4} lg={3}>
                     <HelpSidebar menuStruct={menuStruct} />
                 </Grid>
                 <Hidden xsDown>
-                    <Grid item sm={7} md={8}>
+                    <Grid item sm={7} md={8} lg={9}>
                         <Box>
                             <Typography variant='subtitle1' gutterBottom>
                                 {t('help:main.title')}
