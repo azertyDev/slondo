@@ -14,20 +14,29 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& > div.feedback-form': {
-            '& div.upload-submit': {
+            '& input[type="file"]': {
+                display: 'none'
+            },
+            '& button': {
+                width: '100%'
+            },
+            '& div.img-wrapper': {
                 display: 'flex',
-                flexWrap: 'wrap',
                 flexDirection: 'column',
-                '& div.img-wrapper': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    '& > button': {
-                        width: '90px'
+                alignItems: 'center',
+                '& > button': {
+                    width: '120px',
+                    alignSelf: 'flex-end',
+                    marginTop: 16
+                },
+                '& img.file': {
+                    height: 250,
+                    objectFit: 'contain',
+                    [theme.breakpoints.down('md')]: {
+                        height: 200
                     },
-                    '& img.file': {
-                        width: '290px',
-                        height: '130px',
-                        objectFit: 'cover'
+                    [theme.breakpoints.down('xs')]: {
+                        height: 160
                     }
                 }
             },
@@ -35,13 +44,15 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '20px'
             }
         },
-        '& label.file-upload': {
-            display: 'flex',
-            flexDirection: 'column'
-        },
-        '& div.submit-wrapper': {
-            display: 'flex',
-            justifyContent: 'flex-end'
-        }
+    },
+    icon: {
+        fontSize: '1.5rem!important'
+    },
+    button: {
+        display: 'flex',
+        borderRadius: '5px',
+        background: '#F2F2F2',
+        boxShadow: 'none',
+        padding: '7.5px 8px'
     }
 }));

@@ -1,20 +1,21 @@
 import {FC, useContext, useState} from 'react';
 import {useFormik} from 'formik';
-import {object, string} from "yup";
+import {object, string} from 'yup';
 import {useTranslation} from 'react-i18next';
-import {Grid, Typography} from '@material-ui/core';
+import {Button, Grid, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
-import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {getErrorMsg, phonePrepare} from '@src/helpers';
-import {AuthCtx, ErrorCtx} from "@src/context";
-import {useHandlers} from "@src/hooks";
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {useHandlers} from '@src/hooks';
 import {useStyles} from './useStyles';
-import {userAPI} from "@src/api/api";
-import {unstable_batchedUpdates} from "react-dom";
-import {fieldRequiredTxt, invalidFormat} from "@root/validation_schemas/validateMessages";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
-import {bottomDashRegEx} from "@src/common_data/reg_exs";
+import {userAPI} from '@src/api/api';
+import {unstable_batchedUpdates} from 'react-dom';
+import {fieldRequiredTxt, invalidFormat} from '@root/validation_schemas/validateMessages';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {bottomDashRegEx} from '@src/common_data/reg_exs';
+import {Publish} from '@material-ui/icons';
 
 export const Feedback: FC = () => {
     const {user} = useContext(AuthCtx);
@@ -99,7 +100,7 @@ export const Feedback: FC = () => {
 
     const classes = useStyles();
     return (
-        <Grid item xs={12} className={classes.root}>
+        <Grid item xs={12} sm={12} md={12} lg={7} className={classes.root}>
             <Typography variant='h6'>
                 {t('feedback.name')}
             </Typography>
@@ -154,28 +155,53 @@ export const Feedback: FC = () => {
                         errorMsg={getErrorMsg(errors.message, touched.message, t)}
                     />
                     <div className='upload-submit'>
-                        <label className='file-upload'>
-                            <Typography variant='subtitle1' gutterBottom>
-                                {t('common:photoOrScreenshot')}
-                            </Typography>
-                            <input type='file' onChange={handleUpload}/>
-                        </label>
-                        {file && (
-                            <div className='img-wrapper'>
-                                <CustomButton onClick={handleCancel}>
-                                    {t('cancel')}
+                        <input
+                            type="file"
+                            name='file-upload'
+                            id="file-upload"
+                            onChange={handleUpload}
+                            style={{display: 'none'}}
+                        />
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
+                                <label className='file-upload' htmlFor='file-upload'>
+                                    <Button
+                                        variant="text"
+                                        component="span"
+                                        aria-label="upload picture"
+                                        startIcon={
+                                            <Publish className={classes.icon} />
+                                        }
+                                        classes={{root: classes.button}}
+                                    >
+                                        <Typography variant='subtitle1'>
+                                            {t('common:photoOrScreenshot')}
+                                        </Typography>
+                                    </Button>
+                                </label>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <CustomButton type='submit'>
+                                    {t('common:send')}
                                 </CustomButton>
-                                <img
-                                    className='file'
-                                    src={URL.createObjectURL(file)}
-                                />
-                            </div>
-                        )}
-                    </div>
-                    <div className='submit-wrapper'>
-                        <CustomButton type='submit'>
-                            {t('common:send')}
-                        </CustomButton>
+                            </Grid>
+                            {file && (
+                                <Grid item xs={12}>
+                                    <div className='img-wrapper'>
+                                        <img
+                                            className='file'
+                                            alt='feedback-img'
+                                            src={URL.createObjectURL(file)}
+                                        />
+                                        <CustomButton
+                                            onClick={handleCancel}
+                                        >
+                                            {t('common:cancel')}
+                                        </CustomButton>
+                                    </div>
+                                </Grid>
+                            )}
+                        </Grid>
                     </div>
                 </CustomFormikProvider>
             </div>
