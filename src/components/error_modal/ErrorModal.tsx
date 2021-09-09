@@ -23,16 +23,19 @@ export const ErrorModal: FC = () => {
                 title={t('error')}
                 handleCloseDialog={resetError}
             />
-            <Box mt={2} p={3} className={classes.root}>
+            <Box p={3} className={classes.root}>
                 <Grid container spacing={2} justifyContent='center'>
                     <Grid item xs={12} container justifyContent='center'>
-                        <Typography className="error-text" variant="h6" align='center' component='p'>
-                            {errorMsg}
-                        </Typography>
+                        <Box display='flex' flexDirection='column' alignItems='center'>
+                            <Typography className="error-text" variant="h6" align='center' component='p' gutterBottom>
+                                {errorMsg}
+                            </Typography>
+                            <img src="/img/server-error-bg.png" alt="server-error-bg" />
+                        </Box>
                     </Grid>
                     <Grid item xs={12} container justifyContent='center'>
                         <Typography variant="subtitle1" color="initial" align='center'>
-                            {t('error_modal.text')} <br/>
+                            {t('error_modal.text')} <br />
                             <Link href="/help/feedback">
                                 <a>{t('error_modal.feedback_link_text')}</a>
                             </Link>

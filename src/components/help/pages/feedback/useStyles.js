@@ -27,7 +27,10 @@ export const useStyles = makeStyles((theme) => ({
                 '& > button': {
                     width: '120px',
                     alignSelf: 'flex-end',
-                    marginTop: 16
+                    marginTop: 16,
+                    [theme.breakpoints.down('xs')]: {
+                        width: '100%'
+                    }
                 },
                 '& img.file': {
                     height: 250,
