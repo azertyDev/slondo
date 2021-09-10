@@ -9,9 +9,9 @@ import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, us
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+// import {Banner} from "@src/components/elements/banner/Banner";
 import {useTranslation} from "next-i18next";
 import {useStyles} from "./useStyles";
-import {Banner} from "@src/components/elements/banner/Banner";
 
 const initCardData: CardData = {
     cards: initCards,
@@ -137,17 +137,17 @@ export const PostsTabs: FC = () => {
                                 const isLastCard = cardsLen === i + 1;
                                 return (
                                     <Fragment key={i}>
-                                        {(isSmUp ? 3 : 4) === i && (
-                                            <Hidden lgUp>
-                                                <Grid
-                                                    item
-                                                    key={i}
-                                                    xs={12}
-                                                >
-                                                    <Banner height='240px'/>
-                                                </Grid>
-                                            </Hidden>
-                                        )}
+                                        {/*{(isSmUp ? 3 : 4) === i && (*/}
+                                        {/*    <Hidden lgUp>*/}
+                                        {/*        <Grid*/}
+                                        {/*            item*/}
+                                        {/*            key={i}*/}
+                                        {/*            xs={12}*/}
+                                        {/*        >*/}
+                                        {/*            <Banner height='240px'/>*/}
+                                        {/*        </Grid>*/}
+                                        {/*    </Hidden>*/}
+                                        {/*)}*/}
                                         <Grid
                                             item
                                             xs={6}

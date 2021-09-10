@@ -35,8 +35,8 @@ const Cabinet: FC = () => {
     // const prevPath = getSessionItem('prevPath');
     // const currPath = getSessionItem('currentPath');
 
-    const handlePrev = () => {
-        push(isMainPage ? '/': '/cabinet/main');
+    const handlePrev = async () => {
+        await push(isMainPage ? '/' : '/cabinet/main');
     };
 
     const getPage = () => {
