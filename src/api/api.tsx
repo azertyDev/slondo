@@ -31,6 +31,17 @@ const setTokenToHeader = () => {
     }
 };
 
+export const chatAPI = {
+    getUserContacts: (): Promise<any> => {
+        return instance
+            .get(`contact/all`, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    }
+};
+
 export const myUzCardAPI = {
     p2pHold: (paymentData: string): Promise<any> => {
         return instance

@@ -38,7 +38,6 @@ export const GridCard: FC<CardItemProps> = (props) => {
     } = props;
 
     const isFavorite = true;
-
     const {t} = useTranslation('common');
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}} = useContext(AuthCtx);
@@ -46,11 +45,10 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const [liked, setLiked] = useState(favorite);
     const {time = ''} = useDate().getDate(created_at);
 
-    const url = `/obyavlenie/${translatedTitle}-${id}`;
-
     const ctgrName = category.mark;
-
+    const url = `/obyavlenie/${translatedTitle}-${id}`;
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
+    const postLocation = `${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`;
 
     const handleFavorite = async () => {
         try {
@@ -88,7 +86,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                             />
                             : <CardMedia
                                 className="card-media"
-                                image={image ?? '/img/Vector.png'}
+                                image={image ?? '/img/default.png'}
                             >
                                 <div className="card-header">
                                     <div className="post_type">
@@ -143,13 +141,11 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                     </>
                                     : <>
                                         <Typography
-                                            variant="subtitle1"
-                                            color="initial"
-                                            component='p'
-                                            classes={{
-                                                root: classes.title
-                                            }}
                                             noWrap
+                                            component='p'
+                                            color="initial"
+                                            variant="subtitle1"
+                                            classes={{root: classes.title}}
                                         >
                                             {title}
                                         </Typography>
@@ -163,14 +159,16 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 <span>{t(`${currency.name}`)}</span>
                                             )}
                                         </Typography>
-                                        <Typography
-                                            noWrap
-                                            component='p'
-                                            variant="caption"
-                                            classes={{root: classes.mobileFont}}
-                                        >
-                                            {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
-                                        </Typography>
+                                        {region?.id !== null && (
+                                            <Typography
+                                                noWrap
+                                                component='p'
+                                                variant="caption"
+                                                classes={{root: classes.mobileFont}}
+                                            >
+                                                {postLocation}
+                                            </Typography>
+                                        )}
                                         <Typography
                                             component='p'
                                             variant="caption"

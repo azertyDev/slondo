@@ -1,28 +1,46 @@
-import React, {FC} from 'react';
-import {
-    Grid, Typography,
-    IconButton,
-    Menu,
-    MenuItem, InputBase
-} from '@material-ui/core';
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import SendIcon from '@material-ui/icons/Send';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
+import {FC, MouseEvent, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
+import {Grid, IconButton, InputBase, Menu, MenuItem, Typography} from "@material-ui/core";
+import {UserAvatarComponent} from "@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent";
+import {MoreVert, AttachFile, Send} from "@material-ui/icons";
 import {useStyles} from './useStyles';
+import {chatAPI} from "@src/api/api";
 
-export const Messages: FC<any> = () => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+export const ChatComponent: FC = () => {
+    const [contacts, setContacts] = useState([]);
+    const [chat, setChat] = useState([]);
+    const [isFetch, setIsFetch] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
     const title = 'Сообщения';
+
     const options = [
         'None',
         'Atria',
         'Callisto'
     ];
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const fetchUserContacts = async () => {
+        try {
+            setIsFetch(true);
+
+            const contacts = (await chatAPI.getUserContacts()).data;
+
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setContacts(contacts);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.mesage);
+                setIsFetch(false);
+            });
+        }
+    };
+
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -30,14 +48,23 @@ export const Messages: FC<any> = () => {
         setAnchorEl(null);
     };
 
-    const classes: any = useStyles();
-    return <div>
-        <Grid container className={classes.messengerWrapper}>
-            <Grid item xs={4} className={classes.sidebar}>
+    useEffect(() => {
+        fetchUserContacts();
+    }, []);
+
+    console.log(contacts);
+    const classes = useStyles();
+    return (
+        <Grid container className={classes.root}>
+            <Grid item xs={4} className='chat-sidebar'>
                 <div className='conversation-list'>
-                    {Array.from({length: 15}).map(() => {
-                        return <div className='conversation-item'>
-                            <UserAvatarComponent avatar=''/>
+                    {Array.from({length: 3}).map((_, i) => {
+                        return <div key={i} className='conversation-item'>
+                            <UserAvatarComponent
+                                avatar=''
+                                width={50}
+                                height={50}
+                            />
                             <div className='user-info'>
                                 <div className='user-name'>
                                     <Typography variant='subtitle1'>
@@ -55,7 +82,7 @@ export const Messages: FC<any> = () => {
                     })}
                 </div>
             </Grid>
-            <Grid item xs={8} className={classes.chatBlock}>
+            <Grid item xs={8} className='chat-block'>
                 <div className='chat-header'>
                     <Typography variant='subtitle1'>
                         Feiyutech store
@@ -66,7 +93,7 @@ export const Messages: FC<any> = () => {
                         aria-haspopup="true"
                         onClick={handleClick}
                     >
-                        <MoreVertIcon/>
+                        <MoreVert/>
                     </IconButton>
                     <Menu
                         id="long-menu"
@@ -83,7 +110,7 @@ export const Messages: FC<any> = () => {
                         open={open}
                         onClose={handleClose}
                     >
-                        {options.map((option) => (
+                        {options.map(option => (
                             <MenuItem key={option} onClick={handleClose}>
                                 {option}
                             </MenuItem>
@@ -97,7 +124,7 @@ export const Messages: FC<any> = () => {
                 </div>
                 <div className='compose'>
                     <IconButton className='sendFileBtn'>
-                        <AttachFileIcon/>
+                        <AttachFile/>
                     </IconButton>
                     <div className='textField'>
                         <InputBase
@@ -106,11 +133,11 @@ export const Messages: FC<any> = () => {
                             fullWidth
                         />
                         <IconButton className='send-btn'>
-                            <SendIcon/>
+                            <Send/>
                         </IconButton>
                     </div>
                 </div>
             </Grid>
         </Grid>
-    </div>;
+    );
 };

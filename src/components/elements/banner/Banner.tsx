@@ -1,25 +1,33 @@
 import {FC} from 'react';
+import Link from "next/link";
+import {useMediaQuery, useScrollTrigger, useTheme} from '@material-ui/core';
 import {useStyles} from './useStyles';
-import {Paper, Typography, useMediaQuery, useScrollTrigger, useTheme} from '@material-ui/core';
 
 type BannerPropsType = {
+    img: string,
+    link: string,
     height?: string,
     threshold?: number
 }
 
-export const Banner: FC<BannerPropsType> = ({height, threshold}) => {
+export const Banner: FC<BannerPropsType> = (props) => {
+    const {
+        img,
+        link,
+        height,
+        threshold
+    } = props;
+
     const isXlUp = useMediaQuery(useTheme().breakpoints.up('xl'));
     const trigger = useScrollTrigger({disableHysteresis: true, threshold});
     const isScrollBreak = threshold ? trigger : null;
 
-    const classes = useStyles({isScrollBreak, isXlUp});
+    const classes = useStyles({isScrollBreak, isXlUp, img});
     return (
-        <div className={classes.root}>
-            <Paper style={{height: height}} elevation={0}>
-                <Typography variant="h5" color="initial">
-                    Рекламный блок
-                </Typography>
-            </Paper>
-        </div>
+        <Link href={link}>
+            <a target='_blank'>
+                <div className={classes.root}/>
+            </a>
+        </Link>
     );
 };

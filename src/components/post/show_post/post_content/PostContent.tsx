@@ -196,7 +196,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
-                    title={post.title}
+                    post={{
+                        title: post.title,
+                        description: post.description
+                    }}
                     imgs={post.images}
                     isFavorite={favorite}
                     favoriteCount={favCount}
