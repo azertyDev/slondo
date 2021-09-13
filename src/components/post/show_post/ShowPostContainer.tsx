@@ -205,7 +205,9 @@ export const ShowPostContainer: FC = () => {
             />
             <ErrorModal/>
             <AuthModal/>
-            <Footer/>
+            <Hidden mdDown>
+                <Footer/>
+            </Hidden>
         </>
     );
 };

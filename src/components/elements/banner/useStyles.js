@@ -1,21 +1,23 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         position: ({isScrollBreak}) => isScrollBreak ? 'fixed' : 'unset',
         top: ({isScrollBreak}) => isScrollBreak && '63px',
-        width: ({isScrollBreak, isXlUp}) => isScrollBreak ? isXlUp ? '308px' : '244px' : '100%',
-        '& > div.MuiPaper-rounded': {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#F2F2F2',
-            backgroundRepeat: 'no-repeat',
-            borderRadius: '10px',
-            '& > h5.MuiTypography-h5': {
-                color: '#7DBCF6',
-                fontWeight: '700'
-            }
+        width: '25vw',
+        height: '40vw',
+        maxHeight: '492px',
+        maxWidth: '308px',
+        backgroundImage: ({img}) => `url(${img})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        borderRadius: '10px',
+        filter: 'drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.08))',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+            maxWidth: '100%',
+            height: '52vw',
+            maxHeight: '100%'
         }
     }
 }));

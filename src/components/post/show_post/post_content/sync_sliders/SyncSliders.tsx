@@ -22,7 +22,10 @@ import {useModal} from '@src/hooks';
 import {useStyles} from './useStyles';
 
 type SyncSlidersProps = {
-    title: string,
+    post: {
+        title: string,
+        description: string
+    },
     isCreator: boolean,
     imgs: {
         alt: string;
@@ -35,7 +38,7 @@ type SyncSlidersProps = {
 
 export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
     const {
-        title,
+        post,
         isCreator,
         imgs = [],
         handleFavorite,
@@ -72,7 +75,8 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
     const handleShare = async () => {
         if (navigator.share && isMdDown) {
             await navigator.share({
-                title: title,
+                title: post.title,
+                text: post.description,
                 url: window.location.href
             });
         } else {
@@ -175,7 +179,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                             </IconButton>
                         </div>
                         <Typography className="title" variant="h6">
-                            {title}
+                            {post.title}
                         </Typography>
                     </div>
                     <div className='first-slider'>

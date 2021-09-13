@@ -10,6 +10,7 @@ export const cabinetURLs = [
     '/cabinet/purchases',
     '/cabinet/favorite',
     '/cabinet/notifications',
+    '/cabinet/messages',
     '/cabinet/safe_deal',
     '/cabinet/settings',
     '/uz/cabinet/main',

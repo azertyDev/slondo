@@ -21,6 +21,9 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+        '& div.slider-wrapper': {
+            marginBottom: '25px'
+        },
         '& div.post-type-adaptive': {
             '& .MuiTypography-h6': {
                 padding: '0px 20px',

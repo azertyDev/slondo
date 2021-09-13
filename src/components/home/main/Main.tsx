@@ -16,9 +16,9 @@ import {useTranslation} from 'next-i18next';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
-import {useStyles} from './useStyles';
 import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
 import {Banner} from "@src/components/elements/banner/Banner";
+import {useStyles} from './useStyles';
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
@@ -45,7 +45,12 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <HomeSidebar/>
-                                <Banner height="483px" threshold={1140}/>
+                                <Banner
+                                    height="26vw"
+                                    threshold={1140}
+                                    img='/img/eximtrans.png'
+                                    link='http://www.eximtrans.uz'
+                                />
                             </Grid>
                         </Hidden>
                     </Grid>

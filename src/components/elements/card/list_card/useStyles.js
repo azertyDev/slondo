@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px 0px 0px 10px',
-                    backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/Vector.png'})`,
+                    backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/default.png'})`,
                     '& > span.MuiTypography-caption': {
                         position: 'absolute',
                         top: '3px',

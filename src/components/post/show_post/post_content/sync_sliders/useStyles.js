@@ -42,9 +42,6 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'space-between',
                 width: '100%',
                 padding: '20px 25px 0',
-                [theme.breakpoints.down('md')]: {
-                    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.08) 52.08%, rgba(0, 0, 0, 0) 100%)'
-                },
                 [theme.breakpoints.up('lg')]: {
                     justifyContent: 'flex-end'
                 },
@@ -289,7 +286,9 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-            '& .slick-dotted.slick-slider': {marginBottom: '30px'},
+            '& .slick-dotted.slick-slider': {
+                marginBottom: '30px'
+            },
             '& .slick-dots': {
                 position: 'absolute',
                 bottom: '10px',

@@ -9,9 +9,9 @@ import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, us
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {Banner} from "@src/components/elements/banner/Banner";
 import {useTranslation} from "next-i18next";
 import {useStyles} from "./useStyles";
-import {Banner} from "@src/components/elements/banner/Banner";
 
 const initCardData: CardData = {
     cards: initCards,
@@ -144,7 +144,11 @@ export const PostsTabs: FC = () => {
                                                     key={i}
                                                     xs={12}
                                                 >
-                                                    <Banner height='240px'/>
+                                                    <Banner
+                                                        height='53vw'
+                                                        img='/img/eximtrans_m.png'
+                                                        link='http://www.eximtrans.uz'
+                                                    />
                                                 </Grid>
                                             </Hidden>
                                         )}

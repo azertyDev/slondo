@@ -34,9 +34,7 @@ export const useStyles = makeStyles((theme) => ({
                 border: 'none',
                 height: 44,
                 boxShadow: ' 0px 1px 2px rgb(0 0 0 / 25%)',
-                '&:first-child': {
-                    marginBottom: '10px'
-                },
+                marginBottom: '10px',
                 '&.contact-btn': {
                     border: `1px solid ${theme.palette.primary.secondary}`,
                     '& p': {
