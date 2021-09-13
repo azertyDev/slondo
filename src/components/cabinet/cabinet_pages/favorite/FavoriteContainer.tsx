@@ -4,7 +4,7 @@ import {userAPI} from '@src/api/api';
 import {Box, CircularProgress} from '@material-ui/core';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
-import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card_wrapper/CabinetCardWrapper';
+import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';

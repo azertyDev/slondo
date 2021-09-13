@@ -60,7 +60,10 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                     className="safe-shopping-btn"
                                 >
                                     <SafeIcon/>
-                                    <Typography variant="subtitle1" color="initial">
+                                    <Typography
+                                        color="initial"
+                                        variant="subtitle1"
+                                    >
                                         {t('common:safe_deal')}
                                     </Typography>
                                 </CustomButton>

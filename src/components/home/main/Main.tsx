@@ -74,7 +74,9 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         </div>
                     </Slide>
                 </Hidden>
-                <ScrollTop/>
+                <Hidden mdDown>
+                    <ScrollTop/>
+                </Hidden>
             </div>
         </main>
     );

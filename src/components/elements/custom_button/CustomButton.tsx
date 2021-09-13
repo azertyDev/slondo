@@ -10,8 +10,8 @@ export const CustomButton: FC<PropsWithChildren<ButtonBaseProps>> = (props) => {
         <ButtonBase
             {...otherProps}
             disabled={disabled}
-            classes={{root: classes.root}}
             className={className}
+            classes={{root: classes.root}}
         />
     );
 };

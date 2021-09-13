@@ -6,7 +6,6 @@ import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {LetterIcon, PhoneIcon} from '@src/components/elements/icons';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
