@@ -28,6 +28,7 @@ export {SurpriseIcon} from './SurpriseIcon';
 export {SubstractIcon} from './SubstractIcon';
 export {Search_icon} from './SearchIcon';
 export {LetterIcon} from './LetterIcon';
+export {FeedbackIcon} from './FeedbackIcon';
 export {NotificationIcon} from './NotificationIcon';
 export {AnimalsIcon} from './category_icons/AnimalsIcon';
 export {ApartmentsIcon} from './category_icons/ApartmentsIcon';
