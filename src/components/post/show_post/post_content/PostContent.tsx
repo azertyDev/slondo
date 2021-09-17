@@ -44,9 +44,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const transKey = post.category.name;
     const isExAuc = post.ads_type.mark === 'exauc';
     const isAuction = post.ads_type.mark === 'auc' || isExAuc;
-    const transKey = post.category.name;
 
     const {
         model,
@@ -380,7 +380,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 {t('views')}: {number_of_views}
                             </Typography>
                         </div>
-                        <CustomButton className="btn-report" onClick={handleComplaintModalOpen}>
+                        <CustomButton
+                            className="btn-report"
+                            onClick={handleComplaintModalOpen}
+                        >
                             {t('complain')}
                         </CustomButton>
                     </div>

@@ -1,9 +1,9 @@
 import {FC, ReactNode} from 'react';
+import Link from 'next/link';
 import {useTranslation, Trans} from 'react-i18next';
 import {Box, Grid, Paper, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
-import Link from 'next/link';
 
 type PostInfoProps = {
     author,
@@ -71,11 +71,9 @@ export const PostInfo: FC<PostInfoProps> = (props) => {
                 <Grid item xs={12}>
                     <Typography variant='subtitle2' component='p' color='textSecondary' align='center'>
                         <Trans
-                            i18nKey="post:safeDealRules"
                             t={t}
-                            components={[
-                                <LinkText href='/help/safe_shopping'/>
-                            ]}
+                            i18nKey="post:safeDealRules"
+                            components={[<LinkText href='/help/safe_shopping'/>]}
                         />
                     </Typography>
                 </Grid>

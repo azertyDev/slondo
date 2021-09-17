@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: '31px',
         [theme.breakpoints.down('md')]: {
             marginTop: 0,
-            marginBottom: '75px'
+            marginBottom: '90px'
         },
         '& > div.price': {
             marginBottom: '10px',

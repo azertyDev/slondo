@@ -116,7 +116,10 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 10px 25px rgb(15 51 107 / 15%)'
         },
         '& button': {
-            width: '100%'
+            width: '100%',
+            '&:disabled': {
+                background: 'linear-gradient(90deg, rgb(125, 188, 246) 0%, rgb(99, 166, 244) 100%)'
+            }
         },
         '& a.link': {
             textDecoration: 'none',

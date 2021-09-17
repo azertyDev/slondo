@@ -1,5 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
+import {useModal} from "@src/hooks";
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {unstable_batchedUpdates} from "react-dom";
@@ -10,7 +11,6 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {Footer} from '@src/components/footer/Footer';
 import {AuthCtx, ErrorCtx} from "@src/context";
-import {useModal} from "@src/hooks";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CustomHead} from "@src/components/head/CustomHead";
@@ -24,6 +24,7 @@ export const ShowPostContainer: FC = () => {
     const {url} = useRouter().query;
     const postUrl = url as string;
     const [postId] = postUrl.split('-').splice(-1);
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const initValues = {id: null, name: ''};
     const initialPostData = {
@@ -154,8 +155,6 @@ export const ShowPostContainer: FC = () => {
             });
         }
     };
-
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     useEffect(() => {
         setFetchedPostData();

@@ -7,8 +7,8 @@ import {useTranslation} from 'react-i18next';
 import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {useStyles} from './useStyles';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
@@ -31,7 +31,6 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
     const {t} = useTranslation('cabinet');
 
     const {
-        observer,
         category,
         adsable,
         ads_type,
