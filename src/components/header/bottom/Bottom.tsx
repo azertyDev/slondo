@@ -14,7 +14,7 @@ import {
     useScrollTrigger
 } from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {Logo, QuestionIcon} from '@src/components/elements/icons';
+import {FeedbackIcon, Logo, QuestionIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
@@ -194,9 +194,19 @@ export const Bottom: FC<BottomProps> = (props) => {
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon/>
+                                        <QuestionIcon />
                                         <Typography variant="subtitle1">
                                             {t('help')}
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </Grid>
+                            <Grid item sm={5} md={4}>
+                                <Link href="/help/feedback">
+                                    <a className={pathname === '/help' ? 'selected' : ''}>
+                                        <FeedbackIcon />
+                                        <Typography variant="subtitle1">
+                                            {t('footer:feedback')}
                                         </Typography>
                                     </a>
                                 </Link>
