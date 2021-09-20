@@ -563,6 +563,15 @@
     "fifth_position": {
       "name": "Пятая позиция"
     },
+    "sahar": {
+      "name": "Sahar"
+    },
+    "oksus": {
+      "name": "Okus"
+    },
+    "irbis": {
+      "name": "Irbis"
+    },
     "drive": {
       "name": "Привод"
     },
@@ -2608,7 +2617,7 @@
       "name": "Евроремонт квартир и домов"
     },
     "major_repairs_houses": {
-      "name": "Капитальный ремонт и домов"
+      "name": "Капитальный ремонт домов"
     },
     "cosmetic_repair": {
       "name": "Косметический ремонт"
