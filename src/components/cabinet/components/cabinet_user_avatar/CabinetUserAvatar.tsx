@@ -25,13 +25,13 @@ export const CabinetUserAvatar: FC<CabinetUserAvatarProps> = (props) => {
             aria-label="cabinet menu"
             className={classes.root}
         >
+            <div className='user-info-wrapper'>
+                <UserInfoWithAvatar user={user}/>
+            </div>
             <Grid
                 container
                 spacing={1}
             >
-                <div className='user-info-wrapper'>
-                    <UserInfoWithAvatar user={user}/>
-                </div>
                 <Grid item xs={4}>
                     <CustomBadge badgeContent={user.observer.number_of_reviews}>
                         <ListItem

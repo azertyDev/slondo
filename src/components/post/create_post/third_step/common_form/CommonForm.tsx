@@ -166,7 +166,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.delivery = delivery;
         if (exchange)
             otherData.exchange = exchange;
-        if (user.phone !== preparedPhone && !RegExp(/_/g).test(phone))
+        if (!RegExp(/_/g).test(phone) && user.phone !== preparedPhone)
             otherData.phone = preparedPhone;
 
         otherData.description = description.trim();
