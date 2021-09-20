@@ -1,7 +1,27 @@
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
-import {useTranslation} from "react-i18next";
+import {useTranslation} from 'react-i18next';
+import {
+    CabrioletIcon,
+    CoupeIcon,
+    CrossoverIcon,
+    FastbackIcon,
+    HardtopIcon,
+    HatchbackIcon,
+    LiftbackIcon,
+    LimousineIcon,
+    MinevanIcon,
+    MinibusIcon,
+    PickupIcon,
+    RoadsterIcon,
+    SedanIcon,
+    StationWagonIcon,
+    SuvIcon,
+    TargaIcon,
+    VanIcon
+} from '@src/components/elements/icons';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 
 
 type BodyTypesProps = {
@@ -12,6 +32,94 @@ type BodyTypesProps = {
     handleSelect: (k, v) => void
 };
 
+const bodyIcons = [
+    {
+        id: 1,
+        name: 'cabriolet',
+        icon: <CabrioletIcon />
+    },
+    {
+        id: 2,
+        name: 'hatchback',
+        icon: <HatchbackIcon />
+    },
+    {
+        id: 3,
+        name: 'coupe',
+        icon: <CoupeIcon />
+    },
+    {
+        id: 4,
+        name: 'suv',
+        icon: <SuvIcon />
+    },
+    {
+        id: 5,
+        name: 'minibus',
+        icon: <MinibusIcon />
+    },
+    {
+        id: 6,
+        name: 'minevan',
+        icon: <MinevanIcon />
+    },
+    {
+        id: 7,
+        name: 'pickup',
+        icon: <PickupIcon />
+    },
+    {
+        id: 8,
+        name: 'sedan',
+        icon: <SedanIcon />
+    },
+    {
+        id: 9,
+        name: 'station_wagon',
+        icon: <StationWagonIcon />
+    },
+    {
+        id: 10,
+        name: 'сrossover',
+        icon: <CrossoverIcon />
+    },
+    {
+        id: 11,
+        name: 'roadster',
+        icon: <RoadsterIcon />
+    },
+    {
+        id: 12,
+        name: 'limousine',
+        icon: <LimousineIcon />
+    },
+    {
+        id: 13,
+        name: 'targa',
+        icon: <TargaIcon />
+    },
+    {
+        id: 14,
+        name: 'fastback',
+        icon: <FastbackIcon />
+    },
+    {
+        id: 15,
+        name: 'hardtop',
+        icon: <HardtopIcon />
+    },
+    {
+        id: 16,
+        name: 'liftback',
+        icon: <LiftbackIcon />
+    },
+    {
+        id: 17,
+        name: 'van',
+        icon: <VanIcon />
+    }
+];
+
 export const BodySelect: FC<BodyTypesProps> = (props) => {
     const {
         values,
@@ -20,6 +128,43 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         handleSelect,
         disableRequire
     } = props;
+
+    const sliderSettings = {
+        dots: false,
+        infinite: false,
+        arrows: false,
+        slidesToShow: 10,
+        slidesToScroll: 1,
+        centerPadding: '0px',
+        centerMode: false,
+        adaptiveHeight: false,
+        responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 8
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 6
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 5
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2.5
+                }
+            }
+        ]
+    };
 
     const {t} = useTranslation('filters');
 
@@ -37,22 +182,26 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
                     </span>
                 )}
             </Typography>
-            <div className='body-types'>
-                {bodies?.map(body => (
-                    <Box
-                        key={body.id}
-                        onClick={() => handleSelect('body', body)}
-                        className={body.id === values.body?.id ? 'selected' : ''}
-                    >
-                        <Typography
-                            component='p'
-                            variant='subtitle1'
+            <CustomSlider {...sliderSettings}>
+                {bodies?.map(body => {
+                    const carIcon = bodyIcons.find(el => el.name === body.name);
+                    return (
+                        <Box
+                            key={body.id}
+                            onClick={() => handleSelect('body', body)}
+                            className={body.id === values.body?.id ? 'selected' : ''}
                         >
-                            {t(`car.${body.name}.name`)}
-                        </Typography>
-                    </Box>
-                ))}
-            </div>
+                            {carIcon.icon}
+                            <Typography
+                                component='p'
+                                variant='subtitle1'
+                            >
+                                {t(`car.${body.name}.name`)}
+                            </Typography>
+                        </Box>
+                    );
+                })}
+            </CustomSlider>
         </div>
     );
 };

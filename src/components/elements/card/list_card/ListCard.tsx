@@ -122,7 +122,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             )}
                         </Grid>
                         <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
-                            <Grid item xs={11} sm={10} lg={7}>
+                            <Grid item xs={12} sm={10} lg={7}>
                                 <Typography
                                     variant="h3"
                                     color="initial"
