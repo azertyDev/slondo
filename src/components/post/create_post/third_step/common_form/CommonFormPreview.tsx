@@ -151,7 +151,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <Grid item xs={12} sm={8} container>
                         {values.delivery && (
                             <Box className={classes.serviceItem}>
-                                <DeliveryIcon />
+                                <DeliveryIcon/>
                                 <Typography variant="subtitle1">
                                     {t('filters:delivery')}
                                 </Typography>
@@ -232,10 +232,14 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Box className={classes.serviceItem}>
-                            <PhoneIcon />
+                            <PhoneIcon/>
                             <Typography variant="subtitle1">
                                 {`${timeFormat(available_start_time)} - ${timeFormat(available_end_time)}`}&nbsp;
-                                ({weekDaysHelper(available_days, t)})
+                                {available_days.length !== 0 && (
+                                    <span>
+                                        ({weekDaysHelper(available_days, t)})
+                                    </span>
+                                )}
                             </Typography>
                         </Box>
                     </Grid>

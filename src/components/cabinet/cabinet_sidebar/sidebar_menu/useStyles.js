@@ -37,16 +37,7 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'flex-start'
                 },
                 '& .MuiTypography-body1': {
-                    fontSize: '1rem',
-                    [theme.breakpoints.down('md')]: {
-                        fontSize: 'calc(14px + (100vw - 992px) / 1280)'
-                    },
-                    [theme.breakpoints.down('sm')]: {
-                        fontSize: 'calc(12px + (100vw - 576px) / 1280)'
-                    },
-                    [theme.breakpoints.down('xs')]: {
-                        fontSize: '1rem'
-                    }
+                    fontSize: '1rem'
                 },
                 '& .MuiListItemText-root': {
                     flex: 'none'

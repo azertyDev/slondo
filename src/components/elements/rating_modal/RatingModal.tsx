@@ -108,7 +108,6 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                                 >
                                     <Box my={2}>
                                         <Rating
-                                            card
                                             name="rating"
                                             readOnly={false}
                                             ratingCount={user.rating}

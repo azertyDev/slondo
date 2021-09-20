@@ -155,7 +155,7 @@ export const HelpContent: FC = () => {
                 return <Sold/>;
             case 'buy':
                 return <Buy/>;
-            case 'chat':
+            case 'chat_component':
                 return <Chat/>;
             case 'ratings_reviews':
                 return <RatingsReviews/>;

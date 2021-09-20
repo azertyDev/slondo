@@ -31,6 +31,7 @@ import {useStyles} from './useStyles';
 type PostContentTypes = {
     post,
     handleSafeDeal: () => void,
+    handleChatOpen: () => void,
     setFetchedPostData: () => Promise<void>
 };
 
@@ -38,6 +39,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
         handleSafeDeal,
+        handleChatOpen,
         setFetchedPostData
     } = props;
 
@@ -57,7 +59,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         }
     } = post;
 
-    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
+    const {
+        auth: {isAuth},
+        setAuthModalOpen
+    } = useContext(AuthCtx);
 
     const [favCount, setFavCount] = useState(0);
     const [favorite, setFavorite] = useState(false);
@@ -306,8 +311,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <div className="contact">
                         <ShowPhone postId={post.id}/>
-                        <CustomButton disabled color='silver'>
-                            <Typography variant='subtitle1'>{t('writeMessage')}</Typography>
+                        <CustomButton
+                            disabled
+                            color='silver'
+                            onClick={handleChatOpen}
+                        >
+                            <Typography variant='subtitle1'>
+                                {t('writeMessage')}
+                            </Typography>
                         </CustomButton>
                     </div>
                     {isAuction && (
@@ -391,6 +402,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <OwnerAuctionInfo
                         post={post}
+                        handleChatOpen={handleChatOpen}
                         handleSafeDeal={handleSafeDeal}
                         setFetchedPostData={setFetchedPostData}
                     />

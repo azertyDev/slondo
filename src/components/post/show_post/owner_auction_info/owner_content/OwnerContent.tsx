@@ -2,21 +2,23 @@ import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {LetterIcon, SafeIcon} from '@root/src/components/elements/icons';
+import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
 import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
     postData,
-    handleSafeDeal: () => void
+    handleSafeDeal: () => void,
+    handleChatOpen: () => void
 } & WithT;
 
 export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         t,
         postData,
-        handleSafeDeal
+        handleSafeDeal,
+        handleChatOpen
     } = props;
 
     const {
@@ -45,10 +47,10 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                         <>
                             <CustomButton
                                 disabled
-                                color="primary"
+                                color="silver"
                                 className='contact-btn'
+                                onClick={handleChatOpen}
                             >
-                                <LetterIcon/>
                                 <Typography variant="subtitle1" component='p'>
                                     {t('common:writeToSeller')}
                                 </Typography>

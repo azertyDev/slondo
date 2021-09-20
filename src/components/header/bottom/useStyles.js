@@ -180,7 +180,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     menu: {
         '& .MuiPaper-root': {
-            width: '290px',
+            width: '320px',
             padding: '10px',
             backgroundColor: '#fff'
         },

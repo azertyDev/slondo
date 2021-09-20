@@ -1,10 +1,10 @@
 import {FC, useContext} from 'react';
 import Link from 'next/link';
+import {settings} from './sliderSettings';
+import {useTranslation} from 'next-i18next';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {settings} from './sliderSettings';
 import {site_categories} from '@src/common_data/site_categories';
-import {useTranslation} from 'next-i18next';
 import {transformCyrillic} from '@root/src/helpers';
 import {UserLocationCtx} from "@src/context";
 import {useStyles} from './useStyles';

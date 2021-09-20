@@ -1,21 +1,20 @@
 import Axios from 'axios';
+import {UserInfo} from '@root/interfaces/Auth';
 import {cookies, transformCyrillic} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
-import {UserInfo} from '@root/interfaces/Auth';
 import {CityType, RegionType} from "@root/interfaces/Locations";
+import {DEV_URL, PRODUCTION_URL} from "@src/constants";
 
-const production = 'https://backend.slondo.uz/api/';
+const production = `${PRODUCTION_URL}/api/`;
+const local = `${DEV_URL}/slondo/public/api/`;
 const testb = 'https://backend.testb.uz/api/';
-const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
     baseURL: production
 });
-
-// export const socketIO = socketIOClient('http://192.168.100.60:8005');
 
 const setTokenToHeader = () => {
     const token = cookies.get('slondo_auth');
@@ -32,6 +31,29 @@ const setTokenToHeader = () => {
 };
 
 export const chatAPI = {
+    removeContact: (userId: number): Promise<any> => {
+        return instance
+            .delete(`contact/${userId}`, setTokenToHeader())
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    sendMessage: (form): Promise<any> => {
+        return instance
+            .post(`message/send`, form, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    getMessages: (params: { itemsPerPage: number, receiver_id: number, page: number }): Promise<any> => {
+        return instance
+            .get(`message/byReceiverId`, {params, ...setTokenToHeader()})
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
     getUserContacts: (): Promise<any> => {
         return instance
             .get(`contact/all`, setTokenToHeader())

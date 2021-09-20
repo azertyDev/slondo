@@ -124,6 +124,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             ...otherData
         } = commonData;
 
+        const preparedPhone = phonePrepare(phone);
+
         if (isAuction) {
             const {
                 duration,
@@ -158,10 +160,14 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.available_days = available_days;
         }
 
-        if (!RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
-        if (safe_deal) otherData.safe_deal = safe_deal;
-        if (delivery) otherData.delivery = delivery;
-        if (exchange) otherData.exchange = exchange;
+        if (safe_deal)
+            otherData.safe_deal = safe_deal;
+        if (delivery)
+            otherData.delivery = delivery;
+        if (exchange)
+            otherData.exchange = exchange;
+        if (user.phone !== preparedPhone && !RegExp(/_/g).test(phone))
+            otherData.phone = preparedPhone;
 
         otherData.description = description.trim();
 

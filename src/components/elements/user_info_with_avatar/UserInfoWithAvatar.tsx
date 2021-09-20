@@ -13,7 +13,6 @@ import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
     user: UserInfo,
-    card?: boolean,
     width?: string,
     height?: string
 };
@@ -21,7 +20,6 @@ type UserInfoWithAvatarPropsType = {
 export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const {
         user,
-        card,
         width,
         height
     } = props;
@@ -62,7 +60,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                 height={height}
                 avatar={user?.avatar}
             />
-            <Box>
+            <Box className='user-info'>
                 <Typography color="initial" variant='subtitle1' gutterBottom>
                     {!isIncognito && (`${user?.name ?? ''} ${user?.surname ?? ''}`)}
                 </Typography>
@@ -71,7 +69,6 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                 </Typography>
                 <Rating
                     readOnly
-                    card={card}
                     ratingValue={user?.rating}
                     ratingCount={user?.observer?.number_of_ratings}
                 />

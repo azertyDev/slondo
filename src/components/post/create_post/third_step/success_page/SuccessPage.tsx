@@ -53,7 +53,7 @@ export const SuccessPage: FC = () => {
                     </Typography>
                 </div>
             </Paper>
-            <div className={classes.buttonBlock}>
+            <div className={classes.buttonsBlock}>
                 <div>
                     <Link href="/create" shallow>
                         <a>

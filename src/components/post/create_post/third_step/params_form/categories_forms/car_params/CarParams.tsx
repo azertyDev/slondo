@@ -234,9 +234,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     <Grid item xs={12} md={6}>
                         <PostTitle
                             t={t}
-                            isPreview={isPreview}
-                            title={values.title}
                             formik={formik}
+                            title={values.title}
+                            isPreview={isPreview}
                         />
                     </Grid>
                     <Grid item container spacing={2}>

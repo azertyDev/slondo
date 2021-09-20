@@ -60,6 +60,7 @@
   "archive": "Arxiv",
   "visibility": "Ko'rinish",
   "color": "Rangi",
+  "screen": "Ekran tiniqligi",
   "car": {
     "color": {
       "name": "Rangi"

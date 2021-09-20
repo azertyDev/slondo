@@ -79,7 +79,7 @@ const data  = [
         section: 'Взаимодействие пользователей',
         term: 'user_interaction',
         subSections: [
-            {section: 'Чаты', term: 'chat'},
+            {section: 'Чаты', term: 'chat_component'},
             {section: 'Оценки и отзывы', term: 'ratings_reviews'}
         ],
     },

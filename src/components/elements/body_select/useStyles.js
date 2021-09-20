@@ -6,6 +6,16 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         '& .slick-list': {
             padding: '10px 0',
+            '& div.slick-track': {
+                display: 'flex',
+                alignItems: 'end',
+                '& div.slick-slide': {
+                    '& div.MuiBox-root': {
+                        width: 'fit-content!important',
+                        margin: 'auto'
+                    }
+                }
+            },
             '& .MuiBox-root': {
                 cursor: 'pointer',
                 userSelect: 'none',
@@ -18,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '&.selected': {
                     '& p.MuiTypography-subtitle1': {
-                        color: theme.palette.primary.main
+                        color: theme.palette.primary.secondary
                     },
                     '& svg': {
                         '& path': {

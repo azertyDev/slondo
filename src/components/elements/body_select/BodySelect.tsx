@@ -23,7 +23,6 @@ import {
 } from '@src/components/elements/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 
-
 type BodyTypesProps = {
     disableRequire?: boolean,
     bodies,
@@ -36,87 +35,87 @@ const bodyIcons = [
     {
         id: 1,
         name: 'cabriolet',
-        icon: <CabrioletIcon />
+        icon: <CabrioletIcon/>
     },
     {
         id: 2,
         name: 'hatchback',
-        icon: <HatchbackIcon />
+        icon: <HatchbackIcon/>
     },
     {
         id: 3,
         name: 'coupe',
-        icon: <CoupeIcon />
+        icon: <CoupeIcon/>
     },
     {
         id: 4,
         name: 'suv',
-        icon: <SuvIcon />
+        icon: <SuvIcon/>
     },
     {
         id: 5,
         name: 'minibus',
-        icon: <MinibusIcon />
+        icon: <MinibusIcon/>
     },
     {
         id: 6,
         name: 'minevan',
-        icon: <MinevanIcon />
+        icon: <MinevanIcon/>
     },
     {
         id: 7,
         name: 'pickup',
-        icon: <PickupIcon />
+        icon: <PickupIcon/>
     },
     {
         id: 8,
         name: 'sedan',
-        icon: <SedanIcon />
+        icon: <SedanIcon/>
     },
     {
         id: 9,
         name: 'station_wagon',
-        icon: <StationWagonIcon />
+        icon: <StationWagonIcon/>
     },
     {
         id: 10,
         name: 'сrossover',
-        icon: <CrossoverIcon />
+        icon: <CrossoverIcon/>
     },
     {
         id: 11,
         name: 'roadster',
-        icon: <RoadsterIcon />
+        icon: <RoadsterIcon/>
     },
     {
         id: 12,
         name: 'limousine',
-        icon: <LimousineIcon />
+        icon: <LimousineIcon/>
     },
     {
         id: 13,
         name: 'targa',
-        icon: <TargaIcon />
+        icon: <TargaIcon/>
     },
     {
         id: 14,
         name: 'fastback',
-        icon: <FastbackIcon />
+        icon: <FastbackIcon/>
     },
     {
         id: 15,
         name: 'hardtop',
-        icon: <HardtopIcon />
+        icon: <HardtopIcon/>
     },
     {
         id: 16,
         name: 'liftback',
-        icon: <LiftbackIcon />
+        icon: <LiftbackIcon/>
     },
     {
         id: 17,
         name: 'van',
-        icon: <VanIcon />
+        icon: <VanIcon/>
     }
 ];
 
@@ -128,33 +127,33 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         handleSelect,
         disableRequire
     } = props;
+    const {t} = useTranslation('filters');
 
     const sliderSettings = {
         dots: false,
-        infinite: false,
         arrows: false,
-        slidesToShow: 10,
-        slidesToScroll: 1,
+        infinite: false,
+        slidesToShow: 9.5,
         centerPadding: '0px',
-        centerMode: false,
+        swipeToSlide: true,
         adaptiveHeight: false,
         responsive: [
             {
                 breakpoint: 1280,
                 settings: {
-                    slidesToShow: 8
+                    slidesToShow: 7.5
                 }
             },
             {
                 breakpoint: 992,
                 settings: {
-                    slidesToShow: 6
+                    slidesToShow: 6.5
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 5
+                    slidesToShow: 4.5
                 }
             },
             {
@@ -166,7 +165,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         ]
     };
 
-    const {t} = useTranslation('filters');
+    const handleBodySelect = (body) => () => handleSelect('body', body);
 
     const classes = useStyles();
     return (
@@ -184,14 +183,15 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
             </Typography>
             <CustomSlider {...sliderSettings}>
                 {bodies?.map(body => {
-                    const carIcon = bodyIcons.find(el => el.name === body.name);
+                    const carBodyIcon = bodyIcons.find(el => el.name === body.name).icon;
                     return (
                         <Box
                             key={body.id}
-                            onClick={() => handleSelect('body', body)}
+                            style={{width: 'fit-content'}}
+                            onClick={handleBodySelect(body)}
                             className={body.id === values.body?.id ? 'selected' : ''}
                         >
-                            {carIcon.icon}
+                            {carBodyIcon}
                             <Typography
                                 component='p'
                                 variant='subtitle1'

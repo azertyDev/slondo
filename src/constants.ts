@@ -1,4 +1,12 @@
 export const SERVER_URL = `${process.env.SERVER_URL || 'http://localhost:3317'}`;
+export const DEV_URL = 'http://192.168.100.60';
+export const PRODUCTION_URL = 'https://backend.slondo.uz';
+export const INNER_URLS = {
+    create_post: '/create',
+    create_post_guide: '/help/post/create',
+    create_auc_guide: '/help/auction/create_auction'
+};
+export const MESSAGES_PER_PAGE = 25;
 export const ITEMS_PER_PAGE = 16;
 export const BETS_PER_PAGE = 10;
 export const SUBS_PER_PAGE = 10;

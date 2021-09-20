@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {useRouter} from 'next/router';
+import {useTranslation} from 'react-i18next';
 import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {useTranslation} from 'react-i18next';
 import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
-import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';

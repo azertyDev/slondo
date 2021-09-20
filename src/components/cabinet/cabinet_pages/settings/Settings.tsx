@@ -13,10 +13,10 @@ import {UserInfo} from "@root/interfaces/Auth";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {ChangePasswordModal} from "./change_password_modal/ChangePasswordModal";
 import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
-import {useStyles, SettingsButton} from "./useStyles";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import LockIcon from "@material-ui/icons/Lock";
 import {AvailableDays} from "@src/components/post/create_post/third_step/common_form/available_days/AvailableDays";
+import {useStyles, SettingsButton} from "./useStyles";
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -181,10 +181,10 @@ export const Settings: FC = () => {
             <Grid container direction='column' spacing={4}>
                 <Grid
                     item
-                    xs={12}
                     container
-                    direction='column'
+                    xs={12}
                     spacing={1}
+                    direction='column'
                 >
                     <Grid item xs={12}>
                         <Typography
@@ -266,7 +266,7 @@ export const Settings: FC = () => {
                                             t={t}
                                             disabled
                                             name='phone'
-                                            value={values.phone}
+                                            value={user.phone}
                                             onChange={handleChange}
                                             labelText='phone_number'
                                         />

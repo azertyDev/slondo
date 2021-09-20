@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /* eslint-disable @typescript-eslint/no-varrom s */
+import {config} from 'dotenv';
 import next from 'next';
 import cluster from 'cluster';
 import {cpus} from 'os';
 import {parse} from 'url';
 import {createServer} from 'http';
 
+config();
 const port = 3317;
 const serverUrl = 'http://localhost';
 const dev = process.env.NODE_ENV !== 'production';
@@ -18,8 +20,7 @@ console.log('dev mode: ' + dev);
 if (dev) {
     app.prepare().then(() => {
         createServer((req, res) => {
-            const parsedUrl = parse(req.url, true);
-            handle(req, res, parsedUrl);
+            handle(req, res, req.url);
         }).listen(port, (err) => {
             if (err) throw err;
             console.log(`Server started on ${serverUrl}:${port}`);

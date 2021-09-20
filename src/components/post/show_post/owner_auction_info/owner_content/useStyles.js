@@ -37,6 +37,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '10px',
                 '&.contact-btn': {
                     border: `1px solid ${theme.palette.primary.secondary}`,
+                    background: '#fff',
                     '& p': {
                         color: '#7461BA'
                     },

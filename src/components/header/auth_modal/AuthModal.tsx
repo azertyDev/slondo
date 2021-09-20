@@ -279,9 +279,7 @@ export const AuthModal: FC = () => {
                         variant="subtitle2"
                         className="resendTxt"
                     >
-                        {
-                            t(`resendSms`, {timer: `${time.minutes}:${time.seconds}`})
-                        }
+                        {t(`resendSms`, {timer: `${time.minutes}:${time.seconds}`})}
                     </Typography>
                 )}
             </div>
@@ -397,7 +395,9 @@ export const AuthModal: FC = () => {
                                         </Grid>
                                     </Grid>
                                     <Grid container alignItems='center' item xs={12}>
-                                        <Grid item xs={2}><AdsIcon/></Grid>
+                                        <Grid item xs={2}>
+                                            <AdsIcon/>
+                                        </Grid>
                                         <Grid item xs={10}>
                                             <Typography variant="subtitle2" color="initial">
                                                 {t('createAd')}

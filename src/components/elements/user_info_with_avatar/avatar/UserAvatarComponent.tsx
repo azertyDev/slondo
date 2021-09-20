@@ -1,6 +1,5 @@
 import {FC} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import {Box} from '@material-ui/core';
+import {Box, Avatar} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {

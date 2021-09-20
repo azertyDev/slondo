@@ -5,7 +5,7 @@ import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
-import {ITEMS_PER_PAGE} from '@src/constants';
+import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
@@ -107,8 +107,8 @@ export const MyPosts: FC = () => {
                     fstTabData={{
                         posts: postData.data,
                         emptyPage: <EmptyPage
-                            tutorialLink={'#'}
-                            link={'/create/type'}
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_post_guide}
                             label={t('cabinet:empty.post')}
                             tutorialText={t('post:howToCreatePost')}
                             action={t('cabinet:empty.create_post')}
@@ -137,10 +137,10 @@ export const MyPosts: FC = () => {
                     fstTabData={{
                         posts: securePosts.data,
                         emptyPage: <EmptyPage
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_post_guide}
                             label={t('cabinet:empty.post')}
                             action={t('header:createPost')}
-                            link={'/create/type'}
-                            tutorialLink={'#'}
                             tutorialText={t('post:howToCreatePost')}
                         />
                     }}

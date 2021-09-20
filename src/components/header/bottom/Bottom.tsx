@@ -23,6 +23,7 @@ import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
+import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type BottomProps = {
@@ -129,7 +130,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
-                                    <Link href="/create">
+                                    <Link href={INNER_URLS.create_post}>
                                         <a className='create-post-link'>
                                             <CustomButton
                                                 color="primary"

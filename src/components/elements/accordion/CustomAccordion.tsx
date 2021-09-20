@@ -75,9 +75,9 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                         <Grid item xs={12} justifyContent='flex-end' container>
                             <CustomButton
                                 type='submit'
+                                color='secondary'
                                 disabled={isFetch}
                                 className='nav-button'
-                                color='secondary'
                             >
                                 <Typography variant='subtitle1' component='p'>
                                     {t(`post:${submitTxt}`)}

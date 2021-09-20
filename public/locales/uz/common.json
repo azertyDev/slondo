@@ -1,4 +1,6 @@
 {
+  "write_message": "Xabar yozish",
+  "select_chat": "Suhbat uchun chatni tanlang",
   "name": "Ism",
   "surname": "Familiya",
   "today": "Bugun",

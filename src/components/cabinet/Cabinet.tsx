@@ -15,7 +15,7 @@ import {SafeDeal} from '@src/components/cabinet/cabinet_pages/safe_deal/SafeDeal
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import {ChatComponent} from "@src/components/elements/chat/ChatComponent";
+import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {useStyles} from './useStyles';
 
 export type CommonModalType = {
@@ -50,7 +50,7 @@ const Cabinet: FC = () => {
             case 'favorite':
                 return <FavoriteContainer/>;
             case 'messages':
-                return <ChatComponent/>;
+                return <ChatContainer/>;
             case 'notifications':
                 return <Notifications/>;
             case 'purchases':
@@ -75,11 +75,11 @@ const Cabinet: FC = () => {
             <div className={classes.root}>
                 <Grid container>
                     {(isXsDown && isMainPage || !isXsDown) && (
-                        <Grid item xs={12} sm={4} md={3}>
+                        <Grid item xs={12} sm={5} md={4}>
                             <CabinetSidebar/>
                         </Grid>
                     )}
-                    <Grid item xs={12} sm={8} md={9} className='pl-16'>
+                    <Grid item xs={12} sm={7} md={8} className='pl-16'>
                         <Hidden xsDown>
                             <Typography variant="h6" className="menu-title">
                                 {t(page)}

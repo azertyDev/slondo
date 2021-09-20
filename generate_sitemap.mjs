@@ -39,7 +39,7 @@ const getLocationsNames = async () => {
 };
 
 (async function () {
-    const serverUrl = process.env.SERVER_URL || 'http://localhost:3317';
+    const serverUrl = process.env.SERVER_URL;
     const names = await getLocationsNames();
     const locations = ['uzbekistan', ...names];
 

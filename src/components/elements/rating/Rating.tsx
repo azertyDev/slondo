@@ -1,10 +1,10 @@
 import {ChangeEvent, FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
+import {useTranslation} from "react-i18next";
 import {useStyles} from './useStyles';
 
 type RatingPropsType = {
-    card?: boolean,
     readOnly?: boolean,
     className?,
     ratingValue?: number,
@@ -15,7 +15,6 @@ type RatingPropsType = {
 
 export const Rating: FC<RatingPropsType> = (props) => {
     const {
-        card,
         name,
         readOnly,
         className,
@@ -23,6 +22,8 @@ export const Rating: FC<RatingPropsType> = (props) => {
         ratingCount,
         onChangeRating
     } = props;
+
+    const {t} = useTranslation('cabinet');
 
     const classes = useStyles();
     return (
@@ -41,7 +42,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     </Typography>
                 )}
             </div>
-            {card && (
+            {ratingCount !== 0 && (
                 <Hidden mdDown>
                     <div>
                         <Typography
@@ -49,7 +50,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
                             variant="subtitle1"
                             className='ratingCount'
                         >
-                            {`(${ratingCount} оценок)`}
+                            {t('ratings_count', {count: ratingCount})}
                         </Typography>
                     </div>
                 </Hidden>

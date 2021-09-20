@@ -122,7 +122,6 @@ export const Ratings: FC = () => {
             <Grid container spacing={isXsDown ? 0 : 2} className={classes.root}>
                 <Grid item xs={12} container>
                     <Rating
-                        card
                         readOnly
                         name="rating"
                         ratingValue={rating}

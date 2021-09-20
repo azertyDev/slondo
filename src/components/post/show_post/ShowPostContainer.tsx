@@ -15,6 +15,8 @@ import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CustomHead} from "@src/components/head/CustomHead";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
+import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import {useStyles} from './useStyles';
 
 export const ShowPostContainer: FC = () => {
@@ -111,6 +113,16 @@ export const ShowPostContainer: FC = () => {
         }
     };
 
+    const {
+        modalOpen: chatOpen,
+        handleModalClose: handleChatClose,
+        handleModalOpen: handleChatOpen
+    } = useModal();
+
+    const handleOpenChat = () => {
+        isAuth ? handleChatOpen() : setAuthModalOpen(true);
+    };
+
     const setFetchedPostData = async () => {
         try {
             setIsFetch(true);
@@ -163,7 +175,10 @@ export const ShowPostContainer: FC = () => {
     const classes = useStyles();
     return (
         <>
-            <CustomHead title={postData.title} description={postData.description}/>
+            <CustomHead
+                title={postData.title}
+                description={postData.description}
+            />
             <Hidden mdDown>
                 <Header/>
             </Hidden>
@@ -180,6 +195,7 @@ export const ShowPostContainer: FC = () => {
                             <Grid item xs={12} lg={9}>
                                 <PostContent
                                     post={postData}
+                                    handleChatOpen={handleOpenChat}
                                     handleSafeDeal={handleSafeDeal}
                                     setFetchedPostData={setFetchedPostData}
                                 />
@@ -188,6 +204,7 @@ export const ShowPostContainer: FC = () => {
                                 <Grid item lg={3} xs={12}>
                                     <OwnerAuctionInfo
                                         post={postData}
+                                        handleChatOpen={handleOpenChat}
                                         handleSafeDeal={handleSafeDeal}
                                         setFetchedPostData={setFetchedPostData}
                                     />
@@ -202,6 +219,13 @@ export const ShowPostContainer: FC = () => {
                 onClose={handleCloseSafeDeal}
                 handleRefresh={setFetchedPostData}
             />
+            <ResponsiveModal
+                maxWidth='md'
+                openDialog={chatOpen}
+                handleCloseDialog={handleChatClose}
+            >
+                <ChatContainer user={postData.author}/>
+            </ResponsiveModal>
             <ErrorModal/>
             <AuthModal/>
             <Hidden mdDown>

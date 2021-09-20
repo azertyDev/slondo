@@ -18,6 +18,7 @@ import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
 import {Banner} from "@src/components/elements/banner/Banner";
+import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
@@ -63,7 +64,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         in={!trigger}
                     >
                         <div className={classes.createPostBtn}>
-                            <Link href='/create'>
+                            <Link href={INNER_URLS.create_post}>
                                 <a>
                                     <Typography variant="subtitle1">
                                         {t('header:createPost')}

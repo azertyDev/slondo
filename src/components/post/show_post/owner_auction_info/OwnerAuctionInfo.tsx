@@ -9,6 +9,7 @@ import {useStyles} from './useStyles';
 type OwnerAuctionInfoPropsType = {
     post: any,
     handleSafeDeal: () => void,
+    handleChatOpen: () => void,
     setFetchedPostData: () => Promise<void>
 };
 
@@ -16,6 +17,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
         post,
         handleSafeDeal,
+        handleChatOpen,
         setFetchedPostData
     } = props;
 
@@ -48,6 +50,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
             <OwnerContent
                 t={t}
                 postData={post}
+                handleChatOpen={handleChatOpen}
                 handleSafeDeal={handleSafeDeal}
             />
         </div>

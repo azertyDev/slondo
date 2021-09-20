@@ -9,7 +9,6 @@ export const useStyles = makeStyles((theme) => ({
             fontWeight: 600
         },
         '& a': {
-            textDecoration: 'none',
             color: theme.palette.primary.secondary
         }
     },
@@ -18,7 +17,6 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '200px',
-        marginBottom: '30px',
         [theme.breakpoints.down('xs')]: {
             textAlign: 'center',
             minHeight: 0,
@@ -42,9 +40,12 @@ export const useStyles = makeStyles((theme) => ({
             fill: '#27AE60'
         }
     },
-    buttonBlock: {
+    buttonsBlock: {
         display: 'flex',
         justifyContent: 'center',
+        '& a': {
+            textDecoration: 'none'
+        },
         '& div': {
             margin: '5px',
             width: '20%',

@@ -4,7 +4,7 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet.js';
-import {ITEMS_PER_PAGE} from '@src/constants';
+import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
@@ -130,10 +130,10 @@ export const MyAuctions: FC = () => {
                     fstTabData={{
                         posts: auctionData.data,
                         emptyPage: <EmptyPage
-                            tutorialLink={'#'}
-                            link={'/create/type'}
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_auc_guide}
                             label={t('cabinet:empty.auction')}
-                            tutorialText={t('post:howToCreatePost')}
+                            tutorialText={t('post:howToCreateAuc')}
                             action={t('cabinet:empty.create_auction')}
                         />
                     }}
