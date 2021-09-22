@@ -2,12 +2,12 @@ import {FC, useContext, useState} from 'react';
 import {WithT} from 'i18next';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {TabsDataType} from '@root/interfaces/Cabinet';
-import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {SubsItem} from '@src/components/cabinet/cabinet_pages/subs/subsTab/subs_item/SubsItem';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx} from "@src/context";
+import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 
 export const UserFollowsList: FC<WithT> = ({t}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -96,7 +96,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
     ];
 
     return (
-        <ProfileTabsContent
+        <TabsContent
             tabIndex={tabIndex}
             tabsData={tabsData}
             handleTabChange={handleTabChange}

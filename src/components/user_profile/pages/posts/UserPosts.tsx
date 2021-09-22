@@ -1,19 +1,14 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
+import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardView} from '@src/components/elements/card/CardView';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';
-// import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
-import {Box, CircularProgress, Tab, Tabs, Typography} from '@material-ui/core';
-import {ErrorCtx} from "@src/context";
-import {ProfileTabsContent} from "@src/components/user_profile/tabs/ProfileTabsContent";
-import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
-import {CardDataType} from "@root/interfaces/CardData";
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
-import {CabinetCardWrapper} from "@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper";
+import {CircularProgress} from '@material-ui/core';
+import {ErrorCtx} from '@src/context';
+import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 export const UserPosts: FC<WithT> = ({t}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -40,14 +35,20 @@ export const UserPosts: FC<WithT> = ({t}) => {
 
     const fetchUserPosts = async (type, archive = 0) => {
         try {
+            // const params = {
+            //     user_id,
+            //     type,
+            //     archive
+            // };
+
             const params = {
-                user_id,
                 type,
-                archive
+                page: 1,
+                itemsPerPage: 6
             };
             setIsFetch(true);
 
-            const {data, total} = await userAPI.getUserPosts(params);
+            const {data, total} = await userAPI.getCards(params);
 
             unstable_batchedUpdates(async () => {
                 setIsFetch(false);
@@ -170,7 +171,6 @@ export const UserPosts: FC<WithT> = ({t}) => {
 
     return (
         <>
-            <div>Posts</div>
             <TabsContent
                 tabsData={tabsData}
                 tabIndex={tabIndex}

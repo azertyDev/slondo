@@ -16,20 +16,20 @@ type SidebarMenuPropsType = {
 } & WithT
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}) => {
-    const {setErrorMsg} = useContext(ErrorCtx);
-    const {user_id} = useRouter().query;
+    // const {setErrorMsg} = useContext(ErrorCtx);
+    // const {user_id} = useRouter().query;
 
     const handleListItemClick = (pageName) => () => {
         setPageName(pageName);
     };
 
-    const handleFollow = async () => {
-        try {
-            await userAPI.follow(user_id);
-        } catch (e) {
-            setErrorMsg(e.message);
-        }
-    };
+    // const handleFollow = async () => {
+    //     try {
+    //         await userAPI.follow(user_id);
+    //     } catch (e) {
+    //         setErrorMsg(e.message);
+    //     }
+    // };
 
     const classes = useStyles();
     return (
@@ -49,7 +49,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
                     selected={pageName === 'profile_follows'}
                     onClick={handleListItemClick('profile_follows')}
                 >
-                    <ListItemText primary={t('cabinet:follows')} />
+                    <ListItemText primary={t('cabinet:subscriptions')} />
                 </ListItem>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
@@ -72,15 +72,15 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
                     <ListItemText primary={t('main:posts')} />
                 </ListItem>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
-                <ListItem
-                    button
-                    disableGutters
-                    onClick={handleFollow}
-                >
-                    <ListItemText primary={t('cabinet:subscribe')} />
-                </ListItem>
-            </List>
+            {/*<List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>*/}
+            {/*    <ListItem*/}
+            {/*        button*/}
+            {/*        disableGutters*/}
+            {/*        onClick={handleFollow}*/}
+            {/*    >*/}
+            {/*        <ListItemText primary={t('cabinet:subscribe')} />*/}
+            {/*    </ListItem>*/}
+            {/*</List>*/}
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {UserInfo} from '@root/interfaces/Auth';
 import {SidebarMenu} from '@src/components/user_profile/sidebar_menu/SidebarMenu';
@@ -18,6 +18,7 @@ export const UserProfile: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
     const {t} = useTranslation('cabinet');
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const [pageName, setPageName] = useState<string>('profile_posts');
     const [userInfo, setUserInfo] = useState<UserInfo>(initUser);
@@ -50,26 +51,30 @@ export const UserProfile: FC = () => {
     return (
         <MainLayout title={userInfo.name}>
             <div className={classes.root}>
-                <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                        <Box mb={2}>
-                            <UserInfoWithAvatar
-                                user={userInfo}
-                            />
-                        </Box>
-                        <Box>
-                            <SidebarMenu
-                                t={t}
-                                user={userInfo}
-                                setPageName={setPageName}
-                                pageName={pageName}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={9} container direction='column'>
-                        <Typography variant="h6" className="menu-title">
-                            {t(`cabinet:${pageName}`)}
-                        </Typography>
+                <Grid container spacing={isXsDown ? 0 : 2}>
+                    <Hidden smDown>
+                        <Grid item xs={3}>
+                            <Box mb={2}>
+                                <UserInfoWithAvatar
+                                    user={userInfo}
+                                />
+                            </Box>
+                            <Box>
+                                <SidebarMenu
+                                    t={t}
+                                    user={userInfo}
+                                    setPageName={setPageName}
+                                    pageName={pageName}
+                                />
+                            </Box>
+                        </Grid>
+                    </Hidden>
+                    <Grid item xs={12} md={9} container direction='column'>
+                        <Hidden smDown>
+                            <Typography variant="h6" className="menu-title">
+                                {t(`cabinet:${pageName}`)}
+                            </Typography>
+                        </Hidden>
                         {getPageContent()}
                     </Grid>
                 </Grid>
