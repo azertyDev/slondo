@@ -219,6 +219,9 @@ export const useStyles = makeStyles((theme) => ({
             '& .slick-dots li.slick-active button:before': {opacity: '1', background: '#2196F3'}
         },
         '& div.second-slider': {
+            '& .slick-current': {
+                opacity: '0.5'
+            },
             '& div.slick-slide': {
                 maxWidth: '230px !important',
                 padding: '0 2.5px',
