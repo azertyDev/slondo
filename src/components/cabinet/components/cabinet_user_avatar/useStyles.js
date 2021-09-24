@@ -25,6 +25,8 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '5px!important',
             background: '#fff!important',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)!important',
+            paddingTop: '7px',
+            paddingBottom: '7px',
             '& span': {
                 textAlign: 'center'
             }

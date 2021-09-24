@@ -35,6 +35,7 @@ export const CabinetUserAvatar: FC<CabinetUserAvatarProps> = (props) => {
                 <Grid item xs={4}>
                     <CustomBadge badgeContent={user.observer.number_of_reviews}>
                         <ListItem
+                            button
                             disableGutters
                             selected={page === 'rating'}
                             onClick={onButtonClick('rating')}
@@ -46,6 +47,7 @@ export const CabinetUserAvatar: FC<CabinetUserAvatarProps> = (props) => {
                 </Grid>
                 <Grid item xs={8}>
                     <ListItem
+                        button
                         disableGutters
                         selected={page === 'subs'}
                         onClick={onButtonClick('subs')}
