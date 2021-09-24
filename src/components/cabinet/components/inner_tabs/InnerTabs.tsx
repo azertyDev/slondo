@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {Box, CircularProgress, Grid, Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 type CabinetModalPropsType = {
     isFetch: boolean,
@@ -18,7 +18,7 @@ type CabinetModalPropsType = {
     handleNotificationsOpen
 };
 
-export const CabinetTabs: FC<CabinetModalPropsType> = (props) => {
+export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
     const {
         isFetch,
         onChange,

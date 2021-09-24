@@ -237,7 +237,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                     </div>
                                 )}
                             </Typography>
-                            <Typography variant="h2" className="title" noWrap>
+                            <Typography variant="h2" className="title">
                                 {post.title}
                             </Typography>
                         </div>

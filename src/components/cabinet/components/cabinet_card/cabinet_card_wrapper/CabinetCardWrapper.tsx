@@ -150,9 +150,6 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             className='icons'
                                         >
                                             <RocketIcon/>
-                                            <Typography variant='subtitle1' component='p'>
-                                                Рекламировать
-                                            </Typography>
                                         </CustomButton>
                                         <CustomButton
                                             className='icons'

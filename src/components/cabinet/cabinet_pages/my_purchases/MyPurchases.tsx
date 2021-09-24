@@ -1,32 +1,32 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import { TabsDataType} from '@root/interfaces/Cabinet';
+import {initCardData} from '@src/common_data/common';
 import {CardDataType} from '@root/interfaces/CardData';
 import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
+import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
-import {initCardData} from '@src/common_data/common';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {CabinetTabs} from '@src/components/cabinet/components/cabinet_tabs/CabinetTabs';
+import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
-    const [tabIndex, setTabIndex] = useState(0);
-    const [total, setTotal] = useState(0);
-    const [archTotal, setArchTotal] = useState(0);
+    const initPurchases = {
+        total: 0,
+        data: []
+    };
+
     const [isFetch, setIsFetch] = useState(false);
     const [isPerform, setIsPerform] = useState(false);
-    const [purchases, setPurchases] = useState([]);
-    const [archivePurchases, setArchPurchases] = useState([]);
-    const [childTabValue, setChildTabValue] = useState(0);
+    const [purchases, setPurchases] = useState(initPurchases);
+    const [archivePurchases, setArchPurchases] = useState(initPurchases);
     const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
 
     const {modalOpen: confirmOpen, handleModalClose: handleConfirmClose, handleModalOpen: handleConfirmOpen} = useModal();
@@ -34,14 +34,6 @@ export const MyPurchases: FC = () => {
     const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
 
     const confirmTitle = isPerform ? 'perform_purchase' : 'dismiss_purchase';
-
-    const handleTabChange = (_, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const handleChildTabChange = (event, newValue) => {
-        setChildTabValue(newValue);
-    };
 
     const handleDetailedOpen = (post) => () => {
         setSelectedPost(post);
@@ -61,32 +53,12 @@ export const MyPurchases: FC = () => {
         });
     };
 
-    const fetchPurchases = async (page, archive = 0) => {
-        try {
-            const params = {
-                archive,
-                page,
-                itemsPerPage: ITEMS_PER_PAGE
-            };
-            setIsFetch(true);
-
-            const {data, total} = await userCabinetAPI.getPurchases(params);
-
-            !!archive ? setArchTotal(total) : setTotal(total);
-            !!archive ? setArchPurchases(data) : setPurchases(data);
-
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-        }
-    };
-
     const handlePerformDismiss = async () => {
         try {
             setIsFetch(true);
             const post_id = JSON.stringify({post_id: selectedPost.id});
             await myUzCardAPI.performDismiss(post_id, isPerform);
-            await fetchPurchases(1);
+            await handleRefresh();
             handleConfirmClose();
             setIsFetch(false);
         } catch (e) {
@@ -95,52 +67,67 @@ export const MyPurchases: FC = () => {
         }
     };
 
+    const fetchTabPosts = async (page = 1, secondSubTab = false) => {
+        try {
+            const params = {
+                archive: secondSubTab ? 1 : 0,
+                page,
+                itemsPerPage: ITEMS_PER_PAGE
+            };
+
+            setIsFetch(true);
+
+            const {data, total} = await userCabinetAPI.getPurchases(params);
+
+            unstable_batchedUpdates(() => {
+                secondSubTab
+                    ? setArchPurchases({data, total})
+                    : setPurchases({data, total});
+                setIsFetch(false);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
+        }
+    };
+
     const handleRefresh = () => {
         unstable_batchedUpdates(() => {
-            fetchPurchases(1);
-            fetchPurchases(1, 1);
+            fetchTabPosts();
+            fetchTabPosts(1, true);
         });
     };
 
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<DoubleTabType> = {
+        firstTab: {
             id: 0,
-            title: t('purchases'),
-            itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: fetchPurchases,
-            component: (
-                <CabinetTabs
-                    isFetch={isFetch}
-                    onChange={handleChildTabChange}
-                    handleSafeDeal={confirmModalOpen}
-                    fstTabData={{
-                        posts: purchases,
-                        emptyPage: <EmptyPage
-                            label={t('cabinet:empty.purchase')}
-                        />
-                    }}
-                    secTabData={{
-                        posts: archivePurchases,
-                        emptyPage: <EmptyPage label={t('empty.archive')} />
-                    }}
-                    childTabValue={childTabValue}
-                    handleDetailedOpen={handleDetailedOpen}
-                    handleNotificationsOpen={handleNotificationsOpen}
-                />
-            )
+            title: t('myPurchases'),
+            innerTabsData: {
+                innerFirstTab: {
+                    posts: purchases.data,
+                    total: purchases.total,
+                    emptyPage: <EmptyPage label={t('cabinet:empty.purchase')}/>
+                },
+                innerSecondTab: {
+                    posts: archivePurchases.data,
+                    total: archivePurchases.total,
+                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                }
+            }
         }
-    ];
-
-    useEffect(() => {
-        handleRefresh();
-    }, []);
+    };
 
     return (
         <>
-            <TabsContent
-                tabIndex={tabIndex}
+            <DoubleTabs
+                isFetch={isFetch}
                 tabsData={tabsData}
-                handleTabChange={handleTabChange}
+                handleSafeDeal={confirmModalOpen}
+                fetchFirstTabPosts={fetchTabPosts}
+                handleDetailedOpen={handleDetailedOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <DetailedPostModalContainer
                 post={selectedPost}

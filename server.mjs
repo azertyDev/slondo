@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable @typescript-eslint/no-varrom s */
-import {config} from 'dotenv';
 import next from 'next';
 import cluster from 'cluster';
+import {config} from 'dotenv';
 import {cpus} from 'os';
 import {parse} from 'url';
 import {createServer} from 'http';

@@ -122,11 +122,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                                     <IconButton className="favorite-btn" onClick={handleFavorite}>
                                         <FavoriteBorder/>
                                     </IconButton>
-                                    <div>
-                                        <Typography variant='subtitle1'>
-                                            {favoriteCount}
-                                        </Typography>
-                                    </div>
+                                    {favoriteCount !== 0 && (
+                                        <div>
+                                            <Typography variant='subtitle1'>
+                                                {favoriteCount}
+                                            </Typography>
+                                        </div>
+                                    )}
                                 </Box>
                             )}
                             <ClickAwayListener onClickAway={handleCloseTooltip}>

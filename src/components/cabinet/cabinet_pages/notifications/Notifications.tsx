@@ -90,15 +90,6 @@ export const Notifications: FC = () => {
         setPage(pageNum);
     };
 
-    const pagination = (
-        <CustomPagination
-            currentPage={page}
-            totalItems={itemsCount}
-            itemsPerPage={ITEMS_PER_PAGE}
-            handlePagePagination={handlePagePagination}
-        />
-    );
-
     useEffect(() => {
         fetchAllNotification();
     }, [page]);
@@ -128,12 +119,14 @@ export const Notifications: FC = () => {
                         handleOpenSnackbar={handleOpenSnackbar}
                     />
                 </Box>
-            )}
-        {notifications.length > ITEMS_PER_PAGE && (
-            <Box display='flex' justifyContent='center'>
-                {pagination}
-            </Box>
-        )}
+            )
+        }
+        <CustomPagination
+            currentPage={page}
+            totalItems={itemsCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            handlePagePagination={handlePagePagination}
+        />
         <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
             <Typography variant='subtitle1'>
                 {t('remove_notifications')}

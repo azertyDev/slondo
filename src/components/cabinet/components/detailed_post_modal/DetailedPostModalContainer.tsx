@@ -1,6 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {userAPI} from '@src/api/api';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useModal} from '@src/hooks/useModal';
@@ -10,6 +9,7 @@ import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
 import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
 import {useTranslation} from "next-i18next";
 import {AuthCtx, ErrorCtx} from "@src/context";
+import {userAPI} from '@src/api/api';
 
 enum ActionStatuses {
     'refusal_win',
@@ -72,9 +72,21 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
         }
     })();
 
-    const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
-    const {modalOpen: offersOpen, handleModalClose: handleCloseOffers, handleModalOpen: handleOpenOffers} = useModal();
-    const {modalOpen: confirmOpen, handleModalClose: handleConfirmClose, handleModalOpen: handleConfirmOpen} = useModal();
+    const {
+        modalOpen: ratingOpen,
+        handleModalOpen: handleOpenRating,
+        handleModalClose: handleCloseRating
+    } = useModal();
+    const {
+        modalOpen: offersOpen,
+        handleModalClose: handleCloseOffers,
+        handleModalOpen: handleOpenOffers
+    } = useModal();
+    const {
+        modalOpen: confirmOpen,
+        handleModalClose: handleConfirmClose,
+        handleModalOpen: handleConfirmOpen
+    } = useModal();
 
     const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData({
         page: 1,

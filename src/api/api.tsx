@@ -5,7 +5,7 @@ import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from "@root/interfaces/Locations";
-import {DEV_URL, PRODUCTION_URL} from "@src/constants";
+import {DEV_URL, ITEMS_PER_PAGE, PRODUCTION_URL} from "@src/constants";
 
 const production = `${PRODUCTION_URL}/api/`;
 const local = `${DEV_URL}/slondo/public/api/`;
@@ -228,8 +228,13 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: ({type}: { type?: string }): Promise<any> => {
-        return instance.get(`regular/post/get/favorites?type=${type}`, setTokenToHeader())
+    getFavorites: (type, page, itemsPerPage = ITEMS_PER_PAGE): Promise<any> => {
+        const params = {
+            type,
+            page,
+            itemsPerPage
+        };
+        return instance.get(`regular/post/get/favorites`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -255,8 +260,12 @@ export const userAPI = {
                 throw err;
             });
     },
-    getSubs: (param) => {
-        return instance.get(`regular/user/${param}/all`, setTokenToHeader())
+    getSubs: (subsPath, page, itemsPerPage = ITEMS_PER_PAGE) => {
+        const params = {
+            page,
+            itemsPerPage
+        };
+        return instance.get(`regular/user/${subsPath}/all`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -543,8 +552,13 @@ export const userAPI = {
                 throw err;
             });
     },
-    getBannedPosts: (type: string): Promise<any> => {
-        return instance.get(`regular/post/returned?itemsPerPage=25&page=1&type=${type}`, setTokenToHeader())
+    getBannedPosts: (type, page, itemsPerPage = ITEMS_PER_PAGE): Promise<any> => {
+        const params = {
+            type,
+            page,
+            itemsPerPage
+        };
+        return instance.get(`regular/post/returned`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -1,9 +1,8 @@
-import {FC, useContext, useEffect, useState} from 'react';
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
-import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
+import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
@@ -13,7 +12,7 @@ import {SettingsModal} from "@src/components/cabinet/components/settings_modal/S
 import {ErrorCtx} from "@src/context";
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {initCardData} from "@src/common_data/common";
-import {CabinetTabs} from "@src/components/cabinet/components/cabinet_tabs/CabinetTabs";
+import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
 
 export const MyPosts: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -25,29 +24,33 @@ export const MyPosts: FC = () => {
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [postData, setPostData] = useState(initialPostsState);
-    const [securePosts, setSecurePosts] = useState(initialPostsState);
-    const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
-    const [archivePostData, setArchivePostData] = useState(initialPostsState);
-    const [tabIndex, setTabIndex] = useState(0);
-    const [childTabValue, setChildTabValue] = useState(0);
     const [selectedPost, setSelectedPost] = useState(initCardData);
 
-    const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
-    const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
-    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
+    const [postData, setPostData] = useState(initialPostsState);
+    const [archivePostData, setArchivePostData] = useState(initialPostsState);
+
+    const [securePosts, setSecurePosts] = useState(initialPostsState);
+    const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
+
+    const {
+        modalOpen: settingsOpen,
+        handleModalClose: handleCloseSettings,
+        handleModalOpen: handleOpenSettings
+    } = useModal();
+    const {
+        modalOpen: detailedModalOpen,
+        handleModalClose: closeDetailedModal,
+        handleModalOpen: openDetailedModal
+    } = useModal();
+    const {
+        modalOpen: notificationsOpen,
+        handleModalClose: closeNotificationsModal,
+        handleModalOpen: openNotificationsModal
+    } = useModal();
 
     const handleDetailedOpen = (post) => () => {
         openDetailedModal();
         setSelectedPost(post);
-    };
-
-    const handleTabChange = (_, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const handleChildTabChange = (_, newValue) => {
-        setChildTabValue(newValue);
     };
 
     const handleNotificationsOpen = (post: CardDataType) => () => {
@@ -60,19 +63,21 @@ export const MyPosts: FC = () => {
         setSelectedPost(post);
     };
 
-    const fetchPosts = async (secure: number, archive: number) => {
+    const fetchTabPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
         try {
             const params = {
                 type: 'post',
-                archive,
-                secure
+                archive: secondSubTab ? 1 : 0,
+                secure: secondTab ? 1 : 0,
+                page,
+                itemsPerPage: ITEMS_PER_PAGE
             };
             setIsFetch(true);
             const {data, total} = await userAPI.getMyPosts(params);
             unstable_batchedUpdates(() => {
-                secure
-                    ? !!archive ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
-                    : !!archive ? setArchivePostData({data, total}) : setPostData({data, total});
+                secondTab
+                    ? secondSubTab ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
+                    : secondSubTab ? setArchivePostData({data, total}) : setPostData({data, total});
                 setIsFetch(false);
             });
         } catch (e) {
@@ -83,90 +88,75 @@ export const MyPosts: FC = () => {
         }
     };
 
-    const handleRefresh = () => {
-        unstable_batchedUpdates(async () => {
-            await Promise.all([
-                fetchPosts(0, 0),
-                fetchPosts(0, 1),
-                fetchPosts(1, 0),
-                fetchPosts(1, 1)
-            ]);
-        });
+    const firstTabFetch = fetchTabPosts();
+    const secondTabFetch = fetchTabPosts(true);
+
+    const handleRefresh = async () => {
+        await Promise.all([
+            firstTabFetch(),
+            secondTabFetch(),
+            firstTabFetch(1, true),
+            secondTabFetch(1, true)
+        ]);
     };
 
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<DoubleTabType> = {
+        firstTab: {
             id: 0,
             title: t('posts'),
-            itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: (
-                <CabinetTabs
-                    isFetch={isFetch}
-                    onChange={handleChildTabChange}
-                    fstTabData={{
-                        posts: postData.data,
-                        emptyPage: <EmptyPage
-                            link={INNER_URLS.create_post}
-                            tutorialLink={INNER_URLS.create_post_guide}
-                            label={t('cabinet:empty.post')}
-                            tutorialText={t('post:howToCreatePost')}
-                            action={t('cabinet:empty.create_post')}
-                        />
-                    }}
-                    secTabData={{
-                        posts: archivePostData.data,
-                        emptyPage: <EmptyPage label={t('empty.archive')}/>
-                    }}
-                    childTabValue={childTabValue}
-                    handleDetailedOpen={handleDetailedOpen}
-                    handleSettingsOpen={handleSettingsOpen}
-                    handleNotificationsOpen={handleNotificationsOpen}
-                />
-            )
+            innerTabsData: {
+                innerFirstTab: {
+                    posts: postData.data,
+                    total: postData.total,
+                    emptyPage: <EmptyPage
+                        link={INNER_URLS.create_post}
+                        tutorialLink={INNER_URLS.create_post_guide}
+                        label={t('cabinet:empty.post')}
+                        tutorialText={t('post:howToCreatePost')}
+                        action={t('cabinet:empty.create_post')}
+                    />
+                },
+                innerSecondTab: {
+                    posts: archivePostData.data,
+                    total: archivePostData.total,
+                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                }
+            }
         },
-        {
+        secondTab: {
             id: 1,
             title: t('securePosts'),
-            itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: (
-                <CabinetTabs
-                    isFetch={isFetch}
-                    onChange={handleChildTabChange}
-                    fstTabData={{
-                        posts: securePosts.data,
-                        emptyPage: <EmptyPage
-                            link={INNER_URLS.create_post}
-                            tutorialLink={INNER_URLS.create_post_guide}
-                            label={t('cabinet:empty.post')}
-                            action={t('header:createPost')}
-                            tutorialText={t('post:howToCreatePost')}
-                        />
-                    }}
-                    secTabData={{
-                        posts: archiveSecurePostData.data,
-                        emptyPage: <EmptyPage label={t('empty.archive')}/>
-                    }}
-                    childTabValue={childTabValue}
-                    handleDetailedOpen={handleDetailedOpen}
-                    handleSettingsOpen={handleSettingsOpen}
-                    handleNotificationsOpen={handleNotificationsOpen}
-                />
-            )
+            innerTabsData: {
+                innerFirstTab: {
+                    posts: securePosts.data,
+                    total: securePosts.total,
+                    emptyPage: <EmptyPage
+                        link={INNER_URLS.create_post}
+                        tutorialLink={INNER_URLS.create_post_guide}
+                        label={t('cabinet:empty.post')}
+                        action={t('header:createPost')}
+                        tutorialText={t('post:howToCreatePost')}
+                    />
+                },
+                innerSecondTab: {
+                    posts: archiveSecurePostData.data,
+                    total: archiveSecurePostData.total,
+                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                }
+            }
         }
-    ];
-
-    useEffect(() => {
-        handleRefresh();
-    }, []);
+    };
 
     return (
         <>
-            <TabsContent
+            <DoubleTabs
+                isFetch={isFetch}
                 tabsData={tabsData}
-                tabIndex={tabIndex}
-                handleTabChange={handleTabChange}
+                fetchFirstTabPosts={firstTabFetch}
+                fetchSecondTabPosts={secondTabFetch}
+                handleDetailedOpen={handleDetailedOpen}
+                handleSettingsOpen={handleSettingsOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <DetailedPostModalContainer
                 post={selectedPost}

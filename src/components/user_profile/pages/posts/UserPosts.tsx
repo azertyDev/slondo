@@ -1,21 +1,21 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
+import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet';
+// import {CardView} from '@src/components/elements/card/CardView';
 import {userAPI} from '@src/api/api';
-import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
-import {CardView} from '@src/components/elements/card/CardView';
 import {useRouter} from 'next/router';
-import {WithT} from 'i18next';
-// import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
-import {Box, CircularProgress, Tab, Tabs, Typography} from '@material-ui/core';
 import {ErrorCtx} from "@src/context";
-import {ProfileTabsContent} from "@src/components/user_profile/tabs/ProfileTabsContent";
-import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
-import {CardDataType} from "@root/interfaces/CardData";
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
-import {CabinetCardWrapper} from "@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper";
+import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
+import {useTranslation} from "next-i18next";
+// import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
+// import {ProfileTabsContent} from "@src/components/user_profile/tabs/ProfileTabsContent";
+// import {CardDataType} from "@root/interfaces/CardData";
+// import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
+// import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
+// import {CabinetCardWrapper} from "@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper";
 
-export const UserPosts: FC<WithT> = ({t}) => {
+export const UserPosts: FC = () => {
+    const {t} = useTranslation('main');
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
 
@@ -32,18 +32,13 @@ export const UserPosts: FC<WithT> = ({t}) => {
     const [auctions, setAuctions] = useState(initUserPostsState);
     const [auctionsArch, setAuctionsArch] = useState(initUserPostsState);
 
-    const [tabIndex, setTabIndex] = useState(0);
-
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const fetchUserPosts = async (type, archive = 0) => {
+    const fetchUserPosts = (isPost = false) => async (page, secondTab = false) => {
         try {
+            const type = isPost ? 'post' : 'auc';
             const params = {
-                user_id,
                 type,
-                archive
+                user_id,
+                archive: secondTab ? 1 : 0
             };
             setIsFetch(true);
 
@@ -51,9 +46,9 @@ export const UserPosts: FC<WithT> = ({t}) => {
 
             unstable_batchedUpdates(async () => {
                 setIsFetch(false);
-                type === 'post'
-                    ? !!archive ? setPostsArch({data, total}) : setPosts({data, total})
-                    : !!archive ? setAuctionsArch({data, total}) : setAuctions({data, total});
+                isPost
+                    ? secondTab ? setPostsArch({data, total}) : setPosts({data, total})
+                    : secondTab ? setAuctionsArch({data, total}) : setAuctions({data, total});
             });
         } catch (e) {
             unstable_batchedUpdates(async () => {
@@ -63,24 +58,18 @@ export const UserPosts: FC<WithT> = ({t}) => {
         }
     };
 
-    const handleRefresh = () => {
-        unstable_batchedUpdates(async () => {
-            fetchUserPosts('post');
-            fetchUserPosts('auc');
-            fetchUserPosts('post', 1);
-            fetchUserPosts('auc', 1);
-        });
-    };
+    const firstTabFetch = fetchUserPosts();
+    const secondTabFetch = fetchUserPosts(true);
 
-    const getUserPosts = (auction = false) => {
-        return isFetch
-            ? <CircularProgress color="secondary"/>
-            : <CardView
-                data={auction ? auctions.data : posts.data}
-                isFetch={isFetch}
-                listMode={false}
-            />;
-    };
+    // const getUserPosts = (auction = false) => {
+    //     return isFetch
+    //         ? <CircularProgress color="secondary"/>
+    //         : <CardView
+    //             data={auction ? auctions.data : posts.data}
+    //             isFetch={isFetch}
+    //             listMode={false}
+    //         />;
+    // };
 
     // const getTabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
     //     return (
@@ -147,35 +136,47 @@ export const UserPosts: FC<WithT> = ({t}) => {
     //     );
     // };
 
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<DoubleTabType> = {
+        firstTab: {
             id: 0,
-            title: t('main:posts'),
-            itemsPerPage: posts.total,
-            handleFetchByTab: () => '',
-            component: getUserPosts()
+            title: t('posts'),
+            innerTabsData: {
+                innerFirstTab: {
+                    total: posts.total,
+                    posts: posts.data,
+                    emptyPage: null
+                },
+                innerSecondTab: {
+                    total: postsArch.total,
+                    posts: postsArch.data,
+                    emptyPage: null
+                }
+            }
         },
-        {
+        secondTab: {
             id: 1,
-            title: t('main:auctions'),
-            itemsPerPage: auctions.total,
-            handleFetchByTab: () => '',
-            component: getUserPosts(true)
+            title: t('auctions'),
+            innerTabsData: {
+                innerFirstTab: {
+                    total: auctions.total,
+                    posts: auctions.data,
+                    emptyPage: null
+                },
+                innerSecondTab: {
+                    total: auctionsArch.total,
+                    posts: auctionsArch.data,
+                    emptyPage: null
+                }
+            }
         }
-    ];
-
-    useEffect(() => {
-        handleRefresh();
-    }, []);
+    };
 
     return (
-        <>
-            <div>Posts</div>
-            <TabsContent
-                tabsData={tabsData}
-                tabIndex={tabIndex}
-                handleTabChange={handleTabChange}
-            />
-        </>
+        <DoubleTabs
+            isFetch={isFetch}
+            tabsData={tabsData}
+            fetchFirstTabPosts={firstTabFetch}
+            fetchSecondTabPosts={secondTabFetch}
+        />
     );
 };

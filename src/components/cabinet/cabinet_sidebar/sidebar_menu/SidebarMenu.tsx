@@ -208,8 +208,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 button
                                 disabled
                                 disableGutters
-                                // selected={path === 'paidServices'}
-                                // onClick={handleListItemClick('paidServices')}
+                                selected={page === 'paidServices'}
+                                onClick={handleListItemClick('paidServices')}
                                 classes={{selected: classes.selected}}
                             >
                                 <WalletIcon/>

@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {TabsDataType} from '@root/interfaces/Cabinet';
-import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {TabsType} from '@root/interfaces/Cabinet';
+// import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {useStyles} from './useStyles';
 
 type TabsContentPropsType = {
     tabIndex: number,
-    tabsData: TabsDataType,
+    tabsData: TabsType,
     handleTabChange: (e, v) => void,
 };
 

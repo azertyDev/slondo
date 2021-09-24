@@ -91,16 +91,12 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
                             />
                         </Box>
                     ))}
-                    {notifications.length > ITEMS_PER_PAGE && (
-                        <Box display='flex' justifyContent='center'>
-                            <CustomPagination
-                                currentPage={page}
-                                totalItems={itemsCount}
-                                itemsPerPage={ITEMS_PER_PAGE}
-                                handlePagePagination={handlePagination}
-                            />
-                        </Box>
-                    )}
+                    <CustomPagination
+                        currentPage={page}
+                        totalItems={itemsCount}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        handlePagePagination={handlePagination}
+                    />
                 </>}
             <CustomSnackbar
                 severity="success"

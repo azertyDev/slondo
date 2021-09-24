@@ -10,15 +10,15 @@ import {
     RenewalIcon,
     SafeIcon
 } from '@src/components/elements/icons';
+import {Trans} from 'next-i18next';
 import {AuthCtx} from "@src/context";
 import {numberPrettier} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
-import {useStyles} from './useStyles';
-import {Trans} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {useStyles} from './useStyles';
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -197,7 +197,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         {isAuction && (
                             <Grid item xs={12} md={6}>
                                 {isBetsFetch
-                                    ? <CircularProgress color="primary" />
+                                    ? <CircularProgress color="primary"/>
                                     : <BetsList
                                         bets={bets}
                                         showBetsCount={2}
@@ -213,12 +213,12 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 <Grid item xs={12} sm={8}>
                                     <Typography variant='subtitle2' gutterBottom>
                                         {t(getUserInfoTitle())}&nbsp;
-                                        {hasOffer && !winner && isUserCreator && (
+                                        {hasOffer && isUserCreator && (
                                             <Trans
                                                 t={t}
                                                 i18nKey="offer_price"
+                                                components={[<strong/>]}
                                                 tOptions={{price: numberPrettier(offer?.price)}}
-                                                components={[<strong />]}
                                             />
                                         )}
                                     </Typography>
@@ -247,8 +247,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                             />
                                             : <Typography variant='subtitle1'>
                                                 {t(`auction:last_bet`, {lastBet: bets[0]?.bet})}
-                                            </Typography>
-                                        }
+                                            </Typography>}
                                     </Paper>
                                 </Grid>
                             )}

@@ -1,16 +1,17 @@
 import {FC} from 'react';
 import {
-    DeliveryIcon,
     EyeIcon,
-    FavoriteBorderIcon,
+    SafeIcon,
+    SwapIcon,
     PhoneIcon,
     RenewalIcon,
-    SafeIcon, SwapIcon
+    DeliveryIcon,
+    FavoriteBorderIcon
 } from '@src/components/elements/icons';
 import Link from 'next/link';
 import Countdown from 'react-countdown';
 import {useTranslation} from 'react-i18next';
-import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
+import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useDate} from '@src/hooks';
@@ -28,11 +29,13 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
-    const hasService = !!cardData.delivery
-        || !!cardData.available_days
-        || !!cardData.exchange
-        || !!cardData.safe_deal
-        || !!cardData.auction?.auto_renewal;
+    const hasService = Boolean(
+        cardData.delivery
+        || cardData.exchange
+        || cardData.safe_deal
+        || cardData.available_days
+        || cardData.auction?.auto_renewal
+    );
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
@@ -57,15 +60,9 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
 
     const price = cardData.price;
-    const ctgrName = cardData.category.mark;
+    const ctgrName = cardData.category.name;
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
     const excludePrice = jobOrService || price === 0;
-
-    const priceTransform = (): string => {
-        return price === 0
-            ? jobOrService ? 'negotiated' : 'for_free'
-            : numberPrettier(price);
-    };
 
     const classes = useStyles({cardData});
     return (
@@ -93,7 +90,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                     justifyContent='space-between'
                                 >
                                     <span>
-                                        <EyeIcon />
+                                        <EyeIcon/>
                                         <Typography
                                             noWrap
                                             variant="caption"
@@ -103,7 +100,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                         </Typography>
                                     </span>
                                     <span>
-                                        <FavoriteBorderIcon />
+                                        <FavoriteBorderIcon/>
                                         <Typography
                                             noWrap
                                             variant="caption"
@@ -118,7 +115,6 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                         <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
                             <Grid item xs={12} md={7} lg={8}>
                                 <Typography
-                                    noWrap
                                     variant="h3"
                                     color="initial"
                                 >
@@ -134,7 +130,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                         : <Box className='services'>
                                             {!!cardData.delivery && (
                                                 <div className="delivery">
-                                                    <DeliveryIcon />
+                                                    <DeliveryIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {t('common:delivery')}
                                                     </Typography>}
@@ -142,7 +138,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                             )}
                                             {!!cardData.available_days && (
                                                 <div className="available">
-                                                    <PhoneIcon />
+                                                    <PhoneIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {weekDaysHelper(cardData.available_days, t)}&nbsp;
                                                         {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
@@ -151,7 +147,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                             )}
                                             {!!cardData.exchange && (
                                                 <div className="exchange">
-                                                    <SwapIcon />
+                                                    <SwapIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {t('common:exchange')}
                                                     </Typography>}
@@ -159,7 +155,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                             )}
                                             {!!cardData.safe_deal && (
                                                 <div className="safe_deal">
-                                                    <SafeIcon />
+                                                    <SafeIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {t('common:safe_deal')}
                                                     </Typography>}
@@ -167,7 +163,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                             )}
                                             {!!cardData.auction?.auto_renewal && (
                                                 <div className="safe_deal">
-                                                    <RenewalIcon />
+                                                    <RenewalIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {t('common:auto_ren')}
                                                     </Typography>}
@@ -231,7 +227,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                         component='p'
                                         color="initial"
                                     >
-                                        {t(`post:${priceTransform()}`)}&nbsp;
+                                        {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                         {!excludePrice && (
                                             <span>{t(`common:${cardData.currency.name}`)}</span>
                                         )}

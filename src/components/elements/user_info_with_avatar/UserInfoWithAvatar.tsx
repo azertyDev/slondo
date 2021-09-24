@@ -1,14 +1,14 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {Rating} from '@src/components/elements/rating/Rating';
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {INCOGNITO_NAMES} from "@src/constants";
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {userAPI} from "@src/api/api";
 import {useDate} from "@src/hooks";
+import {Rating} from '@src/components/elements/rating/Rating';
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {

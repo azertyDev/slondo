@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import {
     Box,
-    IconButton,
     Paper,
     Table,
     TableBody,
@@ -14,7 +13,6 @@ import {
 import {useTranslation} from 'react-i18next';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {numberPrettier} from '@src/helpers';
-import {CloseIcon} from '@src/components/elements/icons';
 import {BETS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {useBetsData} from '@src/hooks/useBetsData';
@@ -61,10 +59,10 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 handleCloseDialog={handleModalClose}
                 maxWidth='lg'
             >
-                <ModalHeader title={t('allBets')} handleCloseDialog={handleModalClose} />
+                <ModalHeader title={t('allBets')} handleCloseDialog={handleModalClose}/>
 
                 {isBetsFetch
-                    ? <CustomCircularProgress />
+                    ? <CustomCircularProgress/>
                     : <>
                         <Box
                             p={2}
@@ -144,16 +142,14 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            {bets.length > BETS_PER_PAGE && (
-                                <div>
-                                    <CustomPagination
-                                        currentPage={page}
-                                        totalItems={betsCount}
-                                        itemsPerPage={BETS_PER_PAGE}
-                                        handlePagePagination={handlePagePagination}
-                                    />
-                                </div>
-                            )}
+                            <div>
+                                <CustomPagination
+                                    currentPage={page}
+                                    totalItems={betsCount}
+                                    itemsPerPage={BETS_PER_PAGE}
+                                    handlePagePagination={handlePagePagination}
+                                />
+                            </div>
                         </Box>
                     </>}
             </ResponsiveModal>
