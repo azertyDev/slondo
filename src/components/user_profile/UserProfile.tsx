@@ -34,7 +34,7 @@ export const UserProfile: FC = () => {
     const getPageContent = () => {
         switch (pageName) {
             case 'profile_posts':
-                return <UserPosts t={t}/>;
+                return <UserPosts/>;
             case 'profile_ratings':
                 return <UserRatingsContainer t={t}/>;
             case 'profile_follows':

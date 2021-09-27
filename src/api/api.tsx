@@ -5,7 +5,7 @@ import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from "@root/interfaces/Locations";
-import {DEV_URL, ITEMS_PER_PAGE, PRODUCTION_URL} from "@src/constants";
+import {DEV_URL, ITEMS_PER_PAGE, PRODUCTION_URL, SUBS_PER_PAGE} from "@src/constants";
 
 const production = `${PRODUCTION_URL}/api/`;
 const local = `${DEV_URL}/slondo/public/api/`;
@@ -602,14 +602,24 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserSubscribers: (params) => {
+    getUserSubscribers: (user_id, page, itemsPerPage = SUBS_PER_PAGE) => {
+        const params = {
+            user_id,
+            page,
+            itemsPerPage
+        };
         return instance.get(`user/subscribers/byUserId`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getUserSubscriptions: (params) => {
+    getUserSubscriptions: (user_id, page, itemsPerPage = SUBS_PER_PAGE) => {
+        const params = {
+            user_id,
+            page,
+            itemsPerPage
+        };
         return instance.get(`user/subscriptions/byUserId`, {params})
             .then(res => res.data)
             .catch(err => {
