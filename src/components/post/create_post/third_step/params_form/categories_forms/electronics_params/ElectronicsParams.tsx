@@ -69,9 +69,9 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
+                isPreview={isPreview}
                 submitTxt='appearance'
                 icon={<ParametersIcon/>}
-                isPreview={isPreview}
                 title={t('post:parameters')}
                 open={currentFormIndex === 3}
                 isEditable={currentFormIndex < 3}

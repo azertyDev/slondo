@@ -5,14 +5,14 @@ import {chatAPI} from "@src/api/api";
 import {Chat} from './chat/Chat';
 import {Contacts} from './contacts/Contacts';
 import {MESSAGES_PER_PAGE} from "@src/constants";
-import {useStyles} from './useStyles';
 import {SocketCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 export type MessageType = {
     id: number,
     message: {
         text: string,
-        images: {
+        images?: {
             id: number, url: {
                 default: string,
                 original: string,
@@ -39,14 +39,13 @@ export const ChatContainer: FC<ChatContainerProps> = ({user = null}) => {
     };
 
     const socket = useContext(SocketCtx);
-    const messageEventURL = 'private-channel:App\\Events\PrivateMessageEvent';
+    const messageEventURL = 'private-channel:App\\Events\\PrivateMessageEvent';
 
     const [page, setPage] = useState(1);
     const [contacts, setContacts] = useState([]);
     const [chat, setChat] = useState<ChatType>(initChat);
 
     const [message, setMessage] = useState('');
-    const [image, setImage] = useState(null);
     const [isFetch, setIsFetch] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
 
@@ -134,12 +133,16 @@ export const ChatContainer: FC<ChatContainerProps> = ({user = null}) => {
         }
     };
 
-    const messageListener = ({data}: { data: MessageType }) => {
+    const messageListener = (data) => {
+        const {text} = data;
         const {messages} = chat;
         console.log(data);
         setChat({
             ...chat,
-            messages: [...messages, data]
+            messages: [
+                ...messages,
+                {message: text, id: 1, author: {}}
+            ]
         });
     };
 

@@ -24,7 +24,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {t} = useTranslation('post');
     const isAuction = post.ads_type.mark === 'auc' || post.ads_type.mark === 'exauc';
     const jobOrService = post.category.name === 'job' || post.category.name === 'service';
-    const excludePrice = jobOrService || post.price === 0;
 
     const classes = useStyles();
     return (
@@ -33,7 +32,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 <div className="price">
                     <Typography variant="h4" color="initial">
                         {t(priceTransform(post.price, jobOrService))}&nbsp;
-                        {!excludePrice && (
+                        {post.price !== 0 && (
                             t(`common:${post.currency.name}`)
                         )}
                     </Typography>

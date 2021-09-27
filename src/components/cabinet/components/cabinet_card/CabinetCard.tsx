@@ -14,7 +14,7 @@ import {useTranslation} from 'react-i18next';
 import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
-import {useDate} from '@src/hooks';
+// import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
@@ -23,7 +23,7 @@ type ListCardPropsType = {
 
 export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
-    const {time = ''} = useDate().getDate(cardData.created_at);
+    // const {time = ''} = useDate().getDate(cardData.created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
@@ -62,7 +62,6 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const price = cardData.price;
     const ctgrName = cardData.category.name;
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
-    const excludePrice = jobOrService || price === 0;
 
     const classes = useStyles({cardData});
     return (
@@ -141,7 +140,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                                     <PhoneIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {weekDaysHelper(cardData.available_days, t)}&nbsp;
-                                                        {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
+                                                        {(cardData.available_start_time || cardData.available_end_time) && `${cardData.available_start_time}-${cardData.available_end_time}`}
                                                     </Typography>}
                                                 </div>
                                             )}
@@ -199,16 +198,20 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                             <Grid
                                 item
                                 xs={12}
-                                md={isAuction ? 6 : 12}
                                 container
                                 zeroMinWidth
                                 direction='column'
+                                md={isAuction ? 6 : 12}
                                 alignItems={isSmDown ? 'flex-start' : 'flex-end'}
                             >
                                 {isAuction
                                     ? hasBet &&
                                     <>
-                                        <Typography variant='subtitle1' component='p' className='color-silver'>
+                                        <Typography
+                                            component='p'
+                                            variant='subtitle1'
+                                            className='color-silver'
+                                        >
                                             {t('common:currentRate')}
                                         </Typography>
                                         <Typography
@@ -218,7 +221,9 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                             color="initial"
                                         >
                                             {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                                            <span>
+                                                {t(`common:${cardData.currency.name}`)}
+                                            </span>
                                         </Typography>
                                     </>
                                     : <Typography
@@ -228,8 +233,10 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                         color="initial"
                                     >
                                         {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
-                                        {!excludePrice && (
-                                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                                        {price !== 0 && (
+                                            <span>
+                                                {t(`common:${cardData.currency.name}`)}
+                                            </span>
                                         )}
                                     </Typography>}
                             </Grid>

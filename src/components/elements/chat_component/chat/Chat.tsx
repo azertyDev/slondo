@@ -1,6 +1,6 @@
+import {FC, Fragment, MouseEvent, useContext, useState, useRef, useEffect} from 'react';
 import {useModal} from "@src/hooks";
 import {AuthCtx} from "@src/context";
-import {FC, Fragment, MouseEvent, useContext, useState} from 'react';
 import {IconButton, Menu, MenuItem, Typography} from "@material-ui/core";
 import {MoreVert, Send, CropOriginal} from "@material-ui/icons";
 import {MessageType} from "../ChatContainer";
@@ -34,10 +34,11 @@ export const Chat: FC<ChatProps> = (props) => {
         sendMessage
     } = props;
 
-    const {t} = useTranslation('common');
     const self = useContext(AuthCtx).user;
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const {t} = useTranslation('common');
+    const messagesBottomRef = useRef(null);
     const [selectedMenuItem, selectMenuItem] = useState(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const title = (() => {
         switch (selectedMenuItem) {
@@ -83,6 +84,14 @@ export const Chat: FC<ChatProps> = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const scrollToBottom = () => {
+        messagesBottomRef.current.scrollIntoView({block: 'end'});
+    };
+
+    useEffect(() => {
+        messagesBottomRef.current && scrollToBottom();
+    }, [messages]);
 
     const classes = useStyles();
     return (
@@ -130,10 +139,7 @@ export const Chat: FC<ChatProps> = (props) => {
                                     {text && (
                                         <div
                                             key={id}
-                                            className={
-                                                `message ${author.id === self.id
-                                                    ? 'right-side' : 'left-side'}`
-                                            }
+                                            className={`message ${author.id === self.id ? 'right-side' : 'left-side'}`}
                                         >
                                             {text && (
                                                 <Typography variant='subtitle1'>
@@ -149,6 +155,7 @@ export const Chat: FC<ChatProps> = (props) => {
                                 </Fragment>
                             );
                         })}
+                        <div ref={messagesBottomRef}/>
                     </div>
                     <div className='compose'>
                         <label htmlFor='message' className='img-wrapper'>

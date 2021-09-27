@@ -5073,6 +5073,12 @@
     "used": {
       "name": "Б/У"
     },
+    "build_in_speakers": {
+      "name": "Встроенные динамики"
+    },
+    "usb_connector": {
+      "name": "USB коннектор"
+    },
     "android": {
       "name": "Android"
     },

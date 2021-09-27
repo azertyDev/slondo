@@ -68,7 +68,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const [favorite, setFavorite] = useState(false);
 
     const jobOrService = post.category.name === 'job' || post.category.name === 'service';
-    const excludePrice = jobOrService || post.price === 0;
 
     const {
         modalOpen: complainOpen,
@@ -124,7 +123,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
-                        {t('common:yes')}
+                        {t(`common:${transKey === 'electronics' ? 'has' : 'yes'}`)}
                     </Typography>
                 </li>
             );
@@ -139,9 +138,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             style={{
                                 width: 24,
                                 height: 24,
-                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
                                 marginRight: 15,
                                 borderRadius: '50%',
+                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
                                 backgroundColor: `${model[key]?.hex_color_code}`
                             }}
                         />
@@ -194,7 +193,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                     {!!post.model?.condition && (
                         <div className="condition">
-                            <Typography variant="h6">{t(`${post.model.condition?.name}`)}</Typography>
+                            <Typography variant="h6">
+                                {t(`${post.model.condition?.name}`)}
+                            </Typography>
                         </div>
                     )}
                 </div>
@@ -228,12 +229,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <div>
                             <Typography variant='h6' className="price">
                                 {t(priceTransform(post.price, jobOrService))}&nbsp;
-                                {!excludePrice && (
+                                {post.price !== 0 && (
                                     t(`common:${post.currency.name}`)
                                 )}
                                 {!!post.condition.name && (
                                     <div className="condition">
-                                        <Typography variant="h6">{t(`${post.model?.condition?.name}`)}</Typography>
+                                        <Typography variant="h6">
+                                            {t(`${post.model?.condition?.name}`)}
+                                        </Typography>
                                     </div>
                                 )}
                             </Typography>

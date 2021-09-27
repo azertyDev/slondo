@@ -3,7 +3,8 @@ import {unstable_batchedUpdates} from "react-dom";
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {
     Avatar,
-    Box, Grid,
+    Box,
+    Grid,
     List,
     ListItem,
     ListItemText,
@@ -24,6 +25,7 @@ import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
 
 enum SettingsModalPropsType {
+    'restore',
     'deactivate',
     'deactivate_variants',
     'edit_post',
@@ -36,6 +38,7 @@ enum SettingsModalPropsType {
 export const SettingsModal: FC<CommonModalType> = (props) => {
     const {
         post,
+        postStatus,
         open,
         onClose,
         handleRefresh
@@ -54,13 +57,15 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         avatar: ''
     };
 
-    const [isFetch, setIsFetch] = useState(false);
+    const isPublic = postStatus === 'public';
+
     const [buyer, setBuyer] = useState(initBuyer);
+    const [isFetch, setIsFetch] = useState(false);
     const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('settings');
 
     const isSoldOnSlondo = status === 'sold_on_slondo';
 
-    const titleTxt = (() => {
+    const titleTxt = (_ => {
         switch (status) {
             case 'sold_on_slondo':
                 return 'type_buyer_number';
@@ -70,6 +75,8 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 return 'edit_post_confirm';
             case 'rise_in_tape':
                 return isPost ? 'rise_post_in_tape' : 'rise_auction_in_tape';
+            case "restore":
+                return 'restore_post'
         }
     })();
 
@@ -89,11 +96,17 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                         ads_id: post.id,
                         reason_id: isSoldOnSlondo ? reasons.sold : reasons.archive
                     };
-                    isPost ? await userAPI.deactivatePost(data) : await userAPI.deactivateAuction(post.id);
+                    isPost
+                        ? await userAPI.deactivatePost(data)
+                        : await userAPI.deactivateAuction(post.id);
                     break;
                 }
                 case 'rise_in_tape': {
                     await userAPI.ricePostInTape(post.id);
+                    break;
+                }
+                case "restore": {
+                    await userAPI.restoreFromArchive(post.id);
                     break;
                 }
                 case "edit_post": {
@@ -161,8 +174,8 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         unstable_batchedUpdates(() => {
             onClose();
             setBuyer(initBuyer);
-            handleReset({phone: ''});
             setStatus('settings');
+            handleReset({phone: ''});
         });
     };
 
@@ -175,37 +188,49 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     aria-label="main"
                     className={classes.settingsList}
                 >
-                    <ListItem
-                        button
-                        onClick={handleStatus(isPost ? 'deactivate_variants' : 'confirm')}
-                    >
-                        <ListItemText
-                            primary={t('deactivate')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </ListItem>
-                    {isPost && (
-                        <ListItem
+                    {isPublic
+                        ? <>
+                            <ListItem
+                                button
+                                onClick={handleStatus(isPost ? 'deactivate_variants' : 'confirm')}
+                            >
+                                <ListItemText
+                                    primary={t('deactivate')}
+                                    primaryTypographyProps={{variant: 'subtitle1'}}
+                                />
+                            </ListItem>
+                            {isPost && (
+                                <ListItem
+                                    button
+                                    onClick={handleStatus('edit_post')}
+                                >
+                                    <ListItemText
+                                        primary={t('edit')}
+                                        primaryTypographyProps={{variant: 'subtitle1'}}
+                                    />
+                                </ListItem>
+                            )}
+                            <ListItem
+                                button
+                                onClick={handleStatus('rise_in_tape')}
+                            >
+                                <ListItemText
+                                    primary={t('rise_in_tape')}
+                                    secondary={t('can_use_in_week')}
+                                    primaryTypographyProps={{variant: 'subtitle1'}}
+                                    secondaryTypographyProps={{variant: 'subtitle2'}}
+                                />
+                            </ListItem>
+                        </>
+                        : <ListItem
                             button
-                            onClick={handleStatus('edit_post')}
+                            onClick={handleStatus('restore')}
                         >
                             <ListItemText
-                                primary={t('edit')}
+                                primary={t('restore')}
                                 primaryTypographyProps={{variant: 'subtitle1'}}
                             />
-                        </ListItem>
-                    )}
-                    <ListItem
-                        button
-                        onClick={handleStatus('rise_in_tape')}
-                    >
-                        <ListItemText
-                            primary={t('rise_in_tape')}
-                            secondary={t('can_use_in_week')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                            secondaryTypographyProps={{variant: 'subtitle2'}}
-                        />
-                    </ListItem>
+                        </ListItem>}
                 </List>;
             case 'deactivate_variants':
                 return <List
@@ -256,17 +281,16 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                                 className={classes.userData}
                             >
                                 {isFetch
-                                    ? <CustomCircularProgress />
+                                    ? <CustomCircularProgress/>
                                     : !!buyer
                                         ? <>
-                                            <Avatar src={buyer.avatar ?? ''} />
+                                            <Avatar src={buyer.avatar ?? ''}/>
                                             <Typography variant='subtitle2' noWrap>
-                                                {buyer.name}<br />
+                                                {buyer.name}<br/>
                                                 {buyer.surname}
                                             </Typography>
                                         </>
-                                        : <Typography>{t('user_not_found')}</Typography>
-                                }
+                                        : <Typography>{t('user_not_found')}</Typography>}
                             </Box>
                         </Grid>
                     </Grid>
@@ -276,6 +300,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                         </CustomButton>
                     </Grid>
                 </Grid>;
+            case "restore":
             case 'edit_post':
             case 'confirm':
             case 'rise_in_tape':
@@ -305,14 +330,13 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     return (
         <CabinetModal
             maxWidth='xs'
-            title={t(status)}
             openDialog={open}
             handleCloseDialog={handleClose}
-            hasPrevBtn={status !== 'settings'}
             handlePrevMenu={handlePrevMenu}
+            hasPrevBtn={status !== 'settings'}
         >
             {isFetch
-                ? <CustomCircularProgress />
+                ? <CustomCircularProgress/>
                 : <CustomFormikProvider formik={formik}>
                     {status === 'settings' && (
                         <Typography className={classes.title} variant="h6" align='center'>

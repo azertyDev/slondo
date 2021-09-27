@@ -18,6 +18,9 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '&.message-list': {
+                height: '300px',
+                overflowY: 'scroll',
+                overflowX: 'hidden',
                 padding: '25px 0',
                 borderTop: '1px solid #D5D5D5',
                 borderBottom: '1px solid #D5D5D5',
@@ -46,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
                     position: 'relative',
                     marginLeft: '10px',
                     '&:before': {
-                        left: '-20px',
+                        left: '-19px',
                         borderLeft: '10px solid transparent',
                         borderRight: '10px solid #f1f1f1'
                     }
@@ -60,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
                         backgroundColor: '#E6F3FF'
                     },
                     '&:after': {
-                        right: '-20px',
+                        right: '-19px',
                         borderLeft: '10px solid #E6F3FF',
                         borderRight: '10px solid transparent'
                     }

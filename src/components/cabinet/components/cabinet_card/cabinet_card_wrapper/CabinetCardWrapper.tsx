@@ -40,10 +40,11 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isPublic = status === 'public';
-    const isModeration = status === 'moderation';
     const isSold = status === 'sold';
     const isSuspend = status === 'suspended';
-    const isArchive = status === 'archive' || 'history';
+    const isArchive = status === 'archive';
+    const isHistory = status === 'history';
+    const isModeration = status === 'moderation';
     const isReject = status === 'reject' || 'refuse';
 
     const classes = useStyles({status});
@@ -102,9 +103,10 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             </CustomButton>
                                         </Grid>
                                     )}
-                                    {creator && isPublic && (
+                                    {creator && (isPublic || isArchive) && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
+                                                disabled
                                                 className='icons'
                                                 onClick={handleSettingsOpen}
                                             >
@@ -118,9 +120,9 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                     {handleDetailedOpen && (
                         <Grid
                             item
-                            xs={isPublic || isModeration || isSold || isSuspend || isReject ? 7 : 12}
-                            sm={isPublic || isModeration || isSuspend || isArchive || isReject ? 8 : 12}
                             md={12}
+                            xs={isPublic || isModeration || isSold || isSuspend || isReject ? 7 : 12}
+                            sm={isPublic || isModeration || isSuspend || isArchive || isHistory || isReject ? 8 : 12}
                         >
                             <CustomButton
                                 className='unfold-btn'
@@ -129,7 +131,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1' component='p'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action' />
+                                <ChevronRight color='action'/>
                             </CustomButton>
                         </Grid>
                     )}
@@ -140,18 +142,21 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                             ? <CustomButton
                                 onClick={handleOpenModal(cardData.id)}
                             >
-                                <CloseIcon />
+                                <CloseIcon/>
                             </CustomButton>
                             : <>
-                                {creator && isPublic && (
+                                {creator && (isPublic || isArchive) && (
                                     <>
+                                        {isPublic && (
+                                            <CustomButton
+                                                disabled
+                                                className='icons'
+                                            >
+                                                <RocketIcon/>
+                                            </CustomButton>
+                                        )}
                                         <CustomButton
                                             disabled
-                                            className='icons'
-                                        >
-                                            <RocketIcon/>
-                                        </CustomButton>
-                                        <CustomButton
                                             className='icons'
                                             onClick={handleSettingsOpen}
                                         >
@@ -159,13 +164,14 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         </CustomButton>
                                     </>
                                 )}
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleNotificationsOpen}
-                                    // disabled={!observer.number_of_notifications}
-                                >
-                                    <NotificationIcon/>
-                                </CustomButton>
+                                {(isPublic || isArchive || isHistory || isSold) && (
+                                    <CustomButton
+                                        className='icons'
+                                        onClick={handleNotificationsOpen}
+                                    >
+                                        <NotificationIcon/>
+                                    </CustomButton>
+                                )}
                             </>}
                     </div>
                 </Hidden>

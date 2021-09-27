@@ -20,6 +20,7 @@ import {useStyles} from './useStyles';
 
 export type CommonModalType = {
     post,
+    postStatus?: string,
     open: boolean,
     onClose: () => void,
     handleRefresh: () => void
@@ -32,8 +33,6 @@ const Cabinet: FC = () => {
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const isMainPage = page === 'main';
-    // const prevPath = getSessionItem('prevPath');
-    // const currPath = getSessionItem('currentPath');
 
     const handlePrev = async () => {
         await push(isMainPage ? '/' : '/cabinet/main');

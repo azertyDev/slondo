@@ -169,6 +169,7 @@ export const MyPosts: FC = () => {
                 open={settingsOpen}
                 handleRefresh={handleRefresh}
                 onClose={handleCloseSettings}
+                postStatus={selectedPost.status}
             />
             <NotificationModal
                 post={selectedPost}

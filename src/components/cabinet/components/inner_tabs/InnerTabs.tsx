@@ -69,7 +69,7 @@ export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
                                     handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    handleSettingsOpen={!!handleSettingsOpen ? handleSettingsOpen(data) : null}
+                                    handleSettingsOpen={handleSettingsOpen ? handleSettingsOpen(data) : null}
                                 />
                                 {!!handleSafeDeal && (
                                     <Box mt={1}>
@@ -117,6 +117,7 @@ export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
                                     handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    handleSettingsOpen={handleSettingsOpen ? handleSettingsOpen(data) : null}
                                 />
                             </Box>
                         ))}

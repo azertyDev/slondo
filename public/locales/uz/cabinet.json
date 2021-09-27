@@ -1,4 +1,6 @@
 {
+  "restore": "qayta tiklash",
+  "restore_post": "E'loni qayta tiklamoqchimisiz?",
   "ratings_count": "({{count}} marta baholangan)",
   "main": "Shaxsiy kabinet",
   "safe_deal_payment_text": "To'lov tizimining komissiyasi 1%",

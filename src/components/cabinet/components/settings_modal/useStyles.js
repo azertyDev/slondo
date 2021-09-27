@@ -2,7 +2,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     settingsList: {
-        marginTop: 50,
         width: '100%',
         '& .MuiListItem-button, button': {
             width: '100%',
@@ -17,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     title: {
+        marginBottom: '20px',
         [theme.breakpoints.down('xs')]: {
             fontWeight: '400',
             fontSize: '1rem'
@@ -52,5 +52,5 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: 0,
             marginRight: 0
         }
-    },
+    }
 }));
