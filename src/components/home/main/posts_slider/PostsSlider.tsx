@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {ITEMS_PER_PAGE} from '@src/constants';
+import {HOME_ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCardData} from '@src/common_data/common';
@@ -12,7 +12,7 @@ import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {unstable_batchedUpdates} from "react-dom";
 import {useStyles} from "./useStyles";
 
-export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCardData);
+export const initCards = Array.from({length: HOME_ITEMS_PER_PAGE}).map(() => initCardData);
 
 const initData: CardData = {
     cards: initCards,
@@ -33,7 +33,7 @@ export const PostsSlider: FC = () => {
     const setFetchedCardData = async () => {
         try {
             const params = {
-                itemsPerPage: ITEMS_PER_PAGE,
+                itemsPerPage: HOME_ITEMS_PER_PAGE,
                 page: currentPage
             };
 

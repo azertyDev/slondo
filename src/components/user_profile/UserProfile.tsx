@@ -37,7 +37,7 @@ export const UserProfile: FC = () => {
             case 'profile_posts':
                 return <UserPosts t={t}/>;
             case 'profile_ratings':
-                return <UserRatingsContainer t={t}/>;
+                return <UserRatingsContainer t={t} userInfo={userInfo}/>;
             case 'profile_follows':
                 return <UserFollowsList t={t}/>;
         }

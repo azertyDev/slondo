@@ -8,7 +8,6 @@ import {WithT} from 'i18next';
 import {CircularProgress} from '@material-ui/core';
 import {ErrorCtx} from '@src/context';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {ITEMS_PER_PAGE} from '@src/constants';
 
 export const UserPosts: FC<WithT> = ({t}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -35,20 +34,14 @@ export const UserPosts: FC<WithT> = ({t}) => {
 
     const fetchUserPosts = async (type, archive = 0) => {
         try {
-            // const params = {
-            //     user_id,
-            //     type,
-            //     archive
-            // };
-
             const params = {
+                user_id,
                 type,
-                page: 1,
-                itemsPerPage: 6
+                archive
             };
             setIsFetch(true);
 
-            const {data, total} = await userAPI.getCards(params);
+            const {data, total} = await userAPI.getUserPosts(params);
 
             unstable_batchedUpdates(async () => {
                 setIsFetch(false);

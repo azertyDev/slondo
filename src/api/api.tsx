@@ -529,8 +529,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserRating: (): Promise<any> => {
-        return instance.get(`user/rating`, setTokenToHeader())
+    getUserRating: (params?): Promise<any> => {
+        return instance.get(`user/rating`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;

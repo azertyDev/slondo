@@ -1,4 +1,4 @@
-import {FC, useContext, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {TabsDataType} from '@root/interfaces/Cabinet';

@@ -42,7 +42,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     </Typography>
                 )}
             </div>
-            {ratingCount !== 0 && (
+            {ratingCount && ratingCount !== 0 && (
                 <Hidden mdDown>
                     <div>
                         <Typography

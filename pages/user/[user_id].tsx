@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
                 'notifications',
                 'categories',
                 'locations',
-                'error',
+                'errors',
                 'post'
             ]
         )
