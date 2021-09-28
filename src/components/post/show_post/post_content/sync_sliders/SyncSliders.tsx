@@ -92,10 +92,10 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
         focusOnSelect: true,
         arrows: !isMdDown,
         dots: isMdDown,
-        customPaging: function(i) {
-            return <div className="dot"></div>;
-        },
-        dotsClass: 'slick-dots slick-thumb'
+        // customPaging: function(i) {
+        //     return <div className="dot"></div>;
+        // },
+        // dotsClass: 'slick-dots slick-thumb'
     };
 
     const classes = useStyles({isFavorite});
