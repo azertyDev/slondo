@@ -36,7 +36,8 @@ export const useStyles = makeStyles((theme) => ({
             padding: '5px 0',
             border: '1px solid #2F80ED',
             background: 'none',
-            borderRadius: '5px',
+            borderRadius: 5,
+            marginTop: 5,
             [theme.breakpoints.down('md')]: {
                 border: '1px solid #D5D5D5;'
             },
