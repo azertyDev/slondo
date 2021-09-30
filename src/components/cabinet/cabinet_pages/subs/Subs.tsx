@@ -42,11 +42,19 @@ export const Subs: FC = () => {
         }
     };
 
+    const refresh = () => {
+        unstable_batchedUpdates(() => {
+            fetchSubs(1);
+            fetchSubs(1, true);
+        });
+    };
+
     const getSubs = (subs) => (
         <div>
             {subs.map(({id, subscription, subscriber}) =>
                 <SubsItem
                     key={id}
+                    refresh={refresh}
                     user={subscription ?? subscriber}
                 />
             )}

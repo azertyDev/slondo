@@ -27,45 +27,55 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundColor: '#fff',
                 '& div.message': {
                     width: 'fit-content',
-                    maxWidth: '80%'
-                },
-                '& pre': {
-                    padding: '15px',
-                    borderRadius: '5px',
+                    maxWidth: '80%',
+                    padding: '5px',
                     backgroundColor: '#f1f1f1',
-                    wordBreak: 'break-word',
-                    whiteSpace: 'pre-wrap'
-                },
-                '& div.left-side:before, & div.right-side:after': {
-                    content: '""',
-                    top: 'calc(40% - 10px)',
-                    width: '0px',
-                    height: '0px',
-                    position: 'absolute',
-                    borderTop: '5px solid transparent',
-                    borderBottom: '5px solid transparent'
-                },
-                '& div.left-side': {
-                    position: 'relative',
-                    marginLeft: '10px',
-                    '&:before': {
-                        left: '-19px',
-                        borderLeft: '10px solid transparent',
-                        borderRight: '10px solid #f1f1f1'
-                    }
-                },
-                '& div.right-side': {
-                    position: 'relative',
-                    marginLeft: 'auto',
-                    marginRight: '10px',
-                    '& pre': {
-                        marginLeft: 'auto',
-                        backgroundColor: '#E6F3FF'
+                    borderRadius: '5px',
+                    marginBottom: '10px',
+                    '& h6': {
+                        position: 'relative',
+                        '& > pre': {
+                            margin: '0 0 5px',
+                            wordBreak: 'break-word',
+                            whiteSpace: 'pre-wrap'
+                        }
                     },
-                    '&:after': {
-                        right: '-19px',
-                        borderLeft: '10px solid #E6F3FF',
-                        borderRight: '10px solid transparent'
+                    '& img': {
+                        width: '100%',
+                        marginBottom: '5px',
+                        borderRadius: '5px'
+                    },
+                    '& p.time': {
+                        display: 'block',
+                        fontSize: '.55rem',
+                        textAlign: 'end'
+                    },
+                    '&.left-side > h6:before, &.right-side > h6:after': {
+                        content: '""',
+                        top: 'calc(40% - 5px)',
+                        width: '0px',
+                        height: '0px',
+                        position: 'absolute',
+                        borderTop: '5px solid transparent',
+                        borderBottom: '5px solid transparent'
+                    },
+                    '&.left-side': {
+                        marginLeft: '10px',
+                        '& > h6:before': {
+                            left: '-24px',
+                            borderLeft: '10px solid transparent',
+                            borderRight: '10px solid #f1f1f1'
+                        }
+                    },
+                    '&.right-side': {
+                        marginLeft: 'auto',
+                        marginRight: '10px',
+                        backgroundColor: '#E6F3FF',
+                        '& > h6:after': {
+                            right: '-24px',
+                            borderLeft: '10px solid #E6F3FF',
+                            borderRight: '10px solid transparent'
+                        }
                     }
                 }
             },

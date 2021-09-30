@@ -1,12 +1,13 @@
 import {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
-import {useStyles} from './useStyles';
 import {LetterIcon} from '@src/components/elements/icons';
+import {useTranslation} from "next-i18next";
 import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
-export const SidebarMenu: FC<WithT> = ({t}) => {
+export const SidebarMenu: FC = () => {
+    const {t} = useTranslation('cabinet');
     const {query: {path}, push} = useRouter();
     const [pathname, user_id] = path as string[];
 

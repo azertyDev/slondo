@@ -13,6 +13,7 @@ import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
     user: UserInfo,
+    refresh?: () => void,
     width?: string,
     height?: string
 };
@@ -21,7 +22,8 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const {
         user,
         width,
-        height
+        height,
+        refresh
     } = props;
 
     const isIncognito = INCOGNITO_NAMES.some(n => n === user?.name);
@@ -40,6 +42,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
             if (auth.isAuth) {
                 await userAPI.follow(user?.id);
                 setIsFollow(!isFollow);
+                refresh && refresh();
             } else {
                 setAuthModalOpen(true);
             }
@@ -56,6 +59,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     return (
         <Box className={classes.root}>
             <UserAvatarComponent
+                userId={user.id}
                 width={width}
                 height={height}
                 avatar={user?.avatar}

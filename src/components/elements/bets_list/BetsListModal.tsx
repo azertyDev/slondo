@@ -35,6 +35,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
 
     const {t} = useTranslation('auction');
     const [page, setPage] = useState(1);
+
     const {isBetsFetch, bets, betsCount, setFetchedBetsData} = useBetsData(
         {
             auction_id: auctionId,

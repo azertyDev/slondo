@@ -30,6 +30,7 @@ import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     post,
+    auctionInfo,
     handleSafeDeal: () => void,
     handleChatOpen: () => void,
     setFetchedPostData: () => Promise<void>
@@ -38,6 +39,7 @@ type PostContentTypes = {
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
+        auctionInfo,
         handleSafeDeal,
         handleChatOpen,
         setFetchedPostData
@@ -93,6 +95,17 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         } catch (e) {
             setErrorMsg(e.message);
         }
+    };
+
+    const getPrice = () => {
+        let price = post.price;
+
+        if (isAuction && auctionInfo.bets.length) {
+            const {bets} = auctionInfo;
+            price = bets[0].bet;
+        }
+
+        return t(priceTransform(price, jobOrService));
     };
 
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
@@ -228,11 +241,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-header">
                         <div>
                             <Typography variant='h6' className="price">
-                                {t(priceTransform(post.price, jobOrService))}&nbsp;
+                                {getPrice()}&nbsp;
                                 {post.price !== 0 && (
                                     t(`common:${post.currency.name}`)
                                 )}
-                                {!!post.condition.name && (
+                                {!!post.condition?.name && (
                                     <div className="condition">
                                         <Typography variant="h6">
                                             {t(`${post.model?.condition?.name}`)}
@@ -315,8 +328,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="contact">
                         <ShowPhone postId={post.id}/>
                         <CustomButton
-                            disabled
                             color='silver'
+                            disabled
                             onClick={handleChatOpen}
                         >
                             <Typography variant='subtitle1'>
@@ -327,6 +340,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     {isAuction && (
                         <AuctionContent
                             postData={post}
+                            auctionInfo={auctionInfo}
                             setFetchedPostData={setFetchedPostData}
                         />
                     )}
@@ -341,7 +355,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <LocationIcon/>
                         <Typography variant="subtitle1">
                             {`${t(`locations:${post.region.name}.name`) ?? ''}`}
-                            {post.city.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
+                            {post.city?.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
                         </Typography>
                     </div>
                 </div>
@@ -405,6 +419,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <OwnerAuctionInfo
                         post={post}
+                        auctionInfo={auctionInfo}
                         handleChatOpen={handleChatOpen}
                         handleSafeDeal={handleSafeDeal}
                         setFetchedPostData={setFetchedPostData}

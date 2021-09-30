@@ -6,13 +6,8 @@ import {ErrorCtx} from '@src/context';
 import {useTranslation} from 'next-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 
-export const UserRatingsContainer: FC<{userInfo: UserInfo}> = (props) => {
+export const UserRatingsContainer: FC<{ userInfo: UserInfo }> = ({userInfo}) => {
     const {t} = useTranslation('cabinet');
-
-    const {
-        userInfo
-    } = props;
-
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const [ratings, setRatings] = useState([]);
@@ -40,6 +35,10 @@ export const UserRatingsContainer: FC<{userInfo: UserInfo}> = (props) => {
     }, []);
 
     return (
-        <UserRatings t={t} ratings={ratings} userInfo={userInfo} />
+        <UserRatings
+            t={t}
+            ratings={ratings}
+            userInfo={userInfo}
+        />
     );
 };

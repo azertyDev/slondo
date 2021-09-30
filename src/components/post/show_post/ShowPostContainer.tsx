@@ -1,7 +1,6 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {useModal} from "@src/hooks";
-import {useRouter} from 'next/router';
+import {useBetsData, useModal} from "@src/hooks";
 import {useTranslation} from 'next-i18next';
 import {unstable_batchedUpdates} from "react-dom";
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
@@ -18,86 +17,29 @@ import {CustomCircularProgress} from "@src/components/elements/custom_circular_p
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import {useStyles} from './useStyles';
+import ErrorPage from "@root/pages/_error";
 
-export const ShowPostContainer: FC = () => {
+export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({initPostData, statusCode}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
-
-    const {url} = useRouter().query;
-    const postUrl = url as string;
-    const [postId] = postUrl.split('-').splice(-1);
+    const [isFetch, setIsFetch] = useState(false);
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
-    const initValues = {id: null, name: ''};
-    const initialPostData = {
-        id: null,
-        title: '',
-        price: '',
-        currency: initValues,
-        condition: initValues,
-        created_at: null,
-        expiration_at: null,
-        number_of_views: null,
-        sub_category_id: null,
-        favorite: false,
-        creator: false,
-        status: '',
-        subscribed: null,
-        safe_deal: null,
-        params: null,
-        author: {
-            id: null,
-            name: '',
-            surname: '',
-            phone: '',
-            created_at: null,
-            avatar: '',
-            available_days: '',
-            rating: 0
-        },
-        observer: {
-            number_of_views: 0,
-            number_of_favorites: 0
-        },
-        images: [],
-        description: '',
-        region: initValues,
-        city: initValues,
-        district: initValues,
-        category: {
-            id: null,
-            name: '',
-            mark: ''
-        },
-        adsable: {
-            id: null,
-            sub_category: {
-                id: null,
-                name: ''
-            },
-            type: {
-                id: null,
-                name: ''
-            }
-        },
-        ads_type: {
-            id: null,
-            mark: ''
-        },
-        auction: {
-            id: null,
-            duration: '',
-            display_phone: '',
-            reserve_price: '',
-            price_by_now: '',
-            price_buy_now_status: null,
-            offer_the_price: null
-        }
-    };
+    if (initPostData.available_days) {
+        initPostData.available_days = initPostData.available_days.map(day => {
+            day.name = t(`common:${day.name}`);
+            return day;
+        });
+    }
 
-    const [isFetch, setIsFetch] = useState(false);
-    const [postData, setPostData] = useState(initialPostData);
-    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
+    const [postData, setPostData] = useState(initPostData);
+
+    const auctionInfo = useBetsData({
+        auction_id: postData?.auction?.id,
+        page: 1,
+        itemsPerPage: 5
+    });
 
     const {
         modalOpen: safeDealOpen,
@@ -126,6 +68,8 @@ export const ShowPostContainer: FC = () => {
     const setFetchedPostData = async () => {
         try {
             setIsFetch(true);
+            const initValues = {id: null, name: ''};
+
             const {
                 title,
                 currency,
@@ -137,7 +81,7 @@ export const ShowPostContainer: FC = () => {
                 district,
                 available_days,
                 ...otherData
-            } = await userAPI.getPostById({id: postId});
+            } = await userAPI.getPostById(initPostData.id);
 
             if (available_days) {
                 otherData.available_days = available_days.map(day => {
@@ -168,69 +112,69 @@ export const ShowPostContainer: FC = () => {
         }
     };
 
-    useEffect(() => {
-        setFetchedPostData();
-    }, []);
-
     const classes = useStyles();
     return (
-        <>
-            <CustomHead
-                title={postData.title}
-                description={postData.description}
-            />
-            <Hidden mdDown>
-                <Header/>
-            </Hidden>
-            <Container
-                maxWidth="xl"
-                className={classes.root}
-                disableGutters={isMdDown}
-                style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
-            >
-                <Grid container spacing={isMdDown ? 0 : 2}>
-                    {isFetch
-                        ? <CustomCircularProgress/>
-                        : <>
-                            <Grid item xs={12} lg={9}>
-                                <PostContent
-                                    post={postData}
-                                    handleChatOpen={handleOpenChat}
-                                    handleSafeDeal={handleSafeDeal}
-                                    setFetchedPostData={setFetchedPostData}
-                                />
-                            </Grid>
-                            <Hidden mdDown>
-                                <Grid item lg={3} xs={12}>
-                                    <OwnerAuctionInfo
+        statusCode !== 200
+            ? <ErrorPage statusCode={statusCode}/>
+            : <>
+                <CustomHead
+                    title={postData.title}
+                    description={postData.description}
+                />
+                <Hidden mdDown>
+                    <Header/>
+                </Hidden>
+                <Container
+                    maxWidth="xl"
+                    className={classes.root}
+                    disableGutters={isMdDown}
+                    style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
+                >
+                    <Grid container spacing={isMdDown ? 0 : 2}>
+                        {isFetch
+                            ? <CustomCircularProgress/>
+                            : <>
+                                <Grid item xs={12} lg={9}>
+                                    <PostContent
                                         post={postData}
+                                        auctionInfo={auctionInfo}
                                         handleChatOpen={handleOpenChat}
                                         handleSafeDeal={handleSafeDeal}
                                         setFetchedPostData={setFetchedPostData}
                                     />
                                 </Grid>
-                            </Hidden>
-                        </>}
-                </Grid>
-            </Container>
-            <SafeDealModal
-                post={postData}
-                open={safeDealOpen}
-                onClose={handleCloseSafeDeal}
-                handleRefresh={setFetchedPostData}
-            />
-            <ResponsiveModal
-                maxWidth='md'
-                openDialog={chatOpen}
-                handleCloseDialog={handleChatClose}
-            >
-                <ChatContainer user={postData.author}/>
-            </ResponsiveModal>
-            <ErrorModal/>
-            <AuthModal/>
-            <Hidden mdDown>
-                <Footer/>
-            </Hidden>
-        </>
+                                <Hidden mdDown>
+                                    <Grid item lg={3} xs={12}>
+                                        <OwnerAuctionInfo
+                                            post={postData}
+                                            auctionInfo={auctionInfo}
+                                            handleChatOpen={handleOpenChat}
+                                            handleSafeDeal={handleSafeDeal}
+                                            setFetchedPostData={setFetchedPostData}
+                                        />
+                                    </Grid>
+                                </Hidden>
+                            </>}
+                    </Grid>
+                </Container>
+                <SafeDealModal
+                    post={postData}
+                    open={safeDealOpen}
+                    onClose={handleCloseSafeDeal}
+                    handleRefresh={setFetchedPostData}
+                />
+                <ResponsiveModal
+                    maxWidth='md'
+                    openDialog={chatOpen}
+                    handleCloseDialog={handleChatClose}
+                >
+                    <ChatContainer initContactId={postData.author.id}/>
+                </ResponsiveModal>
+                <ErrorModal/>
+                <AuthModal/>
+                <Hidden mdDown>
+                    <Footer/>
+                </Hidden>
+            </>
     );
 };

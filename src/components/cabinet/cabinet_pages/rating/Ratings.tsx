@@ -42,7 +42,7 @@ export const Ratings: FC = () => {
     const [userRatings, setUserRatings] = useState([]);
     const [commentData, setCommentData] = useState(initCommentData);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
-    const {user: {rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
+    const {user: {id, rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
     const {getDate} = useDate();
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -145,6 +145,7 @@ export const Ratings: FC = () => {
                                         <Grid item xs={12} md={10} container justifyContent='center'>
                                             <Grid item xs={2} container justifyContent='center'>
                                                 <UserAvatarComponent
+                                                    userId={id}
                                                     width={isXsDown ? '30px' : '50px'}
                                                     height={isXsDown ? '30px' : '50px'}
                                                     avatar={mainComment?.author?.avatar}

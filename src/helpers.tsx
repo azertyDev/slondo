@@ -35,7 +35,7 @@ export const getTime = (sec: number) => {
     };
 };
 
-export const priceTransform = (price, jobOrService): string => {
+export const priceTransform = (price, jobOrService = false): string => {
     return price === 0
         ? jobOrService ? 'negotiated' : 'for_free'
         : numberPrettier(price);

@@ -17,7 +17,7 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
     const {
         t,
         ratings,
-        userInfo: {rating, observer: {number_of_ratings}}
+        userInfo: {id, rating, observer: {number_of_ratings}}
     } = props;
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -31,9 +31,9 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                     <Rating
                         readOnly
                         name="rating"
+                        className='mainRating'
                         ratingValue={rating}
                         ratingCount={number_of_ratings}
-                        className='mainRating'
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -52,6 +52,7 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                                         <Grid item xs={12} md={10} container justifyContent='center'>
                                             <Grid item xs={2} container justifyContent='center'>
                                                 <UserAvatarComponent
+                                                    userId={id}
                                                     width={isXsDown ? '30px' : '50px'}
                                                     height={isXsDown ? '30px' : '50px'}
                                                     avatar={mainComment?.author?.avatar}

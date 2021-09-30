@@ -86,14 +86,12 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                         <Grid item xs={5} sm={4} container justifyContent='center'>
                             {page?.includes('favorite')
                                 ? <Grid item xs={6} container justifyContent='center'>
-                                    <CustomButton
-                                        onClick={handleOpenModal(cardData.id)}
-                                    >
+                                    <CustomButton onClick={handleOpenModal(cardData.id)}>
                                         <CloseIcon/>
                                     </CustomButton>
                                 </Grid>
                                 : <>
-                                    {handleNotificationsOpen && (
+                                    {creator && handleNotificationsOpen && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
@@ -106,8 +104,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                     {creator && (isPublic || isArchive) && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
-                                                disabled
                                                 className='icons'
+                                                disabled={isArchive}
                                                 onClick={handleSettingsOpen}
                                             >
                                                 <SettingsIcon/>
@@ -139,9 +137,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                 <Hidden smDown>
                     <div className='card-btns'>
                         {page?.includes('favorite')
-                            ? <CustomButton
-                                onClick={handleOpenModal(cardData.id)}
-                            >
+                            ? <CustomButton onClick={handleOpenModal(cardData.id)}>
                                 <CloseIcon/>
                             </CustomButton>
                             : <>
@@ -156,7 +152,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             </CustomButton>
                                         )}
                                         <CustomButton
-                                            disabled
+                                            disabled={isArchive}
                                             className='icons'
                                             onClick={handleSettingsOpen}
                                         >
@@ -164,7 +160,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         </CustomButton>
                                     </>
                                 )}
-                                {(isPublic || isArchive || isHistory || isSold) && (
+                                {creator && (isPublic || isArchive || isHistory || isSold) && (
                                     <CustomButton
                                         className='icons'
                                         onClick={handleNotificationsOpen}

@@ -8,7 +8,6 @@ import {LockIcon} from '@src/components/elements/icons';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
-import {useBetsData} from '@src/hooks/useBetsData';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from "next-i18next";
@@ -18,12 +17,14 @@ import {useStyles} from './useStyles';
 
 type AuctionInfoPropsType = {
     postData,
+    auctionInfo,
     setFetchedPostData: () => Promise<void>
 };
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         postData,
+        auctionInfo,
         setFetchedPostData
     } = props;
 
@@ -41,13 +42,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
 
-    const {bets, betsCount, setFetchedBetsData} = useBetsData(
-        {
-            auction_id: auctionId,
-            page: 1,
-            itemsPerPage: 5
-        }
-    );
+    const {bets, betsCount, setFetchedBetsData} = auctionInfo;
     const [lastBet] = bets;
 
     const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;

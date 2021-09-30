@@ -5,41 +5,57 @@ import {useStyles} from './useStyles';
 
 type ContactsProps = {
     contacts,
-    selectChat: (chat) => () => void
+    selectContact: (contact) => () => void
 }
 
 export const Contacts: FC<ContactsProps> = (props) => {
     const {
         contacts,
-        selectChat
+        selectContact
     } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className='conversation-list'>
-                {contacts.map(({contact}) => {
-                    return (
-                        <div
-                            key={contact.id}
-                            className='conversation-item'
-                            onClick={selectChat(contact)}
-                        >
-                            <UserAvatarComponent
-                                width={50}
-                                height={50}
-                                avatar={contact.avatar}
-                            />
-                            <div className='user-info'>
-                                <div className='user-name'>
-                                    <Typography variant='subtitle1'>
-                                        {contact.name}
-                                    </Typography>
+                {contacts.map(
+                    ({
+                         sys,
+                         locked,
+                         isBlocked,
+                         contact: {id, name, avatar}
+                     }) => {
+                        return (
+                            <div
+                                key={id}
+                                className='conversation-item'
+                                onClick={
+                                    selectContact({
+                                        sys: !!sys,
+                                        id,
+                                        name,
+                                        avatar,
+                                        locked,
+                                        isBlocked
+                                    })
+                                }
+                            >
+                                <UserAvatarComponent
+                                    userId={id}
+                                    width={50}
+                                    height={50}
+                                    avatar={avatar}
+                                />
+                                <div className='user-info'>
+                                    <div className='user-name'>
+                                        <Typography variant='subtitle1'>
+                                            {sys ? 'Slondo.uz' : name}
+                                        </Typography>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
             </div>
         </div>
     );

@@ -13,10 +13,9 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '10px',
             marginBottom: '10px',
             [theme.breakpoints.down('xs')]: {
+                margin: '8px 0',
                 padding: 0,
-                marginBottom: 0,
-                borderRadius: 0,
-                margin: '8px 0'
+                marginBottom: 0
             },
             '& div.ban-color > span > div': {
                 background: 'rgba(242, 153, 74, 0.15)'
@@ -34,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                 [theme.breakpoints.down('xs')]: {
                     background: '#F2F2F2',
-                    borderRadius: 0,
                     boxShadow: 'none',
                     justifyContent: 'flex-start'
                 },

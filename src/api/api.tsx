@@ -5,7 +5,7 @@ import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from "@root/interfaces/Locations";
-import {DEV_URL, ITEMS_PER_PAGE, PRODUCTION_URL, SUBS_PER_PAGE} from "@src/constants";
+import {DEV_URL, ITEMS_PER_PAGE, MESSAGES_PER_PAGE, PRODUCTION_URL, SUBS_PER_PAGE} from "@src/constants";
 
 const production = `${PRODUCTION_URL}/api/`;
 const local = `${DEV_URL}/slondo/public/api/`;
@@ -13,7 +13,7 @@ const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: local
+    baseURL: production
 });
 
 const setTokenToHeader = () => {
@@ -31,9 +31,24 @@ const setTokenToHeader = () => {
 };
 
 export const chatAPI = {
-    removeContact: (userId: number): Promise<any> => {
+    getContactById: (userId): Promise<any> => {
+        return instance
+            .get(`contact/${userId}`, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    removeUser: (userId: number): Promise<any> => {
         return instance
             .delete(`contact/${userId}`, setTokenToHeader())
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    blockUser: (userId: number): Promise<any> => {
+        return instance
+            .post(`contact/block/${userId}`, {}, setTokenToHeader())
             .catch(({response}) => {
                 throw response.data;
             });
@@ -46,10 +61,18 @@ export const chatAPI = {
                 throw response.data;
             });
     },
-    getMessages: (params: { itemsPerPage: number, receiver_id: number, page: number }): Promise<any> => {
+    getMessages: (receiver_id: number, page: number, itemsPerPage = MESSAGES_PER_PAGE): Promise<any> => {
+        const params = {
+            receiver_id,
+            page,
+            itemsPerPage
+        };
         return instance
             .get(`message/byReceiverId`, {params, ...setTokenToHeader()})
-            .then((res) => res.data)
+            .then((res) => {
+                res.data.data = res.data.data.reverse();
+                return res.data;
+            })
             .catch(({response}) => {
                 throw response.data;
             });
@@ -57,7 +80,7 @@ export const chatAPI = {
     getUserContacts: (): Promise<any> => {
         return instance
             .get(`contact/all`, setTokenToHeader())
-            .then((res) => res.data)
+            .then((res) => res.data.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -310,7 +333,10 @@ export const userAPI = {
                 throw err;
             });
     },
-    getPostById: (params): Promise<any> => {
+    getPostById: (postId): Promise<any> => {
+        const params = {
+            id: postId
+        };
         return instance.get(
             `getPostById`,
             {...setTokenToHeader(), params}
@@ -598,7 +624,14 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserPosts: (params) => {
+    getUserPosts: (user_id, type, archive = 0, page, itemsPerPage = ITEMS_PER_PAGE) => {
+        const params = {
+            user_id,
+            type,
+            archive,
+            page,
+            itemsPerPage
+        };
         return instance.get(`post`, {params})
             .then(res => res.data)
             .catch(err => {
@@ -611,7 +644,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`user/subscribers/byUserId`, {params})
+        return instance.get(`user/subscribers/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -623,7 +656,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`user/subscriptions/byUserId`, {params})
+        return instance.get(`user/subscriptions/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;

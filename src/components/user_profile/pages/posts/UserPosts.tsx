@@ -1,11 +1,9 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
-import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
-import {CardView} from '@src/components/elements/card/CardView';
-import {CircularProgress} from '@material-ui/core';
+import {InitPostsType, DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ErrorCtx} from '@src/context';
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
 import {useTranslation} from 'next-i18next';
 import {ProfilePageProps} from '@src/components/user_profile/UserProfile';
 
@@ -26,28 +24,19 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
     const [auctions, setAuctions] = useState(initUserPostsState);
     const [auctionsArch, setAuctionsArch] = useState(initUserPostsState);
 
-    const [tabIndex, setTabIndex] = useState(0);
-
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const fetchUserPosts = async (type, archive = 0) => {
+    const fetchUserPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
         try {
-            const params = {
-                user_id,
-                type,
-                archive
-            };
-            setIsFetch(true);
+            const type = secondTab ? 'auc' : 'post';
+            const archive = secondSubTab ? 1 : 0;
 
-            const {data, total} = await userAPI.getUserPosts(params);
+            setIsFetch(true);
+            const {data, total} = await userAPI.getUserPosts(user_id, type, archive, page);
 
             unstable_batchedUpdates(async () => {
                 setIsFetch(false);
-                type === 'post'
-                    ? !!archive ? setPostsArch({data, total}) : setPosts({data, total})
-                    : !!archive ? setAuctionsArch({data, total}) : setAuctions({data, total});
+                secondTab
+                    ? secondSubTab ? setAuctionsArch({data, total}) : setAuctions({data, total})
+                    : secondSubTab ? setPostsArch({data, total}) : setPosts({data, total});
             });
         } catch (e) {
             unstable_batchedUpdates(async () => {
@@ -57,118 +46,52 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
         }
     };
 
-    const handleRefresh = () => {
-        unstable_batchedUpdates(async () => {
-            fetchUserPosts('post');
-            fetchUserPosts('auc');
-            fetchUserPosts('post', 1);
-            fetchUserPosts('auc', 1);
-        });
-    };
+    const firstTabFetch = fetchUserPosts();
+    const secondTabFetch = fetchUserPosts(true);
 
-    const getUserPosts = (auction = false) => {
-        return isFetch
-            ? <CircularProgress color="secondary"/>
-            : <CardView
-                data={auction ? auctions.data : posts.data}
-                isFetch={isFetch}
-                listMode={false}
-            />;
-    };
-
-    // const getTabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
-    //     return (
-    //         <>
-    //             <Tabs
-    //                 aria-label="tabs"
-    //                 value={childTabValue}
-    //                 onChange={handleChildTabChange}
-    //                 className={classes.childTabs}
-    //                 TabIndicatorProps={{style: {display: 'none'}}}
-    //             >
-    //                 <Tab
-    //                     label={
-    //                         <Typography variant="subtitle1">
-    //                             {t('active')}
-    //                         </Typography>
-    //                     }
-    //                 />
-    //                 <Tab
-    //                     label={
-    //                         <Typography variant="subtitle1">
-    //                             {t('archive')}
-    //                         </Typography>
-    //                     }
-    //                 />
-    //             </Tabs>
-    //             <CustomTabPanel value={childTabValue} index={0}>
-    //                 {isFetch
-    //                     ? <CircularProgress/>
-    //                     : fstTabPosts.length === 0
-    //                         ? <EmptyPage
-    //                             label={t('cabinet:empty.post')}
-    //                             action={t('header:createPost')}
-    //                             link={'/create/type'}
-    //                             tutorialLink={'#'}
-    //                             tutorialText={t('post:howToCreatePost')}
-    //                         />
-    //                         : fstTabPosts.map((data) => (
-    //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-    //                                 <CabinetCardWrapper
-    //                                     cardData={data}
-    //                                     handleDetailedOpen={handleDetailedOpen(data)}
-    //                                     handleSettingsOpen={handleSettingsOpen(data)}
-    //                                     handleNotificationsOpen={handleNotificationsOpen(data)}
-    //                                 />
-    //                             </Box>
-    //                         ))}
-    //             </CustomTabPanel>
-    //             <CustomTabPanel value={childTabValue} index={1}>
-    //                 {isFetch
-    //                     ? <CircularProgress/>
-    //                     : secTabPosts.length === 0
-    //                         ? <EmptyPage label={t('cabinet:empty.archive')}/>
-    //                         : secTabPosts.map((data) => (
-    //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-    //                                 <CabinetCardWrapper
-    //                                     cardData={data}
-    //                                     handleNotificationsOpen={handleNotificationsOpen(data)}
-    //                                 />
-    //                             </Box>
-    //                         ))}
-    //             </CustomTabPanel>
-    //         </>
-    //     );
-    // };
-
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<DoubleTabType> = {
+        firstTab: {
             id: 0,
-            title: t('main:posts'),
-            itemsPerPage: posts.total,
-            handleFetchByTab: () => '',
-            component: getUserPosts()
+            title: t('posts'),
+            innerTabsData: {
+                innerFirstTab: {
+                    posts: posts.data,
+                    total: posts.total,
+                    emptyPage: null
+                },
+                innerSecondTab: {
+                    posts: postsArch.data,
+                    total: postsArch.total,
+                    emptyPage: null
+                }
+            }
         },
-        {
+        secondTab: {
             id: 1,
-            title: t('main:auctions'),
-            itemsPerPage: auctions.total,
-            handleFetchByTab: () => '',
-            component: getUserPosts(true)
+            title: t('securePosts'),
+            innerTabsData: {
+                innerFirstTab: {
+                    posts: auctions.data,
+                    total: auctions.total,
+                    emptyPage: null
+                },
+                innerSecondTab: {
+                    total: auctionsArch.total,
+                    posts: auctionsArch.data,
+                    emptyPage: null
+                }
+            }
         }
-    ];
-
-    useEffect(() => {
-        handleRefresh();
-    }, []);
+    };
 
     return (
-        <>
-            <TabsContent
-                tabsData={tabsData}
-                tabIndex={tabIndex}
-                handleTabChange={handleTabChange}
-            />
-        </>
+        <DoubleTabs
+            isFetch={isFetch}
+            tabsData={tabsData}
+            fetchFirstTabPosts={firstTabFetch}
+            handleDetailedOpen={() => null}
+            handleNotificationsOpen={() => null}
+            fetchSecondTabPosts={secondTabFetch}
+        />
     );
 };

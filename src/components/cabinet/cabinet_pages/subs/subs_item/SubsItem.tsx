@@ -4,7 +4,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {SubscriberType} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 
-export const SubsItem: FC<SubscriberType> = ({user}) => {
+export const SubsItem: FC<SubscriberType> = ({user, refresh}) => {
     const classes = useStyles();
     return (
         <Grid
@@ -16,7 +16,7 @@ export const SubsItem: FC<SubscriberType> = ({user}) => {
             justifyContent='space-between'
         >
             <Grid item xs={12} md={8} lg={6}>
-                <UserInfoWithAvatar user={user}/>
+                <UserInfoWithAvatar refresh={refresh} user={user}/>
             </Grid>
         </Grid>
     );
