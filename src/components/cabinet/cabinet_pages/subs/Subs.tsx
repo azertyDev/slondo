@@ -64,14 +64,14 @@ export const Subs: FC = () => {
     const tabsData: TabsType<SingleTabType> = {
         firstTab: {
             id: 0,
-            title: 'subscriptions',
+            title: t('subscriptions'),
             total: subscriptions.total,
             component: getSubs(subscriptions.data),
             emptyPage: <EmptyPage label={t(`empty.subscription`)}/>
         },
         secondTab: {
             id: 1,
-            title: 'subscribers',
+            title: t('subscribers'),
             total: subscribers.total,
             component: getSubs(subscribers.data),
             emptyPage: <EmptyPage label={t(`empty.subscriber`)}/>
