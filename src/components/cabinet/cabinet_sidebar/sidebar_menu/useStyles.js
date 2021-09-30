@@ -14,10 +14,12 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: '10px',
             [theme.breakpoints.down('xs')]: {
                 padding: 0,
-                paddingLeft: '14px',
-                borderRadius: 0,
                 marginBottom: 0,
+                borderRadius: 0,
                 margin: '8px 0'
+            },
+            '& div.ban-color > span > div': {
+                background: 'rgba(242, 153, 74, 0.15)'
             },
             '&:last-child': {
                 marginBottom: 0
@@ -25,15 +27,15 @@ export const useStyles = makeStyles((theme) => ({
             '& .MuiBadge-root': {
                 width: '100%'
             },
-            '& .MuiListItem-root': {
+            '& div.MuiListItem-root': {
                 borderRadius: 5,
                 background: '#fff',
                 justifyContent: 'center',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                 [theme.breakpoints.down('xs')]: {
                     background: '#F2F2F2',
-                    boxShadow: 'none',
                     borderRadius: 0,
+                    boxShadow: 'none',
                     justifyContent: 'flex-start'
                 },
                 '& .MuiTypography-body1': {
@@ -43,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
                     flex: 'none'
                 },
                 '& svg': {
-                    marginRight: '10px',
+                    margin: '0 10px 0 14px',
                     [theme.breakpoints.down('xs')]: {
                         marginRight: '27px',
                         '& path': {

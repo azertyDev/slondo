@@ -24,7 +24,7 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
 import {AuthCtx} from '@src/context/AuthCtx';
-import {CabinetUserAvatar} from "../../components/cabinet_user_avatar/CabinetUserAvatar";
+import {CabinetUserAvatar} from '../../components/cabinet_user_avatar/CabinetUserAvatar';
 import {useStyles} from './useStyles';
 
 type SidebarMenuPropsType = {
@@ -78,7 +78,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
             />
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <Grid container spacing={isXsDown ? 0 : 1}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className='ban-color'>
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
