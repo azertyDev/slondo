@@ -85,17 +85,25 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
         }
     };
 
+    const settings = {
+        ref: ref1,
+        asNavFor: isMdDown ? ref3.current : ref2.current,
+        variableWidth: true,
+        focusOnSelect: true,
+        arrows: !isMdDown,
+        dots: isMdDown,
+        // customPaging: function(i) {
+        //     return <div className="dot"></div>;
+        // },
+        // dotsClass: 'slick-dots slick-thumb'
+    };
+
     const classes = useStyles({isFavorite});
     return (
         <div className={classes.root}>
             <div className='first-slider'>
                 <CustomSlider
-                    ref={ref1}
-                    asNavFor={isMdDown ? ref3.current : ref2.current}
-                    variableWidth
-                    focusOnSelect={true}
-                    arrows={!isMdDown}
-                    dots={isMdDown}
+                    {...settings}
                 >
                     {imgs.map((img, i) =>
                         <img

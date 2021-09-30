@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     searchButton: {
         width: '15%',
         height: '100%',
-        backgroundColor: '#E9E9E9',
+        backgroundColor: '#F2F2F2',
         border: '1px solid #D5D5D5',
         borderTopLeftRadius: '0',
         borderTopRightRadius: '9px',

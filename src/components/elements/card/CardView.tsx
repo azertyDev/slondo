@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Grid} from '@material-ui/core';
+import {Box, Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
@@ -12,17 +12,19 @@ export type ViewPropsType = {
 };
 
 export const CardView: FC<ViewPropsType> = ({listMode, data, isFetch}) => {
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
     return (
         <>
             {listMode
                 ? data.map(cardData => {
                     return (
                         <Box mb={1} key={cardData.id}>
-                            <ListCard cardData={cardData}/>
+                            <ListCard cardData={cardData} />
                         </Box>
                     );
                 })
-                : <Grid container spacing={2}>
+                : <Grid container spacing={isXsDown ? 1 : 2}>
                     {data.map((cardData, i) => (
                         <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
                             <GridCard
@@ -31,7 +33,8 @@ export const CardView: FC<ViewPropsType> = ({listMode, data, isFetch}) => {
                             />
                         </Grid>
                     ))}
-                </Grid>}
+                </Grid>
+            }
         </>
     );
 

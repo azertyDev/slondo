@@ -15,7 +15,7 @@ export const SubsItem: FC<SubscriberType> = ({user}) => {
             className={classes.root}
             justifyContent='space-between'
         >
-            <Grid item xs={6}>
+            <Grid item xs={12} md={8} lg={6}>
                 <UserInfoWithAvatar user={user}/>
             </Grid>
         </Grid>

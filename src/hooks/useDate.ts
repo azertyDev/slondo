@@ -3,10 +3,8 @@ import {months} from "@src/common_data/common";
 
 export const useDate = () => {
     const {t} = useTranslation('common');
-
     const getDate = (date) => {
         const today = new Date().getDate();
-
         if (date) {
             date = new Date(date.replace(/-/g, '/'));
         } else {

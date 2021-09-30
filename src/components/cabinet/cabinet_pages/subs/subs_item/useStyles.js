@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: 20,
         padding: 25,
         [theme.breakpoints.down('sm')]: {
-            padding: 0
+            padding: '0 0 20px 0'
         },
         position: 'relative',
         '&:after': {
@@ -36,7 +36,6 @@ export const useStyles = makeStyles((theme) => ({
             background: 'none',
             borderRadius: '5px',
             height: '26px',
-            alignSelf: 'flex-end',
             '& > h6.MuiTypography-subtitle2': {
                 color: '#2F80ED'
             }

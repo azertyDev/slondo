@@ -75,16 +75,21 @@ export const useStyles = makeStyles((theme) => ({
             alignItems: 'center',
             height: '23px',
             fontSize: '1rem',
-            padding: '6.5px 30px 6.5px 10px',
-            background: '#f8f8f8',
-            color: '#4e4e4e'
+            padding: '7.5px 30px 7.5px 10px',
+            background: '#fff',
+            color: '#4e4e4e',
+            [theme.breakpoints.down('sm')]: {
+                padding: '6.5px 30px 6.5px 10px'
+            }
         }
     },
     paramsBtn: {
         width: '100%',
         height: '38px',
+        display: 'flex',
         padding: '9px 10px',
-        background: '#f8f8f8',
+        background: '#fff',
+        justifyContent: 'flex-start',
         border: '1px solid rgba(0, 0, 0, 0.23)',
         '& p': {
             fontSize: '1rem'

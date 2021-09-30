@@ -81,7 +81,7 @@ const Cabinet: FC = () => {
                     <Grid item xs={12} sm={7} md={8} className='pl-16'>
                         <Hidden xsDown>
                             <Typography variant="h6" className="menu-title">
-                                {t(page)}
+                                {t(`cabinet:cabinet.${page}`)}
                             </Typography>
                         </Hidden>
                         {getPage()}

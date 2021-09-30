@@ -1,5 +1,5 @@
 import {FC, Fragment, useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {ITEMS_PER_PAGE} from '@src/constants';
+import {HOME_ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSlider';
@@ -59,7 +59,7 @@ export const PostsTabs: FC = () => {
             const params = {
                 type,
                 page: currentPage,
-                itemsPerPage: ITEMS_PER_PAGE
+                itemsPerPage: HOME_ITEMS_PER_PAGE
             };
 
             setIsFetch(true);

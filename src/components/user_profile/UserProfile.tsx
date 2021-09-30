@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {UserInfo} from '@root/interfaces/Auth';
 import {SidebarMenu} from '@src/components/user_profile/sidebar_menu/SidebarMenu';
@@ -10,17 +10,26 @@ import {UserFollowsList} from '@src/components/user_profile/pages/follows_list/U
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {ErrorCtx} from "@src/context";
-import {initUser} from "@src/hooks/useUser";
+import {ErrorCtx} from '@src/context';
+import {initUser} from '@src/hooks/useUser';
 import {useStyles} from './useStyles';
+
+export type ProfilePageProps = {
+    user_id: string
+}
 
 export const UserProfile: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {user_id} = useRouter().query;
+    const {query: {path}, push} = useRouter();
+    const [pathname, user_id] = path as string[];
     const {t} = useTranslation('cabinet');
-
-    const [pageName, setPageName] = useState<string>('profile_posts');
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const [userInfo, setUserInfo] = useState<UserInfo>(initUser);
+    const isMainPage = pathname === 'main';
+
+    const handlePrev = async () => {
+        await push(isMainPage ? '/' : `/user/main/${user_id}`);
+    };
 
     const fetchUserById = async () => {
         try {
@@ -32,13 +41,13 @@ export const UserProfile: FC = () => {
     };
 
     const getPageContent = () => {
-        switch (pageName) {
+        switch (pathname) {
             case 'profile_posts':
-                return <UserPosts/>;
+                return <UserPosts user_id={user_id} />;
             case 'profile_ratings':
-                return <UserRatingsContainer t={t}/>;
+                return <UserRatingsContainer userInfo={userInfo} />;
             case 'profile_follows':
-                return <UserFollowsList t={t}/>;
+                return <UserFollowsList user_id={user_id} />;
         }
     };
 
@@ -48,28 +57,29 @@ export const UserProfile: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={userInfo.name}>
+        <MainLayout title={t(`cabinet:profile.${pathname}`)} handleBack={handlePrev}>
             <div className={classes.root}>
-                <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                        <Box mb={2}>
-                            <UserInfoWithAvatar
-                                user={userInfo}
-                            />
-                        </Box>
-                        <Box>
-                            <SidebarMenu
-                                t={t}
-                                user={userInfo}
-                                setPageName={setPageName}
-                                pageName={pageName}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={9} container direction='column'>
-                        <Typography variant="h6" className="menu-title">
-                            {t(`cabinet:${pageName}`)}
-                        </Typography>
+                <Grid container spacing={isXsDown ? 0 : 2}>
+                    {((isXsDown && isMainPage) || !isXsDown) && (
+                        <Grid item xs={12} md={3}>
+                            <Box mb={2}>
+                                <UserInfoWithAvatar
+                                    user={userInfo}
+                                />
+                            </Box>
+                            <Box>
+                                <SidebarMenu
+                                    t={t}
+                                />
+                            </Box>
+                        </Grid>
+                    )}
+                    <Grid item xs={12} md={9}>
+                        <Hidden smDown>
+                            <Typography variant="h6" className="menu-title">
+                                {t(`cabinet:profile.${pathname}`)}
+                            </Typography>
+                        </Hidden>
                         {getPageContent()}
                     </Grid>
                 </Grid>

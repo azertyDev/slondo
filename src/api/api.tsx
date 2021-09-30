@@ -13,7 +13,7 @@ const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: production
+    baseURL: local
 });
 
 const setTokenToHeader = () => {
@@ -538,8 +538,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserRating: (): Promise<any> => {
-        return instance.get(`user/rating`, setTokenToHeader())
+    getUserRating: (user_id: number): Promise<any> => {
+        const params = {
+            user_id
+        };
+        return instance.get(`user/rating`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
