@@ -1,35 +1,18 @@
-import {Dispatch, FC, SetStateAction, useContext} from 'react';
+import {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {useStyles} from './useStyles';
-import {UserInfo} from '@root/interfaces/Auth';
-import {userAPI} from '@src/api/api';
-import {useRouter} from 'next/router';
 import {LetterIcon} from '@src/components/elements/icons';
-import {ErrorCtx} from "@src/context";
+import {useRouter} from 'next/router';
 
-type SidebarMenuPropsType = {
-    user: UserInfo,
-    pageName: string
-    setPageName: Dispatch<SetStateAction<string>>
-} & WithT
+export const SidebarMenu: FC<WithT> = ({t}) => {
+    const {query: {path}, push} = useRouter();
+    const [pathname, user_id] = path as string[];
 
-export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}) => {
-    // const {setErrorMsg} = useContext(ErrorCtx);
-    // const {user_id} = useRouter().query;
-
-    const handleListItemClick = (pageName) => () => {
-        setPageName(pageName);
+    const handleListItemClick = (pathname) => async () => {
+        await push(`${pathname}/${user_id}`);
     };
-
-    // const handleFollow = async () => {
-    //     try {
-    //         await userAPI.follow(user_id);
-    //     } catch (e) {
-    //         setErrorMsg(e.message);
-    //     }
-    // };
 
     const classes = useStyles();
     return (
@@ -38,7 +21,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
                 <ListItem
                     button
                     disableGutters
-                    selected={pageName === 'profile_ratings'}
+                    selected={pathname === 'profile_ratings'}
                     onClick={handleListItemClick('profile_ratings')}
                 >
                     <ListItemText primary={t('cabinet:rating')} />
@@ -46,7 +29,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
                 <ListItem
                     button
                     disableGutters
-                    selected={pageName === 'profile_follows'}
+                    selected={pathname === 'profile_follows'}
                     onClick={handleListItemClick('profile_follows')}
                 >
                     <ListItemText primary={t('cabinet:subscriptions')} />
@@ -64,7 +47,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
 
                 <ListItem
                     button
-                    selected={pageName === 'profile_posts'}
+                    selected={pathname === 'profile_posts'}
                     onClick={handleListItemClick('profile_posts')}
                     disableGutters
                 >

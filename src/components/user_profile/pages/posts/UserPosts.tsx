@@ -3,15 +3,15 @@ import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
 import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardView} from '@src/components/elements/card/CardView';
-import {useRouter} from 'next/router';
-import {WithT} from 'i18next';
 import {CircularProgress} from '@material-ui/core';
 import {ErrorCtx} from '@src/context';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {useTranslation} from 'next-i18next';
+import {ProfilePageProps} from '@src/components/user_profile/UserProfile';
 
-export const UserPosts: FC<WithT> = ({t}) => {
+export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {user_id} = useRouter().query;
+    const {t} = useTranslation('cabinet');
 
     const initUserPostsState: InitPostsType = {
         total: 0,

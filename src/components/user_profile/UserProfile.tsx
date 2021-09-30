@@ -10,18 +10,26 @@ import {UserFollowsList} from '@src/components/user_profile/pages/follows_list/U
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {ErrorCtx} from "@src/context";
-import {initUser} from "@src/hooks/useUser";
+import {ErrorCtx} from '@src/context';
+import {initUser} from '@src/hooks/useUser';
 import {useStyles} from './useStyles';
+
+export type ProfilePageProps = {
+    user_id: string
+}
 
 export const UserProfile: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {user_id} = useRouter().query;
+    const {query: {path}, push} = useRouter();
+    const [pathname, user_id] = path as string[];
     const {t} = useTranslation('cabinet');
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
-    const [pageName, setPageName] = useState<string>('profile_posts');
     const [userInfo, setUserInfo] = useState<UserInfo>(initUser);
+    const isMainPage = pathname === 'main';
+
+    const handlePrev = async () => {
+        await push(isMainPage ? '/' : `/user/main/${user_id}`);
+    };
 
     const fetchUserById = async () => {
         try {
@@ -33,13 +41,13 @@ export const UserProfile: FC = () => {
     };
 
     const getPageContent = () => {
-        switch (pageName) {
+        switch (pathname) {
             case 'profile_posts':
-                return <UserPosts t={t}/>;
+                return <UserPosts user_id={user_id} />;
             case 'profile_ratings':
-                return <UserRatingsContainer t={t} userInfo={userInfo}/>;
+                return <UserRatingsContainer userInfo={userInfo} />;
             case 'profile_follows':
-                return <UserFollowsList t={t}/>;
+                return <UserFollowsList user_id={user_id} />;
         }
     };
 
@@ -49,11 +57,11 @@ export const UserProfile: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={userInfo.name}>
+        <MainLayout title={t(`cabinet:profile.${pathname}`)} handleBack={handlePrev}>
             <div className={classes.root}>
                 <Grid container spacing={isXsDown ? 0 : 2}>
-                    <Hidden smDown>
-                        <Grid item xs={3}>
+                    {((isXsDown && isMainPage) || !isXsDown) && (
+                        <Grid item xs={12} md={3}>
                             <Box mb={2}>
                                 <UserInfoWithAvatar
                                     user={userInfo}
@@ -62,17 +70,14 @@ export const UserProfile: FC = () => {
                             <Box>
                                 <SidebarMenu
                                     t={t}
-                                    user={userInfo}
-                                    setPageName={setPageName}
-                                    pageName={pageName}
                                 />
                             </Box>
                         </Grid>
-                    </Hidden>
-                    <Grid item xs={12} md={9} container direction='column'>
+                    )}
+                    <Grid item xs={12} md={9}>
                         <Hidden smDown>
                             <Typography variant="h6" className="menu-title">
-                                {t(`cabinet:${pageName}`)}
+                                {t(`cabinet:profile.${pathname}`)}
                             </Typography>
                         </Hidden>
                         {getPageContent()}

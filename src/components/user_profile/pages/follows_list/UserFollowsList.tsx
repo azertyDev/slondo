@@ -8,10 +8,13 @@ import {SubsItem} from '@src/components/cabinet/cabinet_pages/subs/subsTab/subs_
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx} from "@src/context";
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {ProfilePageProps} from '@src/components/user_profile/UserProfile';
+import {useTranslation} from 'next-i18next';
 
-export const UserFollowsList: FC<WithT> = ({t}) => {
+export const UserFollowsList: FC<ProfilePageProps> = ({user_id}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {query: {user_id}} = useRouter();
+    const {t} = useTranslation('cabinet');
+
     const initialSubs = {
         total: 0,
         data: []

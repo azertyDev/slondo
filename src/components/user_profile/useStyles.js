@@ -6,5 +6,5 @@ export const useStyles = makeStyles(() => ({
             fontWeight: '600',
             margin: '0 0 30px 30px'
         },
-    },
+    }
 }));
