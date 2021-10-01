@@ -178,7 +178,7 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
             );
         }
     };
-    console.log('post', post);
+
     const toPublish = async () => {
         try {
             const form = new FormData();
