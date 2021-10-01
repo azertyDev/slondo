@@ -149,7 +149,19 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
                 appearance: {color_id}
             } = postData;
 
-            commonParams.price = +clearWhiteSpaces(commonParams.price);
+            const {price, auction} = commonParams;
+
+
+            commonParams.price = +clearWhiteSpaces(price);
+
+            if (auction) {
+                const {reserve_price, price_buy_now} = auction;
+
+                if (reserve_price) auction.reserve_price = +clearWhiteSpaces(reserve_price);
+                if (price_buy_now) auction.price_buy_now = +clearWhiteSpaces(price_buy_now);
+
+                commonParams.auction = auction;
+            }
 
             const postParams = {
                 ...commonParams,
@@ -166,7 +178,7 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
             );
         }
     };
-
+    console.log('post', post);
     const toPublish = async () => {
         try {
             const form = new FormData();

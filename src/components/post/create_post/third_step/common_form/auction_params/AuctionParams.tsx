@@ -32,6 +32,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
 
     const {t} = useTranslation('filters');
     const {auction} = values;
+    const {reserve_price, offer_the_price, price_buy_now} = auction;
 
     return (
         <Grid item container spacing={2}>
@@ -64,7 +65,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         name='reserve_price'
                         labelText='reserve_price'
                         onChange={handleInput}
-                        value={auction.reserve_price}
+                        value={reserve_price}
                         placeholder={t('enter_price')}
                     />
                 </Grid>
@@ -72,7 +73,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
             <Grid container alignItems='center' item xs={12}>
                 <Checkbox
                     color='primary'
-                    checked={auction.offer_the_price}
+                    checked={offer_the_price}
                     onChange={handleCheckboxChange('offer_the_price')}
                 />
                 <Typography variant="subtitle1">
@@ -86,7 +87,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     <Grid container item xs={12} sm={4} md={4} lg={3} alignItems='center'>
                         <Checkbox
                             color='primary'
-                            checked={auction.price_buy_now.isActive}
+                            checked={price_buy_now.isActive}
                             onChange={handleCheckboxChange('price_buy_now')}
                         />
                         <Typography variant="subtitle1">
@@ -95,16 +96,18 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             </strong>
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={4} md={4} lg={3}>
-                        <FormikField
-                            t={t}
-                            name='price_buy_now'
-                            onChange={handleInput}
-                            placeholder={t('enter_price')}
-                            value={auction.price_buy_now.value}
-                            disabled={!auction.price_buy_now.isActive}
-                        />
-                    </Grid>
+                    {price_buy_now.isActive && (
+                        <Grid item xs={12} sm={4} md={4} lg={3}>
+                            <FormikField
+                                t={t}
+                                name='price_buy_now'
+                                onChange={handleInput}
+                                placeholder={t('enter_price')}
+                                value={price_buy_now.value}
+                                disabled={!price_buy_now.isActive}
+                            />
+                        </Grid>
+                    )}
                     <Grid container alignItems='center' item xs={12}>
                         <Checkbox
                             color='primary'
