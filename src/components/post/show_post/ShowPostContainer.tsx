@@ -16,8 +16,8 @@ import {CustomHead} from "@src/components/head/CustomHead";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {useStyles} from './useStyles';
 import ErrorPage from "@root/pages/_error";
+import {useStyles} from './useStyles';
 
 export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({initPostData, statusCode}) => {
     const {t} = useTranslation('post');

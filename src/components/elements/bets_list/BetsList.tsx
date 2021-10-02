@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {BetsListModal} from '@src/components/elements/bets_list/BetsListModal';
-import {numberPrettier} from '@src/helpers';
+import {BetsListModal} from '@src/components/elements/bets_list/bets_modal/BetsListModal';
 import {RefreshIcon} from '@src/components/elements/icons';
+import {BetsTable} from "@src/components/elements/bets_list/bets_table/BetsTable";
 import {useStyles} from './useStyles';
 
 type BetsListPropsType = {
@@ -39,62 +39,10 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     {title}
                 </Typography>
                 <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
-                    <RefreshIcon />
+                    <RefreshIcon/>
                 </div>
             </Box>
-            <TableContainer className='bets-table'>
-                <Table>
-                    <TableBody>
-                        {bets.map((bet, index) => (
-                            <TableRow key={index}>
-                                <TableCell component="td" align="left">
-                                    <Typography variant="subtitle1" noWrap gutterBottom className='participant-name'>
-                                        {bet.user.name}
-                                        {bet.number_of_bets && <span>({bet.number_of_bets})</span>}
-                                    </Typography>
-                                    <Box display='flex' className='dateAndTime'>
-                                        <Box width={0.4}>
-                                            <Typography
-                                                variant="subtitle2"
-                                                className="bet-time"
-                                            >
-                                                {bet.created_at?.slice(11, 16)}
-                                            </Typography>
-                                        </Box>
-                                        <Box width={0.6} textAlign='end'>
-                                            <Typography
-                                                variant="subtitle2"
-                                                className="bet-date"
-                                            >
-                                                {bet.created_at?.slice(0, 10)}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </TableCell>
-                                <TableCell align="right" className='bet'>
-                                    <Typography
-                                        noWrap
-                                        variant="subtitle1"
-                                        className="per-bet"
-                                        gutterBottom
-                                    >
-                                        {numberPrettier(bet.bet)}
-                                    </Typography>
-                                    <Typography
-                                        noWrap
-                                        variant="subtitle2"
-                                        className="outbid"
-                                    >
-                                        {index === betsCount - 1
-                                            ? <span className='started-price'>{t('post:startingPrice')}</span>
-                                            : `+ ${numberPrettier(bet.outbid)}`}
-                                    </Typography>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <BetsTable bets={bets} betsCount={betsCount}/>
             {betsCount > showBetsCount && (
                 <CustomButton
                     onClick={handleModalOpen}

@@ -1,35 +1,8 @@
 {
+  "main": "Персональный кабинет",
   "restore": "Восстановить",
   "restore_post": "Восстановить объявление?",
   "ratings_count": "(оценок {{count}})",
-  "cabinet": {
-    "main": "Личный кабинет",
-    "myPosts": "Мои объявления",
-    "myAuctions": "Мои аукционы",
-    "rating": "Рейтинг",
-    "favorite": "Избранное",
-    "reviews": "Отзывы",
-    "subscribe": "Подписаться",
-    "subs": "Подписки/подписчики",
-    "notifications": "Уведомления",
-    "messages": "Сообщения",
-    "paidServices": "Платные услуги",
-    "statistics": "Статистика",
-    "purchases": "Покупки",
-    "myPurchases": "Мои покупки",
-    "settings": "Настройки",
-    "exit": "Выход",
-    "banned": "Не прошло модерацию",
-    "securePosts": "Безопасная покупка",
-    "posts": "Объявления",
-    "auctions": "Аукционы"
-  },
-  "profile": {
-    "main": "Профиль пользователя",
-    "profile_ratings": "Рейтинг",
-    "profile_follows": "Подписки/подписчики",
-    "profile_posts": "Объявления"
-  },
   "safe_deal_payment_text": "Комиссия платежной системы составляет 1%",
   "balance": "Баланс",
   "accept_offer": "Принять предложение?",
@@ -88,7 +61,6 @@
   "all_offers_count": "Все предложения ({{offers}})",
   "all_offers": "Все предложения",
   "current_offer_price": "Предложенная цена",
-  "my_cabinet": "Мой кабинет",
   "perform_purchase": "Подтвердить покупку?",
   "dismiss_purchase": "Отменить покупку?",
   "sms_code": "Смс код",
@@ -147,5 +119,11 @@
     },
     "subscriber": "У вас нет активных подписчиков",
     "subscription": "У вас нет активных подписок"
+  },
+  "profile": {
+    "main": "Профиль пользователя",
+    "profile_ratings": "Рейтинг",
+    "profile_follows": "Подписки/подписчики",
+    "profile_posts": "Объявления"
   }
 }

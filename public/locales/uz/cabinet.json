@@ -1,37 +1,8 @@
 {
+  "main": "Shaxsiy kabinet",
   "restore": "qayta tiklash",
   "restore_post": "E'loni qayta tiklamoqchimisiz?",
-  "ratings_count": "({{count}} marta baholangan)",
-  "main": "Shaxsiy kabinet",
   "ratings_count": "({{count}} ta baho)",
-  "cabinet": {
-    "main": "Shaxsiy kabinet",
-    "myPosts": "Mening e'lonlarim",
-    "myAuctions": "Mening auksionlarim",
-    "rating": "Reyting",
-    "favorite": "Sevimli",
-    "reviews": "Sharhlar",
-    "subs": "Obunachilar/Obunalar",
-    "subscribe": "Obuna bo'lish",
-    "notifications": "Bildiruvlar",
-    "messages": "Xabarlar",
-    "paidServices": "Pullik xizmatlar",
-    "statistics": "Statistika",
-    "purchases": "Xaridlar",
-    "myPurchases": "Xaridlarim",
-    "settings": "Sozlamalar",
-    "exit": "Chiqish",
-    "banned": "Moderatsiyadan o'tmagan",
-    "securePosts": "Xavfsiz xarid",
-    "posts": "E'lonlar",
-    "auctions": "Auksion"
-  },
-  "profile": {
-    "main": "Foydalanuvchi profili",
-    "profile_ratings": "Reyting",
-    "profile_follows": "Obunachilar/obunalar",
-    "profile_posts": "E'lonlar"
-  },
   "safe_deal_payment_text": "To'lov tizimining komissiyasi 1%",
   "balance": "Balans",
   "accept_offer": "Taklifni qabul qilmoqchimisiz?",
@@ -90,7 +61,6 @@
   "all_offers_count": "Barcha takliflar ({{offers}})",
   "all_offers": "Barcha takliflar",
   "current_offer_price": "Taklif etilgan narx",
-  "my_cabinet": "Mening kabinetim",
   "perform_purchase": "Xaridni tasdiqlash",
   "dismiss_purchase": "Xaridni bekor qilish",
   "sms_code": "Sms kod",
@@ -152,5 +122,11 @@
     },
     "subscriber": "Sizda faol obunachilar mavjud emas",
     "subscription": "Sizda faol obunalar mavjud emas"
+  },
+  "profile": {
+    "main": "Foydalanuvchi profili",
+    "profile_ratings": "Reyting",
+    "profile_follows": "Obunachilar/obunalar",
+    "profile_posts": "E'lonlar"
   }
 }
