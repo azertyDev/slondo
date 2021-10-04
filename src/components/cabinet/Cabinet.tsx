@@ -20,7 +20,6 @@ import {useStyles} from './useStyles';
 
 export type CommonModalType = {
     post,
-    postStatus?: string,
     open: boolean,
     onClose: () => void,
     handleRefresh: () => void

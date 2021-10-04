@@ -38,7 +38,6 @@ enum SettingsModalPropsType {
 export const SettingsModal: FC<CommonModalType> = (props) => {
     const {
         post,
-        postStatus,
         open,
         onClose,
         handleRefresh
@@ -57,7 +56,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         avatar: ''
     };
 
-    const isPublic = postStatus === 'public';
+    const isPublic = post.status === 'public';
 
     const [buyer, setBuyer] = useState(initBuyer);
     const [isFetch, setIsFetch] = useState(false);

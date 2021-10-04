@@ -10,7 +10,7 @@ import {InitPostsType, SingleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {initCardData} from '@src/common_data/common';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {useStyles} from './useStyles';
@@ -187,7 +187,7 @@ export const BannedPosts: FC = () => {
                 tabsData={tabsData}
                 fetchTabPosts={fetchBannedPostsData}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

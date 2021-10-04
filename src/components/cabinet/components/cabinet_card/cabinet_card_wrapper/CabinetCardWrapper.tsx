@@ -152,8 +152,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             </CustomButton>
                                         )}
                                         <CustomButton
-                                            disabled={isArchive}
                                             className='icons'
+                                            disabled={isArchive}
                                             onClick={handleSettingsOpen}
                                         >
                                             <SettingsIcon/>

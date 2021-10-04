@@ -9,7 +9,7 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
 import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
@@ -129,7 +129,7 @@ export const MyPurchases: FC = () => {
                 handleDetailedOpen={handleDetailedOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

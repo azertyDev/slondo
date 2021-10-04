@@ -6,7 +6,7 @@ import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet.j
 import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
@@ -37,11 +37,13 @@ export const MyAuctions: FC = () => {
         handleModalClose: handleCloseSettings,
         handleModalOpen: handleOpenSettings
     } = useModal();
+
     const {
         modalOpen: detailedModalOpen,
         handleModalClose: closeDetailedModal,
         handleModalOpen: openDetailedModal
     } = useModal();
+
     const {
         modalOpen: notificationsOpen,
         handleModalClose: closeNotificationsModal,
@@ -180,7 +182,7 @@ export const MyAuctions: FC = () => {
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedAuction}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

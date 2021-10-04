@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles({
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -8,9 +8,6 @@ export const useStyles = makeStyles((theme) => ({
         padding: '15px',
         borderRadius: '10px',
         marginBottom: '10px',
-        [theme.breakpoints.down('xs')]: {
-            borderRadius: 0
-        },
         '& div.user-info-wrapper': {
             marginBottom: '15px'
         },
@@ -32,4 +29,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}));
+});

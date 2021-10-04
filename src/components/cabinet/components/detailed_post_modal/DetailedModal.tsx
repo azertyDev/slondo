@@ -3,13 +3,15 @@ import {unstable_batchedUpdates} from 'react-dom';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostModal} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModal";
+import {DetailedPost} from "@src/components/cabinet/components/detailed_post_modal/modals/DetailedPost";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
 import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
 import {useTranslation} from "next-i18next";
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {userAPI} from '@src/api/api';
+import {DetailedAuctions} from "@src/components/cabinet/components/detailed_post_modal/modals/DetailedAuctions";
+import {CabinetModal} from "@src/components/cabinet/components/cabinet_modal/CabinetModal";
 
 enum ActionStatuses {
     'refusal_win',
@@ -25,7 +27,7 @@ type DetailedPostViewPropsType = {
     onClose: () => void,
     handleDeactivate?: () => Promise<void>,
 }
-export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props) => {
+export const DetailedModal: FC<DetailedPostViewPropsType> = (props) => {
     const {
         open,
         onClose,
@@ -38,11 +40,14 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {
+        ads_type,
         buyer,
         author,
         status,
         auction
     } = post;
+
+    const isAuction = ads_type === 'auc' || ads_type === 'exauc';
 
     const auctionId = auction?.id;
     const offer = auction?.offer;
@@ -163,21 +168,30 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
 
     return (
         <>
-            <DetailedPostModal
-                t={t}
-                bets={bets}
-                post={post}
-                open={open}
-                isFetch={isFetch}
-                betsCount={betsCount}
-                isBetsFetch={isBetsFetch}
-                handleReject={handleReject}
-                handleAccept={handleAccept}
-                handleOpenRating={handleOpenRating}
-                handleOffersOpen={handleOffersOpen}
-                setFetchedBetsData={setFetchedBetsData}
-                handleCloseDetailModal={handleCloseDetailModal}
-            />
+            <CabinetModal
+                maxWidth='lg'
+                openDialog={open}
+                title={`${t(`common:${ads_type}`)} №: ${post.id}`}
+                handleCloseDialog={handleCloseDetailModal}
+            >
+                {isAuction
+                    ? <DetailedAuctions
+                        bets={bets}
+                        post={post}
+                        isFetch={isFetch}
+                        betsCount={betsCount}
+                        isBetsFetch={isBetsFetch}
+                        handleReject={handleReject}
+                        handleAccept={handleAccept}
+                        handleOpenRating={handleOpenRating}
+                        handleOffersOpen={handleOffersOpen}
+                        setFetchedBetsData={setFetchedBetsData}
+                    />
+                    : <DetailedPost
+                        post={post}
+                        handleOpenRating={handleOpenRating}
+                    />}
+            </CabinetModal>
             <ConfirmModal
                 open={confirmOpen}
                 title={t(confirmTxt)}

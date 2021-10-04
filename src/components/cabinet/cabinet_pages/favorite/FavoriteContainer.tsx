@@ -10,7 +10,7 @@ import {unstable_batchedUpdates} from "react-dom";
 import {initCardData} from '@src/common_data/common';
 import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 
@@ -115,7 +115,7 @@ export const FavoriteContainer: FC = () => {
                 tabsData={tabsData}
                 fetchTabPosts={fetchFavoriteData}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

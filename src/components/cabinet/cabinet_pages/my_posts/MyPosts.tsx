@@ -6,7 +6,7 @@ import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
@@ -158,7 +158,7 @@ export const MyPosts: FC = () => {
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
@@ -169,7 +169,6 @@ export const MyPosts: FC = () => {
                 open={settingsOpen}
                 handleRefresh={handleRefresh}
                 onClose={handleCloseSettings}
-                postStatus={selectedPost.status}
             />
             <NotificationModal
                 post={selectedPost}
