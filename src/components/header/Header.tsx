@@ -13,6 +13,7 @@ export const Header: FC = () => {
         handleModalOpen: handleDrawerOpen,
         handleModalClose: handleDrawerClose
     } = useModal();
+
     const {pathname} = useRouter();
 
     const handlePageReload = () => {

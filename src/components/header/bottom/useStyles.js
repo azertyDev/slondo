@@ -22,7 +22,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.bottom-logo': {
-            // marginRight: '20px',
             '& a': {
                 width: '100%',
                 display: 'flex',
@@ -179,18 +178,12 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     menu: {
-        '& .MuiPaper-root': {
+        '& div.MuiPaper-root': {
             width: '320px',
             padding: '10px',
-            backgroundColor: '#fff'
-        },
-        '& .menu-item': {
-            padding: '5px',
-            marginBottom: '0px',
-            borderRadius: '0px',
-            background: 'none!important',
-            '& .MuiListItem-root': {
-                background: '#f2f2f2'
+            '& nav.menu-item': {
+                padding: '5px',
+                marginBottom: '5px'
             }
         }
     }

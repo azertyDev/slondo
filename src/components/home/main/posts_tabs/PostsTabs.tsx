@@ -133,8 +133,7 @@ export const PostsTabs: FC = () => {
                         </Typography>
                         : <Grid container spacing={2}>
                             {postCards.cards.map((cardData, i) => {
-                                const cardsLen = postCards.cards.length;
-                                const isLastCard = cardsLen === i + 1;
+                                const isLastCard = postCards.cards.length === i + 1;
                                 return (
                                     <Fragment key={i}>
                                         {(isSmUp ? 3 : 4) === i && (

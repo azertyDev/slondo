@@ -24,6 +24,8 @@ const App = (props) => {
     const userLocation = useUserLocation();
     const exitPrompt = useExitPrompt(false);
 
+    const user = auth.user;
+
     if (browser) {
         const regions = localStorage.getItem('regions');
         !regions && userAPI.getLocations()
@@ -37,6 +39,19 @@ const App = (props) => {
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
     }, []);
+
+    useEffect(() => {
+        if (browser && socket && user.id !== null) {
+            socket.on('connect', () => {
+                socket.emit('user_connected', user.id);
+            });
+            return () => {
+                socket.off('connect', () => {
+                    socket.emit('disconnect', user.id);
+                });
+            };
+        }
+    }, [socket]);
 
     return (
         <ErrorCtx.Provider value={error}>

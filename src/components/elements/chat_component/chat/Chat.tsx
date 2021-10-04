@@ -1,154 +1,137 @@
-import {useModal} from "@src/hooks";
-import {AuthCtx} from "@src/context";
-import {FC, Fragment, MouseEvent, useContext, useState} from 'react';
+import {FC, Fragment, useRef, useEffect, MouseEvent} from 'react';
+import {useDate} from "@src/hooks";
 import {IconButton, Menu, MenuItem, Typography} from "@material-ui/core";
 import {MoreVert, Send, CropOriginal} from "@material-ui/icons";
-import {MessageType} from "../ChatContainer";
+import {ContactType, MessageType, OptionsType} from "../ChatContainer";
 import {useTranslation} from "next-i18next";
-import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {useStyles} from './useStyles';
 
 type ChatProps = {
-    user,
+    options: OptionsType[],
+    contact: ContactType,
     message: string,
     messages: MessageType[],
     handleImage: (v) => void,
     handleMessage: (v) => void
     sendMessage: () => void,
-    removeContact: () => void
+    handleMenu: (option) => () => void
+    handleAnchor: (e: MouseEvent<HTMLElement>) => void,
+    handleCloseMenu: () => void,
+    menuAnchor: HTMLElement,
+    firstMessageRef: (node) => void
 };
-
-const options = [
-    'mute_contact',
-    'remove_contact'
-];
 
 export const Chat: FC<ChatProps> = (props) => {
     const {
-        user,
+        options,
+        contact,
         messages,
         message,
         handleImage,
         handleMessage,
-        removeContact,
-        sendMessage
+        handleMenu,
+        sendMessage,
+        handleAnchor,
+        menuAnchor,
+        handleCloseMenu,
+        firstMessageRef
     } = props;
 
+    const isSystemUser = contact?.sys;
+    const {getDate} = useDate();
     const {t} = useTranslation('common');
-    const self = useContext(AuthCtx).user;
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [selectedMenuItem, selectMenuItem] = useState(null);
+    const messagesBottomRef = useRef(null);
 
-    const title = (() => {
-        switch (selectedMenuItem) {
-            case 'mute_contact':
-                return 'mute_contact_confirm';
-            case 'remove_contact':
-                return 'remove_contact_confirm';
-        }
-    })();
-
-    const {
-        modalOpen,
-        handleModalOpen,
-        handleModalClose
-    } = useModal();
-
-    const handleAnchor = (event: MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+    const scrollToBottom = () => {
+        messagesBottomRef.current.scrollIntoView(false);
     };
 
-    const handleConfirm = () => {
-        switch (selectedMenuItem) {
-            case 'mute_contact':
-                removeContact();
-                break;
-            case 'remove_contact':
-                removeContact();
-        }
-    };
-
-    const handleMenu = ({target: {innerText}}: any) => {
-        switch (innerText) {
-            case 'mute_contact':
-                selectMenuItem('mute_contact');
-                break;
-            case 'remove_contact':
-                selectMenuItem('remove_contact');
-        }
-        handleModalOpen();
-        setAnchorEl(null);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    useEffect(() => {
+        messagesBottomRef.current && scrollToBottom();
+    }, []);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {user && user.id !== null
+            {contact
                 ? <>
                     <div className='chat-header'>
                         <Typography variant='subtitle1'>
-                            {user.name}
+                            {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
-                        <IconButton
-                            aria-label="more"
-                            aria-haspopup="true"
-                            aria-controls="long-menu"
-                            onClick={handleAnchor}
-                        >
-                            <MoreVert/>
-                        </IconButton>
-                        <Menu
-                            keepMounted
-                            id="long-menu"
-                            anchorEl={anchorEl}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'center'
-                            }}
-                            onClose={handleClose}
-                            open={Boolean(anchorEl)}
-                        >
-                            {options.map(option => (
-                                <MenuItem
-                                    key={option}
-                                    onClick={handleMenu}
+                        {!isSystemUser && (
+                            <>
+                                <IconButton
+                                    aria-label="more"
+                                    aria-haspopup="true"
+                                    aria-controls="long-menu"
+                                    onClick={handleAnchor}
                                 >
-                                    {option}
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                                    <MoreVert/>
+                                </IconButton>
+                                <Menu
+                                    keepMounted
+                                    id="long-menu"
+                                    anchorEl={menuAnchor}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'center'
+                                    }}
+                                    onClose={handleCloseMenu}
+                                    open={Boolean(menuAnchor)}
+                                >
+                                    {options.map(option => (
+                                        <MenuItem
+                                            key={option}
+                                            onClick={handleMenu(option)}
+                                        >
+                                            {t(option)}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </>
+                        )}
                     </div>
                     <div className='message-list'>
-                        {messages.map(({author, id, message}) => {
-                            const {text, images} = message;
+                        {messages.map(({author, message}, index) => {
+                            const {text, images, created_at} = message;
+                            const isFirstMsg = index === 0;
+                            const {time} = getDate(created_at);
+
                             return (
-                                <Fragment key={id}>
-                                    {text && (
-                                        <div
-                                            key={id}
-                                            className={
-                                                `message ${author.id === self.id
-                                                    ? 'right-side' : 'left-side'}`
-                                            }
-                                        >
-                                            {text && (
-                                                <Typography variant='subtitle1'>
-                                                    <pre>
-                                                        {message.text}
-                                                    </pre>
-                                                </Typography>
-                                            )}
-                                        </div>)}
-                                    {images && images.map(({id, url}) =>
-                                        <img key={id} src={url.default}/>
-                                    )}
+                                <Fragment key={index}>
+                                    <div
+                                        ref={isFirstMsg ? firstMessageRef : null}
+                                        className={
+                                            `message ${+author.id === contact.id
+                                                ? 'left-side'
+                                                : 'right-side'}`
+                                        }
+                                    >
+                                        {text && (
+                                            <Typography
+                                                className='msg-text'
+                                                variant='subtitle2'
+                                            >
+                                                <pre>
+                                                    {message.text}
+                                                </pre>
+                                            </Typography>
+                                        )}
+                                        {images && images.map(({id, url}) =>
+                                            <img
+                                                key={id}
+                                                src={url.default}
+                                            />
+                                        )}
+                                        <Typography className='time'>
+                                            {time}
+                                        </Typography>
+                                    </div>
                                 </Fragment>
                             );
                         })}
+                        <div ref={messagesBottomRef}/>
                     </div>
                     <div className='compose'>
                         <label htmlFor='message' className='img-wrapper'>
@@ -181,14 +164,6 @@ export const Chat: FC<ChatProps> = (props) => {
                 : <Typography>
                     {t('select_chat')}
                 </Typography>}
-            <ConfirmModal
-                open={modalOpen}
-                title={title}
-                cancelTxt={t('cancel')}
-                confirmTxt={t('confirm')}
-                handleConfirm={handleConfirm}
-                handleClose={handleModalClose}
-            />
         </div>
     );
 };

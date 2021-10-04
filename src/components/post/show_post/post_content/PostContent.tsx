@@ -30,6 +30,7 @@ import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     post,
+    auctionInfo,
     handleSafeDeal: () => void,
     handleChatOpen: () => void,
     setFetchedPostData: () => Promise<void>
@@ -38,6 +39,7 @@ type PostContentTypes = {
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
+        auctionInfo,
         handleSafeDeal,
         handleChatOpen,
         setFetchedPostData
@@ -68,7 +70,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const [favorite, setFavorite] = useState(false);
 
     const jobOrService = post.category.name === 'job' || post.category.name === 'service';
-    const excludePrice = jobOrService || post.price === 0;
 
     const {
         modalOpen: complainOpen,
@@ -94,6 +95,17 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         } catch (e) {
             setErrorMsg(e.message);
         }
+    };
+
+    const getPrice = () => {
+        let price = post.price;
+
+        if (isAuction && auctionInfo.bets.length) {
+            const {bets} = auctionInfo;
+            price = bets[0].bet;
+        }
+
+        return t(priceTransform(price, jobOrService));
     };
 
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
@@ -124,7 +136,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
-                        {t('common:yes')}
+                        {t(`common:${transKey === 'electronics' ? 'has' : 'yes'}`)}
                     </Typography>
                 </li>
             );
@@ -139,9 +151,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             style={{
                                 width: 24,
                                 height: 24,
-                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
                                 marginRight: 15,
                                 borderRadius: '50%',
+                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
                                 backgroundColor: `${model[key]?.hex_color_code}`
                             }}
                         />
@@ -194,7 +206,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                     {!!post.model?.condition && (
                         <div className="condition">
-                            <Typography variant="h6">{t(`${post.model.condition?.name}`)}</Typography>
+                            <Typography variant="h6">
+                                {t(`${post.model.condition?.name}`)}
+                            </Typography>
                         </div>
                     )}
                 </div>
@@ -227,17 +241,19 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-header">
                         <div>
                             <Typography variant='h6' className="price">
-                                {t(priceTransform(post.price, jobOrService))}&nbsp;
-                                {!excludePrice && (
+                                {getPrice()}&nbsp;
+                                {post.price !== 0 && (
                                     t(`common:${post.currency.name}`)
                                 )}
-                                {!!post.condition.name && (
+                                {!!post.condition?.name && (
                                     <div className="condition">
-                                        <Typography variant="h6">{t(`${post.model?.condition?.name}`)}</Typography>
+                                        <Typography variant="h6">
+                                            {t(`${post.model?.condition?.name}`)}
+                                        </Typography>
                                     </div>
                                 )}
                             </Typography>
-                            <Typography variant="h2" className="title" noWrap>
+                            <Typography variant="h2" className="title">
                                 {post.title}
                             </Typography>
                         </div>
@@ -312,8 +328,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="contact">
                         <ShowPhone postId={post.id}/>
                         <CustomButton
-                            disabled
                             color='silver'
+                            disabled
                             onClick={handleChatOpen}
                         >
                             <Typography variant='subtitle1'>
@@ -324,6 +340,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     {isAuction && (
                         <AuctionContent
                             postData={post}
+                            auctionInfo={auctionInfo}
                             setFetchedPostData={setFetchedPostData}
                         />
                     )}
@@ -338,7 +355,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <LocationIcon/>
                         <Typography variant="subtitle1">
                             {`${t(`locations:${post.region.name}.name`) ?? ''}`}
-                            {post.city.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
+                            {post.city?.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
                         </Typography>
                     </div>
                 </div>
@@ -402,6 +419,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <OwnerAuctionInfo
                         post={post}
+                        auctionInfo={auctionInfo}
                         handleChatOpen={handleChatOpen}
                         handleSafeDeal={handleSafeDeal}
                         setFetchedPostData={setFetchedPostData}

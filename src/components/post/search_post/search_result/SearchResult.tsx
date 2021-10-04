@@ -148,16 +148,14 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                     listMode={!gridView}
                                 />
                             </Box>
-                            {itemsCount > ITEMS_PER_PAGE_SEARCH && (
-                                <Box display='flex' justifyContent='center' mt='70px'>
-                                    <CustomPagination
-                                        currentPage={page}
-                                        totalItems={itemsCount}
-                                        itemsPerPage={ITEMS_PER_PAGE_SEARCH}
-                                        handlePagePagination={handlePagePagination}
-                                    />
-                                </Box>
-                            )}
+                            <Box mt='70px'>
+                                <CustomPagination
+                                    currentPage={page}
+                                    totalItems={itemsCount}
+                                    itemsPerPage={ITEMS_PER_PAGE_SEARCH}
+                                    handlePagePagination={handlePagePagination}
+                                />
+                            </Box>
                         </>}
                 </>}
         </div>

@@ -1,4 +1,9 @@
 {
+  "mute_contact_confirm": "Foydalanuvchini bloklamoqchimisiz?",
+  "remove_contact_confirm": "Foydalanuvchini o'chirmoqchimisiz?",
+  "confirm": "Tasdiqlash",
+  "block_user": "Foydalanuvchini bloklash",
+  "remove_user": "Foydalanuvchini o'chirish",
   "write_message": "Xabar yozish",
   "select_chat": "Suhbat uchun chatni tanlang",
   "name": "Ism",
@@ -9,6 +14,7 @@
   "back": "Qaytish",
   "finish": "Tugatish",
   "perform": "Tasdiqlash",
+  "has": "Bor",
   "yes": "Ha",
   "no": "Yo'q",
   "return": "Orqaga qaytish",

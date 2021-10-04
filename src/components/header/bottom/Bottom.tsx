@@ -20,7 +20,7 @@ import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 import {INNER_URLS} from "@src/constants";
@@ -57,6 +57,7 @@ export const Bottom: FC<BottomProps> = (props) => {
 
     const open = Boolean(anchorEl);
     const popoverId = open ? 'simple-popover' : undefined;
+
     const {
         locElement,
         locationModal
@@ -195,7 +196,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon />
+                                        <QuestionIcon/>
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
@@ -205,7 +206,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                             <Grid item sm={5} md={4}>
                                 <Link href="/help/feedback">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <FeedbackIcon />
+                                        <FeedbackIcon/>
                                         <Typography variant="subtitle1">
                                             {t('footer:feedback')}
                                         </Typography>
@@ -231,7 +232,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                     horizontal: 'right'
                 }}
             >
-                <SidebarMenu clearAnchor={handleClose}/>
+                <CabinetSidebar clearAnchor={handleClose}/>
             </Popover>
         </div>
     );

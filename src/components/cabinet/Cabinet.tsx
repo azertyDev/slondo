@@ -3,7 +3,6 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPosts';
@@ -16,6 +15,7 @@ import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings'
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
+import {CabinetSidebar} from "@src/components/cabinet/cabinet_sidebar/CabinetSidebar";
 import {useStyles} from './useStyles';
 
 export type CommonModalType = {
@@ -28,12 +28,10 @@ export type CommonModalType = {
 const Cabinet: FC = () => {
     const {query: {page}, push} = useRouter();
     const {t} = useTranslation('cabinet');
-    const title = `${t('my_cabinet')} | ${t(page)}`;
+    const title = t(page);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const isMainPage = page === 'main';
-    // const prevPath = getSessionItem('prevPath');
-    // const currPath = getSessionItem('currentPath');
 
     const handlePrev = async () => {
         await push(isMainPage ? '/' : '/cabinet/main');
@@ -75,14 +73,14 @@ const Cabinet: FC = () => {
             <div className={classes.root}>
                 <Grid container>
                     {(isXsDown && isMainPage || !isXsDown) && (
-                        <Grid item xs={12} sm={5} md={4}>
+                        <Grid item xs={12} sm={5} md={4} lg={3}>
                             <CabinetSidebar/>
                         </Grid>
                     )}
-                    <Grid item xs={12} sm={7} md={8} className='pl-16'>
+                    <Grid item xs={12} sm={7} md={8} lg={9} className='pl-16'>
                         <Hidden xsDown>
                             <Typography variant="h6" className="menu-title">
-                                {t(`cabinet:cabinet.${page}`)}
+                                {t(page)}
                             </Typography>
                         </Hidden>
                         {getPage()}

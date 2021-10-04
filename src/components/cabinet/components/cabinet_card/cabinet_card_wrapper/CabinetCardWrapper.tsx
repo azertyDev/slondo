@@ -40,10 +40,11 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isPublic = status === 'public';
-    const isModeration = status === 'moderation';
     const isSold = status === 'sold';
     const isSuspend = status === 'suspended';
-    const isArchive = status === 'archive' || 'history';
+    const isArchive = status === 'archive';
+    const isHistory = status === 'history';
+    const isModeration = status === 'moderation';
     const isReject = status === 'reject' || 'refuse';
 
     const classes = useStyles({status});
@@ -85,14 +86,12 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                         <Grid item xs={5} sm={4} container justifyContent='center'>
                             {page?.includes('favorite')
                                 ? <Grid item xs={6} container justifyContent='center'>
-                                    <CustomButton
-                                        onClick={handleOpenModal(cardData.id)}
-                                    >
+                                    <CustomButton onClick={handleOpenModal(cardData.id)}>
                                         <CloseIcon/>
                                     </CustomButton>
                                 </Grid>
                                 : <>
-                                    {handleNotificationsOpen && (
+                                    {creator && handleNotificationsOpen && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
@@ -102,10 +101,11 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             </CustomButton>
                                         </Grid>
                                     )}
-                                    {creator && isPublic && (
+                                    {creator && (isPublic || isArchive) && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
+                                                disabled={isArchive}
                                                 onClick={handleSettingsOpen}
                                             >
                                                 <SettingsIcon/>
@@ -118,9 +118,9 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                     {handleDetailedOpen && (
                         <Grid
                             item
-                            xs={isPublic || isModeration || isSold || isSuspend || isReject ? 7 : 12}
-                            sm={isPublic || isModeration || isSuspend || isArchive || isReject ? 8 : 12}
                             md={12}
+                            xs={isPublic || isModeration || isSold || isSuspend || isReject ? 7 : 12}
+                            sm={isPublic || isModeration || isSuspend || isArchive || isHistory || isReject ? 8 : 12}
                         >
                             <CustomButton
                                 className='unfold-btn'
@@ -129,7 +129,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1' component='p'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action' />
+                                <ChevronRight color='action'/>
                             </CustomButton>
                         </Grid>
                     )}
@@ -137,38 +137,37 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                 <Hidden smDown>
                     <div className='card-btns'>
                         {page?.includes('favorite')
-                            ? <CustomButton
-                                onClick={handleOpenModal(cardData.id)}
-                            >
-                                <CloseIcon />
+                            ? <CustomButton onClick={handleOpenModal(cardData.id)}>
+                                <CloseIcon/>
                             </CustomButton>
                             : <>
-                                {creator && isPublic && (
+                                {creator && (isPublic || isArchive) && (
                                     <>
+                                        {isPublic && (
+                                            <CustomButton
+                                                disabled
+                                                className='icons'
+                                            >
+                                                <RocketIcon/>
+                                            </CustomButton>
+                                        )}
                                         <CustomButton
-                                            disabled
                                             className='icons'
-                                        >
-                                            <RocketIcon/>
-                                            <Typography variant='subtitle1' component='p'>
-                                                Рекламировать
-                                            </Typography>
-                                        </CustomButton>
-                                        <CustomButton
-                                            className='icons'
+                                            disabled={isArchive}
                                             onClick={handleSettingsOpen}
                                         >
                                             <SettingsIcon/>
                                         </CustomButton>
                                     </>
                                 )}
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleNotificationsOpen}
-                                    // disabled={!observer.number_of_notifications}
-                                >
-                                    <NotificationIcon/>
-                                </CustomButton>
+                                {creator && (isPublic || isArchive || isHistory || isSold) && (
+                                    <CustomButton
+                                        className='icons'
+                                        onClick={handleNotificationsOpen}
+                                    >
+                                        <NotificationIcon/>
+                                    </CustomButton>
+                                )}
                             </>}
                     </div>
                 </Hidden>

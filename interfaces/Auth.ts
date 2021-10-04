@@ -23,5 +23,6 @@ export interface UserInfo {
 
 export type SubscriberType = {
     user_id?: number,
-    user?: UserInfo
+    user?: UserInfo,
+    refresh: () => void
 }

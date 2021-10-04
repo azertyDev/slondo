@@ -19,12 +19,15 @@ export type ProfilePageProps = {
 }
 
 export const UserProfile: FC = () => {
-    const {setErrorMsg} = useContext(ErrorCtx);
+    const {t} = useTranslation('cabinet');
     const {query: {path}, push} = useRouter();
     const [pathname, user_id] = path as string[];
-    const {t} = useTranslation('cabinet');
+
+    const {setErrorMsg} = useContext(ErrorCtx);
+
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const [userInfo, setUserInfo] = useState<UserInfo>(initUser);
+
     const isMainPage = pathname === 'main';
 
     const handlePrev = async () => {
@@ -33,8 +36,8 @@ export const UserProfile: FC = () => {
 
     const fetchUserById = async () => {
         try {
-            const userData = await userAPI.getUserInfoById(user_id as string);
-            setUserInfo(userData);
+            const userInfo = await userAPI.getUserInfoById(user_id as string);
+            setUserInfo(userInfo);
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -63,14 +66,10 @@ export const UserProfile: FC = () => {
                     {((isXsDown && isMainPage) || !isXsDown) && (
                         <Grid item xs={12} md={3}>
                             <Box mb={2}>
-                                <UserInfoWithAvatar
-                                    user={userInfo}
-                                />
+                                <UserInfoWithAvatar user={userInfo}/>
                             </Box>
                             <Box>
-                                <SidebarMenu
-                                    t={t}
-                                />
+                                <SidebarMenu />
                             </Box>
                         </Grid>
                     )}

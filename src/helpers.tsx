@@ -9,7 +9,7 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
-import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
+import {cardDataRegEx, searchTxtRegEx, URLReservedMarks} from '@src/common_data/reg_exs';
 import {excludeFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {CityType, RegionType} from "@root/interfaces/Locations";
 
@@ -35,7 +35,7 @@ export const getTime = (sec: number) => {
     };
 };
 
-export const priceTransform = (price, jobOrService): string => {
+export const priceTransform = (price, jobOrService = false): string => {
     return price === 0
         ? jobOrService ? 'negotiated' : 'for_free'
         : numberPrettier(price);
@@ -77,6 +77,7 @@ export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
         res.write(xml);
         res.end();
     }
+
     return {
         props: {}
     };
@@ -252,7 +253,7 @@ export const transformCyrillic = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
     return transform(title)
         .toLowerCase()
-        .replace(punctuationMarksRegEx, ' ')
+        .replace(URLReservedMarks, '')
         .replace(/\s+/g, '-');
 };
 

@@ -1,15 +1,12 @@
-import {FC, useContext, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
-import {SUBS_PER_PAGE} from '@src/constants';
-import {TabsDataType} from '@root/interfaces/Cabinet';
+import {FC, useContext, useState} from 'react';
+import {TabsType, SingleTabType} from '@root/interfaces/Cabinet';
 import {userAPI} from '@src/api/api';
-import {useRouter} from 'next/router';
-import {SubsItem} from '@src/components/cabinet/cabinet_pages/subs/subsTab/subs_item/SubsItem';
-import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx} from "@src/context";
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {SingleTabs} from '@src/components/cabinet/components/tabs_content/SingleTabs';
 import {ProfilePageProps} from '@src/components/user_profile/UserProfile';
+import {SubsItem} from "@src/components/cabinet/cabinet_pages/subs/subs_item/SubsItem";
 import {useTranslation} from 'next-i18next';
+import {unstable_batchedUpdates} from "react-dom";
 
 export const UserFollowsList: FC<ProfilePageProps> = ({user_id}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -20,89 +17,75 @@ export const UserFollowsList: FC<ProfilePageProps> = ({user_id}) => {
         data: []
     };
 
-    const [tabIndex, setTabIndex] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
     const [subscriptions, setSubscriptions] = useState(initialSubs);
     const [subscribers, setSubscribers] = useState(initialSubs);
 
-    const handleTabChange = (_, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const fetchSubsByPage = (subType: string) => async (page) => {
+    const fetchSubsByPage = async (page, secondTab = false) => {
         try {
-            const fetchParams = {
-                user_id,
-                page,
-                itemsPerPage: SUBS_PER_PAGE
-            };
             setIsFetch(true);
 
-            if (subType === 'subscriptions') {
-                const subscriptions = await userAPI.getUserSubscriptions(fetchParams);
-                setSubscriptions({data: subscriptions.data, total: subscriptions.total});
-            }
-            if (subType === 'subscribers') {
-                const subscribers = await userAPI.getUserSubscribers(fetchParams);
-                setSubscribers({data: subscribers.data, total: subscribers.total});
-            }
+            const {data, total} = await (
+                secondTab
+                    ? userAPI.getUserSubscribers(user_id, page)
+                    : userAPI.getUserSubscriptions(user_id, page)
+            );
 
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                secondTab
+                    ? setSubscribers({data, total})
+                    : setSubscriptions({data, total});
+
+                setIsFetch(false);
+            });
         } catch (e) {
-            setErrorMsg(e.message);
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+                setIsFetch(false);
+            });
         }
     };
 
-    const handleRefresh = () => {
-        fetchSubsByPage('subscribers');
-        fetchSubsByPage('subscriptions');
+    const refresh = () => {
+        unstable_batchedUpdates(() => {
+            fetchSubsByPage(1);
+            fetchSubsByPage(1, true);
+        });
     };
 
-    const subscribersList = (
-        <div>
-            {subscribers.data.map(({id, subscriber}) =>
+    const getSubs = (subs) => (
+        <>
+            {subs.data.map(subs =>
                 <SubsItem
-                    key={id}
-                    user={subscriber}
+                    refresh={refresh}
+                    key={subs.id}
+                    user={subs.subscription ?? subs.subscriber}
                 />
             )}
-        </div>
+        </>
     );
-
-    const subscriptionsList = (
-        <div>
-            {subscriptions.data.map(({id, subscription}) =>
-                <SubsItem
-                    key={id}
-                    user={subscription}
-                />
-            )}
-        </div>
-    );
-
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<SingleTabType> = {
+        firstTab: {
             id: 0,
             title: t('subscriptions'),
-            itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: fetchSubsByPage('subscriptions'),
-            component: isFetch ? <CustomCircularProgress/> : subscriptionsList
+            total: subscriptions.total,
+            component: getSubs(subscriptions),
+            emptyPage: null
         },
-        {
+        secondTab: {
             id: 1,
             title: t('subscribers'),
-            itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: fetchSubsByPage('subscribers'),
-            component: isFetch ? <CustomCircularProgress/> : subscribersList
+            total: subscribers.total,
+            component: getSubs(subscribers),
+            emptyPage: null
         }
-    ];
+    };
 
     return (
-        <TabsContent
-            tabIndex={tabIndex}
+        <SingleTabs
+            isFetch={isFetch}
             tabsData={tabsData}
-            handleTabChange={handleTabChange}
+            fetchTabPosts={fetchSubsByPage}
         />
     );
 };

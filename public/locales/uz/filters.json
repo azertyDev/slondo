@@ -5055,6 +5055,12 @@
     "used": {
       "name": "Iste’molda bo’lgan"
     },
+    "build_in_speakers": {
+      "name": "O'rnatilgan dinamiklar"
+    },
+    "usb_connector": {
+      "name": "USB ulagich"
+    },
     "android": {
       "name": "Android"
     },

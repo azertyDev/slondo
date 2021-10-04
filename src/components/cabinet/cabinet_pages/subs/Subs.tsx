@@ -1,51 +1,38 @@
-import {FC, useContext, useEffect, useState} from 'react';
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {SubsTab} from '@src/components/cabinet/cabinet_pages/subs/subsTab/SubsTab';
+import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {TabsDataType} from '@root/interfaces/Cabinet';
+import {unstable_batchedUpdates} from "react-dom";
+import {SingleTabs} from '@src/components/cabinet/components/tabs_content/SingleTabs';
+import {SingleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {ErrorCtx} from "@src/context";
-import {unstable_batchedUpdates} from "react-dom";
+import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
+import {SubsItem} from "@src/components/cabinet/cabinet_pages/subs/subs_item/SubsItem";
+import {useTranslation} from "next-i18next";
 
 export const Subs: FC = () => {
     const initialState = {
-        subscribers: {
-            total: 0,
-            data: []
-        },
-        subscriptions: {
-            total: 0,
-            data: []
-        }
+        total: 0,
+        data: []
     };
 
+    const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
-
-    const [subs, setSubs] = useState(initialState);
-    const [tabIndex, setTabIndex] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
+    const [subscriptions, setSubscriptions] = useState(initialState);
+    const [subscribers, setSubscribers] = useState(initialState);
 
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
-    const fetchSubs = async (param) => {
+    const fetchSubs = async (page = 1, secondTab = false) => {
         try {
-            const {subscribers, subscriptions} = subs;
-
+            const subsPath = secondTab ? 'subscribers' : 'subscriptions';
             setIsFetch(true);
 
-            const subsData = await userAPI.getSubs(param);
+            const {data, total} = await userAPI.getSubs(subsPath, page, SUBS_PER_PAGE);
 
-            if (param === 'subscribers') {
-                subscribers.data = subsData.data;
-                subscribers.total = subsData.total;
-            } else {
-                subscriptions.data = subsData.data;
-                subscriptions.total = subsData.total;
-            }
             unstable_batchedUpdates(() => {
-                setSubs({...subs});
                 setIsFetch(false);
+                subsPath === 'subscribers'
+                    ? setSubscribers({data, total})
+                    : setSubscriptions({data, total});
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
@@ -55,42 +42,47 @@ export const Subs: FC = () => {
         }
     };
 
-    useEffect(() => {
+    const refresh = () => {
         unstable_batchedUpdates(() => {
-            fetchSubs('subscribers');
-            fetchSubs('subscriptions');
+            fetchSubs(1);
+            fetchSubs(1, true);
         });
-    }, []);
+    };
 
-    const tabsData: TabsDataType = [
-        {
+    const getSubs = (subs) => (
+        <div>
+            {subs.map(({id, subscription, subscriber}) =>
+                <SubsItem
+                    key={id}
+                    refresh={refresh}
+                    user={subscription ?? subscriber}
+                />
+            )}
+        </div>
+    );
+
+    const tabsData: TabsType<SingleTabType> = {
+        firstTab: {
             id: 0,
-            title: 'Подписки',
-            itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: <SubsTab
-                isFetch={isFetch}
-                subs={subs.subscriptions.data}
-            />
+            title: t('subscriptions'),
+            total: subscriptions.total,
+            component: getSubs(subscriptions.data),
+            emptyPage: <EmptyPage label={t(`empty.subscription`)}/>
         },
-        {
+        secondTab: {
             id: 1,
-            title: 'Подписчики',
-            itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: <SubsTab
-                subscribers
-                isFetch={isFetch}
-                subs={subs.subscribers.data}
-            />
+            title: t('subscribers'),
+            total: subscribers.total,
+            component: getSubs(subscribers.data),
+            emptyPage: <EmptyPage label={t(`empty.subscriber`)}/>
         }
-    ];
+    };
 
     return (
-        <TabsContent
-            tabIndex={tabIndex}
+        <SingleTabs
+            isFetch={isFetch}
             tabsData={tabsData}
-            handleTabChange={handleTabChange}
+            fetchTabPosts={fetchSubs}
         />
     );
 };

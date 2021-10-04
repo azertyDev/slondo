@@ -1,20 +1,18 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
+import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {SingleTabs} from '@src/components/cabinet/components/tabs_content/SingleTabs';
 import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import {ArrowBack} from '@material-ui/icons';
-import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitPostsType, SingleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {initCardData} from '@src/common_data/common';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {useStyles} from './useStyles';
 
 export const BannedPosts: FC = () => {
@@ -30,7 +28,6 @@ export const BannedPosts: FC = () => {
     const [postData, setPostData] = useState<InitPostsType>(initialBannedPostsState);
     const [aucData, setAucData] = useState<InitPostsType>(initialBannedPostsState);
     const [selectedPost, setSelectedPost] = useState(initCardData);
-    const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
 
     const {
@@ -42,9 +39,6 @@ export const BannedPosts: FC = () => {
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
     const handleDetailedOpen = (post) => () => {
         openDetailedModal();
         setSelectedPost(post);
@@ -53,16 +47,29 @@ export const BannedPosts: FC = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
         setModalContentIndex(modalContentIndex - backValue);
     };
-    const fetchBannedPostsData = async (type: string) => {
+    const fetchBannedPostsData = async (page = 1, secondTab = false) => {
         try {
+            const type = secondTab ? 'auc' : 'post';
             setIsFetch(true);
-            const {data, total} = await userAPI.getBannedPosts(type);
-            type === 'post' ? setPostData({data, total}) : setAucData({data, total});
-            setIsFetch(false);
+            const {data, total} = await userAPI.getBannedPosts(type, page);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                type === 'post'
+                    ? setPostData({data, total})
+                    : setAucData({data, total});
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
+    };
+    const handleRefresh = () => {
+        unstable_batchedUpdates(() => {
+            fetchBannedPostsData();
+            fetchBannedPostsData(1, true);
+        });
     };
     const handleDelete = async () => {
         try {
@@ -70,23 +77,12 @@ export const BannedPosts: FC = () => {
             await userAPI.deleteBlockedPost(selectedPost.id);
             setModalContentIndex(1);
             closeDetailedModal();
-            if (tabIndex === 0) {
-                await fetchBannedPostsData('post');
-            } else {
-                await fetchBannedPostsData('auc');
-            }
+            handleRefresh();
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
             setErrorMsg(e.message);
         }
-    };
-
-    const handleRefresh = () => {
-        unstable_batchedUpdates(() => {
-            fetchBannedPostsData('post');
-            fetchBannedPostsData('auc');
-        });
     };
 
     const classes = useStyles();
@@ -150,56 +146,48 @@ export const BannedPosts: FC = () => {
 
     const bannedPosts = (posts) => (
         <div className={classes.root}>
-            {isFetch
-                ? <CustomCircularProgress/>
-                : <>
-                    {posts.data.map(data => (
-                        <Box mb={3} key={data.id}>
-                            <CabinetCardWrapper
-                                cardData={data}
-                                handleDetailedOpen={handleDetailedOpen(data)}
-                            />
-                        </Box>
-                    ))}
-                    <ResponsiveModal
-                        openDialog={detailedModalOpen}
-                        handleCloseDialog={closeDetailedModal}
-                    >
-                        <ModalContent/>
-                    </ResponsiveModal>
-                </>}
+            {posts.data.map(data =>
+                <Box mb={3} key={data.id}>
+                    <CabinetCardWrapper
+                        cardData={data}
+                        handleDetailedOpen={handleDetailedOpen(data)}
+                    />
+                </Box>
+            )}
+            <ResponsiveModal
+                openDialog={detailedModalOpen}
+                handleCloseDialog={closeDetailedModal}
+            >
+                <ModalContent/>
+            </ResponsiveModal>
         </div>
     );
 
-    const tabsData: TabsDataType = [
-        {
+    const tabsData: TabsType<SingleTabType> = {
+        firstTab: {
             id: 0,
+            total: postData.total,
             title: t('posts'),
-            itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: bannedPosts(postData)
+            component: bannedPosts(postData),
+            emptyPage: null
         },
-        {
+        secondTab: {
             id: 1,
+            total: aucData.total,
             title: t('auctions'),
-            itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: () => '',
-            component: bannedPosts(aucData)
+            component: bannedPosts(aucData),
+            emptyPage: null
         }
-    ];
-
-    useEffect(() => {
-        handleRefresh();
-    }, []);
+    };
 
     return (
         <>
-            <TabsContent
-                tabIndex={tabIndex}
+            <SingleTabs
+                isFetch={isFetch}
                 tabsData={tabsData}
-                handleTabChange={handleTabChange}
+                fetchTabPosts={fetchBannedPostsData}
             />
-            <DetailedPostModalContainer
+            <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

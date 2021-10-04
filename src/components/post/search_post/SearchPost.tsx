@@ -63,7 +63,7 @@ export const SearchPost: FC<SearchPostProps> = ({statusCode, regions}) => {
     }
 
     const classes = useStyles();
-    return statusCode === 404
+    return statusCode !== 200
         ? <ErrorPage statusCode={statusCode}/>
         : <>
             <CustomHead
