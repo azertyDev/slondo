@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('md')]: {
             filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
         },
-        '& button': {
+        '& button.slick-arrow': {
             background: 'rgba(0, 0, 0, .6)',
             '&.slick-prev': {
                 left: '25px',
@@ -42,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'space-between',
                 width: '100%',
                 padding: '20px 25px 0',
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.21) -37%, rgba(0, 0, 0, 0) 100%)',
                 [theme.breakpoints.up('lg')]: {
                     justifyContent: 'flex-end'
                 },
@@ -51,7 +52,6 @@ export const useStyles = makeStyles((theme) => ({
                 '& button': {
                     width: 50,
                     height: 50,
-                    background: 'rgba(0, 0, 0, 0.5)',
                     borderRadius: '100%',
                     padding: 0,
                     [theme.breakpoints.down('xs')]: {
@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
                     '&.favorite-btn': {
                         background: ({isFavorite}) => isFavorite
                             ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)'
-                            : 'rgba(0, 0, 0, 0.5)',
+                            : 'rgba(0, 0, 0, 0.35)',
                         '& svg': {
                             width: 30,
                             height: 'auto',
@@ -74,6 +74,7 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     },
                     '&.share-btn': {
+                        background: 'rgba(0, 0, 0, 0.35)',
                         '& svg': {
                             width: 30,
                             height: 'auto',
@@ -88,7 +89,6 @@ export const useStyles = makeStyles((theme) => ({
                     '&.backspace-btn': {
                         padding: 0,
                         '& svg': {
-                            width: 40,
                             height: 'auto',
                             filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))',
                             '& path': {
@@ -240,10 +240,10 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: 'rgba(0, 0, 0, 0.97) !important'
         },
         '& div.modal-root': {
+            marginTop: '20px',
             '& div.close-title': {
                 padding: '0 7px'
             },
-            marginTop: '20px',
             '& div.close-wrapper': {
                 display: 'flex',
                 justifyContent: 'flex-end',
@@ -268,6 +268,10 @@ export const useStyles = makeStyles((theme) => ({
                 '& button.slick-next': {
                     right: '50px'
                 },
+                '& div.slick-track': {
+                    display: 'flex',
+                    alignItems: 'center'
+                },
                 '& div.slick-slide': {
                     display: 'flex',
                     justifyContent: 'center',
@@ -277,7 +281,7 @@ export const useStyles = makeStyles((theme) => ({
                         },
                         '& img.iiz__img': {
                             width: 'auto',
-                            height: '580px',
+                            height: '400px',
                             objectFit: 'contain',
                             [theme.breakpoints.down('md')]: {
                                 width: '100%'
@@ -293,8 +297,8 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '30px'
             },
             '& .slick-dots': {
-                position: 'absolute',
-                bottom: '10px',
+                // position: 'absolute',
+                // bottom: '10px',
                 display: 'block',
                 width: '100%',
                 padding: '0',

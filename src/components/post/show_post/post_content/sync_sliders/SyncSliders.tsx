@@ -14,8 +14,7 @@ import {
     Modal
 } from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import {CloseIcon} from "@src/components/elements/icons";
+import {ChevronLeft, CloseIcon} from '@src/components/elements/icons';
 import {AuthCtx} from '@src/context/AuthCtx';
 import {useTranslation} from 'next-i18next';
 import {useModal} from '@src/hooks';
@@ -120,7 +119,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                             onClick={handlePrevPath}
                             className="backspace-btn"
                         >
-                            <KeyboardArrowLeftIcon/>
+                            <ChevronLeft/>
                         </IconButton>
                     </Hidden>
                     {!!imgs.length && (
