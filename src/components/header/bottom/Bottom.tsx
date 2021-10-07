@@ -25,6 +25,7 @@ import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
+import {MainMenu} from '@src/components/header/main_menu/MainMenu';
 
 type BottomProps = {
     handleDrawerOpen: () => void
@@ -232,7 +233,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                     horizontal: 'right'
                 }}
             >
-                <CabinetSidebar clearAnchor={handleClose}/>
+                <MainMenu clearAnchor={handleClose}/>
             </Popover>
         </div>
     );

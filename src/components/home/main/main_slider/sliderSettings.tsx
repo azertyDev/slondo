@@ -33,6 +33,14 @@ export const settings = {
                 centerPadding: '20px',
                 slidesToShow: 1
             }
-        }
+        },
+        // {
+        //     breakpoint: 450,
+        //     settings: {
+        //         arrows: false,
+        //         centerPadding: '45px',
+        //         slidesToShow: 1
+        //     }
+        // }
     ]
 };

@@ -14,7 +14,10 @@ export const useStyles = makeStyles((theme) => ({
         '& div.slick-slider': {
             '& img': {
                 width: '100%',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                // [theme.breakpoints.down('450')]: {
+                //     height: 95
+                // },
             },
             '& div.slick-slide': {
                 padding: '0 5px'

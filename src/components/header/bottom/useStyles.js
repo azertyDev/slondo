@@ -181,10 +181,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.MuiPaper-root': {
             width: '320px',
             padding: '10px',
-            '& nav.menu-item': {
-                padding: '5px',
-                marginBottom: '5px'
-            }
+            background: '#fff',
+            boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+            borderRadius: 10
         }
     }
 }));
