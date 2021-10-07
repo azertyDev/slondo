@@ -171,7 +171,10 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                         handleCloseDialog={handleChatClose}
                     >
                         <ModalHeader handleCloseDialog={handleChatClose}/>
-                        <ChatContainer initContactId={postData.author.id}/>
+                        <ChatContainer
+                            hideContacts
+                            initContactId={postData.author.id}
+                        />
                     </ResponsiveModal>
                 )}
                 <ErrorModal/>

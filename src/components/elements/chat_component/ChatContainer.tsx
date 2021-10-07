@@ -9,7 +9,6 @@ import {useModal} from "@src/hooks";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 
 export type MessageType = {
     author: { id: number },
@@ -29,7 +28,8 @@ export type MessageType = {
 };
 
 type ChatContainerProps = {
-    initContactId?: number
+    initContactId?: number,
+    hideContacts?: boolean
 };
 
 export type ContactType = {
@@ -50,7 +50,7 @@ export type OptionsType = 'block_user' | 'unblock_user' | 'remove_user';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
 const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
-export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) => {
+export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hideContacts = false}) => {
     const socket = useContext(SocketCtx);
 
     const initContact = {
@@ -330,7 +330,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
         <Grid container className={classes.root}>
             {contacts.length > 1 || contact.id
                 ? <>
-                    {(contact.id === null || !isXsDown) && (
+                    {!hideContacts && (contact.id === null || !isXsDown) && (
                         <Grid item xs={12} sm={5}>
                             <Contacts
                                 contacts={contacts}
