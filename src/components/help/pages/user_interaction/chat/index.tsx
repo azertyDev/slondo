@@ -11,12 +11,12 @@ export const Chat = () => {
             <Grid item xs={12} className={classes.root}>
                 <Box display='block' mb={2}>
                     <Typography variant='h6' className='title'>
-                        {t('user_interaction.chat_component.name')}
+                        {t('user_interaction.chat.name')}
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
                     <Typography variant='subtitle1' component='p' className='color-silver'>
-                        {t('user_interaction.chat_component.description')}
+                        {t('user_interaction.chat.description')}
                     </Typography>
                 </Grid>
             </Grid>

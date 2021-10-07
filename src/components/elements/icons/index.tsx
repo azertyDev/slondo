@@ -12,6 +12,7 @@ export {DeliveryIcon} from './services_icons/DeliveryIcon';
 export {ExchangeIcon} from './services_icons/ExchangeIcon';
 export {SwapIcon} from './SwapIcon';
 export {LockIcon} from './LockIcon';
+export {ChevronLeft} from './ChevronLeft';
 export {MegaphoneIcon} from './MegaphoneIcon';
 export {RaiseToTopIcon} from './RaiseToTopIcon';
 export {PromoteIcon} from './PromoteIcon';

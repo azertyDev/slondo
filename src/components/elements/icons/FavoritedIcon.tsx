@@ -18,8 +18,8 @@ export const FavoritedIcon = () => {
                     y2="9.54422"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop stopColor="#675EAA" />
-                    <stop offset="1" stopColor="#AD66D5" />
+                    <stop stopColor="#4e4e4e" />
+                    <stop offset="1" stopColor="#4e4e4e" />
                 </linearGradient>
             </defs>
         </svg>
