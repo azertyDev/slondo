@@ -166,7 +166,7 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                 />
                 {isAuth && (
                     <ResponsiveModal
-                        maxWidth='md'
+                        maxWidth='sm'
                         openDialog={chatOpen}
                         handleCloseDialog={handleChatClose}
                     >

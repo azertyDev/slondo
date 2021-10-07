@@ -340,7 +340,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
                         </Grid>
                     )}
                     {(contact.id !== null || !isXsDown) && (
-                        <Grid item xs={12} sm={7}>
+                        <Grid item xs={12} sm={hideContacts ? 12 : 7}>
                             <Chat
                                 isFetch={isFetch}
                                 options={options}

@@ -2,11 +2,14 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
     root: {
-        overflowY: 'overlay',
-        height: '760px',
         '& div.conversation-list': {
             display: 'flex',
             flexDirection: 'column',
+            overflowY: 'scroll',
+            height: 604,
+            '&::-webkit-scrollbar': {
+                display: 'none'
+            },
             '& div.conversation-item': {
                 display: 'flex',
                 alignItems: 'center',
