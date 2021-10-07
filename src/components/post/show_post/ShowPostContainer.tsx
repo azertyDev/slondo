@@ -164,19 +164,18 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                     onClose={handleCloseSafeDeal}
                     handleRefresh={setFetchedPostData}
                 />
-                {isAuth && (
-                    <ResponsiveModal
-                        maxWidth='md'
-                        openDialog={chatOpen}
-                        handleCloseDialog={handleChatClose}
-                    >
-                        <ModalHeader handleCloseDialog={handleChatClose}/>
-                        <ChatContainer
-                            hideContacts
-                            initContactId={postData.author.id}
-                        />
-                    </ResponsiveModal>
-                )}
+                <ResponsiveModal
+                    keepMounted
+                    maxWidth='md'
+                    openDialog={chatOpen}
+                    handleCloseDialog={handleChatClose}
+                >
+                    <ModalHeader handleCloseDialog={handleChatClose}/>
+                    <ChatContainer
+                        hideContacts
+                        initContactId={postData.author.id}
+                    />
+                </ResponsiveModal>
                 <ErrorModal/>
                 <AuthModal/>
                 <Hidden mdDown>
