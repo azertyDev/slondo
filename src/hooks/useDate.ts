@@ -3,44 +3,26 @@ import {months} from "@src/common_data/common";
 
 export const useDate = () => {
     const {t} = useTranslation('common');
-    const getDate = (date) => {
-        const today = new Date().getDate();
-        if (date) {
-            date = new Date(date.replace(/-/g, '/'));
-        } else {
-            return {};
-        }
+
+    return (date) => {
+        date = new Date(date ? date.replace(/-/g, '/') : Date.now());
+
+        const zeroFormat = num => {
+            return num < 10 ? `0${num}` : num;
+        };
 
         const day = date.getDate();
-        const month = months[date.getMonth()] ?? '';
+        const month = date.getMonth();
         const hours = zeroFormat(date.getHours());
         const minutes = zeroFormat(date.getMinutes());
+        const year = date.getFullYear().toString().slice(-2);
+        const today = new Date().getDate() === day;
 
         return {
             milliSeconds: date ? date.getTime() : '',
-            time: `${today === day ? `${t('today')}` : `${day} ${t(month)}`} ${hours}:${minutes}`
+            time: `${today ? `${t('today')}` : `${day} ${t(months[month])}`} ${hours}:${minutes}`,
+            date: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`}`,
+            fullDate: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`} ${hours}:${minutes}`
         };
     };
-
-    const getFullDate = (date) => {
-        if (date) {
-            date = new Date(date);
-        } else {
-            return {};
-        }
-
-        const day = zeroFormat(date.getDate());
-        const month = zeroFormat(date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        return {
-            date: `${day}.${t(month)}.${year}`
-        };
-    };
-
-    return {getDate, getFullDate};
-
-    function zeroFormat(num) {
-        return num < 10 ? `0${num}` : num;
-    }
 };

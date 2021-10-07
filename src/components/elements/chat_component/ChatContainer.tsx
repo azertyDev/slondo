@@ -1,6 +1,6 @@
 import {FC, MouseEvent, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
-import {Grid} from "@material-ui/core";
+import {Grid, useMediaQuery, useTheme} from "@material-ui/core";
 import {chatAPI} from "@src/api/api";
 import {Chat} from './chat/Chat';
 import {Contacts} from './contacts/Contacts';
@@ -9,6 +9,7 @@ import {useModal} from "@src/hooks";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 
 export type MessageType = {
     author: { id: number },
@@ -33,43 +34,66 @@ type ChatContainerProps = {
 
 export type ContactType = {
     id: number,
-    name: string,
-    avatar: string,
     isBlocked: boolean,
     locked: boolean,
-    sys: boolean
+    sys: number,
+    numberOfMessage: number,
+    contact: {
+        id: number,
+        name: string,
+        avatar: string
+    }
 }
 
 export type OptionsType = 'block_user' | 'unblock_user' | 'remove_user';
 
+const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
+const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
+
 export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) => {
     const socket = useContext(SocketCtx);
-    const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
-    const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
-    const usersOnlineChannel = 'updateUserStatus';
+
+    const initContact = {
+        id: null,
+        isBlocked: false,
+        locked: false,
+        sys: 0,
+        numberOfMessage: 0,
+        contact: {
+            id: null,
+            name: null,
+            avatar: null
+        }
+    };
 
     const {t} = useTranslation('common');
     const {setErrorMsg} = useContext(ErrorCtx);
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const [page, setPage] = useState(1);
     const [isFetch, setIsFetch] = useState(false);
 
-    const [contact, setContact] = useState<ContactType>(null);
-    const [contacts, setContacts] = useState<ContactType[]>([]);
+    const [selectedContact, setSelectedContact] = useState<ContactType>(initContact);
+    const {contact} = selectedContact;
 
-    const [messages, setMessages] = useState<MessageType[]>([]);
+    const [contacts, setContacts] = useState<ContactType[]>([]);
+    const [unreadMsgList, setUnreadMsgList] = useState({});
+
     const [message, setMessage] = useState('');
     const [totalMessages, setTotalMessages] = useState(0);
+    const [messages, setMessages] = useState<MessageType[]>([]);
+    const [msgBuffer, setMsgBuffer] = useState(null);
+
+    const messageRef = useRef(null);
+    const messagesBottomRef = useRef(null);
+    const currentContact = useRef(null);
 
     const hasMoreMsgs = totalMessages > messages.length;
 
     const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
-    const messagesRef = useRef([]);
-    const messageRef = useRef(null);
-
     const options: OptionsType[] = [
-        `${contact?.isBlocked ? 'unblock_user' : 'block_user'}`,
+        `${selectedContact?.isBlocked ? 'unblock_user' : 'block_user'}`,
         'remove_user'
     ];
 
@@ -87,52 +111,58 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
         setMenuAnchor(null);
     };
 
+    const scrollToBottom = () => {
+        messagesBottomRef.current && (
+            messagesBottomRef.current
+                .scrollIntoView({block: "end", inline: 'start'})
+        );
+    };
+
     const firstMessageRef = useCallback(node => {
         if (isFetch) return;
         if (messageRef.current) messageRef.current.disconnect();
 
         messageRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMoreMsgs) {
-                setPage(prevPageNumber => prevPageNumber + 1);
+                setPage(page + 1);
             }
         });
 
         if (node) messageRef.current.observe(node);
     }, [isFetch, hasMoreMsgs]);
 
+    const resetUnreadCount = async () => {
+        try {
+            await chatAPI.resetCount(currentContact.current.id);
+        } catch (e) {
+            setErrorMsg(e.mesage);
+        }
+    };
+
+    const fetchInitContact = async () => {
+        const contact = await chatAPI.getContactById(initContactId);
+        unstable_batchedUpdates(() => {
+            setSelectedContact(contact);
+            currentContact.current = contact;
+        });
+    };
+
     const fetchUserContacts = async () => {
         try {
-            setIsFetch(true);
             const contacts = await chatAPI.getUserContacts();
 
-            if (initContactId) {
-                const contact = contacts.find(({contact}) => contact.id === initContactId);
-
-                const {
-                    sys,
-                    locked,
-                    isBlocked,
-                    contact: {id, name, avatar}
-                } = contact ?? await chatAPI.getContactById(initContactId);
-
-                setContact({
-                    id,
-                    name,
-                    avatar,
-                    locked,
-                    isBlocked,
-                    sys: !!sys
-                });
-            }
+            const unreadList = contacts.reduce((list, {contact, numberOfMessage}) => {
+                list[contact.id] = numberOfMessage;
+                return list;
+            }, {});
 
             unstable_batchedUpdates(() => {
                 setContacts(contacts);
-                setIsFetch(false);
+                setUnreadMsgList(unreadList);
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
                 setErrorMsg(e.mesage);
-                setIsFetch(false);
             });
         }
     };
@@ -142,16 +172,13 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
             setIsFetch(true);
 
             const isFirstPage = page === 1;
-
-            const {data, total} = await chatAPI.getMessages(contact.id, page, 4);
-
+            const {data, total} = await chatAPI.getMessages(contact.id, page, 10);
             const fetchedMessages = isFirstPage ? data : [...messages, ...data];
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
                 setTotalMessages(total);
                 setMessages(fetchedMessages);
-                if (isFirstPage) messagesRef.current = fetchedMessages;
             });
         } catch (e) {
             unstable_batchedUpdates(() => {
@@ -161,8 +188,12 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
         }
     };
 
-    const selectContact = (selectedContact) => () => {
-        selectedContact.id !== contact?.id && setContact(selectedContact);
+    const selectContact = (selectedContact: ContactType) => () => {
+        unstable_batchedUpdates(() => {
+            currentContact.current = selectedContact;
+            selectedContact.contact.id !== contact.id && setSelectedContact(selectedContact);
+            setUnreadMsgList({...unreadMsgList, [selectedContact.contact.id]: 0});
+        });
     };
 
     const sendMessage = async () => {
@@ -170,6 +201,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
             const form = new FormData();
             form.append('message', message);
             form.append('receiver_id', contact.id.toString());
+
 
             const {
                 message_id,
@@ -179,9 +211,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
                 created_at
             } = await chatAPI.sendMessage(form);
 
-            unstable_batchedUpdates(() => {
-                setMessages([
-                    ...messages,
+            unstable_batchedUpdates(async () => {
+                await setMessages([
                     {
                         message_id,
                         author,
@@ -190,76 +221,27 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
                             images,
                             created_at
                         }
-                    }
+                    },
+                    ...messages
                 ]);
+                scrollToBottom();
                 message !== '' && setMessage('');
             });
         } catch (e) {
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+            });
         }
+    };
+
+    const handleBack = () => {
+        setSelectedContact(initContact);
     };
 
     const handleMessage = ({key, shiftKey, target: {value}}) => {
         if (key === 'Enter' && !shiftKey && message !== '') {
             sendMessage();
         } else setMessage(value);
-    };
-
-    const handleImage = async ({target}) => {
-        try {
-            const form = new FormData();
-            const [img] = target.files;
-            form.append('files[]', img);
-            form.append('receiver_id', contact.id.toString());
-
-            const {
-                message_id,
-                sender_id,
-                text,
-                images,
-                created_at
-            } = await chatAPI.sendMessage(form);
-
-            unstable_batchedUpdates(() => {
-                setMessages([
-                    ...messages,
-                    {
-                        message_id,
-                        message: {
-                            text,
-                            images,
-                            created_at
-                        },
-                        author: {id: sender_id}
-                    }
-                ]);
-            });
-        } catch (e) {
-            setErrorMsg(e.message);
-        }
-    };
-
-    const contactsChannelListener = async ({contact_id}) => {
-        if (contacts.every(con => con.id !== contact_id)) {
-            await fetchUserContacts();
-        }
-    };
-
-    const messageChannelListener = (data: any) => {
-        const {sender_id, images, message_id, text, created_at} = data;
-        const message = {
-            text,
-            images,
-            created_at
-        };
-        unstable_batchedUpdates(() => {
-            messagesRef.current.push({
-                message_id,
-                message,
-                author: {id: sender_id}
-            });
-            setMessages([...messagesRef.current]);
-        });
     };
 
     const removeUser = async () => {
@@ -284,25 +266,61 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
         setMenuAnchor(null);
     };
 
+    // Channel listeners
+    const contactsChannelListener = async ({contact_id}) => {
+        if (currentContact.current?.contact.id !== contact_id) {
+            await fetchUserContacts();
+        }
+    };
+
+    const messageChannelListener = (msgData: any) => {
+        const {
+            sender_id,
+            message_id,
+            images,
+            text,
+            created_at
+        } = msgData;
+
+        const msg = {
+            message_id,
+            message: {
+                text,
+                images,
+                created_at
+            },
+            author: {id: sender_id}
+        };
+
+        unstable_batchedUpdates(async () => {
+            await setMsgBuffer(msg);
+            scrollToBottom();
+            sender_id === currentContact.current?.contact?.id && resetUnreadCount();
+        });
+    };
+
     useEffect(() => {
         fetchUserContacts();
+        initContactId && fetchInitContact();
     }, []);
 
     useEffect(() => {
-        contact && fetchMessages();
-    }, [contact?.id, page]);
+        contact.id && fetchMessages();
+    }, [contact.id, page]);
+
+    useEffect(() => {
+        msgBuffer
+        && contact.id === msgBuffer.author.id
+        && setMessages([msgBuffer, ...messages]);
+    }, [msgBuffer]);
 
     useEffect(() => {
         if (socket) {
             socket.on(messagesChannel, messageChannelListener);
             socket.on(contactsUpdateChannel, contactsChannelListener);
-            socket.on(usersOnlineChannel, (list) => {
-                // console.log(list);
-            });
             return () => {
                 socket.off(messagesChannel);
                 socket.off(contactsUpdateChannel);
-                socket.off(usersOnlineChannel);
             };
         }
     }, [socket]);
@@ -310,36 +328,50 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null}) =>
     const classes = useStyles();
     return (
         <Grid container className={classes.root}>
-            <Grid item xs={5}>
-                <Contacts
-                    contacts={contacts}
-                    selectContact={selectContact}
-                />
-            </Grid>
-            <Grid item xs={7}>
-                <Chat
-                    options={options}
-                    contact={contact}
-                    message={message}
-                    messages={messages}
-                    menuAnchor={menuAnchor}
-                    firstMessageRef={firstMessageRef}
-                    handleMenu={handleMenu}
-                    handleImage={handleImage}
-                    sendMessage={sendMessage}
-                    handleAnchor={handleAnchor}
-                    handleMessage={handleMessage}
-                    handleCloseMenu={handleCloseMenu}
-                />
-            </Grid>
-            <ConfirmModal
-                open={modalOpen}
-                handleConfirm={removeUser}
-                cancelTxt={t('cancel')}
-                handleClose={handleModalClose}
-                confirmTxt={t('cabinet:confirm')}
-                title={t('remove_contact_confirm')}
-            />
+            {contacts.length > 1 || contact.id
+                ? <>
+                    {(contact.id === null || !isXsDown) && (
+                        <Grid item xs={12} sm={5}>
+                            <Contacts
+                                contacts={contacts}
+                                unreadMsgList={unreadMsgList}
+                                selectContact={selectContact}
+                            />
+                        </Grid>
+                    )}
+                    {(contact.id !== null || !isXsDown) && (
+                        <Grid item xs={12} sm={7}>
+                            <Chat
+                                isFetch={isFetch}
+                                options={options}
+                                message={message}
+                                messages={messages}
+                                menuAnchor={menuAnchor}
+                                selectedContact={selectedContact}
+                                firstMessageRef={firstMessageRef}
+                                messagesBottomRef={messagesBottomRef}
+                                handleBack={handleBack}
+                                handleMenu={handleMenu}
+                                sendMessage={sendMessage}
+                                handleAnchor={handleAnchor}
+                                handleMessage={handleMessage}
+                                handleCloseMenu={handleCloseMenu}
+                            />
+                        </Grid>
+                    )}
+                    <ConfirmModal
+                        open={modalOpen}
+                        handleConfirm={removeUser}
+                        cancelTxt={t('cancel')}
+                        handleClose={handleModalClose}
+                        confirmTxt={t('cabinet:confirm')}
+                        title={t('remove_contact_confirm')}
+                    />
+                </>
+                : <div>
+                    {t('no_messages')}
+                </div>
+            }
         </Grid>
     );
 };

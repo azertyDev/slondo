@@ -20,8 +20,8 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
         userInfo: {id, rating, observer: {number_of_ratings}}
     } = props;
 
+    const getDate = useDate();
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-    const {getDate} = useDate();
 
     const classes = useStyles();
     return (

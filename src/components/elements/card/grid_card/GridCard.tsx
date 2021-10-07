@@ -43,7 +43,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const {auth: {isAuth}} = useContext(AuthCtx);
     const translatedTitle = transformCyrillic(title);
     const [liked, setLiked] = useState(favorite);
-    const {time = ''} = useDate().getDate(created_at);
+    const {time} = useDate()(created_at);
 
     const ctgrName = category.mark;
     const url = `/obyavlenie/${translatedTitle}-${id}`;

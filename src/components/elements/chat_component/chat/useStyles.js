@@ -18,7 +18,9 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '&.message-list': {
-                height: '300px',
+                display: 'flex',
+                flexDirection: 'column-reverse',
+                height: '200px',
                 overflowY: 'scroll',
                 overflowX: 'hidden',
                 padding: '25px 0',

@@ -34,7 +34,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
-    const {milliSeconds} = useDate().getDate(postData.expiration_at);
+    const {milliSeconds} = useDate()(postData.expiration_at);
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
     const [offerPrice, setOfferPrice] = useState('');

@@ -1,17 +1,19 @@
-import {FC, Fragment, useRef, useEffect, MouseEvent} from 'react';
+import {FC, Fragment, MouseEvent, MutableRefObject} from 'react';
 import {useDate} from "@src/hooks";
-import {IconButton, Menu, MenuItem, Typography} from "@material-ui/core";
-import {MoreVert, Send, CropOriginal} from "@material-ui/icons";
+import {IconButton, Menu, MenuItem, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {MoreVert, Send} from "@material-ui/icons";
 import {ContactType, MessageType, OptionsType} from "../ChatContainer";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 
 type ChatProps = {
+    isFetch: boolean,
+    handleBack: () => void,
     options: OptionsType[],
-    contact: ContactType,
+    selectedContact: ContactType,
     message: string,
     messages: MessageType[],
-    handleImage: (v) => void,
     handleMessage: (v) => void
     sendMessage: () => void,
     handleMenu: (option) => () => void
@@ -19,89 +21,91 @@ type ChatProps = {
     handleCloseMenu: () => void,
     menuAnchor: HTMLElement,
     firstMessageRef: (node) => void
+    messagesBottomRef: MutableRefObject<any>
 };
 
 export const Chat: FC<ChatProps> = (props) => {
     const {
-        options,
-        contact,
+        isFetch,
+        handleBack,
+        // options,
+        selectedContact,
         messages,
         message,
-        handleImage,
         handleMessage,
-        handleMenu,
+        // handleMenu,
         sendMessage,
-        handleAnchor,
-        menuAnchor,
-        handleCloseMenu,
-        firstMessageRef
+        // handleAnchor,
+        // menuAnchor,
+        // handleCloseMenu,
+        firstMessageRef,
+        messagesBottomRef
     } = props;
 
-    const isSystemUser = contact?.sys;
-    const {getDate} = useDate();
+    const getDate = useDate();
+    const isSystemUser = !!selectedContact?.sys;
+    const {contact} = selectedContact;
     const {t} = useTranslation('common');
-    const messagesBottomRef = useRef(null);
-
-    const scrollToBottom = () => {
-        messagesBottomRef.current.scrollIntoView(false);
-    };
-
-    useEffect(() => {
-        messagesBottomRef.current && scrollToBottom();
-    }, []);
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {contact
+            {contact.id !== null
                 ? <>
                     <div className='chat-header'>
                         <Typography variant='subtitle1'>
+                            {isXsDown && (
+                                <CustomButton onClick={handleBack}>
+                                    {t('back')}
+                                </CustomButton>
+                            )}
                             {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
-                        {!isSystemUser && (
-                            <>
-                                <IconButton
-                                    aria-label="more"
-                                    aria-haspopup="true"
-                                    aria-controls="long-menu"
-                                    onClick={handleAnchor}
-                                >
-                                    <MoreVert/>
-                                </IconButton>
-                                <Menu
-                                    keepMounted
-                                    id="long-menu"
-                                    anchorEl={menuAnchor}
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'center'
-                                    }}
-                                    onClose={handleCloseMenu}
-                                    open={Boolean(menuAnchor)}
-                                >
-                                    {options.map(option => (
-                                        <MenuItem
-                                            key={option}
-                                            onClick={handleMenu(option)}
-                                        >
-                                            {t(option)}
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                            </>
-                        )}
+                        {/*{!isSystemUser && (*/}
+                        {/*    <>*/}
+                        {/*        <IconButton*/}
+                        {/*            aria-label="more"*/}
+                        {/*            aria-haspopup="true"*/}
+                        {/*            aria-controls="long-menu"*/}
+                        {/*            onClick={handleAnchor}*/}
+                        {/*        >*/}
+                        {/*            <MoreVert/>*/}
+                        {/*        </IconButton>*/}
+                        {/*        <Menu*/}
+                        {/*            keepMounted*/}
+                        {/*            id="long-menu"*/}
+                        {/*            anchorEl={menuAnchor}*/}
+                        {/*            onClose={handleCloseMenu}*/}
+                        {/*            open={Boolean(menuAnchor)}*/}
+                        {/*            transformOrigin={{*/}
+                        {/*                vertical: 'top',*/}
+                        {/*                horizontal: 'center'*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            {options.map(option => (*/}
+                        {/*                <MenuItem*/}
+                        {/*                    key={option}*/}
+                        {/*                    onClick={handleMenu(option)}*/}
+                        {/*                >*/}
+                        {/*                    {t(option)}*/}
+                        {/*                </MenuItem>*/}
+                        {/*            ))}*/}
+                        {/*        </Menu>*/}
+                        {/*    </>*/}
+                        {/*)}*/}
                     </div>
                     <div className='message-list'>
+                        <div ref={messagesBottomRef}/>
                         {messages.map(({author, message}, index) => {
-                            const {text, images, created_at} = message;
-                            const isFirstMsg = index === 0;
+                            const {text, created_at} = message;
+                            const anchorMsg = index === messages.length - 4;
                             const {time} = getDate(created_at);
 
                             return (
                                 <Fragment key={index}>
                                     <div
-                                        ref={isFirstMsg ? firstMessageRef : null}
+                                        ref={anchorMsg ? firstMessageRef : null}
                                         className={
                                             `message ${+author.id === contact.id
                                                 ? 'left-side'
@@ -118,12 +122,6 @@ export const Chat: FC<ChatProps> = (props) => {
                                                 </pre>
                                             </Typography>
                                         )}
-                                        {images && images.map(({id, url}) =>
-                                            <img
-                                                key={id}
-                                                src={url.default}
-                                            />
-                                        )}
                                         <Typography className='time'>
                                             {time}
                                         </Typography>
@@ -131,18 +129,8 @@ export const Chat: FC<ChatProps> = (props) => {
                                 </Fragment>
                             );
                         })}
-                        <div ref={messagesBottomRef}/>
                     </div>
                     <div className='compose'>
-                        <label htmlFor='message' className='img-wrapper'>
-                            <CropOriginal/>
-                        </label>
-                        <input
-                            type='file'
-                            id='message'
-                            onChange={handleImage}
-                            accept='image/jpeg, image/png'
-                        />
                         <div className='textField'>
                             <textarea
                                 value={message}
@@ -154,7 +142,7 @@ export const Chat: FC<ChatProps> = (props) => {
                             <IconButton
                                 className='send-btn'
                                 onClick={sendMessage}
-                                disabled={message === ''}
+                                disabled={message === '' || isFetch}
                             >
                                 <Send/>
                             </IconButton>

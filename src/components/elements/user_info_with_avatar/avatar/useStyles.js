@@ -16,19 +16,19 @@ export const StyledBadge = withStyles((theme) => ({
             borderRadius: '50%',
             animation: '$ripple 1.2s infinite ease-in-out',
             border: '1px solid currentColor',
-            content: '""',
-        },
+            content: '""'
+        }
     },
     '@keyframes ripple': {
         '0%': {
             transform: 'scale(.8)',
-            opacity: 1,
+            opacity: 1
         },
         '100%': {
             transform: 'scale(2.4)',
-            opacity: 0,
-        },
-    },
+            opacity: 0
+        }
+    }
 }))(Badge);
 
 export const useStyles = makeStyles(() => ({
@@ -36,6 +36,15 @@ export const useStyles = makeStyles(() => ({
         '& .MuiAvatar-root': {
             width: ({width}) => width ?? '80px',
             height: ({height}) => height ?? '80px'
+        },
+        '& div.status': {
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            backgroundColor: 'red'
+        },
+        '& div.online': {
+            backgroundColor: 'green'
         }
-    },
+    }
 }));

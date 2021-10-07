@@ -29,13 +29,15 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     const isIncognito = INCOGNITO_NAMES.some(n => n === user?.name);
 
     const {t} = useTranslation('cabinet');
-    const {setErrorMsg} = useContext(ErrorCtx);
-    const {setAuthModalOpen, auth, user: siteUser} = useContext(AuthCtx);
 
-    const isSelf = user?.id === siteUser.id;
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {setAuthModalOpen, auth, user: self} = useContext(AuthCtx);
+
+    const isSelf = user?.id === self.id;
 
     const [isFollow, setIsFollow] = useState(false);
-    const {date = ''} = useDate().getFullDate(user.created_at);
+
+    const {date} = useDate()(user.created_at);
 
     const handleFollow = async () => {
         try {

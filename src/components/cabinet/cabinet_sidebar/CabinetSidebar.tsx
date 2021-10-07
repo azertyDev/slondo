@@ -78,17 +78,18 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
             />
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <Grid container spacing={isXsDown ? 0 : 1}>
-                    <Grid item xs={12} className='ban-color'>
+                    <Grid item xs={12}>
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
                                 disableGutters
+                                className='ban-color'
                                 selected={page === 'banned'}
                                 onClick={onButtonClick('banned')}
                                 classes={{selected: classes.selected}}
                             >
                                 <ErrorIcon/>
-                                <ListItemText primary={t('cabinet:banned')}/>
+                                <ListItemText primary={t('banned')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -173,7 +174,6 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         >
                             <ListItem
                                 button
-                                disabled
                                 disableGutters
                                 selected={page === 'messages'}
                                 classes={{selected: classes.selected}}
@@ -194,8 +194,8 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 button
                                 disableGutters
                                 selected={page === 'safe_deal'}
-                                onClick={handleListItemClick('safe_deal')}
                                 classes={{selected: classes.selected}}
+                                onClick={handleListItemClick('safe_deal')}
                             >
                                 <SafeIcon/>
                                 <ListItemText primary={t('safe_deal')}/>
@@ -209,8 +209,8 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 disabled
                                 disableGutters
                                 selected={page === 'paidServices'}
-                                onClick={handleListItemClick('paidServices')}
                                 classes={{selected: classes.selected}}
+                                onClick={handleListItemClick('paidServices')}
                             >
                                 <WalletIcon/>
                                 <ListItemText primary={t('paidServices')}/>

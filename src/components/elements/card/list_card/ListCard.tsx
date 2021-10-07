@@ -20,7 +20,7 @@ type ListCardPropsType = {
 
 export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
-    const {time = ''} = useDate().getDate(cardData.created_at);
+    const {time} = useDate()(cardData.created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}} = useContext(AuthCtx);

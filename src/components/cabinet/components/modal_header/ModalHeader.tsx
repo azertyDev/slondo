@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import {useStyles} from './useStyles';
 
 type ModalHeaderPropsType = {
-    title,
+    title?,
     hasPrevBtn?,
     handleBack?,
     handleCloseDialog?

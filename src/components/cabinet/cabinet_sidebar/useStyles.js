@@ -17,8 +17,8 @@ export const useStyles = makeStyles((theme) => ({
                 padding: 0,
                 marginBottom: 0
             },
-            '& div.ban-color > span > div': {
-                background: 'rgba(242, 153, 74, 0.15)'
+            '& div.ban-color': {
+                background: 'rgba(242, 153, 74, 0.15)!important'
             },
             '&:last-child': {
                 marginBottom: 0
@@ -61,8 +61,7 @@ export const useStyles = makeStyles((theme) => ({
         border: '1px solid #AD66D5',
         '& .MuiTypography-body1': {
             color: 'red',
-            backgroundImage:
-                'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+            backgroundImage: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
         },

@@ -38,12 +38,12 @@ export const Ratings: FC = () => {
         }
     };
 
+    const getDate = useDate();
     const [isFetch, setIsFetch] = useState(false);
     const [userRatings, setUserRatings] = useState([]);
     const [commentData, setCommentData] = useState(initCommentData);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {user: {id, rating, observer: {number_of_ratings}}} = useContext(AuthCtx);
-    const {getDate} = useDate();
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
@@ -135,9 +135,10 @@ export const Ratings: FC = () => {
                             {t('reviews_rating')}
                         </Typography>
                     </Box>
-                    {userRatings.map(({comments, rating}, index) => {
+                    {userRatings.map(({comments, rating, author, ...other}, index) => {
                         const [mainComment, ...replyComments] = comments;
                         const {time} = getDate(mainComment?.created_at);
+
                         return (
                             <Box key={index} className='review' pb={2} mb={2}>
                                 <Box mb={2}>
@@ -146,16 +147,16 @@ export const Ratings: FC = () => {
                                             <Grid item xs={2} container justifyContent='center'>
                                                 <UserAvatarComponent
                                                     userId={id}
+                                                    avatar={author.avatar}
                                                     width={isXsDown ? '30px' : '50px'}
                                                     height={isXsDown ? '30px' : '50px'}
-                                                    avatar={mainComment?.author?.avatar}
                                                 />
                                             </Grid>
                                             <Grid item xs={10} container alignItems='center'>
                                                 <Grid item xs={12} sm={8}>
                                                     <Typography variant='subtitle1' gutterBottom>
                                                         <strong>
-                                                            {`${mainComment?.author?.name ?? ''} ${mainComment?.author?.surname ?? ''}`}
+                                                            {`${author.name ?? ''} ${author.surname ?? ''}`}
                                                         </strong>
                                                     </Typography>
                                                     <Typography variant='caption' component='p' gutterBottom>
@@ -203,8 +204,8 @@ export const Ratings: FC = () => {
                                                         </ReadMore>
                                                         {index === comments.length - 1 && !creator && !reply && (
                                                             <CustomButton
-                                                                onClick={onReplyBtnClick(author, commentData)}
                                                                 color='secondary'
+                                                                onClick={onReplyBtnClick(author, commentData)}
                                                             >
                                                                 <Typography variant='subtitle1' component='p'>
                                                                     {t('common:answer')}

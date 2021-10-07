@@ -13,7 +13,7 @@ const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: production
+    baseURL: local
 });
 
 const setTokenToHeader = () => {
@@ -31,6 +31,15 @@ const setTokenToHeader = () => {
 };
 
 export const chatAPI = {
+    resetCount: (contact_id) => {
+        const params = {contact_id};
+        return instance
+            .post(`contact/reset`, params, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
     getContactById: (userId): Promise<any> => {
         return instance
             .get(`contact/${userId}`, setTokenToHeader())
@@ -69,10 +78,7 @@ export const chatAPI = {
         };
         return instance
             .get(`message/byReceiverId`, {params, ...setTokenToHeader()})
-            .then((res) => {
-                res.data.data = res.data.data.reverse();
-                return res.data;
-            })
+            .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;
             });

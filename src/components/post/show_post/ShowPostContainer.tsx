@@ -18,6 +18,7 @@ import {ChatContainer} from "@src/components/elements/chat_component/ChatContain
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import ErrorPage from "@root/pages/_error";
 import {useStyles} from './useStyles';
+import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
 
 export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({initPostData, statusCode}) => {
     const {t} = useTranslation('post');
@@ -163,13 +164,16 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                     onClose={handleCloseSafeDeal}
                     handleRefresh={setFetchedPostData}
                 />
-                <ResponsiveModal
-                    maxWidth='md'
-                    openDialog={chatOpen}
-                    handleCloseDialog={handleChatClose}
-                >
-                    <ChatContainer initContactId={postData.author.id}/>
-                </ResponsiveModal>
+                {isAuth && (
+                    <ResponsiveModal
+                        maxWidth='md'
+                        openDialog={chatOpen}
+                        handleCloseDialog={handleChatClose}
+                    >
+                        <ModalHeader handleCloseDialog={handleChatClose}/>
+                        <ChatContainer initContactId={postData.author.id}/>
+                    </ResponsiveModal>
+                )}
                 <ErrorModal/>
                 <AuthModal/>
                 <Hidden mdDown>

@@ -20,7 +20,7 @@ const App = (props) => {
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketProduction);
+    const socket = useSocket(socketDev);
     const userLocation = useUserLocation();
     const exitPrompt = useExitPrompt(false);
 
@@ -41,9 +41,11 @@ const App = (props) => {
     }, []);
 
     useEffect(() => {
-        if (browser && socket && user.id !== null) {
+        if (browser && socket) {
             socket.on('connect', () => {
-                socket.emit('user_connected', user.id);
+                if (user.id !== null) {
+                    socket.emit('user_connected', user.id);
+                }
             });
             return () => {
                 socket.off('connect', () => {
@@ -51,7 +53,7 @@ const App = (props) => {
                 });
             };
         }
-    }, [socket]);
+    }, [socket, user]);
 
     return (
         <ErrorCtx.Provider value={error}>

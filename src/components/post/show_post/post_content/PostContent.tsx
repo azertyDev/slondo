@@ -77,7 +77,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         handleModalOpen: handleComplainOpen
     } = useModal();
 
-    const {time = ''} = useDate().getDate(post.created_at);
+    const {time} = useDate()(post.created_at);
 
     const handleComplaintModalOpen = () => {
         if (isAuth) {
@@ -329,7 +329,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <ShowPhone postId={post.id}/>
                         <CustomButton
                             color='silver'
-                            disabled
                             onClick={handleChatOpen}
                         >
                             <Typography variant='subtitle1'>
@@ -372,7 +371,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 {isAuction && (
                     <div className="started-price">
-                        <Typography variant="button">{t('startingPrice')}</Typography>
+                        <Typography variant="button">
+                            {t('startingPrice')}
+                        </Typography>
                         <span>
                             <Typography variant="body2">
                                 {numberPrettier(post.price)} {t(`common:${post.currency.name}`)}
