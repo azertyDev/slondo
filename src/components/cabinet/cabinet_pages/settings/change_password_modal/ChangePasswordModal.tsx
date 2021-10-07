@@ -158,12 +158,12 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
 
     const getContent = () => {
         switch (status) {
-            case 'confirm':
-                return <Grid item xs={12} container justifyContent='center'>
-                    <Typography variant='subtitle1' component='p' align='center'>
-                        {t('codeWillBeSent')}
-                    </Typography>
-                </Grid>;
+            // case 'confirm':
+            //     return <Grid item xs={12} container justifyContent='center'>
+            //         <Typography variant='subtitle1' component='p' align='center'>
+            //             {t('codeWillBeSent')}
+            //         </Typography>
+            //     </Grid>;
             case 'code_confirm':
                 return <>
                     <Grid item xs={12}>

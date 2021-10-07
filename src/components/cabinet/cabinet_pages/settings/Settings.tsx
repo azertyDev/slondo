@@ -282,8 +282,8 @@ export const Settings: FC = () => {
                                         className={classes.recoveryBtn}
                                         startIcon={
                                             <span className={classes.icon}>
-                                        <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small'/>
-                                    </span>
+                                                <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small'/>
+                                            </span>
                                         }
                                     >
                                         <Typography variant='subtitle1'>
