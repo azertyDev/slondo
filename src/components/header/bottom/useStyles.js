@@ -181,15 +181,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.MuiPaper-root': {
             width: '320px',
             padding: '10px',
-            backgroundColor: '#fff',
-            '& nav.menu-item': {
-                padding: '5px',
-                marginBottom: '5px',
-                background: 'none',
-                '& div.MuiButtonBase-root': {
-                    backgroundColor: '#f2f2f2'
-                }
-            }
+            background: '#fff',
+            boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+            borderRadius: 10
         }
     }
 }));

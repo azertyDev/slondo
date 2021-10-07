@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
             right: '5px',
             height: '16px',
             padding: '0',
-            minWidth: '16px',
+            maxWidth: '25px',
         }
     }
 }));

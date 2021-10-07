@@ -17,6 +17,7 @@ export const HelpSidebar: FC<ThemesMenuPropsType> = ({menuStruct}) => {
                         key={index}
                         component="nav"
                         className={classes.helpMenu}
+
                     >
                         {data.map(el => {
                             return (

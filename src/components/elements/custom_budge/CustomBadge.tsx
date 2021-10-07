@@ -13,6 +13,7 @@ export const CustomBadge: FC<any> = (props) => {
                 vertical: 'top',
                 horizontal: 'right'
             }}
+            max={99}
         >
             {props.children}
         </Badge>
