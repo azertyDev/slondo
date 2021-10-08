@@ -29,7 +29,8 @@ export type MessageType = {
 
 type ChatContainerProps = {
     initContactId?: number,
-    hideContacts?: boolean
+    hideContacts?: boolean,
+    handleChatClose?
 };
 
 export type ContactType = {
@@ -51,7 +52,7 @@ const onlineListChannel = 'updateUserStatus';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
 const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
-export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hideContacts = false}) => {
+export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hideContacts = false, handleChatClose}) => {
     const socket = useContext(SocketCtx);
 
     const initContact = {
@@ -329,7 +330,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
         }
     }, [socket]);
 
-    const classes = useStyles();
+    const classes = useStyles({hideContacts});
     return (
         <Grid container className={classes.root}>
             {contacts.length > 1 || contact.id
@@ -341,6 +342,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
                                 onlineList={onlineList}
                                 unreadMsgList={unreadMsgList}
                                 selectContact={selectContact}
+                                selectedContactId={selectedContact.id}
                             />
                         </Grid>
                     )}
@@ -351,6 +353,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
                                 options={options}
                                 message={message}
                                 messages={messages}
+                                hideContacts={hideContacts}
+                                handleChatClose={handleChatClose}
                                 menuAnchor={menuAnchor}
                                 selectedContact={selectedContact}
                                 firstMessageRef={firstMessageRef}

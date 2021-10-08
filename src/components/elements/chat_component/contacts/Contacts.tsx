@@ -8,6 +8,7 @@ type ContactsProps = {
     contacts,
     onlineList,
     unreadMsgList,
+    selectedContactId: number,
     selectContact: (contact) => () => void
 }
 
@@ -16,7 +17,8 @@ export const Contacts: FC<ContactsProps> = (props) => {
         contacts,
         onlineList,
         unreadMsgList,
-        selectContact
+        selectContact,
+        selectedContactId
     } = props;
 
     const getDate = useDate();
@@ -37,11 +39,12 @@ export const Contacts: FC<ContactsProps> = (props) => {
                     const {hoursMin} = getDate(created_at);
                     const unreadCount = unreadMsgList[id];
                     const hasUnread = unreadCount > 0;
+                    const selected = selectedContactId === contact.id;
 
                     return !sys && (
                         <div
                             key={id}
-                            className='conversation-item'
+                            className={`conversation-item ${hasUnread ? 'unread' : ''} ${selected ? 'selected' : ''}`}
                             onClick={selectContact(contact)}
                         >
                             <UserAvatarComponent
@@ -58,7 +61,7 @@ export const Contacts: FC<ContactsProps> = (props) => {
                                 className='contact-info'
                             >
                                 <div className='user-name'>
-                                    <Typography variant='subtitle1'>
+                                    <Typography variant='subtitle1' gutterBottom>
                                         {sys ? 'Slondo.uz' : name}
                                     </Typography>
                                     {text && (
@@ -69,7 +72,7 @@ export const Contacts: FC<ContactsProps> = (props) => {
                                 </div>
                                 {text && (
                                     <div className='time-counter'>
-                                        <Typography variant='subtitle2'>
+                                        <Typography variant='subtitle2' gutterBottom={!!unreadCount}>
                                             {hoursMin}
                                         </Typography>
                                         {hasUnread && (

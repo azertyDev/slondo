@@ -17,6 +17,12 @@ export const useStyles = makeStyles((theme) => ({
                 background: '#F8F8F8',
                 boxShadow: '0px 0px 8px rgba(132, 92, 171, 0.15)',
                 borderRadius: '5px 0px 0px 0px',
+                '&.unread': {
+                    background: 'linear-gradient(0deg, rgba(229, 243, 255, 0.5), rgba(229, 243, 255, 0.5)), #FFFFFF'
+                },
+                '&.selected': {
+                    background: '#eeeef1'
+                },
                 '&:hover': {
                     cursor: 'pointer',
                     backgroundColor: '#eeeef1'
@@ -29,14 +35,10 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '& div.contact-info': {
-                    '& > div': {
+                    '& div.user-name': {
+                        width: 'inherit',
                         display: 'flex',
                         flexDirection: 'column',
-                        '& > h6:first-child': {
-                            marginBottom: '5px'
-                        }
-                    },
-                    '& div.user-name': {
                         '& .MuiTypography-subtitle1': {
                             fontWeight: 600
                         },
@@ -45,11 +47,16 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     },
                     '& div.time-counter': {
+                        display: 'flex',
+                        flexDirection: 'column',
                         alignItems: 'center',
                         '& h6.msg-counter': {
-                            padding: '2px',
-                            borderRadius: '45%',
+                            width: 20,
                             color: '#fff',
+                            padding: '2px',
+                            display: 'flex',
+                            borderRadius: '45%',
+                            justifyContent: 'center',
                             backgroundColor: theme.palette.primary.adBgColor
                         }
                     }

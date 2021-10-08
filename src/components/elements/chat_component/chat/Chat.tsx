@@ -1,7 +1,7 @@
 import {FC, Fragment, MouseEvent, MutableRefObject} from 'react';
 import {useDate} from '@src/hooks';
-import {Box, IconButton, Menu, MenuItem, TextField, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {MoreVert, Send, KeyboardArrowLeft} from '@material-ui/icons';
+import {Box, IconButton, TextField, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Send, KeyboardArrowLeft} from '@material-ui/icons';
 import {ContactType, MessageType, OptionsType} from '../ChatContainer';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
@@ -16,7 +16,9 @@ type ChatProps = {
     messages: MessageType[],
     handleMessage: (v) => void
     sendMessage: () => void,
+    hideContacts: boolean,
     handleMenu: (option) => () => void
+    handleChatClose,
     handleAnchor: (e: MouseEvent<HTMLElement>) => void,
     handleCloseMenu: () => void,
     menuAnchor: HTMLElement,
@@ -35,10 +37,12 @@ export const Chat: FC<ChatProps> = (props) => {
         handleMessage,
         // handleMenu,
         sendMessage,
+        handleChatClose,
         // handleAnchor,
         // menuAnchor,
         // handleCloseMenu,
         firstMessageRef,
+        hideContacts,
         messagesBottomRef
     } = props;
 
@@ -56,8 +60,8 @@ export const Chat: FC<ChatProps> = (props) => {
                 ? <>
                     <div className='chat-header'>
                         {isXsDown && (
-                            <CustomButton onClick={handleBack}>
-                                <KeyboardArrowLeft color='action' fontSize='medium'/>
+                            <CustomButton onClick={hideContacts ? handleChatClose : handleBack}>
+                                <KeyboardArrowLeft color='action' fontSize='medium' />
                             </CustomButton>
                         )}
                         <Typography variant='subtitle1'>
