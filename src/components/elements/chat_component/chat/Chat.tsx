@@ -6,6 +6,8 @@ import {ContactType, MessageType, OptionsType} from '../ChatContainer';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {CloseIcon} from '@src/components/elements/icons';
+import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 
 type ChatProps = {
     isFetch: boolean,
@@ -59,14 +61,12 @@ export const Chat: FC<ChatProps> = (props) => {
             {contact.id !== null
                 ? <>
                     <div className='chat-header'>
-                        {isXsDown && (
-                            <CustomButton onClick={hideContacts ? handleChatClose : handleBack}>
-                                <KeyboardArrowLeft color='action' fontSize='medium' />
-                            </CustomButton>
-                        )}
                         <Typography variant='subtitle1'>
                             {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
+                        {hideContacts && (
+                            <CloseBtn handleClose={hideContacts ? handleChatClose : handleBack} />
+                        )}
                         {/*{!isSystemUser && (*/}
                         {/*    <>*/}
                         {/*        <IconButton*/}

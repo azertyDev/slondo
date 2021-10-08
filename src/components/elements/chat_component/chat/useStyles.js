@@ -16,16 +16,17 @@ export const useStyles = makeStyles((theme) => ({
                     padding: 10
                 },
                 '& .MuiTypography-subtitle1': {
+                    flex: 1,
                     fontWeight: 600,
-                    [theme.breakpoints.down('xs')]: {
-                        flex: 1,
-                        textAlign: 'center'
-                    }
+                    textAlign: 'center'
                 },
                 '& .MuiButtonBase-root': {
-                    padding: 0,
+                    right: '15px',
                     background: 'none',
-                    position: 'absolute'
+                    position: 'absolute',
+                    [theme.breakpoints.down('xs')]: {
+                        right: '10px'
+                    }
                 }
             },
             '&.message-list': {
