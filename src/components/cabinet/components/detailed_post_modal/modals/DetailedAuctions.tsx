@@ -163,7 +163,6 @@ export const DetailedAuctions: FC<DetailedPostViewPropsType> = (props) => {
                             showBetsCount={2}
                             betsCount={betsCount}
                             auctionId={auctionId}
-                            handleRefresh={setFetchedBetsData}
                             title={t('auction:extremeRates')}
                         />}
                 </Grid>

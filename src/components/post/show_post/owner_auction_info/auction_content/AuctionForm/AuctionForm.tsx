@@ -16,15 +16,13 @@ import {fieldRequiredTxt} from "@root/validation_schemas/validateMessages";
 
 type AuctionFromPropsType = {
     lastBet,
-    auctionId: string,
-    handleRefresh: () => void
+    auctionId: string
 };
 
 export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         lastBet,
-        auctionId,
-        handleRefresh
+        auctionId
     } = props;
 
     const {t} = useTranslation('auction');
@@ -70,7 +68,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const onSubmit = async ({bet}, {resetForm}) => {
         await handleBet(bet.replace(whiteSpacesRegEx, ''));
         resetForm();
-        handleRefresh();
+        // handleRefresh();
     };
 
     const formik = useFormik({

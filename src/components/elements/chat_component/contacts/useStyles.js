@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.conversation-list': {
             display: 'flex',
@@ -28,11 +28,15 @@ export const useStyles = makeStyles({
                         height: 50
                     }
                 },
-                '& div.user-info': {
-                    width: '100%',
-                    '& div.user-name': {
+                '& div.contact-info': {
+                    '& > div': {
                         display: 'flex',
-                        justifyContent: 'space-between',
+                        flexDirection: 'column',
+                        '& > h6:first-child': {
+                            marginBottom: '5px'
+                        }
+                    },
+                    '& div.user-name': {
                         '& .MuiTypography-subtitle1': {
                             fontWeight: 600
                         },
@@ -40,11 +44,17 @@ export const useStyles = makeStyles({
                             color: '#838383'
                         }
                     },
-                    '& .message-fragment': {
-                        maxWidth: '211px'
+                    '& div.time-counter': {
+                        alignItems: 'center',
+                        '& h6.msg-counter': {
+                            padding: '2px',
+                            borderRadius: '45%',
+                            color: '#fff',
+                            backgroundColor: theme.palette.primary.adBgColor
+                        }
                     }
                 }
             }
         }
     }
-});
+}));

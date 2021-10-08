@@ -1,15 +1,16 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {browser} from 'process';
-import {Box, Avatar} from '@material-ui/core';
-import {StyledBadge, useStyles} from './useStyles';
+import {Box, Avatar, Badge} from '@material-ui/core';
 import {AuthCtx, SocketCtx} from '@src/context';
+import {useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
     userId: number,
     avatar?: string
     width?: string | number,
-    height?: string | number
+    height?: string | number,
+    isOnline?: boolean
 };
 
 export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
@@ -17,14 +18,15 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
         userId,
         avatar,
         width,
-        height
+        height,
+        isOnline
     } = props;
 
     const socket = useContext(SocketCtx);
     const [online, setOnline] = useState(false);
     const isSelf = useContext(AuthCtx).user.id === userId;
 
-    const onlineClass = online ? 'online' : '';
+    const onlineStatus = isOnline || online;
 
     useEffect(() => {
         if (browser && socket && userId) {
@@ -35,7 +37,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
         }
     }, [socket, userId]);
 
-    const classes = useStyles({width, height});
+    const classes = useStyles({onlineStatus, width, height});
     return (
         <Box
             mr={1}
@@ -43,15 +45,15 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
             alignItems='center'
             className={classes.root}
         >
-            <StyledBadge
+            <Badge
                 variant='dot'
-                invisible={!online}
+                invisible={isSelf}
                 overlap="circular"
+                classes={{badge: classes.badge}}
                 anchorOrigin={{
                     horizontal: 'right',
                     vertical: 'bottom'
                 }}
-                color={online ? 'secondary' : 'error'}
             >
                 <Link href={`/user/profile_posts/${userId}`}>
                     <a>
@@ -61,8 +63,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
                         />
                     </a>
                 </Link>
-            </StyledBadge>
-            {/*<div className={`status ${onlineClass}`} />*/}
+            </Badge>
         </Box>
     );
 };

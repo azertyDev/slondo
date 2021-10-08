@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         padding: '20px',
-        // boxShadow: '0px 0px 8px 0px #845CAB26',
         [theme.breakpoints.down('xs')]: {
             padding: 0
         },
@@ -42,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& div.message': {
                     width: 'fit-content',
                     maxWidth: '80%',
-                    padding: '15px',
+                    padding: '5px',
                     backgroundColor: '#f1f1f1',
                     borderRadius: '5px',
                     marginBottom: '10px',
@@ -50,13 +49,14 @@ export const useStyles = makeStyles((theme) => ({
                         position: 'relative',
                         '& > pre': {
                             margin: '0 0 5px',
+                            fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
                             wordBreak: 'break-word',
                             whiteSpace: 'pre-wrap'
                         }
                     },
                     '& img': {
                         width: '100%',
-                        marginBottom: '5px',
+                        marginBottom: '10px',
                         borderRadius: '5px'
                     },
                     '& p.time': {
@@ -137,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
                     '& svg': {
                         transform: 'rotate(50deg)'
                     }
-                },
+                }
             }
         }
     }

@@ -4,7 +4,8 @@ import Rating from '@material-ui/lab/Rating';
 export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
         '& div.rating': {
             display: 'flex',
             alignItems: 'center',

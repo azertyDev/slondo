@@ -47,6 +47,7 @@ export type ContactType = {
 
 export type OptionsType = 'block_user' | 'unblock_user' | 'remove_user';
 
+const onlineListChannel = 'updateUserStatus';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
 const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
@@ -77,6 +78,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     const {contact} = selectedContact;
 
     const [contacts, setContacts] = useState<ContactType[]>([]);
+    const [onlineList, setOnlineList] = useState({});
     const [unreadMsgList, setUnreadMsgList] = useState({});
 
     const [message, setMessage] = useState('');
@@ -167,12 +169,12 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
         }
     };
 
-    const fetchMessages = async () => {
+    const fetchMessages = async (contactId, page = 1) => {
         try {
             setIsFetch(true);
 
             const isFirstPage = page === 1;
-            const {data, total} = await chatAPI.getMessages(contact.id, page, 10);
+            const {data, total} = await chatAPI.getMessages(contactId, page, 10);
             const fetchedMessages = isFirstPage ? data : [...messages, ...data];
 
             unstable_batchedUpdates(() => {
@@ -189,10 +191,11 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     };
 
     const selectContact = (selectedContact: ContactType) => () => {
-        unstable_batchedUpdates(() => {
+        unstable_batchedUpdates(async () => {
             currentContact.current = selectedContact;
             selectedContact.contact.id !== contact.id && setSelectedContact(selectedContact);
             setUnreadMsgList({...unreadMsgList, [selectedContact.contact.id]: 0});
+            await fetchMessages(selectedContact.contact.id);
         });
     };
 
@@ -239,7 +242,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     };
 
     const handleMessage = ({key, shiftKey, target: {value}}) => {
-        if (key === 'Enter' && !shiftKey && message !== '') {
+        if (key === 'Enter' && !shiftKey && value.trim() !== '') {
             sendMessage();
         } else setMessage(value);
     };
@@ -271,6 +274,10 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
         if (currentContact.current?.contact.id !== contact_id) {
             await fetchUserContacts();
         }
+    };
+
+    const onlineListListener = async (list) => {
+        setOnlineList(list);
     };
 
     const messageChannelListener = (msgData: any) => {
@@ -305,8 +312,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     }, []);
 
     useEffect(() => {
-        contact.id && fetchMessages();
-    }, [contact.id, page]);
+        contact.id && fetchMessages(contact.id, page);
+    }, [page]);
 
     useEffect(() => {
         msgBuffer
@@ -317,11 +324,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     useEffect(() => {
         if (socket) {
             socket.on(messagesChannel, messageChannelListener);
+            socket.on(onlineListChannel, onlineListListener);
             socket.on(contactsUpdateChannel, contactsChannelListener);
-            return () => {
-                socket.off(messagesChannel);
-                socket.off(contactsUpdateChannel);
-            };
         }
     }, [socket]);
 
@@ -334,6 +338,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
                         <Grid item xs={12} sm={5}>
                             <Contacts
                                 contacts={contacts}
+                                onlineList={onlineList}
                                 unreadMsgList={unreadMsgList}
                                 selectContact={selectContact}
                             />

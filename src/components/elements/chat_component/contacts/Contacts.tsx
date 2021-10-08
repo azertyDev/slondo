@@ -6,6 +6,7 @@ import {useDate} from "@src/hooks";
 
 type ContactsProps = {
     contacts,
+    onlineList,
     unreadMsgList,
     selectContact: (contact) => () => void
 }
@@ -13,6 +14,7 @@ type ContactsProps = {
 export const Contacts: FC<ContactsProps> = (props) => {
     const {
         contacts,
+        onlineList,
         unreadMsgList,
         selectContact
     } = props;
@@ -30,9 +32,11 @@ export const Contacts: FC<ContactsProps> = (props) => {
                         contact: {id, name, avatar}
                     } = contact;
 
+                    const isOnline = !!onlineList[id];
                     const {text, created_at} = lastMessage ?? {};
-                    const {time} = getDate(created_at);
+                    const {hoursMin} = getDate(created_at);
                     const unreadCount = unreadMsgList[id];
+                    const hasUnread = unreadCount > 0;
 
                     return !sys && (
                         <div
@@ -45,33 +49,35 @@ export const Contacts: FC<ContactsProps> = (props) => {
                                 width={50}
                                 height={50}
                                 avatar={avatar}
+                                isOnline={isOnline}
                             />
                             <Box
-                                display='flex'
-                                flexDirection='column'
                                 width={0.8}
+                                display='flex'
+                                justifyContent='space-between'
+                                className='contact-info'
                             >
-                                <div className='user-info'>
-                                    <div className='user-name'>
-                                        <Typography variant='subtitle1'>
-                                            {sys ? 'Slondo.uz' : name}
-                                        </Typography>
-                                    </div>
-                                </div>
-                                {text && (
-                                    <>
-                                        <Typography variant='subtitle2'>
-                                            {time}
-                                        </Typography>
+                                <div className='user-name'>
+                                    <Typography variant='subtitle1'>
+                                        {sys ? 'Slondo.uz' : name}
+                                    </Typography>
+                                    {text && (
                                         <Typography variant='subtitle2' noWrap>
                                             {text}
                                         </Typography>
-                                        {unreadCount && (
-                                            <Typography>
+                                    )}
+                                </div>
+                                {text && (
+                                    <div className='time-counter'>
+                                        <Typography variant='subtitle2'>
+                                            {hoursMin}
+                                        </Typography>
+                                        {hasUnread && (
+                                            <Typography variant='subtitle2' className='msg-counter'>
                                                 {unreadCount}
                                             </Typography>
                                         )}
-                                    </>
+                                    </div>
                                 )}
                             </Box>
                         </div>

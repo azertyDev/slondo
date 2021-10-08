@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {AuctionTimer} from './AuctionTimer';
 import {unstable_batchedUpdates} from "react-dom";
@@ -29,24 +29,29 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('post');
+
     const auctionId = postData.auction.id;
     const isPublic = postData.status === 'public';
 
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
+    const {auth: {isAuth}, user, setAuthModalOpen} = useContext(AuthCtx);
     const {milliSeconds} = useDate()(postData.expiration_at);
+
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
+
     const [offerPrice, setOfferPrice] = useState('');
     const [isFetch, setIsFetch] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
 
-    const {bets, betsCount, setFetchedBetsData} = auctionInfo;
+    const {bets, betsCount} = auctionInfo;
     const [lastBet] = bets;
 
     const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;
     const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
+
+    const isCreator = user.id === postData.author.id;
 
     const handleModalBuyNow = value => () => {
         isAuth
@@ -98,17 +103,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         setOfferPrice(target.value);
     };
 
-    // useEffect(() => {
-    //     socketIO.on('bet-channel', async (lastBet) => {
-    //         setBets([lastBet, ...betsRef.current]);
-    //     });
-    //     () => socketIO.off('bet-channel');
-    // }, []);
-
-    useEffect(() => {
-        setFetchedBetsData();
-    }, []);
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -137,15 +131,13 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                     showBetsCount={5}
                     auctionId={auctionId}
                     betsCount={betsCount}
-                    handleRefresh={setFetchedBetsData}
                     title={t('auction:currentRates')}
                 />
-                {isPublic && !postData.creator && (
+                {isPublic && !isCreator && (
                     <>
                         <AuctionForm
                             lastBet={lastBet}
                             auctionId={auctionId}
-                            handleRefresh={setFetchedBetsData}
                         />
                         {hasBuyNow && (
                             <div>

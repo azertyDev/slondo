@@ -64,22 +64,22 @@ export const UserCard: FC<UserCardProps> = (props) => {
                             {phone}
                         </Typography>
                         : <>
-                            <PhoneIcon />
+                            <PhoneIcon/>
                             <Typography variant='subtitle2' component='p'>
                                 {t('post:show_phone')}
                             </Typography>
                         </>
                     }
                 </CustomButton>
-                <CustomButton disabled>
-                    <LetterIcon />
+                <CustomButton>
+                    <LetterIcon/>
                     <Typography variant='subtitle2' component='p'>
                         {t('post:writeMessage')}
                     </Typography>
                 </CustomButton>
                 {hasUserForRating && (
                     <CustomButton onClick={handleOpenRating} className='ratingBtn'>
-                        <Star />
+                        <Star/>
                         <Typography variant='subtitle2' component='p'>
                             {t('give_rating')}
                         </Typography>

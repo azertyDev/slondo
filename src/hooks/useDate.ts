@@ -21,6 +21,7 @@ export const useDate = () => {
         return {
             milliSeconds: date ? date.getTime() : '',
             time: `${today ? `${t('today')}` : `${day} ${t(months[month])}`} ${hours}:${minutes}`,
+            hoursMin: `${hours}:${minutes}`,
             date: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`}`,
             fullDate: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`} ${hours}:${minutes}`
         };

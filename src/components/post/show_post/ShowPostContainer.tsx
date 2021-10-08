@@ -16,9 +16,9 @@ import {CustomHead} from "@src/components/head/CustomHead";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
+import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
 import ErrorPage from "@root/pages/_error";
 import {useStyles} from './useStyles';
-import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
 
 export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({initPostData, statusCode}) => {
     const {t} = useTranslation('post');
@@ -165,7 +165,6 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                     handleRefresh={setFetchedPostData}
                 />
                 <ResponsiveModal
-                    keepMounted
                     maxWidth='md'
                     openDialog={chatOpen}
                     handleCloseDialog={handleChatClose}

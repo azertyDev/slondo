@@ -4,9 +4,7 @@ import {
     Grid,
     List,
     ListItem,
-    ListItemText,
-    useMediaQuery,
-    useTheme
+    ListItemText
 } from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';
@@ -25,7 +23,7 @@ import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
 import {AuthCtx} from '@src/context/AuthCtx';
 import {useStyles} from './useStyles';
-import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
+import {SocketCtx} from "@src/context";
 
 type MainMenuPropsType = {
     clearAnchor?: () => void
@@ -35,6 +33,7 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
     const {push, asPath, query: {page}} = useRouter();
     const {user, clearUser} = useContext(AuthCtx);
+    const socket = useContext(SocketCtx);
 
     const {
         observer: {
@@ -62,20 +61,15 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                 await push('/');
             }
 
+            socket.emit('user_disconnect', user.id);
+
             clearUser();
         });
     };
 
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {/*<CabinetUserAvatar*/}
-            {/*    page={page as string}*/}
-            {/*    onButtonClick={onButtonClick}*/}
-            {/*    selectedClass={classes.selected}*/}
-            {/*/>*/}
             <List
                 disablePadding
                 component="nav"
@@ -95,7 +89,7 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={onButtonClick('rating')}
                                 classes={{selected: classes.selected}}
                             >
-                                <ListItemText primary={t('cabinet:rating')} />
+                                <ListItemText primary={t('cabinet:rating')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -107,29 +101,29 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                             onClick={onButtonClick('subs')}
                             classes={{selected: classes.selected}}
                         >
-                            <ListItemText primary={t('cabinet:subs')} />
+                            <ListItemText primary={t('cabinet:subs')}/>
                         </ListItem>
                     </Grid>
                 </Grid>
             </List>
-            {/*<List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>*/}
-            {/*    <Grid container spacing={0}>*/}
-            {/*        <Grid item xs={12} className='ban-color'>*/}
-            {/*            <CustomBadge badgeContent={0} color='error'>*/}
-            {/*                <ListItem*/}
-            {/*                    button*/}
-            {/*                    disableGutters*/}
-            {/*                    selected={page === 'banned'}*/}
-            {/*                    onClick={onButtonClick('banned')}*/}
-            {/*                    classes={{selected: classes.selected}}*/}
-            {/*                >*/}
-            {/*                    <ErrorIcon/>*/}
-            {/*                    <ListItemText primary={t('cabinet:banned')}/>*/}
-            {/*                </ListItem>*/}
-            {/*            </CustomBadge>*/}
-            {/*        </Grid>*/}
-            {/*    </Grid>*/}
-            {/*</List>*/}
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+                <Grid container spacing={0}>
+                    <Grid item xs={12} className='ban-color'>
+                        <CustomBadge badgeContent={0} color='error'>
+                            <ListItem
+                                button
+                                disableGutters
+                                selected={page === 'banned'}
+                                onClick={onButtonClick('banned')}
+                                classes={{selected: classes.selected}}
+                            >
+                                <ErrorIcon/>
+                                <ListItemText primary={t('cabinet:banned')}/>
+                            </ListItem>
+                        </CustomBadge>
+                    </Grid>
+                </Grid>
+            </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <Grid container spacing={0}>
                     <Grid item xs={12}>
@@ -140,8 +134,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                             onClick={handleListItemClick('posts')}
                             classes={{selected: classes.selected}}
                         >
-                            <NotesIcon />
-                            <ListItemText primary={t('myPosts')} />
+                            <NotesIcon/>
+                            <ListItemText primary={t('myPosts')}/>
                         </ListItem>
                     </Grid>
                     <Grid item xs={12}>
@@ -152,8 +146,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                             onClick={handleListItemClick('auctions')}
                             classes={{selected: classes.selected}}
                         >
-                            <GavelIcon />
-                            <ListItemText primary={t('myAuctions')} />
+                            <GavelIcon/>
+                            <ListItemText primary={t('myAuctions')}/>
                         </ListItem>
                     </Grid>
                     <Grid item xs={12}>
@@ -165,8 +159,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={handleListItemClick('purchases')}
                                 classes={{selected: classes.selected}}
                             >
-                                <ShoppingIcon />
-                                <ListItemText primary={t('myPurchases')} />
+                                <ShoppingIcon/>
+                                <ListItemText primary={t('myPurchases')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -179,8 +173,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={handleListItemClick('favorite')}
                                 classes={{selected: classes.selected}}
                             >
-                                <FavoriteBorderIcon />
-                                <ListItemText primary={t('favorite')} />
+                                <FavoriteBorderIcon/>
+                                <ListItemText primary={t('favorite')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -197,8 +191,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={handleListItemClick('notifications')}
                                 classes={{selected: classes.selected}}
                             >
-                                <NotificationIcon />
-                                <ListItemText primary={t('notifications')} />
+                                <NotificationIcon/>
+                                <ListItemText primary={t('notifications')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -209,14 +203,13 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                         >
                             <ListItem
                                 button
-                                disabled
                                 disableGutters
                                 selected={page === 'messages'}
                                 classes={{selected: classes.selected}}
                                 onClick={handleListItemClick('messages')}
                             >
-                                <LetterIcon />
-                                <ListItemText primary={t('messages')} />
+                                <LetterIcon/>
+                                <ListItemText primary={t('messages')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -233,8 +226,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={handleListItemClick('safe_deal')}
                                 classes={{selected: classes.selected}}
                             >
-                                <SafeIcon />
-                                <ListItemText primary={t('safe_deal')} />
+                                <SafeIcon/>
+                                <ListItemText primary={t('safe_deal')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -248,8 +241,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                                 onClick={handleListItemClick('paidServices')}
                                 classes={{selected: classes.selected}}
                             >
-                                <WalletIcon />
-                                <ListItemText primary={t('paidServices')} />
+                                <WalletIcon/>
+                                <ListItemText primary={t('paidServices')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -265,8 +258,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                             onClick={handleListItemClick('settings')}
                             classes={{selected: classes.selected}}
                         >
-                            <SettingsIcon />
-                            <ListItemText primary={t('settings')} />
+                            <SettingsIcon/>
+                            <ListItemText primary={t('settings')}/>
                         </ListItem>
                     </Grid>
                     <Grid item xs={12}>
@@ -275,8 +268,8 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                             disableGutters
                             onClick={signout}
                         >
-                            <PowerIcon />
-                            <ListItemText primary={t('exit')} />
+                            <PowerIcon/>
+                            <ListItemText primary={t('exit')}/>
                         </ListItem>
                     </Grid>
                 </Grid>

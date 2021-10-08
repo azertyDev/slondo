@@ -1,8 +1,9 @@
 import {FC, ReactNode, useContext, useEffect, useState} from 'react';
-import {unstable_batchedUpdates} from 'react-dom';
-import {Form, FormikProvider, useFormik} from 'formik';
+import Link from "next/link";
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
+import {unstable_batchedUpdates} from 'react-dom';
+import {Form, FormikProvider, useFormik} from 'formik';
 import {Box, Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
 import {cookieOpts, cookies, getErrorMsg, getTime, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
@@ -18,12 +19,12 @@ import {
 } from '@src/components/elements/icons';
 import {AuthCtx} from '@src/context/AuthCtx';
 import {CONFIRM_SECONDS} from '@src/constants';
-import {useStyles} from './useStyles';
-import Link from "next/link";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import {useTheme} from "@material-ui/core/styles";
+import {SocketCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 export type SubmitTxtType = 'signIn'
     | 'send'
@@ -38,6 +39,7 @@ type FormStatusesType = 'reg'
     | 'newPass'
 
 export const AuthModal: FC = () => {
+    const socket = useContext(SocketCtx);
     const {t} = useTranslation('auth_reg');
     const {auth: {authModalOpen}, setAuthModalOpen, addUser} = useContext(AuthCtx);
     const smDown = useMediaQuery(useTheme().breakpoints.down('sm'));
@@ -117,9 +119,11 @@ export const AuthModal: FC = () => {
 
     const signInHandle = async (phone, password) => {
         const data = await userAPI.login(phone, password);
+
         unstable_batchedUpdates(() => {
             addUser(data.user);
             handleCloseModal();
+            socket.emit('user_connected', data.user.id);
             cookies.set('slondo_user', data.user, cookieOpts);
             cookies.set('slondo_auth', data.token, cookieOpts);
         });

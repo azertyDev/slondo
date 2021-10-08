@@ -14,8 +14,7 @@ type BetsListPropsType = {
     betsCount: number,
     title: string,
     auctionId: number,
-    showBetsCount: number,
-    handleRefresh: () => void
+    showBetsCount: number
 }
 
 export const BetsList: FC<BetsListPropsType> = (props) => {
@@ -24,8 +23,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
         betsCount,
         title,
         auctionId,
-        showBetsCount,
-        handleRefresh
+        showBetsCount
     } = props;
 
     const {t} = useTranslation('auction');
@@ -38,9 +36,6 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                 <Typography variant="subtitle2" color="initial">
                     {title}
                 </Typography>
-                <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
-                    <RefreshIcon/>
-                </div>
             </Box>
             <BetsTable bets={bets} betsCount={betsCount}/>
             {betsCount > showBetsCount && (

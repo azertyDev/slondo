@@ -49,7 +49,7 @@ const App = (props) => {
             });
             return () => {
                 socket.off('connect', () => {
-                    socket.emit('disconnect', user.id);
+                    socket.emit('disconnect');
                 });
             };
         }

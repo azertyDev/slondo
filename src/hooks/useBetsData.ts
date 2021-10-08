@@ -1,7 +1,7 @@
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
-import {ErrorCtx} from "@src/context";
+import {ErrorCtx, SocketCtx} from "@src/context";
 
 type BetsStatesProps = {
     auction_id: number,
@@ -16,6 +16,7 @@ export const useBetsData = (props: BetsStatesProps) => {
         itemsPerPage
     } = props;
 
+    const socket = useContext(SocketCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
     const [bets, setBets] = useState([]);
     const [betsCount, setBetsCount] = useState(0);
@@ -44,6 +45,20 @@ export const useBetsData = (props: BetsStatesProps) => {
             });
         }
     };
+
+    const betChannelListener = () => {
+        setFetchedBetsData();
+    };
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('bet-channel', betChannelListener);
+        }
+    }, [socket]);
+
+    useEffect(() => {
+        auction_id && setFetchedBetsData();
+    }, [auction_id]);
 
     return {
         bets,

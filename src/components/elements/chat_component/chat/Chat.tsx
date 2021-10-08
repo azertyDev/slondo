@@ -47,6 +47,7 @@ export const Chat: FC<ChatProps> = (props) => {
     const {contact} = selectedContact;
     const {t} = useTranslation('common');
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const emptyMsg = message.trim() === '';
 
     const classes = useStyles();
     return (
@@ -146,27 +147,11 @@ export const Chat: FC<ChatProps> = (props) => {
                             <IconButton
                                 className='send-btn'
                                 onClick={sendMessage}
-                                disabled={message === '' || isFetch}
+                                disabled={emptyMsg || isFetch}
                             >
-                                <Send />
+                                <Send/>
                             </IconButton>
                         </Box>
-                        {/*<div className='textField'>*/}
-                        {/*    <textarea*/}
-                        {/*        value={message}*/}
-                        {/*        className='input'*/}
-                        {/*        onChange={handleMessage}*/}
-                        {/*        onKeyDown={handleMessage}*/}
-                        {/*        placeholder={t('write_message')}*/}
-                        {/*    />*/}
-                        {/*    <IconButton*/}
-                        {/*        className='send-btn'*/}
-                        {/*        onClick={sendMessage}*/}
-                        {/*        disabled={message === '' || isFetch}*/}
-                        {/*    >*/}
-                        {/*        <Send/>*/}
-                        {/*    </IconButton>*/}
-                        {/*</div>*/}
                     </div>
                 </>
                 : <Typography>
