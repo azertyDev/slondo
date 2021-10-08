@@ -49,6 +49,7 @@ export const Contacts: FC<ContactsProps> = (props) => {
                             <Box
                                 display='flex'
                                 flexDirection='column'
+                                width={0.8}
                             >
                                 <div className='user-info'>
                                     <div className='user-name'>
@@ -64,7 +65,7 @@ export const Contacts: FC<ContactsProps> = (props) => {
                                         </Typography>
                                         <Typography variant='subtitle2' noWrap>
                                             {text}
-                                        </Typography>&nbsp;
+                                        </Typography>
                                         {unreadCount && (
                                             <Typography>
                                                 {unreadCount}

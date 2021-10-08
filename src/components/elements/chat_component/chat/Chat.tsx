@@ -1,11 +1,11 @@
 import {FC, Fragment, MouseEvent, MutableRefObject} from 'react';
-import {useDate} from "@src/hooks";
-import {IconButton, Menu, MenuItem, Typography, useMediaQuery, useTheme} from "@material-ui/core";
-import {MoreVert, Send} from "@material-ui/icons";
-import {ContactType, MessageType, OptionsType} from "../ChatContainer";
-import {useTranslation} from "next-i18next";
+import {useDate} from '@src/hooks';
+import {Box, IconButton, Menu, MenuItem, TextField, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {MoreVert, Send, KeyboardArrowLeft} from '@material-ui/icons';
+import {ContactType, MessageType, OptionsType} from '../ChatContainer';
+import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 type ChatProps = {
     isFetch: boolean,
@@ -54,12 +54,12 @@ export const Chat: FC<ChatProps> = (props) => {
             {contact.id !== null
                 ? <>
                     <div className='chat-header'>
+                        {isXsDown && (
+                            <CustomButton onClick={handleBack}>
+                                <KeyboardArrowLeft color='action' fontSize='medium'/>
+                            </CustomButton>
+                        )}
                         <Typography variant='subtitle1'>
-                            {isXsDown && (
-                                <CustomButton onClick={handleBack}>
-                                    {t('back')}
-                                </CustomButton>
-                            )}
                             {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
                         {/*{!isSystemUser && (*/}
@@ -131,22 +131,42 @@ export const Chat: FC<ChatProps> = (props) => {
                         })}
                     </div>
                     <div className='compose'>
-                        <div className='textField'>
-                            <textarea
+                        <Box className='messaging-input'>
+                            <TextField
+                                fullWidth
+                                multiline
+                                maxRows={3}
                                 value={message}
                                 className='input'
                                 onChange={handleMessage}
                                 onKeyDown={handleMessage}
                                 placeholder={t('write_message')}
+                                variant='outlined'
                             />
                             <IconButton
                                 className='send-btn'
                                 onClick={sendMessage}
                                 disabled={message === '' || isFetch}
                             >
-                                <Send/>
+                                <Send />
                             </IconButton>
-                        </div>
+                        </Box>
+                        {/*<div className='textField'>*/}
+                        {/*    <textarea*/}
+                        {/*        value={message}*/}
+                        {/*        className='input'*/}
+                        {/*        onChange={handleMessage}*/}
+                        {/*        onKeyDown={handleMessage}*/}
+                        {/*        placeholder={t('write_message')}*/}
+                        {/*    />*/}
+                        {/*    <IconButton*/}
+                        {/*        className='send-btn'*/}
+                        {/*        onClick={sendMessage}*/}
+                        {/*        disabled={message === '' || isFetch}*/}
+                        {/*    >*/}
+                        {/*        <Send/>*/}
+                        {/*    </IconButton>*/}
+                        {/*</div>*/}
                     </div>
                 </>
                 : <Typography>

@@ -1,36 +1,48 @@
-import {alpha, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         padding: '20px',
-        paddingLeft: 0,
+        // boxShadow: '0px 0px 8px 0px #845CAB26',
+        [theme.breakpoints.down('xs')]: {
+            padding: 0
+        },
         '& div': {
             '&.chat-header': {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0 20px 20px 20px',
+                [theme.breakpoints.down('xs')]: {
+                    padding: 10
+                },
                 '& .MuiTypography-subtitle1': {
-                    fontWeight: 600
+                    fontWeight: 600,
+                    [theme.breakpoints.down('xs')]: {
+                        flex: 1,
+                        textAlign: 'center'
+                    }
                 },
                 '& .MuiButtonBase-root': {
-                    padding: 0
+                    padding: 0,
+                    background: 'none',
+                    position: 'absolute'
                 }
             },
             '&.message-list': {
                 display: 'flex',
                 flexDirection: 'column-reverse',
-                height: '200px',
                 overflowY: 'scroll',
                 overflowX: 'hidden',
                 padding: '25px 0',
                 borderTop: '1px solid #D5D5D5',
                 borderBottom: '1px solid #D5D5D5',
                 backgroundColor: '#fff',
+                height: 470,
                 '& div.message': {
                     width: 'fit-content',
                     maxWidth: '80%',
-                    padding: '5px',
+                    padding: '15px',
                     backgroundColor: '#f1f1f1',
                     borderRadius: '5px',
                     marginBottom: '10px',
@@ -82,9 +94,36 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '&.compose': {
-                display: 'flex',
-                justifyContent: 'space-between',
                 paddingTop: 20,
+                [theme.breakpoints.down('xs')]: {
+                    padding: '10px 0'
+                },
+                '& div.messaging-input': {
+                    position: 'relative',
+                    '& div.MuiTextField-root': {
+                        '& .MuiOutlinedInput-root': {
+                            fontSize: 16,
+                            borderRadius: 100,
+                            backgroundColor: theme.palette.common.white,
+                            padding: '10px 50px 10px 10px',
+                            [theme.breakpoints.down('xs')]: {
+                                background: 'none'
+                            },
+                            '& fieldset': {
+                                [theme.breakpoints.down('xs')]: {
+                                    border: 0
+                                }
+                            }
+                        }
+                    },
+                    '& .send-btn': {
+                        top: '50%',
+                        right: '-15px',
+                        padding: '8px',
+                        position: 'absolute',
+                        transform: 'translate(-50%, -50%)'
+                    }
+                },
                 '& label.img-wrapper': {
                     '& > svg': {
                         fontSize: '2.8rem',
@@ -99,31 +138,6 @@ export const useStyles = makeStyles((theme) => ({
                         transform: 'rotate(50deg)'
                     }
                 },
-                '& div.textField': {
-                    position: 'relative',
-                    width: '90%',
-                    '& div.MuiInputBase-root': {
-                        '& input': {
-                            borderRadius: 100,
-                            position: 'relative',
-                            backgroundColor: theme.palette.common.white,
-                            border: '1px solid #E0E0E0',
-                            fontSize: 16,
-                            padding: '10px 12px',
-                            transition: theme.transitions.create(['border-color', 'box-shadow']),
-                            '&:focus': {
-                                boxShadow: `${alpha(theme.palette.secondary.main, 0.25)} 0 0 0 0.2rem`,
-                                borderColor: theme.palette.secondary.main
-                            }
-                        }
-                    },
-                    '& .send-btn': {
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                        padding: '8px'
-                    }
-                }
             }
         }
     }

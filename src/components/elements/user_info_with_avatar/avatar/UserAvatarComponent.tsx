@@ -1,9 +1,9 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import Link from "next/link";
-import {browser} from "process";
+import Link from 'next/link';
+import {browser} from 'process';
 import {Box, Avatar} from '@material-ui/core';
-import {useStyles} from './useStyles';
-import {AuthCtx, SocketCtx} from "@src/context";
+import {StyledBadge, useStyles} from './useStyles';
+import {AuthCtx, SocketCtx} from '@src/context';
 
 type UserAvatarComponentTypes = {
     userId: number,
@@ -24,7 +24,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
     const [online, setOnline] = useState(false);
     const isSelf = useContext(AuthCtx).user.id === userId;
 
-    const onlineClass = isSelf || online ? 'online' : '';
+    const onlineClass = online ? 'online' : '';
 
     useEffect(() => {
         if (browser && socket && userId) {
@@ -43,15 +43,26 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
             alignItems='center'
             className={classes.root}
         >
-            <Link href={`/user/profile_posts/${userId}`}>
-                <a>
-                    <Avatar
-                        alt="avatar"
-                        src={avatar ?? '/img/avatar.svg'}
-                    />
-                </a>
-            </Link>
-            <div className={`status ${onlineClass}`}/>
+            <StyledBadge
+                variant='dot'
+                invisible={!online}
+                overlap="circular"
+                anchorOrigin={{
+                    horizontal: 'right',
+                    vertical: 'bottom'
+                }}
+                color={online ? 'secondary' : 'error'}
+            >
+                <Link href={`/user/profile_posts/${userId}`}>
+                    <a>
+                        <Avatar
+                            alt="avatar"
+                            src={avatar ?? '/img/avatar.svg'}
+                        />
+                    </a>
+                </Link>
+            </StyledBadge>
+            {/*<div className={`status ${onlineClass}`} />*/}
         </Box>
     );
 };
