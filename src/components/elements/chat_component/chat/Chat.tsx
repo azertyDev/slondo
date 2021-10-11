@@ -139,13 +139,14 @@ export const Chat: FC<ChatProps> = (props) => {
                             <TextField
                                 fullWidth
                                 multiline
+                                autoFocus
                                 maxRows={3}
                                 value={message}
                                 className='input'
+                                variant='outlined'
                                 onChange={handleMessage}
                                 onKeyDown={handleMessage}
                                 placeholder={t('write_message')}
-                                variant='outlined'
                             />
                             <IconButton
                                 className='send-btn'

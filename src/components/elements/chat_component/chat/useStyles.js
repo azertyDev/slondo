@@ -106,7 +106,7 @@ export const useStyles = makeStyles((theme) => ({
                             fontSize: 16,
                             borderRadius: 100,
                             backgroundColor: theme.palette.common.white,
-                            padding: '10px 50px 10px 10px',
+                            padding: '10px 20px 10px',
                             [theme.breakpoints.down('xs')]: {
                                 background: 'none'
                             },
