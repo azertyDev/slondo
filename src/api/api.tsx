@@ -31,7 +31,7 @@ const setTokenToHeader = () => {
 };
 
 export const chatAPI = {
-    resetCount: (contact_id) => {
+    resetUnreadCount: (contact_id) => {
         const params = {contact_id};
         return instance
             .post(`contact/reset`, params, setTokenToHeader())

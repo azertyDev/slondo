@@ -142,7 +142,8 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
 
     const resetUnreadCount = async () => {
         try {
-            currentContact.current && await chatAPI.resetCount(currentContact.current.id);
+            currentContact.current?.id
+            && await chatAPI.resetUnreadCount(currentContact.current.id);
         } catch (e) {
             setErrorMsg(e.mesage);
         }
