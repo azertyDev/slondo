@@ -6,6 +6,8 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: 0
         },
+        borderRadius: '0px 10px 10px 0px',
+        boxShadow: ({hideContacts}) => hideContacts ? 'none' : '0px 0px 8px rgba(132, 92, 171, 0.15)',
         '& div': {
             '&.chat-header': {
                 display: 'flex',
@@ -20,12 +22,17 @@ export const useStyles = makeStyles((theme) => ({
                     fontWeight: 600,
                     textAlign: 'center'
                 },
-                '& .MuiButtonBase-root': {
-                    right: '15px',
+                '& button': {
                     background: 'none',
                     position: 'absolute',
-                    [theme.breakpoints.down('xs')]: {
-                        right: '10px'
+                    '&.back-btn': {
+                        left: '15px'
+                    },
+                    '&.close-btn': {
+                        right: '15px',
+                        [theme.breakpoints.down('xs')]: {
+                            right: '10px'
+                        }
                     }
                 }
             },
@@ -117,12 +124,23 @@ export const useStyles = makeStyles((theme) => ({
                             }
                         }
                     },
-                    '& .send-btn': {
-                        top: '50%',
-                        right: '-15px',
-                        padding: '8px',
-                        position: 'absolute',
-                        transform: 'translate(-50%, -50%)'
+                    '& button': {
+                        '&.send-btn': {
+                            top: '50%',
+                            right: '-15px',
+                            padding: '8px',
+                            position: 'absolute',
+                            transform: 'translate(-50%, -50%)',
+                            '& svg path': {
+                                fill: theme.palette.primary.adBgColor
+                            }
+                        },
+                        '&.Mui-disabled': {
+                            '& svg path': {
+                                fill: '#838383!important',
+                                opacity: .5
+                            }
+                        }
                     }
                 },
                 '& label.img-wrapper': {
@@ -141,5 +159,6 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         }
-    }
+    },
+
 }));

@@ -5,9 +5,8 @@ import {Send, KeyboardArrowLeft} from '@material-ui/icons';
 import {ContactType, MessageType, OptionsType} from '../ChatContainer';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CloseIcon} from '@src/components/elements/icons';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 type ChatProps = {
     isFetch: boolean,
@@ -55,17 +54,28 @@ export const Chat: FC<ChatProps> = (props) => {
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const emptyMsg = message.trim() === '';
 
-    const classes = useStyles();
+    const classes = useStyles({hideContacts});
     return (
         <div className={classes.root}>
             {contact.id !== null
                 ? <>
                     <div className='chat-header'>
+                        {(isXsDown && !hideContacts) && (
+                            <IconButton
+                                className='back-btn'
+                                onClick={handleBack} size='small'
+                            >
+                                <KeyboardArrowLeft fontSize='medium' />
+                            </IconButton>
+                        )}
                         <Typography variant='subtitle1'>
                             {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
                         {hideContacts && (
-                            <CloseBtn handleClose={hideContacts ? handleChatClose : handleBack} />
+                            <CloseBtn
+                                className='close-btn'
+                                handleClose={hideContacts ? handleChatClose : handleBack}
+                            />
                         )}
                         {/*{!isSystemUser && (*/}
                         {/*    <>*/}
@@ -147,13 +157,17 @@ export const Chat: FC<ChatProps> = (props) => {
                                 onKeyDown={handleMessage}
                                 placeholder={t('write_message')}
                                 variant='outlined'
+                                color='secondary'
                             />
                             <IconButton
+                                disableRipple
+                                disableTouchRipple
+                                disableFocusRipple
                                 className='send-btn'
                                 onClick={sendMessage}
                                 disabled={emptyMsg || isFetch}
                             >
-                                <Send/>
+                                <Send />
                             </IconButton>
                         </Box>
                     </div>

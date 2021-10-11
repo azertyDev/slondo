@@ -38,6 +38,7 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {user, clearUser} = useContext(AuthCtx);
     const socket = useContext(SocketCtx);
 
+
     const {
         observer: {
             number_of_messages,
