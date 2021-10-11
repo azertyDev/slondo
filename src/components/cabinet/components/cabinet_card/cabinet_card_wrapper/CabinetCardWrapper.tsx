@@ -48,6 +48,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
     const isBanned = status === 'banned';
     const isReject = status === 'reject' || 'refuse';
 
+    const allowSettings = isPublic || isArchive;
+
     const classes = useStyles({status});
     return (
         <Box className={classes.root}>
@@ -106,7 +108,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
-                                                disabled={isArchive}
+                                                disabled={!allowSettings}
                                                 onClick={handleSettingsOpen}
                                             >
                                                 <SettingsIcon/>
@@ -154,7 +156,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         )}
                                         <CustomButton
                                             className='icons'
-                                            disabled={isArchive}
+                                            disabled={!allowSettings}
                                             onClick={handleSettingsOpen}
                                         >
                                             <SettingsIcon/>

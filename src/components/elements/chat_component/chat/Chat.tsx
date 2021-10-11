@@ -5,8 +5,8 @@ import {Send, KeyboardArrowLeft} from '@material-ui/icons';
 import {ContactType, MessageType, OptionsType} from '../ChatContainer';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CloseIcon} from '@src/components/elements/icons';
+// import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+// import {CloseIcon} from '@src/components/elements/icons';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 
 type ChatProps = {

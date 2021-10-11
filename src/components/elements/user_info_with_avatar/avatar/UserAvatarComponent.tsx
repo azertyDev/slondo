@@ -23,11 +23,12 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
         isOnline
     } = props;
 
+    const isIncognito = INCOGNITO_IDS.some(id => id === userId);
     const socket = useContext(SocketCtx);
     const [online, setOnline] = useState(false);
     const isSelf = useContext(AuthCtx).user.id === userId;
-    const isIncognito = INCOGNITO_IDS.some(id => id === userId);
-    const onlineStatus = isOnline || online;
+
+    const onlineStatus = (isOnline || online) && !isIncognito;
 
     useEffect(() => {
         if (browser && socket && userId) {

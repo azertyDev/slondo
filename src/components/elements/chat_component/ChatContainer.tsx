@@ -142,7 +142,7 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
 
     const resetUnreadCount = async () => {
         try {
-            await chatAPI.resetCount(currentContact.current.id);
+            currentContact.current && await chatAPI.resetCount(currentContact.current.id);
         } catch (e) {
             setErrorMsg(e.mesage);
         }
@@ -281,7 +281,7 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
 
     // Channel listeners
     const contactsChannelListener = async ({contact_id}) => {
-        if (currentContact.current?.contact.id !== contact_id) {
+        if (currentContact.current?.contact?.id !== contact_id) {
             await fetchUserContacts();
         }
     };
@@ -294,7 +294,6 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         const {
             sender_id,
             message_id,
-            images,
             text,
             created_at
         } = msgData;
@@ -303,7 +302,6 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
             message_id,
             message: {
                 text,
-                images,
                 created_at
             },
             author: {id: sender_id}
@@ -312,7 +310,9 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         unstable_batchedUpdates(async () => {
             await setMsgBuffer(msg);
             scrollToBottom();
-            sender_id === currentContact.current?.contact?.id && resetUnreadCount();
+            currentContact?.current
+            && sender_id === currentContact.current.contact.id
+            && resetUnreadCount();
         });
     };
 
