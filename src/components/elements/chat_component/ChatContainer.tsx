@@ -52,7 +52,13 @@ const onlineListChannel = 'updateUserStatus';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
 const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
-export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hideContacts = false, handleChatClose}) => {
+export const ChatContainer: FC<ChatContainerProps> = (props) => {
+    const {
+        initContactId = null,
+        hideContacts = false,
+        handleChatClose
+    } = props;
+
     const socket = useContext(SocketCtx);
 
     const initContact = {
@@ -175,7 +181,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
             setIsFetch(true);
 
             const isFirstPage = page === 1;
-            const {data, total} = await chatAPI.getMessages(contactId, page, 10);
+            const {data, total} = await chatAPI.getMessages(contactId, page);
             const fetchedMessages = isFirstPage ? data : [...messages, ...data];
 
             unstable_batchedUpdates(() => {
@@ -194,8 +200,11 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     const selectContact = (selectedContact: ContactType) => () => {
         unstable_batchedUpdates(async () => {
             currentContact.current = selectedContact;
-            selectedContact.contact.id !== contact.id && setSelectedContact(selectedContact);
             setUnreadMsgList({...unreadMsgList, [selectedContact.contact.id]: 0});
+            if (selectedContact.contact.id !== contact.id) {
+                setPage(1);
+                setSelectedContact(selectedContact);
+            }
             await fetchMessages(selectedContact.contact.id);
         });
     };
@@ -314,7 +323,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     useEffect(() => {
         contact.id && fetchMessages(contact.id, page);
-    }, [page]);
+    }, [contact.id, page]);
 
     useEffect(() => {
         msgBuffer
@@ -324,8 +333,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     useEffect(() => {
         if (socket) {
-            socket.on(messagesChannel, messageChannelListener);
             socket.on(onlineListChannel, onlineListListener);
+            socket.on(messagesChannel, messageChannelListener);
             socket.on(contactsUpdateChannel, contactsChannelListener);
         }
     }, [socket]);

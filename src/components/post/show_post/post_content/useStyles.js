@@ -285,7 +285,7 @@ export const useStyles = makeStyles((theme) => ({
                         width: '49%'
                     }
                 },
-                '&:last-child': {
+                '&.write-msg': {
                     '&:disabled': {
                         background: theme.palette.primary.gray,
                         border: '1px solid #C0C0C0',

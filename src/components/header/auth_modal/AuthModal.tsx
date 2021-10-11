@@ -60,6 +60,8 @@ export const AuthModal: FC = () => {
     const [formStatus, setFormStatus] = useState<FormStatusesType>('reg');
     const isSignInTab = tabIndex === 0;
 
+    const resetPassStats = formStatus === 'rec' || formStatus === 'code' || formStatus === 'newPass';
+
     const tabsHandler = (_, newValue) => {
         tabIndex !== newValue && unstable_batchedUpdates(() => {
             setTabIndex(newValue);
@@ -470,7 +472,7 @@ export const AuthModal: FC = () => {
                                                         value={1}
                                                         label={
                                                             <Typography variant="subtitle1">
-                                                                {t(formStatus === 'rec' ? 'resetPassTitle' : 'signUpTitle')}
+                                                                {t(resetPassStats ? 'resetPassTitle' : 'signUpTitle')}
                                                             </Typography>
                                                         }
                                                     />

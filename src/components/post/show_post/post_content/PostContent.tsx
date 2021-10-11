@@ -47,19 +47,21 @@ export const PostContent: FC<PostContentTypes> = (props) => {
 
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
+    const {user} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const transKey = post.category.name;
     const isExAuc = post.ads_type.mark === 'exauc';
     const isAuction = post.ads_type.mark === 'auc' || isExAuc;
+    const self = post.author.id === user.id;
 
     const {
         model,
-        creator,
         observer: {
             number_of_views,
             number_of_favorites
         }
     } = post;
+
 
     const {
         auth: {isAuth},
@@ -270,7 +272,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <Typography variant="subtitle1">
                             {t('views')}: {number_of_views}
                         </Typography>
-                        {!creator && (
+                        {!self && (
                             <Typography variant="subtitle1" onClick={handleComplaintModalOpen}>
                                 {t('complain')} <WarningIcon/>
                             </Typography>
@@ -327,14 +329,17 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <div className="contact">
                         <ShowPhone postId={post.id}/>
-                        <CustomButton
-                            color='silver'
-                            onClick={handleChatOpen}
-                        >
-                            <Typography variant='subtitle1'>
-                                {t('writeMessage')}
-                            </Typography>
-                        </CustomButton>
+                        {!self && (
+                            <CustomButton
+                                color='silver'
+                                className='write-msg'
+                                onClick={handleChatOpen}
+                            >
+                                <Typography variant='subtitle1'>
+                                    {t('writeMessage')}
+                                </Typography>
+                            </CustomButton>
+                        )}
                     </div>
                     {isAuction && (
                         <AuctionContent

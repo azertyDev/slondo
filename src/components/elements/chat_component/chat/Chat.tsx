@@ -52,7 +52,6 @@ export const Chat: FC<ChatProps> = (props) => {
     const isSystemUser = !!selectedContact?.sys;
     const {contact} = selectedContact;
     const {t} = useTranslation('common');
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const emptyMsg = message.trim() === '';
 
     const classes = useStyles();

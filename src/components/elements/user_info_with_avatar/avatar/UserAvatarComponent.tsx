@@ -4,6 +4,7 @@ import {browser} from 'process';
 import {Box, Avatar, Badge} from '@material-ui/core';
 import {AuthCtx, SocketCtx} from '@src/context';
 import {useStyles} from './useStyles';
+import {INCOGNITO_IDS} from "@src/constants";
 
 type UserAvatarComponentTypes = {
     userId: number,
@@ -25,7 +26,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
     const socket = useContext(SocketCtx);
     const [online, setOnline] = useState(false);
     const isSelf = useContext(AuthCtx).user.id === userId;
-
+    const isIncognito = INCOGNITO_IDS.some(id => id === userId);
     const onlineStatus = isOnline || online;
 
     useEffect(() => {
@@ -55,14 +56,19 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
                     vertical: 'bottom'
                 }}
             >
-                <Link href={`/user/profile_posts/${userId}`}>
-                    <a>
-                        <Avatar
-                            alt="avatar"
-                            src={avatar ?? '/img/avatar.svg'}
-                        />
-                    </a>
-                </Link>
+                {isIncognito
+                    ? <Avatar
+                        alt="avatar"
+                        src={avatar ?? '/img/avatar.svg'}
+                    />
+                    : <Link href={`/user/profile_posts/${userId}`}>
+                        <a>
+                            <Avatar
+                                alt="avatar"
+                                src={avatar ?? '/img/avatar.svg'}
+                            />
+                        </a>
+                    </Link>}
             </Badge>
         </Box>
     );

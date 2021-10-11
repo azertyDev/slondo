@@ -13,7 +13,7 @@ const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: local
+    baseURL: production
 });
 
 const setTokenToHeader = () => {
@@ -83,9 +83,12 @@ export const chatAPI = {
                 throw response.data;
             });
     },
-    getUserContacts: (): Promise<any> => {
+    getUserContacts: (itemsPerPage = 50): Promise<any> => {
+        const params = {
+            itemsPerPage
+        };
         return instance
-            .get(`contact/all`, setTokenToHeader())
+            .get(`contact/all`, {params, ...setTokenToHeader()})
             .then((res) => res.data.data)
             .catch(({response}) => {
                 throw response.data;
