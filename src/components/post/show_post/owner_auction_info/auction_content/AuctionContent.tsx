@@ -55,8 +55,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     const handleModalBuyNow = value => () => {
         isAuth
-            ? setOpenOfferPrice(value)
-            : setOpenBuyNow(value);
+            ? setOpenBuyNow(value)
+            : setAuthModalOpen(true)
     };
 
     const handleModalOfferPrice = value => () => {
@@ -210,7 +210,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
                                             <CustomButton onClick={handleModalBuyNow(true)}>
-                                                <Typography variant='subtitle2'>{t('buyNow')}</Typography>
+                                                <Typography variant='subtitle2'>
+                                                    {t('buyNow')}
+                                                </Typography>
                                             </CustomButton>
                                         </Grid>
                                     )}

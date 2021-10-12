@@ -22,7 +22,6 @@ type DetailedPostViewPropsType = {
     isBetsFetch: boolean,
     post: CardDataType,
     bets,
-    setFetchedBetsData,
     handleOffersOpen: () => void,
     handleReject: () => void,
     handleAccept: () => void,
@@ -37,7 +36,6 @@ export const DetailedAuctions: FC<DetailedPostViewPropsType> = (props) => {
         betsCount,
         isBetsFetch,
         handleOpenRating,
-        setFetchedBetsData,
         handleOffersOpen,
         handleAccept,
         handleReject

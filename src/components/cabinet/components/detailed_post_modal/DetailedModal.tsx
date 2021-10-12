@@ -93,7 +93,7 @@ export const DetailedModal: FC<DetailedPostViewPropsType> = (props) => {
         handleModalOpen: handleConfirmOpen
     } = useModal();
 
-    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData({
+    const {bets, betsCount, isBetsFetch} = useBetsData({
         page: 1,
         itemsPerPage: 2,
         auction_id: auctionId
@@ -162,10 +162,6 @@ export const DetailedModal: FC<DetailedPostViewPropsType> = (props) => {
         }
     };
 
-    useEffect(() => {
-        open && !!auctionId && setFetchedBetsData();
-    }, [auctionId, open]);
-
     return (
         <>
             <CabinetModal
@@ -185,7 +181,6 @@ export const DetailedModal: FC<DetailedPostViewPropsType> = (props) => {
                         handleAccept={handleAccept}
                         handleOpenRating={handleOpenRating}
                         handleOffersOpen={handleOffersOpen}
-                        setFetchedBetsData={setFetchedBetsData}
                     />
                     : <DetailedPost
                         post={post}

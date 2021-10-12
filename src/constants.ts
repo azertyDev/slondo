@@ -20,5 +20,6 @@ export const TEXT_LIMIT = 3000;
 export const DESC_MIN = 10;
 export const SAFE_DEAL_LIMIT = 4000;
 export const SAFE_DEAL_PERCENT = 3;
+export const INCOGNITO_IDS = [10, 11];
 export const INCOGNITO_PHONES = ['998940330716', '998900443605'];
 export const INCOGNITO_NAMES = ['user1627903931948', 'user16279078839239'];

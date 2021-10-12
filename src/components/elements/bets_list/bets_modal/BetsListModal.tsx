@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
@@ -25,7 +25,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
     const {t} = useTranslation('auction');
     const [page, setPage] = useState(1);
 
-    const {isBetsFetch, bets, betsCount, setFetchedBetsData} = useBetsData(
+    const {isBetsFetch, bets, betsCount} = useBetsData(
         {
             auction_id: auctionId,
             page: page,
@@ -36,10 +36,6 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
     };
-
-    useEffect(() => {
-        modalOpen && setFetchedBetsData();
-    }, [modalOpen, page]);
 
     return (
         <ResponsiveModal

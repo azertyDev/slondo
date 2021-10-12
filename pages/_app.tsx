@@ -20,7 +20,7 @@ const App = (props) => {
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketDev);
+    const socket = useSocket(socketProduction);
     const userLocation = useUserLocation();
     const exitPrompt = useExitPrompt(false);
 

@@ -6,7 +6,6 @@ import {ContactType, MessageType, OptionsType} from '../ChatContainer';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 type ChatProps = {
     isFetch: boolean,
@@ -150,13 +149,14 @@ export const Chat: FC<ChatProps> = (props) => {
                             <TextField
                                 fullWidth
                                 multiline
+                                autoFocus
                                 maxRows={3}
                                 value={message}
                                 className='input'
+                                variant='outlined'
                                 onChange={handleMessage}
                                 onKeyDown={handleMessage}
                                 placeholder={t('write_message')}
-                                variant='outlined'
                                 color='secondary'
                             />
                             <IconButton

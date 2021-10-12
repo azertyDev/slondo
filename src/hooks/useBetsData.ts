@@ -63,7 +63,6 @@ export const useBetsData = (props: BetsStatesProps) => {
     return {
         bets,
         betsCount,
-        isBetsFetch,
-        setFetchedBetsData
+        isBetsFetch
     };
 };

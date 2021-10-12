@@ -52,7 +52,13 @@ const onlineListChannel = 'updateUserStatus';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
 const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
-export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hideContacts = false, handleChatClose}) => {
+export const ChatContainer: FC<ChatContainerProps> = (props) => {
+    const {
+        initContactId = null,
+        hideContacts = false,
+        handleChatClose
+    } = props;
+
     const socket = useContext(SocketCtx);
 
     const initContact = {
@@ -136,7 +142,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     const resetUnreadCount = async () => {
         try {
-            await chatAPI.resetCount(currentContact.current.id);
+            currentContact.current?.id
+            && await chatAPI.resetUnreadCount(currentContact.current.id);
         } catch (e) {
             setErrorMsg(e.mesage);
         }
@@ -175,7 +182,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
             setIsFetch(true);
 
             const isFirstPage = page === 1;
-            const {data, total} = await chatAPI.getMessages(contactId, page, 10);
+            const {data, total} = await chatAPI.getMessages(contactId, page);
             const fetchedMessages = isFirstPage ? data : [...messages, ...data];
 
             unstable_batchedUpdates(() => {
@@ -194,8 +201,11 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
     const selectContact = (selectedContact: ContactType) => () => {
         unstable_batchedUpdates(async () => {
             currentContact.current = selectedContact;
-            selectedContact.contact.id !== contact.id && setSelectedContact(selectedContact);
             setUnreadMsgList({...unreadMsgList, [selectedContact.contact.id]: 0});
+            if (selectedContact.contact.id !== contact.id) {
+                setPage(1);
+                setSelectedContact(selectedContact);
+            }
             await fetchMessages(selectedContact.contact.id);
         });
     };
@@ -272,7 +282,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     // Channel listeners
     const contactsChannelListener = async ({contact_id}) => {
-        if (currentContact.current?.contact.id !== contact_id) {
+        if (currentContact.current?.contact?.id !== contact_id) {
             await fetchUserContacts();
         }
     };
@@ -285,7 +295,6 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
         const {
             sender_id,
             message_id,
-            images,
             text,
             created_at
         } = msgData;
@@ -294,7 +303,6 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
             message_id,
             message: {
                 text,
-                images,
                 created_at
             },
             author: {id: sender_id}
@@ -303,7 +311,9 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
         unstable_batchedUpdates(async () => {
             await setMsgBuffer(msg);
             scrollToBottom();
-            sender_id === currentContact.current?.contact?.id && resetUnreadCount();
+            currentContact?.current
+            && sender_id === currentContact.current.contact.id
+            && resetUnreadCount();
         });
     };
 
@@ -314,7 +324,7 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     useEffect(() => {
         contact.id && fetchMessages(contact.id, page);
-    }, [page]);
+    }, [contact.id, page]);
 
     useEffect(() => {
         msgBuffer
@@ -324,8 +334,8 @@ export const ChatContainer: FC<ChatContainerProps> = ({initContactId = null, hid
 
     useEffect(() => {
         if (socket) {
-            socket.on(messagesChannel, messageChannelListener);
             socket.on(onlineListChannel, onlineListListener);
+            socket.on(messagesChannel, messageChannelListener);
             socket.on(contactsUpdateChannel, contactsChannelListener);
         }
     }, [socket]);

@@ -9,6 +9,9 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {LetterIcon, PhoneIcon} from '@src/components/elements/icons';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
+import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
+import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
+import {useModal} from "@src/hooks";
 
 type UserCardProps = {
     userData,
@@ -28,6 +31,12 @@ export const UserCard: FC<UserCardProps> = (props) => {
 
     const [isFetch, setIsFetch] = useState(false);
     const [phone, setPhone] = useState(null);
+
+    const {
+        modalOpen: chatOpen,
+        handleModalClose: handleChatClose,
+        handleModalOpen: handleChatOpen
+    } = useModal();
 
     const fetchUserPhone = async () => {
         if (!phone) {
@@ -71,7 +80,7 @@ export const UserCard: FC<UserCardProps> = (props) => {
                         </>
                     }
                 </CustomButton>
-                <CustomButton>
+                <CustomButton onClick={handleChatOpen}>
                     <LetterIcon/>
                     <Typography variant='subtitle2' component='p'>
                         {t('post:writeMessage')}
@@ -86,6 +95,17 @@ export const UserCard: FC<UserCardProps> = (props) => {
                     </CustomButton>
                 )}
             </Grid>
+            <ResponsiveModal
+                maxWidth='md'
+                openDialog={chatOpen}
+                handleCloseDialog={handleChatClose}
+            >
+                <ChatContainer
+                    hideContacts
+                    handleChatClose={handleChatClose}
+                    initContactId={userData.id}
+                />
+            </ResponsiveModal>
         </Grid>
     );
 };

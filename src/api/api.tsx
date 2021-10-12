@@ -31,7 +31,7 @@ const setTokenToHeader = () => {
 };
 
 export const chatAPI = {
-    resetCount: (contact_id) => {
+    resetUnreadCount: (contact_id) => {
         const params = {contact_id};
         return instance
             .post(`contact/reset`, params, setTokenToHeader())
@@ -83,9 +83,12 @@ export const chatAPI = {
                 throw response.data;
             });
     },
-    getUserContacts: (): Promise<any> => {
+    getUserContacts: (itemsPerPage = 50): Promise<any> => {
+        const params = {
+            itemsPerPage
+        };
         return instance
-            .get(`contact/all`, setTokenToHeader())
+            .get(`contact/all`, {params, ...setTokenToHeader()})
             .then((res) => res.data.data)
             .catch(({response}) => {
                 throw response.data;

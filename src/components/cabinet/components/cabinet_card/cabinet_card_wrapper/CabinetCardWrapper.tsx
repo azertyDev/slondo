@@ -45,7 +45,10 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
     const isArchive = status === 'archive';
     const isHistory = status === 'history';
     const isModeration = status === 'moderation';
+    const isBanned = status === 'banned';
     const isReject = status === 'reject' || 'refuse';
+
+    const allowSettings = isPublic || isArchive;
 
     const classes = useStyles({status});
     return (
@@ -91,7 +94,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                     </CustomButton>
                                 </Grid>
                                 : <>
-                                    {creator && handleNotificationsOpen && (
+                                    {creator && !isBanned && handleNotificationsOpen && (
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
@@ -105,7 +108,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
-                                                disabled={isArchive}
+                                                disabled={!allowSettings}
                                                 onClick={handleSettingsOpen}
                                             >
                                                 <SettingsIcon/>
@@ -153,14 +156,14 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         )}
                                         <CustomButton
                                             className='icons'
-                                            disabled={isArchive}
+                                            disabled={!allowSettings}
                                             onClick={handleSettingsOpen}
                                         >
                                             <SettingsIcon/>
                                         </CustomButton>
                                     </>
                                 )}
-                                {creator && (isPublic || isArchive || isHistory || isSold) && (
+                                {creator && handleNotificationsOpen && !isBanned && (
                                     <CustomButton
                                         className='icons'
                                         onClick={handleNotificationsOpen}

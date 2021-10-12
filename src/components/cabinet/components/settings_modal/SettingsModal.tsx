@@ -75,7 +75,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
             case 'rise_in_tape':
                 return isPost ? 'rise_post_in_tape' : 'rise_auction_in_tape';
             case "restore":
-                return 'restore_post'
+                return 'restore_post';
         }
     })();
 
@@ -109,7 +109,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     break;
                 }
                 case "edit_post": {
-                    const postData = await userAPI.getPostById({id: post.id});
+                    const postData = await userAPI.getPostById(post.id);
                     const postType = postData.ads_type.mark;
                     const categoryName = postData.category.name;
                     const subcategoryName = postData.adsable.sub_category.name;

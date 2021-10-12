@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import {WithT} from 'i18next';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import {SafeIcon} from '@root/src/components/elements/icons';
@@ -6,6 +6,7 @@ import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {useStyles} from './useStyles';
+import {AuthCtx} from "@src/context";
 
 type OwnerPropsType = {
     postData,
@@ -24,11 +25,13 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         status,
         author,
-        creator,
         safe_deal
     } = postData;
 
+    const {user} = useContext(AuthCtx);
+
     const isPublic = status === 'public';
+    const self = author.id === user.id;
 
     const classes = useStyles();
     return (
@@ -47,7 +50,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
             <Hidden mdDown>
                 <div className="contact-buttons">
                     <ShowPhone postId={postData.id}/>
-                    {isPublic && !creator && (
+                    {isPublic && !self && (
                         <>
                             <CustomButton
                                 color="silver"
@@ -78,7 +81,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                 </div>
             </Hidden>
             <Hidden lgUp>
-                {!creator && !!safe_deal && (
+                {!self && !!safe_deal && (
                     <div className='fixed-bet-safe-deal floating'>
                         <div className="floating-text">
                             <SafeIcon/>
