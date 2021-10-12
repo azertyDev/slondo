@@ -61,7 +61,7 @@ export const Contacts: FC<ContactsProps> = (props) => {
                                 className='contact-info'
                             >
                                 <div className='user-name'>
-                                    <Typography variant='subtitle1' noWrap>
+                                    <Typography variant='subtitle1' noWrap gutterBottom>
                                         {sys ? 'Slondo.uz' : name}
                                     </Typography>
                                     {text && (

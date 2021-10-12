@@ -374,7 +374,7 @@ export const useStyles = makeStyles((theme) => ({
                     marginBottom: '8px'
                 }
             },
-            '& h6.description': {
+            '& p.description': {
                 [theme.breakpoints.down('md')]: {
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',

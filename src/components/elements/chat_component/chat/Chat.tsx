@@ -1,4 +1,4 @@
-import {FC, Fragment, MouseEvent, MutableRefObject} from 'react';
+import {FC, MouseEvent, MutableRefObject} from 'react';
 import {useDate} from '@src/hooks';
 import {Box, IconButton, TextField, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {Send, KeyboardArrowLeft} from '@material-ui/icons';
@@ -117,18 +117,21 @@ export const Chat: FC<ChatProps> = (props) => {
                             const {time} = getDate(created_at);
 
                             return (
-                                <Fragment key={index}>
+                                <div
+                                    key={index}
+                                    className={
+                                        `message-item ${+author.id === contact.id
+                                            ? 'left-side'
+                                            : 'right-side'}`
+                                    }
+                                >
                                     <div
+                                        className='message'
                                         ref={anchorMsg ? firstMessageRef : null}
-                                        className={
-                                            `message ${+author.id === contact.id
-                                                ? 'left-side'
-                                                : 'right-side'}`
-                                        }
                                     >
                                         {text && (
                                             <Typography
-                                                className='msg-text'
+                                                className='text'
                                                 variant='subtitle2'
                                             >
                                                 <pre>
@@ -140,7 +143,7 @@ export const Chat: FC<ChatProps> = (props) => {
                                             {time}
                                         </Typography>
                                     </div>
-                                </Fragment>
+                                </div>
                             );
                         })}
                     </div>

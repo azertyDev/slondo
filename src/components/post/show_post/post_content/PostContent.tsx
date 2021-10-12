@@ -339,7 +339,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                     {t('writeMessage')}
                                 </Typography>
                             </CustomButton>
-                        )}
+                        )}`
                     </div>
                     {isAuction && (
                         <AuctionContent
@@ -356,7 +356,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </Hidden>
                     <div className='location-text'>
-                        <LocationIcon/>
+                        <LocationIcon />
                         <Typography variant="subtitle1">
                             {`${t(`locations:${post.region.name}.name`) ?? ''}`}
                             {post.city?.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
@@ -364,10 +364,13 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                 </div>
                 <div className="post-description">
-                    <Typography variant="button" color="initial">
-                        {t('description')}:
-                    </Typography>
+                    <Hidden xsDown>
+                        <Typography variant="button" color="initial">
+                            {t('description')}:
+                        </Typography>
+                    </Hidden>
                     <Typography
+                        component='p'
                         variant="subtitle1"
                         className='description'
                     >
@@ -388,9 +391,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 )}
                 {!!parameterItems.length && (
                     <div className="post-parameters">
-                        <Typography variant="button" color="initial">
-                            {t('parameters')}:
-                        </Typography>
+                        <Hidden xsDown>
+                            <Typography variant="button" color="initial">
+                                {t('parameters')}:
+                            </Typography>
+                        </Hidden>
                         <ul>{parameterItems}</ul>
                     </div>
                 )}

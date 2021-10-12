@@ -2,12 +2,13 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        height: '100%',
         padding: '20px',
+        borderRadius: '0px 10px 10px 0px',
+        boxShadow: ({hideContacts}) => hideContacts ? 'none' : '0px 0px 8px rgba(132, 92, 171, 0.15)',
         [theme.breakpoints.down('xs')]: {
             padding: 0
         },
-        borderRadius: '0px 10px 10px 0px',
-        boxShadow: ({hideContacts}) => hideContacts ? 'none' : '0px 0px 8px rgba(132, 92, 171, 0.15)',
         '& div': {
             '&.chat-header': {
                 display: 'flex',
@@ -37,42 +38,17 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '&.message-list': {
+                height: 470,
                 display: 'flex',
-                flexDirection: 'column-reverse',
-                overflowY: 'scroll',
-                overflowX: 'hidden',
                 padding: '25px 0',
+                overflowX: 'hidden',
+                overflowY: 'scroll',
+                backgroundColor: '#fff',
+                flexDirection: 'column-reverse',
                 borderTop: '1px solid #D5D5D5',
                 borderBottom: '1px solid #D5D5D5',
-                backgroundColor: '#fff',
-                height: 470,
-                '& div.message': {
-                    width: 'fit-content',
-                    maxWidth: '80%',
-                    padding: '5px',
-                    backgroundColor: '#f1f1f1',
-                    borderRadius: '5px',
-                    marginBottom: '10px',
-                    '& h6': {
-                        position: 'relative',
-                        '& > pre': {
-                            margin: '0 0 5px',
-                            fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
-                            wordBreak: 'break-word',
-                            whiteSpace: 'pre-wrap'
-                        }
-                    },
-                    '& img': {
-                        width: '100%',
-                        marginBottom: '10px',
-                        borderRadius: '5px'
-                    },
-                    '& p.time': {
-                        display: 'block',
-                        fontSize: '.55rem',
-                        textAlign: 'end'
-                    },
-                    '&.left-side > h6:before, &.right-side > h6:after': {
+                '& div.message-item': {
+                    '&.left-side div.message > h6:before, &.right-side div.message > h6:after': {
                         content: '""',
                         top: 'calc(40% - 5px)',
                         width: '0px',
@@ -81,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
                         borderTop: '5px solid transparent',
                         borderBottom: '5px solid transparent'
                     },
-                    '&.left-side': {
+                    '&.left-side > div.message:last-child': {
                         marginLeft: '10px',
                         '& > h6:before': {
                             left: '-24px',
@@ -89,7 +65,7 @@ export const useStyles = makeStyles((theme) => ({
                             borderRight: '10px solid #f1f1f1'
                         }
                     },
-                    '&.right-side': {
+                    '&.right-side > div.message:last-child': {
                         marginLeft: 'auto',
                         marginRight: '10px',
                         backgroundColor: '#E6F3FF',
@@ -98,6 +74,67 @@ export const useStyles = makeStyles((theme) => ({
                             borderLeft: '10px solid #E6F3FF',
                             borderRight: '10px solid transparent'
                         }
+                    },
+                    '& div.message:last-child': {
+                        '& > h6:after': {
+                            right: '-24px',
+                            borderLeft: '10px solid #E6F3FF',
+                            borderRight: '10px solid transparent'
+                        }
+                    },
+                    '& div.message': {
+                        width: 'fit-content',
+                        maxWidth: '80%',
+                        padding: '5px',
+                        backgroundColor: '#f1f1f1',
+                        borderRadius: '5px',
+                        marginBottom: '10px',
+                        '& h6.text': {
+                            position: 'relative',
+                            '& > pre': {
+                                margin: '0 0 5px',
+                                fontFamily: 'Calibri, Roboto, Helvetica, Arial, sans-serif',
+                                wordBreak: 'break-word',
+                                whiteSpace: 'pre-wrap'
+                            }
+                        },
+                        '& img': {
+                            width: '100%',
+                            marginBottom: '10px',
+                            borderRadius: '5px'
+                        },
+                        '& p.time': {
+                            display: 'block',
+                            fontSize: '.55rem',
+                            textAlign: 'end'
+                        }
+                        // '&.left-side > h6:before, &.right-side > h6:after': {
+                        //     content: '""',
+                        //     top: 'calc(40% - 5px)',
+                        //     width: '0px',
+                        //     height: '0px',
+                        //     position: 'absolute',
+                        //     borderTop: '5px solid transparent',
+                        //     borderBottom: '5px solid transparent'
+                        // }
+                        // '&.left-side': {
+                        //     marginLeft: '10px',
+                        //     '& > h6:before': {
+                        //         left: '-24px',
+                        //         borderLeft: '10px solid transparent',
+                        //         borderRight: '10px solid #f1f1f1'
+                        //     }
+                        // },
+                        // '&.right-side': {
+                        //     marginLeft: 'auto',
+                        //     marginRight: '10px',
+                        //     backgroundColor: '#E6F3FF',
+                        //     '& > h6:after': {
+                        //         right: '-24px',
+                        //         borderLeft: '10px solid #E6F3FF',
+                        //         borderRight: '10px solid transparent'
+                        //     }
+                        // }
                     }
                 }
             },
@@ -115,7 +152,8 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: theme.palette.common.white,
                             padding: '10px 20px 10px',
                             [theme.breakpoints.down('xs')]: {
-                                background: 'none'
+                                background: 'none',
+                                padding: '10px 50px 10px 10px'
                             },
                             '& fieldset': {
                                 [theme.breakpoints.down('xs')]: {

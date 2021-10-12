@@ -68,7 +68,7 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
                         : <div>
                             {!isIncognito && (
                                 <Typography component='p' variant='subtitle1'>
-                                    {t(phone ?? 'show_phone')}
+                                    {t(phone ?? 'call')}
                                 </Typography>
                             )}
                             {additional_number && (
