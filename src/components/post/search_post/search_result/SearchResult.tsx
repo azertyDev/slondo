@@ -39,7 +39,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
-    const [gridView, setGridView] = useState(false);
+    const [gridView, setGridView] = useState(true);
     const [isNotFound, setIsNotFound] = useState(false);
 
     const handlePagePagination = (_, pageNum) => {

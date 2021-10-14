@@ -7,7 +7,7 @@ export const settings = {
     adaptiveHeight: true,
     centerPadding: '0px',
     slidesToShow: 4,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     prevArrow: <SliderArrow/>,
     nextArrow: <SliderArrow/>,

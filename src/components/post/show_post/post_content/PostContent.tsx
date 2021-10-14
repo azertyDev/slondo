@@ -370,7 +370,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </Hidden>
                     <Typography
-                        component='p'
+                        component='span'
                         variant="subtitle1"
                         className='description'
                     >

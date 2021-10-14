@@ -151,7 +151,7 @@ export const Feedback: FC = () => {
                         name='message'
                         value={values.message}
                         onChange={handleInput}
-                        labelTxt={t('post:description')}
+                        labelTxt={t('post:enterQuestion')}
                         errorMsg={getErrorMsg(errors.message, touched.message, t)}
                     />
                     <div className='upload-submit'>

@@ -1,6 +1,4 @@
 import {makeStyles} from '@material-ui/core/styles';
-import {Box} from '@material-ui/core';
-
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,22 +54,38 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     content: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: '60%',
+        right: 40,
+        bottom: 40,
         display: 'flex',
+        maxWidth: '60%',
+        position: 'absolute',
         flexDirection: 'column',
         justifyContent: 'center',
-        height: '100%',
-        '& h4': {
+        [theme.breakpoints.down('xs')]: {
+            right: 16,
+            bottom: 50,
+            maxWidth: '55%'
+        },
+        '& h5': {
+            fontWeight: 600,
             [theme.breakpoints.down('xs')]: {
-                fontSize: '1.6rem',
-                fontWeight: 500
+                fontSize: '1rem',
+                lineHeight: '20px',
+                textShadow: 'none'
+            }
+        },
+        '& h6': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.75rem'
             }
         },
         '& .MuiTypography-root': {
-            textAlign: 'center'
+            color: '#fff',
+            textAlign: 'end',
+            textShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)',
+            [theme.breakpoints.down('xs')]: {
+                // textShadow: 'none'
+            }
         }
     }
 }));

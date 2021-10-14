@@ -47,10 +47,10 @@ export const MainSlider: FC = () => {
                                     <Box
                                         className={classes.content}
                                     >
-                                        <Typography variant='h4' color="initial" gutterBottom>
+                                        <Typography variant='h5' color="initial" gutterBottom>
                                             {title}
                                         </Typography>
-                                        <Typography variant="subtitle1" color="initial">
+                                        <Typography variant="subtitle2" color="initial">
                                             {description}
                                         </Typography>
                                     </Box>

@@ -7,8 +7,11 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: 0
         },
         '& div.view-btns': {
-            '& button.selected svg rect': {
-                fill: '#845CAB'
+            '& button': {
+                padding: 6,
+                '&.selected svg rect': {
+                    fill: '#845CAB'
+                }
             }
         }
     }
