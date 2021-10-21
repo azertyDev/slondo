@@ -73,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& .MuiTypography-root': {
-            color: '#fff',
+            color: '#5A5581',
             textShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)'
         }
     }
