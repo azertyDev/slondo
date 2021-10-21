@@ -124,6 +124,7 @@
     "main": "Профиль пользователя",
     "profile_ratings": "Рейтинг",
     "profile_follows": "Подписки/подписчики",
-    "profile_posts": "Объявления"
+    "profile_posts": "Объявления",
+    "write_to_user": "Написать пользователю"
   }
 }

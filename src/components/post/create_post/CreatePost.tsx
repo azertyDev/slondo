@@ -2,17 +2,19 @@ import {FC} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from "next-i18next";
 import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
-import {PostTypesPage} from "@src/components/post/create_post/first_step/PostTypesPage";
-import {CategoriesPage} from "@src/components/post/create_post/second_step/CategoriesPage";
-import {FormPages} from "@src/components/post/create_post/third_step/FormPages";
+import {FirstStep} from "@src/components/post/create_post/first_step/FirstStep";
+import {SecondStep} from "@src/components/post/create_post/second_step/SecondStep";
+import {ThirdStep} from "@src/components/post/create_post/third_step/ThirdStep";
 import {MainLayout} from "@src/components/main_layout/MainLayout";
-import {site_categories} from "@src/common_data/site_categories";
 import {SuccessPage} from "@src/components/post/create_post/third_step/success_page/SuccessPage";
+import {CategoryType} from "@root/interfaces/Categories";
+import {categoriesNormalize} from "@src/helpers";
 
-const CreatePost: FC = () => {
+const CreatePost: FC<{ siteCategories: CategoryType[] }> = (props) => {
     const {t} = useTranslation('post');
-
     const {query, push, asPath} = useRouter();
+    const siteCategories = categoriesNormalize(props.siteCategories);
+
     const {
         post_type,
         main_ctgr,
@@ -21,6 +23,7 @@ const CreatePost: FC = () => {
         preview,
         success
     } = query;
+
     const isPreview = +preview === 1;
 
     const getBackURL = () => {
@@ -60,19 +63,23 @@ const CreatePost: FC = () => {
         }
 
         if (sub_ctgr || type_ctgr) {
-            const hasType = !!site_categories
-                .find(ctgr => ctgr.name === main_ctgr).subcategory
-                .find(sub => sub.name === sub_ctgr).type;
+            const hasType = !!siteCategories
+                .find(ctgr => ctgr.name === main_ctgr)?.subcategory
+                .find(sub => sub.name === sub_ctgr)?.type;
+
             return !hasType || type_ctgr
-                ? <FormPages backURL={getBackURL()}/>
-                : <CategoriesPage/>;
+                ? <ThirdStep
+                    backURL={getBackURL()}
+                    siteCategories={siteCategories}
+                />
+                : <SecondStep siteCategories={siteCategories}/>;
         }
 
         if (post_type) {
-            return <CategoriesPage/>;
+            return <SecondStep siteCategories={siteCategories}/>;
         }
 
-        return <PostTypesPage/>;
+        return <FirstStep/>;
     };
 
     const handleBack = async () => {

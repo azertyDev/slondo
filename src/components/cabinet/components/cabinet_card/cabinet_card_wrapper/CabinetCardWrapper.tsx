@@ -12,10 +12,10 @@ import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
-    handleOpenModal?: (id: number) => () => void,
     handleDetailedOpen?: () => void,
     handleSettingsOpen?: () => void,
-    handleNotificationsOpen?: () => void
+    handleNotificationsOpen?: () => void,
+    handleOpenModal?: (id: number) => () => void
 }
 
 export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {

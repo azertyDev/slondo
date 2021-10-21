@@ -84,9 +84,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 </Typography>
             </label>
             <Select
+                name={name}
                 labelId={name}
                 variant='outlined'
-                name={name}
                 onBlur={onBlur}
                 multiple={multiple}
                 onChange={onChange}
@@ -100,11 +100,11 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         {t('filters:noSelect')}
                     </MenuItem>
                 )}
-                {items.map(item => {
+                {items.map((item, i) => {
                     const isSelected = multiple && !!values[name]?.some(v => v === item.id);
                     return (
                         <MenuItem
-                            key={item.id}
+                            key={i}
                             value={item.id}
                         >
                             {multiple && (

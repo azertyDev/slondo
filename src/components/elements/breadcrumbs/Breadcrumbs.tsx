@@ -1,10 +1,10 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import Link from 'next/link';
 import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {transformCyrillic} from '@src/helpers';
-import {site_categories} from '@src/common_data/site_categories';
 import {useStyles} from './useStyles';
+import {CategoriesCtx} from "@src/context";
 
 type BreadcrumbsPropsType = {
     category: string,
@@ -14,8 +14,9 @@ type BreadcrumbsPropsType = {
 
 export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {
     const {t} = useTranslation('categories');
+    const siteCategories = useContext(CategoriesCtx);
 
-    const mainCtgr = site_categories.find(ctgr => ctgr.name === category);
+    const mainCtgr = siteCategories.find(ctgr => ctgr.name === category);
     const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
     const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === type);
 

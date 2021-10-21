@@ -312,7 +312,9 @@ export const userAPI = {
     },
     getCategories: (): Promise<CategoryType[]> => {
         return instance.get(`categories/all`)
-            .then(res => res.data)
+            .then(res => {
+                return res.data;
+            })
             .catch(err => {
                 throw err;
             });

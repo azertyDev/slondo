@@ -5,11 +5,11 @@ import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
 type ReadMoreTypeProps = {
-    threshold: number,
+    threshold?: number,
     id?: string
 };
 
-export const ReadMore: FC<ReadMoreTypeProps> = ({threshold, id, children}) => {
+export const ReadMore: FC<ReadMoreTypeProps> = ({threshold = 55, id, children}) => {
     const {t} = useTranslation('common');
     const [isHidden, setIsHidden] = useState(true);
     const [descHeight, setDescHeight] = useState(0);

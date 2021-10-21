@@ -9,7 +9,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
-export const PostTypesPage: FC = () => {
+export const FirstStep: FC = () => {
     const {push} = useRouter();
     const {t} = useTranslation('post');
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));

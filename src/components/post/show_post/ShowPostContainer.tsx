@@ -9,23 +9,37 @@ import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {Footer} from '@src/components/footer/Footer';
-import {AuthCtx, ErrorCtx} from "@src/context";
+import {AuthCtx, CategoriesCtx, ErrorCtx} from "@src/context";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CustomHead} from "@src/components/head/CustomHead";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
+import {categoriesNormalize} from "@src/helpers";
 import ErrorPage from "@root/pages/_error";
 import {useStyles} from './useStyles';
 
-export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({initPostData, statusCode}) => {
+type ShowPostProps = {
+    initPostData,
+    statusCode: number,
+    siteCategories
+}
+
+export const ShowPostContainer: FC<ShowPostProps> = (props) => {
+    const {
+        initPostData,
+        statusCode,
+        siteCategories
+    } = props;
+
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+
+    const categories = categoriesNormalize(siteCategories);
 
     if (initPostData.available_days) {
         initPostData.available_days = initPostData.available_days.map(day => {
@@ -136,13 +150,15 @@ export const ShowPostContainer: FC<{ initPostData, statusCode: number }> = ({ini
                             ? <CustomCircularProgress/>
                             : <>
                                 <Grid item xs={12} lg={9}>
-                                    <PostContent
-                                        post={postData}
-                                        auctionInfo={auctionInfo}
-                                        handleChatOpen={handleOpenChat}
-                                        handleSafeDeal={handleSafeDeal}
-                                        setFetchedPostData={setFetchedPostData}
-                                    />
+                                    <CategoriesCtx.Provider value={categories}>
+                                        <PostContent
+                                            post={postData}
+                                            auctionInfo={auctionInfo}
+                                            handleChatOpen={handleOpenChat}
+                                            handleSafeDeal={handleSafeDeal}
+                                            setFetchedPostData={setFetchedPostData}
+                                        />
+                                    </CategoriesCtx.Provider>
                                 </Grid>
                                 <Hidden mdDown>
                                     <Grid item lg={3} xs={12}>

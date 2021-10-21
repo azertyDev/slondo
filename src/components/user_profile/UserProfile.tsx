@@ -13,6 +13,7 @@ import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from '@src/context';
 import {initUser} from '@src/hooks/useUser';
 import {useStyles} from './useStyles';
+import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 
 export type ProfilePageProps = {
     user_id: string
@@ -45,12 +46,16 @@ export const UserProfile: FC = () => {
 
     const getPageContent = () => {
         switch (pathname) {
-            case 'profile_posts':
-                return <UserPosts user_id={user_id} />;
             case 'profile_ratings':
-                return <UserRatingsContainer userInfo={userInfo} />;
+                return <UserRatingsContainer userInfo={userInfo}/>;
+            case 'profile_posts':
+                return <UserPosts user_id={user_id}/>;
             case 'profile_follows':
-                return <UserFollowsList user_id={user_id} />;
+                return <UserFollowsList user_id={user_id}/>;
+            case 'write_to_user':
+                return <div className='chat-wrapper'>
+                    <ChatContainer hideContacts initContactId={+user_id}/>
+                </div>;
         }
     };
 
@@ -60,7 +65,7 @@ export const UserProfile: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={t(`cabinet:profile.${pathname}`)} handleBack={handlePrev}>
+        <MainLayout title={t(`profile.${pathname}`)} handleBack={handlePrev}>
             <div className={classes.root}>
                 <Grid container spacing={isXsDown ? 0 : 2}>
                     {((isXsDown && isMainPage) || !isXsDown) && (
@@ -69,7 +74,7 @@ export const UserProfile: FC = () => {
                                 <UserInfoWithAvatar user={userInfo}/>
                             </Box>
                             <Box>
-                                <SidebarMenu />
+                                <SidebarMenu/>
                             </Box>
                         </Grid>
                     )}

@@ -6,7 +6,7 @@ import {Grid} from '@material-ui/core';
 import {GetServerSidePropsContext} from "next";
 import {IdNameType} from '@root/interfaces/Post';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {HasAuction, site_categories} from '@src/common_data/site_categories';
+import {categoryIcons} from '@src/common_data/categories_icons';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {cardDataRegEx, searchTxtRegEx, URLReservedMarks} from '@src/common_data/reg_exs';
@@ -17,6 +17,78 @@ export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
     path: '/',
     sameSite: 'strict'
+};
+
+export const categoriesNormalize = (categories: any[]): CategoryType[] => {
+    const normalizedCategories = [];
+
+    categories.forEach(ctgr => {
+        const {mark, ...other} = ctgr;
+
+        // remove empty type categories
+        if (other.subcategory.some(s => !!s.type)) {
+            other.subcategory = other.subcategory.map(({type, ...other}) => {
+                const subCtgr = {...other};
+
+                if (type.length) subCtgr.type = type;
+
+                return subCtgr;
+            });
+        }
+
+        normalizedCategories.push({
+            ...other,
+            name: mark,
+            iconUrl: categoryIcons[mark].iconUrl,
+            smallIcon: categoryIcons[mark].smallIcon
+        });
+    }, []);
+
+    return addParentsToCtgrs(normalizedCategories);
+
+    function addParentsToCtgrs(categoriesList: CategoryType[]): CategoryType[] {
+        return categoriesList.map(ctgry => {
+            if (ctgry.subcategory) {
+                const subcategory = addParents(
+                    ctgry.subcategory,
+                    [{
+                        id: ctgry.id,
+                        name: ctgry.name
+                    }]
+                );
+                return {...ctgry, subcategory};
+            } else {
+                return ctgry;
+            }
+        });
+
+        function addParents(list, parents) {
+            return list.map(ctgry => {
+                if (ctgry.type) {
+                    const type = addParents(
+                        ctgry.type,
+                        [
+                            ...parents,
+                            {
+                                id: ctgry.id,
+                                name: ctgry.name
+                            }
+                        ]
+                    );
+                    return {
+                        ...ctgry,
+                        type,
+                        parents
+                    };
+                } else {
+                    return {
+                        ...ctgry,
+                        parents
+                    };
+                }
+            });
+        }
+    }
 };
 
 export const getTime = (sec: number) => {
@@ -259,31 +331,6 @@ export const transformCyrillic = (title: string): string => {
 
 export type CtgrsByCyrillicNameType = [CategoryType, SubcategoryType, TypeCategory?];
 
-export const getCtgrsByCyrillicNames = (categories: string[] = []): CtgrsByCyrillicNameType | [] => {
-    if (categories.length) {
-        const [categoryName, subCtgrName, typeCtgrName] = categories;
-        return site_categories.reduce((acc: any, ctgr) => {
-            if (transformCyrillic(ctgr.ru_name) === categoryName) {
-                acc.push(ctgr);
-                ctgr.subcategory.forEach(subctgr => {
-                    if (transformCyrillic(subctgr.ru_name) === subCtgrName) {
-                        acc.push(subctgr);
-                        if (typeCtgrName) {
-                            subctgr.type?.forEach(type => {
-                                if (transformCyrillic(type.ru_name) === typeCtgrName) {
-                                    acc.push(type);
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-            return acc;
-        }, []);
-    }
-    return [];
-};
-
 export const numberPrettier = (price: string | number): string => {
     return (price !== '' && price !== undefined && price !== null)
         ? price.toString()
@@ -387,24 +434,15 @@ export const weekDaysHelper = (days: IdNameType[], t: TFunction): string => {
     return result;
 };
 
-export const categoriesByType = (postType: string): CategoryType[] => {
-    return site_categories.reduce((acc, ctgry) => {
-        if (postType === 'post' || !!HasAuction[ctgry.name]) {
-            acc.push(ctgry);
-        }
-        return acc;
-    }, []);
-};
-
 export type CategoriesParamsType = {
     categoryName: string,
     subcategoryName: string,
     typeName: string
 };
 
-export const getCategoriesByParams = (params: CategoriesParamsType) => {
+export const getCategoriesByParams = (params: CategoriesParamsType, siteCategories: CategoryType[]) => {
     const {categoryName, subcategoryName, typeName} = params;
-    return site_categories.reduce((acc: any, ctgry) => {
+    return siteCategories.reduce((acc: any, ctgry) => {
         if (ctgry.name === categoryName) {
             acc.category = {id: ctgry.id, name: ctgry.name};
             if (subcategoryName && ctgry.subcategory) {

@@ -1,12 +1,12 @@
 import {SliderArrow} from '@src/components/elements/custom_slider/slider_arrow/SliderArrow';
+import {Settings} from "react-slick";
 
-export const settings = {
+export const settings: Settings = {
     dots: false,
     infinite: true,
     centerMode: true,
-    adaptiveHeight: true,
     centerPadding: '0px',
-    slidesToShow: 4,
+    slidesToShow: 3,
     autoplay: false,
     autoplaySpeed: 5000,
     prevArrow: <SliderArrow/>,
@@ -30,17 +30,9 @@ export const settings = {
             breakpoint: 576,
             settings: {
                 arrows: false,
-                centerPadding: '20px',
+                centerPadding: '44px',
                 slidesToShow: 1
             }
-        },
-        // {
-        //     breakpoint: 450,
-        //     settings: {
-        //         arrows: false,
-        //         centerPadding: '45px',
-        //         slidesToShow: 1
-        //     }
-        // }
+        }
     ]
 };

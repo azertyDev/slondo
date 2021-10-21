@@ -1,9 +1,9 @@
 import {FC} from 'react';
+import {useRouter} from 'next/router';
+import {useTranslation} from "next-i18next";
+import {LetterIcon} from '@src/components/elements/icons';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
-import {LetterIcon} from '@src/components/elements/icons';
-import {useTranslation} from "next-i18next";
-import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 export const SidebarMenu: FC = () => {
@@ -25,7 +25,7 @@ export const SidebarMenu: FC = () => {
                     selected={pathname === 'profile_ratings'}
                     onClick={handleListItemClick('profile_ratings')}
                 >
-                    <ListItemText primary={t('cabinet:rating')} />
+                    <ListItemText primary={t('rating')}/>
                 </ListItem>
                 <ListItem
                     button
@@ -33,38 +33,33 @@ export const SidebarMenu: FC = () => {
                     selected={pathname === 'profile_follows'}
                     onClick={handleListItemClick('profile_follows')}
                 >
-                    <ListItemText primary={t('cabinet:subscriptions')} />
+                    <ListItemText primary={t('subscriptions')}/>
                 </ListItem>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List
+                disablePadding
+                component="nav"
+                className='menu-item'
+                aria-label="cabinet menu"
+                onClick={handleListItemClick('write_to_user')}
+            >
                 <ListItem
                     button
                     disableGutters
-                    disabled
                 >
-                    <LetterIcon />
-                    <ListItemText primary={t('cabinet:messages')} />
+                    <LetterIcon/>
+                    <ListItemText primary={t('post:writeMessage')}/>
                 </ListItem>
-
                 <ListItem
                     button
+                    disableGutters
                     selected={pathname === 'profile_posts'}
                     onClick={handleListItemClick('profile_posts')}
-                    disableGutters
                 >
-                    <NotesIcon />
-                    <ListItemText primary={t('main:posts')} />
+                    <NotesIcon/>
+                    <ListItemText primary={t('main:posts')}/>
                 </ListItem>
             </List>
-            {/*<List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>*/}
-            {/*    <ListItem*/}
-            {/*        button*/}
-            {/*        disableGutters*/}
-            {/*        onClick={handleFollow}*/}
-            {/*    >*/}
-            {/*        <ListItemText primary={t('cabinet:subscribe')} />*/}
-            {/*    </ListItem>*/}
-            {/*</List>*/}
         </div>
     );
 };

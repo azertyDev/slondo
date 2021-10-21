@@ -4,3 +4,4 @@ export {SearchCtx} from "./SearchCtx";
 export {ExitPromptCtx} from "./ExitPrompt";
 export {UserLocationCtx} from "./UserLocationCtx";
 export {SocketCtx} from "./SocketCtx";
+export {CategoriesCtx} from "./CategoriesCtx";

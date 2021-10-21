@@ -1,40 +1,21 @@
-import {IdNameType} from "@root/interfaces/Post";
+type markRuNameType = {
+    id: number,
+    name: string,
+    ru_name: string,
+};
 
-export interface Categories {
-    isFetch: boolean;
-    error?: unknown;
-    data: CategoriesDataTypes[];
-}
-
-export type CategoriesDataTypes = {
-    id: number;
-    manufactures: [];
-    name: string;
-    defaultParams: {
-        id: number;
-        name: string;
-        adjustable_seats: AdjustableSeats[]
-    }[]
-}[];
-export type AdjustableSeats = {
-    id: number;
-    name: string;
-}[];
-
-export type CategoryType = IdNameType & {
-    icon?: {
-        url: string;
-    },
-    ru_name?: string;
-    smallIcon?: any;
+export type CategoryType = markRuNameType & {
+    iconUrl: string,
+    smallIcon: JSX.Element,
+    has_auction?: number,
     subcategory?: SubcategoryType[];
 };
 
-export type SubcategoryType = IdNameType & {
-    parents?: IdNameType[],
+export type SubcategoryType = markRuNameType & {
+    parents?: markRuNameType[],
     type?: TypeCategory[]
 };
 
-export type TypeCategory = IdNameType & {
-    parents?: IdNameType[]
+export type TypeCategory = markRuNameType & {
+    parents?: markRuNameType[]
 };

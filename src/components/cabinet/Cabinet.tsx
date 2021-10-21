@@ -16,7 +16,9 @@ import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {CabinetSidebar} from "@src/components/cabinet/cabinet_sidebar/CabinetSidebar";
+import {categoriesNormalize} from "@src/helpers";
 import {useStyles} from './useStyles';
+import {CategoriesCtx} from "@src/context";
 
 export type CommonModalType = {
     post,
@@ -25,11 +27,13 @@ export type CommonModalType = {
     handleRefresh: () => void
 };
 
-const Cabinet: FC = () => {
+const Cabinet: FC<{ siteCategories }> = ({siteCategories}) => {
     const {query: {page}, push} = useRouter();
     const {t} = useTranslation('cabinet');
     const title = t(page);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    const categories = categoriesNormalize(siteCategories);
 
     const isMainPage = page === 'main';
 
@@ -83,7 +87,9 @@ const Cabinet: FC = () => {
                                 {t(page)}
                             </Typography>
                         </Hidden>
-                        {getPage()}
+                        <CategoriesCtx.Provider value={categories}>
+                            {getPage()}
+                        </CategoriesCtx.Provider>
                     </Grid>
                 </Grid>
             </div>

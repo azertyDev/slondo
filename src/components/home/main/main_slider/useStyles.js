@@ -3,19 +3,14 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        maxWidth: '1920px',
-        padding: '0 19px',
-        [theme.breakpoints.down('md')]: {
-            padding: 0
-        },
+        maxWidth: '1420px',
         margin: '0 auto',
         '& div.slick-slider': {
             '& img': {
+                aspectRatio: '2.5/1',
                 width: '100%',
                 borderRadius: '5px',
-                // [theme.breakpoints.down('450')]: {
-                //     height: 95
-                // },
+                objectFit: 'cover'
             },
             '& div.slick-slide': {
                 padding: '0 5px'
@@ -54,38 +49,32 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     content: {
-        right: 40,
-        bottom: 40,
-        display: 'flex',
-        maxWidth: '60%',
         position: 'absolute',
+        top: 0,
+        right: 0,
+        maxWidth: '65%',
+        height: '100%',
+        display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        [theme.breakpoints.down('xs')]: {
-            right: 16,
-            bottom: 50,
-            maxWidth: '55%'
+        justifyContent: 'flex-end',
+        padding: '0 5% 8% 0',
+        '& h5, & h6': {
+            textAlign: 'end'
         },
         '& h5': {
             fontWeight: 600,
             [theme.breakpoints.down('xs')]: {
-                fontSize: '1rem',
-                lineHeight: '20px',
-                textShadow: 'none'
+                fontSize: '4.5vw'
             }
         },
         '& h6': {
             [theme.breakpoints.down('xs')]: {
-                fontSize: '0.75rem'
+                fontSize: '3.6vw'
             }
         },
         '& .MuiTypography-root': {
             color: '#fff',
-            textAlign: 'end',
-            textShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)',
-            [theme.breakpoints.down('xs')]: {
-                // textShadow: 'none'
-            }
+            textShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)'
         }
     }
 }));

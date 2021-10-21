@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
                 fontSize: '1rem'
             },
             '& .MuiTypography-subtitle1': {
-                marginRight: '5px',
                 fontWeight: 600
             }
         },

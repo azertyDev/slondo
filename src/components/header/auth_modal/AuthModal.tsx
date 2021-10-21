@@ -39,7 +39,7 @@ type FormStatusesType = 'reg'
     | 'newPass'
 
 export const AuthModal: FC = () => {
-    const socket = useContext(SocketCtx);
+    // const socket = useContext(SocketCtx);
     const {t} = useTranslation('auth_reg');
     const {auth: {authModalOpen}, setAuthModalOpen, addUser} = useContext(AuthCtx);
     const smDown = useMediaQuery(useTheme().breakpoints.down('sm'));
@@ -125,7 +125,7 @@ export const AuthModal: FC = () => {
         unstable_batchedUpdates(() => {
             addUser(data.user);
             handleCloseModal();
-            socket.emit('user_connected', data.user.id);
+            // socket.emit('user_connected', data.user.id);
             cookies.set('slondo_user', data.user, cookieOpts);
             cookies.set('slondo_auth', data.token, cookieOpts);
         });

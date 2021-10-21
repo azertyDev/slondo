@@ -13,12 +13,12 @@ import {
     toUrlParams,
     transformCyrillic,
     normalizeFiltersByCategory,
-    manufacturersDataNormalize, getLocationByURL
+    manufacturersDataNormalize,
+    getLocationByURL
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
-import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {SearchEstate} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
@@ -31,6 +31,7 @@ import {ModalHeader} from "@src/components/cabinet/components/modal_header/Modal
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {useModal} from "@src/hooks";
 import {unstable_batchedUpdates} from "react-dom";
+import {CategoryType} from "@root/interfaces/Categories";
 import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
@@ -45,13 +46,15 @@ export type CommonFiltersType = {
 
 type SearchFormPropsType = {
     urlParams,
-    categories
+    categories,
+    siteCategories: CategoryType[]
 };
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const {
         urlParams,
-        categories
+        categories,
+        siteCategories
     } = props;
 
     const {
@@ -91,13 +94,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const [ctgr, subctgr, typeCtgr] = categories;
 
-    const initFilters = {
-        categories: site_categories,
-        subcategories: ctgr?.subcategory || [],
-        typeCategories: subctgr?.type || [],
-        filtersByCtgr: {}
-    };
-
     const {query, push} = useRouter();
     const [queryLoc] = query.path as string[];
 
@@ -105,6 +101,13 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const {term} = useContext(SearchCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
+
+    const initFilters = {
+        categories: [],
+        subcategories: ctgr?.subcategory || [],
+        typeCategories: subctgr?.type || [],
+        filtersByCtgr: {}
+    };
 
     const [regions, setRegions] = useState([]);
     const [values, setValues] = useState(initVals);
@@ -133,7 +136,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const mainCategoryName: string = category?.name ?? '';
     const subcategoryName: string = subcategory?.name ?? '';
 
-    const hasAuction = !!HasAuction[mainCategoryName];
+    const hasAuction = siteCategories.some(c => c.name === mainCategoryName && !!c.has_auction);
 
     const {handleNumericInput} = useHandlers(values, setValues);
 
@@ -438,8 +441,12 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                                 onChange={handleSort}
                                 value={values.by_filtering}
                             >
-                                <MenuItem value='created_at'>{t('by_date')}</MenuItem>
-                                <MenuItem value='price'>{t('by_price')}</MenuItem>
+                                <MenuItem value='created_at'>
+                                    {t('by_date')}
+                                </MenuItem>
+                                <MenuItem value='price'>
+                                    {t('by_price')}
+                                </MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -461,7 +468,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     name='category'
                     disableRequire
                     values={values}
-                    items={filters.categories}
+                    items={siteCategories}
                     handleSelect={handleSelect}
                     transKey='categories:'
                     labelTxt={t(`category`)}

@@ -4,7 +4,6 @@
 import {userAPI} from "@src/api/api";
 import {GetServerSideProps} from 'next';
 import {getSitemap, transformCyrillic} from "@src/helpers";
-import {categories_list} from "@src/common_data/site_categories";
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
@@ -14,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locationName = queryLoc.replace(xmlRegEx, '');
     const siteUrl = process.env.SERVER_URL || 'http://localhost:3317';
 
-    const regions = await userAPI.getLocations();
+    const [regions, categories] = await Promise.all([userAPI.getLocations(), userAPI.getCategories()]);
 
     const locationExist = xmlRegEx.test(queryLoc) && regions.some(loc => {
         if (loc.ru_name === locationName) return true;
@@ -22,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     });
 
     if (locationName === 'uzbekistan' || locationExist) {
-        const fields = categories_list.reduce((fieldsAcc, ctgr) => {
+        const fields = categories.reduce((fieldsAcc, ctgr) => {
             const fields = [
                 getSitemapParams(`${locationName}/${transformCyrillic(ctgr.ru_name)}`)
             ];

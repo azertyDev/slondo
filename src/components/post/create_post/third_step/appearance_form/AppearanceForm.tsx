@@ -182,16 +182,14 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         if (dist > 0) {
             photos.splice(-dist, dist);
         }
+
         if (sum > 0) {
             files.splice(-sum, sum);
         }
 
         setValues({
             ...values,
-            files: [
-                ...photos,
-                ...files
-            ]
+            files: sortArray([...files, ...photos])
         });
     };
 

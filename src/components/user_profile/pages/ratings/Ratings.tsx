@@ -42,9 +42,10 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                             {t('reviews_rating')}
                         </Typography>
                     </Box>
-                    {ratings.map(({comments, rating}, index) => {
+                    {ratings.map(({comments, rating, ...other}, index) => {
                         const [mainComment, ...replyComments] = comments;
                         const {time} = getDate(mainComment?.created_at);
+
                         return (
                             <Box key={index} className='review' pb={2} mb={2}>
                                 <Box mb={2}>
@@ -70,13 +71,13 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12} sm={3} md={4} lg={2}>
-                                                    <Rating ratingValue={rating} readOnly />
+                                                    <Rating ratingValue={rating} readOnly/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
                                         <Grid item xs={12} md={10} container justifyContent='flex-end'>
                                             <Grid item xs={12} sm={10}>
-                                                <ReadMore id={mainComment?.id} threshold={55}>
+                                                <ReadMore id={mainComment?.id}>
                                                     <Typography variant='subtitle2'>
                                                         {mainComment?.comment}
                                                     </Typography>
@@ -103,7 +104,7 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                                                                 {time}
                                                             </Typography>
                                                         </Box>
-                                                        <ReadMore id={id} threshold={55}>
+                                                        <ReadMore id={id}>
                                                             <Typography variant='subtitle2'>
                                                                 {comment}
                                                             </Typography>
@@ -125,7 +126,7 @@ export const UserRatings: FC<UserRatingsPropsType> = (props) => {
                                                             {time}
                                                         </Typography>
                                                     </Box>
-                                                    <ReadMore id={id} threshold={55}>
+                                                    <ReadMore id={id}>
                                                         <Typography variant='subtitle2'>
                                                             {comment}
                                                         </Typography>

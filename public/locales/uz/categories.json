@@ -363,7 +363,7 @@
       "banking_sector": {
         "name": "Bank sohasi"
       },
-      "management": {
+      "human_resources_management": {
         "name": "Xodimlarni boshqarish"
       },
       "jurisprudence": {
@@ -456,7 +456,7 @@
       "banking_sector": {
         "name": "Bank sohasi"
       },
-      "management": {
+      "human_resources_management": {
         "name": "Xodimlarni boshqarish"
       },
       "jurisprudence": {
@@ -717,6 +717,9 @@
       "replacement_liquids": {
         "name": "Suyuqliklarni almashtirish"
       },
+      "car_painting": {
+        "name": "Avtomobil bo'yash"
+      },
       "repair_engine": {
         "name": "Dvigatel va xodovoyni ta’mirlash"
       },
@@ -885,10 +888,10 @@
       "printing_printing_design": {
         "name": "Poligrafiya, taxrir, dizayn"
       },
-      "realtor": {
+      "realtor_service": {
         "name": "Rieltorlik xizmatlari"
       },
-      "HR": {
+      "hr": {
         "name": "HR"
       },
       "certification": {
@@ -1092,25 +1095,25 @@
       "footwear": {
         "name": "Poyafzal"
       },
-      "blazers_and_suits": {
+      "blazers_and_sui": {
         "name": "Pidjak va kostyumlar"
       },
       "dresses_and_ski": {
         "name": "Ko’ylak va yubkalar"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Sviter va tolstovkalar"
       },
       "sportswear": {
         "name": "Sport kiyimlari"
       },
-      "overalls_and_uniforms": {
+      "overalls_and_un": {
         "name": "Maxsus kiyim va uniforma"
       },
-      "tshirts_and_tops": {
+      "tshirts_and_top": {
         "name": "Futbolka va toplar"
       },
-      "pants_and_shorts": {
+      "pants_and_short": {
         "name": "Ishton va shortiklar"
       },
       "other": {
@@ -1140,25 +1143,25 @@
       "footwear": {
         "name": "Poyafzal"
       },
-      "blazers_and_suits": {
+      "blazers_and_sui": {
         "name": "Pidjak va kostyumlar"
       },
       "shirts": {
         "name": "Ko’ylaklar"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Sviter va tolstovkalar"
       },
-      "overalls_and_uniforms": {
+      "overalls_and_un": {
         "name": "Maxsus kiyim"
       },
       "sportswear": {
         "name": "Sport kiyimi"
       },
-      "tshirts_and_polos": {
+      "tshirts_and_pol": {
         "name": "Futbolkalar va polo"
       },
-      "pants_shorts": {
+      "pants_and_short": {
         "name": "Ishton va shortiklar"
       },
       "other": {
@@ -1182,7 +1185,7 @@
       "home_clothes": {
         "name": "Uyda kiyiladigan kiyimlar"
       },
-      "jumpsuits_bodysuits": {
+      "jumpsuits_bodys": {
         "name": "Kombinezonlar va bodi"
       },
       "envelopes": {
@@ -1200,10 +1203,10 @@
       "dresses_skirts": {
         "name": "Ko’ylak va yubkalar"
       },
-      "romper_undershirts": {
+      "romper_undershi": {
         "name": "Polzunka va raspashonkalar"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Sviter va tolstovkalar"
       },
       "sportswear": {
@@ -1230,10 +1233,10 @@
       "toys_and_games": {
         "name": "O’yinchoqlar va o’yinlar"
       },
-      "strollers_select": {
+      "strollers_selec": {
         "name": "Aravachalar"
       },
-      "feeding_and_nutrition": {
+      "feeding_and_nut": {
         "name": "Emizish va ovqatlantirish"
       },
       "bathing": {
@@ -1245,7 +1248,7 @@
       "nappies_pots": {
         "name": "Tagliklar va tuvaklar"
       },
-      "radio_video_baby_monitors": {
+      "radio_video_bab": {
         "name": "Radio va video enagalar"
       },
       "goods_for_moms": {
@@ -1269,13 +1272,13 @@
       "dolls_and_toys": {
         "name": "Qo’g’irchoq va o’yinchoqlar"
       },
-      "decoration_of_an_interior": {
+      "decoration_of_a": {
         "name": "Interyerni bezatish"
       },
       "accessories": {
         "name": "Aksessuarlar"
       },
-      "decoration_of_holidays": {
+      "decoration_of_h": {
         "name": "Bayramlarni bezatish"
       },
       "office": {
@@ -1293,7 +1296,7 @@
       "makeup": {
         "name": "Makiyaj"
       },
-      "manicure_pedicure": {
+      "manicure_pedicu": {
         "name": "Manikyur va pedikyur"
       },
       "health_products": {
@@ -1302,7 +1305,7 @@
       "perfumery": {
         "name": "Parfyumeriya"
       },
-      "haircut_hair_removal": {
+      "haircut_hair_re": {
         "name": "Soch kesish va soch olish"
       },
       "hair_care": {
@@ -1311,16 +1314,16 @@
       "skin_care": {
         "name": "Terini parvarish qilish"
       },
-      "hair_dryers_styling": {
+      "hair_dryers_sty": {
         "name": "Fen va sochni turmaklash"
       },
-      "tattoo_permanent_makeup": {
+      "tattoo_permanen": {
         "name": "Tatu va tatuaj"
       },
-      "solariums_and_tanning": {
+      "solariums_and_t": {
         "name": "Solyariy va qorayish"
       },
-      "hygiene_products": {
+      "hygiene_product": {
         "name": "Gigiyena vositalari"
       },
       "other": {
@@ -1693,7 +1696,7 @@
   },
   "hobbies": {
     "name": "Xobbi va dam olish",
-    "tickets": {
+    "ticket": {
       "name": "Chiptalar"
     },
     "videos": {

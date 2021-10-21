@@ -13,7 +13,23 @@ export const defaultSEOContent = {
     }
 };
 
-export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, typeCtgr: TypeCategory, location: string, locale: string) => {
+type SEODataType = {
+    ctgr: CategoryType,
+    subctgr: SubcategoryType,
+    typectgr: TypeCategory,
+    location: string,
+    locale: string
+}
+
+export const getSEOContent = (data: SEODataType) => {
+    const {
+        ctgr,
+        subctgr,
+        typectgr,
+        location,
+        locale
+    } = data;
+
     const seoContent = {
         electronics: {
             phones_tablets: {
@@ -12484,8 +12500,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         title: `${location}da ekskavatorlar uchun ehtiyot qismlar maxsus texnika uchun butlovchi qismlar  sotib olish`,
                         description: `JCB, Hyundai, Holland, Hitachi ekskavatorlari uchun eng yaxshi narxlarda yangi va b.u. ehtiyot qismlar, butlovchi qismlar va sarf materiallarini sotib olish, slondo.uz / ${location}`,
                         text: `Ekskavatorlarni qo'llash sohasi juda katta. Tuproq, qum, temir javhari, granit va boshqa jinslarni qazish uchun ishlatiladigan ushbu tuproq qazish qurilmalari ularni qurilish va boshqa sanoat sohalarida ajralmas holga keltiradi. Biroq, uzoq muddatli operatsiya bilan, vaqt o'tishi bilan sarf materiallarini va muvaffaqiyatsiz qismlarni almashtirish kerak: tırtıl kuchlanish, o'qning aylanish zanjiri va boshqa ko'plab komponentlar.
-                        Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
-                        `
+                        Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                     },
                     other: {
                         title: `Boshqa maxsus texnika uchun ehtiyot qismlar va sarf materiallari / ${location}`,
@@ -12499,25 +12514,23 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     title: `Запчасти и комплектующие для водного транспорта б/у и новые | ${location}`,
                     description: `Купить новые и б/у запчасти, комплектующие и расходные материалы для водного транспорта в ${location} | лучшие цены на slondo.uz`,
                     text: `Водный транспорт, как и его сухопутные аналоги, нуждается в регулярном обслуживании. При активной эксплуатации, следует на постоянной основе заменять расходники, а в случае неожиданного выхода из строя, менять уже ключевые запчасти. Самые частые поломки возникают при попадании воды в электронику, повреждении надувных отсеков и гниения деревянной основы, что приводит к пробоинам на судне. В любом из этих случаев, требуются необходимые запчасти или комплектующие для водного транспорта. Также могут сломаться другие комплектующие и аксессуары, без которых эксплуатация определенного водного транспорта невозможна. К примеру весла или надувные жилеты.
-                  Выбрать лучшее из множества предложений по продаже запчастей для водного транспорта, Вам поможет slondo.uz`
+                    Выбрать лучшее из множества предложений по продаже запчастей для водного транспорта, Вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `Ishlatilgan va yangi suv transporti uchun ehtiyot qismlar va butlovchi qismlar / ${location}`,
+                    title: `Ishlatilgan va yangi suv transporti uchun ehtiyot qismlar va butlovchi qismlar | ${location}`,
                     description: `${location}da suv transporti uchun yangi va ikkinchi qo'l ehtiyot qismlar, butlovchi qismlar va sarf materiallarini sotib olish / eng yaxshi narxlar slondo.uz`,
                     text: `Suv transporti, uning er hamkorlari kabi, muntazam parvarishlarga muhtoj. Faol ishlayotganda, sarf materiallarini doimiy ravishda almashtirish kerak, va kutilmagan qobiliyatsiz bo'lsa, kalit qismlarni o'zgartiring. Eng tez-tez uchraydigan buzilishlar suv elektronikaga kirganda, shishiradigan xonalarga zarar etkazilganda va yog'och taglikning parchalanishiga olib keladi, bu esa kemada yoriqlar paydo bo'lishiga olib keladi. Bu hollarda har qanday, suv transporti uchun zarur ehtiyot qismlar yoki butlovchi qismlar talab qiladi. Boshqa aksessuarlar va aksessuarlar ham sindirishi mumkin, bu holda ma'lum suv transportining ishlashi mumkin emas. Misol uchun, eshkaklar yoki puflamali yeleklar.
-                    Suv transporti uchun ehtiyot qismlarni sotish bo'yicha ko'plab takliflarni tanlash sizga yordam beradi slondo.uz
-                    `
+                    Suv transporti uchun ehtiyot qismlarni sotish bo'yicha ko'plab takliflarni tanlash sizga yordam beradi slondo.uz`
                 }
             }
         }
     };
-
-    if (typeCtgr) {
-        return seoContent[category.name][subCtgr.name][locale][typeCtgr.name];
+    if (typectgr) {
+        return seoContent[ctgr.name][subctgr.name][locale][typectgr.name];
     }
 
-    if (subCtgr) {
-        return seoContent[category.name][subCtgr.name][locale];
+    if (subctgr) {
+        return seoContent[ctgr.name][subctgr.name][locale];
     }
 
     return defaultSEOContent[locale];

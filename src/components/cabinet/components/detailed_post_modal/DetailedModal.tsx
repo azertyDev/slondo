@@ -1,4 +1,4 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useBetsData} from '@src/hooks/useBetsData';

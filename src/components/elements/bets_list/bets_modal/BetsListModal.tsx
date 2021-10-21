@@ -52,10 +52,10 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 : <>
                     <Box
                         p={2}
+                        width={1}
                         display='flex'
                         justifyContent='center'
                         flexDirection='column'
-                        width={1}
                     >
                         <Box
                             mb={2}

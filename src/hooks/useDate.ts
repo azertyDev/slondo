@@ -5,7 +5,18 @@ export const useDate = () => {
     const {t} = useTranslation('common');
 
     return (date) => {
-        date = new Date(date ? date.replace(/-/g, '/') : Date.now());
+
+        if (!date) {
+            return {
+                milliSeconds: '',
+                time: '',
+                hoursMin: '',
+                date: '',
+                fullDate: ''
+            };
+        }
+
+        date = new Date(date.replace(/-/g, '/'));
 
         const zeroFormat = num => {
             return num < 10 ? `0${num}` : num;

@@ -2,20 +2,21 @@ import {FC, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {StepsProgress} from '../steps_progress/StepsProgress';
-import {searchCategory, categoriesByType} from '@src/helpers';
-import {SubcategoryType} from '@root/interfaces/Categories';
+import {searchCategory} from '@src/helpers';
+import {CategoryType, SubcategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography, useTheme, useMediaQuery, Hidden} from '@material-ui/core';
 import {BackspaceIcon, Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import {categoryIcons} from "@src/common_data/categories_icons";
 import {IdNameType} from '@root/interfaces/Post';
 import {useStyles} from './useStyles';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 type CategoryStateType = {
     subcategory: IdNameType
 } & IdNameType;
 
-export const CategoriesPage: FC = () => {
+export const SecondStep: FC<{ siteCategories: CategoryType[] }> = ({siteCategories}) => {
     const {t} = useTranslation('categories');
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
@@ -37,7 +38,12 @@ export const CategoriesPage: FC = () => {
     const [category, setCategory] = useState(initCategory);
     const [subctgrs, setSubctgrs] = useState<SubcategoryType[]>([]);
 
-    const categories = categoriesByType(post_type as string);
+    let categories = siteCategories;
+
+    if (post_type === 'auc' || post_type === 'exauc') {
+        categories = siteCategories.filter(ctgr => !!ctgr.has_auction);
+    }
+
     const baseURL = `/create?post_type=${post_type}`;
 
     const handleCategory = (ctgr) => async () => {
@@ -71,7 +77,9 @@ export const CategoriesPage: FC = () => {
                     if (sub_ctgr) {
                         subcategory.forEach(({name, type}) => {
                             if (name === sub_ctgr) {
-                                type ? setSubctgrs(type) : setSubctgrs(subcategory);
+                                type
+                                    ? setSubctgrs(type)
+                                    : setSubctgrs(subcategory);
                             }
                         });
                     } else {
@@ -141,7 +149,7 @@ export const CategoriesPage: FC = () => {
                                     className={main_ctgr === ctgr.name ? 'selected-category' : ''}
                                 >
                                     <Typography variant="subtitle1">
-                                        {ctgr.smallIcon}
+                                        {categoryIcons[ctgr.name].smallIcon}
                                         {t(`${ctgr.name}.name`)}
                                     </Typography>
                                     <Hidden smUp>
@@ -194,7 +202,13 @@ export const CategoriesPage: FC = () => {
                                 )}
                                 {subctgrs.map((typeCtgr, i) => {
                                     const [ctgr, subctgr] = typeCtgr.parents;
-                                    const transCtgrName = t(`${ctgr.name}${subctgr ? `.${subctgr.name}` : ''}.${typeCtgr.name}.name`);
+
+                                    const transCtgrName = t(
+                                        `${ctgr.name}${subctgr
+                                            ? `.${subctgr.name}`
+                                            : ''}.${typeCtgr.name}.name`
+                                    );
+
                                     return (
                                         <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
                                             <div>

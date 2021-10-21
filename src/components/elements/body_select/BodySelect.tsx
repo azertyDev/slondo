@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'react-i18next';
 import {
     CabrioletIcon,
@@ -22,6 +21,7 @@ import {
     VanIcon
 } from '@src/components/elements/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {useStyles} from './useStyles';
 
 type BodyTypesProps = {
     disableRequire?: boolean,
@@ -182,25 +182,27 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
                 )}
             </Typography>
             <CustomSlider {...sliderSettings}>
-                {bodies?.map(body => {
-                    const carBodyIcon = bodyIcons.find(el => el.name === body.name).icon;
-                    return (
-                        <Box
-                            key={body.id}
-                            style={{width: 'fit-content'}}
-                            onClick={handleBodySelect(body)}
-                            className={body.id === values.body?.id ? 'selected' : ''}
-                        >
-                            {carBodyIcon}
-                            <Typography
-                                component='p'
-                                variant='subtitle1'
+                {bodies
+                    ? bodies.map(body => {
+                        const carBodyIcon = bodyIcons.find(el => el.name === body.name).icon;
+                        return (
+                            <Box
+                                key={body.id}
+                                style={{width: 'fit-content'}}
+                                onClick={handleBodySelect(body)}
+                                className={body.id === values.body?.id ? 'selected' : ''}
                             >
-                                {t(`car.${body.name}.name`)}
-                            </Typography>
-                        </Box>
-                    );
-                })}
+                                {carBodyIcon}
+                                <Typography
+                                    component='p'
+                                    variant='subtitle1'
+                                >
+                                    {t(`car.${body.name}.name`)}
+                                </Typography>
+                            </Box>
+                        );
+                    })
+                    : <div/>}
             </CustomSlider>
         </div>
     );

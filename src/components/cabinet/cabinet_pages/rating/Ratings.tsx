@@ -170,7 +170,7 @@ export const Ratings: FC = () => {
                                         </Grid>
                                         <Grid item xs={12} md={10} container justifyContent='flex-end'>
                                             <Grid item xs={12} sm={10}>
-                                                <ReadMore id={mainComment?.id} threshold={55}>
+                                                <ReadMore id={mainComment?.id}>
                                                     <Typography variant='subtitle2'>
                                                         {mainComment?.comment}
                                                     </Typography>
@@ -197,7 +197,7 @@ export const Ratings: FC = () => {
                                                                 {time}
                                                             </Typography>
                                                         </Box>
-                                                        <ReadMore id={id} threshold={55}>
+                                                        <ReadMore id={id}>
                                                             <Typography variant='subtitle2'>
                                                                 {comment}
                                                             </Typography>
@@ -229,7 +229,7 @@ export const Ratings: FC = () => {
                                                             {time}
                                                         </Typography>
                                                     </Box>
-                                                    <ReadMore id={id} threshold={55}>
+                                                    <ReadMore id={id}>
                                                         <Typography variant='subtitle2'>
                                                             {comment}
                                                         </Typography>

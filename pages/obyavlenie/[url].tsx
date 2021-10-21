@@ -6,11 +6,14 @@ import {userAPI} from "@src/api/api";
 export const getServerSideProps: GetServerSideProps = async ({locale, query, res}) => {
     const postUrl = query.url as string;
     const [postId] = postUrl.split('-').splice(-1);
-    const initPostData = await userAPI.getPostById(postId);
+
+    const [initPostData, siteCategories] =
+        await Promise.all([userAPI.getPostById(postId), userAPI.getCategories()]);
 
     return ({
         props: {
             initPostData,
+            siteCategories,
             statusCode: res.statusCode,
             ...await serverSideTranslations(
                 locale,

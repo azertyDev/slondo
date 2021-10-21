@@ -19,10 +19,11 @@ import {
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ParamsForm} from './params_form/ParamsForm';
 import {ErrorCtx, ExitPromptCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {numericFields} from "@src/common_data/fields_keys";
+import {CategoryType} from "@root/interfaces/Categories";
+import {useStyles} from './useStyles';
 
-export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
+export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> = ({backURL, siteCategories}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [_, setShowExitPrompt] = useContext(ExitPromptCtx);
@@ -43,11 +44,13 @@ export const FormPages: FC<{ backURL: string }> = ({backURL}) => {
     const subcategoryName = sub_ctgr as string;
     const typeName = type_ctgr as string;
 
-    const {category, subcategory, type} = getCategoriesByParams({
+    const params = {
         categoryName,
         subcategoryName,
         typeName
-    } as CategoriesParamsType);
+    } as CategoriesParamsType;
+
+    const {category, subcategory, type} = getCategoriesByParams(params, siteCategories);
 
     const isCtgrAnimalFishes = category?.name === 'animal' && subcategory?.name === 'fishes';
 

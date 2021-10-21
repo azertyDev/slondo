@@ -127,6 +127,7 @@
     "main": "Foydalanuvchi profili",
     "profile_ratings": "Reyting",
     "profile_follows": "Obunachilar/obunalar",
-    "profile_posts": "E'lonlar"
+    "profile_posts": "E'lonlar",
+    "write_to_user": "Foydalanuvchiga yozish"
   }
 }

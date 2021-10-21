@@ -205,35 +205,31 @@ export const DetailedAuctions: FC<DetailedPostViewPropsType> = (props) => {
                             </Grid>
                         </>
                     )}
-                    {(isUserCreator || isUserWinner) && !inactiveStatus && (
-                        <>
-                            {(isUserWinner || (offerUser && !winner)) && (
-                                <Grid item xs={12}>
-                                    <CustomButton
-                                        color='silver'
-                                        disabled={isFetch}
-                                        onClick={handleReject}
-                                    >
-                                        <Typography variant='subtitle1' component='p'>
-                                            {t(`common:reject`)}
-                                        </Typography>
-                                    </CustomButton>
-                                </Grid>
-                            )}
-                            {(winner || hasOffer) && isUserCreator && (
-                                <Grid item xs={12}>
-                                    <CustomButton
-                                        color='primary'
-                                        disabled={isFetch}
-                                        onClick={handleAccept}
-                                    >
-                                        <Typography variant='subtitle1' component='p'>
-                                            {t(`common:${winner ? 'finish' : 'accept'}`)}
-                                        </Typography>
-                                    </CustomButton>
-                                </Grid>
-                            )}
-                        </>
+                    {offerUser && isUserCreator && !inactiveStatus && (
+                        <Grid item xs={12}>
+                            <CustomButton
+                                color='silver'
+                                disabled={isFetch}
+                                onClick={handleReject}
+                            >
+                                <Typography variant='subtitle1' component='p'>
+                                    {t(`common:reject`)}
+                                </Typography>
+                            </CustomButton>
+                        </Grid>
+                    )}
+                    {(winner || hasOffer) && isUserCreator && (
+                        <Grid item xs={12}>
+                            <CustomButton
+                                color='primary'
+                                disabled={isFetch}
+                                onClick={handleAccept}
+                            >
+                                <Typography variant='subtitle1' component='p'>
+                                    {t(`common:${winner ? 'finish' : 'accept'}`)}
+                                </Typography>
+                            </CustomButton>
+                        </Grid>
                     )}
                 </Grid>
                 {isNotPassModeration && (

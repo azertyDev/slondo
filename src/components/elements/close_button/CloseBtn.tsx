@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import {CloseIcon} from '@src/components/elements/icons';
 import {IconButton} from '@material-ui/core';
-import {ClassNameMap} from '@material-ui/styles';
 import {useStyles} from './useStyles';
 
 type CloseBtnPropsType = {
@@ -10,11 +9,11 @@ type CloseBtnPropsType = {
 };
 
 export const CloseBtn: FC<CloseBtnPropsType> = ({handleClose, className = ''}) => {
-    const classes: ClassNameMap<any> = useStyles();
+    const classes: any = useStyles();
     return (
         <IconButton
-            className={`${classes.root} ${className}`}
             onClick={handleClose}
+            className={`${classes.root} ${className}`}
         >
             <CloseIcon/>
         </IconButton>

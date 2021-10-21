@@ -363,7 +363,7 @@
       "banking_sector": {
         "name": "Банковская сфера"
       },
-      "management": {
+      "human_resources_management": {
         "name": "Управление персоналом"
       },
       "jurisprudence": {
@@ -456,7 +456,7 @@
       "banking_sector": {
         "name": "Банковская сфера"
       },
-      "management": {
+      "human_resources_management": {
         "name": "Управление персоналом"
       },
       "jurisprudence": {
@@ -651,7 +651,7 @@
       "layout_designer": {
         "name": "Верстальщик"
       },
-      "designers": {
+      "designer": {
         "name": "Дизайнеры"
       },
       "setting_pc": {
@@ -716,6 +716,9 @@
       },
       "replacement_liquids": {
         "name": "Замена жидкостей"
+      },
+      "car_painting": {
+        "name": "Покраска авто"
       },
       "repair_engine": {
         "name": "Ремонт двигателя и ходовой"
@@ -885,10 +888,10 @@
       "printing_printing_design": {
         "name": "Полиграфия, печать, дизайн"
       },
-      "realtor": {
+      "realtor_service": {
         "name": "Риэлторские услуги"
       },
-      "HR": {
+      "hr": {
         "name": "HR"
       },
       "certification": {
@@ -1092,25 +1095,25 @@
       "footwear": {
         "name": "Обувь"
       },
-      "blazers_and_suits": {
+      "blazers_and_sui": {
         "name": "Пиджаки и костюмы"
       },
       "dresses_and_ski": {
         "name": "Платья и юбки"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Свитеры и толстовки"
       },
       "sportswear": {
         "name": "Спортивная одежда"
       },
-      "overalls_and_uniforms": {
+      "overalls_and_un": {
         "name": "Спецодежда и униформа"
       },
-      "tshirts_and_tops": {
+      "tshirts_and_top": {
         "name": "Футболки и топы"
       },
-      "pants_and_shorts": {
+      "pants_and_short": {
         "name": "Штаны и шорты"
       },
       "other": {
@@ -1140,25 +1143,25 @@
       "footwear": {
         "name": "Обувь"
       },
-      "blazers_and_suits": {
+      "blazers_and_sui": {
         "name": "Пиджаки и костюмы"
       },
       "shirts": {
         "name": "Рубашки"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Свитеры и толстовки"
       },
-      "overalls_and_uniforms": {
+      "overalls_and_un": {
         "name": "Спецодежда"
       },
       "sportswear": {
         "name": "Спортивная одежда"
       },
-      "tshirts_and_polos": {
+      "tshirts_and_pol": {
         "name": "Футболки и поло"
       },
-      "pants_shorts": {
+      "pants_and_short": {
         "name": "Штаны и шорты"
       },
       "other": {
@@ -1182,7 +1185,7 @@
       "home_clothes": {
         "name": "Домашняя одежда"
       },
-      "jumpsuits_bodysuits": {
+      "jumpsuits_bodys": {
         "name": "Комбинезоны и боди"
       },
       "envelopes": {
@@ -1200,10 +1203,10 @@
       "dresses_skirts": {
         "name": "Платья и юбки"
       },
-      "romper_undershirts": {
+      "romper_undershi": {
         "name": "Ползунки и распашонки"
       },
-      "sweaters_hoodies": {
+      "sweaters_hoodie": {
         "name": "Свитеры и толстовки"
       },
       "sportswear": {
@@ -1230,10 +1233,10 @@
       "toys_and_games": {
         "name": "Игрушки и игры"
       },
-      "strollers_select": {
+      "strollers_selec": {
         "name": "Коляски"
       },
-      "feeding_and_nutrition": {
+      "feeding_and_nut": {
         "name": "Кормление и питание"
       },
       "bathing": {
@@ -1245,7 +1248,7 @@
       "nappies_pots": {
         "name": "Подгузники и горшки"
       },
-      "radio_video_baby_monitors": {
+      "radio_video_bab": {
         "name": "Радио и видеоняни"
       },
       "goods_for_moms": {
@@ -1269,13 +1272,13 @@
       "dolls_and_toys": {
         "name": "Куклы и игрушки"
       },
-      "decoration_of_an_interior": {
+      "decoration_of_a": {
         "name": "Оформление интерьера"
       },
       "accessories": {
         "name": "Аксессуары"
       },
-      "decoration_of_holidays": {
+      "decoration_of_h": {
         "name": "Оформление праздников"
       },
       "office": {
@@ -1293,7 +1296,7 @@
       "makeup": {
         "name": "Макияж"
       },
-      "manicure_pedicure": {
+      "manicure_pedicu": {
         "name": "Маникюр и педикюр"
       },
       "health_products": {
@@ -1302,7 +1305,7 @@
       "perfumery": {
         "name": "Парфюмерия"
       },
-      "haircut_hair_removal": {
+      "haircut_hair_re": {
         "name": "Стрижка и удаление волос"
       },
       "hair_care": {
@@ -1311,16 +1314,16 @@
       "skin_care": {
         "name": "Уход за кожей"
       },
-      "hair_dryers_styling": {
+      "hair_dryers_sty": {
         "name": "Фены и укладка"
       },
-      "tattoo_permanent_makeup": {
+      "tattoo_permanen": {
         "name": "Тату и татуаж"
       },
-      "solariums_and_tanning": {
+      "solariums_and_t": {
         "name": "Солярии и загар"
       },
-      "hygiene_products": {
+      "hygiene_product": {
         "name": "Средства для гигиены"
       },
       "other": {
@@ -1693,7 +1696,7 @@
   },
   "hobbies": {
     "name": "Хобби и отдых",
-    "tickets": {
+    "ticket": {
       "name": "Билеты"
     },
     "videos": {

@@ -10,3 +10,4 @@ export {useUrlParams} from './useUrlParams';
 export {useDate} from './useDate';
 export {useUserLocation} from './useUserLocation';
 export {useSocket} from './useSocket';
+export {useCategories} from './useCategories';

@@ -6,12 +6,20 @@ import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {defaultSEOContent} from '@src/common_data/seo_content';
 import {CustomHead} from "@src/components/head/CustomHead";
+import {categoriesNormalize} from "@src/helpers";
+import {CategoriesCtx, UserLocationCtx} from "@src/context";
 
-export const HomePage: FC = () => {
+type HomePageProps = {
+    siteCategories
+}
+
+export const HomePage: FC<HomePageProps> = ({siteCategories}) => {
+    const categories = categoriesNormalize(siteCategories);
     const {language} = useTranslation().i18n;
     const {title, description, text} = defaultSEOContent[language as string];
+
     return (
-        <>
+        <CategoriesCtx.Provider value={categories}>
             <CustomHead
                 title={title}
                 description={description}
@@ -20,6 +28,6 @@ export const HomePage: FC = () => {
             <Main seoTxt={text}/>
             <Footer/>
             <ErrorModal/>
-        </>
+        </CategoriesCtx.Provider>
     );
 };
