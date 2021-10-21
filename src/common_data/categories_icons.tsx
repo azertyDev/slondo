@@ -14,47 +14,47 @@ import {
 
 export const categoryIcons = {
     car: {
-        iconUrl: '/img/categories_img/car.png',
+        iconUrl: '/img/popular_categories/car.png',
         smallIcon: <CarIcon/>
     },
+    electronics: {
+        iconUrl: '/img/popular_categories/electronics.png',
+        smallIcon: <ElectronicIcon/>
+    },
     transport: {
-        iconUrl: '/img/categories_img/transport.png',
+        iconUrl: '/img/popular_categories/transport.png',
         smallIcon: <SpecTechIcon/>
     },
+    hobbies: {
+        iconUrl: '/img/popular_categories/hobbies.png',
+        smallIcon: <HobbyIcon/>
+    },
     parts: {
-        iconUrl: '/img/categories_img/parts.png',
+        iconUrl: '/img/popular_categories/parts.png',
         smallIcon: <PartsIcon/>
     },
+    goods: {
+        iconUrl: '/img/popular_categories/goods.png',
+        smallIcon: <HangerIcon/>
+    },
     estate: {
-        iconUrl: '/img/categories_img/estate.png',
+        iconUrl: '/img/popular_categories/estate.png',
         smallIcon: <ApartmentsIcon/>
     },
+    home: {
+        iconUrl: '/img/popular_categories/home.png',
+        smallIcon: <SofaIcon/>
+    },
     job: {
-        iconUrl: '/img/categories_img/job.png',
+        iconUrl: '/img/popular_categories/job.png',
         smallIcon: <JobIcon/>
     },
     service: {
-        iconUrl: '/img/categories_img/service.png',
+        iconUrl: '/img/popular_categories/service.png',
         smallIcon: <ServicesIcon/>
     },
-    goods: {
-        iconUrl: '/img/categories_img/goods.png',
-        smallIcon: <HangerIcon/>
-    },
-    home: {
-        iconUrl: '/img/categories_img/home.png',
-        smallIcon: <SofaIcon/>
-    },
-    electronics: {
-        iconUrl: '/img/categories_img/electronics.png',
-        smallIcon: <ElectronicIcon/>
-    },
-    hobbies: {
-        iconUrl: '/img/categories_img/hobbies.png',
-        smallIcon: <HobbyIcon/>
-    },
     animal: {
-        iconUrl: '/img/categories_img/animal.png',
+        iconUrl: '/img/popular_categories/animal.png',
         smallIcon: <AnimalsIcon/>
     }
 };

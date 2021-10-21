@@ -32,13 +32,13 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.slick-slider': {
                 '& > button.slick-prev, & > button.slick-next': {
-                    top: '23%'
+                    // top: '23%'
                 },
                 '& button.slick-prev': {
-                    left: '10px'
+                    // left: '10px'
                 },
                 '& button.slick-next': {
-                    right: '10px'
+                    // right: '10px'
                 },
                 '& div.slick-slide img': {
                     width: '100%'
@@ -67,13 +67,12 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'center',
                     color: theme.palette.primary.black,
                     '&:hover': {
-                        '& > span.category-name': {
-                            background: '#F2F2F2',
-                            transition: 'background 0.5s'
-                        },
                         '& div.bg-layer': {
-                            boxShadow: '0px 0px 8px rgb(0 0 0 / 8%)',
-                            transition: 'box-shadow 0.5s'
+                            '&:before': {
+                                background: 'radial-gradient(50% 50% at 50% 50%, #F3F3F3 0%, rgba(116, 97, 186, 0.1) 100%)',
+                                boxShadow: '0px 1px 4px rgba(116, 97, 186, 0.4)',
+                                transition: 'box-shadow 0.5s'
+                            }
                         }
                     },
                     '& > span.category-name': {
@@ -87,38 +86,40 @@ export const useStyles = makeStyles((theme) => ({
                                 lineHeight: '16px'
                             }
                         }
-
                     },
                     '& div.bg-layer': {
-                        width: '105px',
-                        height: '105px',
+                        width: '150px',
+                        height: '132px',
                         display: 'flex',
+                        padding: '0 10px 5px 10px',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: '20px',
-                        background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
-                        borderRadius: '100px',
+                        position: 'relative',
+                        '&:before': {
+                            content: '""',
+                            zIndex: 0,
+                            bottom: 8,
+                            height: 26,
+                            width: '100%',
+                            position: 'absolute',
+                            borderRadius: '100%',
+                            boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.05)',
+                            background: 'radial-gradient(50% 50% at 50% 50%, #F0F0F0 0%, #F0F0F0 100%)'
+                        },
+                        '& > img': {
+                            objectFit: 'contain',
+                            zIndex: 1
+                        },
                         [theme.breakpoints.down('xs')]: {
+                            '&:before': {
+                                display: 'none'
+                            },
+                            padding: 0,
                             marginBottom: '5px',
                             width: '80px',
                             height: '80px'
                         }
                     },
-                    '& div.medium': {
-                        background:
-                            'linear-gradient(90deg, #d7d6e3 -18.43%, #fafafa 147.2%)',
-                        width: '101px',
-                        height: '101px',
-                        borderRadius: '100px',
-                        '& > img': {
-                            height: '100%',
-                            objectFit: 'contain'
-                        },
-                        [theme.breakpoints.down('xs')]: {
-                            width: '80px',
-                            height: '80px'
-                        }
-                    }
                 }
             }
         }

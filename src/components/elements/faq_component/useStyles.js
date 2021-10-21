@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+        background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%)',
         borderRadius: 30,
         marginBottom: 24,
         '& > p.MuiTypography-subtitle1': {

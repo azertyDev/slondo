@@ -100,7 +100,10 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         '& div.preview': {
             padding: '18px',
             [breakpoints.down('sm')]: {
-                background: 'none'
+                background: 'none',
+                '& img': {
+                    width: 'inherit'
+                }
             }
         },
         '& div.paper': {
@@ -116,7 +119,7 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
                     fontSize: '0.875rem'
                 },
                 '& img': {
-                    width: 'inherit'
+                    // width: 'inherit'
                 }
             }
         },
@@ -135,6 +138,9 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         },
         '& .fw600': {
             fontWeight: '700'
+        },
+        '& .mb-16': {
+            marginBottom: 16
         }
     },
     link: {

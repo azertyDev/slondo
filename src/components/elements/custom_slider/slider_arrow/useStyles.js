@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
                 // background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 background: '#4E4E4E',
                 width: 'inherit',
-                height: '3.2px'
+                height: '2.5px'
             },
             '&:after': {
                 content: '""',
@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
                 // background: 'linear-gradient(49.94deg, #AD66D5 19.03%, #675EAA 72.72%)',
                 background: '#4E4E4E',
                 height: 'inherit',
-                width: '3.2px'
+                width: '2.5px'
             }
         },
         '&.slick-prev > span.MuiIconButton-label': {

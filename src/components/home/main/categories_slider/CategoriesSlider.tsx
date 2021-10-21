@@ -35,12 +35,10 @@ export const CategoriesSlider: FC = () => {
                                 <a title={ctgrName}>
                                     <div className="category">
                                         <div className="bg-layer">
-                                            <div className="medium">
-                                                <img
-                                                    alt={ctgrName}
-                                                    src={iconUrl}
-                                                />
-                                            </div>
+                                            <img
+                                                alt={ctgrName}
+                                                src={iconUrl}
+                                            />
                                         </div>
                                         <span className="category-name">
                                             <Typography variant='h4'>

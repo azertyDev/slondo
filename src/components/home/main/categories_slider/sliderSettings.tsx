@@ -1,7 +1,7 @@
 export const settings = {
     dots: false,
     infinite: false,
-    slidesToShow: 9,
+    slidesToShow: 7,
     swipeToSlide: true,
     responsive: [
         {

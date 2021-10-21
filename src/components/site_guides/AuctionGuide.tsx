@@ -39,7 +39,7 @@ export const AuctionGuide: FC<WithT> = (props) => {
     return (
         <div className={classes.root}>
             <Container maxWidth='lg' style={{paddingTop: isXsDown ? 10 : 50}}>
-                <Grid container spacing={2} justifyContent='center'>
+                <Grid container spacing={isXsDown ? 0 : 2} justifyContent='center'>
                     <Grid item xs={12}>
                         <Paper
                             elevation={isXsDown ? 0 : 1}
@@ -72,24 +72,24 @@ export const AuctionGuide: FC<WithT> = (props) => {
                             </Grid>
                         </Paper>
                     </Grid>
-                    <Grid item xs={11}>
-                        <Typography variant={isXsDown ? 'subtitle2' : 'h5'} className='fw600' align='center'>
+                    <Grid item xs={12} sm={11}>
+                        <Typography variant={isXsDown ? 'subtitle2' : 'h5'} className='fw600 mb-16' align='center'>
                             {t('howItWorks')}
                         </Typography>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12} sm={11}>
                         {
                             auction.map(({imgUrl, text}, index) => {
                                 if (index % 2) {
                                     return (
                                         <Paper elevation={1} className='paper' key={index}>
-                                            <Grid container>
-                                                <Grid item xs={6} container alignItems='center'>
+                                            <Grid container spacing={2} direction={isXsDown ? 'column' : 'row'}>
+                                                <Grid item xs={12} sm={6} container alignItems='center'>
                                                     <Box>
                                                         <Typography variant='h5'>{t(text)}</Typography>
                                                     </Box>
                                                 </Grid>
-                                                <Grid item xs={6} container justifyContent='center'>
+                                                <Grid item xs={12} sm={6} container justifyContent='center'>
                                                     <img src={imgUrl} alt="safety-img" />
                                                 </Grid>
                                             </Grid>
@@ -98,11 +98,11 @@ export const AuctionGuide: FC<WithT> = (props) => {
                                 }
                                 return (
                                     <Paper elevation={1} className='paper' key={index}>
-                                        <Grid container>
-                                            <Grid item xs={6} container justifyContent='center'>
+                                        <Grid container spacing={2} direction={isXsDown ? 'column-reverse' : 'row'}>
+                                            <Grid item xs={12} sm={6} container justifyContent='center'>
                                                 <img src={imgUrl} alt="safety-img" />
                                             </Grid>
-                                            <Grid item xs={6} container alignItems='center'>
+                                            <Grid item xs={12} sm={6} container alignItems='center'>
                                                 <Box>
                                                     <Typography variant='h5'>{t(text)}</Typography>
                                                 </Box>
@@ -113,7 +113,7 @@ export const AuctionGuide: FC<WithT> = (props) => {
                             })
                         }
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12} sm={11}>
                         <Link href="/help/how_to_participate">
                             <a className={classes.link}>
                                 <Typography variant='subtitle1' component='p'>

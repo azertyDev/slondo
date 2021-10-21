@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Box, Container, Grid, Paper, Tab, Tabs, Typography} from '@material-ui/core';
+import {Box, Container, Grid, Hidden, Paper, Tab, Tabs, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CustomTabPanel} from '../elements/custom_tab_panel/CustomTabPanel';
 import {useStyles} from './useStyles';
 import Link from 'next/link';
@@ -71,6 +71,7 @@ const cardItemsData = {
 export const SafeShoppingGuide = (props) => {
     const {t} = props;
     const {forSeller, forBuyer} = cardItemsData;
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const [tabValue, setTabValue] = useState(0);
 
@@ -81,23 +82,32 @@ export const SafeShoppingGuide = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Container maxWidth='lg' style={{paddingTop: 50}}>
+            <Container maxWidth='lg' style={{paddingTop: isXsDown ? 10 : 50}}>
                 <Grid container spacing={2} justifyContent='center'>
                     <Grid item xs={12}>
-                        <Paper elevation={1} className='paper'>
+                        <Paper elevation={isXsDown ? 0 : 1} className='paper preview'>
                             <Grid container>
-                                <Grid item xs={6} container justifyContent='center'>
+                                <Hidden smUp>
+                                    <Grid item xs={12}>
+                                        <Typography variant='h3' className='fw600' align='center'>
+                                            {t('hero.title')}
+                                        </Typography>
+                                    </Grid>
+                                </Hidden>
+                                <Grid item xs={12} sm={6} container justifyContent='center'>
                                     <img
                                         src="/img/safety.png"
                                         alt="safety-img"
                                         className='img'
                                     />
                                 </Grid>
-                                <Grid item xs={6} container alignItems='center' zeroMinWidth>
+                                <Grid item xs={12} sm={6} container alignItems='center' zeroMinWidth>
                                     <Box className='main-title'>
-                                        <Typography variant='h3' gutterBottom className='fw600'>
-                                            {t('hero.title')}
-                                        </Typography>
+                                        <Hidden xsDown>
+                                            <Typography variant='h3' gutterBottom className='fw600'>
+                                                {t('hero.title')}
+                                            </Typography>
+                                        </Hidden>
                                         <Typography variant='h5'>
                                             {t('hero.description')}
                                         </Typography>
@@ -107,12 +117,12 @@ export const SafeShoppingGuide = (props) => {
                         </Paper>
                     </Grid>
                     <Grid item xs={12} container>
-                        <Grid item xs={6} container justifyContent='center' alignItems='center'>
-                            <Typography variant='h5' className='fw600'>
+                        <Grid item xs={12} sm={6} container justifyContent='center' alignItems='center'>
+                            <Typography variant={isXsDown ? 'subtitle2' : 'h5'} className='fw600 mb-16'>
                                 {t('howItWorks')}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <Tabs
                                 value={tabValue}
                                 variant="fullWidth"
@@ -133,20 +143,24 @@ export const SafeShoppingGuide = (props) => {
                             </Tabs>
                         </Grid>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12} sm={11}>
                         <CustomTabPanel value={tabValue} index={0}>
                             {
                                 forSeller.map(({imgUrl, text}, index) => {
                                     if (index % 2) {
                                         return (
                                             <Paper elevation={1} className='paper' key={index}>
-                                                <Grid container>
-                                                    <Grid item xs={8} container alignItems='center'>
+                                                <Grid
+                                                    container
+                                                    spacing={2}
+                                                    direction={isXsDown ? 'column' : 'row'}
+                                                >
+                                                    <Grid item xs={12} sm={8} container alignItems='center'>
                                                         <Box className='main-title' color='textSecondary'>
                                                             <Typography variant='h5'>{t(text)}</Typography>
                                                         </Box>
                                                     </Grid>
-                                                    <Grid item xs={4} container justifyContent='center'>
+                                                    <Grid item xs={12} sm={4} container justifyContent='center'>
                                                         <img src={imgUrl} alt="safety-img" />
                                                     </Grid>
                                                 </Grid>
@@ -155,11 +169,11 @@ export const SafeShoppingGuide = (props) => {
                                     }
                                     return (
                                         <Paper elevation={1} className='paper' key={index}>
-                                            <Grid container>
-                                                <Grid item xs={6} container justifyContent='center'>
+                                            <Grid container spacing={2} direction={isXsDown ? 'column-reverse' : 'row'}>
+                                                <Grid item xs={12} sm={8} container justifyContent='center'>
                                                     <img src={imgUrl} alt="safety-img" />
                                                 </Grid>
-                                                <Grid item xs={6} container alignItems='center'>
+                                                <Grid item xs={12} sm={4} container alignItems='center'>
                                                     <Box className='main-title' color='textSecondary'>
                                                         <Typography variant='h5'>{t(text)}</Typography>
                                                     </Box>
@@ -176,13 +190,13 @@ export const SafeShoppingGuide = (props) => {
                                     if (index % 2) {
                                         return (
                                             <Paper elevation={1} className='paper' key={index}>
-                                                <Grid container>
-                                                    <Grid item xs={6} container alignItems='center'>
+                                                <Grid container spacing={2} direction={isXsDown ? 'column' : 'row'}>
+                                                    <Grid item xs={12} sm={8} container alignItems='center'>
                                                         <Box className='main-title' color='textSecondary'>
                                                             <Typography variant='h5'>{t(text)}</Typography>
                                                         </Box>
                                                     </Grid>
-                                                    <Grid item xs={6} container justifyContent='center'>
+                                                    <Grid item xs={12} sm={4} container justifyContent='center'>
                                                         <img src={imgUrl} alt="safety-img" />
                                                     </Grid>
                                                 </Grid>
@@ -191,11 +205,11 @@ export const SafeShoppingGuide = (props) => {
                                     }
                                     return (
                                         <Paper elevation={1} className='paper' key={index}>
-                                            <Grid container>
-                                                <Grid item xs={6} container justifyContent='center'>
+                                            <Grid container spacing={2} direction={isXsDown ? 'column-reverse' : 'row'}>
+                                                <Grid item xs={12} sm={8} container justifyContent='center'>
                                                     <img src={imgUrl} alt="safety-img" />
                                                 </Grid>
-                                                <Grid item xs={6} container alignItems='center'>
+                                                <Grid item xs={12} sm={4} container alignItems='center'>
                                                     <Box className='main-title' color='textSecondary'>
                                                         <Typography variant='h5'>{t(text)}</Typography>
                                                     </Box>
@@ -207,7 +221,7 @@ export const SafeShoppingGuide = (props) => {
                             }
                         </CustomTabPanel>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={12} sm={11}>
                         <Link href="/help/safe_shopping/buy">
                             <a className={classes.link}>
                                 <Typography variant='subtitle1' component='p'>
