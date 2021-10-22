@@ -33,7 +33,7 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
     const {push, asPath, query: {page}} = useRouter();
     const {user, clearUser} = useContext(AuthCtx);
-    // const socket = useContext(SocketCtx);
+    const socket = useContext(SocketCtx);
 
     const {
         observer: {
@@ -61,7 +61,7 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                 await push('/');
             }
 
-            // socket.emit('user_disconnect', user.id);
+            socket.emit('user_disconnect', user.id);
 
             clearUser();
         });

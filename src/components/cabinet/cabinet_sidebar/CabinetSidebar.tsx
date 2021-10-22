@@ -36,7 +36,7 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
     const {push, asPath, query: {page}} = useRouter();
     const {user, clearUser} = useContext(AuthCtx);
-    // const socket = useContext(SocketCtx);
+    const socket = useContext(SocketCtx);
 
 
     const {
@@ -62,7 +62,7 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
             cookies.remove('slondo_auth', {path: '/'});
             cookies.remove('slondo_user', {path: '/'});
 
-            // socket.emit('user_disconnect', user.id);
+            socket.emit('user_disconnect', user.id);
 
             if (asPath.includes('cabinet')) {
                 await push('/');

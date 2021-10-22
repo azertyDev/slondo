@@ -27,7 +27,7 @@ const App = (props) => {
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
-    // const socket = useSocket(socketProduction);
+    const socket = useSocket(socketProduction);
     const userLocation = useUserLocation();
     const exitPrompt = useExitPrompt(false);
 
@@ -47,25 +47,25 @@ const App = (props) => {
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
     }, []);
 
-    // useEffect(() => {
-    //     if (browser && socket) {
-    //         socket.on('connect', () => {
-    //             if (user.id !== null) {
-    //                 socket.emit('user_connected', user.id);
-    //             }
-    //         });
-    //         return () => {
-    //             socket.off('connect', () => {
-    //                 socket.emit('disconnect');
-    //             });
-    //         };
-    //     }
-    // }, [socket, user]);
+    useEffect(() => {
+        if (browser && socket) {
+            socket.on('connect', () => {
+                if (user.id !== null) {
+                    socket.emit('user_connected', user.id);
+                }
+            });
+            return () => {
+                socket.off('connect', () => {
+                    socket.emit('disconnect');
+                });
+            };
+        }
+    }, [socket, user]);
 
     return (
         <ErrorCtx.Provider value={error}>
             <ExitPromptCtx.Provider value={exitPrompt}>
-                {/*<SocketCtx.Provider value={socket}>*/}
+                <SocketCtx.Provider value={socket}>
                 <AuthCtx.Provider value={auth}>
                     <UserLocationCtx.Provider value={userLocation}>
                             <SearchCtx.Provider value={search}>
@@ -76,7 +76,7 @@ const App = (props) => {
                             </SearchCtx.Provider>
                     </UserLocationCtx.Provider>
                 </AuthCtx.Provider>
-                {/*</SocketCtx.Provider>*/}
+                </SocketCtx.Provider>
             </ExitPromptCtx.Provider>
         </ErrorCtx.Provider>
     );

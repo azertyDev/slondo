@@ -24,20 +24,20 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = (props) => {
     } = props;
 
     const isIncognito = INCOGNITO_IDS.some(id => id === userId);
-    // const socket = useContext(SocketCtx);
+    const socket = useContext(SocketCtx);
     const [online, setOnline] = useState(false);
     const isSelf = useContext(AuthCtx).user.id === userId;
 
     const onlineStatus = (isOnline || online) && !isIncognito;
 
-    // useEffect(() => {
-    //     if (browser && socket && userId) {
-    //         socket.emit('checkOnline', userId);
-    //         socket.on('getOnline', ({online}) => {
-    //             setOnline(online);
-    //         });
-    //     }
-    // }, [socket, userId]);
+    useEffect(() => {
+        if (browser && socket && userId) {
+            socket.emit('checkOnline', userId);
+            socket.on('getOnline', ({online}) => {
+                setOnline(online);
+            });
+        }
+    }, [socket, userId]);
 
     const classes = useStyles({onlineStatus, width, height});
     return (

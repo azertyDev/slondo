@@ -7,7 +7,7 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {defaultSEOContent} from '@src/common_data/seo_content';
 import {CustomHead} from "@src/components/head/CustomHead";
 import {categoriesNormalize} from "@src/helpers";
-import {CategoriesCtx, UserLocationCtx} from "@src/context";
+import {CategoriesCtx} from "@src/context";
 
 type HomePageProps = {
     siteCategories
