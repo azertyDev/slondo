@@ -6,6 +6,8 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {CustomHead} from '@src/components/head/CustomHead';
+import {CategoriesCtx} from "@src/context";
+import {useCategories} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type MainLayoutPropsType = {
@@ -18,6 +20,7 @@ type MainLayoutPropsType = {
 export const MainLayout: FC<MainLayoutPropsType> = (props) => {
     const title = props.title;
     const description = props.description;
+    const {categories} = useCategories();
 
     const {
         children,
@@ -27,7 +30,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <>
+        <CategoriesCtx.Provider value={categories}>
             <CustomHead
                 title={title}
                 description={description}
@@ -57,7 +60,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                 </Hidden>
             </div>
             <ErrorModal/>
-        </>
+        </CategoriesCtx.Provider>
     );
 };
 

@@ -3,10 +3,10 @@ import Head from "next/head";
 
 type CustomHeadProps = {
     title: string,
-    description: string
+    description?: string
 }
 
-export const CustomHead: FC<CustomHeadProps> = ({title, description}) => {
+export const CustomHead: FC<CustomHeadProps> = ({title, description = ''}) => {
     return (
         <Head>
             <title>{title}</title>

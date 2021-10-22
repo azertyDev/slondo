@@ -5,15 +5,20 @@ import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
 import {FirstStep} from "@src/components/post/create_post/first_step/FirstStep";
 import {SecondStep} from "@src/components/post/create_post/second_step/SecondStep";
 import {ThirdStep} from "@src/components/post/create_post/third_step/ThirdStep";
-import {MainLayout} from "@src/components/main_layout/MainLayout";
 import {SuccessPage} from "@src/components/post/create_post/third_step/success_page/SuccessPage";
-import {CategoryType} from "@root/interfaces/Categories";
+import {ErrorModal} from "@src/components/error_modal/ErrorModal";
+import {CustomHead} from "@src/components/head/CustomHead";
+import {Container, Hidden} from "@material-ui/core";
+import {Header} from "@src/components/header/Header";
+import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
 import {categoriesNormalize} from "@src/helpers";
+import {useStyles} from "@src/components/main_layout/useStyles";
+import {CategoriesCtx} from "@src/context";
 
-const CreatePost: FC<{ siteCategories: CategoryType[] }> = (props) => {
+const CreatePost: FC<{ siteCategories }> = ({siteCategories}) => {
     const {t} = useTranslation('post');
     const {query, push, asPath} = useRouter();
-    const siteCategories = categoriesNormalize(props.siteCategories);
+    const categories = categoriesNormalize(siteCategories);
 
     const {
         post_type,
@@ -63,20 +68,19 @@ const CreatePost: FC<{ siteCategories: CategoryType[] }> = (props) => {
         }
 
         if (sub_ctgr || type_ctgr) {
-            const hasType = !!siteCategories
+            const hasType = !!categories
                 .find(ctgr => ctgr.name === main_ctgr)?.subcategory
                 .find(sub => sub.name === sub_ctgr)?.type;
 
             return !hasType || type_ctgr
                 ? <ThirdStep
                     backURL={getBackURL()}
-                    siteCategories={siteCategories}
                 />
-                : <SecondStep siteCategories={siteCategories}/>;
+                : <SecondStep/>;
         }
 
         if (post_type) {
-            return <SecondStep siteCategories={siteCategories}/>;
+            return <SecondStep/>;
         }
 
         return <FirstStep/>;
@@ -90,13 +94,38 @@ const CreatePost: FC<{ siteCategories: CategoryType[] }> = (props) => {
         );
     };
 
+    const title = t(getTitle());
+
+    const classes = useStyles();
     return (
-        <MainLayout
-            title={t(getTitle())}
-            handleBack={handleBack}
-        >
-            {getPage()}
-        </MainLayout>
+        <>
+            <CustomHead
+                title={title}
+            />
+            <div className={classes.root}>
+                <CategoriesCtx.Provider value={categories}>
+                    <Hidden xsDown>
+                        <Header/>
+                    </Hidden>
+                    <Hidden smUp>
+                        <ModalHeader
+                            title={title}
+                            hasPrevBtn={true}
+                            handleBack={handleBack}
+                        />
+                    </Hidden>
+                    <main style={{marginBottom: '20px'}}>
+                        <Container
+                            maxWidth="xl"
+                            className='layout-container'
+                        >
+                            {getPage()}
+                        </Container>
+                    </main>
+                </CategoriesCtx.Provider>
+            </div>
+            <ErrorModal/>
+        </>
     );
 };
 

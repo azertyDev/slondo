@@ -18,15 +18,15 @@ import {
 } from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ParamsForm} from './params_form/ParamsForm';
-import {ErrorCtx, ExitPromptCtx} from "@src/context";
+import {CategoriesCtx, ErrorCtx, ExitPromptCtx} from "@src/context";
 import {numericFields} from "@src/common_data/fields_keys";
-import {CategoryType} from "@root/interfaces/Categories";
 import {useStyles} from './useStyles';
 
-export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> = ({backURL, siteCategories}) => {
+export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
     const [_, setShowExitPrompt] = useContext(ExitPromptCtx);
+    const siteCategories = useContext(CategoriesCtx);
 
     const {asPath, query, push} = useRouter();
     const {

@@ -18,7 +18,12 @@ export const SidebarMenu: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List
+                disablePadding
+                component="nav"
+                className='menu-item'
+                aria-label="cabinet menu"
+            >
                 <ListItem
                     button
                     disableGutters
@@ -41,11 +46,12 @@ export const SidebarMenu: FC = () => {
                 component="nav"
                 className='menu-item'
                 aria-label="cabinet menu"
-                onClick={handleListItemClick('write_to_user')}
             >
                 <ListItem
                     button
                     disableGutters
+                    selected={pathname === 'write_to_user'}
+                    onClick={handleListItemClick('write_to_user')}
                 >
                     <LetterIcon/>
                     <ListItemText primary={t('post:writeMessage')}/>

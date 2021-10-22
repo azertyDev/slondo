@@ -12,11 +12,9 @@ export const useStyles = makeStyles((theme) => ({
             textDecoration: 'none'
         },
         '& > h2.title': {
-            marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
                 fontWeight: '600',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
-                marginBottom: '10px',
                 padding: '0 24px'
             },
             [theme.breakpoints.down('xs')]: {

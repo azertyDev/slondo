@@ -23,7 +23,7 @@ import {SearchEstate} from '@src/components/post/search_post/search_form/categor
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {ErrorCtx, SearchCtx} from "@src/context";
+import {CategoriesCtx, ErrorCtx, SearchCtx} from "@src/context";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {FilterIcon} from "@src/components/elements/icons";
 import Drawer from "@material-ui/core/Drawer";
@@ -46,15 +46,13 @@ export type CommonFiltersType = {
 
 type SearchFormPropsType = {
     urlParams,
-    categories,
-    siteCategories: CategoryType[]
+    categories
 };
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const {
         urlParams,
-        categories,
-        siteCategories
+        categories
     } = props;
 
     const {
@@ -69,6 +67,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         by_filtering,
         ...urlFiltersParams
     } = urlParams;
+
+    const siteCategories = useContext(CategoriesCtx);
 
     const postTypesList = [postTypes[0], postTypes[1]];
     const postType = !!archive

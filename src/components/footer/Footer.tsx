@@ -37,19 +37,6 @@ export const Footer: FC = () => {
                                         </a>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/help">
-                                        <a>
-                                            <Typography
-                                                component='p'
-                                                color="initial"
-                                                variant="subtitle1"
-                                            >
-                                                {t('advertise')}
-                                            </Typography>
-                                        </a>
-                                    </Link>
-                                </li>
                             </ul>
                         </Grid>
                         <Grid item xs={12} md={3} container justifyContent="center">
