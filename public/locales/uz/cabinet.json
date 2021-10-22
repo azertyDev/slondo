@@ -1,4 +1,5 @@
 {
+  "auth_require": "Chat ishlatish uchun saytga kirish shart",
   "main": "Shaxsiy kabinet",
   "restore": "qayta tiklash",
   "restore_post": "E'loni qayta tiklamoqchimisiz?",
