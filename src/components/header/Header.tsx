@@ -26,9 +26,6 @@ export const Header: FC = () => {
             <div className='header-wrapper'>
                 <Top handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
                 <Bottom handleDrawerOpen={handleDrawerOpen} handlePageReload={handlePageReload}/>
-                <div className={classes.modalDialog}>
-                    <AuthModal/>
-                </div>
                 <CategoriesDrawer
                     position='left'
                     open={drawerOpen}

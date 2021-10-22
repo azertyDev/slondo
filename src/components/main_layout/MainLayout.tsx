@@ -6,6 +6,7 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {CustomHead} from '@src/components/head/CustomHead';
+import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CategoriesCtx} from "@src/context";
 import {useCategories} from "@src/hooks";
 import {useStyles} from './useStyles';
@@ -58,6 +59,9 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                 <Hidden xsDown>
                     <Footer/>
                 </Hidden>
+            </div>
+            <div className={classes.modalDialog}>
+                <AuthModal/>
             </div>
             <ErrorModal/>
         </CategoriesCtx.Provider>
