@@ -2,7 +2,6 @@ import {FC} from 'react';
 import {Top} from './top/Top';
 import {useModal} from "@src/hooks";
 import {Bottom} from './bottom/Bottom';
-import {AuthModal} from './auth_modal/AuthModal';
 import {CategoriesDrawer} from "@src/components/header/bottom/categories_drawer/CategoriesDrawer";
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';

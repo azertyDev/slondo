@@ -8,6 +8,7 @@ import {defaultSEOContent} from '@src/common_data/seo_content';
 import {CustomHead} from "@src/components/head/CustomHead";
 import {categoriesNormalize} from "@src/helpers";
 import {CategoriesCtx} from "@src/context";
+import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 
 type HomePageProps = {
     siteCategories
@@ -28,6 +29,7 @@ export const HomePage: FC<HomePageProps> = ({siteCategories}) => {
             <Main seoTxt={text}/>
             <Footer/>
             <ErrorModal/>
+            <AuthModal/>
         </CategoriesCtx.Provider>
     );
 };
