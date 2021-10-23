@@ -39,7 +39,6 @@ export const Ratings: FC = () => {
     };
 
     const getDate = useDate();
-    const [isFetch, setIsFetch] = useState(false);
     const [userRatings, setUserRatings] = useState([]);
     const [commentData, setCommentData] = useState(initCommentData);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
@@ -49,17 +48,10 @@ export const Ratings: FC = () => {
 
     const fetchUserRatings = async () => {
         try {
-            setIsFetch(true);
             const {data} = await userAPI.getAllUserRating();
-            unstable_batchedUpdates(() => {
-                setUserRatings(data);
-                setIsFetch(false);
-            });
+            setUserRatings(data);
         } catch (e) {
-            unstable_batchedUpdates(() => {
-                setErrorMsg(e.message);
-                setIsFetch(false);
-            });
+            setErrorMsg(e.message);
         }
     };
 
@@ -147,7 +139,7 @@ export const Ratings: FC = () => {
                                             <Grid item xs={2} container justifyContent='center'>
                                                 <UserAvatarComponent
                                                     userId={id}
-                                                    avatar={author.avatar}
+                                                    avatar={author?.avatar}
                                                     width={isXsDown ? '30px' : '50px'}
                                                     height={isXsDown ? '30px' : '50px'}
                                                 />
@@ -156,7 +148,7 @@ export const Ratings: FC = () => {
                                                 <Grid item xs={12} sm={8}>
                                                     <Typography variant='subtitle1' gutterBottom>
                                                         <strong>
-                                                            {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                            {`${author?.name ?? ''} ${author?.surname ?? ''}`}
                                                         </strong>
                                                     </Typography>
                                                     <Typography variant='caption' component='p' gutterBottom>
@@ -190,7 +182,7 @@ export const Ratings: FC = () => {
                                                         <Box mb={2}>
                                                             <Typography variant='subtitle1' gutterBottom>
                                                                 <strong>
-                                                                    {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                                    {`${author?.name ?? ''} ${author?.surname ?? ''}`}
                                                                 </strong>
                                                             </Typography>
                                                             <Typography variant='caption' component='p'>
@@ -222,7 +214,7 @@ export const Ratings: FC = () => {
                                                     <Box mb={2}>
                                                         <Typography variant='subtitle1' gutterBottom>
                                                             <strong>
-                                                                {`${author.name ?? ''} ${author.surname ?? ''}`}
+                                                                {`${author?.name ?? ''} ${author?.surname ?? ''}`}
                                                             </strong>
                                                         </Typography>
                                                         <Typography variant='caption' component='p'>

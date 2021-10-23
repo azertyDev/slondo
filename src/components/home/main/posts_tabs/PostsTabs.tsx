@@ -1,9 +1,5 @@
 import {FC, Fragment, useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {HOME_ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {CardData} from '@root/interfaces/CardData';
-import {initCards} from '../posts_slider/PostsSlider';
-import {AuthCtx} from "@src/context/AuthCtx";
 import {unstable_batchedUpdates} from "react-dom";
 import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
@@ -11,27 +7,27 @@ import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {Banner} from "@src/components/elements/banner/Banner";
 import {useTranslation} from "next-i18next";
+import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
-
-const initCardData: CardData = {
-    cards: initCards,
-    total: null
-};
 
 export const PostsTabs: FC = () => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
+    const {posts, auctions} = useContext(HomePageCtx).tabPosts;
+
     const isSmUp = useMediaQuery(useTheme().breakpoints.up('sm'));
+
     const [isFetch, setIsFetch] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string>(null);
+
     const [tabValue, setTabValue] = useState(0);
     const [postCurrPage, setPostCurrPage] = useState(1);
     const [auctionCurrPage, setAuctionCurrPage] = useState(1);
-    const [postCards, setPostCards] = useState(initCardData);
-    const [auctionCards, setAuctionCards] = useState(initCardData);
+    const [postCards, setPostCards] = useState(posts);
+    const [auctionCards, setAuctionCards] = useState(auctions);
 
-    const hasMorePosts = postCards.total > postCards.cards.length && tabValue === 0;
-    const hasMoreAuctions = auctionCards.total > auctionCards.cards.length && tabValue === 1;
+    const hasMorePosts = postCards.total > postCards.data.length && tabValue === 0;
+    const hasMoreAuctions = auctionCards.total > auctionCards.data.length && tabValue === 1;
     const isFirstPostPage = postCurrPage === 1;
     const isFirstAucPage = auctionCurrPage === 1;
 
@@ -53,23 +49,18 @@ export const PostsTabs: FC = () => {
     const lastPostCardRef = GetCardRef(useRef());
     const lastAucCardRef = GetCardRef(useRef(), true);
 
-    const fetchCardData = async (currentPage, type) => {
+    const fetchCardData = async (currentPage, type = 'post') => {
         try {
             const isAuc = type === 'auc';
-            const params = {
-                type,
-                page: currentPage,
-                itemsPerPage: HOME_ITEMS_PER_PAGE
-            };
 
             setIsFetch(true);
-            const {data, total} = await userAPI.getCards(params);
+            const {data, total} = await userAPI.getCards(type, currentPage);
             setIsFetch(false);
 
-            const cards = isAuc ? auctionCards.cards : postCards.cards;
+            const cards = isAuc ? auctionCards.data : postCards.data;
 
             const cardData = {
-                cards: (isAuc ? isFirstAucPage : isFirstPostPage) ? data : [...cards, ...data],
+                data: (isAuc ? isFirstAucPage : isFirstPostPage) ? data : [...cards, ...data],
                 total: total
             };
 
@@ -96,11 +87,11 @@ export const PostsTabs: FC = () => {
     };
 
     useEffect(() => {
-        fetchCardData(postCurrPage, 'post');
+        (postCurrPage !== 1 || isAuth) && fetchCardData(postCurrPage);
     }, [postCurrPage, isAuth]);
 
     useEffect(() => {
-        fetchCardData(auctionCurrPage, 'auc');
+        (auctionCurrPage !== 1 || isAuth) && fetchCardData(auctionCurrPage, 'auc');
     }, [auctionCurrPage, isAuth]);
 
     const classes = useStyles({tabValue});
@@ -132,8 +123,8 @@ export const PostsTabs: FC = () => {
                             {errorMsg}
                         </Typography>
                         : <Grid container spacing={2}>
-                            {postCards.cards.map((cardData, i) => {
-                                const isLastCard = postCards.cards.length === i + 1;
+                            {postCards.data.map((cardData, i) => {
+                                const isLastCard = postCards.data.length === i + 1;
                                 return (
                                     <Fragment key={i}>
                                         {(isSmUp ? 3 : 4) === i && (
@@ -184,8 +175,8 @@ export const PostsTabs: FC = () => {
                             {errorMsg}
                         </Typography>
                         : <Grid container spacing={2}>
-                            {auctionCards.cards.map((cardData, i) => {
-                                const isLastCard = postCards.cards.length === i + 1;
+                            {auctionCards.data.map((cardData, i) => {
+                                const isLastCard = postCards.data.length === i + 1;
                                 return (
                                     <Grid
                                         item

@@ -1,49 +1,35 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {HOME_ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {CardData} from '@root/interfaces/CardData';
-import {initCardData} from '@src/common_data/common';
 import {useTranslation} from 'next-i18next';
-import {AuthCtx} from "@src/context/AuthCtx";
 import {Typography} from "@material-ui/core";
 import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
 import {settings} from "@src/components/home/main/posts_slider/sliderSettings";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {unstable_batchedUpdates} from "react-dom";
+import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
-
-export const initCards = Array.from({length: HOME_ITEMS_PER_PAGE}).map(() => initCardData);
-
-const initData: CardData = {
-    cards: initCards,
-    total: null
-};
 
 export const PostsSlider: FC = () => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
+    const {postsSliderData} = useContext(HomePageCtx);
 
     const [isFetch, setIsFetch] = useState(false);
     const [errMsg, setErrorMsg] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [popularPosts, setPopularPosts] = useState(initData);
+    const [popularPosts, setPopularPosts] = useState(postsSliderData);
 
-    const {cards} = popularPosts;
+    const {data} = popularPosts;
 
     const setFetchedCardData = async () => {
         try {
-            const params = {
-                itemsPerPage: HOME_ITEMS_PER_PAGE,
-                page: currentPage
-            };
-
             setIsFetch(true);
-            const {data, total} = await userAPI.getPopular(params);
+            const {data, total} = await userAPI.getPopular(currentPage);
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
                 setPopularPosts({
-                    cards: data,
+                    data,
                     total: total
                 });
             });
@@ -56,32 +42,30 @@ export const PostsSlider: FC = () => {
     };
 
     useEffect(() => {
-        setFetchedCardData();
+        (currentPage !== 1 || isAuth) && setFetchedCardData();
     }, [currentPage, isAuth]);
 
     const classes = useStyles();
     return (
-        !!cards.length && (
-            <div className={classes.root}>
-                <Typography className="title" variant="h2">
-                    {t('popularPosts')}
-                </Typography>
-                <div className="slider">
-                    {!!errMsg
-                        ? <div className="error-wrapper">
-                            <Typography className="error-text">{errMsg}</Typography>
-                        </div>
-                        : <CustomSlider {...settings}>
-                            {cards.map(card =>
-                                <GridCard
-                                    isFetch={isFetch}
-                                    key={card.id}
-                                    {...card}
-                                />
-                            )}
-                        </CustomSlider>}
-                </div>
+        <div className={classes.root}>
+            <Typography className="title" variant="h2">
+                {t('popularPosts')}
+            </Typography>
+            <div className="slider">
+                {!!errMsg
+                    ? <div className="error-wrapper">
+                        <Typography className="error-text">{errMsg}</Typography>
+                    </div>
+                    : <CustomSlider {...settings}>
+                        {data.map(card =>
+                            <GridCard
+                                isFetch={isFetch}
+                                key={card.id}
+                                {...card}
+                            />
+                        )}
+                    </CustomSlider>}
             </div>
-        )
+        </div>
     );
 };
