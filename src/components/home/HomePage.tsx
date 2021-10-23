@@ -26,22 +26,15 @@ export const HomePage: FC<HomePageProps> = (props) => {
     const [
         mainSliderData,
         postsSliderData,
-        posts,
-        auctions
+        posts
     ] = other;
 
     const homePageData = {
         mainSliderData,
         postsSliderData,
         tabPosts: {
-            posts: {
-                data: posts.data,
-                total: posts.total
-            },
-            auctions:  {
-                data: auctions.data,
-                total: auctions.total
-            }
+            data: posts.data,
+            total: posts.total
         }
     };
 

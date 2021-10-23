@@ -13,7 +13,7 @@ import {useStyles} from "./useStyles";
 export const PostsTabs: FC = () => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
-    const {posts, auctions} = useContext(HomePageCtx).tabPosts;
+    const posts = useContext(HomePageCtx).tabPosts;
 
     const isSmUp = useMediaQuery(useTheme().breakpoints.up('sm'));
 
@@ -23,8 +23,12 @@ export const PostsTabs: FC = () => {
     const [tabValue, setTabValue] = useState(0);
     const [postCurrPage, setPostCurrPage] = useState(1);
     const [auctionCurrPage, setAuctionCurrPage] = useState(1);
+
     const [postCards, setPostCards] = useState(posts);
-    const [auctionCards, setAuctionCards] = useState(auctions);
+    const [auctionCards, setAuctionCards] = useState({
+        data: [],
+        total: 0
+    });
 
     const hasMorePosts = postCards.total > postCards.data.length && tabValue === 0;
     const hasMoreAuctions = auctionCards.total > auctionCards.data.length && tabValue === 1;
@@ -91,7 +95,7 @@ export const PostsTabs: FC = () => {
     }, [postCurrPage, isAuth]);
 
     useEffect(() => {
-        (auctionCurrPage !== 1 || isAuth) && fetchCardData(auctionCurrPage, 'auc');
+        fetchCardData(auctionCurrPage, 'auc');
     }, [auctionCurrPage, isAuth]);
 
     const classes = useStyles({tabValue});

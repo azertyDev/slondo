@@ -3,10 +3,7 @@ import {createContext} from 'react';
 type HomePageDataType = {
     mainSliderData: MainSliderType[],
     postsSliderData: PostType,
-    tabPosts: {
-        posts: PostType,
-        auctions: PostType
-    }
+    tabPosts: PostType
 }
 
 export type PostType = {

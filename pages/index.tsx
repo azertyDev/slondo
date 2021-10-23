@@ -8,8 +8,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
         userAPI.getCategories(),
         userAPI.getMainSliderData({lang: locale}),
         userAPI.getPopular(),
-        userAPI.getCards(),
-        userAPI.getCards('auc')
+        userAPI.getCards()
     ]);
 
     return ({
