@@ -133,7 +133,7 @@ const theme = createTheme({
                 },
                 body: {
                     minWidth: '320px',
-                    backgroundColor: '#fafafa',
+                    backgroundColor: '#F8F7FA',
                     '@media (max-width: 991px)': {
                         fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
                     }

@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
             width: '48%',
             minHeight: '36px !important',
             borderBottom: 'none !important',
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#EEEDF2',
             borderRadius: '5px 5px 0px 0px',
             '&:not(:last-child)': {
                 marginRight: 10

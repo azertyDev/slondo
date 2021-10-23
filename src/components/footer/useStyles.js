@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '60px',
-        backgroundColor: '#F2F2F2',
+        backgroundColor: '#EEEDF2',
         borderRadius: '100px 100px 0px 0px',
         [theme.breakpoints.down('sm')]: {
             borderRadius: '30px 30px 0px 0px'

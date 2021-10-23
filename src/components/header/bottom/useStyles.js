@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        backgroundColor: '#F8F7FA',
         transition: 'box-shadow 0.5s',
         [theme.breakpoints.down('md')]: {
             height: '100%',
