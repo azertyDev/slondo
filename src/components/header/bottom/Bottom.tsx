@@ -71,7 +71,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                 <ElevationScroll {...props}>
                     <AppBar
                         elevation={0}
-                        color='inherit'
+                        // color='inherit'
                         className={classes.root}
                         position={isScrollBreak ? 'fixed' : 'relative'}
                     >

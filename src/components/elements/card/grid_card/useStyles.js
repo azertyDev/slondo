@@ -30,7 +30,8 @@ export const useStyles = makeStyles((theme) => ({
         '& div.MuiCard-root': {
             position: 'relative',
             borderRadius: '7px',
-            filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))',
+            boxShadow: '0px 2px 8px rgba(103, 94, 170, 0.2)',
+            // filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))',
             [theme.breakpoints.down('xs')]: {
                 filter: 'drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.08))'
             },

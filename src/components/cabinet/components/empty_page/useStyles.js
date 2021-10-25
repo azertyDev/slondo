@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         height: 220,
         padding: 10,
         borderRadius: 10,
-        background: '#F2F2F2',
+        background: '#EEEDF2',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.04), 1px 0px 2px rgba(0, 0, 0, 0.04)',
         '& h6.MuiTypography-h6': {
             textAlign: 'center',
