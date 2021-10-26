@@ -37,6 +37,18 @@ const setTokenToHeader = () => {
     }
 };
 
+export const adsAPI = {
+    getAds: (main = 0): Promise<{ id: number, name: string, reclame }[]> => {
+        const params = {main};
+        return instance
+            .get(`post/reclame`, {params})
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    }
+};
+
 export const chatAPI = {
     resetUnreadCount: (contact_id) => {
         const params = {contact_id};

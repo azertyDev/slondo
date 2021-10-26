@@ -77,7 +77,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
             <Link href={url}>
                 <a target='_blank' className='card' title={cardData.title}>
                     <Grid container>
-                        <Grid item xs={6} sm={4} md={3} className="img">
+                        <Grid item xs={6} sm={4} md={3} className="img lazyload">
                             <Typography
                                 noWrap
                                 color="initial"

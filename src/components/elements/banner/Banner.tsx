@@ -4,27 +4,25 @@ import {useMediaQuery, useScrollTrigger, useTheme} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type BannerPropsType = {
-    img: string,
-    link: string,
-    height?: string,
+    ads,
     threshold?: number
 }
 
 export const Banner: FC<BannerPropsType> = (props) => {
     const {
-        img,
-        link,
-        height,
+        ads,
         threshold
     } = props;
+
+    const {image, url} = ads;
 
     const isXlUp = useMediaQuery(useTheme().breakpoints.up('xl'));
     const trigger = useScrollTrigger({disableHysteresis: true, threshold});
     const isScrollBreak = threshold ? trigger : null;
 
-    const classes = useStyles({isScrollBreak, isXlUp, img});
+    const classes = useStyles({isScrollBreak, isXlUp, image});
     return (
-        <Link href={link}>
+        <Link href={url}>
             <a target='_blank'>
                 <div className={classes.root}/>
             </a>

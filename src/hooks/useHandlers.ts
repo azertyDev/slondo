@@ -75,14 +75,20 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
 
             setValues({...values, ...vals});
         },
-        setValsByUrlParams: (urlParams) => {
+        setValsByUrlParams: (urlParams, filters) => {
             const vals = {};
+
             Object.keys(urlParams).forEach(k => {
                 if (!values[k]) {
-                    vals[k] = urlParams[k];
+                    if (filters[k]) {
+                        vals[k] = filters[k].find(v => v.id === urlParams[k].id);
+                    } else if (typeof urlParams[k] === 'number') {
+                        vals[k] = urlParams[k];
+                    }
                 }
+
+                setValues({...values, ...vals});
             });
-            setValues({...values, ...vals});
         },
         setRequireVals: (filters) => {
             const reqVals = {};

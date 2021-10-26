@@ -60,7 +60,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
     } = useHandlers(values, setValues);
 
     useEffect(() => {
-        filtersLen && title && setValsByUrlParams(params);
+        filtersLen && title && setValsByUrlParams(params, filters);
     }, [filtersLen]);
 
     const classes = useStyles();

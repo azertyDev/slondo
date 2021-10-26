@@ -1,13 +1,5 @@
 import {createContext, Dispatch, SetStateAction} from 'react';
 
-export type ExitPromptType = [
-    boolean,
-    Dispatch<SetStateAction<boolean>>
-]
-
-const initCtx: ExitPromptType = [
-    false,
-    (v: boolean) => {}
-];
+const initCtx: Dispatch<SetStateAction<boolean>> = (v: boolean) => {};
 
 export const ExitPromptCtx = createContext(initCtx);

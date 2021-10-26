@@ -76,7 +76,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     useEffect(() => {
-        filtersLen && title && setValsByUrlParams(params);
+        filtersLen && title && setValsByUrlParams(params, filters);
     }, [filtersLen]);
 
     const classes = useStyles();

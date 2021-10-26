@@ -21,6 +21,7 @@ export default class MyDocument extends Document {
                             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                             })(window,document,'script','dataLayer','GTM-MPMDTGC');`
                         }}
+                        async
                     />
                     <link
                         rel="icon"
@@ -32,7 +33,7 @@ export default class MyDocument extends Document {
                 <body>
                 <noscript
                     dangerouslySetInnerHTML={{
-                        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC" height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+                        __html: `<iframe class="lazyload" src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC" height="0" width="0" style="display:none;visibility:hidden"></iframe>`
                     }}>
                 </noscript>
                 <Main/>

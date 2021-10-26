@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {
     Hidden,
     Slide,
@@ -20,10 +20,43 @@ import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
 import {Banner} from "@src/components/elements/banner/Banner";
 import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
+import {adsAPI} from "@src/api/api";
+import {ErrorCtx} from "@src/context";
+import {IdNameType} from "@root/interfaces/Post";
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
+
+    const initAds: {
+        right: IdNameType & { reclame }
+        bottom: IdNameType & { reclame }
+    } = {
+        right: null,
+        bottom: null
+    };
+
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const [ads, setAds] = useState(initAds);
+    const {right, bottom} = ads;
+
+    const fetchAds = async () => {
+        try {
+            const adsData = await adsAPI.getAds(1);
+            const ads = {
+                right: adsData.find(ads => ads.name === 'sidebar'),
+                bottom: adsData.find(ads => ads.name === 'footer')
+            };
+
+            setAds(ads);
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    // useEffect(() => {
+    //     fetchAds();
+    // }, []);
 
     const classes = useStyles();
     return (
@@ -46,12 +79,12 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <HomeSidebar/>
-                                <Banner
-                                    height="26vw"
-                                    threshold={1140}
-                                    img='/img/eximtrans.png'
-                                    link='http://www.eximtrans.uz'
-                                />
+                                {right && (
+                                    <Banner
+                                        threshold={1140}
+                                        ads={right.reclame}
+                                    />
+                                )}
                             </Grid>
                         </Hidden>
                     </Grid>

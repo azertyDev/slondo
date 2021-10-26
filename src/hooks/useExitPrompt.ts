@@ -1,5 +1,4 @@
-import {useState, useEffect} from 'react';
-import {ExitPromptType} from "@src/context/ExitPrompt";
+import {useState, useEffect, Dispatch, SetStateAction} from 'react';
 
 const initBeforeUnLoad = (showExitPrompt) => {
     window.onbeforeunload = (event) => {
@@ -14,8 +13,8 @@ const initBeforeUnLoad = (showExitPrompt) => {
     };
 };
 
-export const useExitPrompt = (bool): ExitPromptType => {
-    const [showExitPrompt, setShowExitPrompt] = useState(bool);
+export const useExitPrompt = (value: boolean): Dispatch<SetStateAction<boolean>> => {
+    const [showExitPrompt, setShowExitPrompt] = useState(value);
 
     if (process.browser) {
         window.onload = function () {
@@ -27,5 +26,5 @@ export const useExitPrompt = (bool): ExitPromptType => {
         initBeforeUnLoad(showExitPrompt);
     }, [showExitPrompt]);
 
-    return [showExitPrompt, setShowExitPrompt];
+    return setShowExitPrompt;
 };

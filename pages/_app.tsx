@@ -29,7 +29,7 @@ const App = (props) => {
     const search = useSearch();
     const socket = useSocket(socketProduction);
     const userLocation = useUserLocation();
-    const exitPrompt = useExitPrompt(false);
+    const showExitPrompt = useExitPrompt(false);
 
     const user = auth.user;
 
@@ -64,20 +64,20 @@ const App = (props) => {
 
     return (
         <ErrorCtx.Provider value={error}>
-            <ExitPromptCtx.Provider value={exitPrompt}>
-                <SocketCtx.Provider value={socket}>
+            <SocketCtx.Provider value={socket}>
                 <AuthCtx.Provider value={auth}>
-                    <UserLocationCtx.Provider value={userLocation}>
+                    <ExitPromptCtx.Provider value={showExitPrompt}>
+                        <UserLocationCtx.Provider value={userLocation}>
                             <SearchCtx.Provider value={search}>
                                 <ThemeProvider theme={theme}>
                                     <CssBaseline/>
                                     <Component {...pageProps} />
                                 </ThemeProvider>
                             </SearchCtx.Provider>
-                    </UserLocationCtx.Provider>
+                        </UserLocationCtx.Provider>
+                    </ExitPromptCtx.Provider>
                 </AuthCtx.Provider>
-                </SocketCtx.Provider>
-            </ExitPromptCtx.Provider>
+            </SocketCtx.Provider>
         </ErrorCtx.Provider>
     );
 };
