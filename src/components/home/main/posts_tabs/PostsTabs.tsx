@@ -140,7 +140,6 @@ export const PostsTabs: FC = () => {
                                                 >
                                                     <Banner
                                                         ads={{
-                                                            height: '53vw',
                                                             image: '/img/eximtrans_m.png',
                                                             url: 'http://www.eximtrans.uz'
                                                         }}
