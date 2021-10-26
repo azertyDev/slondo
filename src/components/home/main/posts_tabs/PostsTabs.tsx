@@ -139,9 +139,11 @@ export const PostsTabs: FC = () => {
                                                     xs={12}
                                                 >
                                                     <Banner
-                                                        height='53vw'
-                                                        img='/img/eximtrans_m.png'
-                                                        link='http://www.eximtrans.uz'
+                                                        ads={{
+                                                            height: '53vw',
+                                                            image: '/img/eximtrans_m.png',
+                                                            url: 'http://www.eximtrans.uz'
+                                                        }}
                                                     />
                                                 </Grid>
                                             </Hidden>

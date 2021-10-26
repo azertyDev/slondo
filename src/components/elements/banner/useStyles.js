@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         height: '40vw',
         maxHeight: '492px',
         maxWidth: '308px',
-        backgroundImage: ({img}) => `url(${img})`,
+        backgroundImage: ({image}) => `url(${image})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         borderRadius: '10px',

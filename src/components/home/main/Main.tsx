@@ -79,12 +79,13 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <HomeSidebar/>
-                                {right && (
-                                    <Banner
-                                        threshold={1140}
-                                        ads={right.reclame}
-                                    />
-                                )}
+                                <Banner
+                                    threshold={1140}
+                                    ads={{
+                                        image: '/img/eximtrans.png',
+                                        url: 'http://www.eximtrans.uz'
+                                    }}
+                                />
                             </Grid>
                         </Hidden>
                     </Grid>
