@@ -5,15 +5,19 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {getLocationByURL} from "@src/helpers";
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, res}) => {
+    let location = 'uzbekistan';
     const {path, ...urlParams} = query;
     const [locationName, ...urlCategories] = path as string[];
 
-    const site_categories = await userAPI.getCategories();
+    const [
+        site_categories,
+        regions
+    ] = await Promise.all([
+        userAPI.getCategories(),
+        userAPI.getLocations()
+    ]);
 
-    const regions = await userAPI.getLocations();
     const {region, city} = getLocationByURL(locationName, regions);
-
-    let location = 'uzbekistan';
 
     if (region) {
         location = city && region.name !== 'city_tashkent'

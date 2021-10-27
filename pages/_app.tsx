@@ -17,7 +17,6 @@ import {DEV_URL, PRODUCTION_URL} from "@src/constants";
 
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import "../slick.min.css";
-import Script from "next/script";
 
 const socketDev = `${DEV_URL}:8005`;
 const socketProduction = `${PRODUCTION_URL}:8005`;
@@ -72,17 +71,6 @@ const App = (props) => {
                             <SearchCtx.Provider value={search}>
                                 <ThemeProvider theme={theme}>
                                     <CssBaseline/>
-                                    <Script
-                                        id='id'
-                                        dangerouslySetInnerHTML={{
-                                            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                                            })(window,document,'script','dataLayer','GTM-MPMDTGC');`
-                                        }}
-                                        async
-                                    />
                                     <noscript
                                         dangerouslySetInnerHTML={{
                                             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC" height="0" width="0" style="display:none;visibility:hidden"></iframe>`
