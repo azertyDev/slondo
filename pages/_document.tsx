@@ -21,20 +21,9 @@ export default class MyDocument extends Document {
                     />
                     <script
                         async
-                        id='googletagmanager'
-                        dangerouslySetInnerHTML={{
-                            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                                            })(window,document,'script','dataLayer','GTM-MPMDTGC');`
-                        }}
-                    />
-                    <script
-                        async
-                        id='adsbygoogle'
                         crossOrigin="anonymous"
-                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2464319641801775"
+                        data-ad-client='ca-pub-2464319641801775'
+                        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`}
                     />
                 </Head>
                 <body>

@@ -1,11 +1,11 @@
 import {FC, Fragment, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from "react-dom";
-import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {Banner} from "@src/components/elements/banner/Banner";
+import {ContentAdv} from "@src/components/elements/adv/content_adv/ContentAdv";
 import {useTranslation} from "next-i18next";
 import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
@@ -14,8 +14,6 @@ export const PostsTabs: FC = () => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
     const posts = useContext(HomePageCtx).tabPosts;
-
-    const isSmUp = useMediaQuery(useTheme().breakpoints.up('sm'));
 
     const [isFetch, setIsFetch] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string>(null);
@@ -112,12 +110,16 @@ export const PostsTabs: FC = () => {
                 onChange={handleTabChange}
             >
                 <Tab
-                    label={<Typography variant="h6">{t('posts')}</Typography>}
                     value={0}
+                    label={<Typography variant="h6">
+                        {t('posts')}
+                    </Typography>}
                 />
                 <Tab
-                    label={<Typography variant="h6">{t('auctions')}</Typography>}
                     value={1}
+                    label={<Typography variant="h6">
+                        {t('auctions')}
+                    </Typography>}
                 />
             </Tabs>
             <div className="tabs-content">
@@ -129,24 +131,10 @@ export const PostsTabs: FC = () => {
                         : <Grid container spacing={2}>
                             {postCards.data.map((cardData, i) => {
                                 const isLastCard = postCards.data.length === i + 1;
+                                const isAdvSlot = (i + 1) % 9 === 0;
+
                                 return (
                                     <Fragment key={i}>
-                                        {(isSmUp ? 3 : 4) === i && (
-                                            <Hidden lgUp>
-                                                <Grid
-                                                    item
-                                                    key={i}
-                                                    xs={12}
-                                                >
-                                                    <Banner
-                                                        ads={{
-                                                            image: '/img/eximtrans_m.png',
-                                                            url: 'http://www.eximtrans.uz'
-                                                        }}
-                                                    />
-                                                </Grid>
-                                            </Hidden>
-                                        )}
                                         <Grid
                                             item
                                             xs={6}
@@ -156,6 +144,17 @@ export const PostsTabs: FC = () => {
                                         >
                                             <GridCard{...cardData}/>
                                         </Grid>
+                                        {isAdvSlot && (
+                                            <Grid
+                                                item
+                                                xs={6}
+                                                md={4}
+                                                lg={3}
+                                                ref={isLastCard ? lastAucCardRef : null}
+                                            >
+                                                <ContentAdv/>
+                                            </Grid>
+                                        )}
                                     </Fragment>
                                 );
                             })}
@@ -182,6 +181,7 @@ export const PostsTabs: FC = () => {
                         : <Grid container spacing={2}>
                             {auctionCards.data.map((cardData, i) => {
                                 const isLastCard = postCards.data.length === i + 1;
+
                                 return (
                                     <Grid
                                         item
