@@ -1,5 +1,5 @@
 export type AdvType = {
-    adv: {
-        google_ads: boolean
-    }
+    google_ads: boolean,
+    image: string,
+    url: string
 }

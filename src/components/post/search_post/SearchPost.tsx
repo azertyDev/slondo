@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import ErrorPage from '@root/pages/_error';
 import {useTranslation} from 'react-i18next';
 import {SearchForm} from '@src/components/post/search_post/search_form/SearchForm';
@@ -6,7 +6,7 @@ import {SearchResult} from '@src/components/post/search_post/search_result/Searc
 import {
     Container,
     Grid,
-    Hidden,
+    Hidden, Typography,
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
@@ -21,6 +21,10 @@ import {categoriesNormalize, CtgrsByCyrillicNameType, transformCyrillic} from "@
 import {CategoriesCtx} from "@src/context";
 import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
+import {adsAPI} from "@src/api/api";
+import {AdvType} from "@root/interfaces/Adv";
+import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
+import {BottomAdv} from "@src/components/elements/adv/bottom/BottomAdv";
 
 type SearchPostProps = {
     urlParams,
@@ -44,6 +48,39 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     const {locale} = useRouter();
     const {t} = useTranslation('locations');
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
+
+    const initAds: {
+        right: AdvType,
+        bottom: AdvType
+    } = {
+        right: {
+            image: null,
+            url: '#',
+            google_ads: false
+        },
+        bottom: {
+            image: null,
+            url: '#',
+            google_ads: false
+        }
+    };
+
+    const [ads, setAds] = useState(initAds);
+    const {right, bottom} = ads;
+
+    const fetchAds = async () => {
+        try {
+            const {sidebar, footer} = await adsAPI.getAds();
+            const ads = {
+                right: sidebar,
+                bottom: footer
+            };
+
+            setAds(ads);
+        } catch (e) {
+            console.error(e.message);
+        }
+    };
 
     const siteCategories = categoriesNormalize(site_categories);
 
@@ -72,6 +109,9 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
             `${searchTermFromUrl} - ${t(`common:categories:${typectgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`;
     }
 
+    useEffect(() => {
+        fetchAds();
+    }, []);
 
     const classes = useStyles();
     return statusCode !== 200
@@ -100,10 +140,19 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
                                         categories={ctgrsByCyrName}
                                         searchTermFromUrl={searchTermFromUrl}
                                     />
+                                    <div className='bot-adv-wrapper'>
+                                        <BottomAdv adv={bottom}/>
+                                    </div>
                                 </Grid>
                                 <Hidden mdDown>
                                     <Grid item xs={3}>
-                                        <HomeSidebar/>
+                                        <div className='sidebar-wrapper'>
+                                            <HomeSidebar/>
+                                        </div>
+                                        <RightAdv
+                                            adv={right}
+                                            threshold={475}
+                                        />
                                     </Grid>
                                 </Hidden>
                             </Grid>

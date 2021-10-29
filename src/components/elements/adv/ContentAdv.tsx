@@ -18,12 +18,15 @@ export const ContentAdv = () => {
 
     const classes = useStyles();
     return (
-        <div className={`${classes.root} ${classes.content}`}>
-            <ins
-                className="adsbygoogle"
-                style={{display: 'block'}}
-                data-ad-client="ca-pub-2464319641801775"
-            />
+        <div className={classes.root}>
+            <div className='content-adv'>
+                <ins
+                    className="adsbygoogle"
+                    style={{display: 'block'}}
+                    data-ad-client="ca-pub-2464319641801775"
+                    data-ad-slot="8138311139"
+                />
+            </div>
         </div>
     );
 };

@@ -20,34 +20,25 @@ import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
 import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
 import {adsAPI} from "@src/api/api";
-import {ErrorCtx} from "@src/context";
-import {IdNameType} from "@root/interfaces/Post";
-import {RightAdv} from "@src/components/elements/adv/RightAdv";
-import {BottomAdv} from "@src/components/elements/adv/BottomAdv";
+import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
+import {AdvType} from "@root/interfaces/Adv";
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
 
     const initAds: {
-        right: IdNameType & { google_ads: boolean }
-        bottom: IdNameType & { google_ads: boolean }
+        right: AdvType
     } = {
         right: {
-            id: null,
-            name: '',
-            google_ads: false
-        },
-        bottom: {
-            id: null,
-            name: '',
+            image: null,
+            url: '',
             google_ads: false
         }
     };
 
-    const {setErrorMsg} = useContext(ErrorCtx);
     const [ads, setAds] = useState(initAds);
-    const {right, bottom} = ads;
+    const {right} = ads;
 
     const fetchAds = async () => {
         try {
@@ -59,7 +50,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
 
             setAds(ads);
         } catch (e) {
-            setErrorMsg(e.message);
+            console.error(e.message);
         }
     };
 
@@ -84,18 +75,15 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                                 <PostsSlider/>
                             </Hidden>
                             <PostsTabs/>
-                            <div className='bot-adv-wrapper'>
-                                <BottomAdv adv={bottom}/>
-                            </div>
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
-                                <HomeSidebar/>
+                                <div className='sidebar-wrapper'>
+                                    <HomeSidebar/>
+                                </div>
                                 <RightAdv
                                     adv={right}
-                                    threshold={1140}
-                                    image='/img/eximtrans.png'
-                                    url='http://www.eximtrans.uz'
+                                    threshold={1130}
                                 />
                             </Grid>
                         </Hidden>

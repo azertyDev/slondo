@@ -13,6 +13,12 @@ export const useStyles = makeStyles((theme) => ({
             paddingTop: '48px',
             [theme.breakpoints.down('xs')]: {
                 padding: '10px'
+            },
+            '& div.bot-adv-wrapper': {
+                margin: '30px 0'
+            },
+            '& div.sidebar-wrapper': {
+                marginBottom: '15px'
             }
         }
     }

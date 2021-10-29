@@ -5,6 +5,9 @@ export const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        '& h6': {
+            marginBottom: '12px'
+        },
         '& div': {
             '& > a': {
                 marginRight: '20px',
