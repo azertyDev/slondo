@@ -254,11 +254,11 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant="subtitle1">
-                        <pre className={classes.description}>
-                            {values.description.trim()}
-                        </pre>
-                    </Typography>
+                    <pre className={classes.description}>
+                        <Typography variant="subtitle1">
+                                {values.description.trim()}
+                        </Typography>
+                    </pre>
                 </Grid>
             </Grid>
         </>
