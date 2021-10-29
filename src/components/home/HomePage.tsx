@@ -7,27 +7,54 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {defaultSEOContent} from '@src/common_data/seo_content';
 import {CustomHead} from "@src/components/head/CustomHead";
 import {categoriesNormalize} from "@src/helpers";
-import {CategoriesCtx, UserLocationCtx} from "@src/context";
+import {CategoriesCtx, HomePageCtx} from "@src/context";
+import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
+import {MainSliderType, PostType} from "@src/context/HomePageCtx";
 
 type HomePageProps = {
-    siteCategories
+    homePageData: [
+        any,
+        MainSliderType[],
+        PostType,
+        PostType,
+        PostType
+    ]
 }
 
-export const HomePage: FC<HomePageProps> = ({siteCategories}) => {
-    const categories = categoriesNormalize(siteCategories);
+export const HomePage: FC<HomePageProps> = (props) => {
+    const [siteCategories, ...other] = props.homePageData;
+    const [
+        mainSliderData,
+        postsSliderData,
+        posts
+    ] = other;
+
+    const homePageData = {
+        mainSliderData,
+        postsSliderData,
+        tabPosts: {
+            data: posts.data,
+            total: posts.total
+        }
+    };
+
     const {language} = useTranslation().i18n;
+    const categories = categoriesNormalize(siteCategories);
     const {title, description, text} = defaultSEOContent[language as string];
 
     return (
-        <CategoriesCtx.Provider value={categories}>
-            <CustomHead
-                title={title}
-                description={description}
-            />
-            <Header/>
-            <Main seoTxt={text}/>
-            <Footer/>
-            <ErrorModal/>
-        </CategoriesCtx.Provider>
+        <HomePageCtx.Provider value={homePageData}>
+            <CategoriesCtx.Provider value={categories}>
+                <CustomHead
+                    title={title}
+                    description={description}
+                />
+                <Header/>
+                <Main seoTxt={text}/>
+                <Footer/>
+                <ErrorModal/>
+                <AuthModal/>
+            </CategoriesCtx.Provider>
+        </HomePageCtx.Provider>
     );
 };

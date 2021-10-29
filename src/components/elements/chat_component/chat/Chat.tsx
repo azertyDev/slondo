@@ -3,9 +3,9 @@ import {useDate} from '@src/hooks';
 import {Box, IconButton, TextField, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {Send, KeyboardArrowLeft} from '@material-ui/icons';
 import {ContactType, MessageType, OptionsType} from '../ChatContainer';
+import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 
 type ChatProps = {
     isFetch: boolean,
@@ -64,13 +64,13 @@ export const Chat: FC<ChatProps> = (props) => {
                                 className='back-btn'
                                 onClick={handleBack} size='small'
                             >
-                                <KeyboardArrowLeft fontSize='medium' />
+                                <KeyboardArrowLeft fontSize='medium'/>
                             </IconButton>
                         )}
                         <Typography variant='subtitle1'>
                             {isSystemUser ? 'Slondo.uz' : contact.name}
                         </Typography>
-                        {hideContacts && (
+                        {hideContacts && handleChatClose && (
                             <CloseBtn
                                 className='close-btn'
                                 handleClose={hideContacts ? handleChatClose : handleBack}
@@ -170,7 +170,7 @@ export const Chat: FC<ChatProps> = (props) => {
                                 onClick={sendMessage}
                                 disabled={emptyMsg || isFetch}
                             >
-                                <Send />
+                                <Send/>
                             </IconButton>
                         </Box>
                     </div>

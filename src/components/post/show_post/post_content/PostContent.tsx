@@ -344,7 +344,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                     {t('writeMessage')}
                                 </Typography>
                             </CustomButton>
-                        )}`
+                        )}
                     </div>
                     {isAuction && (
                         <AuctionContent

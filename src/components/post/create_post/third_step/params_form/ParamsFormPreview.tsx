@@ -25,7 +25,7 @@ export const ParamsFormPreview: FC<PreviewValuesPropsType> = (props) => {
         <Grid item container spacing={2} className={classes.prevWrapper}>
             {Object.keys(values).map(key => {
                     let value;
-                    const isPrimitive = typeof values[key] === 'string' || typeof values[key] === 'number';
+                    const isStringNum = typeof values[key] === 'string' || typeof values[key] === 'number';
                     const isBoolean = typeof values[key] === 'boolean' || booleanFields.some(f => f === key);
                     const isArray = Array.isArray(values[key]);
                     const isExcludeKey = excludeFields.some(k => k === key);
@@ -37,7 +37,7 @@ export const ParamsFormPreview: FC<PreviewValuesPropsType> = (props) => {
                                 const valueName = filters[key].find(f => f.id === val).name;
                                 return t(`${transKey}${valueName}.name`);
                             }).join(', ');
-                        } else if (isPrimitive) {
+                        } else if (isStringNum) {
                             value = values[key];
                         } else if (values[key].name) {
                             const valName = values[key].name;

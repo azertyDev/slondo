@@ -5,3 +5,4 @@ export {ExitPromptCtx} from "./ExitPrompt";
 export {UserLocationCtx} from "./UserLocationCtx";
 export {SocketCtx} from "./SocketCtx";
 export {CategoriesCtx} from "./CategoriesCtx";
+export {HomePageCtx} from "./HomePageCtx";

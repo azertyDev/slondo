@@ -2,7 +2,6 @@ import {GetStaticProps} from 'next';
 import {cabinetURLs} from "@src/common_data/common";
 import Cabinet from "@src/components/cabinet/Cabinet";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {userAPI} from "@src/api/api";
 
 export async function getStaticPaths() {
     return {
@@ -12,11 +11,8 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({locale}) => {
-    const siteCategories = await userAPI.getCategories();
-
     return ({
         props: {
-            siteCategories,
             ...await serverSideTranslations(
                 locale,
                 [

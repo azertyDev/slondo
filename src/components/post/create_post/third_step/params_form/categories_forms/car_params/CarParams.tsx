@@ -1,6 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
-import {object} from "yup";
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
@@ -14,7 +13,7 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {CommonParamsPropsType} from '../../ParamsForm';
 import {optionFields} from '@src/common_data/fields_keys';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {carSchema} from '@root/validation_schemas/postSchemas';
+import {carSchema, uzCarSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -23,7 +22,6 @@ import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
-import {fieldRequiredTxt} from "@root/validation_schemas/validateMessages";
 
 type CarParamsPropsType = {
     subcategoryName: string
@@ -69,18 +67,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
-        validationSchema: isMadeInUzb
-            ? carSchema
-                .concat(object({
-                    position: object<{ id: number }>()
-                        .nullable()
-                        .test(
-                            '',
-                            fieldRequiredTxt,
-                            value => !!value && !!value.id
-                        )
-                }))
-            : carSchema
+        validationSchema: isMadeInUzb ? uzCarSchema : carSchema
     });
 
     const {
@@ -810,7 +797,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
 
             const manufacturer = filters.manufacturer.find(m => m.id === manufacturerParam.id);
             const model = manufacturer.models.find(m => m.id === modelParam.id);
-            const engine_capacity = engine_capacityParam.name;
+            const engine_capacity = engine_capacityParam;
 
             if (isMadeInUzb) {
                 const [valsByYear = {}] = (await userAPI.getCarDataByYear(model.id, others.year.id))?.bodies || [];
@@ -818,8 +805,17 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             }
 
             Object.keys(others).forEach(k => {
-                if (filters[k] !== undefined && optionFields.some(f => f === k)) {
-                    others[k] = others[k].map(v => v);
+                if (!values[k]) {
+                    if (filters[k]) {
+                        if (!Array.isArray(others[k]) && typeof others[k] === 'object') {
+                            others[k] = filters[k].find(v => v.id === others[k].id);
+                        }
+                    } else if (k === 'year') {
+                        others[k] = filters.years.find(y => y.id === others[k].id);
+                    } else if (k === 'position' && valuesByYear.positions) {
+                        const position = valuesByYear.positions.find(p => p.id === others[k].id);
+                        others.position = {id: position.id, name: position.name};
+                    }
                 }
             });
 

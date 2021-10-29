@@ -18,8 +18,9 @@ import {CustomHead} from '@src/components/head/CustomHead';
 import {SearchHeader} from '@src/components/post/search_post/search_header/SearchHeader';
 import {getSEOContent} from "@src/common_data/seo_content";
 import {categoriesNormalize, CtgrsByCyrillicNameType, transformCyrillic} from "@src/helpers";
-import {useStyles} from './useStyles';
+import {CategoriesCtx} from "@src/context";
 import {useRouter} from "next/router";
+import {useStyles} from './useStyles';
 
 type SearchPostProps = {
     urlParams,
@@ -81,34 +82,35 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
                 description={description}
             />
             <div className={classes.root}>
-                <SearchHeader/>
-                <main>
-                    <Container
-                        maxWidth="xl"
-                        className='layout-container'
-                    >
-                        <Grid container spacing={isSmDown ? 0 : 2}>
-                            <Grid item xs={12} lg={9} zeroMinWidth>
-                                <SearchForm
-                                    urlParams={urlParams}
-                                    categories={ctgrsByCyrName}
-                                    siteCategories={siteCategories}
-                                />
-                                <SearchResult
-                                    urlParams={urlParams}
-                                    categories={ctgrsByCyrName}
-                                    searchTermFromUrl={searchTermFromUrl}
-                                />
-                            </Grid>
-                            <Hidden mdDown>
-                                <Grid item xs={3}>
-                                    <HomeSidebar/>
+                <CategoriesCtx.Provider value={siteCategories}>
+                    <SearchHeader/>
+                    <main>
+                        <Container
+                            maxWidth="xl"
+                            className='layout-container'
+                        >
+                            <Grid container spacing={isSmDown ? 0 : 2}>
+                                <Grid item xs={12} lg={9} zeroMinWidth>
+                                    <SearchForm
+                                        urlParams={urlParams}
+                                        categories={ctgrsByCyrName}
+                                    />
+                                    <SearchResult
+                                        urlParams={urlParams}
+                                        categories={ctgrsByCyrName}
+                                        searchTermFromUrl={searchTermFromUrl}
+                                    />
                                 </Grid>
-                            </Hidden>
-                        </Grid>
-                        {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
-                    </Container>
-                </main>
+                                <Hidden mdDown>
+                                    <Grid item xs={3}>
+                                        <HomeSidebar/>
+                                    </Grid>
+                                </Hidden>
+                            </Grid>
+                            {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
+                        </Container>
+                    </main>
+                </CategoriesCtx.Provider>
                 <Hidden smDown>
                     <Footer/>
                 </Hidden>

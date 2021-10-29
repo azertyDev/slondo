@@ -59,7 +59,7 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         handleChatClose
     } = props;
 
-    // const socket = useContext(SocketCtx);
+    const socket = useContext(SocketCtx);
 
     const initContact = {
         id: null,
@@ -332,13 +332,13 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         && setMessages([msgBuffer, ...messages]);
     }, [msgBuffer]);
 
-    // useEffect(() => {
-    //     if (socket) {
-    //         socket.on(onlineListChannel, onlineListListener);
-    //         socket.on(messagesChannel, messageChannelListener);
-    //         socket.on(contactsUpdateChannel, contactsChannelListener);
-    //     }
-    // }, [socket]);
+    useEffect(() => {
+        if (socket) {
+            socket.on(onlineListChannel, onlineListListener);
+            socket.on(messagesChannel, messageChannelListener);
+            socket.on(contactsUpdateChannel, contactsChannelListener);
+        }
+    }, [socket]);
 
     const classes = useStyles({hideContacts});
     return (

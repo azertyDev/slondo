@@ -62,6 +62,9 @@
   "color": "Rangi",
   "screen": "Ekran tiniqligi",
   "car": {
+    "assistant": {
+      "name": "Haydash yo'rdami"
+    },
     "color": {
       "name": "Rangi"
     },

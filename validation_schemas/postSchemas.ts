@@ -113,9 +113,19 @@ export const carSchema = object({
             'notMustBeLess0.8',
             value => +value >= 0.8
         ),
-    mileage: string().required(fieldRequiredTxt),
-    broken: string().required(fieldRequiredTxt)
+    mileage: string().required(fieldRequiredTxt)
 });
+
+export const uzCarSchema = carSchema
+    .concat(object({
+        position: object<{ id: number }>()
+            .nullable()
+            .test(
+                '',
+                fieldRequiredTxt,
+                value => !!value && !!value.id
+            )
+    }));
 
 export const transportParamsSchema = lazy(
     (value) => object({

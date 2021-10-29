@@ -1,9 +1,9 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {StepsProgress} from '../steps_progress/StepsProgress';
 import {searchCategory} from '@src/helpers';
-import {CategoryType, SubcategoryType} from '@root/interfaces/Categories';
+import {SubcategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography, useTheme, useMediaQuery, Hidden} from '@material-ui/core';
 import {BackspaceIcon, Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -11,15 +11,17 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {categoryIcons} from "@src/common_data/categories_icons";
 import {IdNameType} from '@root/interfaces/Post';
 import {useStyles} from './useStyles';
+import {CategoriesCtx} from "@src/context";
 
 type CategoryStateType = {
     subcategory: IdNameType
 } & IdNameType;
 
-export const SecondStep: FC<{ siteCategories: CategoryType[] }> = ({siteCategories}) => {
+export const SecondStep: FC = () => {
     const {t} = useTranslation('categories');
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
+    const siteCategories = useContext(CategoriesCtx);
 
     const initCategory: CategoryStateType = {
         id: null,

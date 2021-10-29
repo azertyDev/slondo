@@ -340,7 +340,9 @@ export const numberPrettier = (price: string | number): string => {
 };
 
 export const clearWhiteSpaces = (txt: string): string => {
-    return txt.replace(/\s+/g, '');
+    if (/\s+/g.test(txt)) {
+        return txt.replace(/\s+/g, '');
+    } else return txt;
 };
 
 export const manufacturersDataNormalize = data => (

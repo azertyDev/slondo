@@ -1,6 +1,6 @@
 import io, {Socket} from 'socket.io-client';
 import {useEffect, useState} from "react";
-import {DefaultEventsMap} from "socket.io-client/build/typed-events";
+import {DefaultEventsMap} from "@socket.io/component-emitter";
 
 export const useSocket = (url) => {
     const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap>>(null);

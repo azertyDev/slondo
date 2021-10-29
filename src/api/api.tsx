@@ -5,7 +5,14 @@ import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from "@root/interfaces/Locations";
-import {DEV_URL, ITEMS_PER_PAGE, MESSAGES_PER_PAGE, PRODUCTION_URL, SUBS_PER_PAGE} from "@src/constants";
+import {
+    DEV_URL,
+    HOME_ITEMS_PER_PAGE,
+    ITEMS_PER_PAGE,
+    MESSAGES_PER_PAGE,
+    PRODUCTION_URL,
+    SUBS_PER_PAGE
+} from "@src/constants";
 
 const production = `${PRODUCTION_URL}/api/`;
 const local = `${DEV_URL}/slondo/public/api/`;
@@ -27,6 +34,18 @@ const setTokenToHeader = () => {
                 'Authorization': `Bearer ${token}`
             }
         };
+    }
+};
+
+export const adsAPI = {
+    getAds: (main = 0, lang = 'ru'): Promise<any> => {
+        const params = {main, lang};
+        return instance
+            .get(`post/reclame`, {params})
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
     }
 };
 
@@ -337,7 +356,13 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCards: (params): Promise<{ data: CardDataType[]; total: number; }> => {
+    getCards: (type = 'post', page = 1, itemsPerPage = HOME_ITEMS_PER_PAGE):
+        Promise<{ data: CardDataType[]; total: number; }> => {
+        const params = {
+            type,
+            page,
+            itemsPerPage
+        };
         return instance.get(`post/all`, {params, ...setTokenToHeader()})
             .then((res) => res.data)
             .catch((err) => {
@@ -673,8 +698,12 @@ export const userAPI = {
                 throw err;
             });
     },
-    getPopular: (params) => {
-        return instance.get(`post/popular`, {...setTokenToHeader(), params})
+    getPopular: (page = 1, itemsPerPage = HOME_ITEMS_PER_PAGE) => {
+        const params = {
+            page,
+            itemsPerPage
+        };
+        return instance.get(`post/popular`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;

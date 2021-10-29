@@ -32,6 +32,7 @@ import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 
 type DefaultParamsPropsType = {
+    isPreview: boolean,
     postType: PostType,
     currentFormIndex: number,
     handleSubmit: (v) => void
@@ -39,6 +40,7 @@ type DefaultParamsPropsType = {
 
 export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
+        isPreview,
         postType,
         handleSubmit,
         currentFormIndex
@@ -66,7 +68,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         : null;
 
     const formIndex = 1;
-    const isPreview = +query.preview === 1;
     const categoryName = query.main_ctgr as string;
     const isJobOrService = categoryName === 'service' || categoryName === 'job';
     const isAdvanceAuction = postType.name === 'exauc';

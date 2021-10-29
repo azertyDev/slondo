@@ -91,8 +91,8 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     useEffect(() => {
         if (browser) {
-            const storeRegions = JSON.parse(localStorage.getItem('regions'));
-            storeRegions && !regions.length && setRegions(storeRegions);
+            const regionsFromStorage = JSON.parse(localStorage.getItem('regions'));
+            regionsFromStorage && !regions.length && setRegions(regionsFromStorage);
         }
     }, []);
 

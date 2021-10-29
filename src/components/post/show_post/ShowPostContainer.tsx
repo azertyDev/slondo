@@ -35,7 +35,6 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
 
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
-    const [isFetch, setIsFetch] = useState(false);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
@@ -82,7 +81,6 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
 
     const setFetchedPostData = async () => {
         try {
-            setIsFetch(true);
             const initValues = {id: null, name: ''};
 
             const {
@@ -106,7 +104,6 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
             }
 
             unstable_batchedUpdates(() => {
-                setIsFetch(false);
                 setPostData({
                     title,
                     images,
@@ -120,10 +117,7 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
                 });
             });
         } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
+            setErrorMsg(e.message);
         }
     };
 
@@ -136,44 +130,45 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
                     title={postData.title}
                     description={postData.description}
                 />
-                <Hidden mdDown>
-                    <Header/>
-                </Hidden>
-                <Container
-                    maxWidth="xl"
-                    className={classes.root}
-                    disableGutters={isMdDown}
-                    style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
-                >
-                    <Grid container spacing={isMdDown ? 0 : 2}>
-                        {isFetch
-                            ? <CustomCircularProgress/>
-                            : <>
-                                <Grid item xs={12} lg={9}>
-                                    <CategoriesCtx.Provider value={categories}>
-                                        <PostContent
-                                            post={postData}
-                                            auctionInfo={auctionInfo}
-                                            handleChatOpen={handleOpenChat}
-                                            handleSafeDeal={handleSafeDeal}
-                                            setFetchedPostData={setFetchedPostData}
-                                        />
-                                    </CategoriesCtx.Provider>
+                <CategoriesCtx.Provider value={categories}>
+                    <Hidden mdDown>
+                        <Header/>
+                    </Hidden>
+                    <Container
+                        maxWidth="xl"
+                        className={classes.root}
+                        disableGutters={isMdDown}
+                        style={
+                            {
+                                paddingTop: `${isMdDown ? 0 : '48px'}`,
+                                position: 'relative'
+                            }
+                        }
+                    >
+                        <Grid container spacing={isMdDown ? 0 : 2}>
+                            <Grid item xs={12} lg={9}>
+                                <PostContent
+                                    post={postData}
+                                    auctionInfo={auctionInfo}
+                                    handleChatOpen={handleOpenChat}
+                                    handleSafeDeal={handleSafeDeal}
+                                    setFetchedPostData={setFetchedPostData}
+                                />
+                            </Grid>
+                            <Hidden mdDown>
+                                <Grid item lg={3} xs={12}>
+                                    <OwnerAuctionInfo
+                                        post={postData}
+                                        auctionInfo={auctionInfo}
+                                        handleChatOpen={handleOpenChat}
+                                        handleSafeDeal={handleSafeDeal}
+                                        setFetchedPostData={setFetchedPostData}
+                                    />
                                 </Grid>
-                                <Hidden mdDown>
-                                    <Grid item lg={3} xs={12}>
-                                        <OwnerAuctionInfo
-                                            post={postData}
-                                            auctionInfo={auctionInfo}
-                                            handleChatOpen={handleOpenChat}
-                                            handleSafeDeal={handleSafeDeal}
-                                            setFetchedPostData={setFetchedPostData}
-                                        />
-                                    </Grid>
-                                </Hidden>
-                            </>}
-                    </Grid>
-                </Container>
+                            </Hidden>
+                        </Grid>
+                    </Container>
+                </CategoriesCtx.Provider>
                 <SafeDealModal
                     post={postData}
                     open={safeDealOpen}

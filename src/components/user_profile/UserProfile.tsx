@@ -13,7 +13,7 @@ import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from '@src/context';
 import {initUser} from '@src/hooks/useUser';
 import {useStyles} from './useStyles';
-import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
+import {WriteToUser} from "@src/components/user_profile/pages/write_to_user/WriteToUser";
 
 export type ProfilePageProps = {
     user_id: string
@@ -53,9 +53,7 @@ export const UserProfile: FC = () => {
             case 'profile_follows':
                 return <UserFollowsList user_id={user_id}/>;
             case 'write_to_user':
-                return <div className='chat-wrapper'>
-                    <ChatContainer hideContacts initContactId={+user_id}/>
-                </div>;
+                return <WriteToUser userId={+user_id}/>;
         }
     };
 

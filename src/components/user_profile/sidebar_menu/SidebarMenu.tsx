@@ -1,24 +1,35 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from "next-i18next";
 import {LetterIcon} from '@src/components/elements/icons';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {useStyles} from './useStyles';
+import {AuthCtx} from "@src/context";
 
 export const SidebarMenu: FC = () => {
     const {t} = useTranslation('cabinet');
     const {query: {path}, push} = useRouter();
     const [pathname, user_id] = path as string[];
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
     const handleListItemClick = (pathname) => async () => {
-        await push(`${pathname}/${user_id}`);
+        if (!isAuth && pathname === 'write_to_user') {
+            setAuthModalOpen(true);
+        } else {
+            await push(`${pathname}/${user_id}`);
+        }
     };
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List
+                disablePadding
+                component="nav"
+                className='menu-item'
+                aria-label="cabinet menu"
+            >
                 <ListItem
                     button
                     disableGutters
@@ -41,11 +52,12 @@ export const SidebarMenu: FC = () => {
                 component="nav"
                 className='menu-item'
                 aria-label="cabinet menu"
-                onClick={handleListItemClick('write_to_user')}
             >
                 <ListItem
                     button
                     disableGutters
+                    selected={pathname === 'write_to_user'}
+                    onClick={handleListItemClick('write_to_user')}
                 >
                     <LetterIcon/>
                     <ListItemText primary={t('post:writeMessage')}/>

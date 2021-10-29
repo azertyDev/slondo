@@ -11,6 +11,7 @@ export const Localization: FC = () => {
     return (
         <div className={classes.root}>
             <Link
+                passHref
                 locale='ru'
                 href={asPath}
             >
@@ -23,6 +24,7 @@ export const Localization: FC = () => {
                 </Typography>
             </Link>
             <Link
+                passHref
                 locale='uz'
                 href={asPath}
             >

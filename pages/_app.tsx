@@ -1,3 +1,4 @@
+import Script from "next/script";
 import {browser} from 'process';
 import {useEffect} from 'react';
 import theme from '@src/theme';
@@ -27,9 +28,9 @@ const App = (props) => {
     const auth = useAuth();
     const error = useError();
     const search = useSearch();
-    // const socket = useSocket(socketProduction);
+    const socket = useSocket(socketProduction);
     const userLocation = useUserLocation();
-    const exitPrompt = useExitPrompt(false);
+    const showExitPrompt = useExitPrompt(false);
 
     const user = auth.user;
 
@@ -47,37 +48,59 @@ const App = (props) => {
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
     }, []);
 
-    // useEffect(() => {
-    //     if (browser && socket) {
-    //         socket.on('connect', () => {
-    //             if (user.id !== null) {
-    //                 socket.emit('user_connected', user.id);
-    //             }
-    //         });
-    //         return () => {
-    //             socket.off('connect', () => {
-    //                 socket.emit('disconnect');
-    //             });
-    //         };
-    //     }
-    // }, [socket, user]);
+    useEffect(() => {
+        if (browser && socket) {
+            socket.on('connect', () => {
+                if (user.id !== null) {
+                    socket.emit('user_connected', user.id);
+                }
+            });
+            return () => {
+                socket.off('connect', () => {
+                    socket.emit('disconnect');
+                });
+            };
+        }
+    }, [socket, user]);
 
     return (
         <ErrorCtx.Provider value={error}>
-            <ExitPromptCtx.Provider value={exitPrompt}>
-                {/*<SocketCtx.Provider value={socket}>*/}
+            <SocketCtx.Provider value={socket}>
                 <AuthCtx.Provider value={auth}>
-                    <UserLocationCtx.Provider value={userLocation}>
+                    <ExitPromptCtx.Provider value={showExitPrompt}>
+                        <UserLocationCtx.Provider value={userLocation}>
                             <SearchCtx.Provider value={search}>
                                 <ThemeProvider theme={theme}>
                                     <CssBaseline/>
+                                    <Script
+                                        id='gtag-init'
+                                        strategy='afterInteractive'
+                                        dangerouslySetInnerHTML={{
+                                            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                            })(window,document,'script','dataLayer','GTM-MPMDTGC');`
+                                        }}
+                                    />
+                                    <noscript
+                                        dangerouslySetInnerHTML={{
+                                            __html:
+                                                `<iframe
+                                                    height="0"
+                                                    width="0"
+                                                    style="display:none;visibility:hidden"
+                                                    src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC" 
+                                                />`
+                                        }}>
+                                    </noscript>
                                     <Component {...pageProps} />
                                 </ThemeProvider>
                             </SearchCtx.Provider>
-                    </UserLocationCtx.Provider>
+                        </UserLocationCtx.Provider>
+                    </ExitPromptCtx.Provider>
                 </AuthCtx.Provider>
-                {/*</SocketCtx.Provider>*/}
-            </ExitPromptCtx.Provider>
+            </SocketCtx.Provider>
         </ErrorCtx.Provider>
     );
 };

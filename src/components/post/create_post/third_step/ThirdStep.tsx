@@ -18,27 +18,26 @@ import {
 } from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ParamsForm} from './params_form/ParamsForm';
-import {ErrorCtx, ExitPromptCtx} from "@src/context";
+import {CategoriesCtx, ErrorCtx, ExitPromptCtx} from "@src/context";
 import {numericFields} from "@src/common_data/fields_keys";
-import {CategoryType} from "@root/interfaces/Categories";
 import {useStyles} from './useStyles';
 
-export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> = ({backURL, siteCategories}) => {
+export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
-    const [_, setShowExitPrompt] = useContext(ExitPromptCtx);
+    const showExitPrompt = useContext(ExitPromptCtx);
+    const siteCategories = useContext(CategoriesCtx);
 
     const {asPath, query, push} = useRouter();
+
     const {
         post_type,
         main_ctgr,
         sub_ctgr,
         type_ctgr,
-        post_id,
-        preview
+        post_id
     } = query;
 
-    const isPreview = +preview === 1;
     const postTypeName = post_type as string;
     const categoryName = main_ctgr as string;
     const subcategoryName = sub_ctgr as string;
@@ -75,6 +74,8 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
     };
 
     const [isFetch, setIsFetch] = useState(false);
+    const [isPreview, setIsPreview] = useState(false);
+
     const [post, setPost] = useState<any>(initPost);
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
@@ -125,8 +126,11 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
     };
 
     const handleBack = async () => {
-        !isPreview && setShowExitPrompt(false);
-        await push(backURL, undefined, {shallow: true});
+        if (isPreview) setIsPreview(false);
+        else {
+            showExitPrompt(false);
+            await push(backURL, undefined, {shallow: true});
+        }
     };
 
     const handleSubmit = async (values) => {
@@ -154,7 +158,6 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
 
             const {price, auction} = commonParams;
 
-
             commonParams.price = +clearWhiteSpaces(price);
 
             if (auction) {
@@ -175,10 +178,11 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
             if (color_id) postParams.model.color = {id: color_id};
 
             await push(
-                `${formURL}${urlByParams(postParams)}${post_id ? `&post_id=${post_id}` : ''}&preview=1`,
+                `${formURL}${urlByParams(postParams)}${post_id ? `&post_id=${post_id}` : ''}`,
                 undefined,
                 {shallow: true}
             );
+            setIsPreview(true);
         }
     };
 
@@ -248,10 +252,10 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
             !isCtgrAnimalFishes
             && !!category
             && fetchFilters();
-            setShowExitPrompt(true);
+            showExitPrompt(true);
         });
         return () => {
-            setShowExitPrompt(false);
+            showExitPrompt(false);
         };
     }, []);
 
@@ -290,6 +294,7 @@ export const ThirdStep: FC<{ backURL: string, siteCategories: CategoryType[] }> 
                 </div>
                 <div>
                     <CommonForm
+                        isPreview={isPreview}
                         postType={postType}
                         handleSubmit={handleSubmit}
                         currentFormIndex={currentFormIndex}

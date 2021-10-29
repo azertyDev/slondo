@@ -61,7 +61,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
     useEffect(() => {
         unstable_batchedUpdates(() => {
             setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
+            filtersLen && title && setValsByUrlParams(params, filters);
         });
     }, [filtersLen]);
 

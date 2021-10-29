@@ -16,7 +16,7 @@ export const useBetsData = (props: BetsStatesProps) => {
         itemsPerPage
     } = props;
 
-    // const socket = useContext(SocketCtx);
+    const socket = useContext(SocketCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
     const [bets, setBets] = useState([]);
     const [betsCount, setBetsCount] = useState(0);
@@ -52,11 +52,11 @@ export const useBetsData = (props: BetsStatesProps) => {
         setFetchedBetsData();
     };
 
-    // useEffect(() => {
-    //     if (socket) {
-    //         socket.on('bet-channel', betChannelListener);
-    //     }
-    // }, [socket]);
+    useEffect(() => {
+        if (socket) {
+            socket.on('bet-channel', betChannelListener);
+        }
+    }, [socket]);
 
     useEffect(() => {
         setFetchedBetsData();

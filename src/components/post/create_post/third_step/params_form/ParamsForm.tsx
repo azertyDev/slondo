@@ -46,20 +46,23 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
     } = props;
 
     const categoryName = category.name;
+
     const {phone} = useContext(AuthCtx).user;
 
     const prepareParamsData = (data) => {
         return Object.keys(data).reduce<any>((acc, key) => {
             const isArray = Array.isArray(data[key]);
-            const isStrOrBoolTrue = typeof data[key] === 'string' || (typeof data[key] === 'boolean' && data[key]);
-            const isPhoneDouble = key === 'phone' && data[key] === phone;
+            const isDuplicatePhone = key === 'phone' && data[key] === phone;
+            const isPrimitive = typeof data[key] === 'string'
+                || typeof data[key] === 'number'
+                || (typeof data[key] === 'boolean' && data[key]);
 
             if (data[key]) {
                 if (isArray) {
                     if (data[key].length) {
                         acc[key] = data[key].map(id => ({id}));
                     }
-                } else if (isStrOrBoolTrue && !isPhoneDouble) {
+                } else if (isPrimitive && !isDuplicatePhone) {
                     if (key === 'engine_capacity' && (data[key].length === 1 || RegExp(dotRegEx).test(data[key]))) {
                         data[key] = data[key].replace(dotRegEx, '');
                         data[key] = `${data[key]}.0`;

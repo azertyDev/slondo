@@ -49,7 +49,7 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     useEffect(() => {
         unstable_batchedUpdates(() => {
             setRequireVals(filters);
-            filtersLen && title && setValsByUrlParams(params);
+            filtersLen && title && setValsByUrlParams(params, filters);
         });
     }, [filtersLen]);
 
@@ -81,16 +81,15 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                                 filters={filters}
                                 transKey={t(`${categoryName}.`)}
                             />
-                            : <>
-                                <Grid item container spacing={2}>
-                                    {getFieldsByFilters({
-                                        t,
-                                        filters,
-                                        formik,
-                                        handleSelect
-                                    }, categoryName)}
-                                </Grid>
-                            </>}
+                            : <Grid item container spacing={2}>
+                                {getFieldsByFilters({
+                                    t,
+                                    filters,
+                                    formik,
+                                    handleSelect
+                                }, categoryName)}
+                            </Grid>
+                        }
                     </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>

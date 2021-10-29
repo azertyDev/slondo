@@ -12,11 +12,9 @@ export const useStyles = makeStyles((theme) => ({
             textDecoration: 'none'
         },
         '& > h2.title': {
-            marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
                 fontWeight: '600',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
-                marginBottom: '10px',
                 padding: '0 24px'
             },
             [theme.breakpoints.down('xs')]: {
@@ -31,15 +29,6 @@ export const useStyles = makeStyles((theme) => ({
                 minHeight: '188px'
             },
             '& > div.slick-slider': {
-                '& > button.slick-prev, & > button.slick-next': {
-                    // top: '23%'
-                },
-                '& button.slick-prev': {
-                    // left: '10px'
-                },
-                '& button.slick-next': {
-                    // right: '10px'
-                },
                 '& div.slick-slide img': {
                     width: '100%'
                 }
@@ -50,7 +39,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.slick-slide': {
             marginTop: 10,
-            // width: '120px !important',
             '& > div': {
                 display: 'flex',
                 justifyContent: 'center',
@@ -98,8 +86,8 @@ export const useStyles = makeStyles((theme) => ({
                         '&:before': {
                             content: '""',
                             zIndex: 0,
-                            bottom: 8,
-                            height: 26,
+                            bottom: '8px',
+                            height: '26px',
                             width: '100%',
                             position: 'absolute',
                             borderRadius: '100%',
@@ -112,14 +100,14 @@ export const useStyles = makeStyles((theme) => ({
                         },
                         [theme.breakpoints.down('xs')]: {
                             '&:before': {
-                                display: 'none'
+                                bottom: '-2px'
                             },
                             padding: 0,
                             marginBottom: '5px',
                             width: '80px',
                             height: '80px'
                         }
-                    },
+                    }
                 }
             }
         }

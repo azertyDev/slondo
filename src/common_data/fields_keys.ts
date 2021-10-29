@@ -151,6 +151,7 @@ export const stringFields = [
 ];
 
 export const booleanFields = [
+    'broken',
     'usb_connector',
     'build_in_speakers',
     'furnished',

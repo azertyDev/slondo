@@ -116,7 +116,7 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                minHeight: '500px',
+                minHeight: '452px',
                 background: '#F2F2F2',
                 borderRadius: '10px',
                 backgroundImage: `url('/img/category-bg.png')`,

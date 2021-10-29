@@ -15,5 +15,12 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '10px'
             }
         }
+    },
+    modalDialog: {
+        '& > div:first-child': {
+            [theme.breakpoints.down('md')]: {
+                backgroundColor: `${theme.palette.primary.white}!important`
+            }
+        }
     }
 }));
