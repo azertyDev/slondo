@@ -38,8 +38,8 @@ const setTokenToHeader = () => {
 };
 
 export const adsAPI = {
-    getAds: (main = 0): Promise<{ id: number, name: string, reclame }[]> => {
-        const params = {main};
+    getAds: (main = 0, lang = 'ru'): Promise<any> => {
+        const params = {main, lang};
         return instance
             .get(`post/reclame`, {params})
             .then((res) => res.data)

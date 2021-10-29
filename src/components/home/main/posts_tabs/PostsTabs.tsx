@@ -5,7 +5,7 @@ import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography} from "@material-u
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-// import {ContentAdv} from "@src/components/elements/adv/content_adv/ContentAdv";
+import {ContentAdv} from "@src/components/elements/adv/ContentAdv";
 import {useTranslation} from "next-i18next";
 import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
@@ -131,7 +131,7 @@ export const PostsTabs: FC = () => {
                         : <Grid container spacing={2}>
                             {postCards.data.map((cardData, i) => {
                                 const isLastCard = postCards.data.length === i + 1;
-                                // const isAdvSlot = (i + 1) % 9 === 0;
+                                const isAdvSlot = (i + 1) % 9 === 0;
 
                                 return (
                                     <Fragment key={i}>
@@ -144,17 +144,17 @@ export const PostsTabs: FC = () => {
                                         >
                                             <GridCard{...cardData}/>
                                         </Grid>
-                                        {/*{isAdvSlot && (*/}
-                                        {/*    <Grid*/}
-                                        {/*        item*/}
-                                        {/*        xs={6}*/}
-                                        {/*        md={4}*/}
-                                        {/*        lg={3}*/}
-                                        {/*        ref={isLastCard ? lastAucCardRef : null}*/}
-                                        {/*    >*/}
-                                        {/*        <ContentAdv/>*/}
-                                        {/*    </Grid>*/}
-                                        {/*)}*/}
+                                        {isAdvSlot && (
+                                            <Grid
+                                                item
+                                                xs={6}
+                                                md={4}
+                                                lg={3}
+                                                ref={isLastCard ? lastAucCardRef : null}
+                                            >
+                                                <ContentAdv/>
+                                            </Grid>
+                                        )}
                                     </Fragment>
                                 );
                             })}

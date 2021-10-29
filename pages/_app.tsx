@@ -1,4 +1,3 @@
-import * as gtag from '../lib/gtag';
 import Script from "next/script";
 import {browser} from 'process';
 import {useEffect} from 'react';

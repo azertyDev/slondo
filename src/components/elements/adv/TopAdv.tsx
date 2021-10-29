@@ -5,7 +5,7 @@ declare global {
     interface Window { adsbygoogle: any; }
 }
 
-export const BottomAdv = () => {
+export const TopAdv = () => {
     useEffect(() => {
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -16,7 +16,7 @@ export const BottomAdv = () => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={`${classes.root} ${classes.top}`}>
             <ins
                 className="adsbygoogle"
                 style={{display: 'block'}}

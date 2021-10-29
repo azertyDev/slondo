@@ -17,23 +17,32 @@ import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOT
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
-import {Banner} from "@src/components/elements/banner/Banner";
 import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
 import {adsAPI} from "@src/api/api";
 import {ErrorCtx} from "@src/context";
 import {IdNameType} from "@root/interfaces/Post";
+import {RightAdv} from "@src/components/elements/adv/RightAdv";
+import {BottomAdv} from "@src/components/elements/adv/BottomAdv";
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
 
     const initAds: {
-        right: IdNameType & { reclame }
-        bottom: IdNameType & { reclame }
+        right: IdNameType & { google_ads: boolean }
+        bottom: IdNameType & { google_ads: boolean }
     } = {
-        right: null,
-        bottom: null
+        right: {
+            id: null,
+            name: '',
+            google_ads: false
+        },
+        bottom: {
+            id: null,
+            name: '',
+            google_ads: false
+        }
     };
 
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -42,10 +51,10 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
 
     const fetchAds = async () => {
         try {
-            const adsData = await adsAPI.getAds(1);
+            const {sidebar, footer} = await adsAPI.getAds(1);
             const ads = {
-                right: adsData.find(ads => ads.name === 'sidebar'),
-                bottom: adsData.find(ads => ads.name === 'footer')
+                right: sidebar,
+                bottom: footer
             };
 
             setAds(ads);
@@ -54,9 +63,9 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
         }
     };
 
-    // useEffect(() => {
-    //     fetchAds();
-    // }, []);
+    useEffect(() => {
+        fetchAds();
+    }, []);
 
     const classes = useStyles();
     return (
@@ -75,16 +84,18 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                                 <PostsSlider/>
                             </Hidden>
                             <PostsTabs/>
+                            <div className='bot-adv-wrapper'>
+                                <BottomAdv adv={bottom}/>
+                            </div>
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <HomeSidebar/>
-                                <Banner
+                                <RightAdv
+                                    adv={right}
                                     threshold={1140}
-                                    ads={{
-                                        image: '/img/eximtrans.png',
-                                        url: 'http://www.eximtrans.uz'
-                                    }}
+                                    image='/img/eximtrans.png'
+                                    url='http://www.eximtrans.uz'
                                 />
                             </Grid>
                         </Hidden>

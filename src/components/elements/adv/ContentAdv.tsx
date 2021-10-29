@@ -2,10 +2,12 @@ import {useEffect} from "react";
 import {useStyles} from './useStyles';
 
 declare global {
-    interface Window { adsbygoogle: any; }
+    interface Window {
+        adsbygoogle: any;
+    }
 }
 
-export const TopAdv = () => {
+export const ContentAdv = () => {
     useEffect(() => {
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -16,7 +18,7 @@ export const TopAdv = () => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={`${classes.root} ${classes.content}`}>
             <ins
                 className="adsbygoogle"
                 style={{display: 'block'}}

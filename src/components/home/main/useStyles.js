@@ -26,6 +26,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.right-content': {
                 margin: '58px 0 131px'
+            },
+            '& div.bot-adv-wrapper': {
+                marginTop: '30px'
             }
         }
     },
