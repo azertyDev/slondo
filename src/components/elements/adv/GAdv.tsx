@@ -18,7 +18,10 @@ export const GAdv: FC<{ slot: number }> = ({slot}) => {
     return (
         <ins
             className="adsbygoogle"
-            style={{display: 'block'}}
+            style={{
+                display: 'block',
+                height: '100%'
+            }}
             data-ad-client="ca-pub-2464319641801775"
             data-ad-slot={slot}
         />

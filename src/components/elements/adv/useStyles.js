@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '7px',
             backgroundColor: '#f0f0f0'
         },
-        '& div.right-adv, div.bottom-adv': {
+        '& div.right-adv-content, div.bottom-adv-content': {
             backgroundImage: ({image}) => image && `url(${image})`
         },
         '& div.content-adv': {
@@ -35,8 +35,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.bottom-adv': {
             width: '100%',
-            height: '90px',
-            margin: 'auto'
+            height: '90px'
         }
     }
 }));

@@ -8,6 +8,7 @@ declare global {
 }
 
 export const ContentAdv = () => {
+
     useEffect(() => {
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -22,9 +23,12 @@ export const ContentAdv = () => {
             <div className='content-adv'>
                 <ins
                     className="adsbygoogle"
-                    style={{display: 'block'}}
-                    data-ad-client="ca-pub-2464319641801775"
+                    style={{
+                        display: 'block',
+                        height: '100%'
+                    }}
                     data-ad-slot="8138311139"
+                    data-ad-client="ca-pub-2464319641801775"
                 />
             </div>
         </div>

@@ -25,14 +25,16 @@ export const RightAdv: FC<RightAdvProps> = ({adv, threshold}) => {
     const classes = useStyles({isScrollBreak, image});
     return (
         <div className={classes.root}>
-            {google_ads
-                ? <GAdv slot={8138311139}/>
-                : <Link href={url}>
-                    <a>
-                        <div className='right-adv'/>
-                    </a>
-                </Link>
-            }
+            <div className='right-adv'>
+                {google_ads
+                    ? <GAdv slot={8138311139}/>
+                    : <Link href={url}>
+                        <a>
+                            <div className='right-adv-content'/>
+                        </a>
+                    </Link>
+                }
+            </div>
         </div>
     );
 };
