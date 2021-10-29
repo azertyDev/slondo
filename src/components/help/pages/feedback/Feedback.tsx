@@ -179,6 +179,9 @@ export const Feedback: FC = () => {
                                         </Typography>
                                     </Button>
                                 </label>
+                                <Typography variant='subtitle1' className='file-limit'>
+                                    До 5 файлов (общий размер до 25 мб)
+                                </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <CustomButton type='submit'>

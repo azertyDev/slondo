@@ -16,14 +16,14 @@ import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/services_icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {numberPrettier, priceTransform, weekDaysHelper} from '@src/helpers';
+import {numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
 import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
-import {AuthCtx, ErrorCtx} from '@src/context';
+import {AuthCtx, CategoriesCtx, ErrorCtx} from '@src/context';
 import {useTranslation} from "next-i18next";
 import {useDate, useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
@@ -45,6 +45,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         setFetchedPostData
     } = props;
 
+    const siteCategories = useContext(CategoriesCtx);
     const {t} = useTranslation('post');
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user} = useContext(AuthCtx);
@@ -53,6 +54,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const isExAuc = post.ads_type.mark === 'exauc';
     const isAuction = post.ads_type.mark === 'auc' || isExAuc;
     const self = post.author.id === user.id;
+
+    const mainCtgr = siteCategories.find(ctgr => ctgr.name === post.category.name);
+    const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === post.adsable?.sub_category.name);
+    const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === post.adsable?.type?.name);
 
     const {
         model,
@@ -360,6 +365,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <Typography variant="subtitle1">
                             {`${t(`locations:${post.region.name}.name`) ?? ''}`}
                             {post.city?.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
+                        </Typography>
+                    </div>
+                </div>
+                <div className="post-category">
+                    <div>
+                        <Typography variant="subtitle1" color="initial">
+                            {t(`categories:${mainCtgr.name}.name`)}
+                            {subCtgr && <>&nbsp;- {t(`categories:${mainCtgr?.name}.${subCtgr?.name}.name`)}</>}
+                            {typeCtgr && <>&nbsp;- <span> {t(`categories:${mainCtgr?.name}.${subCtgr?.name}.${typeCtgr?.name}.name`)}</span></>}
                         </Typography>
                     </div>
                 </div>

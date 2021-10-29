@@ -12,9 +12,9 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button': {
             position: 'absolute',
-            top: 5,
+            top: 8,
             '&.left': {
-                left: '10px'
+                left: '5px'
             },
             '&.right': {
                 right: '10px'
@@ -23,11 +23,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     button: {
         padding: 5,
+        width: '30px',
+        height: '30px',
         '& svg': {
-            [theme.breakpoints.down('xs')]: {
-                width: '25px',
-                height: '25px'
-            },
             '& path': {
                 fill: '#28293D'
             }

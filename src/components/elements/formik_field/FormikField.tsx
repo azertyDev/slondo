@@ -77,9 +77,9 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             {errorMsg && (
                                 <Grid item xs={limit ? 9 : 12}>
                                     <Typography variant="subtitle1" className='error-text'>
-                                    <span>
-                                        {errorMsg}
-                                    </span>
+                                        <span>
+                                            {errorMsg}
+                                        </span>
                                     </Typography>
                                 </Grid>
                             )}

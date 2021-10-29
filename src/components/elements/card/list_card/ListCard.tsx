@@ -7,7 +7,7 @@ import {
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
-import {Grid, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
@@ -131,6 +131,46 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} container>
+                                <Hidden smUp>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                        container
+                                        zeroMinWidth
+                                        direction='column'
+                                    >
+                                        {isAuction
+                                            ? hasBet &&
+                                            <>
+                                                <Typography variant='subtitle1' component='p' className='color-silver'>
+                                                    {t('common:currentRate')}
+                                                </Typography>
+                                                <Typography
+                                                    noWrap
+                                                    variant="h6"
+                                                    component='p'
+                                                    color="initial"
+                                                    className='price'
+                                                >
+                                                    {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
+                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                </Typography>
+                                            </>
+                                            : <Typography
+                                                noWrap
+                                                variant="h6"
+                                                component='p'
+                                                color="initial"
+                                                className='price'
+                                            >
+                                                {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
+                                                {!excludePrice && (
+                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                )}
+                                            </Typography>}
+                                    </Grid>
+                                </Hidden>
                                 <Grid
                                     item
                                     xs={12}
@@ -147,45 +187,47 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         {time}
                                     </Typography>
                                 </Grid>
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={6}
-                                    container
-                                    zeroMinWidth
-                                    direction='column'
-                                    alignItems={isXsDown ? 'flex-start' : 'flex-end'}
-                                >
-                                    {isAuction
-                                        ? hasBet &&
-                                        <>
-                                            <Typography variant='subtitle1' component='p' className='color-silver'>
-                                                {t('common:currentRate')}
-                                            </Typography>
-                                            <Typography
+                                <Hidden xsDown>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                        container
+                                        zeroMinWidth
+                                        direction='column'
+                                        alignItems={isXsDown ? 'flex-start' : 'flex-end'}
+                                    >
+                                        {isAuction
+                                            ? hasBet &&
+                                            <>
+                                                <Typography variant='subtitle1' component='p' className='color-silver'>
+                                                    {t('common:currentRate')}
+                                                </Typography>
+                                                <Typography
+                                                    noWrap
+                                                    variant="h6"
+                                                    component='p'
+                                                    color="initial"
+                                                    className='price'
+                                                >
+                                                    {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
+                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                </Typography>
+                                            </>
+                                            : <Typography
                                                 noWrap
                                                 variant="h6"
                                                 component='p'
                                                 color="initial"
                                                 className='price'
                                             >
-                                                {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                                <span>{t(`common:${cardData.currency.name}`)}</span>
-                                            </Typography>
-                                        </>
-                                        : <Typography
-                                            noWrap
-                                            variant="h6"
-                                            component='p'
-                                            color="initial"
-                                            className='price'
-                                        >
-                                            {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
-                                            {!excludePrice && (
-                                                <span>{t(`common:${cardData.currency.name}`)}</span>
-                                            )}
-                                        </Typography>}
-                                </Grid>
+                                                {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
+                                                {!excludePrice && (
+                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                )}
+                                            </Typography>}
+                                    </Grid>
+                                </Hidden>
                             </Grid>
                         </Grid>
                     </Grid>

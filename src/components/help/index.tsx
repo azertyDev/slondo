@@ -7,8 +7,9 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
+import {NextPage} from 'next';
 
-export const HelpPage: FC = () => {
+export const HelpPage: NextPage = () => {
     const {t} = useTranslation('help');
     const {push} = useRouter();
 

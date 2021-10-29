@@ -27,13 +27,13 @@ export const FormikTextarea: FC<FormikTextareaPropsType> = (props) => {
             {({field}) => (
                 <div className={classes.root}>
                     {labelTxt && (
-                        <Typography variant="subtitle1" gutterBottom>
-                            <strong>
+                        <label htmlFor={name}>
+                            <Typography variant="subtitle1" gutterBottom>
                                 {labelTxt}
                                 {!disableRequire && <span className='error-text'>*</span>}&nbsp;
-                            </strong>
-                            {errorMsg && <span className='error-text'>&nbsp;{errorMsg}</span>}
-                        </Typography>
+                                {errorMsg && <span className='error-text'>&nbsp;{errorMsg}</span>}
+                            </Typography>
+                        </label>
                     )}
                     <TextField
                         fullWidth

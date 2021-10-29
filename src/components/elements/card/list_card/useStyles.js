@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         background: '#FFF',
         position: 'relative',
         borderRadius: '10px',
-        boxShadow: '0px 1px 6px rgb(0 0 0 / 10%)',
+        boxShadow: '0px 2px 8px rgba(103, 94, 170, 0.2)',
         [theme.breakpoints.down('sm')]: {
             height: 165
         },
@@ -42,10 +42,10 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('430')]: {
                 left: '41%'
             },
-            [theme.breakpoints.down('360')]: {
-                left: '39.5%'
-            },
 
+            [theme.breakpoints.down('360')]: {
+                left: '40.5%'
+            },
             '&:hover': {
                 '& svg': {
                     transform: 'scale(1.1)',
@@ -75,10 +75,7 @@ export const useStyles = makeStyles((theme) => ({
                         '&.post': {
                             backgroundColor: theme.palette.primary.postBgColor
                         },
-                        '&.auc': {
-                            backgroundColor: theme.palette.primary.aucBgColor
-                        },
-                        '&.exauc': {
+                        '&.auc, &.exauc': {
                             backgroundColor: theme.palette.primary.exAucBgColor
                         }
                     },
@@ -127,7 +124,11 @@ export const useStyles = makeStyles((theme) => ({
                         WebkitLineClamp: 2,
                         overflow: 'hidden',
                         WebkitBoxOrient: 'vertical',
-                        fontSize: '1.2rem'
+                        fontSize: '1.2rem',
+                        lineHeight: '16px',
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '0.875rem'
+                        }
                     }
                 },
                 '& .color-silver': {

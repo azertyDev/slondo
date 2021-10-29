@@ -430,15 +430,35 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-category': {
             marginBottom: '40px',
-            background: '#F2F2F2',
-            borderRadius: '10px',
-            display: 'inline-block',
-            padding: '10px 21px',
-            '& > h6.MuiTypography-subtitle1': {
-                fontSize: '1.125rem',
-                '& > span': {
-                    color: '#675EAA',
-                    fontWeight: '600'
+            position: 'relative',
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: '-16px',
+                    left: 0,
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+                }
+            },
+            '& > div': {
+                display: 'inline-block',
+                background: '#F2F2F2',
+                padding: '10px 21px',
+                borderRadius: '10px',
+                [theme.breakpoints.down('md')]: {
+                    padding: '7px 14px',
+                },
+                '& > h6.MuiTypography-subtitle1': {
+                    fontSize: '1.125rem',
+                    [theme.breakpoints.down('md')]: {
+                        fontSize: '0.875rem'
+                    },
+                    '& > span': {
+                        color: '#675EAA',
+                        fontWeight: '600'
+                    }
                 }
             }
         },

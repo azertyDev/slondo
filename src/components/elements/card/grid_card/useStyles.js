@@ -79,9 +79,7 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: ({ads_type}) => (
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
-                                    : ads_type === 'exauc'
-                                    ? 'rgba(242, 153, 74, .65)'
-                                    : 'rgba(173, 102, 213, 0.65)'
+                                    : 'rgba(242, 153, 74, .65)'
                             ),
                             [theme.breakpoints.down('xs')]: {
                                 fontSize: '0.75rem'

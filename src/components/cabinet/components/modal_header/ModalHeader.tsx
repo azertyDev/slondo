@@ -1,8 +1,9 @@
 import {FC} from 'react';
 import {Box, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import CloseIcon from '@material-ui/icons/Close';
 import {useStyles} from './useStyles';
+import {ArrowBackIcon} from '@src/components/elements/icons/ArrowBackIcon';
+
 
 type ModalHeaderPropsType = {
     title?,
@@ -39,7 +40,7 @@ export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
                     onClick={handleBack}
                     classes={{root: classes.button}}
                 >
-                    <KeyboardArrowLeftIcon />
+                    <ArrowBackIcon />
                 </IconButton>
             )}
             {title && (

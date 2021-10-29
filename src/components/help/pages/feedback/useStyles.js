@@ -2,20 +2,42 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& .MuiTypography-root': {
+            [theme.breakpoints.down('xs')]: {
+                fontFamily: 'Roboto'
+            }
+        },
         '& > h6.MuiTypography-h6': {
-            marginBottom: 10
+            marginBottom: 10,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '1rem'
+            }
         },
         '& > h6.MuiTypography-subtitle1': {
             fontSize: '1.125rem',
             color: 'rgba(49, 49, 49, 0.6)',
             marginBottom: 30,
             [theme.breakpoints.down('xs')]: {
-                fontSize: 'initial'
+                color: 'inherit',
+                lineHeight: '14px',
+                fontSize: '0.75rem'
             }
         },
         '& > div.feedback-form': {
             '& input[type="file"]': {
                 display: 'none'
+            },
+            '& .file-limit': {
+                color: '#838383',
+                fontSize: '0.75rem',
+                marginTop: 5
+            },
+            '& label': {
+                '& .MuiTypography-subtitle1': {
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: '0.875rem'
+                    }
+                }
             },
             '& button': {
                 width: '100%'
