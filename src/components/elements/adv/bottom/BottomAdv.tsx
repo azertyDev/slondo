@@ -16,16 +16,16 @@ export const BottomAdv: FC<{ adv: AdvType }> = ({adv}) => {
     const classes = useStyles({image});
     return (
         <div className={classes.root}>
-            <div className='bottom-adv'>
-                {google_ads
-                    ? <GAdv slot={2924339441}/>
-                    : <Link href={url}>
-                        <a>
-                            <div className='bottom-adv-content'/>
-                        </a>
-                    </Link>
-                }
-            </div>
+            {google_ads
+                ? <div className='bottom-adv'>
+                    <GAdv slot={2924339441}/>
+                </div>
+                : <Link href={url}>
+                    <a>
+                        <div className='bottom-adv'/>
+                    </a>
+                </Link>
+            }
         </div>
     );
 };

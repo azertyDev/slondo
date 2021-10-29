@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.content-adv, & div.right-adv, & div.bottom-adv': {
             borderRadius: '7px'
         },
-        '& div.right-adv-content, div.bottom-adv-content': {
+        '& div.right-adv, div.bottom-adv': {
             backgroundImage: ({image}) => image && `url(${image})`
         },
         '& div.content-adv': {
@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
                 height: '233px'
             }
         },
-        '& div.right-adv-content': {
+        '& div.right-adv': {
             position: ({isScrollBreak}) => isScrollBreak ? 'fixed' : 'unset',
             top: ({isScrollBreak}) => isScrollBreak && '63px',
             width: '25vw',
@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
                 maxHeight: '100%'
             }
         },
-        '& div.bottom-adv-content': {
+        '& div.bottom-adv': {
             width: '100%',
             height: '90px'
         }
