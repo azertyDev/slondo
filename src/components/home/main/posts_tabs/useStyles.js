@@ -62,6 +62,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '40px'
             },
             '& ins.adsbygoogle[data-ad-status="unfilled"]': {
+                height: '100%!important',
                 backgroundColor: '#f0f0f0'
             }
         },

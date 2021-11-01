@@ -6,6 +6,18 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             marginTop: 0
         },
+        '& div.right-content-adv-wrapper': {
+            height: '200px',
+            [theme.breakpoints.down('xs')]: {
+                height: '150px'
+            }
+        },
+        '& div.content-adv-wrapper': {
+            height: '345px',
+            [theme.breakpoints.down('xs')]: {
+                height: '233px'
+            }
+        },
         '& div.view-btns': {
             '& button': {
                 padding: 6,
@@ -15,6 +27,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& ins.adsbygoogle[data-ad-status="unfilled"]': {
+            height: '100%!important',
             backgroundColor: '#f0f0f0'
         }
     }

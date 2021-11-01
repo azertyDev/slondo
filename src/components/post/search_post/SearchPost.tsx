@@ -136,6 +136,7 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
                                         categories={ctgrsByCyrName}
                                     />
                                     <SearchResult
+                                        rightAdvData={right}
                                         urlParams={urlParams}
                                         categories={ctgrsByCyrName}
                                         searchTermFromUrl={searchTermFromUrl}

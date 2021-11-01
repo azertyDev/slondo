@@ -13,17 +13,20 @@ import {useRouter} from "next/router";
 import {getLocationByURL} from "@src/helpers";
 import {ListCard} from "@src/components/elements/card/list_card/ListCard";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
-import {useStyles} from './useStyles';
 import {ContentAdv} from "@src/components/elements/adv/ContentAdv";
+import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
+import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
+    rightAdvData,
     categories,
     urlParams
 };
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
+        rightAdvData,
         searchTermFromUrl,
         categories,
         urlParams
@@ -31,7 +34,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     const {asPath, query} = useRouter();
     const [queryLoc] = query.path as string[];
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const {t} = useTranslation('filters');
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -42,7 +45,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
-    const [gridView, setGridView] = useState(true);
+    const [listView, setListView] = useState(false);
     const [isNotFound, setIsNotFound] = useState(false);
 
     const handlePagePagination = (_, pageNum) => {
@@ -133,41 +136,50 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                     </Typography>
                                     <Box className='view-btns'>
                                         <IconButton
-                                            className={gridView ? 'selected' : ''}
-                                            onClick={() => setGridView(true)}
+                                            className={listView ? '' : 'selected'}
+                                            onClick={() => setListView(false)}
                                         >
                                             <GridViewIcon/>
                                         </IconButton>
                                         <IconButton
-                                            className={gridView ? '' : 'selected'}
-                                            onClick={() => setGridView(false)}
+                                            className={listView ? 'selected' : ''}
+                                            onClick={() => setListView(true)}
                                         >
                                             <ListViewIcon/>
                                         </IconButton>
                                     </Box>
                                 </Box>
-                                <Grid container spacing={isXsDown ? 1 : 2}>
+                                <Grid container spacing={isMdDown ? 1 : 2}>
                                     {posts.map((cardData, i) => {
-                                        const isAdvSlot = (i + 1) % 9 === 0;
-                                        return gridView
-                                            ? <Fragment key={i}>
-                                                <Grid xs={6} sm={6} md={4} lg={3} item>
-                                                    <GridCard
-                                                        {...cardData}
-                                                        isFetch={isFetch}
-                                                    />
+                                        const isAdvSlot = (i + 1) % 10 === 0;
+                                        const isRightAdvSlot = isMdDown && i === 4;
+
+                                        return <Fragment key={i}>
+                                            {isRightAdvSlot && (
+                                                <Grid item xs={12}>
+                                                    <RightAdv mobile adv={rightAdvData}/>
                                                 </Grid>
-                                                {isAdvSlot && (
-                                                    <Grid xs={6} sm={6} md={4} lg={3} item>
-                                                        <ContentAdv/>
-                                                    </Grid>
-                                                )}
-                                            </Fragment>
-                                            : <Grid item key={i} xs={12}>
-                                                <Box mb={1}>
+                                            )}
+                                            {listView
+                                                ? <Grid item xs={12}>
                                                     <ListCard cardData={cardData}/>
-                                                </Box>
-                                            </Grid>;
+                                                </Grid>
+                                                : <>
+                                                    {isAdvSlot && (
+                                                        <Grid item xs={6} sm={6} md={4} lg={3}>
+                                                            <div className='content-adv-wrapper'>
+                                                                <ContentAdv/>
+                                                            </div>
+                                                        </Grid>
+                                                    )}
+                                                    <Grid xs={6} sm={6} md={4} lg={3} item>
+                                                        <GridCard
+                                                            {...cardData}
+                                                            isFetch={isFetch}
+                                                        />
+                                                    </Grid>
+                                                </>}
+                                        </Fragment>;
                                     })}
                                 </Grid>
                             </Box>

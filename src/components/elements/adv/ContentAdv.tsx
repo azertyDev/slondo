@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {useStyles} from './useStyles';
 
 declare global {
@@ -7,7 +7,7 @@ declare global {
     }
 }
 
-export const ContentAdv = () => {
+export const ContentAdv: FC = () => {
 
     useEffect(() => {
         try {

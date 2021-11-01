@@ -12,26 +12,27 @@ declare global {
 }
 
 type RightAdvProps = {
-    threshold: number
-    adv: AdvType
+    threshold?: number
+    adv: AdvType,
+    mobile?: boolean
 }
 
-export const RightAdv: FC<RightAdvProps> = ({adv, threshold}) => {
-    const {google_ads, image, url} = adv;
+export const RightAdv: FC<RightAdvProps> = ({adv, threshold, mobile = false}) => {
+    const {google_ads, image, mobile_image, url} = adv;
 
     const trigger = useScrollTrigger({disableHysteresis: true, threshold});
     const isScrollBreak = threshold ? trigger : null;
 
-    const classes = useStyles({isScrollBreak, image});
+    const classes = useStyles({isScrollBreak, image, mobile_image});
     return (
         <div className={classes.root}>
             {google_ads
-                ? <div className='right-adv'>
+                ? <div className={mobile ? 'm-right-adv' : 'right-adv'}>
                     <GAdv slot={7228462253}/>
                 </div>
                 : <Link href={url}>
                     <a>
-                        <div className='right-adv'/>
+                        <div className={mobile ? 'm-right-adv' : 'right-adv'}/>
                     </a>
                 </Link>
             }

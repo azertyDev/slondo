@@ -2,7 +2,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.content-adv, & div.right-adv, & div.bottom-adv': {
+        height: '100%',
+        '& div.content-adv, & div.right-adv, div.m-right-adv, & div.bottom-adv': {
             borderRadius: '7px'
         },
         '& div.right-adv, div.bottom-adv': {
@@ -13,6 +14,12 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('xs')]: {
                 height: '233px'
             }
+        },
+        '& div.m-right-adv': {
+            width: '100%',
+            aspectRatio: '9/5',
+            backgroundSize: 'cover',
+            backgroundImage: ({mobile_image}) => mobile_image && `url(${mobile_image})`
         },
         '& div.right-adv': {
             position: ({isScrollBreak}) => isScrollBreak ? 'fixed' : 'unset',

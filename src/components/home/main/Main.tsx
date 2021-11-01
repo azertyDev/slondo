@@ -74,7 +74,7 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                             <Hidden mdDown>
                                 <PostsSlider/>
                             </Hidden>
-                            <PostsTabs/>
+                            <PostsTabs rightAdvData={right}/>
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
