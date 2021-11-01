@@ -27,7 +27,7 @@ export const RightAdv: FC<RightAdvProps> = ({adv, threshold}) => {
         <div className={classes.root}>
             {google_ads
                 ? <div className='right-adv'>
-                    <GAdv slot={8138311139}/>
+                    <GAdv slot={7228462253}/>
                 </div>
                 : <Link href={url}>
                     <a>

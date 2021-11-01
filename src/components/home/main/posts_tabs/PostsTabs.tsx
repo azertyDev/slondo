@@ -132,7 +132,6 @@ export const PostsTabs: FC = () => {
                             {postCards.data.map((cardData, i) => {
                                 const isLastCard = postCards.data.length === i + 1;
                                 const isAdvSlot = (i + 1) % 9 === 0;
-
                                 return (
                                     <Fragment key={i}>
                                         <Grid

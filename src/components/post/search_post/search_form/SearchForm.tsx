@@ -595,8 +595,12 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             onChange={handleSort}
                             value={values.by_filtering}
                         >
-                            <MenuItem value='created_at'>{t('by_date')}</MenuItem>
-                            <MenuItem value='price'>{t('by_price')}</MenuItem>
+                            <MenuItem value='created_at'>
+                                {t('by_date')}
+                            </MenuItem>
+                            <MenuItem value='price'>
+                                {t('by_price')}
+                            </MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
