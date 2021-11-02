@@ -58,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
                         '& > h6.MuiTypography-subtitle1': {
                             color: theme.palette.primary.secondary
                         },
-                        '& > svg': {
+                        '& svg': {
                             '& > path': {
                                 fill: '#845CAB'
                             }
@@ -86,6 +86,14 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.categories-menu': {
             paddingRight: 20,
+            '& span.ctgr-icon': {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 10px',
+                width: 36,
+                height: 36,
+            },
             [theme.breakpoints.down('sm')]: {
                 paddingRight: 0,
                 '& span.ctgr-icon': {
@@ -94,9 +102,7 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '100px',
                     width: 36,
                     height: 36,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
+
                 }
             }
 
