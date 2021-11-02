@@ -5,6 +5,9 @@ export const useStyles = makeStyles((theme) => ({
         '& ol': {
             listStyle: 'none',
             counterReset: 'li',
+            [theme.breakpoints.down('xs')]: {
+                padding: 0
+            },
             '& p': {
                 display: 'inline'
             }
@@ -12,14 +15,23 @@ export const useStyles = makeStyles((theme) => ({
         '& li:before': {
             counterIncrement: 'li',
             content: 'counters(li, ".") ". "',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.75rem'
+            },
             fontSize: '1rem',
             color: '#838383'
         },
         '& .title': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.875rem'
+            },
             fontWeight: 600
         },
         '& .MuiTypography-root': {
-            lineHeight: 'normal'
+            lineHeight: 'normal',
+            [theme.breakpoints.down('xs')]: {
+                fontFamily: 'Roboto'
+            }
         },
         '& .image': {
             width: '100%'
@@ -35,7 +47,10 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& .color-silver': {
-            color: '#838383'
+            color: '#838383',
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.75rem'
+            }
         },
         '& a.link': {
             textDecoration: 'none',

@@ -76,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
             height: '23px',
             fontSize: '1rem',
             padding: '7.5px 30px 7.5px 10px',
-            background: '#fff',
+            background: '#FDFCFF',
             color: '#4e4e4e',
             [theme.breakpoints.down('sm')]: {
                 padding: '6.5px 30px 6.5px 10px'
@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
         height: '38px',
         display: 'flex',
         padding: '9px 10px',
-        background: '#fff',
+        background: '#FDFCFF',
         justifyContent: 'flex-start',
         border: '1px solid rgba(0, 0, 0, 0.23)',
         '& p': {
@@ -101,7 +101,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     drawer: {
         '& .MuiDrawer-paper': {
-            overflowX: 'hidden'
+            overflowX: 'hidden',
+            backgroundColor: '#F8F7FA',
         }
     }
 }));

@@ -398,7 +398,10 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         <Grid
             container
             spacing={2}
-            style={{padding: '9px'}}
+            style={{
+                padding: '9px',
+                backgroundColor: '#F8F7FA',
+            }}
         >
             {!isSmDown && (
                 <>

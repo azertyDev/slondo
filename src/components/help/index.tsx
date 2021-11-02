@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import Link from 'next/link';
-import {Box, Grid, Hidden, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from '@src/components/help/menu_struct';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
@@ -12,6 +12,7 @@ import {NextPage} from 'next';
 export const HelpPage: NextPage = () => {
     const {t} = useTranslation('help');
     const {push} = useRouter();
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const handleBack = async () => {
         await push('/');
@@ -25,7 +26,7 @@ export const HelpPage: NextPage = () => {
                     {t('header:help')}
                 </Typography>
             </Hidden>
-            <Grid container spacing={2}>
+            <Grid container spacing={isXsDown ? 0 : 2}>
                 <Grid item xs={12} sm={5} md={4} lg={3}>
                     <HelpSidebar menuStruct={menuStruct} />
                 </Grid>

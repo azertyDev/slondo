@@ -44,5 +44,8 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         }
+    },
+    stepper: {
+        background: 'none'
     }
 }));

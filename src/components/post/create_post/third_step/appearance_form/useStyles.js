@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             display: 'none'
         },
         '& div.color-preview': {
-            width: 'min-content',
+            width: 'max-content',
             display: 'flex',
             alignItems: 'center',
             padding: '7px 10px',
@@ -42,10 +42,19 @@ export const useStyles = makeStyles((theme) => ({
             textAlign: 'center',
             cursor: 'pointer',
             '& span, & img.color-img': {
+                [theme.breakpoints.down('sm')]: {
+                    width: '40px',
+                    height: '40px'
+                },
                 width: '50px',
                 height: '50px',
                 margin: '10px 0px',
                 borderRadius: '50%'
+            },
+            '& p.MuiTypography-subtitle2': {
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: '0.75rem'
+                },
             }
         },
         '& .selected-color': {

@@ -14,6 +14,7 @@ import {ModalHeader} from "@src/components/cabinet/components/modal_header/Modal
 import {categoriesNormalize} from "@src/helpers";
 import {useStyles} from "@src/components/main_layout/useStyles";
 import {CategoriesCtx} from "@src/context";
+import {Footer} from '@src/components/footer/Footer';
 
 const CreatePost: FC<{ siteCategories }> = ({siteCategories}) => {
     const {t} = useTranslation('post');

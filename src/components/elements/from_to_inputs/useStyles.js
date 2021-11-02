@@ -9,7 +9,9 @@ export const useStyles = makeStyles(() => ({
             '& div.MuiTextField-root': {
                 width: '49%',
                 '& input': {
-                    borderRadius: '5px'
+                    borderRadius: '5px',
+                    boxShadow: 'none',
+                    background: '#FDFCFF',
                 }
             }
         }

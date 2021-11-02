@@ -51,7 +51,7 @@ export const StepsProgress: FC<AncmntAuctionTopPropsType> = (props) => {
             </Grid>
             <Hidden mdDown>
                 <Grid item md={4}>
-                    <Stepper activeStep={activeStep} alternativeLabel>
+                    <Stepper activeStep={activeStep} alternativeLabel classes={{root: classes.stepper}}>
                         {steps.map(label =>
                             <Step key={label}>
                                 <StepLabel>{label}</StepLabel>

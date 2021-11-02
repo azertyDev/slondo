@@ -31,14 +31,16 @@ export const useStyles = makeStyles((theme) => ({
                         borderRadius: 0,
                         paddingTop: '13px',
                         paddingBottom: '13px',
-                        '&:after': {
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            content: '""',
-                            width: '100%',
-                            height: '0.8px',
-                            background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.35) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                        '&:not(:last-child)': {
+                            '&:after': {
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                content: '""',
+                                width: '100%',
+                                height: '0.8px',
+                                background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.35) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                            }
                         },
                         '& > svg > path': {
                             fill: '#838383'
@@ -85,8 +87,19 @@ export const useStyles = makeStyles((theme) => ({
         '& div.categories-menu': {
             paddingRight: 20,
             [theme.breakpoints.down('sm')]: {
-                paddingRight: 0
+                paddingRight: 0,
+                '& span.ctgr-icon': {
+                    margin: '0 15px',
+                    background: 'rgba(236, 235, 240, 0.8)',
+                    borderRadius: '100px',
+                    width: 36,
+                    height: 36,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }
             }
+
         },
         '& div.subcategories-menu': {
             '& h6.subcategories-list-item': {

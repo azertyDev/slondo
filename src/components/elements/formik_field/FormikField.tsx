@@ -72,6 +72,9 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 size='small'
                                 autoFocus={autoFocus}
                                 className={errorMsg ? 'error-border' : ''}
+                                classes={{
+                                    root: 'red'
+                                }}
                             />}
                         <Grid container className='helpers-content'>
                             {errorMsg && (

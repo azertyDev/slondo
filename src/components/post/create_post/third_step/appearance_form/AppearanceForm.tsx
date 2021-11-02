@@ -70,7 +70,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             {
                 breakpoint: 576,
                 settings: {
-                    slidesToShow: 2.5
+                    slidesToShow: 3,
+                    slidesToScroll: 2
                 }
             }
         ]

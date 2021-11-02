@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#F4F4F4',
+        backgroundColor: '#F3F2F7',
         borderRadius: '10px!important',
         '& .MuiAccordionSummary-content': {
             display: 'flex',
@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     accordionTitle: {
-        background: '#FFFFFF',
+        background: '#FDFCFF',
         borderRadius: '5px'
     }
 }));

@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             padding: 8,
             margin: '10px 0 10px',
             borderRadius: 10,
-            backgroundColor: '#fff',
+            backgroundColor: '#FDFCFF',
             boxShadow: '0px 1px 2px 0px #00000026',
             '& a': {
                 textDecoration: 'none'
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
         height: 40,
         padding: '7px 10px',
         userSelect: 'none',
-        background: '#FFFFFF',
+        background: '#FDFCFF',
         borderRadius: '5px',
         border: '1px solid #F2F2F2',
         borderColor: props => props.checked && '#AD66D5',

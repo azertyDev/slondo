@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.local-modal-container': {
             padding: '0 35px 35px',
+            background: '#F8F7FA',
             [theme.breakpoints.down('sm')]: {
                 padding: '0 20px 10px'
             },
@@ -62,6 +63,8 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '7px',
                     border: '1px solid #ccc',
                     fontSize: '0.87rem',
+                    background: '#FDFCFF',
+                    boxShadow: 'none',
                     [theme.breakpoints.down('sm')]: {
                         padding: '8px 0 8px 30px',
                         textOverflow: 'ellipsis'

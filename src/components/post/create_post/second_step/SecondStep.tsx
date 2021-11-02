@@ -151,7 +151,9 @@ export const SecondStep: FC = () => {
                                     className={main_ctgr === ctgr.name ? 'selected-category' : ''}
                                 >
                                     <Typography variant="subtitle1">
-                                        {categoryIcons[ctgr.name].smallIcon}
+                                        <span className='ctgr-icon'>
+                                            {categoryIcons[ctgr.name].smallIcon}
+                                        </span>
                                         {t(`${ctgr.name}.name`)}
                                     </Typography>
                                     <Hidden smUp>

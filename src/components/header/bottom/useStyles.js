@@ -130,7 +130,7 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'center',
                     padding: '6px 12px',
                     borderRadius: '100px',
-                    background: '#F5F5F5',
+                    background: '#EEEDF2',
                     '&.selected': {
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:

@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
             alignItems: 'center',
             borderRadius: 10,
             padding: '15px',
+            background: '#FDFCFF',
             '& > div.week-days': {
                 '& p': {
                     padding: 3,

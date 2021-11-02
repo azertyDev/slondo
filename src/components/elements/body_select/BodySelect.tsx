@@ -22,6 +22,7 @@ import {
 } from '@src/components/elements/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {useStyles} from './useStyles';
+import {Settings} from 'react-slick';
 
 type BodyTypesProps = {
     disableRequire?: boolean,
@@ -129,7 +130,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
     } = props;
     const {t} = useTranslation('filters');
 
-    const sliderSettings = {
+    const sliderSettings: Settings = {
         dots: false,
         arrows: false,
         infinite: false,
@@ -159,7 +160,8 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
             {
                 breakpoint: 576,
                 settings: {
-                    slidesToShow: 2.5
+                    slidesToShow: 3,
+                    waitForAnimate: false
                 }
             }
         ]

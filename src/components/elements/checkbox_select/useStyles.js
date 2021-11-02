@@ -38,7 +38,7 @@ export const useStyles = makeStyles(() => ({
         borderRadius: '5px',
         padding: '7px 10px',
         alignItems: 'center',
-        background: '#FFFFFF',
+        background: '#FDFCFF',
         justifyContent: 'center',
         border: '1px solid #F2F2F2',
         borderColor: props => props.checked && '#AD66D5',

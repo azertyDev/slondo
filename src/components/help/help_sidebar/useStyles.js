@@ -2,6 +2,12 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& .MuiTypography-root': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.875rem',
+                fontFamily: 'Roboto'
+            }
+        },
         '& > h6.MuiTypography-h6': {
             fontWeight: '600',
             marginLeft: 15,
@@ -64,6 +70,7 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: 20
         },
         '& div.MuiListItem-button': {
+            position: 'relative',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
             borderRadius: '5px',
             height: '38px',
@@ -73,8 +80,23 @@ export const useStyles = makeStyles((theme) => ({
                 background: 'red'
             },
             '&:last-child': {
-                margin: 0,
+                margin: 0
             },
+            '&:not(:last-child)': {
+                '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.345) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                }
+            },
+            [theme.breakpoints.down('xs')]: {
+                height: 'auto',
+                marginBottom: 0,
+                padding: '15px 5px'
+            }
         },
         '& div.MuiCollapse-container': {
             '& div.MuiList-root': {

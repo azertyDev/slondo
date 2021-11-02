@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         zIndex: 1,
+        backgroundColor: '#F8F7FA',
         '& .title': {
             fontWeight: 600,
             [theme.breakpoints.down('xs')]: {

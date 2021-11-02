@@ -26,6 +26,11 @@ export const useStyles = makeStyles((theme) => ({
                 '& svg': {
                     marginBottom: 5
                 },
+                '& p.MuiTypography-subtitle1': {
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: '0.75rem'
+                    }
+                },
                 '&.selected': {
                     '& p.MuiTypography-subtitle1': {
                         color: theme.palette.primary.secondary

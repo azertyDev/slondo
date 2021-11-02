@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& button': {
                 color: theme.palette.common.tab,
-                background: 'none',
+                background: '#FDFCFF',
                 borderRadius: '0px',
                 width: '100%',
                 height: '100%',

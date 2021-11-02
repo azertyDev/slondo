@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             '& .': {},
             '& > .MuiInputBase-input': {
-                background: '#fff',
+                background: '#FDFCFF',
                 padding: '9px',
                 paddingRight: '30px',
                 border: '1px solid #D5D5D5',
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& fieldset.MuiOutlinedInput-notchedOutline': {
                 borderColor: 'inherit',
-                borderWidth: 0
+                borderWidth: 0,
             },
             '& svg.MuiSvgIcon-root': {
                 right: '7px'

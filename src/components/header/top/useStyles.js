@@ -73,6 +73,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     adaptive: {
         // ------------> adaptive <--------------- //
+        '& .MuiPaper-root': {
+            backgroundColor: '#F8F7FA'
+        },
         '& div.top-header-logo': {
             height: '30px'
         },

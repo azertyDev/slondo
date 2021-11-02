@@ -3,6 +3,10 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
+        '& input': {
+            background: '#FDFCFF',
+            boxShadow: 'none'
+        },
         [theme.breakpoints.down('md')]: {
             '& input': {
                 padding: '11.5px 7px',

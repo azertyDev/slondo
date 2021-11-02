@@ -9,7 +9,7 @@ export const useStyles = makeStyles(() => ({
     },
     textArea: {
         '& .MuiOutlinedInput-root': {
-            background: '#fff'
+            background: '#FDFCFF'
         }
     }
 }));
