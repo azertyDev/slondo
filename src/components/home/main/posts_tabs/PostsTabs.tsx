@@ -1,7 +1,7 @@
 import {FC, Fragment, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from "react-dom";
-import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography} from "@material-ui/core";
+import {CircularProgress, Grid, Hidden, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
@@ -9,8 +9,9 @@ import {ContentAdv} from "@src/components/elements/adv/ContentAdv";
 import {useTranslation} from "next-i18next";
 import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
+import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
 
-export const PostsTabs: FC = () => {
+export const PostsTabs: FC<{ rightAdvData }> = ({rightAdvData}) => {
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
     const posts = useContext(HomePageCtx).tabPosts;
@@ -32,6 +33,8 @@ export const PostsTabs: FC = () => {
     const hasMoreAuctions = auctionCards.total > auctionCards.data.length && tabValue === 1;
     const isFirstPostPage = postCurrPage === 1;
     const isFirstAucPage = auctionCurrPage === 1;
+
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const GetCardRef = (observer, isAuc = false) => useCallback(node => {
         if (isFetch) return;
@@ -130,20 +133,17 @@ export const PostsTabs: FC = () => {
                         </Typography>
                         : <Grid container spacing={2}>
                             {postCards.data.map((cardData, i) => {
+                                const isAdvSlot = (i + 1) % 10 === 0;
+                                const isRightAdvSlot = isMdDown && i === 4;
                                 const isLastCard = postCards.data.length === i + 1;
-                                const isAdvSlot = (i + 1) % 9 === 0;
 
                                 return (
                                     <Fragment key={i}>
-                                        <Grid
-                                            item
-                                            xs={6}
-                                            sm={4}
-                                            lg={3}
-                                            ref={isLastCard ? lastPostCardRef : null}
-                                        >
-                                            <GridCard{...cardData}/>
-                                        </Grid>
+                                        {isRightAdvSlot && (
+                                            <Grid item xs={12}>
+                                                <RightAdv mobile adv={rightAdvData}/>
+                                            </Grid>
+                                        )}
                                         {isAdvSlot && (
                                             <Grid
                                                 item
@@ -155,6 +155,15 @@ export const PostsTabs: FC = () => {
                                                 <ContentAdv/>
                                             </Grid>
                                         )}
+                                        <Grid
+                                            item
+                                            xs={6}
+                                            sm={4}
+                                            lg={3}
+                                            ref={isLastCard ? lastPostCardRef : null}
+                                        >
+                                            <GridCard{...cardData}/>
+                                        </Grid>
                                     </Fragment>
                                 );
                             })}

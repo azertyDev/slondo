@@ -8,10 +8,9 @@ export const INNER_URLS = {
 };
 export const MESSAGES_PER_PAGE = 25;
 export const ITEMS_PER_PAGE = 16;
-export const HOME_ITEMS_PER_PAGE = 36;
 export const BETS_PER_PAGE = 10;
 export const SUBS_PER_PAGE = 10;
-export const ITEMS_PER_PAGE_SEARCH = 40;
+export const POSTS_PER_PAGE = 40;
 export const UPLOAD_FILES_LIMIT = 8;
 export const CONFIRM_SECONDS = 120;
 export const TITLE_LIMIT = 70;

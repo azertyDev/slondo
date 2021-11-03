@@ -3,13 +3,13 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         border: 0,
-        height: 176,
+        height: '176px',
         background: '#FFF',
         position: 'relative',
         borderRadius: '10px',
         boxShadow: '0px 2px 8px rgba(103, 94, 170, 0.2)',
         [theme.breakpoints.down('sm')]: {
-            height: 165
+            height: '165px'
         },
         '&:hover': {
             cursor: 'pointer',

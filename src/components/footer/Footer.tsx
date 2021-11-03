@@ -9,6 +9,7 @@ import {useStyles} from './useStyles';
 export const Footer: FC = () => {
     const {t} = useTranslation('footer');
     const year = new Date().getFullYear();
+
     const classes = useStyles();
     return (
         <footer className={classes.root}>

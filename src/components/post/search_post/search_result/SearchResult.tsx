@@ -1,9 +1,8 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, Fragment, useContext, useEffect, useState} from 'react';
 import {browser} from "process";
 import {useTranslation} from "react-i18next";
-import {ITEMS_PER_PAGE_SEARCH} from '@src/constants';
-import {CardView} from '@src/components/elements/card/CardView';
-import {Box, IconButton, Typography} from '@material-ui/core';
+import {POSTS_PER_PAGE} from '@src/constants';
+import {Box, Grid, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {GridViewIcon, ListViewIcon} from '@src/components/elements/icons';
 import {unstable_batchedUpdates} from "react-dom";
@@ -12,16 +11,22 @@ import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
 import {useRouter} from "next/router";
 import {getLocationByURL} from "@src/helpers";
+import {ListCard} from "@src/components/elements/card/list_card/ListCard";
+import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
+import {ContentAdv} from "@src/components/elements/adv/ContentAdv";
+import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
 import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
+    rightAdvData,
     categories,
     urlParams
 };
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
+        rightAdvData,
         searchTermFromUrl,
         categories,
         urlParams
@@ -29,6 +34,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     const {asPath, query} = useRouter();
     const [queryLoc] = query.path as string[];
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const {t} = useTranslation('filters');
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -39,7 +45,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
-    const [gridView, setGridView] = useState(true);
+    const [listView, setListView] = useState(false);
     const [isNotFound, setIsNotFound] = useState(false);
 
     const handlePagePagination = (_, pageNum) => {
@@ -52,7 +58,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             const query: any = {
                 page,
-                itemsPerPage: ITEMS_PER_PAGE_SEARCH,
+                itemsPerPage: POSTS_PER_PAGE,
                 by_filtering,
                 ...params
             };
@@ -130,29 +136,58 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                     </Typography>
                                     <Box className='view-btns'>
                                         <IconButton
-                                            className={gridView ? 'selected' : ''}
-                                            onClick={() => setGridView(true)}
+                                            className={listView ? '' : 'selected'}
+                                            onClick={() => setListView(false)}
                                         >
                                             <GridViewIcon/>
                                         </IconButton>
                                         <IconButton
-                                            className={gridView ? '' : 'selected'}
-                                            onClick={() => setGridView(false)}
+                                            className={listView ? 'selected' : ''}
+                                            onClick={() => setListView(true)}
                                         >
                                             <ListViewIcon/>
                                         </IconButton>
                                     </Box>
                                 </Box>
-                                <CardView
-                                    data={posts}
-                                    listMode={!gridView}
-                                />
+                                <Grid container spacing={isMdDown ? 1 : 2}>
+                                    {posts.map((cardData, i) => {
+                                        const isAdvSlot = (i + 1) % 10 === 0;
+                                        const isRightAdvSlot = isMdDown && i === 4;
+
+                                        return <Fragment key={i}>
+                                            {isRightAdvSlot && (
+                                                <Grid item xs={12}>
+                                                    <RightAdv mobile adv={rightAdvData}/>
+                                                </Grid>
+                                            )}
+                                            {listView
+                                                ? <Grid item xs={12}>
+                                                    <ListCard cardData={cardData}/>
+                                                </Grid>
+                                                : <>
+                                                    {isAdvSlot && (
+                                                        <Grid item xs={6} sm={6} md={4} lg={3}>
+                                                            <div className='content-adv-wrapper'>
+                                                                <ContentAdv/>
+                                                            </div>
+                                                        </Grid>
+                                                    )}
+                                                    <Grid xs={6} sm={6} md={4} lg={3} item>
+                                                        <GridCard
+                                                            {...cardData}
+                                                            isFetch={isFetch}
+                                                        />
+                                                    </Grid>
+                                                </>}
+                                        </Fragment>;
+                                    })}
+                                </Grid>
                             </Box>
                             <Box mt='70px'>
                                 <CustomPagination
                                     currentPage={page}
                                     totalItems={itemsCount}
-                                    itemsPerPage={ITEMS_PER_PAGE_SEARCH}
+                                    itemsPerPage={POSTS_PER_PAGE}
                                     handlePagePagination={handlePagePagination}
                                 />
                             </Box>

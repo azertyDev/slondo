@@ -7,7 +7,7 @@ import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from "@root/interfaces/Locations";
 import {
     DEV_URL,
-    HOME_ITEMS_PER_PAGE,
+    POSTS_PER_PAGE,
     ITEMS_PER_PAGE,
     MESSAGES_PER_PAGE,
     PRODUCTION_URL,
@@ -356,7 +356,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCards: (type = 'post', page = 1, itemsPerPage = HOME_ITEMS_PER_PAGE):
+    getCards: (type = 'post', page = 1, itemsPerPage = POSTS_PER_PAGE):
         Promise<{ data: CardDataType[]; total: number; }> => {
         const params = {
             type,
@@ -698,7 +698,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getPopular: (page = 1, itemsPerPage = HOME_ITEMS_PER_PAGE) => {
+    getPopular: (page = 1, itemsPerPage = POSTS_PER_PAGE) => {
         const params = {
             page,
             itemsPerPage

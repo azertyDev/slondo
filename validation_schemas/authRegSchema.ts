@@ -5,7 +5,7 @@ import {bottomDashRegEx} from "@src/common_data/reg_exs";
 const passwordMin = 'passwordMustMinEightChars';
 const passwordsDifferent = 'passwordsDifferent';
 
-export const userInfoSchema = object().shape({
+export const userInfoSchema = object({
     name: string()
         .min(3, 'must_more_than_3')
         .max(20, 'must_less_than_20')
@@ -25,7 +25,7 @@ export const passwordSchema = object({
 
 export const codeSchema = object({
     code: string().required(fieldRequiredTxt)
-});
+}).concat(userInfoSchema);
 
 export const signInSchema = object({}).concat(phoneSchema).concat(passwordSchema);
 

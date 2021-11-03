@@ -1,10 +1,22 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 30,
         [theme.breakpoints.down('sm')]: {
             marginTop: 0
+        },
+        '& div.right-content-adv-wrapper': {
+            height: '200px',
+            [theme.breakpoints.down('xs')]: {
+                height: '150px'
+            }
+        },
+        '& div.content-adv-wrapper': {
+            height: '345px',
+            [theme.breakpoints.down('xs')]: {
+                height: '233px'
+            }
         },
         '& div.view-btns': {
             '& button': {
@@ -13,6 +25,10 @@ export const useStyles = makeStyles((theme) => ({
                     fill: '#845CAB'
                 }
             }
+        },
+        '& ins.adsbygoogle[data-ad-status="unfilled"]': {
+            height: '100%!important',
+            backgroundColor: '#f0f0f0'
         }
     }
 }));
