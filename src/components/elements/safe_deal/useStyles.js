@@ -49,6 +49,16 @@ export const useStyles = makeStyles((theme) => ({
                     textAlign: 'center',
                     marginTop: '30px'
                 }
+            },
+            '& .submit-btn': {
+                marginBottom: 10
+            },
+            '& a': {
+                color: '#675EAA',
+                '& p': {
+                    marginTop: 30,
+                    color: '#675EAA'
+                }
             }
         }
     },
@@ -57,13 +67,16 @@ export const useStyles = makeStyles((theme) => ({
         minHeight: '280px',
         padding: '20px 30px',
         borderRadius: '20px',
-        background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+        backgroundImage: ({hasCard}) => hasCard && 'url(/img/card-bg.png)',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        boxShadow: '0px 10px 25px rgba(15, 51, 107, 0.15)',
+        boxShadow: '0px 0px 25px rgba(103, 94, 170, 0.15)',
+        '&.MuiPaper-root': {
+            backgroundColor: ({hasCard}) => !hasCard && 'inherit'
+        },
         '& h6, p': {
-            color: '#fff'
+            color: ({hasCard}) => hasCard ? '#fff' : 'inherit'
         },
         [theme.breakpoints.down('sm')]: {
             padding: '20px'

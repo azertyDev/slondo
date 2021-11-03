@@ -12,7 +12,7 @@ type PostInfoProps = {
     createP2P: () => void,
 }
 
-const LinkText = ({href, children}: { href: string, children?: ReactNode }) => {
+export const LinkText = ({href, children}: {href: string, children?: ReactNode}) => {
     return <Link href={href}>
         <a className='link'>
             {children}

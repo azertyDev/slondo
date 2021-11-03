@@ -400,7 +400,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             spacing={2}
             style={{
                 padding: '9px',
-                backgroundColor: '#F8F7FA',
             }}
         >
             {!isSmDown && (

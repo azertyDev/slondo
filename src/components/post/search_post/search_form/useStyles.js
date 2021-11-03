@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         padding: '15px',
         borderRadius: '10px',
-        backgroundColor: '#F2F2F2',
+        backgroundColor: '#F3F2F7',
         [theme.breakpoints.down('sm')]: {
             padding: 0,
             borderRadius: 0,

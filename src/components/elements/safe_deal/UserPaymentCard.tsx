@@ -3,19 +3,20 @@ import {Form, FormikProvider, useFormik} from 'formik';
 import {Card, Grid, TextField, Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
-import {useTranslation} from 'react-i18next';
+import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {Trans, useTranslation} from 'react-i18next';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {cookieOpts, cookies, formatCardData, getErrorMsg, phonePrepare} from '@src/helpers';
-import ReactInputMask from "react-input-mask";
-import {paymentCardSchema} from "@root/validation_schemas/paymentCardSchema";
-import {codeSchema} from "@root/validation_schemas/authRegSchema";
-import {myUzCardAPI, userAPI} from "@src/api/api";
-import {unstable_batchedUpdates} from "react-dom";
-import {AuthCtx, ErrorCtx} from "@src/context";
-import {useModal} from "@src/hooks";
+import ReactInputMask from 'react-input-mask';
+import {paymentCardSchema} from '@root/validation_schemas/paymentCardSchema';
+import {codeSchema} from '@root/validation_schemas/authRegSchema';
+import {myUzCardAPI, userAPI} from '@src/api/api';
+import {unstable_batchedUpdates} from 'react-dom';
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {useModal} from '@src/hooks';
 import {useStyles} from './useStyles';
+import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
 
 type UserPaymentCardProps = {
     userCard,
@@ -200,7 +201,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         setValues(userVals);
     }, [user.id, userCard]);
 
-    const classes = useStyles();
+    const classes = useStyles({hasCard});
     return (
         <div className={classes.root}>
             <FormikProvider value={formik}>
@@ -216,8 +217,13 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                         </Typography>
                                     </Grid>
                                 )}
-                                <Grid container item spacing={3}>
-                                    <Grid item xs={10}>
+                                <Grid container item  spacing={3}>
+                                    <Grid item xs={12} lg={10}>
+                                        {!hasCard && (
+                                            <Typography variant='subtitle1' gutterBottom>
+                                                {t('common:personalData')}
+                                            </Typography>
+                                        )}
                                         <FormikField
                                             t={t}
                                             name='name'
@@ -233,7 +239,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                             )}
                                         />
                                     </Grid>
-                                    <Grid item xs={10}>
+                                    <Grid item xs={12} lg={10}>
                                         <FormikField
                                             t={t}
                                             name='surname'
@@ -250,7 +256,12 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                         />
                                     </Grid>
                                 </Grid>
-                                <Grid container item xs={10}>
+                                <Grid container item xs={12} lg={10}>
+                                    {!hasCard && (
+                                        <Typography variant='subtitle1' gutterBottom>
+                                            Добавить карту
+                                        </Typography>
+                                    )}
                                     <Card className={classes.paymentCard}>
                                         <Grid container spacing={1} alignContent='space-between'>
                                             {isSmsConfirm
@@ -412,15 +423,45 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                         </Grid>
                                     </Card>
                                 </Grid>
+                                <Grid container item xs={12} lg={10} justifyContent='center'>
+                                    <CustomButton
+                                        type='submit'
+                                        disabled={isFetch}
+                                        className='submit-btn'
+                                    >
+                                        {t(`common:${hasCard
+                                            ? 'remove'
+                                            : isSmsConfirm ? 'send' : 'save'}`)}
+                                    </CustomButton>
+                                    {!hasCard && (
+                                        <>
+                                            <Typography
+                                                component='p'
+                                                align='center'
+                                                variant='subtitle1'
+                                                color='textSecondary'
+                                            >
+                                                <Trans
+                                                    t={t}
+                                                    i18nKey="post:safeDealCondition"
+                                                    components={[<LinkText href='/help/safe_shopping' />]}
+                                                />
+                                            </Typography>
+                                            <LinkText href='/help/safe_shopping/concept'>
+                                                <Typography
+                                                    component='p'
+                                                    align='center'
+                                                    variant='subtitle1'
+                                                >
+                                                    {t('post:whySafeDealNeed')}
+                                                </Typography>
+                                            </LinkText>
+
+                                        </>
+
+                                    )}
+                                </Grid>
                             </Grid>
-                            <CustomButton
-                                type='submit'
-                                disabled={isFetch}
-                            >
-                                {t(`common:${hasCard
-                                    ? 'remove'
-                                    : isSmsConfirm ? 'send' : 'save'}`)}
-                            </CustomButton>
                         </>
                     }
                 </Form>

@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        background: '#F2F2F2'
+        background: '#EEEDF2',
+        borderRadius: 10
     }
 }));

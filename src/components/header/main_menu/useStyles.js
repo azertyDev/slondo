@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& .menu-nav': {
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#EEEDF2',
             padding: '15px',
             borderRadius: '10px',
             '& .MuiBadge-root': {
@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
         '& .menu-item': {
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: '#F2F2F2',
+            backgroundColor: '#EEEDF2',
             borderRadius: '10px',
             margin: '8px 0',
             marginBottom: 0,
