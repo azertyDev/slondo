@@ -13,7 +13,6 @@ import {AuthCtx, CategoriesCtx, ErrorCtx} from "@src/context";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {AuthModal} from "@src/components/header/auth_modal/AuthModal";
 import {CustomHead} from "@src/components/head/CustomHead";
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {ChatContainer} from "@src/components/elements/chat_component/ChatContainer";
 import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
 import {categoriesNormalize} from "@src/helpers";
