@@ -9,7 +9,6 @@ type SliderProps = {
         autoPlaySpeed?: number;
         responsive: ResponsiveType,
         itemClass?: string;
-        renderButtonGroupOutside,
     }
 }
 
