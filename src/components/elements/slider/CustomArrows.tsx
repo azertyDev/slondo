@@ -1,19 +1,19 @@
 import {IconButton} from "@material-ui/core";
 import {useStyles} from "./useStyles";
 
-const CustomLeftArrow = ({onClick}) => {
+const CustomLeftArrow = (props) => {
     const classes = useStyles();
     return <IconButton
-        className={classes.arrows}
-        onClick={() => onClick()}
+        className={classes.arrows + ' left'}
+        onClick={props.previous}
     />;
 };
 
-const CustomRightArrow = ({onClick}) => {
+const CustomRightArrow = (props) => {
     const classes = useStyles();
     return <IconButton
-        className={classes.arrows}
-        onClick={() => onClick()}
+        className={classes.arrows + ' right'}
+        onClick={props.next}
     />;
 };
 

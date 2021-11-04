@@ -1,7 +1,7 @@
-import "react-multi-carousel/lib/styles.css";
-import {FC} from "react";
+import 'react-multi-carousel/lib/styles.css';
+import {FC} from 'react';
 import {useStyles} from './useStyles';
-import Carousel, {ResponsiveType} from "react-multi-carousel";
+import Carousel, {ResponsiveType} from 'react-multi-carousel';
 
 type SliderProps = {
     config: {
@@ -9,6 +9,7 @@ type SliderProps = {
         autoPlaySpeed?: number;
         responsive: ResponsiveType,
         itemClass?: string;
+        renderButtonGroupOutside,
     }
 }
 
@@ -22,7 +23,7 @@ export const Slider: FC<SliderProps> = (props) => {
                 {...config}
                 ssr
                 partialVisible
-                removeArrowOnDeviceType={["tablet", "mobile", "mobileS"]}
+                removeArrowOnDeviceType={['tablet', 'mobile', 'mobileS']}
             >
                 {children}
             </Carousel>

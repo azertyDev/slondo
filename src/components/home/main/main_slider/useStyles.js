@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: '0 auto',
         '& li.slide-item': {
             padding: '0 5px',
+            userSelect: 'none',
             '& img': {
                 aspectRatio: '2.5/1',
                 width: '100%',

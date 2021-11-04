@@ -1,7 +1,21 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        '& .react-multiple-carousel__arrow': {
+            opacity: '0.7',
+            background: '#ffffff',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.15)',
+            minWidth: 36,
+            minHeight: 36,
+            '&:before': {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#4E4E4E'
+            }
+        }
+    },
     arrows: {
         display: 'flex',
         justifyContent: 'center',
@@ -10,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.white,
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.15)',
         zIndex: 20,
+        position: 'absolute',
         '& > span.MuiIconButton-label': {
             position: 'relative',
             width: '10px',
@@ -37,9 +52,15 @@ export const useStyles = makeStyles((theme) => ({
                 width: '2.5px'
             }
         },
-        '&.slick-prev > span.MuiIconButton-label': {
-            marginRight: '-6.5px',
-            transform: 'rotate(135deg)'
+        '&.right': {
+            right: '70px'
+        },
+        '&.left': {
+            left: '70px',
+            '& > span.MuiIconButton-label': {
+                marginRight: '-6.5px',
+                transform: 'rotate(135deg)'
+            }
         },
         '&:hover': {
             backgroundColor: theme.palette.primary.secondary,
