@@ -22,31 +22,10 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.category-slider': {
-            '& div.error-wrapper': {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '188px'
-            },
-            '& > div.slick-slider': {
-                '& div.slick-slide img': {
+            '& li.slide-item': {
+                marginTop: 10,
+                '& img': {
                     width: '100%'
-                }
-            },
-            '& button.slick-disabled': {
-                display: 'none'
-            }
-        },
-        '& div.slick-slide': {
-            marginTop: 10,
-            '& > div': {
-                display: 'flex',
-                justifyContent: 'center',
-                '& div.category-skeleton': {
-                    display: 'flex !important',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column'
                 },
                 '& div.category': {
                     display: 'flex',

@@ -1,12 +1,35 @@
 import {FC, useContext} from 'react';
 import Link from 'next/link';
-import {settings} from './sliderSettings';
 import {useTranslation} from 'next-i18next';
 import {Typography} from '@material-ui/core';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {transformCyrillic} from '@root/src/helpers';
 import {CategoriesCtx, UserLocationCtx} from "@src/context";
+import {Slider} from "@src/components/elements/slider/Slider";
 import {useStyles} from './useStyles';
+
+const config = {
+    itemClass: 'slide-item',
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 1440},
+            items: 7
+        },
+        laptop: {
+            breakpoint: {max: 1439, min: 993},
+            items: 5
+        },
+        tablet: {
+            breakpoint: {max: 993, min: 425},
+            items: 4,
+            partialVisibilityGutter: 15
+        },
+        mobile: {
+            breakpoint: {max: 426, min: 0},
+            items: 3,
+            partialVisibilityGutter: 15
+        }
+    }
+};
 
 export const CategoriesSlider: FC = () => {
     const {t} = useTranslation('main');
@@ -24,7 +47,7 @@ export const CategoriesSlider: FC = () => {
                 {t('popularCategories')}
             </Typography>
             <div className="category-slider">
-                <CustomSlider {...settings}>
+                <Slider config={config}>
                     {categories.map(({name, ru_name, iconUrl}, i) => {
                         const ctgrName = t(`categories:${name}.name`);
                         return (
@@ -50,7 +73,7 @@ export const CategoriesSlider: FC = () => {
                             </Link>
                         );
                     })}
-                </CustomSlider>
+                </Slider>
             </div>
         </div>
     );

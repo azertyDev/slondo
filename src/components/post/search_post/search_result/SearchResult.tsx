@@ -152,7 +152,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                 <Grid container spacing={isMdDown ? 1 : 2}>
                                     {posts.map((cardData, i) => {
                                         const isAdvSlot = (i + 1) % 10 === 0;
-                                        const isRightAdvSlot = isMdDown && i === 4;
+                                        const isRightAdvSlot = isMdDown && i === 6;
 
                                         return <Fragment key={i}>
                                             {isRightAdvSlot && (

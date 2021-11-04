@@ -1,10 +1,31 @@
 import {FC, useContext} from 'react';
 import Link from 'next/link';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {settings} from './sliderSettings';
 import {useStyles} from './useStyles';
 import {Typography, Box} from '@material-ui/core';
 import {HomePageCtx} from "@src/context";
+import {Slider} from "@src/components/elements/slider/Slider";
+
+const config = {
+    itemClass: 'slide-item',
+    autoPlay: true,
+    infinite: true,
+    autoPlaySpeed: 5000,
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 992},
+            items: 3
+        },
+        tablet: {
+            breakpoint: {max: 992, min: 576},
+            items: 2
+        },
+        mobile: {
+            breakpoint: {max: 576, min: 0},
+            items: 1,
+            partialVisibilityGutter: 40
+        }
+    }
+};
 
 export const MainSlider: FC = () => {
     const {mainSliderData} = useContext(HomePageCtx);
@@ -12,7 +33,7 @@ export const MainSlider: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CustomSlider {...settings}>
+            <Slider config={config}>
                 {mainSliderData.map(({id, img, title, description, url}) => (
                     <Link href={url} key={id}>
                         <a target='_blank'>
@@ -37,7 +58,7 @@ export const MainSlider: FC = () => {
                         </a>
                     </Link>
                 ))}
-            </CustomSlider>
+            </Slider>
         </div>
     );
 };

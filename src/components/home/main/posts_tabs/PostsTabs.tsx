@@ -134,7 +134,7 @@ export const PostsTabs: FC<{ rightAdvData }> = ({rightAdvData}) => {
                         : <Grid container spacing={2}>
                             {postCards.data.map((cardData, i) => {
                                 const isAdvSlot = (i + 1) % 10 === 0;
-                                const isRightAdvSlot = isMdDown && i === 4;
+                                const isRightAdvSlot = isMdDown && i === 6;
                                 const isLastCard = postCards.data.length === i + 1;
 
                                 return (

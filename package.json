@@ -25,6 +25,7 @@
     "react-dom": "^17.0.2",
     "react-inner-image-zoom": "^2.0.1",
     "react-input-mask": "^2.0.4",
+    "react-multi-carousel": "^2.6.5",
     "react-slick": "^0.28.1",
     "socket.io-client": "^4.3.2",
     "universal-cookie": "^4.0.4",

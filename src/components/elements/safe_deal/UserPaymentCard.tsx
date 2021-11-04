@@ -11,12 +11,12 @@ import {cookieOpts, cookies, formatCardData, getErrorMsg, phonePrepare} from '@s
 import ReactInputMask from 'react-input-mask';
 import {paymentCardSchema} from '@root/validation_schemas/paymentCardSchema';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
+import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
 import {myUzCardAPI, userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from 'react-dom';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useModal} from '@src/hooks';
 import {useStyles} from './useStyles';
-import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
 
 type UserPaymentCardProps = {
     userCard,
@@ -444,7 +444,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                 <Trans
                                                     t={t}
                                                     i18nKey="post:safeDealCondition"
-                                                    components={[<LinkText href='/help/safe_shopping' />]}
+                                                    components={[<LinkText href='/help/safe_deal_offer' />]}
                                                 />
                                             </Typography>
                                             <LinkText href='/help/safe_shopping/concept'>
