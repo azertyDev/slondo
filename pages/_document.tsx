@@ -20,8 +20,8 @@ class MyDocument extends Document<{ lang: string }> {
 
         const initialProps = await Document.getInitialProps(ctx);
 
-        const {pathname} = ctx;
-        const lang = pathname.startsWith("/uz") ? "uz" : "ru";
+        const {locale} = ctx;
+        const lang = locale === "uz" ? "uz" : "ru";
 
         return {
             ...initialProps,
