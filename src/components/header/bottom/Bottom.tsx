@@ -20,7 +20,6 @@ import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 import {INNER_URLS} from "@src/constants";
@@ -71,7 +70,6 @@ export const Bottom: FC<BottomProps> = (props) => {
                 <ElevationScroll {...props}>
                     <AppBar
                         elevation={0}
-                        // color='inherit'
                         className={classes.root}
                         position={isScrollBreak ? 'fixed' : 'relative'}
                     >
@@ -150,8 +148,8 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     item
                                     xs={1}
                                     container
-                                    justifyContent="center"
                                     alignItems="center"
+                                    justifyContent="center"
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>

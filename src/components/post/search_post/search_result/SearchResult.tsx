@@ -32,7 +32,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
         urlParams
     } = props;
 
-    const {asPath, query} = useRouter();
+    const {asPath, query, locale} = useRouter();
     const [queryLoc] = query.path as string[];
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
@@ -151,7 +151,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                 </Box>
                                 <Grid container spacing={isMdDown ? 1 : 2}>
                                     {posts.map((cardData, i) => {
-                                        const isAdvSlot = (i + 1) % 10 === 0;
+                                        const isAdvSlot = locale !== 'uz' && (i + 1) % 10 === 0;
                                         const isRightAdvSlot = isMdDown && i === 6;
 
                                         return <Fragment key={i}>

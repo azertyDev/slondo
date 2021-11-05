@@ -10,8 +10,10 @@ import {useTranslation} from "next-i18next";
 import {HomePageCtx, AuthCtx} from "@src/context";
 import {useStyles} from "./useStyles";
 import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
+import {useRouter} from "next/router";
 
 export const PostsTabs: FC<{ rightAdvData }> = ({rightAdvData}) => {
+    const {locale} = useRouter();
     const {t} = useTranslation('main');
     const {auth: {isAuth}} = useContext(AuthCtx);
     const posts = useContext(HomePageCtx).tabPosts;
@@ -133,7 +135,7 @@ export const PostsTabs: FC<{ rightAdvData }> = ({rightAdvData}) => {
                         </Typography>
                         : <Grid container spacing={2}>
                             {postCards.data.map((cardData, i) => {
-                                const isAdvSlot = (i + 1) % 10 === 0;
+                                const isAdvSlot = locale !== 'uz' && (i + 1) % 10 === 0;
                                 const isRightAdvSlot = isMdDown && i === 6;
                                 const isLastCard = postCards.data.length === i + 1;
 
