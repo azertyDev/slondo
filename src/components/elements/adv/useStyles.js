@@ -2,7 +2,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        height: '100%',
         '& div.content-adv, & div.right-adv, div.m-right-adv, & div.bottom-adv': {
             borderRadius: '7px'
         },

@@ -23,8 +23,8 @@ import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {AuthCtx} from "@src/context";
 import {INNER_URLS} from "@src/constants";
-import {useStyles} from './useStyles';
 import {MainMenu} from '@src/components/header/main_menu/MainMenu';
+import {useStyles} from './useStyles';
 
 type BottomProps = {
     handleDrawerOpen: () => void
@@ -37,7 +37,7 @@ export const Bottom: FC<BottomProps> = (props) => {
         handlePageReload
     } = props;
 
-    const {pathname} = useRouter();
+    const {pathname, push} = useRouter();
     const {t} = useTranslation('header');
     const {user: {avatar}, auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -53,6 +53,14 @@ export const Bottom: FC<BottomProps> = (props) => {
 
     const handleAuthModalOpen = () => {
         setAuthModalOpen(true);
+    };
+
+    const pushUrl = (url) => async () => {
+        if (isAuth) {
+            await push(url);
+        } else {
+            setAuthModalOpen(true);
+        }
     };
 
     const open = Boolean(anchorEl);
@@ -130,19 +138,16 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
-                                    <Link href={INNER_URLS.create_post}>
-                                        <a className='create-post-link'>
-                                            <CustomButton
-                                                color="primary"
-                                                className="header-button"
-                                            >
-                                                <Typography variant="subtitle2">
-                                                    {t('header:createPost')}
-                                                </Typography>
-                                                <AddIcon/>
-                                            </CustomButton>
-                                        </a>
-                                    </Link>
+                                    <CustomButton
+                                        color="primary"
+                                        className="header-button create-post-btn"
+                                        onClick={pushUrl(INNER_URLS.create_post)}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('header:createPost')}
+                                        </Typography>
+                                        <AddIcon/>
+                                    </CustomButton>
                                 </Grid>
                                 <Grid
                                     item

@@ -58,6 +58,11 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down(1200)]: {
                     display: 'none'
                 }
+            },
+            '& h6.MuiTypography-subtitle2': {
+                lineHeight: '15px',
+                letterSpacing: '0.5px',
+                color: '#fff'
             }
         },
         '& span.avatar': {
@@ -74,19 +79,12 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
             width: '100%'
         },
-        '& a.create-post-link': {
+        '& button.create-post-btn': {
             textDecoration: 'none',
             '& svg': {
                 marginLeft: '8px'
             },
-            '& button': {
-                width: '100%',
-                '& h6.MuiTypography-subtitle2': {
-                    lineHeight: '15px',
-                    letterSpacing: '0.5px',
-                    color: '#fff'
-                }
-            }
+            width: '100%'
         },
         '& button.bottom-category-button': {
             width: '100%',
@@ -95,10 +93,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '8px'
             },
             '& > h6.MuiTypography-subtitle2': {
-                lineHeight: '15px',
-                letterSpacing: '0.5px',
-                fontSize: '1.125rem',
-                color: '#fff'
+                fontSize: '1.125rem'
             }
         },
         // Adaptive

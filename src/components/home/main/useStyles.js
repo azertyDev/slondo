@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: '22px',
         justifyContent: 'center',
         zIndex: 100,
-        '& > a': {
+        '& > button': {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',

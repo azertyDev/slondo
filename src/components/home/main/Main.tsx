@@ -1,13 +1,12 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {
     Hidden,
     Slide,
     Typography,
     useScrollTrigger,
     Grid,
-    Container
+    Container, ButtonBase
 } from '@material-ui/core';
-import Link from 'next/link';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
 import {PostsSlider} from './posts_slider/PostsSlider';
@@ -22,8 +21,12 @@ import {useStyles} from './useStyles';
 import {adsAPI} from "@src/api/api";
 import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
 import {AdvType} from "@root/interfaces/Adv";
+import {useRouter} from "next/router";
+import {AuthCtx} from "@src/context";
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
+    const {push} = useRouter();
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
 
@@ -51,6 +54,14 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
             setAds(ads);
         } catch (e) {
             console.error(e.message);
+        }
+    };
+
+    const pushUrl = (url) => async () => {
+        if (isAuth) {
+            await push(url);
+        } else {
+            setAuthModalOpen(true);
         }
     };
 
@@ -97,14 +108,12 @@ export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
                         in={!trigger}
                     >
                         <div className={classes.createPostBtn}>
-                            <Link href={INNER_URLS.create_post}>
-                                <a>
-                                    <Typography variant="subtitle1">
-                                        {t('header:createPost')}
-                                    </Typography>
-                                    <AddIcon/>
-                                </a>
-                            </Link>
+                            <ButtonBase onClick={pushUrl(INNER_URLS.create_post)}>
+                                <Typography variant="subtitle1">
+                                    {t('header:createPost')}
+                                </Typography>
+                                <AddIcon/>
+                            </ButtonBase>
                         </div>
                     </Slide>
                 </Hidden>

@@ -3,7 +3,7 @@ import {useFormik} from 'formik';
 import {useRouter} from "next/router";
 import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Box, Grid, Paper, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
@@ -20,7 +20,7 @@ import {
 import {getErrorMsg, numberPrettier, phonePrepare, timeFormat} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
-import {StateIcon} from '@src/components/elements/icons';
+import {DeliveryIcon, StateIcon} from '@src/components/elements/icons';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/third_step/common_form/CommonFormPreview';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
@@ -90,6 +90,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         price: query.price ? JSON.parse(query.price as string).toString() : '',
         currency: query.currency ? JSON.parse(query.currency as string) : postType.currency[0],
         available_days: query.available_days ? JSON.parse(query.available_days as string) : [...WEEK_DAYS],
+        auto_renewal: false,
         auction: {
             duration: null,
             reserve_price: '',
@@ -118,6 +119,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             safe_deal,
             delivery,
             exchange,
+            auto_renewal,
             available_days,
             available_end_time,
             available_start_time,
@@ -132,7 +134,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 duration,
                 price_buy_now,
                 reserve_price,
-                auto_renewal,
                 offer_the_price,
                 ...other
             } = auction;
@@ -259,7 +260,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         const auctionOptionsList = [
             'price_buy_now',
             'offer_the_price',
-            'auto_renewal',
             'display_phone'
         ];
 
@@ -296,6 +296,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const switchActive = (_, value) => {
         setAvalTimeActive(value);
     };
+    console.log(values);
 
     const handleAvalDays = day => () => {
         const isExstDay = available_days.some(({id}) => id === day.id);
@@ -402,13 +403,41 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     </Grid>
                                 </Grid>}
                             <SiteServices
-                                t={t}
                                 isCommonForm
                                 values={values}
                                 isAuction={isAuction}
                                 categoryName={categoryName}
                                 handleCheckbox={handleCheckboxChange}
                             />
+                            {!isAuction && (
+                                <Grid
+                                    item
+                                    container
+                                    alignItems="center"
+                                    xs={12}
+                                    sm={12}
+                                    spacing={1}
+                                >
+                                    <Grid
+                                        item
+                                        xs={4}
+                                    >
+                                        <ServiceItem
+                                            icon={<DeliveryIcon/>}
+                                            checked={values.auto_renewal}
+                                            serviceText={t('common:auto_ren')}
+                                            handleCheckbox={handleCheckboxChange('auto_renewal')}
+                                        />
+                                        {values.auto_renewal && (
+                                            <Paper className='service-desc'>
+                                                <Typography variant="subtitle2">
+                                                    {t(`common:post_auto_renewal`)}
+                                                </Typography>
+                                            </Paper>
+                                        )}
+                                    </Grid>
+                                </Grid>
+                            )}
                             <Grid item container direction='column' xs={12}>
                                 <Box
                                     mb={1}

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
 import Link from 'next/link';
 import {useModal} from '@src/hooks';
 import {Grid, Paper, Typography} from '@material-ui/core';
@@ -8,9 +7,10 @@ import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/third_step/common_form/site_services/ServiceItem';
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {SafeDealModal} from '@src/components/elements/safe_deal/SafeDealModal';
-import {useStyles} from './useStyles';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {SAFE_DEAL_PERCENT} from '@src/constants';
+import {useTranslation} from "next-i18next";
+import {useStyles} from './useStyles';
 
 type PaymentDeliveryPropsType = {
     values,
@@ -19,11 +19,10 @@ type PaymentDeliveryPropsType = {
     iconMode?: boolean,
     isAuction: boolean,
     isCommonForm?: boolean
-} & WithT;
+};
 
 export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const {
-        t,
         values,
         iconMode,
         isAuction,
@@ -31,6 +30,8 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         categoryName,
         isCommonForm
     } = props;
+
+    const {t} = useTranslation('common');
 
     const hasSafeDeal = !!site_services.safe_deal[categoryName] || !categoryName;
     const hasExchange = !!site_services.exchange[categoryName] || !categoryName;
@@ -87,26 +88,22 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 lg={!iconMode ? 4 : 12}
                             >
                                 {isFetchUserCard
-                                    ? <CustomCircularProgress />
+                                    ? <CustomCircularProgress/>
                                     : <ServiceItem
-                                        icon={<SafeIcon />}
-                                        serviceText={t('common:safe_deal')}
+                                        icon={<SafeIcon/>}
+                                        serviceText={t('safe_deal')}
                                         checked={values.safe_deal}
                                         handleCheckbox={handleSafeDealCheckBox}
                                     />
                                 }
                                 {!iconMode && values.safe_deal && (
-                                    <Paper
-                                        className='service-desc'
-                                    >
+                                    <Paper className='service-desc'>
                                         <Typography variant="subtitle2">
-                                            {`Вы подключили услугу «Безопасный
-                                            торг». Ваша сделка защищена. Стоимость
-                                            услуги составляет ${SAFE_DEAL_PERCENT}%.`}&nbsp;
+                                            {`Вы подключили услугу «Безопасный торг». Ваша сделка защищена. Стоимость услуги составляет ${SAFE_DEAL_PERCENT}%.`}&nbsp;
                                             <Link href="/help/safe_deal_offer">
                                                 <a>
                                                     <span className="safe-auction-rules">
-                                                        {t('common:safe_deal_rules')}
+                                                        {t('safe_deal_rules')}
                                                     </span>
                                                 </a>
                                             </Link>
@@ -133,8 +130,8 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 lg={!iconMode ? 4 : 12}
                             >
                                 <ServiceItem
-                                    icon={<ExchangeIcon />}
-                                    serviceText={t('common:exchange')}
+                                    icon={<ExchangeIcon/>}
+                                    serviceText={t('exchange')}
                                     checked={values.exchange}
                                     handleCheckbox={handleCheckbox('exchange')}
                                 />
@@ -169,8 +166,8 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                         lg={!iconMode ? 4 : 12}
                     >
                         <ServiceItem
-                            icon={<DeliveryIcon />}
-                            serviceText={t('common:delivery')}
+                            icon={<DeliveryIcon/>}
+                            serviceText={t('delivery')}
                             checked={values.delivery}
                             handleCheckbox={handleCheckbox('delivery')}
                         />

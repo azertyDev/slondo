@@ -77,7 +77,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
     const [isPreview, setIsPreview] = useState(false);
 
     const [post, setPost] = useState<any>(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(3);
+    const [currentFormIndex, setCurrentFormIndex] = useState(1);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 

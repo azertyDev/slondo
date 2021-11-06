@@ -74,9 +74,7 @@ const CreatePost: FC<{ siteCategories }> = ({siteCategories}) => {
                 .find(sub => sub.name === sub_ctgr)?.type;
 
             return !hasType || type_ctgr
-                ? <ThirdStep
-                    backURL={getBackURL()}
-                />
+                ? <ThirdStep backURL={getBackURL()}/>
                 : <SecondStep/>;
         }
 
@@ -100,9 +98,7 @@ const CreatePost: FC<{ siteCategories }> = ({siteCategories}) => {
     const classes = useStyles();
     return (
         <>
-            <CustomHead
-                title={title}
-            />
+            <CustomHead title={title}/>
             <div className={classes.root}>
                 <CategoriesCtx.Provider value={categories}>
                     <Hidden xsDown>
