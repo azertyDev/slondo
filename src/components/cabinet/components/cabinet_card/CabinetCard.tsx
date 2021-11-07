@@ -4,7 +4,7 @@ import {
     SafeIcon,
     SwapIcon,
     PhoneIcon,
-    RenewalIcon,
+    AutoRenewalIcon,
     DeliveryIcon,
     FavoriteBorderIcon
 } from '@src/components/elements/icons';
@@ -14,7 +14,6 @@ import {useTranslation} from 'react-i18next';
 import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
-// import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
@@ -23,17 +22,18 @@ type ListCardPropsType = {
 
 export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
-    // const {time = ''} = useDate().getDate(cardData.created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
+
     const hasService = Boolean(
         cardData.delivery
         || cardData.exchange
         || cardData.safe_deal
         || cardData.available_days
+        || cardData.auto_renewal
         || cardData.auction?.auto_renewal
     );
 
@@ -160,9 +160,9 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                                     </Typography>}
                                                 </div>
                                             )}
-                                            {!!cardData.auction?.auto_renewal && (
+                                            {(!!cardData.auto_renewal || !!cardData.auction?.auto_renewal) && (
                                                 <div className="safe_deal">
-                                                    <RenewalIcon/>
+                                                    <AutoRenewalIcon/>
                                                     {!isXsDown && <Typography variant="body1">
                                                         {t('common:auto_ren')}
                                                     </Typography>}

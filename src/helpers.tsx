@@ -234,6 +234,7 @@ export const urlByParams = (params) => {
         'delivery',
         'exchange',
         'safe_deal',
+        'auto_renewal',
         'price',
         'currency',
         'phone',

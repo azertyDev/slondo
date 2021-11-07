@@ -33,8 +33,8 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
         <div className={classes.root}>
             <Breadcrumbs
                 separator='•'
-                aria-label="breadcrumb"
                 className='bc'
+                aria-label="breadcrumb"
             >
                 <Link href={categoryLink}>
                     <a>

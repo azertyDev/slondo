@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {excludeCtgrsForYear} from '@src/components/post/create_post/third_step/params_form/categories_forms/transport_params/TransportParams';
+import {excludeCtgrsForYear} from '@src/components/post/create_post/third_step/third_form/categories_forms/transport_params/TransportParams';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 

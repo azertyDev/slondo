@@ -15,7 +15,7 @@ import {ChangePasswordModal} from "./change_password_modal/ChangePasswordModal";
 import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import LockIcon from "@material-ui/icons/Lock";
-import {AvailableDays} from "@src/components/post/create_post/third_step/common_form/available_days/AvailableDays";
+import {AvailableDays} from "@src/components/post/create_post/third_step/first_form/available_days/AvailableDays";
 import {useStyles, SettingsButton} from "./useStyles";
 
 export const Settings: FC = () => {

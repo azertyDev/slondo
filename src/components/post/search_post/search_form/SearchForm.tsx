@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 import {postTypes} from '@src/common_data/post_types';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
-import {SiteServices} from '@src/components/post/create_post/third_step/common_form/site_services/SiteServices';
+import {SiteServices} from '@src/components/post/create_post/third_step/first_form/site_services/SiteServices';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {
     toUrlParams,
@@ -31,7 +31,6 @@ import {ModalHeader} from "@src/components/cabinet/components/modal_header/Modal
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {useModal} from "@src/hooks";
 import {unstable_batchedUpdates} from "react-dom";
-import {CategoryType} from "@root/interfaces/Categories";
 import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
@@ -538,7 +537,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 </Grid>
             )}
             <SiteServices
-                t={t}
                 iconMode
                 values={values}
                 isAuction={false}

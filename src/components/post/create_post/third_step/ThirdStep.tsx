@@ -6,8 +6,8 @@ import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {StepsProgress} from '../steps_progress/StepsProgress';
 import {postTypes} from '@src/common_data/post_types';
-import {AppearanceForm} from './appearance_form/AppearanceForm';
-import {CommonForm} from './common_form/CommonForm';
+import {SecondForm} from './second_form/SecondForm';
+import {FirstForm} from './first_form/FirstForm';
 import {
     urlByParams,
     normalizeFiltersByCategory,
@@ -17,7 +17,7 @@ import {
     clearWhiteSpaces
 } from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {ParamsForm} from './params_form/ParamsForm';
+import {ThirdForm} from './third_form/ThirdForm';
 import {CategoriesCtx, ErrorCtx, ExitPromptCtx} from "@src/context";
 import {numericFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
@@ -77,7 +77,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
     const [isPreview, setIsPreview] = useState(false);
 
     const [post, setPost] = useState<any>(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(1);
+    const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 
@@ -182,6 +182,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
                 undefined,
                 {shallow: true}
             );
+
             setIsPreview(true);
         }
     };
@@ -270,7 +271,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
                 />
             </Hidden>
             <div className={classes.root}>
-                <ParamsForm
+                <ThirdForm
                     type={type}
                     filters={filtersData}
                     isPreview={isPreview}
@@ -282,7 +283,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
                     handleNextFormOpen={handleNextFormOpen}
                 />
                 <div>
-                    <AppearanceForm
+                    <SecondForm
                         isPreview={isPreview}
                         colors={colors || color}
                         categoryName={categoryName}
@@ -293,7 +294,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
                     />
                 </div>
                 <div>
-                    <CommonForm
+                    <FirstForm
                         isPreview={isPreview}
                         postType={postType}
                         handleSubmit={handleSubmit}

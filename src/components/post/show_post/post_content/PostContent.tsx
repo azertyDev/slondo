@@ -18,7 +18,7 @@ import {SyncSliders} from './sync_sliders/SyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {RenewalIcon} from '@src/components/elements/icons';
+import {AutoRenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
@@ -324,7 +324,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.auction?.auto_renewal && (
                         <span className="auto-renewal">
-                                <RenewalIcon/>
+                                <AutoRenewalIcon/>
                                 <Typography variant="subtitle1">
                                 {t('common:auto_ren')}
                             </Typography>

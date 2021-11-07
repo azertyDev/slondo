@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "start": "node --max-old-space-size=4096 server.mjs",
+    "start": "node server.mjs",
+    "start-mem": "node --max-old-space-size=4096 server.mjs",
     "postbuild": "node generate_sitemap.mjs"
   },
   "dependencies": {
@@ -17,7 +18,7 @@
     "dotenv": "^10.0.0",
     "formik": "^2.2.6",
     "latest": "^0.2.0",
-    "next": "^11.0.1",
+    "next": "12",
     "next-i18next": "^8.1.2",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

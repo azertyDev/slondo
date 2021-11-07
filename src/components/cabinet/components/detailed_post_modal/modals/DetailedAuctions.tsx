@@ -5,7 +5,7 @@ import {
     DeliveryIcon,
     LocationIcon,
     PhoneIcon,
-    RenewalIcon
+    AutoRenewalIcon
 } from '@src/components/elements/icons';
 import {Trans, useTranslation} from 'next-i18next';
 import {AuthCtx} from "@src/context";
@@ -127,7 +127,7 @@ export const DetailedAuctions: FC<DetailedPostViewPropsType> = (props) => {
                             {!!auction?.auto_renewal && (
                                 <div className="bonus_item">
                                             <span className='icon-bg'>
-                                                <RenewalIcon/>
+                                                <AutoRenewalIcon/>
                                             </span>
                                     <Typography variant="body1">
                                         {t('common:auto_ren')}

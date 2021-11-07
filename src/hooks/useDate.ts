@@ -27,7 +27,12 @@ export const useDate = () => {
         const hours = zeroFormat(date.getHours());
         const minutes = zeroFormat(date.getMinutes());
         const year = date.getFullYear().toString().slice(-2);
-        const today = new Date().getDate() === day;
+
+        const now = new Date();
+
+        const today = now.getDate() === day
+            && now.getMonth() === month
+            && now.getFullYear().toString().slice(-2) === year;
 
         return {
             milliSeconds: date ? date.getTime() : '',
