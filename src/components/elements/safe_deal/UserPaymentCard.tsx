@@ -1,6 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {Card, Grid, TextField, Typography} from '@material-ui/core';
+import {Box, Card, Grid, TextField, Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
@@ -217,7 +217,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                         </Typography>
                                     </Grid>
                                 )}
-                                <Grid container item  spacing={3}>
+                                <Grid container item spacing={4}>
                                     <Grid item xs={12} lg={10}>
                                         {!hasCard && (
                                             <Typography variant='subtitle1' gutterBottom>
@@ -258,9 +258,20 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                 </Grid>
                                 <Grid container item xs={12} lg={10}>
                                     {!hasCard && (
-                                        <Typography variant='subtitle1' gutterBottom>
-                                            Добавить карту
-                                        </Typography>
+                                        <>
+                                            <Grid item xs={12} container direction='column'>
+                                                <Typography variant='subtitle1' gutterBottom>
+                                                    {t('common:addCard')}
+                                                    <span className='error-text'>*</span>
+                                                </Typography>
+                                                <Box display='flex' alignItems='center' mb={1}>
+                                                    <img src='/img/uzcard.png' alt='uzcard' className='uzcard' />
+                                                    <Typography className='error-text' variant='subtitle2'>
+                                                        {t('common:onlyUzcard')}
+                                                    </Typography>
+                                                </Box>
+                                            </Grid>
+                                        </>
                                     )}
                                     <Card className={classes.paymentCard}>
                                         <Grid container spacing={1} alignContent='space-between'>
@@ -283,29 +294,34 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                     </Grid>
                                                 </>
                                                 : <>
-                                                    <Grid item container xs={12}>
-                                                        <Grid item xs={12} sm={8}>
-                                                            {hasCard
-                                                                ? <Typography variant='subtitle1'>
-                                                                    {userCard.cardName}
-                                                                </Typography>
-                                                                : <FormikField
-                                                                    t={t}
-                                                                    name="cardName"
-                                                                    value={cardName}
-                                                                    disabled={hasCard}
-                                                                    placeholder={t('cardName')}
-                                                                    labelText={t('cardName')}
-                                                                    onChange={handleInput}
-                                                                    errorMsg={getErrorMsg(errors.cardName, touched.cardName, t)}
-                                                                />
-                                                            }
-                                                        </Grid>
+                                                    <Grid
+                                                        item
+                                                        xs={12}
+                                                        sm={10}
+                                                        md={8}
+                                                    >
+                                                        {hasCard
+                                                            ? <Typography variant='subtitle1'>
+                                                                {userCard.cardName}
+                                                            </Typography>
+                                                            : <FormikField
+                                                                t={t}
+                                                                name="cardName"
+                                                                value={cardName}
+                                                                disabled={hasCard}
+                                                                placeholder={t('cardName')}
+                                                                labelText={t('cardName')}
+                                                                onChange={handleInput}
+                                                                errorMsg={getErrorMsg(errors.cardName, touched.cardName, t)}
+                                                            />
+                                                        }
                                                     </Grid>
                                                     <Grid
                                                         item
                                                         xs={12}
-                                                        sm={hasCard ? 12 : 5}
+                                                        sm={hasCard ? 12 : 6}
+                                                        md={5}
+                                                        lg={5}
                                                     >
                                                         {hasCard
                                                             ? <Typography variant='subtitle2' gutterBottom>
@@ -345,7 +361,9 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                     <Grid
                                                         item
                                                         xs={hasCard ? 12 : 6}
-                                                        sm={hasCard ? 12 : 3}
+                                                        sm={hasCard ? 12 : 4}
+                                                        md={3}
+                                                        lg={3}
                                                     >
                                                         {hasCard
                                                             ? <Typography variant='subtitle2' gutterBottom>
@@ -397,7 +415,8 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                     <Grid
                                                         item
                                                         xs={12}
-                                                        sm={hasCard ? 12 : 8}
+                                                        sm={10}
+                                                        md={8}
                                                     >
                                                         {hasCard
                                                             ? <Typography>{userCard.owner}</Typography>
@@ -431,7 +450,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                     >
                                         {t(`common:${hasCard
                                             ? 'remove'
-                                            : isSmsConfirm ? 'send' : 'save'}`)}
+                                            : isSmsConfirm ? 'send' : 'apply'}`)}
                                     </CustomButton>
                                     {!hasCard && (
                                         <>
@@ -456,9 +475,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                     {t('post:whySafeDealNeed')}
                                                 </Typography>
                                             </LinkText>
-
                                         </>
-
                                     )}
                                 </Grid>
                             </Grid>

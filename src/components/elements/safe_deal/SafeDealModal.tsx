@@ -74,7 +74,7 @@ export const SafeDealModal: FC<UserPaymentCardModalProps> = (props) => {
         <ResponsiveModal
             openDialog={open}
             handleCloseDialog={onClose}
-            maxWidth={isMdDown ? 'sm' : hasPost ? 'lg' : 'sm'}
+            maxWidth={isMdDown ? 'sm' : hasPost ? 'xl' : 'sm'}
         >
             <ModalHeader title={t('safe_deal')} handleCloseDialog={onClose}/>
             <Grid container>
