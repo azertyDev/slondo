@@ -91,10 +91,10 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                 setOpenBuyNow(false);
                 setIsFetch(false);
             });
-        } catch ({response}) {
+        } catch (e) {
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
-                setErrorMsg(response.data.message);
+                setErrorMsg(e.response.data.message);
             });
         }
     };

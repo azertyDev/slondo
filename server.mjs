@@ -27,7 +27,7 @@ if (dev) {
         });
     });
 } else {
-    if (cluster.isMaster) {
+    if (cluster.isPrimary) {
         console.log(`Primary ${process.pid} is running`);
 
         // Fork workers.

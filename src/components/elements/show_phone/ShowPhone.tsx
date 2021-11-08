@@ -40,8 +40,8 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
                 setIsFetch(false);
                 isXsDown && handleModalOpen();
             });
-        } catch ({response}) {
-            const {message} = response.data;
+        } catch (e) {
+            const {message} = e.response.data;
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
                 if (message !== 'forbidden:') {

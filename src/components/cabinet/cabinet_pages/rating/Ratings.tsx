@@ -73,8 +73,8 @@ export const Ratings: FC = () => {
                 setSubmitting(false);
                 setValues({...values, comment});
             });
-        } catch ({message}) {
-            setValues({...values, message});
+        } catch (e) {
+            setValues({...values, message: e.message});
         }
     };
 

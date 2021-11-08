@@ -53,8 +53,8 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                 setValues(initialValues);
                 handleCloseRating();
             });
-        } catch ({message}) {
-            setErrorMsg(message);
+        } catch (e) {
+            setErrorMsg(e.message);
         }
     };
 

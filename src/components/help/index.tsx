@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import Link from 'next/link';
 import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';

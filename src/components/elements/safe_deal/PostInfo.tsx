@@ -73,7 +73,7 @@ export const PostInfo: FC<PostInfoProps> = (props) => {
                         <Trans
                             t={t}
                             i18nKey="post:safeDealRules"
-                            components={[<LinkText href='/help/safe_shopping' />]}
+                            components={[<LinkText href='/help/safe_deal_offer'/>]}
                         />
                     </Typography>
                 </Grid>
