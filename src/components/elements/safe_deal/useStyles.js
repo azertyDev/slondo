@@ -3,6 +3,13 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         padding: '15px',
+        '& .uzcard': {
+            height: 45,
+            marginRight: 10,
+            [theme.breakpoints.down('xs')]: {
+                height: 40
+            }
+        },
         '& form': {
             display: 'flex',
             justifyContent: 'center',
@@ -51,6 +58,10 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& .submit-btn': {
+                width: '40%',
+                [theme.breakpoints.down('xs')]: {
+                    width: '100%'
+                },
                 marginBottom: 10
             },
             '& a': {
@@ -79,7 +90,7 @@ export const useStyles = makeStyles((theme) => ({
             color: ({hasCard}) => hasCard ? '#fff' : 'inherit'
         },
         [theme.breakpoints.down('sm')]: {
-            padding: '20px'
+            padding: '11px 16px'
         },
         '& > div': {
             height: '100%'
@@ -116,22 +127,31 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     sellerInfo: {
+        [theme.breakpoints.up('sm')]: {
+            position: 'relative',
+            '&:before': {
+                content: '""',
+                position: 'absolute',
+                left: 0,
+                top: '10%',
+                width: '1px',
+                height: '80%',
+                background: '#E0E0E0'
+            }
+        },
         '& span.seller-name': {
             fontSize: '1.2rem',
             fontWeight: 600
         },
-        '&, & > div': {
-            height: '100%'
-        },
         '& .MuiPaper-root': {
-            padding: 15,
+            padding: 20,
             borderRadius: 10,
             boxShadow: '0px 10px 25px rgb(15 51 107 / 15%)'
         },
         '& button': {
             width: '100%',
             '&:disabled': {
-                background: 'linear-gradient(90deg, rgb(125, 188, 246) 0%, rgb(99, 166, 244) 100%)'
+                background: '#BDBDBD'
             }
         },
         '& a.link': {

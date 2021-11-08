@@ -29,17 +29,17 @@ export const useDate = () => {
         const year = date.getFullYear().toString().slice(-2);
 
         const now = new Date();
-
-        const today = now.getDate() === day
+        const isToday =
+            now.getDate() === day
             && now.getMonth() === month
             && now.getFullYear().toString().slice(-2) === year;
 
         return {
             milliSeconds: date ? date.getTime() : '',
-            time: `${today ? `${t('today')}` : `${day} ${t(months[month])}`} ${hours}:${minutes}`,
+            time: `${isToday ? `${t('today')}` : `${day} ${t(months[month])}`} ${hours}:${minutes}`,
             hoursMin: `${hours}:${minutes}`,
-            date: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`}`,
-            fullDate: `${today ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`} ${hours}:${minutes}`
+            date: `${isToday ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`}`,
+            fullDate: `${isToday ? `${t('today')}` : `${zeroFormat(day)}.${zeroFormat(month + 1)}.${year}`} ${hours}:${minutes}`
         };
     };
 };

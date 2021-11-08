@@ -33,47 +33,47 @@ export const PostInfo: FC<PostInfoProps> = (props) => {
     const classes = useStyles();
     return (
         <Box p='15px' className={classes.sellerInfo}>
-            <Grid container spacing={1} alignContent='space-between'>
+            <Grid container spacing={3} justifyContent='center'>
                 <Grid item xs={12}>
                     <Typography
                         component='p'
                         variant='subtitle1'
                         color='textSecondary'
+                        align='center'
                     >
-                        {t('cabinet:seller')}:&nbsp;
+                        {t('cabinet:seller')}:&nbsp;<br />
                         <span className='seller-name'>
                             {`${author.name} ${author.surname ?? ''}`}
                         </span>
                     </Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={10}>
                     <Paper elevation={0}>
                         <Typography variant='h4' align='center' gutterBottom>
                             <strong>
-                                {price} {t('common:sum')}
+                                {price}
                             </strong>
+                            &nbsp; {t('common:sum')}
                         </Typography>
                         <Typography variant='subtitle2' component='p' color='textSecondary' align='center'>
                             {t('safe_deal_payment_text')}
                         </Typography>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} container justifyContent='center'>
-                    <Grid item xs={4}>
-                        <CustomButton
-                            disabled={disable}
-                            onClick={createP2P}
-                        >
-                            {t('common:buy')}
-                        </CustomButton>
-                    </Grid>
+                <Grid item xs={12} sm={4}>
+                    <CustomButton
+                        disabled={disable}
+                        onClick={createP2P}
+                    >
+                        {t('common:pay')}
+                    </CustomButton>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={9}>
                     <Typography variant='subtitle2' component='p' color='textSecondary' align='center'>
                         <Trans
                             t={t}
                             i18nKey="post:safeDealRules"
-                            components={[<LinkText href='/help/safe_shopping'/>]}
+                            components={[<LinkText href='/help/safe_shopping' />]}
                         />
                     </Typography>
                 </Grid>

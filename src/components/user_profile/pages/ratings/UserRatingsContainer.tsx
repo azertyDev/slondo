@@ -31,8 +31,8 @@ export const UserRatingsContainer: FC<{ userInfo: UserInfo }> = ({userInfo}) => 
     };
 
     useEffect(() => {
-        fetchUserRatings();
-    }, []);
+        userInfo.id && fetchUserRatings();
+    }, [userInfo]);
 
     return (
         <UserRatings

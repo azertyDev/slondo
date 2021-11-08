@@ -2,10 +2,14 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& .MuiPaper-root': {
+            background:'#F8F7FA',
+        },
         '& div.MuiDialog-paperFullScreen': {
             MsOverflowStyle: 'none',
             scrollbarWidth: 'none',
             overflow: 'scroll',
+
             '&::-webkit-scrollbar': {
                 width: 0,
                 display: 'none'
