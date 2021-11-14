@@ -14,42 +14,54 @@ import {useStyles} from './useStyles';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {userAPI} from '@src/api/api';
 
-type ListCardPropsType = {
-    cardData: CardDataType
-}
+export const ListCard: FC<CardDataType> = (props) => {
+    const {
+        id,
+        created_at,
+        favorite,
+        ads_type,
+        delivery,
+        exchange,
+        safe_deal,
+        auction,
+        title,
+        category,
+        price,
+        creator,
+        currency,
+        city,
+        region,
+        image
+    } = props;
 
-export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
-    const {time} = useDate()(cardData.created_at);
+    const {time} = useDate()(created_at);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}} = useContext(AuthCtx);
-    const [liked, setLiked] = useState(cardData.favorite);
+    const [liked, setLiked] = useState(favorite);
 
-    const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
-    const hasBet = !!cardData.auction?.number_of_bets;
-    const hasService = !!cardData.delivery
-        || !!cardData.exchange
-        || !!cardData.safe_deal;
+    const isAuction = ads_type === 'auc' || ads_type === 'exauc';
+    const hasBet = !!auction?.number_of_bets;
+    const hasService = !!delivery
+        || !!exchange
+        || !!safe_deal;
 
 
-    const translatedTitle = transformCyrillic(cardData.title);
+    const translatedTitle = transformCyrillic(title);
 
-    const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
+    const url = `/obyavlenie/${translatedTitle}-${id}`;
 
-    const price = cardData.price;
-    const ctgrName = cardData.category.mark;
+    const ctgrName = category.mark;
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
     const excludePrice = jobOrService || price === 0;
-
-    const {city, region} = cardData;
 
     const regionName = t(`locations:${region.name}.name`);
     const locationName = city ? `${t(`locations:${region.name}.${city.name}`)}, ${regionName}` : regionName;
 
     const handleFavorite = async () => {
         try {
-            await userAPI.favoriteAds(cardData.id);
+            await userAPI.favoriteAds(id);
             setLiked(!liked);
         } catch (e) {
             setErrorMsg(e.message);
@@ -57,13 +69,13 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     };
 
     useEffect(() => {
-        setLiked(cardData.favorite);
-    }, [cardData.favorite]);
+        setLiked(favorite);
+    }, [favorite]);
 
-    const classes = useStyles({cardData});
+    const classes = useStyles({image});
     return (
         <div className={classes.root}>
-            {isAuth && !cardData.creator && (
+            {isAuth && !creator && (
                 <IconButton
                     className="favorite-btn"
                     onClick={handleFavorite}
@@ -75,20 +87,20 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 </IconButton>
             )}
             <Link href={url}>
-                <a target='_blank' className='card' title={cardData.title}>
+                <a target='_blank' className='card' title={title}>
                     <Grid container>
                         <Grid item xs={6} sm={4} md={3} className="img lazyload">
                             <Typography
                                 noWrap
                                 color="initial"
                                 variant="caption"
-                                className={cardData.ads_type}
+                                className={ads_type}
                             >
-                                {t(cardData.ads_type === 'exauc' && isXsDown ? 'common:auc' : cardData.ads_type)}
+                                {t(ads_type === 'exauc' && isXsDown ? 'common:auc' : ads_type)}
                             </Typography>
                             {hasService && (
                                 <div className="icons">
-                                    {!!cardData.delivery && (
+                                    {!!delivery && (
                                         <Tooltip
                                             arrow
                                             title={t('common:delivery')}
@@ -98,7 +110,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         </span>
                                         </Tooltip>
                                     )}
-                                    {!!cardData.safe_deal && (
+                                    {!!safe_deal && (
                                         <Tooltip
                                             arrow
                                             title={t('common:safe_deal')}
@@ -108,7 +120,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                         </span>
                                         </Tooltip>
                                     )}
-                                    {!!cardData.exchange && (
+                                    {!!exchange && (
                                         <Tooltip
                                             arrow
                                             title={t('common:exchange')}
@@ -127,7 +139,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     variant="h3"
                                     color="initial"
                                 >
-                                    {cardData.title}
+                                    {title}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} container>
@@ -153,8 +165,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                                     color="initial"
                                                     className='price'
                                                 >
-                                                    {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                    {numberPrettier(auction?.bet?.bet)}&nbsp;
+                                                    <span>{t(`common:${currency.name}`)}</span>
                                                 </Typography>
                                             </>
                                             : <Typography
@@ -166,7 +178,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             >
                                                 {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                                 {!excludePrice && (
-                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                    <span>{t(`common:${currency.name}`)}</span>
                                                 )}
                                             </Typography>}
                                     </Grid>
@@ -210,8 +222,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                                     color="initial"
                                                     className='price'
                                                 >
-                                                    {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                    {numberPrettier(auction?.bet?.bet)}&nbsp;
+                                                    <span>{t(`common:${currency.name}`)}</span>
                                                 </Typography>
                                             </>
                                             : <Typography
@@ -223,7 +235,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                             >
                                                 {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                                 {!excludePrice && (
-                                                    <span>{t(`common:${cardData.currency.name}`)}</span>
+                                                    <span>{t(`common:${currency.name}`)}</span>
                                                 )}
                                             </Typography>}
                                     </Grid>

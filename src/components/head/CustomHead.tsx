@@ -8,7 +8,7 @@ type CustomHeadProps = {
 
 export const CustomHead: FC<CustomHeadProps> = ({title, description = ''}) => {
     return (
-        <Head>
+        <Head key={2}>
             <title>{title}</title>
             {/*<meta name="robots" content="noindex"/>*/}
             <meta name="description" content={description}/>
@@ -16,6 +16,10 @@ export const CustomHead: FC<CustomHeadProps> = ({title, description = ''}) => {
             <meta property="og:type" content="website"/>
             <meta property="og:title" content={title} key="ogtitle"/>
             <meta property="og:description" content={description} key="ogdesc"/>
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no"
+            />
         </Head>
     );
 };

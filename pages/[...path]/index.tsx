@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, res
 
     return ({
         props: {
-            urlParams,
             urlCategories,
             location,
             site_categories,

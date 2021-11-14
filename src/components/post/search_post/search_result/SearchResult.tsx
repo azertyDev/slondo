@@ -21,19 +21,18 @@ type SearchResultPropsType = {
     searchTermFromUrl: string,
     rightAdvData,
     categories,
-    urlParams
 };
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
         rightAdvData,
         searchTermFromUrl,
-        categories,
-        urlParams
+        categories
     } = props;
 
-    const {asPath, query, locale} = useRouter();
-    const [queryLoc] = query.path as string[];
+    const {asPath, pathname, query, locale, replace} = useRouter();
+    const {page = 1, path, gclid, ...urlParams} = query;
+    const [queryLoc] = path as string[];
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const {t} = useTranslation('filters');
@@ -42,25 +41,30 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     const [regions, setRegions] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
     const [isFetch, setIsFetch] = useState(false);
     const [listView, setListView] = useState(false);
     const [isNotFound, setIsNotFound] = useState(false);
 
-    const handlePagePagination = (_, pageNum) => {
-        setPage(pageNum);
+    const handlePagePagination = async (_, pageNum) => {
+        // await push(`${asPath}&page=${pageNum}`);
+        replace(pathname);
     };
 
     const getPostsByFilters = async () => {
         try {
-            const {q, by_filtering = 'created_at', ...params} = urlParams;
+            const {
+                q,
+                by_filtering = 'created_at',
+                by_currency,
+                ...params
+            } = urlParams;
 
             const query: any = {
-                page,
+                ...params,
                 itemsPerPage: POSTS_PER_PAGE,
                 by_filtering,
-                ...params
+                page
             };
 
             if (queryLoc !== 'uzbekistan' && regions.length) {
@@ -104,11 +108,11 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     useEffect(() => {
         !!regions.length && getPostsByFilters();
-    }, [asPath, regions, page]);
+    }, [asPath, regions]);
 
-    useEffect(() => {
-        page !== 1 && setPage(1);
-    }, [categories]);
+    // useEffect(() => {
+    //     +page !== 1 && setPage(1);
+    // }, [categories]);
 
     const classes = useStyles();
     return (
@@ -151,6 +155,23 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                 </Box>
                                 <Grid container spacing={isMdDown ? 1 : 2}>
                                     {posts.map((cardData, i) => {
+                                        const {
+                                            price,
+                                            sum,
+                                            usd,
+                                            currency,
+                                            ...other
+                                        } = cardData;
+
+                                        const {by_currency} = query;
+
+                                        const isYe = by_currency === 'уе';
+                                        const isSum = by_currency === 'sum';
+
+                                        const curCurrency = isYe
+                                            ? {name: 'уе'}
+                                            : isSum ? {name: 'sum'} : currency;
+
                                         const isAdvSlot = locale !== 'uz' && (i + 1) % 10 === 0;
                                         const isRightAdvSlot = isMdDown && i === 6;
 
@@ -162,7 +183,15 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                             )}
                                             {listView
                                                 ? <Grid item xs={12}>
-                                                    <ListCard cardData={cardData}/>
+                                                    <ListCard
+                                                        {...other}
+                                                        currency={curCurrency}
+                                                        price={
+                                                            isYe
+                                                                ? usd
+                                                                : isSum ? sum : price
+                                                        }
+                                                    />
                                                 </Grid>
                                                 : <>
                                                     {isAdvSlot && (
@@ -174,8 +203,14 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                                                     )}
                                                     <Grid xs={6} sm={6} md={4} lg={3} item>
                                                         <GridCard
-                                                            {...cardData}
+                                                            {...other}
                                                             isFetch={isFetch}
+                                                            currency={curCurrency}
+                                                            price={
+                                                                isYe
+                                                                    ? usd
+                                                                    : isSum ? sum : price
+                                                            }
                                                         />
                                                     </Grid>
                                                 </>}
@@ -185,7 +220,6 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                             </Box>
                             <Box mt='70px'>
                                 <CustomPagination
-                                    currentPage={page}
                                     totalItems={itemsCount}
                                     itemsPerPage={POSTS_PER_PAGE}
                                     handlePagePagination={handlePagePagination}

@@ -10,7 +10,7 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {cookieOpts, cookies, formatCardData, getErrorMsg, phonePrepare} from '@src/helpers';
 import ReactInputMask from 'react-input-mask';
 import {paymentCardSchema} from '@root/validation_schemas/paymentCardSchema';
-import {codeSchema} from '@root/validation_schemas/authRegSchema';
+import {codeSchema, userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
 import {myUzCardAPI, userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from 'react-dom';
@@ -163,7 +163,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
-        validationSchema: hasCard ? null : isSmsConfirm ? codeSchema : paymentCardSchema
+        validationSchema: hasCard ? null : isSmsConfirm ? codeSchema.concat(userInfoSchema) : paymentCardSchema
     });
 
     const {

@@ -5,15 +5,11 @@ import {SearchCommercialProperty} from '@src/components/post/search_post/search_
 import {SearchLand} from '@src/components/post/search_post/search_form/categories_forms/estate/search_land/SearchLand';
 import {SearchParkingLotsBoxes} from '@src/components/post/search_post/search_form/categories_forms/estate/search_parking_lots_boxes/SearchParkingLotsBoxes';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
-import {Grid} from '@material-ui/core';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {useFormik} from 'formik';
 
 type SearchEstatePropsType = {
     subcategoryName: string,
     isRent: boolean,
-    onSubmit,
     filters,
     handleReset: () => void,
     urlParams
@@ -28,7 +24,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         categoryName,
         subcategoryName,
         isRent,
-        onSubmit,
+        formik,
         filters,
         handleReset,
         urlParams,
@@ -63,11 +59,6 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         parking_spaces_from: '',
         parking_spaces_to: ''
     };
-
-    const formik = useFormik<any>({
-        initialValues: initialValues,
-        onSubmit
-    });
 
     function getFormByCtgr(): ReactNode {
         switch (subcategoryName) {
@@ -122,16 +113,13 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         }
     }
 
-    useEffect(() => {
-        formik.setValues(initialValues);
-    }, [subcategoryName]);
+    // useEffect(() => {
+    //     formik.setValues(initialValues);
+    // }, [subcategoryName]);
 
     return (
         <CustomFormikProvider formik={formik}>
             {!!subcategoryName && getFormByCtgr()}
-            <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset}/>
-            </Grid>
         </CustomFormikProvider>
     );
 };

@@ -3,12 +3,10 @@ import {Grid} from '@material-ui/core';
 import {getFieldsByFilters} from '@src/helpers';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {useTranslation} from 'react-i18next';
-import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {excludeCtgrsForYear} from '@src/components/post/create_post/third_step/third_form/categories_forms/transport_params/TransportParams';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 type SearchRegularPropsType = {
     type,
@@ -23,10 +21,9 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         category,
         subcategory,
         sameWithUrlCtgr,
-        onSubmit,
+        formik,
         filters,
-        urlParams,
-        handleReset
+        urlParams
     } = props;
 
     const {t} = useTranslation('filters');
@@ -50,11 +47,6 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         initVals.mileage_from = '';
         initVals.mileage_to = '';
     }
-
-    const formik = useFormik({
-        onSubmit,
-        initialValues: initVals
-    });
 
     const {
         values,
@@ -158,9 +150,6 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         />
                     </Grid>
                 )}
-                <Grid item container xs={12}>
-                    <ActionButtons handleReset={handleReset}/>
-                </Grid>
             </Grid>
         </CustomFormikProvider>
     );

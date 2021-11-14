@@ -2,8 +2,11 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& button.slick-disabled': {
-            display: 'none'
+        '& button.react-multiple-carousel__arrow--left': {
+            left: 'calc(1% + 10px)'
+        },
+        '& button.react-multiple-carousel__arrow--right': {
+            right: 'calc(1% + 10px)'
         },
         '& div.color-preview': {
             width: 'max-content',
@@ -54,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
             '& p.MuiTypography-subtitle2': {
                 [theme.breakpoints.down('sm')]: {
                     fontSize: '0.75rem'
-                },
+                }
             }
         },
         '& .selected-color': {

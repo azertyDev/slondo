@@ -156,7 +156,9 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         >
                                             {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
                                             {price !== 0 && (
-                                                <span>{t(`${currency.name}`)}</span>
+                                                <span>
+                                                    {t(`${currency.name}`)}
+                                                </span>
                                             )}
                                         </Typography>
                                         {region?.id !== null && (

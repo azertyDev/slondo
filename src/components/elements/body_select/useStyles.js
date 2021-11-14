@@ -4,19 +4,14 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        '& .slick-list': {
+        '& div.react-multi-carousel-list': {
             padding: '10px 0',
-            '& div.slick-track': {
+            '& div.react-multi-carousel-track': {
                 display: 'flex',
-                alignItems: 'end',
-                '& div.slick-slide': {
-                    '& div.MuiBox-root': {
-                        width: 'fit-content!important',
-                        margin: 'auto'
-                    }
-                }
+                alignItems: 'end'
             },
             '& .MuiBox-root': {
+                margin: 'auto',
                 cursor: 'pointer',
                 userSelect: 'none',
                 display: 'flex!important',

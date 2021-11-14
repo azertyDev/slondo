@@ -4,7 +4,7 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {DropResult} from 'react-beautiful-dnd';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -12,9 +12,9 @@ import {FileType, IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {useStyles} from './useStyles';
 import {notRequirePhotosCategories} from "@src/common_data/fields_keys";
+import {Slider} from "@src/components/elements/slider/Slider";
+import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
     categoryName: string,
@@ -37,45 +37,6 @@ export const SecondForm: FC<AppearanceFormPropsType> = (props) => {
         handleNextFormOpen
     } = props;
 
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
-    const sliderSettings = {
-        dots: false,
-        infinite: false,
-        arrows: !isXsDown,
-        slidesToShow: 10,
-        slidesToScroll: 1,
-        centerPadding: '0px',
-        centerMode: false,
-        adaptiveHeight: false,
-        responsive: [
-            {
-                breakpoint: 1280,
-                settings: {
-                    slidesToShow: 8
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 6
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 5
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 2
-                }
-            }
-        ]
-    };
     const formIndex = 2;
     const notReqPhoto = notRequirePhotosCategories.some(c => c === categoryName);
 
@@ -281,7 +242,7 @@ export const SecondForm: FC<AppearanceFormPropsType> = (props) => {
                                             </span>
                                         )}
                                     </Typography>
-                                    <CustomSlider {...sliderSettings}>
+                                    <Slider config={config}>
                                         {colors.map(clr => {
                                                 const selected = !!color && color.id === clr.id;
                                                 const hexColor = clr.hex_color_code;
@@ -312,7 +273,7 @@ export const SecondForm: FC<AppearanceFormPropsType> = (props) => {
                                                 );
                                             }
                                         )}
-                                    </CustomSlider>
+                                    </Slider>
                                 </Grid>
                             )}
                             <Grid item xs={12}>
@@ -364,4 +325,35 @@ export const SecondForm: FC<AppearanceFormPropsType> = (props) => {
             </CustomAccordion>
         </CustomFormikProvider>
     );
+};
+
+const config = {
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 992},
+            items: 8
+        },
+        laptop: {
+            breakpoint: {max: 992, min: 768},
+            items: 6
+        },
+        tablet: {
+            breakpoint: {max: 768, min: 576},
+            items: 4,
+            slidesToSlide: 4,
+            partialVisibilityGutter: 20
+        },
+        mobile: {
+            breakpoint: {max: 576, min: 425},
+            items: 4,
+            slidesToSlide: 4,
+            partialVisibilityGutter: 15
+        },
+        mobileS: {
+            breakpoint: {max: 426, min: 0},
+            items: 3,
+            slidesToSlide: 3,
+            partialVisibilityGutter: 15
+        }
+    }
 };

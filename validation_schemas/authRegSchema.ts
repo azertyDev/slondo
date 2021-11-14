@@ -25,7 +25,7 @@ export const passwordSchema = object({
 
 export const codeSchema = object({
     code: string().required(fieldRequiredTxt)
-}).concat(userInfoSchema);
+})
 
 export const signInSchema = object({}).concat(phoneSchema).concat(passwordSchema);
 

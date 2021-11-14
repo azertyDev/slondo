@@ -1,5 +1,5 @@
-import React, {FC, useEffect} from 'react';
-import {Grid, Typography, Paper, Hidden} from '@material-ui/core';
+import {FC, useEffect} from 'react';
+import {Typography, Paper, Hidden} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {useTranslation} from 'next-i18next';

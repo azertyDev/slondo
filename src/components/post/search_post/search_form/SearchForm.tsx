@@ -1,3 +1,4 @@
+import {useFormik} from "formik";
 import {FC, ReactNode, useContext, useEffect, useState} from 'react';
 import {Box, FormControl, Grid, Hidden, MenuItem, Select, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {browser} from 'process';
@@ -30,13 +31,15 @@ import Drawer from "@material-ui/core/Drawer";
 import {ModalHeader} from "@src/components/cabinet/components/modal_header/ModalHeader";
 import {useLocation} from "@src/hooks/use_location/useLocation";
 import {useModal} from "@src/hooks";
-import {unstable_batchedUpdates} from "react-dom";
+import {ActionButtons} from "@src/components/post/search_post/search_form/ActionButtons";
+import {booleanFields, singleFields, stringFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
-    onSubmit?,
+    formik,
     filters,
     urlParams,
+    handleSelect: (v, n) => void,
     isRent?: boolean,
     categoryName?: string,
     handleReset?: () => void,
@@ -44,15 +47,15 @@ export type CommonFiltersType = {
 };
 
 type SearchFormPropsType = {
-    urlParams,
     categories
 };
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const {
-        urlParams,
         categories
     } = props;
+
+    const {path, ...urlParams} = useRouter().query;
 
     const {
         post_type,
@@ -64,20 +67,50 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         exchange,
         delivery,
         by_filtering,
+        by_currency,
+        page,
         ...urlFiltersParams
-    } = urlParams;
+    } = urlParams as { [p: string]: string };
 
     const siteCategories = useContext(CategoriesCtx);
 
     const postTypesList = [postTypes[0], postTypes[1]];
+
+    const currencyList = ['sum', 'уе'];
+
+    const {query, push} = useRouter();
+    const [queryLoc] = query.path as string[];
+
+    const [regions, setRegions] = useState([]);
+
+    const {region, city} = getLocationByURL(queryLoc, regions);
+
     const postType = !!archive
         ? postTypesList[1]
         : postTypesList.find(type => type.id === +post_type) || null;
 
+    const [ctgr, subctgr, typeCtgr] = categories;
+
     const initVals = {
-        region: null,
-        city: null,
-        category: null,
+        region: region || null,
+        city: city || null,
+        category: ctgr || null,
+        subcategory: subctgr || null,
+        type: typeCtgr || null,
+        post_type: postType || null,
+        price_from: price_from || '',
+        price_to: price_to || '',
+        free: Boolean(free) || false,
+        archive: Boolean(archive) || false,
+        safe_deal: Boolean(safe_deal) || false,
+        exchange: Boolean(exchange) || false,
+        delivery: Boolean(delivery) || false,
+        by_currency: by_currency || null,
+        by_filtering: by_filtering || 'created_at',
+        page: page || 1
+    };
+
+    const resetValues = {
         subcategory: null,
         type: null,
         post_type: null,
@@ -88,30 +121,17 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         safe_deal: false,
         exchange: false,
         delivery: false,
-        by_filtering: 'created_at'
+        by_currency: null,
+        by_filtering: 'created_at',
+        page: 1
     };
-
-    const [ctgr, subctgr, typeCtgr] = categories;
-
-    const {query, push} = useRouter();
-    const [queryLoc] = query.path as string[];
 
     const {t} = useTranslation('filters');
 
     const {term} = useContext(SearchCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
-    const initFilters = {
-        categories: [],
-        subcategories: ctgr?.subcategory || [],
-        typeCategories: subctgr?.type || [],
-        filtersByCtgr: {}
-    };
-
-    const [regions, setRegions] = useState([]);
-    const [values, setValues] = useState(initVals);
-    const [filters, setFilters] = useState(initFilters);
-    const {filtersByCtgr} = filters;
+    const [filters, setFilters] = useState({});
 
     const {
         modalOpen: drawerOpen,
@@ -124,8 +144,20 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         drawerOpen && handleDrawerClose();
     };
 
+    const formik = useFormik({
+        onSubmit,
+        initialValues: initVals
+    });
+
+    const {
+        values,
+        setValues
+    } = formik;
+
     const {category, subcategory, type} = values;
-    const sameWithUrlCtgr = category?.name === ctgr?.name && subcategory?.name === subctgr?.name && type?.name === typeCtgr?.name;
+    const sameWithUrlCtgr = category?.name === ctgr?.name
+        && subcategory?.name === subctgr?.name
+        && type?.name === typeCtgr?.name;
 
     const isJob = category?.name === 'job';
     const isService = category?.name === 'service';
@@ -152,71 +184,81 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             };
         }
         setValues(vals);
+        onSubmit(vals);
     };
 
     const handleSelect = (name, value) => {
-        const locations: any = {};
-        const {region, city, by_filtering} = values;
-
-        if (city) locations.city = city;
-        if (region) locations.region = region;
+        let vals;
 
         if (name === 'category') {
-            setValues({
-                ...initVals,
-                ...locations,
+            vals = {
+                ...resetValues,
+                region,
+                city,
                 by_filtering,
                 category: value
-            });
+            };
         } else if (name === 'subcategory') {
-            setValues({
-                ...initVals,
-                ...locations,
+            vals = {
+                ...resetValues,
+                region,
+                city,
                 by_filtering,
-                category: values.category,
+                category,
                 subcategory: value
-            });
+            };
         } else {
-            setValues({...values, [name]: value});
+            vals = {...values, [name]: value};
         }
+        console.log('vals', vals);
+        setValues(vals);
+        onSubmit(vals);
     };
 
-    const handlePostType = (_, value) => {
-        value = values.post_type?.id === value.id ? null : value;
-        setValues({...values, post_type: value});
+    const handlePostType = (name, value) => {
+        value = values[name]?.id === value.id ? null : value;
+        const vals = {...values, [name]: value};
+        setValues(vals);
+        onSubmit(vals);
+    };
+
+    const handlePostByCurrency = (_, value) => {
+        value = values.by_currency === value ? null : value;
+        const vals = {...values, by_currency: value};
+        setValues(vals);
+        onSubmit(vals);
     };
 
     const handleReset = () => {
-        const locations: any = {};
-        const {region, city, by_filtering} = values;
+        const vals = {
+            ...resetValues,
+            region,
+            city,
+            category,
+            subcategory,
+            type
+        };
 
-        if (city) locations.city = city;
-        if (region) locations.region = region;
-
-        unstable_batchedUpdates(() => {
-            setValues({
-                ...initVals,
-                ...locations,
-                by_filtering,
-                category,
-                subcategory
-            });
-            setFilters(initFilters);
-        });
+        setValues(vals);
+        onSubmit(vals);
     };
 
     const handleSort = async ({target: {value}}) => {
         value = {...values, by_filtering: value};
-        isSmDown
-            ? await push(urlByParams(value))
-            : setValues(value);
+        setValues(value);
+        onSubmit(value);
     };
 
     const handleSelectLocation = async (loc) => {
-        const value = {...values, ...loc};
-        isSmDown
-            ? await push(urlByParams(value))
-            : setValues(value);
+        const vals = {...values, ...loc};
+        setValues(vals);
+        onSubmit(vals);
+    };
+
+    const handleOptSelect = (name, value) => {
+        const vals = {...values, [name]: value};
+        setValues(vals);
+        onSubmit(vals);
     };
 
     const {
@@ -225,12 +267,39 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         handleLocModalOpen
     } = useLocation({handleSelectLocation});
 
+    const setValsByParams = (urlParams, filters) => {
+        const vals: any = {};
+
+        Object.keys(urlParams).forEach(k => {
+            const isSingleField = singleFields.some(f => f === k);
+            const isStringField = stringFields.some(f => f === k);
+            const isBooleanField = booleanFields.some(f => f === k);
+
+            if (filters[k]) {
+                if (isSingleField) {
+                    vals[k] = filters[k].find(v => v.id === +urlParams[k]);
+                } else {
+                    vals[k] = filters[k]
+                        .filter(v => urlParams[k].split(',').some(p => +p === v.id));
+                }
+            } else if ((isBooleanField || isStringField) && (!values[k] || values[k] === '')) {
+                vals[k] = isBooleanField || urlParams[k];
+            }
+        });
+
+        if (urlParams.model && vals?.manufacturer?.models) {
+            vals.model = vals.manufacturer.models.find(m => m.id === +urlParams.model);
+        }
+
+        setValues({...values, ...vals});
+    };
+
     const getFiltersByCtgr = (): ReactNode => {
         switch (mainCategoryName) {
             case 'car':
                 return <SearchCar
-                    onSubmit={onSubmit}
-                    filters={filtersByCtgr}
+                    formik={formik}
+                    filters={filters}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
                     sameWithUrlCtgr={sameWithUrlCtgr}
@@ -240,9 +309,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     type={type}
                     category={category}
                     subcategory={subcategory}
-                    filters={filtersByCtgr}
+                    filters={filters}
                     urlParams={urlFiltersParams}
-                    onSubmit={onSubmit}
+                    formik={formik}
                     handleReset={handleReset}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                     categoryName={values.category?.name}
@@ -250,8 +319,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             case 'estate':
                 return <SearchEstate
                     isRent={isRent}
-                    onSubmit={onSubmit}
-                    filters={filtersByCtgr}
+                    formik={formik}
+                    filters={filters}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
                     subcategoryName={subcategoryName}
@@ -263,8 +332,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     type={type}
                     category={category}
                     subcategory={subcategory}
-                    onSubmit={onSubmit}
-                    filters={filtersByCtgr}
+                    formik={formik}
+                    filters={filters}
                     urlParams={urlFiltersParams}
                     handleReset={handleReset}
                     sameWithUrlCtgr={sameWithUrlCtgr}
@@ -275,9 +344,10 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     type={type}
                     category={category}
                     subcategory={subcategory}
-                    onSubmit={onSubmit}
-                    filters={filtersByCtgr}
+                    formik={formik}
+                    filters={filters}
                     handleReset={handleReset}
+                    handleSelect={handleOptSelect}
                     urlParams={urlFiltersParams}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                     categoryName={values.category?.name}
@@ -287,8 +357,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     function urlByParams(vals): string {
         let url = '/';
-
-        vals = {...values, ...vals};
 
         const {
             category,
@@ -346,61 +414,74 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 }
 
                 filtersByCtgr = normalizeFiltersByCategory(filtersByCtgr, type);
+                console.log('values', values);
 
-                setFilters({
-                    ...filters,
-                    filtersByCtgr
-                });
+                setFilters(filtersByCtgr);
+                sameWithUrlCtgr && setValsByParams(urlParams, filtersByCtgr);
             } else {
-                setFilters({
-                    ...filters,
-                    filtersByCtgr: {}
-                });
+                setFilters({});
+                sameWithUrlCtgr && setValsByParams(urlParams, {});
             }
         } catch (e) {
             setErrorMsg(e.message);
         }
     };
 
-    const setInitVals = () => {
-        const {region, city} = getLocationByURL(queryLoc, regions);
-
-        const vals = {
-            region: region || null,
-            city: city || null,
-            category: ctgr || null,
-            subcategory: subctgr || null,
-            type: typeCtgr || null,
-            post_type: postType,
-            price_from: price_from || '',
-            price_to: price_to || '',
-            free: !!free,
-            archive: !!archive,
-            safe_deal: !!safe_deal,
-            exchange: !!exchange,
-            delivery: !!delivery,
-            by_filtering: by_filtering || 'created_at'
-        };
-
-        setValues(vals);
-    };
-
-    useEffect(() => {
-        if (browser) {
-            const storeRegions = JSON.parse(localStorage.getItem('regions'));
-            storeRegions && !regions.length && setRegions(storeRegions);
-        }
-    }, []);
-
     const classes = useStyles();
     const form = (
         <Grid
             container
             spacing={2}
-            style={{
-                padding: '9px',
-            }}
+            style={{padding: '9px'}}
         >
+            <Grid item xs={12} sm={6} md={4}>
+                <DropDownSelect
+                    name='category'
+                    disableRequire
+                    values={values}
+                    items={siteCategories}
+                    handleSelect={handleSelect}
+                    transKey='categories:'
+                    labelTxt={t(`category`)}
+                />
+            </Grid>
+            {!!values.category?.subcategory && (
+                <Grid item xs={12} sm={6} md={4}>
+                    <DropDownSelect
+                        name='subcategory'
+                        disableRequire
+                        values={values}
+                        handleSelect={handleSelect}
+                        labelTxt={t(`subcategory`)}
+                        items={values.category?.subcategory}
+                        transKey={`categories:${category?.name}.`}
+                    />
+                </Grid>
+            )}
+            {!!values.subcategory?.type && (
+                <Grid item xs={12} sm={6} md={4}>
+                    <DropDownSelect
+                        name='type'
+                        disableRequire
+                        values={values}
+                        handleSelect={handleSelect}
+                        items={values.subcategory.type}
+                        labelTxt={t(`${category?.name}.type.name`)}
+                        transKey={`categories:${category?.name}.${subcategory?.name}.`}
+                    />
+                </Grid>
+            )}
+            {(!mainCategoryName || hasAuction) && (
+                <Grid item xs={12} sm={6} md={4}>
+                    <DeployedSelect
+                        disableRequire
+                        values={values}
+                        name='post_type'
+                        options={postTypesList}
+                        handleSelect={handlePostType}
+                    />
+                </Grid>
+            )}
             {!isSmDown && (
                 <>
                     <Grid
@@ -453,54 +534,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     </Grid>
                 </>
             )}
-            {(!mainCategoryName || hasAuction) && (
-                <Grid item xs={12} sm={6} md={4}>
-                    <DeployedSelect
-                        disableRequire
-                        values={values}
-                        name='post_type'
-                        options={postTypesList}
-                        handleSelect={handlePostType}
-                    />
-                </Grid>
-            )}
-            <Grid item xs={12} sm={6} md={4}>
-                <DropDownSelect
-                    name='category'
-                    disableRequire
-                    values={values}
-                    items={siteCategories}
-                    handleSelect={handleSelect}
-                    transKey='categories:'
-                    labelTxt={t(`category`)}
-                />
-            </Grid>
-            {!!values.category?.subcategory && (
-                <Grid item xs={12} sm={6} md={4}>
-                    <DropDownSelect
-                        name='subcategory'
-                        disableRequire
-                        values={values}
-                        handleSelect={handleSelect}
-                        labelTxt={t(`subcategory`)}
-                        items={values.category?.subcategory}
-                        transKey={`categories:${category?.name}.`}
-                    />
-                </Grid>
-            )}
-            {!!values.subcategory?.type && (
-                <Grid item xs={12} sm={6} md={4}>
-                    <DropDownSelect
-                        name='type'
-                        disableRequire
-                        values={values}
-                        handleSelect={handleSelect}
-                        items={values.subcategory.type}
-                        labelTxt={t(`${category?.name}.type.name`)}
-                        transKey={`categories:${category?.name}.${subcategory?.name}.`}
-                    />
-                </Grid>
-            )}
             <Grid item xs={12} sm={6} md={4}>
                 <FromToInputs
                     disabled={values.free}
@@ -527,6 +560,15 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     />
                 </Grid>
             )}
+            <Grid item xs={12} sm={6} md={4}>
+                <DeployedSelect
+                    disableRequire
+                    values={values}
+                    name='by_currency'
+                    options={currencyList}
+                    handleSelect={handlePostByCurrency}
+                />
+            </Grid>
             {values.post_type?.name === 'auc' && (
                 <Grid item container alignItems='flex-end' xs={6} sm={3}>
                     <CheckboxSelect
@@ -546,17 +588,24 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             <Grid item xs={12}>
                 {getFiltersByCtgr()}
             </Grid>
+            <Grid item container xs={12}>
+                <ActionButtons handleReset={handleReset}/>
+            </Grid>
         </Grid>
     );
-
-    useEffect(() => {
-        setInitVals();
-    }, [urlParams]);
 
     useEffect(() => {
         setFiltersByCtgr();
     }, [category, subcategory, type]);
 
+    useEffect(() => {
+        if (browser) {
+            const storeRegions = JSON.parse(localStorage.getItem('regions'));
+            storeRegions && !regions.length && setRegions(storeRegions);
+        }
+    }, []);
+
+    console.log('filters', filters);
     return (
         <div className={classes.root}>
             <Hidden smDown>

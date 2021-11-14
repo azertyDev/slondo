@@ -1,7 +1,7 @@
-import 'react-multi-carousel/lib/styles.css';
 import {FC} from 'react';
-import {useStyles} from './useStyles';
 import Carousel, {ResponsiveType} from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import {useStyles} from './useStyles';
 
 type SliderProps = {
     config: {

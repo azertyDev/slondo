@@ -48,7 +48,7 @@ export const FirstFormPreview: FC<DefaultParamsPropsType> = (props) => {
         || !!values.auto_renewal
         || !!auction.offer_the_price
         || !!values.safe_deal;
-    console.log(values, !!values.auto_renewal);
+
     const classes = useStyles();
     return (
         <>

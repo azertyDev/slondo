@@ -158,17 +158,12 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
 
     const getContent = () => {
         switch (status) {
-            // case 'confirm':
-            //     return <Grid item xs={12} container justifyContent='center'>
-            //         <Typography variant='subtitle1' component='p' align='center'>
-            //             {t('codeWillBeSent')}
-            //         </Typography>
-            //     </Grid>;
             case 'code_confirm':
                 return <>
                     <Grid item xs={12}>
                         <FormikField
                             t={t}
+                            autoFocus
                             type="text"
                             name="code"
                             placeholder={t('enter_sms')}
@@ -190,6 +185,7 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
                 return <div className="formik-num-pass">
                     <FormikField
                         t={t}
+                        autoFocus
                         type="password"
                         name="password"
                         labelText={t('enter_new_password')}

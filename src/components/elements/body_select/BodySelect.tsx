@@ -20,9 +20,8 @@ import {
     TargaIcon,
     VanIcon
 } from '@src/components/elements/icons';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {Slider} from "@src/components/elements/slider/Slider";
 import {useStyles} from './useStyles';
-import {Settings} from 'react-slick';
 
 type BodyTypesProps = {
     disableRequire?: boolean,
@@ -30,6 +29,83 @@ type BodyTypesProps = {
     values,
     errorMsg: string,
     handleSelect: (k, v) => void
+};
+
+export const BodySelect: FC<BodyTypesProps> = (props) => {
+    const {
+        values,
+        bodies = [],
+        errorMsg,
+        handleSelect,
+        disableRequire
+    } = props;
+
+    const {t} = useTranslation('filters');
+    const handleBodySelect = (body) => () => handleSelect('body', body);
+
+    const classes = useStyles();
+    return (
+        <div className={classes.root}>
+            <Typography variant='subtitle1' gutterBottom>
+                <strong>
+                    {t('car.body.name')}
+                    {!disableRequire && <span className='error-text'>*&nbsp;</span>}
+                </strong>
+                {errorMsg && (
+                    <span className='error-text'>
+                        {errorMsg}
+                    </span>
+                )}
+            </Typography>
+            <Slider config={config}>
+                {bodies.map(body => {
+                        const {icon} = bodyIcons.find(el => el.name === body.name);
+                        return (
+                            <Box
+                                key={body.id}
+                                style={{width: 'fit-content'}}
+                                onClick={handleBodySelect(body)}
+                                className={body.id === values.body?.id ? 'selected' : ''}
+                            >
+                                {icon}
+                                <Typography
+                                    component='p'
+                                    variant='subtitle1'
+                                >
+                                    {t(`car.${body.name}.name`)}
+                                </Typography>
+                            </Box>
+                        );
+                    }
+                )}
+            </Slider>
+        </div>
+    );
+};
+
+const config = {
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 992},
+            items: 8
+        },
+        laptop: {
+            breakpoint: {max: 992, min: 768},
+            items: 6
+        },
+        tablet: {
+            breakpoint: {max: 768, min: 576},
+            items: 4,
+            slidesToSlide: 4,
+            partialVisibilityGutter: 20
+        },
+        mobile: {
+            breakpoint: {max: 576, min: 0},
+            items: 3,
+            slidesToSlide: 3,
+            partialVisibilityGutter: 15
+        }
+    }
 };
 
 const bodyIcons = [
@@ -119,93 +195,3 @@ const bodyIcons = [
         icon: <VanIcon/>
     }
 ];
-
-export const BodySelect: FC<BodyTypesProps> = (props) => {
-    const {
-        values,
-        bodies,
-        errorMsg,
-        handleSelect,
-        disableRequire
-    } = props;
-    const {t} = useTranslation('filters');
-
-    const sliderSettings: Settings = {
-        dots: false,
-        arrows: false,
-        infinite: false,
-        slidesToShow: 9.5,
-        centerPadding: '0px',
-        swipeToSlide: true,
-        adaptiveHeight: false,
-        responsive: [
-            {
-                breakpoint: 1280,
-                settings: {
-                    slidesToShow: 7.5
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 6.5
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 4.5
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 3,
-                    waitForAnimate: false
-                }
-            }
-        ]
-    };
-
-    const handleBodySelect = (body) => () => handleSelect('body', body);
-
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            <Typography variant='subtitle1' gutterBottom>
-                <strong>
-                    {t('car.body.name')}
-                    {!disableRequire && <span className='error-text'>*&nbsp;</span>}
-                </strong>
-                {errorMsg && (
-                    <span className='error-text'>
-                        {errorMsg}
-                    </span>
-                )}
-            </Typography>
-            <CustomSlider {...sliderSettings}>
-                {bodies
-                    ? bodies.map(body => {
-                        const carBodyIcon = bodyIcons.find(el => el.name === body.name).icon;
-                        return (
-                            <Box
-                                key={body.id}
-                                style={{width: 'fit-content'}}
-                                onClick={handleBodySelect(body)}
-                                className={body.id === values.body?.id ? 'selected' : ''}
-                            >
-                                {carBodyIcon}
-                                <Typography
-                                    component='p'
-                                    variant='subtitle1'
-                                >
-                                    {t(`car.${body.name}.name`)}
-                                </Typography>
-                            </Box>
-                        );
-                    })
-                    : <div/>}
-            </CustomSlider>
-        </div>
-    );
-};

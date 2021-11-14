@@ -196,7 +196,10 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                 >
                     <Grid
                         item
-                        xs={4}
+                        xs={12}
+                        sm={8}
+                        md={6}
+                        lg={4}
                     >
                         <ServiceItem
                             icon={<AutoRenewalIcon/>}

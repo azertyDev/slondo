@@ -33,7 +33,7 @@ class MyDocument extends Document<{ lang: string }> {
     render() {
         return (
             <Html lang='ru'>
-                <Head>
+                <Head key={1}>
                     <link
                         rel="icon"
                         sizes="54x54"

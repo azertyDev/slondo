@@ -6,7 +6,7 @@ import {SearchResult} from '@src/components/post/search_post/search_result/Searc
 import {
     Container,
     Grid,
-    Hidden, Typography,
+    Hidden,
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
@@ -27,7 +27,6 @@ import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
 import {BottomAdv} from "@src/components/elements/adv/bottom/BottomAdv";
 
 type SearchPostProps = {
-    urlParams,
     urlCategories,
     location,
     site_categories,
@@ -41,7 +40,6 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
         site_categories,
         location,
         statusCode,
-        urlParams,
         searchTermFromUrl
     } = props;
 
@@ -55,12 +53,12 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     } = {
         right: {
             image: null,
-            url: '#',
+            url: '/uzbekistan',
             google_ads: false
         },
         bottom: {
             image: null,
-            url: '#',
+            url: '/uzbekistan',
             google_ads: false
         }
     };
@@ -83,7 +81,6 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     };
 
     const siteCategories = categoriesNormalize(site_categories);
-
     const ctgrsByCyrName = getCtgrsByCyrillicNames(urlCategories, siteCategories);
     const [ctgr, subctgr = null, typectgr = null] = ctgrsByCyrName;
 
@@ -132,12 +129,10 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
                             <Grid container spacing={isSmDown ? 0 : 2}>
                                 <Grid item xs={12} lg={9} zeroMinWidth>
                                     <SearchForm
-                                        urlParams={urlParams}
                                         categories={ctgrsByCyrName}
                                     />
                                     <SearchResult
                                         rightAdvData={right}
-                                        urlParams={urlParams}
                                         categories={ctgrsByCyrName}
                                         searchTermFromUrl={searchTermFromUrl}
                                     />

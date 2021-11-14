@@ -36,7 +36,6 @@ export const useStyles = makeStyles((theme) => ({
                 position: 'absolute',
                 bottom: '0px',
                 right: '0px',
-                // background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 background: '#4E4E4E',
                 width: 'inherit',
                 height: '2.5px'
@@ -46,7 +45,6 @@ export const useStyles = makeStyles((theme) => ({
                 position: 'absolute',
                 top: '0px',
                 right: '0px',
-                // background: 'linear-gradient(49.94deg, #AD66D5 19.03%, #675EAA 72.72%)',
                 background: '#4E4E4E',
                 height: 'inherit',
                 width: '2.5px'

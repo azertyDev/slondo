@@ -2,7 +2,7 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
-import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {ThirdFormPreview} from '../../ThirdFormPreview';
@@ -22,6 +22,7 @@ import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
+import {Slider} from "@src/components/elements/slider/Slider";
 
 type CarParamsPropsType = {
     subcategoryName: string

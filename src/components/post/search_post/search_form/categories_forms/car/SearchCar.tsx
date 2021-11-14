@@ -1,5 +1,4 @@
-import {FC, useEffect} from 'react';
-import {useFormik} from 'formik';
+import {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
@@ -8,15 +7,12 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 export const SearchCar: FC<CommonFiltersType> = (props) => {
     const {
-        onSubmit,
+        formik,
         filters,
-        handleReset,
-        urlParams,
-        sameWithUrlCtgr
+        handleSelect
     } = props;
 
     const initVals = {
@@ -32,11 +28,6 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         engine_capacity_to: ''
     };
 
-    const formik = useFormik({
-        onSubmit,
-        initialValues: initVals
-    });
-
     const {
         values,
         setValues,
@@ -46,10 +37,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     const {t} = useTranslation('filters');
 
     const {
-        handleSelect,
         handleNumericInput,
-        handleFracInput,
-        setValsByParams
+        handleFracInput
     } = useHandlers(values, setValues);
 
     const handleManufacturer = (_, value) => {
@@ -59,10 +48,6 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
             model: null
         });
     };
-
-    useEffect(() => {
-        sameWithUrlCtgr && setValsByParams(urlParams, filters);
-    }, [filters]);
 
     return (
         <CustomFormikProvider formik={formik}>
@@ -123,8 +108,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters.manufacturer}
-                                handleSelect={handleManufacturer}
                                 labelTxt={t('manufacturer')}
+                                handleSelect={handleManufacturer}
                             />
                         </Grid>
                         <Grid
@@ -284,7 +269,6 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </ShowHide>
             )}
-            <ActionButtons handleReset={handleReset}/>
         </CustomFormikProvider>
     );
 };

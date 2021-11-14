@@ -7,30 +7,6 @@ import {CategoriesCtx, UserLocationCtx} from "@src/context";
 import {Slider} from "@src/components/elements/slider/Slider";
 import {useStyles} from './useStyles';
 
-const config = {
-    itemClass: 'slide-item',
-    responsive: {
-        desktop: {
-            breakpoint: {max: 1920, min: 1440},
-            items: 7
-        },
-        laptop: {
-            breakpoint: {max: 1439, min: 993},
-            items: 5
-        },
-        tablet: {
-            breakpoint: {max: 993, min: 425},
-            items: 4,
-            partialVisibilityGutter: 15
-        },
-        mobile: {
-            breakpoint: {max: 426, min: 0},
-            items: 3,
-            partialVisibilityGutter: 15
-        }
-    }
-};
-
 export const CategoriesSlider: FC = () => {
     const {t} = useTranslation('main');
     const {region, city} = useContext(UserLocationCtx).userLocation;
@@ -77,4 +53,30 @@ export const CategoriesSlider: FC = () => {
             </div>
         </div>
     );
+};
+
+const config = {
+    itemClass: 'slide-item',
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 1440},
+            items: 7
+        },
+        laptop: {
+            breakpoint: {max: 1440, min: 993},
+            items: 5
+        },
+        tablet: {
+            breakpoint: {max: 993, min: 426},
+            items: 4,
+            slidesToSlide: 4,
+            partialVisibilityGutter: 15
+        },
+        mobile: {
+            breakpoint: {max: 426, min: 0},
+            items: 3,
+            slidesToSlide: 3,
+            partialVisibilityGutter: 10
+        }
+    }
 };

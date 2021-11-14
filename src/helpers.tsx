@@ -295,7 +295,7 @@ export const toUrlParams = (params, term?) => {
                 url = url.concat(`&${key}=${params[key]}`);
             }
             if (isNoEmptyArray) {
-                url = url.concat(`&${key}=${params[key].map(p => p).join(',')}`);
+                url = url.concat(`&${key}=${params[key].map(p => p.id ?? p).join(',')}`);
             }
             if (isObject && !!params[key].id) {
                 url = url.concat(`&${key}=${params[key].id}`);
