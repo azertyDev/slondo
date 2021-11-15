@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {getFieldsByFilters} from '@src/helpers';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
@@ -9,70 +9,33 @@ import {excludeCtgrsForYear} from '@src/components/post/create_post/third_step/t
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 
 type SearchRegularPropsType = {
-    type,
-    category,
-    subcategory
+    type;
+    subcategory;
 } & CommonFiltersType;
 
 export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
-    const {
-        type,
-        categoryName,
-        category,
-        subcategory,
-        sameWithUrlCtgr,
-        formik,
-        filters,
-        urlParams
-    } = props;
+    const {type, categoryName, subcategory, formik, filters} = props;
 
     const {t} = useTranslation('filters');
-    const isYearExclude = excludeCtgrsForYear.some(k => k === type?.name);
-    const hasEngineCapacity = type?.name === 'motorcycles' || type?.name === 'mopedsAndScooters';
-    const hasMileage = subcategory?.name === 'motorcyclesAndMotorTech' || subcategory?.name === 'busesAndTrucks';
+    const isYearExclude = excludeCtgrsForYear.some((k) => k === type?.name);
+    const hasEngineCapacity =
+        type?.name === 'motorcycles' || type?.name === 'mopedsAndScooters';
+    const hasMileage =
+        subcategory?.name === 'motorcyclesAndMotorTech' ||
+        subcategory?.name === 'busesAndTrucks';
 
-    const initVals: any = {};
+    const {values, setValues} = formik;
 
-    if (!isYearExclude) {
-        initVals.year_from = '';
-        initVals.year_to = '';
-    }
-
-    if (hasEngineCapacity) {
-        initVals.engine_capacity_from = '';
-        initVals.engine_capacity_to = '';
-    }
-
-    if (hasMileage) {
-        initVals.mileage_from = '';
-        initVals.mileage_to = '';
-    }
-
-    const {
+    const {handleSelect, handleFracInput, handleNumericInput} = useHandlers(
         values,
-        setValues,
-        resetForm
-    } = formik;
-
-    const {
-        handleSelect,
-        setValsByParams,
-        handleFracInput,
-        handleNumericInput
-    } = useHandlers(values, setValues);
-
-    useEffect(() => {
-        sameWithUrlCtgr && setValsByParams(urlParams, filters);
-    }, [filters]);
-
-    useEffect(() => {
-        resetForm();
-    }, [category, subcategory, type]);
+        setValues
+    );
 
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>
-                {getFieldsByFilters({
+                {getFieldsByFilters(
+                    {
                         t,
                         filters,
                         formik,
@@ -82,12 +45,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                     true
                 )}
                 {hasEngineCapacity && (
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        sm={4}
-                    >
+                    <Grid item container xs={12} sm={4}>
                         <FromToInputs
                             handleInput={handleFracInput}
                             labelTxt={t('engine_capacity')}
@@ -105,12 +63,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                     </Grid>
                 )}
                 {!isYearExclude && (
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        sm={4}
-                    >
+                    <Grid item container xs={12} sm={4}>
                         <FromToInputs
                             handleInput={handleNumericInput}
                             labelTxt={t('year')}
@@ -128,12 +81,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                     </Grid>
                 )}
                 {hasMileage && (
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        sm={4}
-                    >
+                    <Grid item container xs={12} sm={4}>
                         <FromToInputs
                             handleInput={handleNumericInput}
                             labelTxt={t('mileage')}

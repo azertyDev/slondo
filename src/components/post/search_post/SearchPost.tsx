@@ -16,26 +16,31 @@ import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {CustomHead} from '@src/components/head/CustomHead';
 import {SearchHeader} from '@src/components/post/search_post/search_header/SearchHeader';
-import {getSEOContent} from "@src/common_data/seo_content";
-import {categoriesNormalize, CtgrsByCyrillicNameType, transformCyrillic} from "@src/helpers";
-import {CategoriesCtx} from "@src/context";
-import {useRouter} from "next/router";
+import {getSEOContent} from '@src/common_data/seo_content';
+import {categoriesNormalize, getCtgrsByCyrillicNames} from '@src/helpers';
+import {CategoriesCtx} from '@src/context';
+import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
-import {adsAPI} from "@src/api/api";
-import {AdvType} from "@root/interfaces/Adv";
-import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
-import {BottomAdv} from "@src/components/elements/adv/bottom/BottomAdv";
+import {adsAPI} from '@src/api/api';
+import {AdvType} from '@root/interfaces/Adv';
+import {RightAdv} from '@src/components/elements/adv/right/RightAdv';
+import {BottomAdv} from '@src/components/elements/adv/bottom/BottomAdv';
+import {RegionType} from '@root/interfaces/Locations';
 
 type SearchPostProps = {
-    urlCategories,
-    location,
-    site_categories,
-    searchTermFromUrl,
-    statusCode: number,
-}
+    regions: RegionType[];
+    filters;
+    urlCategories;
+    location;
+    site_categories;
+    searchTermFromUrl;
+    statusCode: number;
+};
 
-export const SearchPost: FC<SearchPostProps> = (props) => {
+export const SearchPost: FC<SearchPostProps> = props => {
     const {
+        filters,
+        regions,
         urlCategories,
         site_categories,
         location,
@@ -48,8 +53,8 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const initAds: {
-        right: AdvType,
-        bottom: AdvType
+        right: AdvType;
+        bottom: AdvType;
     } = {
         right: {
             image: null,
@@ -81,7 +86,12 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     };
 
     const siteCategories = categoriesNormalize(site_categories);
-    const ctgrsByCyrName = getCtgrsByCyrillicNames(urlCategories, siteCategories);
+
+    const ctgrsByCyrName = getCtgrsByCyrillicNames(
+        urlCategories,
+        siteCategories
+    );
+
     const [ctgr, subctgr = null, typectgr = null] = ctgrsByCyrName;
 
     const userLocation = t(location);
@@ -98,12 +108,17 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     const seoTxt = seoContent.text;
 
     const description = searchTermFromUrl
-        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${userLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
+        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${userLocation}${
+              locale === 'uz' ? 'da' : 'е'
+          } SLONDO.uz`
         : seoContent.description;
 
     if (ctgr && searchTermFromUrl) {
-        seoTitle =
-            `${searchTermFromUrl} - ${t(`common:categories:${typectgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`;
+        seoTitle = `${searchTermFromUrl} - ${t(
+            `common:categories:${
+                typectgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''
+            }`
+        )} - SLONDO.uz`;
     }
 
     useEffect(() => {
@@ -111,85 +126,51 @@ export const SearchPost: FC<SearchPostProps> = (props) => {
     }, []);
 
     const classes = useStyles();
-    return statusCode !== 200
-        ? <ErrorPage statusCode={statusCode}/>
-        : <>
-            <CustomHead
-                title={seoTitle}
-                description={description}
-            />
+    return statusCode !== 200 ? (
+        <ErrorPage statusCode={statusCode} />
+    ) : (
+        <>
+            <CustomHead title={seoTitle} description={description} />
             <div className={classes.root}>
                 <CategoriesCtx.Provider value={siteCategories}>
-                    <SearchHeader/>
+                    <SearchHeader />
                     <main>
-                        <Container
-                            maxWidth="xl"
-                            className='layout-container'
-                        >
+                        <Container maxWidth="xl" className="layout-container">
                             <Grid container spacing={isSmDown ? 0 : 2}>
                                 <Grid item xs={12} lg={9} zeroMinWidth>
                                     <SearchForm
+                                        regions={regions}
+                                        filters={filters}
                                         categories={ctgrsByCyrName}
                                     />
                                     <SearchResult
+                                        regions={regions}
                                         rightAdvData={right}
                                         categories={ctgrsByCyrName}
                                         searchTermFromUrl={searchTermFromUrl}
                                     />
-                                    <div className='bot-adv-wrapper'>
-                                        <BottomAdv adv={bottom}/>
+                                    <div className="bot-adv-wrapper">
+                                        <BottomAdv adv={bottom} />
                                     </div>
                                 </Grid>
                                 <Hidden mdDown>
                                     <Grid item xs={3}>
-                                        <div className='sidebar-wrapper'>
-                                            <HomeSidebar/>
+                                        <div className="sidebar-wrapper">
+                                            <HomeSidebar />
                                         </div>
-                                        <RightAdv
-                                            adv={right}
-                                            threshold={475}
-                                        />
+                                        <RightAdv adv={right} threshold={475} />
                                     </Grid>
                                 </Hidden>
                             </Grid>
-                            {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
+                            {!!seoTxt && <SEOTextComponent text={seoTxt} />}
                         </Container>
                     </main>
                 </CategoriesCtx.Provider>
                 <Hidden smDown>
-                    <Footer/>
+                    <Footer />
                 </Hidden>
             </div>
-            <ErrorModal/>
-        </>;
+            <ErrorModal />
+        </>
+    );
 };
-
-function getCtgrsByCyrillicNames(
-    urlCategories: string[] = [],
-    siteCategories
-): CtgrsByCyrillicNameType | [] {
-    if (urlCategories.length) {
-        const [categoryName, subCtgrName, typeCtgrName] = urlCategories;
-
-        return siteCategories.reduce((acc: any, ctgr) => {
-            if (transformCyrillic(ctgr.ru_name) === categoryName) {
-                acc.push(ctgr);
-                ctgr.subcategory.forEach(subctgr => {
-                    if (transformCyrillic(subctgr.ru_name) === subCtgrName) {
-                        acc.push(subctgr);
-                        if (typeCtgrName) {
-                            subctgr.type?.forEach(type => {
-                                if (transformCyrillic(type.ru_name) === typeCtgrName) {
-                                    acc.push(type);
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-            return acc;
-        }, []);
-    }
-
-    return [];
-}

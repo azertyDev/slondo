@@ -45,6 +45,7 @@
     "eslint-config-next": "^11.1.2",
     "eslint-plugin": "^1.0.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.4.1",
     "typescript": "^4.4.4",
     "webpack": "^5.41.1"
   }

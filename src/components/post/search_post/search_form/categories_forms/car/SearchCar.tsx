@@ -4,42 +4,20 @@ import {useTranslation} from 'react-i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 
-export const SearchCar: FC<CommonFiltersType> = (props) => {
-    const {
-        formik,
-        filters,
-        handleSelect
-    } = props;
+export const SearchCar: FC<CommonFiltersType> = props => {
+    const {formik, filters, handleSelect} = props;
 
-    const initVals = {
-        manufacturer: null,
-        model: null,
-        params: null,
-        transmission: [],
-        year_from: '',
-        year_to: '',
-        mileage_from: '',
-        mileage_to: '',
-        engine_capacity_from: '',
-        engine_capacity_to: ''
-    };
-
-    const {
-        values,
-        setValues,
-        handleBlur
-    } = formik;
+    const {values, setValues, handleBlur} = formik;
 
     const {t} = useTranslation('filters');
 
-    const {
-        handleNumericInput,
-        handleFracInput
-    } = useHandlers(values, setValues);
+    const {handleNumericInput, handleFracInput} = useHandlers(
+        values,
+        setValues
+    );
 
     const handleManufacturer = (_, value) => {
         setValues({
@@ -50,14 +28,9 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
     };
 
     return (
-        <CustomFormikProvider formik={formik}>
+        <>
             <Grid item container spacing={2}>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
+                <Grid item container sm={4} xs={12}>
                     <FromToInputs
                         handleInput={handleNumericInput}
                         labelTxt={t('year')}
@@ -73,12 +46,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
+                <Grid item container sm={4} xs={12}>
                     <FromToInputs
                         handleInput={handleNumericInput}
                         labelTxt={t('mileage')}
@@ -96,14 +64,9 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                 </Grid>
                 {Object.keys(filters).length !== 0 && (
                     <>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
-                                name='manufacturer'
+                                name="manufacturer"
                                 disableRequire
                                 values={values}
                                 onBlur={handleBlur}
@@ -112,14 +75,9 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                                 handleSelect={handleManufacturer}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
-                                name='model'
+                                name="model"
                                 disableRequire
                                 values={values}
                                 onBlur={handleBlur}
@@ -128,20 +86,15 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                                 items={values.manufacturer?.models}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='transmission'
+                                name="transmission"
                                 values={values}
                                 onBlur={handleBlur}
                                 handleSelect={handleSelect}
-                                transKey='car.'
+                                transKey="car."
                                 labelTxt={t('car.transmission.name')}
                                 items={filters.transmission}
                             />
@@ -151,52 +104,37 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
             </Grid>
             {Object.keys(filters).length !== 0 && (
                 <ShowHide
-                    className='add-params'
+                    className="add-params"
                     showTxt={t('common:externalParams')}
                 >
                     <Grid item container spacing={2} xs={12}>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='body'
+                                name="body"
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters.body}
                                 handleSelect={handleSelect}
-                                transKey='car.'
+                                transKey="car."
                                 labelTxt={t('car.body.name')}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='engine_type'
+                                name="engine_type"
                                 values={values}
                                 onBlur={handleBlur}
                                 handleSelect={handleSelect}
                                 items={filters.engine_type}
-                                transKey='car.'
+                                transKey="car."
                                 labelTxt={t('car.engine_type.name')}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <FromToInputs
                                 handleInput={handleFracInput}
                                 labelTxt={t('engine_capacity')}
@@ -212,53 +150,38 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                                 }}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='drive'
+                                name="drive"
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters.drive}
-                                transKey='car.'
+                                transKey="car."
                                 handleSelect={handleSelect}
                                 labelTxt={t('car.drive.name')}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='color'
+                                name="color"
                                 values={values}
                                 onBlur={handleBlur}
-                                transKey='car.'
+                                transKey="car."
                                 items={filters.colors}
                                 handleSelect={handleSelect}
                                 labelTxt={t('car.color.name')}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
+                        <Grid item container sm={4} xs={12}>
                             <DropDownSelect
                                 multiple
                                 disableRequire
-                                name='other'
-                                transKey='car.'
+                                name="other"
+                                transKey="car."
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters.other}
@@ -269,6 +192,6 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </ShowHide>
             )}
-        </CustomFormikProvider>
+        </>
     );
 };

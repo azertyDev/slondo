@@ -1,4 +1,4 @@
-import {FC, ReactNode, useEffect} from 'react';
+import {FC, ReactNode} from 'react';
 import {SearchApartments} from '@src/components/post/search_post/search_form/categories_forms/estate/search_apartments/SearchApartments';
 import {SearchHousesCottages} from '@src/components/post/search_post/search_form/categories_forms/estate/search_houses_cottages/SearchHousesCottages';
 import {SearchCommercialProperty} from '@src/components/post/search_post/search_form/categories_forms/estate/search_commercial_property/SearchCommercialProperty';
@@ -8,18 +8,18 @@ import {CommonFiltersType} from '@src/components/post/search_post/search_form/Se
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 
 type SearchEstatePropsType = {
-    subcategoryName: string,
-    isRent: boolean,
-    filters,
-    handleReset: () => void,
-    urlParams
+    subcategoryName: string;
+    isRent: boolean;
+    filters;
+    handleReset: () => void;
+    urlParams;
 } & CommonFiltersType;
 
 export type SubcategoryFormTypes = {
-    formik
+    formik;
 } & CommonFiltersType;
 
-export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
+export const SearchEstate: FC<SearchEstatePropsType> = props => {
     const {
         categoryName,
         subcategoryName,
@@ -27,95 +27,72 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         formik,
         filters,
         handleReset,
-        urlParams,
-        sameWithUrlCtgr
+        handleSelect,
+        urlParams
     } = props;
-
-    const initialValues = {
-        estate_type: null,
-        room: [],
-        area_from: '',
-        area_to: '',
-        floor_from: '',
-        floor_to: '',
-        number_of_floors_from: '',
-        number_of_floors_to: '',
-        material: [],
-        metro: [],
-        repair: [],
-        furnished: false,
-        with_pledge: false,
-        general_area_from: '',
-        general_area_to: '',
-        land_area_from: '',
-        land_area_to: '',
-        location: null,
-        p2pHold: null,
-        posted: null,
-        electricity: null,
-        sewerage: null,
-        gas: null,
-        water: null,
-        parking_spaces_from: '',
-        parking_spaces_to: ''
-    };
 
     function getFormByCtgr(): ReactNode {
         switch (subcategoryName) {
             case 'flat':
-                return <SearchApartments
-                    formik={formik}
-                    isRent={isRent}
-                    filters={filters}
-                    handleReset={handleReset}
-                    urlParams={urlParams}
-                    categoryName={categoryName}
-                    sameWithUrlCtgr={sameWithUrlCtgr}
-                />;
+                return (
+                    <SearchApartments
+                        formik={formik}
+                        isRent={isRent}
+                        filters={filters}
+                        urlParams={urlParams}
+                        handleReset={handleReset}
+                        handleSelect={handleSelect}
+                        categoryName={categoryName}
+                    />
+                );
             case 'houses_cottages':
-                return <SearchHousesCottages
-                    formik={formik}
-                    isRent={isRent}
-                    filters={filters}
-                    handleReset={handleReset}
-                    urlParams={urlParams}
-                    categoryName={categoryName}
-                    sameWithUrlCtgr={sameWithUrlCtgr}
-                />;
+                return (
+                    <SearchHousesCottages
+                        formik={formik}
+                        isRent={isRent}
+                        filters={filters}
+                        urlParams={urlParams}
+                        handleReset={handleReset}
+                        handleSelect={handleSelect}
+                        categoryName={categoryName}
+                    />
+                );
             case 'commercial_real_estate':
-                return <SearchCommercialProperty
-                    formik={formik}
-                    isRent={isRent}
-                    filters={filters}
-                    handleReset={handleReset}
-                    urlParams={urlParams}
-                    categoryName={categoryName}
-                    sameWithUrlCtgr={sameWithUrlCtgr}
-                />;
+                return (
+                    <SearchCommercialProperty
+                        formik={formik}
+                        isRent={isRent}
+                        filters={filters}
+                        urlParams={urlParams}
+                        handleReset={handleReset}
+                        handleSelect={handleSelect}
+                        categoryName={categoryName}
+                    />
+                );
             case 'land_plots':
-                return <SearchLand
-                    formik={formik}
-                    filters={filters}
-                    handleReset={handleReset}
-                    urlParams={urlParams}
-                    categoryName={categoryName}
-                    sameWithUrlCtgr={sameWithUrlCtgr}
-                />;
+                return (
+                    <SearchLand
+                        formik={formik}
+                        filters={filters}
+                        urlParams={urlParams}
+                        handleReset={handleReset}
+                        handleSelect={handleSelect}
+                        categoryName={categoryName}
+                    />
+                );
             case 'underground_parking_lots_boxes':
-                return <SearchParkingLotsBoxes
-                    formik={formik}
-                    filters={filters}
-                    handleReset={handleReset}
-                    urlParams={urlParams}
-                    categoryName={categoryName}
-                    sameWithUrlCtgr={sameWithUrlCtgr}
-                />;
+                return (
+                    <SearchParkingLotsBoxes
+                        formik={formik}
+                        filters={filters}
+                        urlParams={urlParams}
+                        handleReset={handleReset}
+                        handleSelect={handleSelect}
+                        categoryName={categoryName}
+                    />
+                );
         }
     }
-
-    // useEffect(() => {
-    //     formik.setValues(initialValues);
-    // }, [subcategoryName]);
 
     return (
         <CustomFormikProvider formik={formik}>
