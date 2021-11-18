@@ -190,10 +190,16 @@ export const SearchPost: FC<SearchPostProps> = props => {
 
     const {values, setValues} = formik;
 
-    const drower = useModal();
+    const {handleModalClose, handleModalOpen, modalOpen} = useModal();
+
+    const drower = {
+        drawerOpen: modalOpen,
+        handleDrawerOpen: handleModalOpen,
+        handleDrawerClose: handleModalClose
+    };
 
     function onSubmit() {
-        drower.handleModalClose();
+        handleModalClose();
     }
 
     const handleSelectCategory = (name, value) => {
