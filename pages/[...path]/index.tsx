@@ -31,27 +31,30 @@ export const getServerSideProps: GetServerSideProps = async ({
         siteCategories
     );
 
-    const params: any = {
-        category_id: category.id
-    };
+    const params: any = {};
+    let filters: any = {};
 
-    if (subcategory?.id) params.sub_category_id = subcategory.id;
-    if (type?.id) params.type_id = type.id;
+    if (category) {
+        params.category_id = category.id;
 
-    let filters = await userAPI.getFiltersByCtgr(params);
+        if (subcategory?.id) params.sub_category_id = subcategory.id;
+        if (type?.id) params.type_id = type.id;
 
-    if (category.name === 'car') {
-        if (subcategory?.name === 'made_uzbekistan') {
-            filters = {
-                ...filters.default_param,
-                manufacturer: manufacturersDataNormalize(filters)
-            };
-        } else {
-            filters = {...filters.default_param};
+        filters = await userAPI.getFiltersByCtgr(params);
+
+        if (category.name === 'car') {
+            if (subcategory?.name === 'made_uzbekistan') {
+                filters = {
+                    ...filters.default_param,
+                    manufacturer: manufacturersDataNormalize(filters)
+                };
+            } else {
+                filters = {...filters.default_param};
+            }
         }
-    }
 
-    filters = normalizeFiltersByCategory(filters, type);
+        filters = normalizeFiltersByCategory(filters, type);
+    }
 
     const {region, city} = getLocationByURL(locationName, regions);
 

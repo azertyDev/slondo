@@ -1,11 +1,10 @@
-import {FC, ReactNode} from 'react';
+import {FC} from 'react';
 import {SearchApartments} from '@src/components/post/search_post/search_form/categories_forms/estate/search_apartments/SearchApartments';
 import {SearchHousesCottages} from '@src/components/post/search_post/search_form/categories_forms/estate/search_houses_cottages/SearchHousesCottages';
 import {SearchCommercialProperty} from '@src/components/post/search_post/search_form/categories_forms/estate/search_commercial_property/SearchCommercialProperty';
 import {SearchLand} from '@src/components/post/search_post/search_form/categories_forms/estate/search_land/SearchLand';
 import {SearchParkingLotsBoxes} from '@src/components/post/search_post/search_form/categories_forms/estate/search_parking_lots_boxes/SearchParkingLotsBoxes';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
-import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 
 type SearchEstatePropsType = {
     subcategoryName: string;
@@ -31,7 +30,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = props => {
         urlParams
     } = props;
 
-    function getFormByCtgr(): ReactNode {
+    function getFormByCtgr() {
         switch (subcategoryName) {
             case 'flat':
                 return (
@@ -94,9 +93,5 @@ export const SearchEstate: FC<SearchEstatePropsType> = props => {
         }
     }
 
-    return (
-        <CustomFormikProvider formik={formik}>
-            {!!subcategoryName && getFormByCtgr()}
-        </CustomFormikProvider>
-    );
+    return getFormByCtgr();
 };

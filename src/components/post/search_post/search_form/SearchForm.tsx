@@ -1,5 +1,4 @@
-import {useFormik} from 'formik';
-import {FC, ReactNode, useContext, useEffect, useState} from 'react';
+import {FC, ReactNode, useContext} from 'react';
 import {
     Box,
     FormControl,
@@ -18,7 +17,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {SiteServices} from '@src/components/post/create_post/third_step/first_form/site_services/SiteServices';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
-import {toUrlParams, transformCyrillic, getLocationByURL} from '@src/helpers';
+import {getLocationByURL} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
@@ -26,22 +25,16 @@ import {SearchEstate} from '@src/components/post/search_post/search_form/categor
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {CategoriesCtx, SearchCtx} from '@src/context';
+import {CategoriesCtx} from '@src/context';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FilterIcon} from '@src/components/elements/icons';
 import Drawer from '@material-ui/core/Drawer';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useLocation} from '@src/hooks/use_location/useLocation';
-import {useModal} from '@src/hooks';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
-import {
-    booleanFields,
-    singleFields,
-    stringFields
-} from '@src/common_data/fields_keys';
 import {useStyles} from './useStyles';
 import {RegionType} from '@root/interfaces/Locations';
-import {getInitStateByCategory, initStates} from './initStates';
+import {initStates} from './initStates';
 import {CustomFormikProvider} from '@root/src/components/elements/custom_formik_provider/CustomFormikProvider';
 
 export type CommonFiltersType = {
@@ -58,10 +51,16 @@ type SearchFormPropsType = {
     regions: RegionType[];
     categories;
     filters;
+    formik;
+    drower;
+    handleSelectCategory: (name: string, value) => void;
 };
 
 export const SearchForm: FC<SearchFormPropsType> = props => {
-    const {regions, filters, categories} = props;
+    const {formik, regions, filters, categories, drower, handleSelectCategory} =
+        props;
+
+    const {drawerOpen, handleDrawerOpen, handleDrawerClose} = drower;
 
     const {path, ...urlParams} = useRouter().query;
 
@@ -74,75 +73,29 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         safe_deal,
         exchange,
         delivery,
-        by_filtering,
         by_currency,
-        page,
+        page = '1',
+        by_filtering = 'created_at',
         ...urlFiltersParams
     } = urlParams as {[p: string]: string};
 
     const currencyList = ['sum', 'уе'];
+
+    const {t} = useTranslation('filters');
     const siteCategories = useContext(CategoriesCtx);
     const postTypesList = [postTypes[0], postTypes[1]];
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const {query, push} = useRouter();
+    const {query} = useRouter();
     const [queryLoc] = query.path as string[];
 
     const {region, city} = getLocationByURL(queryLoc, regions);
 
-    const postType = !!archive
-        ? postTypesList[1]
-        : postTypesList.find(type => type.id === +post_type) || null;
-
-    const [ctgr, subctgr, typeCtgr] = categories;
-
-    const initVals = {
-        region: region || null,
-        city: city || null,
-        category: ctgr || null,
-        subcategory: subctgr || null,
-        type: typeCtgr || null,
-        post_type: postType || null,
-        price_from: price_from || '',
-        price_to: price_to || '',
-        free: Boolean(free) || false,
-        archive: Boolean(archive) || false,
-        safe_deal: Boolean(safe_deal) || false,
-        exchange: Boolean(exchange) || false,
-        delivery: Boolean(delivery) || false,
-        by_currency: by_currency || null,
-        by_filtering: by_filtering || 'created_at',
-        page: page || 1,
-        ...getInitStateByCategory(ctgr?.name, urlParams, filters)
-    };
+    const [ctgr] = categories;
 
     const {mainInit} = initStates;
 
-    const {t} = useTranslation('filters');
-
-    const {term} = useContext(SearchCtx);
-
-    const {
-        modalOpen: drawerOpen,
-        handleModalOpen: handleDrawerOpen,
-        handleModalClose: handleDrawerClose
-    } = useModal();
-
-    const onSubmit = () => {
-        handleDrawerClose();
-    };
-
-    const generateUrl = async values => {
-        await push(urlByParams(values));
-    };
-
-    const formik = useFormik({
-        onSubmit,
-        initialValues: initVals
-    });
-
     const {values, setValues} = formik;
-
     const {category, subcategory, type} = values;
 
     const isJob = category?.name === 'job';
@@ -176,30 +129,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         };
 
     const handleSelect = (name, value) => {
-        let vals;
-
-        if (name === 'category') {
-            vals = {
-                ...mainInit,
-                region,
-                city,
-                by_filtering,
-                category: value
-            };
-        } else if (name === 'subcategory') {
-            vals = {
-                ...mainInit,
-                region,
-                city,
-                by_filtering,
-                category,
-                subcategory: value
-            };
-        } else {
-            vals = {...values, [name]: value};
-        }
-
-        setValues(vals);
+        setValues({...values, [name]: value});
     };
 
     const handleReset = () => {
@@ -238,11 +168,6 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         setValues(vals);
     };
 
-    const handleOptSelect = (name, value) => {
-        const vals = {...values, [name]: value};
-        setValues(vals);
-    };
-
     const {locationName, locationModal, handleLocModalOpen} = useLocation({
         handleSelectLocation
     });
@@ -274,30 +199,34 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                 );
             case 'estate':
                 return (
-                    <SearchEstate
-                        isRent={isRent}
-                        formik={formik}
-                        filters={filters}
-                        handleReset={handleReset}
-                        urlParams={urlFiltersParams}
-                        handleSelect={handleSelect}
-                        subcategoryName={subcategoryName}
-                        categoryName={values.category?.name}
-                    />
+                    !!subcategory && (
+                        <SearchEstate
+                            isRent={isRent}
+                            formik={formik}
+                            filters={filters}
+                            handleReset={handleReset}
+                            urlParams={urlFiltersParams}
+                            handleSelect={handleSelect}
+                            subcategoryName={subcategoryName}
+                            categoryName={values.category?.name}
+                        />
+                    )
                 );
             case 'job':
                 return (
-                    <SearchJob
-                        type={type}
-                        category={category}
-                        subcategory={subcategory}
-                        formik={formik}
-                        filters={filters}
-                        urlParams={urlFiltersParams}
-                        handleReset={handleReset}
-                        handleSelect={handleSelect}
-                        categoryName={values.category?.name}
-                    />
+                    !!subcategory && (
+                        <SearchJob
+                            type={type}
+                            category={category}
+                            subcategory={subcategory}
+                            formik={formik}
+                            filters={filters}
+                            urlParams={urlFiltersParams}
+                            handleReset={handleReset}
+                            handleSelect={handleSelect}
+                            categoryName={values.category?.name}
+                        />
+                    )
                 );
             default:
                 return (
@@ -308,43 +237,13 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                         formik={formik}
                         filters={filters}
                         handleReset={handleReset}
-                        handleSelect={handleOptSelect}
+                        handleSelect={handleSelect}
                         urlParams={urlFiltersParams}
                         categoryName={values.category?.name}
                     />
                 );
         }
     };
-
-    function urlByParams(vals): string {
-        let url = '/';
-
-        const {category, subcategory, type, region, city, ...other} = vals;
-
-        const params = toUrlParams(other, term);
-
-        if (region) {
-            url = url.concat(city ? `${city.ru_name}/` : `${region.ru_name}/`);
-        } else {
-            url = url.concat(`uzbekistan/`);
-        }
-
-        if (category) {
-            let categoryName = `${transformCyrillic(category.ru_name)}/`;
-            if (subcategory) {
-                const subcategoryName = `${transformCyrillic(
-                    subcategory.ru_name
-                )}/`;
-                categoryName = `${categoryName}${subcategoryName}`;
-            }
-            url = url.concat(categoryName);
-        }
-
-        if (type) url = url.concat(`${transformCyrillic(type.ru_name)}`);
-        if (params) url = url.concat(params);
-
-        return url;
-    }
 
     const classes = useStyles();
     const form = (
@@ -356,9 +255,9 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                         disableRequire
                         values={values}
                         items={siteCategories}
-                        handleSelect={handleSelect}
                         transKey="categories:"
                         labelTxt={t(`category`)}
+                        handleSelect={handleSelectCategory}
                     />
                 </Grid>
                 {!!values.category?.subcategory && (
@@ -367,7 +266,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                             name="subcategory"
                             disableRequire
                             values={values}
-                            handleSelect={handleSelect}
+                            handleSelect={handleSelectCategory}
                             labelTxt={t(`subcategory`)}
                             items={values.category?.subcategory}
                             transKey={`categories:${category?.name}.`}
@@ -380,7 +279,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                             name="type"
                             disableRequire
                             values={values}
-                            handleSelect={handleSelect}
+                            handleSelect={handleSelectCategory}
                             items={values.subcategory.type}
                             labelTxt={t(`${category?.name}.type.name`)}
                             transKey={`categories:${category?.name}.${subcategory?.name}.`}
@@ -512,10 +411,6 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
             </Grid>
         </CustomFormikProvider>
     );
-
-    useEffect(() => {
-        generateUrl(values);
-    }, [values]);
 
     return (
         <div className={classes.root}>

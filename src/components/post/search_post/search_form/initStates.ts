@@ -18,7 +18,7 @@ export const initStates = {
         delivery: false,
         by_currency: null,
         by_filtering: 'created_at',
-        page: 1
+        page: '1'
     },
     car: {
         manufacturer: null,
@@ -81,7 +81,7 @@ export const getInitStateByCategory = (
     urlParams,
     filters
 ) => {
-    const vals: any = initStates[category];
+    const vals: any = initStates[category] || {};
 
     Object.keys(urlParams).forEach(k => {
         const isSingleField = singleFields.some(f => f === k);

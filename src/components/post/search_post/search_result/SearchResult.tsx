@@ -1,6 +1,5 @@
-import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {FC, Fragment, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {POSTS_PER_PAGE} from '@src/constants';
 import {
     Box,
     Grid,
@@ -9,102 +8,29 @@ import {
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
-import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {GridViewIcon, ListViewIcon} from '@src/components/elements/icons';
-import {unstable_batchedUpdates} from 'react-dom';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
-import {userAPI} from '@src/api/api';
-import {ErrorCtx} from '@src/context';
-import {useRouter} from 'next/router';
-import {getLocationByURL} from '@src/helpers';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 import {ContentAdv} from '@src/components/elements/adv/ContentAdv';
 import {RightAdv} from '@src/components/elements/adv/right/RightAdv';
-import {RegionType} from '@root/interfaces/Locations';
 import {useStyles} from './useStyles';
+import {useRouter} from 'next/router';
 
 type SearchResultPropsType = {
+    isFetch: boolean;
+    isNotFound: boolean;
     searchTermFromUrl: string;
     rightAdvData;
-    categories;
-    regions: RegionType[];
+    posts;
 };
 
 export const SearchResult: FC<SearchResultPropsType> = props => {
-    const {regions, rightAdvData, searchTermFromUrl, categories} = props;
-
-    const {asPath, pathname, query, locale, replace} = useRouter();
-    const {page = 1, path, gclid, ...urlParams} = query;
-    const [queryLoc] = path as string[];
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-
+    const {isFetch, isNotFound, posts, rightAdvData, searchTermFromUrl} = props;
+    const {locale, query} = useRouter();
     const {t} = useTranslation('filters');
-    const {setErrorMsg} = useContext(ErrorCtx);
-    const [ctgr, subCtgr, typeCtgr] = categories;
-
-    const [posts, setPosts] = useState([]);
-    const [itemsCount, setItemsCount] = useState(0);
-    const [isFetch, setIsFetch] = useState(false);
     const [listView, setListView] = useState(false);
-    const [isNotFound, setIsNotFound] = useState(false);
-
-    const handlePagePagination = async (_, pageNum) => {
-        // await push(`${asPath}&page=${pageNum}`);
-        replace(pathname);
-    };
-
-    const getPostsByFilters = async () => {
-        try {
-            const {
-                q,
-                by_filtering = 'created_at',
-                by_currency,
-                ...params
-            } = urlParams;
-
-            const query: any = {
-                ...params,
-                itemsPerPage: POSTS_PER_PAGE,
-                by_filtering,
-                page
-            };
-
-            if (queryLoc !== 'uzbekistan' && regions.length) {
-                const {region, city} = getLocationByURL(queryLoc, regions);
-                query.region_id = region.id;
-                if (city) query.city_id = city.id;
-            }
-
-            if (searchTermFromUrl) query.title = searchTermFromUrl;
-            if (ctgr) query.category_id = ctgr.id;
-            if (subCtgr) query.sub_category_id = subCtgr.id;
-            if (typeCtgr) query.type_id = typeCtgr.id;
-
-            setIsFetch(true);
-
-            const {data, total} = await userAPI.getPostsByFilters(query);
-
-            setIsFetch(false);
-
-            if (total) {
-                setPosts(data);
-                setItemsCount(total);
-                isNotFound && setIsNotFound(false);
-            } else {
-                setIsNotFound(true);
-            }
-        } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
-        }
-    };
-
-    useEffect(() => {
-        getPostsByFilters();
-    }, [asPath]);
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const classes = useStyles();
     return (
@@ -250,13 +176,6 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                         );
                                     })}
                                 </Grid>
-                            </Box>
-                            <Box mt="70px">
-                                <CustomPagination
-                                    totalItems={itemsCount}
-                                    itemsPerPage={POSTS_PER_PAGE}
-                                    handlePagePagination={handlePagePagination}
-                                />
                             </Box>
                         </>
                     )}

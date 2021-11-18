@@ -13,11 +13,12 @@ type SearchRegularPropsType = {
     subcategory;
 } & CommonFiltersType;
 
-export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
-    const {type, categoryName, subcategory, formik, filters} = props;
+export const SearchTransport: FC<SearchRegularPropsType> = props => {
+    const {type, handleSelect, categoryName, subcategory, formik, filters} =
+        props;
 
     const {t} = useTranslation('filters');
-    const isYearExclude = excludeCtgrsForYear.some((k) => k === type?.name);
+    const isYearExclude = excludeCtgrsForYear.some(k => k === type?.name);
     const hasEngineCapacity =
         type?.name === 'motorcycles' || type?.name === 'mopedsAndScooters';
     const hasMileage =
@@ -26,79 +27,77 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
 
     const {values, setValues} = formik;
 
-    const {handleSelect, handleFracInput, handleNumericInput} = useHandlers(
+    const {handleFracInput, handleNumericInput} = useHandlers(
         values,
         setValues
     );
 
     return (
-        <CustomFormikProvider formik={formik}>
-            <Grid container spacing={1}>
-                {getFieldsByFilters(
-                    {
-                        t,
-                        filters,
-                        formik,
-                        handleSelect
-                    },
-                    categoryName,
-                    true
-                )}
-                {hasEngineCapacity && (
-                    <Grid item container xs={12} sm={4}>
-                        <FromToInputs
-                            handleInput={handleFracInput}
-                            labelTxt={t('engine_capacity')}
-                            firstInputProps={{
-                                value: values.engine_capacity_from,
-                                name: 'engine_capacity_from',
-                                placeholder: t(`filters:from`)
-                            }}
-                            secondInputProps={{
-                                value: values.engine_capacity_to,
-                                name: 'engine_capacity_to',
-                                placeholder: t(`filters:to`)
-                            }}
-                        />
-                    </Grid>
-                )}
-                {!isYearExclude && (
-                    <Grid item container xs={12} sm={4}>
-                        <FromToInputs
-                            handleInput={handleNumericInput}
-                            labelTxt={t('year')}
-                            firstInputProps={{
-                                value: values.year_from,
-                                name: 'year_from',
-                                placeholder: t(`filters:from`)
-                            }}
-                            secondInputProps={{
-                                value: values.year_to,
-                                name: 'year_to',
-                                placeholder: t(`filters:to`)
-                            }}
-                        />
-                    </Grid>
-                )}
-                {hasMileage && (
-                    <Grid item container xs={12} sm={4}>
-                        <FromToInputs
-                            handleInput={handleNumericInput}
-                            labelTxt={t('mileage')}
-                            firstInputProps={{
-                                value: values.mileage_from,
-                                name: 'mileage_from',
-                                placeholder: t(`filters:from`)
-                            }}
-                            secondInputProps={{
-                                value: values.mileage_to,
-                                name: 'mileage_to',
-                                placeholder: t(`filters:to`)
-                            }}
-                        />
-                    </Grid>
-                )}
-            </Grid>
-        </CustomFormikProvider>
+        <Grid container spacing={1}>
+            {getFieldsByFilters(
+                {
+                    t,
+                    filters,
+                    formik,
+                    handleSelect
+                },
+                categoryName,
+                true
+            )}
+            {hasEngineCapacity && (
+                <Grid item container xs={12} sm={4}>
+                    <FromToInputs
+                        handleInput={handleFracInput}
+                        labelTxt={t('engine_capacity')}
+                        firstInputProps={{
+                            value: values.engine_capacity_from,
+                            name: 'engine_capacity_from',
+                            placeholder: t(`filters:from`)
+                        }}
+                        secondInputProps={{
+                            value: values.engine_capacity_to,
+                            name: 'engine_capacity_to',
+                            placeholder: t(`filters:to`)
+                        }}
+                    />
+                </Grid>
+            )}
+            {!isYearExclude && (
+                <Grid item container xs={12} sm={4}>
+                    <FromToInputs
+                        handleInput={handleNumericInput}
+                        labelTxt={t('year')}
+                        firstInputProps={{
+                            value: values.year_from,
+                            name: 'year_from',
+                            placeholder: t(`filters:from`)
+                        }}
+                        secondInputProps={{
+                            value: values.year_to,
+                            name: 'year_to',
+                            placeholder: t(`filters:to`)
+                        }}
+                    />
+                </Grid>
+            )}
+            {hasMileage && (
+                <Grid item container xs={12} sm={4}>
+                    <FromToInputs
+                        handleInput={handleNumericInput}
+                        labelTxt={t('mileage')}
+                        firstInputProps={{
+                            value: values.mileage_from,
+                            name: 'mileage_from',
+                            placeholder: t(`filters:from`)
+                        }}
+                        secondInputProps={{
+                            value: values.mileage_to,
+                            name: 'mileage_to',
+                            placeholder: t(`filters:to`)
+                        }}
+                    />
+                </Grid>
+            )}
+        </Grid>
     );
 };
