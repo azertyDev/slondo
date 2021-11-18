@@ -63,7 +63,7 @@ export const SearchPost: FC<SearchPostProps> = props => {
     } = props;
 
     const {locale, asPath, query, push} = useRouter();
-    const {path, gclid, ...urlParams} = query;
+    const {path, gclid, by_currency = null, ...urlParams} = query;
     const [queryLoc] = path as string[];
 
     const {region = null, city = null} = getLocationByURL(queryLoc, regions);
@@ -138,7 +138,6 @@ export const SearchPost: FC<SearchPostProps> = props => {
         safe_deal = false,
         exchange = false,
         delivery = false,
-        by_currency = null,
         by_filtering = 'created_at',
         page = '1'
     } = urlParams as {[p: string]: string};
