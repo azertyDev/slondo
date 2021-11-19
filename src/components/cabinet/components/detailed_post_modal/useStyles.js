@@ -48,6 +48,17 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab
                 }
             },
+            '& div.renewal': {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                '& svg': {
+                    marginRight: 10
+                },
+                '& .MuiTypography-subtitle2': {
+                    color: theme.palette.common.tab
+                }
+            },
             '& button': {
                 height: 38,
                 width: '100%',

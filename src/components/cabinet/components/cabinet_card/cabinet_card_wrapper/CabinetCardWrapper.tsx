@@ -5,7 +5,7 @@ import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
+import {AutoRenIcon, CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';
@@ -67,13 +67,32 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                         alignItems='center'
                         width={isXsDown ? 1 : 'auto'}
                         justifyContent={isXsDown ? 'space-between' : ''}
+                        flexDirection={isXsDown ? 'row-reverse' : 'row'}
                     >
-                        <Typography variant="subtitle1" color="initial" component='p'>
-                            <span className={ads_type}>
-                                {t(`common:${ads_type}`)} №:&nbsp;
-                            </span>
-                            {cardData.id}
-                        </Typography>
+                        <Box display='flex' alignItems='center'>
+                            {
+                                ads_type === 'post' &&
+                                (
+                                    <Box display='flex' mr={isXsDown ? 1 : 2} alignItems='center'>
+                                        {!isXsDown && (
+                                            <Typography
+                                                variant='caption'
+                                                style={{marginRight: 5}}
+                                            >
+                                                {t('common:auto_ren')}
+                                            </Typography>
+                                        )}
+                                        <AutoRenIcon />
+                                    </Box>
+                                )
+                            }
+                            <Typography variant="subtitle1" color="initial" component='p'>
+                                <span className={ads_type}>
+                                    {t(`common:${ads_type}`)} №:&nbsp;
+                                </span>
+                                {cardData.id}
+                            </Typography>
+                        </Box>
                         <div className='status'>
                             <Typography variant='subtitle2' component='p'>
                                 {t(status)}
@@ -83,14 +102,14 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                 </div>
             </Box>
             <Box position='relative'>
-                <CabinetCard cardData={cardData}/>
+                <CabinetCard cardData={cardData} />
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
                         <Grid item xs={5} sm={4} container justifyContent='center'>
                             {page?.includes('favorite')
                                 ? <Grid item xs={6} container justifyContent='center'>
                                     <CustomButton onClick={handleOpenModal(cardData.id)}>
-                                        <CloseIcon/>
+                                        <CloseIcon />
                                     </CustomButton>
                                 </Grid>
                                 : <>
@@ -100,7 +119,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                                 className='icons'
                                                 onClick={handleNotificationsOpen}
                                             >
-                                                <NotificationIcon/>
+                                                <NotificationIcon />
                                             </CustomButton>
                                         </Grid>
                                     )}
@@ -111,7 +130,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                                 disabled={!allowSettings}
                                                 onClick={handleSettingsOpen}
                                             >
-                                                <SettingsIcon/>
+                                                <SettingsIcon />
                                             </CustomButton>
                                         </Grid>
                                     )}
@@ -132,7 +151,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1' component='p'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action'/>
+                                <ChevronRight color='action' />
                             </CustomButton>
                         </Grid>
                     )}
@@ -141,7 +160,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                     <div className='card-btns'>
                         {page?.includes('favorite')
                             ? <CustomButton onClick={handleOpenModal(cardData.id)}>
-                                <CloseIcon/>
+                                <CloseIcon />
                             </CustomButton>
                             : <>
                                 {creator && (isPublic || isArchive) && (
@@ -151,7 +170,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                                 disabled
                                                 className='icons'
                                             >
-                                                <RocketIcon/>
+                                                <RocketIcon />
                                             </CustomButton>
                                         )}
                                         <CustomButton
@@ -159,7 +178,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                             disabled={!allowSettings}
                                             onClick={handleSettingsOpen}
                                         >
-                                            <SettingsIcon/>
+                                            <SettingsIcon />
                                         </CustomButton>
                                     </>
                                 )}
@@ -168,7 +187,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = (props) => {
                                         className='icons'
                                         onClick={handleNotificationsOpen}
                                     >
-                                        <NotificationIcon/>
+                                        <NotificationIcon />
                                     </CustomButton>
                                 )}
                             </>}
