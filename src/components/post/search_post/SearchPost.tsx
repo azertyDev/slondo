@@ -313,7 +313,9 @@ export const SearchPost: FC<SearchPostProps> = props => {
 
     const fetchAds = async () => {
         try {
-            const {sidebar, footer} = await adsAPI.getAds();
+            const {sidebar = initAds.right, footer = initAds.bottom} =
+                await adsAPI.getAds();
+
             const ads = {
                 right: sidebar,
                 bottom: footer

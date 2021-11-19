@@ -20,7 +20,7 @@ const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: production
+    baseURL: local
 });
 
 const setTokenToHeader = () => {

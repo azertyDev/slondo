@@ -1,5 +1,5 @@
 export const SERVER_URL = `${process.env.SERVER_URL || 'http://localhost:3317'}`;
-export const DEV_URL = 'http://192.168.100.60';
+export const DEV_URL = 'http://192.168.100.101';
 export const PRODUCTION_URL = 'https://backend.slondo.uz';
 export const INNER_URLS = {
     create_post: '/create',
