@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#EEEDF2',
+        backgroundColor: '#EEEDF7',
         padding: '15px',
         borderRadius: '10px',
         marginBottom: '10px',

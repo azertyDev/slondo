@@ -1,11 +1,10 @@
 import {FC, useContext} from 'react';
 import {CardDataType} from '@root/interfaces/CardData';
-import {Box, Grid, Paper, Typography} from '@material-ui/core';
-import {LocationIcon} from '@src/components/elements/icons';
+import {Box, Grid, Paper, Switch, Typography} from '@material-ui/core';
+import {AutoRenIcon, LocationIcon} from '@src/components/elements/icons';
 import {useTranslation} from 'next-i18next';
-import {AuthCtx} from "@src/context";
-import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
+import {AuthCtx} from '@src/context';
+import {UserCard} from '@src/components/cabinet/components/user_card/UserCard';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from '../useStyles';
 
@@ -66,12 +65,12 @@ export const DetailedPost: FC<DetailedPostViewPropsType> = (props) => {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <CabinetCard cardData={post}/>
+                    <CabinetCard cardData={post} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper className='paper-block'>
                         <Box className='location' width={1}>
-                            <LocationIcon/>
+                            <LocationIcon />
                             <Typography
                                 noWrap
                                 color="initial"
@@ -82,6 +81,17 @@ export const DetailedPost: FC<DetailedPostViewPropsType> = (props) => {
                                     : t(`locations:${post.region.name}.name`)}
                             </Typography>
                         </Box>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Paper className='paper-block'>
+                        <Box className='renewal'>
+                            <AutoRenIcon />
+                            <Typography variant='subtitle1'>
+                                Автопродление объявления
+                            </Typography>
+                        </Box>
+                        <Switch color='secondary' disableFocusRipple />
                     </Paper>
                 </Grid>
                 {userData && (

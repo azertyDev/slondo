@@ -36,6 +36,9 @@ export const useStyles = makeStyles(theme => ({
             },
             '& p.MuiTypography-subtitle1': {
                 marginRight: 10,
+                [theme.breakpoints.down('xs')]: {
+                    marginRight: 0
+                },
                 '& span': {
                     color: '#838383'
                 }

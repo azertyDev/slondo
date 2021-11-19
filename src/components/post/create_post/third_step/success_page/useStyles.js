@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '200px',
+        backgroundColor: '#F8F7FA',
         [theme.breakpoints.down('xs')]: {
             textAlign: 'center',
             minHeight: 0,
