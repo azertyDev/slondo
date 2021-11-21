@@ -22,6 +22,8 @@ import {
     categoriesNormalize,
     getCtgrsByCyrillicNames,
     getLocationByURL,
+    manufacturersDataNormalize,
+    normalizeFiltersByCategory,
     toUrlParams,
     transformCyrillic
 } from '@src/helpers';
@@ -178,6 +180,7 @@ export const SearchPost: FC<SearchPostProps> = props => {
     const [isFetch, setIsFetch] = useState(false);
     const [itemsCount, setItemsCount] = useState(0);
     const [isNotFound, setIsNotFound] = useState(false);
+    const [filtersState, setFilters] = useState(filters);
 
     const [ads, setAds] = useState(initAds);
     const {right, bottom} = ads;
@@ -188,10 +191,11 @@ export const SearchPost: FC<SearchPostProps> = props => {
     });
 
     const {values, setValues} = formik;
+    const {category, subcategory, type} = values;
 
     const {handleModalClose, handleModalOpen, modalOpen} = useModal();
 
-    const drower = {
+    const drawer = {
         drawerOpen: modalOpen,
         handleDrawerOpen: handleModalOpen,
         handleDrawerClose: handleModalClose
@@ -202,15 +206,43 @@ export const SearchPost: FC<SearchPostProps> = props => {
         handleModalClose();
     }
 
-    const resetByCategory = () => {
+    const setFiltersCategory = async values => {
         const {category, subcategory, type} = values;
 
+        if (category) {
+            const params: any = {
+                category_id: category.id
+            };
+
+            if (subcategory?.id) params.sub_category_id = subcategory.id;
+            if (type?.id) params.type_id = type.id;
+
+            let filters = await userAPI.getFiltersByCtgr(params);
+
+            if (category.name === 'car') {
+                if (subcategory?.name === 'made_uzbekistan') {
+                    filters = {
+                        ...filters.default_param,
+                        manufacturer: manufacturersDataNormalize(filters)
+                    };
+                } else {
+                    filters = {...filters.default_param};
+                }
+            }
+
+            filters = normalizeFiltersByCategory(filters, type);
+            setFilters(filters);
+        }
+    };
+
+    const resetByCategory = () => {
         if (
             (ctgr && ctgr.name !== category.name) ||
             (subctgr && subctgr.name !== subcategory.name) ||
             (typectgr && typectgr.name !== type.name)
-        )
+        ) {
             setValues(initVals);
+        }
     };
 
     const handleSelectCategory = (name, value) => {
@@ -245,6 +277,7 @@ export const SearchPost: FC<SearchPostProps> = props => {
         }
 
         setValues(vals);
+        setFiltersCategory(vals);
     };
 
     const generateUrl = async values => {
@@ -344,12 +377,12 @@ export const SearchPost: FC<SearchPostProps> = props => {
     }, []);
 
     useEffect(() => {
-        !isSmDown && generateUrl(values);
-    }, [values]);
-
-    useEffect(() => {
         getPostsByFilters();
     }, [asPath]);
+    
+    useEffect(() => {
+        !isSmDown && generateUrl(values);
+    }, [values]);
 
     useEffect(() => {
         resetByCategory();
@@ -370,9 +403,8 @@ export const SearchPost: FC<SearchPostProps> = props => {
                                 <Grid item xs={12} lg={9} zeroMinWidth>
                                     <SearchForm
                                         formik={formik}
-                                        drower={drower}
-                                        regions={regions}
-                                        filters={filters}
+                                        drawer={drawer}
+                                        filters={filtersState}
                                         categories={ctgrsByCyrName}
                                         handleSelectCategory={
                                             handleSelectCategory

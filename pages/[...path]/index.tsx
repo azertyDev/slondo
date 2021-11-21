@@ -31,11 +31,12 @@ export const getServerSideProps: GetServerSideProps = async ({
         siteCategories
     );
 
-    const params: any = {};
     let filters: any = {};
 
     if (category) {
-        params.category_id = category.id;
+        const params: any = {
+            category_id: category.id
+        };
 
         if (subcategory?.id) params.sub_category_id = subcategory.id;
         if (type?.id) params.type_id = type.id;

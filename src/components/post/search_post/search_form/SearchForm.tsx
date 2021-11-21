@@ -18,7 +18,6 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {SiteServices} from '@src/components/post/create_post/third_step/first_form/site_services/SiteServices';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
-import {getLocationByURL} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
@@ -32,7 +31,6 @@ import {FilterIcon} from '@src/components/elements/icons';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useLocation} from '@src/hooks/use_location/useLocation';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
-import {RegionType} from '@root/interfaces/Locations';
 import {initStates} from './initStates';
 import {CustomFormikProvider} from '@root/src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useStyles} from './useStyles';
@@ -48,19 +46,18 @@ export type CommonFiltersType = {
 };
 
 type SearchFormPropsType = {
-    regions: RegionType[];
     categories;
     filters;
     formik;
-    drower;
+    drawer;
     handleSelectCategory: (name: string, value) => void;
 };
 
 export const SearchForm: FC<SearchFormPropsType> = props => {
-    const {formik, regions, filters, categories, drower, handleSelectCategory} =
+    const {formik, filters, categories, drawer, handleSelectCategory} =
         props;
 
-    const {drawerOpen, handleDrawerOpen, handleDrawerClose} = drower;
+    const {drawerOpen, handleDrawerOpen, handleDrawerClose} = drawer;
 
     const {path, ...urlParams} = useRouter().query;
 
@@ -86,12 +83,6 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
     const postTypesList = [postTypes[0], postTypes[1]];
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const [queryLoc] = useRouter().query.path as string[];
-
-    const {region, city} = getLocationByURL(queryLoc, regions);
-
-    const [ctgr] = categories;
-
     const {mainInit} = initStates;
 
     const {values, setValues} = formik;
@@ -101,7 +92,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
     const isService = category?.name === 'service';
     const isRent = type?.id === 2 || type?.id === 3;
 
-    const mainCategoryName: string = ctgr?.name ?? '';
+    const mainCategoryName: string = category?.name ?? '';
     const subcategoryName: string = subcategory?.name ?? '';
 
     const hasAuction = siteCategories.some(
@@ -162,7 +153,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         handleSelectLocation
     });
 
-    const getFiltersByCtgr = (): ReactNode => {
+    const getFormByCategory = (): ReactNode => {
         switch (mainCategoryName) {
             case 'car':
                 return (
@@ -393,7 +384,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                     categoryName={mainCategoryName}
                 />
                 <Grid item xs={12}>
-                    {getFiltersByCtgr()}
+                    {getFormByCategory()}
                 </Grid>
                 <Grid item container xs={12}>
                     <ActionButtons handleReset={handleReset} />
