@@ -245,6 +245,11 @@ export const SearchPost: FC<SearchPostProps> = props => {
         }
     };
 
+    const handleReset = () => {
+        setFilters({});
+        setValues(mainInit);
+    };
+
     const handleSelectCategory = (name, value) => {
         let vals = {};
 
@@ -379,7 +384,7 @@ export const SearchPost: FC<SearchPostProps> = props => {
     useEffect(() => {
         getPostsByFilters();
     }, [asPath]);
-    
+
     useEffect(() => {
         !isSmDown && generateUrl(values);
     }, [values]);
@@ -406,6 +411,7 @@ export const SearchPost: FC<SearchPostProps> = props => {
                                         drawer={drawer}
                                         filters={filtersState}
                                         categories={ctgrsByCyrName}
+                                        handleReset={handleReset}
                                         handleSelectCategory={
                                             handleSelectCategory
                                         }

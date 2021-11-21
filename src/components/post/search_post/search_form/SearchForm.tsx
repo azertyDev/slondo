@@ -50,12 +50,12 @@ type SearchFormPropsType = {
     filters;
     formik;
     drawer;
+    handleReset: () => void;
     handleSelectCategory: (name: string, value) => void;
 };
 
 export const SearchForm: FC<SearchFormPropsType> = props => {
-    const {formik, filters, categories, drawer, handleSelectCategory} =
-        props;
+    const {formik, filters, drawer, handleReset, handleSelectCategory} = props;
 
     const {drawerOpen, handleDrawerOpen, handleDrawerClose} = drawer;
 
@@ -120,10 +120,6 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
 
     const handleSelect = (name, value) => {
         setValues({...values, [name]: value});
-    };
-
-    const handleReset = () => {
-        setValues(mainInit);
     };
 
     const handlePostType = (name, value) => {
