@@ -153,9 +153,9 @@ export const SearchApartments: FC<SubcategoryFormTypes> = props => {
                             >
                                 <CheckboxSelect
                                     name="with_pledge"
-                                    labelTxt={t('filters:with_pledge')}
                                     checked={values.with_pledge}
                                     handleCheckbox={handleCheckbox}
+                                    labelTxt={t('estate.with_pledge.name')}
                                 />
                             </Grid>
                         )}

@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
         };
     } catch (e) {
         console.error(e);
+        throw e;
     }
 };
 

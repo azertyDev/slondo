@@ -69,12 +69,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = props => {
 
     const classes = useStyles();
     return (
-        <Grid
-            item
-            container
-            spacing={iconMode ? 2 : 1}
-            className={classes.root}
-        >
+        <Grid item container spacing={1} className={classes.root}>
+            <Typography
+                variant="subtitle1"
+                style={{width: '100%', paddingLeft: '8px'}}
+            >
+                {t('services')}
+            </Typography>
             {!isAuction && (
                 <>
                     {hasSafeDeal && (

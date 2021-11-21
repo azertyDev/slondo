@@ -17,7 +17,7 @@ export const CheckboxSelect: FC<ServiceItemPropsType> = (props) => {
         name,
         icon = null,
         labelTxt,
-        checked,
+        checked = false,
         handleCheckbox
     } = props;
 

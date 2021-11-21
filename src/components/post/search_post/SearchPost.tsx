@@ -197,9 +197,21 @@ export const SearchPost: FC<SearchPostProps> = props => {
         handleDrawerClose: handleModalClose
     };
 
-    function onSubmit() {
+    async function onSubmit() {
+        await generateUrl(values);
         handleModalClose();
     }
+
+    const resetByCategory = () => {
+        const {category, subcategory, type} = values;
+
+        if (
+            (ctgr && ctgr.name !== category.name) ||
+            (subctgr && subctgr.name !== subcategory.name) ||
+            (typectgr && typectgr.name !== type.name)
+        )
+            setValues(initVals);
+    };
 
     const handleSelectCategory = (name, value) => {
         let vals = {};
@@ -332,12 +344,16 @@ export const SearchPost: FC<SearchPostProps> = props => {
     }, []);
 
     useEffect(() => {
-        generateUrl(values);
+        !isSmDown && generateUrl(values);
     }, [values]);
 
     useEffect(() => {
         getPostsByFilters();
     }, [asPath]);
+
+    useEffect(() => {
+        resetByCategory();
+    }, [ctgr?.name, subctgr?.name, typectgr?.name]);
 
     const classes = useStyles();
     return statusCode !== 200 ? (

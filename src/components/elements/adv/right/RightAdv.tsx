@@ -36,7 +36,7 @@ export const RightAdv: FC<RightAdvProps> = ({
                 </div>
             ) : (
                 <Link href={url}>
-                    <a>
+                    <a rel="nofollow">
                         <div className={mobile ? 'm-right-adv' : 'right-adv'} />
                     </a>
                 </Link>

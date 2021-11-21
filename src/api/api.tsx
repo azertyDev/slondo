@@ -4,7 +4,7 @@ import {cookies, transformCyrillic} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
-import {CityType, RegionType} from "@root/interfaces/Locations";
+import {CityType, RegionType} from '@root/interfaces/Locations';
 import {
     DEV_URL,
     POSTS_PER_PAGE,
@@ -12,15 +12,15 @@ import {
     MESSAGES_PER_PAGE,
     PRODUCTION_URL,
     SUBS_PER_PAGE
-} from "@src/constants";
+} from '@src/constants';
 
-const production = `${PRODUCTION_URL}/api/`;
-const local = `${DEV_URL}/slondo/public/api/`;
+const production = `${PRODUCTION_URL}/api`;
+const local = `${PRODUCTION_URL}/slondo/public/api/`;
 const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: local
+    baseURL: production
 });
 
 const setTokenToHeader = () => {
@@ -31,7 +31,7 @@ const setTokenToHeader = () => {
                 'Cross-Origin-Embedder-Policy': 'require-corp',
                 'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         };
     }
@@ -42,7 +42,7 @@ export const adsAPI = {
         const params = {main, lang};
         return instance
             .get(`post/reclame`, {params})
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -50,11 +50,11 @@ export const adsAPI = {
 };
 
 export const chatAPI = {
-    resetUnreadCount: (contact_id) => {
+    resetUnreadCount: contact_id => {
         const params = {contact_id};
         return instance
             .post(`contact/reset`, params, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -62,7 +62,7 @@ export const chatAPI = {
     getContactById: (userId): Promise<any> => {
         return instance
             .get(`contact/${userId}`, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -84,12 +84,16 @@ export const chatAPI = {
     sendMessage: (form): Promise<any> => {
         return instance
             .post(`message/send`, form, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
-    getMessages: (receiver_id: number, page: number, itemsPerPage = MESSAGES_PER_PAGE): Promise<any> => {
+    getMessages: (
+        receiver_id: number,
+        page: number,
+        itemsPerPage = MESSAGES_PER_PAGE
+    ): Promise<any> => {
         const params = {
             receiver_id,
             page,
@@ -97,7 +101,7 @@ export const chatAPI = {
         };
         return instance
             .get(`message/byReceiverId`, {params, ...setTokenToHeader()})
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -108,7 +112,7 @@ export const chatAPI = {
         };
         return instance
             .get(`contact/all`, {params, ...setTokenToHeader()})
-            .then((res) => res.data.data)
+            .then(res => res.data.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -119,15 +123,19 @@ export const myUzCardAPI = {
     p2pHold: (paymentData: string): Promise<any> => {
         return instance
             .post(`uzcard/p2p/createHold`, paymentData, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
     performDismiss: (postId, isPerform = false): Promise<any> => {
         return instance
-            .post(`uzcard/p2p/${isPerform ? 'performHold' : 'dismissHold'}`, postId, setTokenToHeader())
-            .then((res) => res.data)
+            .post(
+                `uzcard/p2p/${isPerform ? 'performHold' : 'dismissHold'}`,
+                postId,
+                setTokenToHeader()
+            )
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -135,7 +143,7 @@ export const myUzCardAPI = {
     createCard: (cardData: string): Promise<any> => {
         return instance
             .post(`uzcard/card/create`, cardData, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -143,7 +151,7 @@ export const myUzCardAPI = {
     confirmSmsCode: (data: string): Promise<any> => {
         return instance
             .post(`uzcard/card/confirm`, data, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -151,7 +159,7 @@ export const myUzCardAPI = {
     getUserCards: (): Promise<any> => {
         return instance
             .get(`uzcard/cards/all`, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -159,7 +167,7 @@ export const myUzCardAPI = {
     removeUserCard: (cardId: number): Promise<any> => {
         return instance
             .delete(`uzcard/card/delete/${cardId}`, setTokenToHeader())
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -170,15 +178,18 @@ export const userCabinetAPI = {
     getPurchases: (params): Promise<any> => {
         return instance
             .get('regular/post/purchased', {params, ...setTokenToHeader()})
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
     getArchivePurchases: (params): Promise<any> => {
         return instance
-            .get('regular/archivePost/purchased', {params, ...setTokenToHeader()})
-            .then((res) => res.data)
+            .get('regular/archivePost/purchased', {
+                params,
+                ...setTokenToHeader()
+            })
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -188,7 +199,11 @@ export const userCabinetAPI = {
 export const postAPI = {
     complaint: (ads_id: number, complaint: string): Promise<any> => {
         return instance
-            .post(`regular/post/complaint`, {ads_id, complaint}, setTokenToHeader())
+            .post(
+                `regular/post/complaint`,
+                {ads_id, complaint},
+                setTokenToHeader()
+            )
             .catch(({response}) => {
                 throw response.data;
             });
@@ -197,26 +212,28 @@ export const postAPI = {
 
 export const userAPI = {
     feedback: (form): Promise<any> => {
-        return instance.post(`feedback`, form)
-            .catch(err => {
-                throw err;
-            });
+        return instance.post(`feedback`, form).catch(err => {
+            throw err;
+        });
     },
     getPostsByFilters: (params): Promise<any> => {
         return instance
             .get('posts/filter', {params, ...setTokenToHeader()})
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
-    login: (phone: string, password: string): Promise<{ token: string, user: UserInfo }> => {
+    login: (
+        phone: string,
+        password: string
+    ): Promise<{token: string; user: UserInfo}> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
         return instance
             .post(`login`, form)
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -224,7 +241,7 @@ export const userAPI = {
     getMainSliderData: (params): Promise<any> => {
         return instance
             .get('slider/main', {params})
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -234,7 +251,7 @@ export const userAPI = {
         form.set('phone', phone);
         return instance
             .post(`register`, form)
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -244,7 +261,7 @@ export const userAPI = {
         form.set('phone', phone);
         return instance
             .post(`recoveryRequest`, form)
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
@@ -252,30 +269,34 @@ export const userAPI = {
     confirmSmsCode: (phone: string, code: string): Promise<unknown> => {
         return instance
             .get(`checkShortCode?phone=${phone}&code=${code}`)
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
-    newPassword: (phone: string, code: string, newPassword: string): Promise<{ user: any, token: string }> => {
+    newPassword: (
+        phone: string,
+        code: string,
+        newPassword: string
+    ): Promise<{user: any; token: string}> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('code', code);
         form.set('password', newPassword);
         return instance
             .post(`recovery`, form)
-            .then((res) => res.data)
+            .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
-    favoriteAds: (id: number): Promise<{ message: string }> => {
+    favoriteAds: (id: number): Promise<{message: string}> => {
         const form = new FormData();
         form.set('ads_id', `${id}`);
         return instance
             .post(`regular/post/favorite`, form, setTokenToHeader())
-            .then((res) => res.data)
-            .catch((err) => {
+            .then(res => res.data)
+            .catch(err => {
                 throw err;
             });
     },
@@ -285,27 +306,30 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`regular/post/get/favorites`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`regular/post/get/favorites`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getMyPosts: (params): Promise<any> => {
-        return instance.get(`regular/user/posts`, {
-            params,
-            ...setTokenToHeader()
-        })
+        return instance
+            .get(`regular/user/posts`, {
+                params,
+                ...setTokenToHeader()
+            })
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getParticipatingAucs: (params) => {
-        return instance.get(`regular/user/auctions/participating`, {
-            params,
-            ...setTokenToHeader()
-        })
+    getParticipatingAucs: params => {
+        return instance
+            .get(`regular/user/auctions/participating`, {
+                params,
+                ...setTokenToHeader()
+            })
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -316,21 +340,31 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`regular/user/${subsPath}/all`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`regular/user/${subsPath}/all`, {
+                params,
+                ...setTokenToHeader()
+            })
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    follow: (id): Promise<{ message: string }> => {
-        return instance.post(`regular/user/subscribe?user_id=${id}`, {}, setTokenToHeader())
+    follow: (id): Promise<{message: string}> => {
+        return instance
+            .post(
+                `regular/user/subscribe?user_id=${id}`,
+                {},
+                setTokenToHeader()
+            )
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getCategories: (): Promise<CategoryType[]> => {
-        return instance.get(`categories/all`)
+        return instance
+            .get(`categories/all`)
             .then(res => {
                 return res.data;
             })
@@ -339,7 +373,8 @@ export const userAPI = {
             });
     },
     getFiltersByCtgr: (params): Promise<any> => {
-        return instance.get(`subcategory`, {params})
+        return instance
+            .get(`subcategory`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -350,22 +385,27 @@ export const userAPI = {
             model_id: modelId,
             year_id: yearId
         };
-        return instance.get(`regular/cars/params/getByManufacturerYear`, {params})
+        return instance
+            .get(`regular/cars/params/getByManufacturerYear`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getCards: (type = 'post', page = 1, itemsPerPage = POSTS_PER_PAGE):
-        Promise<{ data: CardDataType[]; total: number; }> => {
+    getCards: (
+        type = 'post',
+        page = 1,
+        itemsPerPage = POSTS_PER_PAGE
+    ): Promise<{data: CardDataType[]; total: number}> => {
         const params = {
             type,
             page,
             itemsPerPage
         };
-        return instance.get(`post/all`, {params, ...setTokenToHeader()})
-            .then((res) => res.data)
-            .catch((err) => {
+        return instance
+            .get(`post/all`, {params, ...setTokenToHeader()})
+            .then(res => res.data)
+            .catch(err => {
                 throw err;
             });
     },
@@ -373,12 +413,10 @@ export const userAPI = {
         const params = {
             id: postId
         };
-        return instance.get(
-            `getPostById`,
-            {...setTokenToHeader(), params}
-        )
-            .then((res) => res.data)
-            .catch((err) => {
+        return instance
+            .get(`getPostById`, {...setTokenToHeader(), params})
+            .then(res => res.data)
+            .catch(err => {
                 throw err;
             });
     },
@@ -393,21 +431,24 @@ export const userAPI = {
             });
         };
 
-        return instance.get(`location`)
+        return instance
+            .get(`location`)
             .then(res => transFromCyrillic(res.data))
             .catch(err => {
                 throw err;
             });
     },
     createPost: (form: FormData): Promise<string> => {
-        return instance.post(`regular/post/new`, form, setTokenToHeader())
+        return instance
+            .post(`regular/post/new`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     editPost: (form: FormData, postId): Promise<string> => {
-        return instance.post(`regular/post/edit/${postId}`, form, setTokenToHeader())
+        return instance
+            .post(`regular/post/edit/${postId}`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -417,21 +458,24 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', id);
         form.set('bet', bet);
-        return instance.post(`regular/auction/nextBet`, form, setTokenToHeader())
+        return instance
+            .post(`regular/auction/nextBet`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getAuctionBets: (params): Promise<any> => {
-        return instance.get(`auction/allBets`, {params})
+        return instance
+            .get(`auction/allBets`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getPostAuthorPhones: (postId: number): Promise<any> => {
-        return instance.get(`getPhone/${postId}`)
+        return instance
+            .get(`getPhone/${postId}`)
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -441,93 +485,116 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', auctionId);
         form.set('ads_id', postId);
-        return instance.post(`regular/auction/buyNow`, form, setTokenToHeader())
+        return instance
+            .post(`regular/auction/buyNow`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     deactivateAuction: (ads_id: number): Promise<any> => {
-        return instance.post(`regular/auction/deactivate`, {ads_id}, setTokenToHeader())
+        return instance
+            .post(`regular/auction/deactivate`, {ads_id}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     deactivatePost: (data): Promise<any> => {
-        return instance.post(`regular/post/deactivate`, data, setTokenToHeader())
+        return instance
+            .post(`regular/post/deactivate`, data, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getUserByPhoneNumber: (params: { phone: string }): Promise<any> => {
-        return instance.get(`regular/user/byPhone`, {
-            params,
-            ...setTokenToHeader()
-        })
+    getUserByPhoneNumber: (params: {phone: string}): Promise<any> => {
+        return instance
+            .get(`regular/user/byPhone`, {
+                params,
+                ...setTokenToHeader()
+            })
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     restoreFromArchive: (ads_id: number): Promise<any> => {
-        return instance.post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
+        return instance
+            .post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    deleteArchivePost: (ads_id: number): Promise<{ message: string }> => {
-        return instance.delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
+    deleteArchivePost: (ads_id: number): Promise<{message: string}> => {
+        return instance
+            .delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     rejectVictory: (ads_id: number): Promise<any> => {
-        return instance.post(`regular/auction/reject`, {ads_id}, setTokenToHeader())
+        return instance
+            .post(`regular/auction/reject`, {ads_id}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     offerThePrice: (auction_id: number, price: string): Promise<any> => {
-        return instance.post(`regular/auction/offerThePrice`, {
-            auction_id,
-            price
-        }, setTokenToHeader())
+        return instance
+            .post(
+                `regular/auction/offerThePrice`,
+                {
+                    auction_id,
+                    price
+                },
+                setTokenToHeader()
+            )
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getAllOffersById: (auction_id: number): Promise<any> => {
-        return instance.get(`regular/auction/allOffers?auction_id=${auction_id}`, setTokenToHeader())
+        return instance
+            .get(
+                `regular/auction/allOffers?auction_id=${auction_id}`,
+                setTokenToHeader()
+            )
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     acceptOffer: (offer_id: number, is_accepted: boolean): Promise<any> => {
-        return instance.post(`regular/auction/acceptOfferThePrice`, {
-            offer_id,
-            is_accepted
-        }, setTokenToHeader())
+        return instance
+            .post(
+                `regular/auction/acceptOfferThePrice`,
+                {
+                    offer_id,
+                    is_accepted
+                },
+                setTokenToHeader()
+            )
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     changeUserInfo: (userInfo): Promise<any> => {
-        return instance.post(`regular/user/info`, userInfo, setTokenToHeader())
+        return instance
+            .post(`regular/user/info`, userInfo, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getUserInfo: (): Promise<any> => {
-        return instance.get(`regular/user/info`, setTokenToHeader())
+        return instance
+            .get(`regular/user/info`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -536,65 +603,72 @@ export const userAPI = {
     changeUserAvatar: (avatar): Promise<any> => {
         const formData = new FormData();
         formData.append('avatar', avatar);
-        return instance.post(`regular/user/avatar`, formData, setTokenToHeader())
+        return instance
+            .post(`regular/user/avatar`, formData, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     deleteUserAvatar: (id: number): Promise<any> => {
-        return instance.delete(`regular/user/avatar/${id}`, setTokenToHeader())
+        return instance
+            .delete(`regular/user/avatar/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getAllNotifications: (params): Promise<any> => {
-        return instance.get(`regular/user/notification`, {...setTokenToHeader(), params})
+        return instance
+            .get(`regular/user/notification`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    deleteUserNotification: (id: number): Promise<{ message?: string }> => {
-        return instance.delete(`regular/user/notification/${id}`, setTokenToHeader())
+    deleteUserNotification: (id: number): Promise<{message?: string}> => {
+        return instance
+            .delete(`regular/user/notification/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     deleteAllNotification: (user_id: number): Promise<any> => {
-        return instance.delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
+        return instance
+            .delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     ricePostInTape: (post_id: number): Promise<any> => {
-        return instance.post(`regular/user/post/rise/${post_id}`, {}, setTokenToHeader())
+        return instance
+            .post(`regular/user/post/rise/${post_id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getPhoneByUserId: (user_id: number): Promise<any> => {
-        return instance.get(`regular/user/phone/${user_id}`, setTokenToHeader())
+        return instance
+            .get(`regular/user/phone/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getNotificationById: (params): Promise<any> => {
-        return instance.get(
-            `regular/post/notifications`,
-            {...setTokenToHeader(), params})
+        return instance
+            .get(`regular/post/notifications`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getUserObserver: (): Promise<any> => {
-        return instance.get(`regular/user/observer`, setTokenToHeader())
+        return instance
+            .get(`regular/user/observer`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -604,63 +678,87 @@ export const userAPI = {
         const params = {
             user_id
         };
-        return instance.get(`user/rating`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`user/rating`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     setUserRating: (data): Promise<any> => {
-        return instance.post('regular/user/rating', {...data}, setTokenToHeader())
+        return instance
+            .post('regular/user/rating', {...data}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getBannedPosts: (type, page, itemsPerPage = ITEMS_PER_PAGE): Promise<any> => {
+    getBannedPosts: (
+        type,
+        page,
+        itemsPerPage = ITEMS_PER_PAGE
+    ): Promise<any> => {
         const params = {
             type,
             page,
             itemsPerPage
         };
-        return instance.get(`regular/post/returned`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`regular/post/returned`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     deleteBlockedPost: (postId: number): Promise<any> => {
-        return instance.delete(`regular/post/returned/${postId}`, setTokenToHeader())
+        return instance
+            .delete(`regular/post/returned/${postId}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getAllUserRating: (): Promise<any> => {
-        return instance.get(`user/rating`, setTokenToHeader())
+        return instance
+            .get(`user/rating`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    setReplyComment: (comment_id: number, comment: string): Promise<{ message: string }> => {
-        return instance.post('regular/user/comment', {
-            comment_id,
-            comment
-        }, setTokenToHeader())
+    setReplyComment: (
+        comment_id: number,
+        comment: string
+    ): Promise<{message: string}> => {
+        return instance
+            .post(
+                'regular/user/comment',
+                {
+                    comment_id,
+                    comment
+                },
+                setTokenToHeader()
+            )
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getUserInfoById: (user_id: string): Promise<any> => {
-        return instance.get(`user/${user_id}`, setTokenToHeader())
+        return instance
+            .get(`user/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getUserPosts: (user_id, type, archive = 0, page, itemsPerPage = ITEMS_PER_PAGE) => {
+    getUserPosts: (
+        user_id,
+        type,
+        archive = 0,
+        page,
+        itemsPerPage = ITEMS_PER_PAGE
+    ) => {
         const params = {
             user_id,
             type,
@@ -668,7 +766,8 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`post`, {params})
+        return instance
+            .get(`post`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -680,7 +779,8 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`user/subscribers/byUserId`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`user/subscribers/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -692,7 +792,8 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`user/subscriptions/byUserId`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`user/subscriptions/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -703,7 +804,8 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance.get(`post/popular`, {params, ...setTokenToHeader()})
+        return instance
+            .get(`post/popular`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;

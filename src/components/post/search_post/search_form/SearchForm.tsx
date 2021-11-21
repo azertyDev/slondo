@@ -1,5 +1,6 @@
 import {FC, ReactNode, useContext} from 'react';
 import {
+    Drawer,
     Box,
     FormControl,
     Grid,
@@ -28,14 +29,13 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {CategoriesCtx} from '@src/context';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FilterIcon} from '@src/components/elements/icons';
-import Drawer from '@material-ui/core/Drawer';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useLocation} from '@src/hooks/use_location/useLocation';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
-import {useStyles} from './useStyles';
 import {RegionType} from '@root/interfaces/Locations';
 import {initStates} from './initStates';
 import {CustomFormikProvider} from '@root/src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
     formik;
@@ -86,8 +86,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
     const postTypesList = [postTypes[0], postTypes[1]];
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const {query} = useRouter();
-    const [queryLoc] = query.path as string[];
+    const [queryLoc] = useRouter().query.path as string[];
 
     const {region, city} = getLocationByURL(queryLoc, regions);
 
@@ -133,16 +132,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
     };
 
     const handleReset = () => {
-        const vals = {
-            ...mainInit,
-            region,
-            city,
-            category,
-            subcategory,
-            type
-        };
-
-        setValues(vals);
+        setValues(mainInit);
     };
 
     const handlePostType = (name, value) => {
@@ -369,7 +359,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                     />
                 </Grid>
                 {!isJob && !isService && (
-                    <Grid item container alignItems="flex-end" xs={6} sm={3}>
+                    <Grid item container alignItems="flex-end" xs={6} sm={4}>
                         <CheckboxSelect
                             checked={values.free}
                             labelTxt={t('free')}
