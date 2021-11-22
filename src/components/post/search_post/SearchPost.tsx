@@ -237,9 +237,9 @@ export const SearchPost: FC<SearchPostProps> = props => {
 
     const resetByCategory = () => {
         if (
-            (ctgr && ctgr.name !== category.name) ||
-            (subctgr && subctgr.name !== subcategory.name) ||
-            (typectgr && typectgr.name !== type.name)
+            (ctgr && ctgr.name !== category?.name) ||
+            (subctgr && subctgr.name !== subcategory?.name) ||
+            (typectgr && typectgr.name !== type?.name)
         ) {
             setValues(initVals);
         }

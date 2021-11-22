@@ -22,7 +22,7 @@ export const BottomAdv: FC<{adv: AdvType}> = ({adv}) => {
                 </div>
             ) : (
                 <Link href={url}>
-                    <a rel="nofollow">
+                    <a rel="nofollow" target='_blank'>
                         <div className="bottom-adv" />
                     </a>
                 </Link>
