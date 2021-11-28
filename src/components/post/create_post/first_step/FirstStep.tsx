@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {StepsProgress} from '@src/components/post/create_post/steps_progress/StepsProgress';
+import {StepsProgress} from '@root/src/components/post/create_post/steps_progress/StepsProgress';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';

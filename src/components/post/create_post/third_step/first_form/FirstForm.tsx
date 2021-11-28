@@ -1,7 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
-import {useRouter} from "next/router";
-import {unstable_batchedUpdates} from "react-dom";
+import {useRouter} from 'next/router';
+import {unstable_batchedUpdates} from 'react-dom';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -17,34 +17,34 @@ import {
     defaultParamsSchema,
     safeDealPriceSchema
 } from '@root/validation_schemas/postSchemas';
-import {getErrorMsg, numberPrettier, phonePrepare, timeFormat} from '@src/helpers';
+import {
+    getErrorMsg,
+    numberPrettier,
+    phonePrepare,
+    timeFormat
+} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {FirstFormPreview} from '@src/components/post/create_post/third_step/first_form/FirstFormPreview';
+import {FirstFormPreview} from '@root/src/components/post/create_post/third_step/first_form/FirstFormPreview';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {ServiceItem} from "@src/components/post/create_post/third_step/first_form/site_services/ServiceItem";
-import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
-import {useLocation} from "@src/hooks/use_location/useLocation";
-import {AuthCtx} from "@src/context";
+import {ServiceItem} from '@root/src/components/post/create_post/third_step/first_form/site_services/ServiceItem';
+import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from '@src/constants';
+import {useLocation} from '@src/hooks/use_location/useLocation';
+import {AuthCtx} from '@src/context';
 
 type DefaultParamsPropsType = {
-    isPreview: boolean,
-    postType: PostType,
-    currentFormIndex: number,
-    handleSubmit: (v) => void
+    isPreview: boolean;
+    postType: PostType;
+    currentFormIndex: number;
+    handleSubmit: (v) => void;
 };
 
-export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
-    const {
-        isPreview,
-        postType,
-        handleSubmit,
-        currentFormIndex
-    } = props;
+export const FirstForm: FC<DefaultParamsPropsType> = props => {
+    const {isPreview, postType, handleSubmit, currentFormIndex} = props;
 
     const query = useRouter().query;
     const {region, city = null} = query;
@@ -62,9 +62,9 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
 
     const location = region
         ? {
-            region: JSON.parse(region as string),
-            city: city ? JSON.parse(city as string) : null
-        }
+              region: JSON.parse(region as string),
+              city: city ? JSON.parse(city as string) : null
+          }
         : null;
 
     const formIndex = 1;
@@ -86,11 +86,19 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
         exchange: !!query.exchange,
         auto_renewal: !!query.auto_renewal,
         location,
-        description: query.description ? JSON.parse(query.description as string) : '',
-        phone: query.phone ? JSON.parse(query.phone as string) : '+998(__) ___ __ __',
+        description: query.description
+            ? JSON.parse(query.description as string)
+            : '',
+        phone: query.phone
+            ? JSON.parse(query.phone as string)
+            : '+998(__) ___ __ __',
         price: query.price ? JSON.parse(query.price as string).toString() : '',
-        currency: query.currency ? JSON.parse(query.currency as string) : postType.currency[0],
-        available_days: query.available_days ? JSON.parse(query.available_days as string) : [...WEEK_DAYS],
+        currency: query.currency
+            ? JSON.parse(query.currency as string)
+            : postType.currency[0],
+        available_days: query.available_days
+            ? JSON.parse(query.available_days as string)
+            : [...WEEK_DAYS],
         auction: {
             duration: null,
             reserve_price: '',
@@ -106,9 +114,11 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
 
     const [free, setFree] = useState(false);
     const [isSafeDeal, setIsSafeDeal] = useState(false);
-    const [avalTimeActive, setAvalTimeActive] = useState(!!query.available_start_time);
+    const [avalTimeActive, setAvalTimeActive] = useState(
+        !!query.available_start_time
+    );
 
-    const onSubmit = (values) => {
+    const onSubmit = values => {
         const commonData = {...values};
         const {
             auction,
@@ -139,8 +149,7 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
 
             other.duration_id = duration.id;
 
-            if (offer_the_price)
-                other.offer_the_price = offer_the_price;
+            if (offer_the_price) other.offer_the_price = offer_the_price;
 
             if (isAdvanceAuction) {
                 if (price_buy_now.isActive) {
@@ -160,12 +169,9 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.available_days = available_days;
         }
 
-        if (safe_deal)
-            otherData.safe_deal = safe_deal;
-        if (delivery)
-            otherData.delivery = delivery;
-        if (exchange)
-            otherData.exchange = exchange;
+        if (safe_deal) otherData.safe_deal = safe_deal;
+        if (delivery) otherData.delivery = delivery;
+        if (exchange) otherData.exchange = exchange;
 
         if (auto_renewal) {
             if (isAuction) {
@@ -202,14 +208,7 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
         validationSchema: getSchema()
     });
 
-    const {
-        values,
-        setValues,
-        errors,
-        touched,
-        setTouched,
-        handleBlur
-    } = formik;
+    const {values, setValues, errors, touched, setTouched, handleBlur} = formik;
 
     const {auction, available_days} = values;
 
@@ -230,7 +229,7 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
     };
 
     const handleInput = ({target: {name, value}}) => {
-        const isNumericField = numericFields.some((n => n === name));
+        const isNumericField = numericFields.some(n => n === name);
         if (isNumericField) {
             if (RegExp(numberRegEx).test(value)) {
                 const number = numberPrettier(value);
@@ -261,44 +260,46 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    const handleCheckboxChange = (name: string) => ({target}) => {
-        const {checked} = target;
+    const handleCheckboxChange =
+        (name: string) =>
+        ({target}) => {
+            const {checked} = target;
 
-        const auctionOptionsList = [
-            'price_buy_now',
-            'offer_the_price',
-            'display_phone'
-        ];
+            const auctionOptionsList = [
+                'price_buy_now',
+                'offer_the_price',
+                'display_phone'
+            ];
 
-        if (name === 'safe_deal') {
-            setIsSafeDeal(checked);
-            if (checked) {
-                values.price = '';
-                values.currency = {id: 2, name: 'sum'};
-                unstable_batchedUpdates(() => {
-                    setFree(false);
-                    setTouched({price: true});
-                });
-            } else {
-                setTouched({});
+            if (name === 'safe_deal') {
+                setIsSafeDeal(checked);
+                if (checked) {
+                    values.price = '';
+                    values.currency = {id: 2, name: 'sum'};
+                    unstable_batchedUpdates(() => {
+                        setFree(false);
+                        setTouched({price: true});
+                    });
+                } else {
+                    setTouched({});
+                }
             }
-        }
 
-        if (auctionOptionsList.some(option => option === name)) {
-            if (name === 'price_buy_now') {
-                auction.price_buy_now.isActive = checked;
-                if (!checked) {
-                    auction.price_buy_now.value = '';
+            if (auctionOptionsList.some(option => option === name)) {
+                if (name === 'price_buy_now') {
+                    auction.price_buy_now.isActive = checked;
+                    if (!checked) {
+                        auction.price_buy_now.value = '';
+                    }
+                } else {
+                    auction[name] = checked;
                 }
             } else {
-                auction[name] = checked;
+                values[name] = checked;
             }
-        } else {
-            values[name] = checked;
-        }
 
-        setValues({...values});
-    };
+            setValues({...values});
+        };
 
     const switchActive = (_, value) => {
         setAvalTimeActive(value);
@@ -329,35 +330,36 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
     }
 
     useEffect(() => {
-        !region
-        && !!userLoc
-        && setValues({
-            ...values,
-            location: userLoc
-        });
+        !region &&
+            !!userLoc &&
+            setValues({
+                ...values,
+                location: userLoc
+            });
     }, [userLoc]);
 
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
-                submitTxt='next'
-                icon={<StateIcon/>}
+                submitTxt="next"
+                icon={<StateIcon />}
                 isPreview={isPreview}
                 title={t('priceDescContacts')}
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
             >
                 <>
-                    {isPreview
-                        ? <FirstFormPreview
+                    {isPreview ? (
+                        <FirstFormPreview
                             values={values}
                             isAuction={isAuction}
                             priceLabel={priceLabel}
                             avalTimeActive={avalTimeActive}
                         />
-                        : <>
-                            {isAuction
-                                ? <AuctionParams
+                    ) : (
+                        <>
+                            {isAuction ? (
+                                <AuctionParams
                                     values={values}
                                     errors={errors}
                                     touched={touched}
@@ -368,21 +370,27 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                                     isAdvanceAuction={isAdvanceAuction}
                                     handleCheckboxChange={handleCheckboxChange}
                                 />
-                                : <Grid item container spacing={1}>
+                            ) : (
+                                <Grid item container spacing={1}>
                                     <Grid item xs={8} sm={5} md={4} lg={3}>
                                         <FormikField
                                             t={t}
-                                            name='price'
+                                            name="price"
                                             disabled={free}
                                             value={values.price}
                                             labelText={priceLabel}
                                             onChange={handleInput}
-                                            errorMsg={getErrorMsg(errors.price, touched.price, t, SAFE_DEAL_LIMIT)}
+                                            errorMsg={getErrorMsg(
+                                                errors.price,
+                                                touched.price,
+                                                t,
+                                                SAFE_DEAL_LIMIT
+                                            )}
                                         />
                                     </Grid>
                                     <Grid item xs={4} sm={2} lg={1}>
                                         <DropDownSelect
-                                            name='currency'
+                                            name="currency"
                                             values={values}
                                             onBlur={handleBlur}
                                             items={postType.currency}
@@ -390,20 +398,21 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                                             disabled={values.safe_deal || free}
                                         />
                                     </Grid>
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={4}
-                                    >
-                                        <div style={{height: '22px'}}/>
+                                    <Grid item xs={12} sm={4}>
+                                        <div style={{height: '22px'}} />
                                         <ServiceItem
                                             checked={free}
                                             handleCheckbox={handleFree}
                                             disabled={values.safe_deal}
-                                            serviceText={t(isJobOrService ? 'negotiated' : 'for_free')}
+                                            serviceText={t(
+                                                isJobOrService
+                                                    ? 'negotiated'
+                                                    : 'for_free'
+                                            )}
                                         />
                                     </Grid>
-                                </Grid>}
+                                </Grid>
+                            )}
                             <SiteServices
                                 isCreateForm
                                 values={values}
@@ -411,21 +420,29 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                                 categoryName={categoryName}
                                 handleCheckbox={handleCheckboxChange}
                             />
-                            <Grid item container direction='column' xs={12}>
+                            <Grid item container direction="column" xs={12}>
                                 <Box
                                     mb={1}
-                                    display='flex'
-                                    flexDirection='column'
+                                    display="flex"
+                                    flexDirection="column"
                                 >
-                                    <Typography variant='subtitle1' component='p' gutterBottom>
+                                    <Typography
+                                        variant="subtitle1"
+                                        component="p"
+                                        gutterBottom
+                                    >
                                         {t('filters:choiceLocation')}&nbsp;
-                                        <span className='error-text'>*</span>
+                                        <span className="error-text">*</span>
                                     </Typography>
                                     {locElement}
                                     {locationModal}
                                 </Box>
                                 {errors.location && touched.location && (
-                                    <Typography variant='subtitle2' component='p' className='error-text'>
+                                    <Typography
+                                        variant="subtitle2"
+                                        component="p"
+                                        className="error-text"
+                                    >
                                         {t(`errors:${errors.location}`)}
                                     </Typography>
                                 )}
@@ -433,13 +450,18 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                             <Grid item xs={12}>
                                 <FormikTextarea
                                     rows={15}
-                                    name='description'
+                                    name="description"
                                     value={values.description}
                                     onBlur={handleBlur}
                                     limit={TEXT_LIMIT}
                                     onChange={handleInput}
                                     labelTxt={t('filters:description')}
-                                    errorMsg={getErrorMsg(errors.description, touched.description, t, DESC_MIN)}
+                                    errorMsg={getErrorMsg(
+                                        errors.description,
+                                        touched.description,
+                                        t,
+                                        DESC_MIN
+                                    )}
                                 />
                             </Grid>
                             <Grid item container spacing={2}>
@@ -449,11 +471,19 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                                         values={values}
                                         isAuction={isAuction}
                                         handleInput={handleInput}
-                                        handleCheckboxChange={handleCheckboxChange}
+                                        handleCheckboxChange={
+                                            handleCheckboxChange
+                                        }
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid item container xs={12} sm={6} justifyContent='center'>
+                                    <Grid
+                                        item
+                                        container
+                                        xs={12}
+                                        sm={6}
+                                        justifyContent="center"
+                                    >
                                         <Grid item xs={12} sm={12} lg={8}>
                                             <AvailableDays
                                                 t={t}
@@ -469,7 +499,8 @@ export const FirstForm: FC<DefaultParamsPropsType> = (props) => {
                                     </Grid>
                                 )}
                             </Grid>
-                        </>}
+                        </>
+                    )}
                 </>
             </CustomAccordion>
         </CustomFormikProvider>

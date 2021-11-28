@@ -22,25 +22,26 @@ import {Logo, QuestionIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
-import {useTranslation} from "next-i18next";
-import {useLocation} from "@src/hooks/use_location/useLocation";
+import {useTranslation} from 'next-i18next';
+import {useLocation} from '@src/hooks/use_location/useLocation';
 import {useStyles} from './useStyles';
 
 type TopHeaderPropsType = {
-    positionStatic?: boolean,
-    handleDrawerOpen: () => void,
-    handlePageReload: () => void
+    positionStatic?: boolean;
+    handleDrawerOpen: () => void;
+    handlePageReload: () => void;
 };
 
-export const Top: FC<TopHeaderPropsType> = (props) => {
-    const {
-        positionStatic,
-        handleDrawerOpen,
-        handlePageReload
-    } = props;
+export const Top: FC<TopHeaderPropsType> = props => {
+    const {positionStatic, handleDrawerOpen, handlePageReload} = props;
 
     const {t} = useTranslation('header');
-    const {user: {avatar}, auth, setAuthModalOpen} = useContext(AuthCtx);
+    const {
+        user: {avatar},
+        auth,
+        setAuthModalOpen
+    } = useContext(AuthCtx);
+    const {user} = useContext(AuthCtx);
 
     const {pathname} = useRouter();
     const trigger = useScrollTrigger({threshold: 53});
@@ -50,17 +51,18 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
         setAuthModalOpen(true);
     };
 
-    const {
-        locElement,
-        locationModal
-    } = useLocation({saveToCookies: true});
+    const {locElement, locationModal} = useLocation({saveToCookies: true});
 
     const classes = useStyles();
     return (
         <>
             <Hidden mdDown>
                 <Container maxWidth="xl" className={classes.root}>
-                    <Grid container justifyContent="space-between" alignItems="center">
+                    <Grid
+                        container
+                        justifyContent="space-between"
+                        alignItems="center"
+                    >
                         <Grid item md={6}>
                             {locElement}
                             {locationModal}
@@ -71,20 +73,29 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             container
                             alignItems="center"
                             justifyContent="flex-end"
-                            className='multiple-actions'
+                            className="multiple-actions"
                         >
                             <Grid item md={2}>
                                 <Link href="/help">
-                                    <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <Typography variant="subtitle1" component='p'>
+                                    <a
+                                        className={
+                                            pathname === '/help'
+                                                ? 'selected'
+                                                : ''
+                                        }
+                                    >
+                                        <Typography
+                                            variant="subtitle1"
+                                            component="p"
+                                        >
                                             {t('help')}
                                         </Typography>
-                                        <QuestionIcon/>
+                                        <QuestionIcon />
                                     </a>
                                 </Link>
                             </Grid>
-                            <Grid item md={2} container justifyContent='center'>
-                                <Localization/>
+                            <Grid item md={2} container justifyContent="center">
+                                <Localization />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -100,7 +111,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                     >
                         <AppBar
                             position={positionStatic ? 'static' : 'fixed'}
-                            color='inherit'
+                            color="inherit"
                             elevation={0}
                         >
                             <Toolbar>
@@ -115,37 +126,52 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             onClick={handleDrawerOpen}
                                         >
                                             <div className="burger-menu">
-                                                <CategorySortIcon/>
+                                                <CategorySortIcon />
                                             </div>
                                         </IconButton>
                                     </Grid>
                                     <Grid className="top-header-logo">
                                         <Link href="/">
                                             <a onClick={handlePageReload}>
-                                                <Logo/>
+                                                <Logo />
                                             </a>
                                         </Link>
                                     </Grid>
-                                    {auth.isAuth
-                                        ? <Link href='/cabinet/main'>
+                                    {auth.isAuth ? (
+                                        <Link href="/cabinet/main">
                                             <a>
-                                                <CustomButton className={classes.avatarBlock}>
-                                                    <Avatar alt="Avatar" src={avatar}/>
+                                                <CustomButton
+                                                    className={
+                                                        classes.avatarBlock
+                                                    }
+                                                >
+                                                    <Avatar
+                                                        alt="Avatar"
+                                                        src={avatar}
+                                                    />
                                                 </CustomButton>
                                             </a>
                                         </Link>
-                                        : <CustomButton
+                                    ) : (
+                                        <CustomButton
                                             className="btn-sign-mobile"
                                             onClick={handleAuthModalOpen}
                                         >
-                                            <Typography variant="subtitle2" component='p'>
+                                            <Typography
+                                                variant="subtitle2"
+                                                component="p"
+                                            >
                                                 {t('auth_reg:signIn')}
                                             </Typography>
-                                        </CustomButton>}
+                                        </CustomButton>
+                                    )}
                                 </Grid>
                             </Toolbar>
-                            <Box px={isXsDown ? '10px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm/>
+                            <Box
+                                px={isXsDown ? '10px' : '24px'}
+                                marginBottom="10px"
+                            >
+                                <HeaderSearchForm />
                             </Box>
                         </AppBar>
                     </Slide>

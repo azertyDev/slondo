@@ -35,6 +35,14 @@ export const cookieOpts: {
     sameSite: 'strict'
 };
 
+export const checkIsMobileView = req => {
+    return Boolean(
+        (req ? req.headers['user-agent'] : navigator.userAgent).match(
+            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+        )
+    );
+};
+
 export function getCtgrsByCyrillicNames(
     urlCategories: string[] = [],
     siteCategories
@@ -328,11 +336,9 @@ export const urlByParams = params => {
     return url;
 };
 
-export const toUrlParams = (params, term?) => {
+export const toUrlParams = params => {
     if (params) {
         let url = '';
-
-        if (term !== '') url = url.concat(`&q=${term}`);
 
         Object.keys(params).forEach(key => {
             const val = params[key];

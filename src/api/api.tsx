@@ -15,7 +15,7 @@ import {
 } from '@src/constants';
 
 const production = `${PRODUCTION_URL}/api`;
-const local = `${PRODUCTION_URL}/slondo/public/api/`;
+const local = `${DEV_URL}/slondo/public/api/`;
 const testb = 'https://backend.testb.uz/api/';
 
 const instance = Axios.create({
@@ -34,6 +34,31 @@ const setTokenToHeader = () => {
                 Authorization: `Bearer ${token}`
             }
         };
+    }
+};
+
+export const promoteAPI = {
+    getServicesById: (postId: number) => {
+        return instance
+            .get(`services/paid/${postId}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    activateServices: (post_id: number, services, payment_type: string) => {
+        const params = {
+            post_id,
+            services,
+            payment_type
+        };
+
+        return instance
+            .post(`paid/service/activate`, params, setTokenToHeader())
+            .then(res => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
     }
 };
 

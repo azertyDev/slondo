@@ -1,9 +1,10 @@
 import {GetServerSideProps} from 'next';
 import {userAPI} from '@src/api/api';
-import {SearchPost} from '@src/components/post/search_post/SearchPost';
+import {SearchContainer} from '@root/src/components/post/search/SearchContainer';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {
     categoriesNormalize,
+    checkIsMobileView,
     getCtgrsByCyrillicNames,
     getLocationByURL,
     manufacturersDataNormalize,
@@ -13,8 +14,11 @@ import {
 export const getServerSideProps: GetServerSideProps = async ({
     locale,
     query,
+    req,
     res
 }) => {
+    const isMobileView = checkIsMobileView(req);
+
     let location = 'uzbekistan';
     const {path, ...urlParams} = query;
     const [locationName, ...urlCategories] = path as string[];
@@ -39,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         };
 
         if (subcategory?.id) params.sub_category_id = subcategory.id;
+
         if (type?.id) params.type_id = type.id;
 
         filters = await userAPI.getFiltersByCtgr(params);
@@ -74,6 +79,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
     return {
         props: {
+            isMobileView,
             regions,
             filters,
             urlCategories,
@@ -110,4 +116,4 @@ function checkQuery(loc: string, locs): boolean {
     });
 }
 
-export default SearchPost;
+export default SearchContainer;

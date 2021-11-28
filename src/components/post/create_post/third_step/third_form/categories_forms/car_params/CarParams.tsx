@@ -17,7 +17,7 @@ import {carSchema, uzCarSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {PostTitle} from '@src/components/post/create_post/third_step/third_form/post_title/PostTitle';
+import {PostTitle} from '@root/src/components/post/create_post/third_step/third_form/post_title/PostTitle';
 import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";

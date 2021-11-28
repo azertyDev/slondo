@@ -7,7 +7,7 @@ import {numberPrettier} from '@src/helpers';
 import {LockIcon} from '@src/components/elements/icons';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
+import {AuctionForm} from '@root/src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from "next-i18next";

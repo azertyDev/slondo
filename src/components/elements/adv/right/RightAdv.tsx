@@ -35,8 +35,8 @@ export const RightAdv: FC<RightAdvProps> = ({
                     <GAdv slot={7228462253} />
                 </div>
             ) : (
-                <Link href={url}>
-                    <a rel="nofollow" target='_blank'>
+                <Link href={url ?? '/'}>
+                    <a rel="nofollow" target="_blank">
                         <div className={mobile ? 'm-right-adv' : 'right-adv'} />
                     </a>
                 </Link>

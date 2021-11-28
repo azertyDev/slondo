@@ -1,10 +1,10 @@
-import Script from "next/script";
-import {browser} from "process";
-import {useEffect} from "react";
-import theme from "@src/theme";
-import {userAPI} from "@src/api/api";
-import {appWithTranslation} from "next-i18next";
-import {ThemeProvider, CssBaseline} from "@material-ui/core";
+import Script from 'next/script';
+import {browser} from 'process';
+import {useEffect} from 'react';
+import theme from '@src/theme';
+import {userAPI} from '@src/api/api';
+import {appWithTranslation} from 'next-i18next';
+import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import {
     AuthCtx,
     ErrorCtx,
@@ -12,24 +12,27 @@ import {
     ExitPromptCtx,
     UserLocationCtx,
     SocketCtx
-} from "@src/context";
+} from '@src/context';
 import {
     useAuth,
     useError,
     useSearch,
     useSocket,
     useUserLocation
-} from "@src/hooks";
-import {useExitPrompt} from "@src/hooks/useExitPrompt";
-import {DEV_URL, PRODUCTION_URL} from "@src/constants";
+} from '@src/hooks';
+import {useExitPrompt} from '@src/hooks/useExitPrompt';
+import {DEV_URL, PRODUCTION_URL} from '@src/constants';
 
-import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
-import "../slick.min.css";
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
+import '../slick.min.css';
 
 const socketDev = `${DEV_URL}:8005`;
 const socketProduction = `${PRODUCTION_URL}:8005`;
 
-const App = (props) => {
+const userObsChannel =
+    'user-observer-channel:App\\Events\\UserObserverEvent';
+
+const App = props => {
     const {Component, pageProps} = props;
 
     const auth = useAuth();
@@ -42,29 +45,35 @@ const App = (props) => {
     const user = auth.user;
 
     if (browser) {
-        const regions = localStorage.getItem("regions");
+        const regions = localStorage.getItem('regions');
+
         !regions &&
-            userAPI.getLocations().then((regs) => {
-                localStorage.setItem("regions", JSON.stringify(regs));
+            userAPI.getLocations().then(regs => {
+                localStorage.setItem('regions', JSON.stringify(regs));
             });
     }
 
     useEffect(() => {
         // Remove the server-side injected CSS.
-        const jssStyles = document.querySelector("#jss-server-side");
+        const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
     }, []);
 
     useEffect(() => {
         if (browser && socket) {
-            socket.on("connect", () => {
+            socket.on('connect', () => {
                 if (user.id !== null) {
-                    socket.emit("user_connected", user.id);
+                    socket.emit('user_connected', user.id);
                 }
             });
+
+            socket.on(userObsChannel, data => {
+                console.log(data);
+            });
+
             return () => {
-                socket.off("connect", () => {
-                    socket.emit("disconnect");
+                socket.off('connect', () => {
+                    socket.emit('disconnect');
                 });
             };
         }

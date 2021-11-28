@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {ApartmentsParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/apartments_params/ApartmentsParams';
-import {HousesCottagesParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/houses_cotteges_params/HousesCottagesParams';
-import {LandParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/land_params/LandParams';
-import {ParkingLotsBoxes} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/parking_lots_boxes_params/ParkingLotsBoxes';
-import {CommercialPropertyParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/commercial_property_params/CommercialPropertyParams';
-import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/third_form/ThirdForm';
+import {ApartmentsParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/apartments_params/ApartmentsParams';
+import {HousesCottagesParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/houses_cotteges_params/HousesCottagesParams';
+import {LandParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/land_params/LandParams';
+import {ParkingLotsBoxes} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/parking_lots_boxes_params/ParkingLotsBoxes';
+import {CommercialPropertyParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/commercial_property_params/CommercialPropertyParams';
+import {CommonParamsPropsType} from '@root/src/components/post/create_post/third_step/third_form/ThirdForm';
 
 export const EstateParams: FC<CommonParamsPropsType> = (props) => {
     const {

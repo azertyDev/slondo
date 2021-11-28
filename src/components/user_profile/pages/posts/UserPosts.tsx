@@ -24,27 +24,38 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
     const [auctions, setAuctions] = useState(initUserPostsState);
     const [auctionsArch, setAuctionsArch] = useState(initUserPostsState);
 
-    const fetchUserPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
-        try {
-            const type = secondTab ? 'auc' : 'post';
-            const archive = secondSubTab ? 1 : 0;
+    const fetchUserPosts =
+        (secondTab = false) =>
+        async (page = 1, secondSubTab = false) => {
+            try {
+                const type = secondTab ? 'auc' : 'post';
+                const archive = secondSubTab ? 1 : 0;
 
-            setIsFetch(true);
-            const {data, total} = await userAPI.getUserPosts(user_id, type, archive, page);
+                setIsFetch(true);
+                const {data, total} = await userAPI.getUserPosts(
+                    user_id,
+                    type,
+                    archive,
+                    page
+                );
 
-            unstable_batchedUpdates(async () => {
-                setIsFetch(false);
-                secondTab
-                    ? secondSubTab ? setAuctionsArch({data, total}) : setAuctions({data, total})
-                    : secondSubTab ? setPostsArch({data, total}) : setPosts({data, total});
-            });
-        } catch (e) {
-            unstable_batchedUpdates(async () => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
-        }
-    };
+                unstable_batchedUpdates(async () => {
+                    setIsFetch(false);
+                    secondTab
+                        ? secondSubTab
+                            ? setAuctionsArch({data, total})
+                            : setAuctions({data, total})
+                        : secondSubTab
+                        ? setPostsArch({data, total})
+                        : setPosts({data, total});
+                });
+            } catch (e) {
+                unstable_batchedUpdates(async () => {
+                    setIsFetch(false);
+                    setErrorMsg(e.message);
+                });
+            }
+        };
 
     const firstTabFetch = fetchUserPosts();
     const secondTabFetch = fetchUserPosts(true);
@@ -88,9 +99,10 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
         <DoubleTabs
             isFetch={isFetch}
             tabsData={tabsData}
-            fetchFirstTabPosts={firstTabFetch}
+            handlePromoteOpen={() => null}
             handleDetailedOpen={() => null}
             handleNotificationsOpen={() => null}
+            fetchFirstTabPosts={firstTabFetch}
             fetchSecondTabPosts={secondTabFetch}
         />
     );

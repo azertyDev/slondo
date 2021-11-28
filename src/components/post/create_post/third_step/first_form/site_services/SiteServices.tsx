@@ -9,7 +9,7 @@ import {
     AutoRenewalIcon
 } from '@src/components/elements/icons';
 import {site_services} from '@src/common_data/site_services';
-import {ServiceItem} from '@src/components/post/create_post/third_step/first_form/site_services/ServiceItem';
+import {ServiceItem} from '@root/src/components/post/create_post/third_step/first_form/site_services/ServiceItem';
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {SafeDealModal} from '@src/components/elements/safe_deal/SafeDealModal';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
@@ -70,12 +70,14 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = props => {
     const classes = useStyles();
     return (
         <Grid item container spacing={1} className={classes.root}>
-            <Typography
-                variant="subtitle1"
-                style={{width: '100%', paddingLeft: '8px'}}
-            >
-                {t('services')}
-            </Typography>
+            {(hasSafeDeal || hasExchange || hasDelivery) && (
+                <Typography
+                    variant="subtitle1"
+                    style={{width: '100%', paddingLeft: '8px'}}
+                >
+                    {t('services')}
+                </Typography>
+            )}
             {!isAuction && (
                 <>
                     {hasSafeDeal && (

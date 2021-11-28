@@ -1,4 +1,4 @@
-import {ShowPostContainer} from '@src/components/post/show_post/ShowPostContainer';
+import {ShowPostContainer} from '@root/src/components/post/show_post/ShowPostContainer';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {GetServerSideProps} from 'next';
 import {userAPI} from "@src/api/api";

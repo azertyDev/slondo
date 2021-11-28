@@ -2,14 +2,14 @@ import {FC, useContext} from 'react';
 import Link from 'next/link';
 import {useStyles} from './useStyles';
 import {Typography, Box} from '@material-ui/core';
-import {HomePageCtx} from "@src/context";
-import {Slider} from "@src/components/elements/slider/Slider";
+import {HomePageCtx} from '@src/context';
+import {Slider} from '@src/components/elements/slider/Slider';
 
 const config = {
     itemClass: 'slide-item',
     autoPlay: true,
     infinite: true,
-    autoPlaySpeed: 5000,
+    autoPlaySpeed: 7000,
     responsive: {
         desktop: {
             breakpoint: {max: 1920, min: 992},
@@ -36,12 +36,12 @@ export const MainSlider: FC = () => {
             <Slider config={config}>
                 {mainSliderData.map(({id, img, title, description, url}) => (
                     <Link href={url} key={id}>
-                        <a target='_blank'>
-                            <Box position='relative'>
-                                <img src={img} alt={title}/>
+                        <a target="_blank" rel="nofollow">
+                            <Box position="relative">
+                                <img src={img} alt={title} />
                                 <Box className={classes.content}>
                                     <Typography
-                                        variant='h5'
+                                        variant="h5"
                                         gutterBottom
                                         color="initial"
                                     >
