@@ -212,6 +212,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                     <>
                                         {isPublic && (
                                             <CustomButton
+                                                disabled
                                                 className="icons"
                                                 onClick={handlePromoteOpen}
                                             >
