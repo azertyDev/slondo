@@ -74,13 +74,12 @@ export const useStyles = makeStyles(theme => ({
     },
     paramsBtn: {
         display: 'flex',
-        width: 'auto',
-        height: 'auto',
         padding: '9px 10px',
         background: '#FDFCFF',
         justifyContent: 'flex-start',
         border: '1px solid rgba(0, 0, 0, 0.23)',
         '& p': {
+            width: 'max-content',
             fontSize: '1rem'
         }
     },

@@ -19,12 +19,14 @@ import {useStyles} from './useStyles';
 import {useRouter} from 'next/router';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
 import {POSTS_PER_PAGE} from '@root/src/constants';
+import {BottomAdv} from '@root/src/components/elements/adv/bottom/BottomAdv';
 
 type SearchResultPropsType = {
     isFetch: boolean;
     isNotFound: boolean;
     searchTermFromUrl: string;
-    rightAdvData;
+    rightAdv;
+    bottomAdv;
     posts;
     itemsCount: number;
     handlePagePagination: (_, page) => void;
@@ -35,7 +37,8 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
         posts,
         isFetch,
         isNotFound,
-        rightAdvData,
+        rightAdv,
+        bottomAdv,
         itemsCount,
         searchTermFromUrl,
         handlePagePagination
@@ -119,7 +122,7 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                                 <Grid item xs={12}>
                                                     <RightAdv
                                                         mobile
-                                                        adv={rightAdvData}
+                                                        adv={rightAdv}
                                                     />
                                                 </Grid>
                                             )}
@@ -187,10 +190,11 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                             </Box>
                         </>
                     )}
+                    <BottomAdv adv={bottomAdv} />
                 </Grid>
                 <Hidden mdDown>
                     <Grid item xs={3} className="sidebar-adv-wrapper">
-                        <RightAdv adv={rightAdvData} threshold={475} />
+                        <RightAdv adv={rightAdv} threshold={475} />
                     </Grid>
                 </Hidden>
             </Grid>

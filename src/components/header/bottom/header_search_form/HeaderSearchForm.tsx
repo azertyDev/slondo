@@ -33,8 +33,8 @@ export const HeaderSearchForm: FC = () => {
 
         const location = userLocation ?? 'uzbekistan';
 
-        const url = `/${location}?by_filtering=created_at&page=1${
-            searchTerm !== '' ? `&q=${searchTerm}` : ''
+        const url = `/${location}${
+            searchTerm !== '' ? `?q=${searchTerm}` : ''
         }`;
 
         setTerm(searchTerm);

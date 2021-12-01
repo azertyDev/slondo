@@ -11,12 +11,13 @@ import {
     ITEMS_PER_PAGE,
     MESSAGES_PER_PAGE,
     PRODUCTION_URL,
-    SUBS_PER_PAGE
+    SUBS_PER_PAGE,
+    TESTB_URL
 } from '@src/constants';
 
 const production = `${PRODUCTION_URL}/api`;
 const local = `${DEV_URL}/slondo/public/api/`;
-const testb = 'https://backend.testb.uz/api/';
+const testb = `${TESTB_URL}/api/`;
 
 const instance = Axios.create({
     withCredentials: true,

@@ -27,10 +27,6 @@ export const useStyles = makeStyles(theme => ({
                 }
             }
         },
-        '& ins.adsbygoogle[data-ad-status="unfilled"]': {
-            height: '100%!important',
-            backgroundColor: '#f0f0f0'
-        },
         '& div.sidebar-adv-wrapper': {
             marginBottom: '15px',
             paddingRight: 0

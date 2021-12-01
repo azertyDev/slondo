@@ -22,7 +22,6 @@ import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
 import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
-import {Slider} from "@src/components/elements/slider/Slider";
 
 type CarParamsPropsType = {
     subcategoryName: string

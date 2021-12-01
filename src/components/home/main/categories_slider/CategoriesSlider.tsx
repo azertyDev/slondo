@@ -57,6 +57,7 @@ export const CategoriesSlider: FC = () => {
 
 const config = {
     itemClass: 'slide-item',
+    partialVisible: true,
     responsive: {
         desktop: {
             breakpoint: {max: 1920, min: 1440},

@@ -84,6 +84,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
 };
 
 const config = {
+    partialVisible: true,
     responsive: {
         desktop: {
             breakpoint: {max: 1920, min: 992},

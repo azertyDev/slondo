@@ -317,6 +317,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
 
             const query: any = {
                 ...params,
+                by_filtering,
                 itemsPerPage: POSTS_PER_PAGE
             };
 
@@ -419,15 +420,13 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                         <SearchResult
                             posts={posts}
                             isFetch={isFetch}
-                            rightAdvData={right}
+                            rightAdv={right}
+                            bottomAdv={bottom}
                             isNotFound={isNotFound}
                             itemsCount={itemsCount}
                             searchTermFromUrl={searchTermFromUrl}
                             handlePagePagination={handlePagePagination}
                         />
-                        <div>
-                            <BottomAdv adv={bottom} />
-                        </div>
                         {!!seoTxt && <SEOTextComponent text={seoTxt} />}
                     </Grid>
                 </Container>

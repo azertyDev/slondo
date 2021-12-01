@@ -1,10 +1,16 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
-        '& div.content-adv, & div.right-adv, div.m-right-adv, & div.bottom-adv': {
-            borderRadius: '7px'
+        width: '100%',
+        '& ins.adsbygoogle[data-ad-status="unfilled"]': {
+            height: '100%!important',
+            backgroundColor: '#f0f0f0'
         },
+        '& div.content-adv, & div.right-adv, div.m-right-adv, & div.bottom-adv':
+            {
+                borderRadius: '7px'
+            },
         '& div.right-adv, div.bottom-adv': {
             backgroundImage: ({image}) => image && `url(${image})`
         },
@@ -18,10 +24,11 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             aspectRatio: '9/5',
             backgroundSize: 'cover',
-            backgroundImage: ({mobile_image}) => mobile_image && `url(${mobile_image})`
+            backgroundImage: ({mobile_image}) =>
+                mobile_image && `url(${mobile_image})`
         },
         '& div.right-adv': {
-            position: ({isScrollBreak}) => isScrollBreak ? 'fixed' : 'unset',
+            position: ({isScrollBreak}) => (isScrollBreak ? 'fixed' : 'unset'),
             top: ({isScrollBreak}) => isScrollBreak && '63px',
             width: '25vw',
             maxWidth: '308px',

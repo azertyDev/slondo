@@ -14,7 +14,7 @@ export const SearchPostDesktop: FC<SearchFormProps & {right}> = props => {
     } = props;
 
     return (
-        <Grid item container xs={12} spacing={2}>
+        <Grid item container xs={12}>
             <Grid item xs={9} zeroMinWidth>
                 <SearchForm
                     formik={formik}
@@ -25,7 +25,11 @@ export const SearchPostDesktop: FC<SearchFormProps & {right}> = props => {
                 />
             </Grid>
             <Hidden mdDown>
-                <Grid item xs={3} className="sidebar-wrapper">
+                <Grid
+                    item
+                    xs={3}
+                    style={{paddingRight: 0, paddingLeft: '16px'}}
+                >
                     <HomeSidebar />
                 </Grid>
             </Hidden>

@@ -215,7 +215,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
     return (
         <div className={classes.root}>
             <CustomFormikProvider formik={formik}>
-                <Grid container spacing={2} style={{padding: '9px'}}>
+                <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4}>
                         <DropDownSelect
                             name="category"

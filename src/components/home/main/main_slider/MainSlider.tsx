@@ -10,6 +10,7 @@ const config = {
     autoPlay: true,
     infinite: true,
     autoPlaySpeed: 7000,
+    partialVisible: true,
     responsive: {
         desktop: {
             breakpoint: {max: 1920, min: 992},
