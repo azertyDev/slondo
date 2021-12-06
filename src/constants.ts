@@ -3,7 +3,7 @@ export const SERVER_URL = `${
 }`;
 export const DEV_URL = 'http://192.168.100.101';
 export const PRODUCTION_URL = 'https://backend.slondo.uz';
-export const TESTB_URL = 'https://185.74.6.111';
+export const TESTB_URL = 'https://backend.testb.uz';
 export const INNER_URLS = {
     create_post: '/create',
     create_post_guide: '/help/post/create',

@@ -181,13 +181,13 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                     );
                                 })}
                             </Grid>
-                            <Box mt="70px" width="100%">
+                            <div style={{width: '100%', margin: '70px 0 20px'}}>
                                 <CustomPagination
                                     totalItems={itemsCount}
                                     itemsPerPage={POSTS_PER_PAGE}
                                     handlePagePagination={handlePagePagination}
                                 />
-                            </Box>
+                            </div>
                         </>
                     )}
                     <BottomAdv adv={bottomAdv} />

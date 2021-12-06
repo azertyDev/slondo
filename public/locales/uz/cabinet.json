@@ -1,4 +1,13 @@
 {
+  "activate": "Faollashtirish",
+  "add_service": "Xizmatni qo'shish",
+  "next": "Oldinga",
+  "top": "Top",
+  "turbo_sale": "Turbo so'tuvi",
+  "raise_tape": "Lentada ko'tarish",
+  "select_service": "Xizmatni tanlang",
+  "payment_type": "To'lov turi",
+  "bonuses": "Bonuslar",
   "auth_require": "Chat ishlatish uchun saytga kirish shart",
   "main": "Shaxsiy kabinet",
   "restore": "qayta tiklash",

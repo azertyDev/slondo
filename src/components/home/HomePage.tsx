@@ -23,6 +23,7 @@ type HomePageProps = {
 
 export const HomePage: FC<HomePageProps> = (props) => {
     const [siteCategories, ...other] = props.homePageData;
+    
     const [
         mainSliderData,
         postsSliderData,

@@ -190,8 +190,8 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                             {isAuction && (
                                 <Grid item xs={12} md={6}>
                                     <Countdown
-                                        date={new Date(cardData.expiration_at).getTime()}
                                         renderer={timer}
+                                        date={new Date(cardData.expiration_at).getTime()}
                                     />
                                 </Grid>
                             )}

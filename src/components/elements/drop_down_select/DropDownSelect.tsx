@@ -102,6 +102,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 )}
                 {items.map((item, i) => {
                     const isSelected = multiple && !!values[name]?.some(v => v === item.id);
+                    
                     return (
                         <MenuItem
                             key={i}

@@ -25,6 +25,7 @@ import {DEV_URL, PRODUCTION_URL, TESTB_URL} from '@src/constants';
 
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import '../slick.min.css';
+import {cookieOpts, cookies} from '@src/helpers';
 
 const socketDev = `${DEV_URL}:8005`;
 const socketTestb = `${TESTB_URL}:8005`;
@@ -36,13 +37,13 @@ const App = props => {
     const {Component, pageProps} = props;
 
     const auth = useAuth();
+    const user = auth.user;
+
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketProduction);
+    const socket = useSocket(socketTestb);
     const userLocation = useUserLocation();
     const showExitPrompt = useExitPrompt(false);
-
-    const user = auth.user;
 
     if (browser) {
         const regions = localStorage.getItem('regions');
@@ -60,15 +61,17 @@ const App = props => {
     }, []);
 
     useEffect(() => {
-        if (browser && socket) {
+        if (browser && socket && user.id !== null) {
             socket.on('connect', () => {
-                if (user.id !== null) {
-                    socket.emit('user_connected', user.id);
-                }
+                socket.emit('user_connected', user.id);
             });
 
             socket.on(userObsChannel, data => {
-                console.log(data);
+                const {balance, ...observer} = data;
+                const userData = {...user, balance, observer};
+
+                auth.addUser(userData);
+                cookies.set('slondo_user', userData, cookieOpts);
             });
 
             return () => {
@@ -102,13 +105,13 @@ const App = props => {
                                     <noscript
                                         dangerouslySetInnerHTML={{
                                             __html: `<iframe
-                                                    height="0"
-                                                    width="0"
-                                                    style="display:none;visibility:hidden"
-                                                    src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC"
+                                                    height='0'
+                                                    width='0'
+                                                    style='display:none;visibility:hidden'
+                                                    src='https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC'
                                                 />`
                                         }}
-                                    ></noscript>
+                                    />
                                     <Component {...pageProps} />
                                 </ThemeProvider>
                             </SearchCtx.Provider>

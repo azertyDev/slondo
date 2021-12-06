@@ -170,8 +170,6 @@ export const MyPosts: FC = () => {
         }
     };
 
-    console.log(postData);
-
     return (
         <>
             <DoubleTabs

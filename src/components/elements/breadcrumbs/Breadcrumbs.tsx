@@ -4,48 +4,53 @@ import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {transformCyrillic} from '@src/helpers';
 import {useStyles} from './useStyles';
-import {CategoriesCtx} from "@src/context";
+import {CategoriesCtx} from '@src/context';
 
 type BreadcrumbsPropsType = {
-    category: string,
-    subcategory: string,
-    type: string
-}
+    category: string;
+    subcategory: string;
+    type: string;
+};
 
-export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {
+export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({
+    category,
+    subcategory,
+    type
+}) => {
     const {t} = useTranslation('categories');
     const siteCategories = useContext(CategoriesCtx);
 
     const mainCtgr = siteCategories.find(ctgr => ctgr.name === category);
-    const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
+    const subCtgr = mainCtgr?.subcategory?.find(
+        subCtgr => subCtgr.name === subcategory
+    );
     const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === type);
 
     const categoryName = transformCyrillic(mainCtgr?.ru_name);
     const subCategoryName = transformCyrillic(subCtgr?.ru_name);
     const typeName = transformCyrillic(typeCtgr?.ru_name);
 
-    const categoryLink = `/uzbekistan/${categoryName}`;
+    const categoryLink = mainCtgr
+        ? `/uzbekistan/${categoryName}`
+        : '/uzbekistan';
+
     const subCategoryLink = `${categoryLink}/${subCategoryName}`;
     const subCategoryTypeLink = `${subCategoryLink}/${typeName}`;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Breadcrumbs
-                separator='•'
-                className='bc'
-                aria-label="breadcrumb"
-            >
+            <Breadcrumbs separator="•" className="bc" aria-label="breadcrumb">
                 <Link href={categoryLink}>
                     <a>
-                        <Typography variant='subtitle1'>
+                        <Typography variant="subtitle1">
                             {t(`categories:${category}.name`)}
                         </Typography>
                     </a>
                 </Link>
                 <Link href={subCategoryLink}>
                     <a>
-                        <Typography variant='subtitle1'>
+                        <Typography variant="subtitle1">
                             {t(`categories:${category}.${subcategory}.name`)}
                         </Typography>
                     </a>
@@ -53,8 +58,10 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
                 {typeCtgr !== undefined && type && (
                     <Link href={subCategoryTypeLink}>
                         <a>
-                            <Typography variant='subtitle1' component='h1'>
-                                {t(`categories:${category}.${subcategory}.${type}.name`)}
+                            <Typography variant="subtitle1" component="h1">
+                                {t(
+                                    `categories:${category}.${subcategory}.${type}.name`
+                                )}
                             </Typography>
                         </a>
                     </Link>

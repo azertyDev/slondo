@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import {cookies} from "@src/helpers";
-import {unstable_batchedUpdates} from "react-dom";
-import {UserInfo} from "@root/interfaces/Auth";
+import {cookies} from '@src/helpers';
+import {unstable_batchedUpdates} from 'react-dom';
+import {UserInfo} from '@root/interfaces/Auth';
 
 export const initAuth = {
     isAuth: false,
@@ -25,7 +25,8 @@ export const initUser: UserInfo = {
         number_of_notifications: 0,
         number_of_messages: 0,
         number_of_ratings: 0
-    }
+    },
+    balance: 0
 };
 
 export const useAuth = () => {
@@ -42,7 +43,7 @@ export const useAuth = () => {
         });
     };
 
-    const addUser = (user) => {
+    const addUser = user => {
         unstable_batchedUpdates(() => {
             setUser(user);
             setAuth({...auth, isAuth: true});
@@ -54,10 +55,11 @@ export const useAuth = () => {
     };
 
     useEffect(() => {
-        isAuth && unstable_batchedUpdates(() => {
-            setUser(userFromCookies);
-            setAuth({...auth, isAuth: true});
-        });
+        isAuth &&
+            unstable_batchedUpdates(() => {
+                setUser(userFromCookies);
+                setAuth({...auth, isAuth: true});
+            });
     }, [isAuth]);
 
     return {

@@ -5,10 +5,6 @@ export const useStyles = makeStyles(() => ({
         scrollbarWidth: 'none',
         '&::-webkit-scrollbar': {
             display: 'none'
-        },
-        '& button.selected': {
-            background: 'white',
-            color: '#000'
         }
     }
 }));
