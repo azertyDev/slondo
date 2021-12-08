@@ -1,5 +1,5 @@
 import {FC, useContext, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
+import {unstable_batchedUpdates} from 'react-dom';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {
     Avatar,
@@ -10,18 +10,18 @@ import {
     ListItemText,
     Typography
 } from '@material-ui/core';
-import {useFormik} from "formik";
+import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {CommonModalType} from "@src/components/cabinet/Cabinet";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
+import {CommonModalType} from '@src/components/cabinet/Cabinet';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
-import {phoneSchema} from "@root/validation_schemas/authRegSchema";
-import {getErrorMsg, phonePrepare, urlByParams} from "@src/helpers";
-import {ErrorCtx} from "@src/context";
-import {useRouter} from "next/router";
+import {phoneSchema} from '@root/validation_schemas/authRegSchema';
+import {getErrorMsg, phonePrepare, urlByParams} from '@src/helpers';
+import {ErrorCtx} from '@src/context';
+import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 enum SettingsModalPropsType {
@@ -35,13 +35,8 @@ enum SettingsModalPropsType {
     'settings'
 }
 
-export const SettingsModal: FC<CommonModalType> = (props) => {
-    const {
-        post,
-        open,
-        onClose,
-        handleRefresh
-    } = props;
+export const SettingsModal: FC<CommonModalType> = props => {
+    const {post, open, onClose, handleRefresh} = props;
 
     const {push} = useRouter();
     const {t} = useTranslation('cabinet');
@@ -58,9 +53,14 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
 
     const isPublic = post.status === 'public';
 
+    const raiseTapeCount =
+        post.slondo_services.find(srv => srv.service.name === 'raise_tape')
+            ?.quantity || 0;
+
     const [buyer, setBuyer] = useState(initBuyer);
     const [isFetch, setIsFetch] = useState(false);
-    const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('settings');
+    const [status, setStatus] =
+        useState<keyof typeof SettingsModalPropsType>('settings');
 
     const isSoldOnSlondo = status === 'sold_on_slondo';
 
@@ -74,7 +74,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 return 'edit_post_confirm';
             case 'rise_in_tape':
                 return isPost ? 'rise_post_in_tape' : 'rise_auction_in_tape';
-            case "restore":
+            case 'restore':
                 return 'restore_post';
         }
     })();
@@ -89,11 +89,13 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
             setIsFetch(true);
             switch (status) {
                 case 'confirm':
-                case "sold_on_slondo": {
+                case 'sold_on_slondo': {
                     const data = {
                         user_id: buyer.id,
                         ads_id: post.id,
-                        reason_id: isSoldOnSlondo ? reasons.sold : reasons.archive
+                        reason_id: isSoldOnSlondo
+                            ? reasons.sold
+                            : reasons.archive
                     };
                     isPost
                         ? await userAPI.deactivatePost(data)
@@ -104,17 +106,23 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     await userAPI.ricePostInTape(post.id);
                     break;
                 }
-                case "restore": {
+                case 'restore': {
                     await userAPI.restoreFromArchive(post.id);
                     break;
                 }
-                case "edit_post": {
+                case 'edit_post': {
                     const postData = await userAPI.getPostById(post.id);
                     const postType = postData.ads_type.mark;
                     const categoryName = postData.category.name;
                     const subcategoryName = postData.adsable.sub_category.name;
-                    const type = postData.adsable.type ? `&type_ctgr=${postData.adsable.type.name}` : '';
-                    push(`/create?post_type=${postType}&main_ctgr=${categoryName}&sub_ctgr=${subcategoryName}${type}&post_id=${postData.id}${urlByParams(postData)}`);
+                    const type = postData.adsable.type
+                        ? `&type_ctgr=${postData.adsable.type.name}`
+                        : '';
+                    push(
+                        `/create?post_type=${postType}&main_ctgr=${categoryName}&sub_ctgr=${subcategoryName}${type}&post_id=${
+                            postData.id
+                        }${urlByParams(postData)}`
+                    );
                     return;
                 }
             }
@@ -158,9 +166,10 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         setValues({phone: value});
     };
 
-    const handleStatus = (status: keyof typeof SettingsModalPropsType) => () => {
-        setStatus(status);
-    };
+    const handleStatus =
+        (status: keyof typeof SettingsModalPropsType) => () => {
+            setStatus(status);
+        };
 
     const handlePrevMenu = () => {
         unstable_batchedUpdates(() => {
@@ -181,178 +190,230 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const getModalContent = () => {
         switch (status) {
             case 'settings':
-                return <List
-                    disablePadding
-                    component="nav"
-                    aria-label="main"
-                    className={classes.settingsList}
-                >
-                    {isPublic
-                        ? <>
-                            <ListItem
-                                button
-                                onClick={handleStatus(isPost ? 'deactivate_variants' : 'confirm')}
-                            >
-                                <ListItemText
-                                    primary={t('deactivate')}
-                                    primaryTypographyProps={{variant: 'subtitle1'}}
-                                />
-                            </ListItem>
-                            {isPost && (
+                return (
+                    <List
+                        disablePadding
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                    >
+                        {isPublic ? (
+                            <>
                                 <ListItem
                                     button
-                                    onClick={handleStatus('edit_post')}
+                                    onClick={handleStatus(
+                                        isPost
+                                            ? 'deactivate_variants'
+                                            : 'confirm'
+                                    )}
                                 >
                                     <ListItemText
-                                        primary={t('edit')}
-                                        primaryTypographyProps={{variant: 'subtitle1'}}
+                                        primary={t('deactivate')}
+                                        primaryTypographyProps={{
+                                            variant: 'subtitle1'
+                                        }}
                                     />
                                 </ListItem>
-                            )}
-                            <ListItem
-                                button
-                                onClick={handleStatus('rise_in_tape')}
-                            >
+                                {isPost && (
+                                    <ListItem
+                                        button
+                                        onClick={handleStatus('edit_post')}
+                                    >
+                                        <ListItemText
+                                            primary={t('edit')}
+                                            primaryTypographyProps={{
+                                                variant: 'subtitle1'
+                                            }}
+                                        />
+                                    </ListItem>
+                                )}
+                                {raiseTapeCount !== 0 && (
+                                    <ListItem
+                                        button
+                                        onClick={handleStatus('rise_in_tape')}
+                                    >
+                                        <ListItemText
+                                            primary={t('rise_in_tape')}
+                                            secondary={t('raise_tape_left', {
+                                                value: raiseTapeCount
+                                            })}
+                                            primaryTypographyProps={{
+                                                variant: 'subtitle1'
+                                            }}
+                                            secondaryTypographyProps={{
+                                                variant: 'subtitle2'
+                                            }}
+                                        />
+                                    </ListItem>
+                                )}
+                            </>
+                        ) : (
+                            <ListItem button onClick={handleStatus('restore')}>
                                 <ListItemText
-                                    primary={t('rise_in_tape')}
-                                    secondary={t('can_use_in_week')}
-                                    primaryTypographyProps={{variant: 'subtitle1'}}
-                                    secondaryTypographyProps={{variant: 'subtitle2'}}
+                                    primary={t('restore')}
+                                    primaryTypographyProps={{
+                                        variant: 'subtitle1'
+                                    }}
                                 />
                             </ListItem>
-                        </>
-                        : <ListItem
+                        )}
+                    </List>
+                );
+            case 'deactivate_variants':
+                return (
+                    <List
+                        disablePadding
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                    >
+                        <ListItem
                             button
-                            onClick={handleStatus('restore')}
+                            onClick={handleStatus('sold_on_slondo')}
                         >
                             <ListItemText
-                                primary={t('restore')}
+                                primary={t('sold_on_slondo')}
                                 primaryTypographyProps={{variant: 'subtitle1'}}
                             />
-                        </ListItem>}
-                </List>;
-            case 'deactivate_variants':
-                return <List
-                    disablePadding
-                    component="nav"
-                    aria-label="main"
-                    className={classes.settingsList}
-                >
-                    <ListItem
-                        button
-                        onClick={handleStatus('sold_on_slondo')}
-                    >
-                        <ListItemText
-                            primary={t('sold_on_slondo')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </ListItem>
-                    <ListItem
-                        button
-                        onClick={handleStatus('confirm')}
-                    >
-                        <ListItemText
-                            primary={t('to_archive')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </ListItem>
-                </List>;
+                        </ListItem>
+                        <ListItem button onClick={handleStatus('confirm')}>
+                            <ListItemText
+                                primary={t('to_archive')}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                    </List>
+                );
             case 'sold_on_slondo':
-                return <Grid container spacing={2} className={classes.mt30}>
-                    <Grid item container spacing={2} justifyContent='center'>
-                        <Grid item xs={12} sm={6}>
-                            <Box>
-                                <FormikField
-                                    t={t}
-                                    type='tel'
-                                    name='phone'
-                                    value={values.phone}
-                                    onChange={handleInput}
-                                    helperText={t('(Нажмите отправить если не знаете номер)')}
-                                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                                />
-                            </Box>
-                        </Grid>
-                        <Grid item xs={8} sm={6}>
-                            <Box
-                                display='flex'
-                                alignItems='center'
-                                className={classes.userData}
-                            >
-                                {isFetch
-                                    ? <CustomCircularProgress/>
-                                    : !!buyer
-                                        ? <>
-                                            <Avatar src={buyer.avatar ?? ''}/>
-                                            <Typography variant='subtitle2' noWrap>
-                                                {buyer.name}<br/>
+                return (
+                    <Grid container spacing={2} className={classes.mt30}>
+                        <Grid
+                            item
+                            container
+                            spacing={2}
+                            justifyContent="center"
+                        >
+                            <Grid item xs={12} sm={6}>
+                                <Box>
+                                    <FormikField
+                                        t={t}
+                                        type="tel"
+                                        name="phone"
+                                        value={values.phone}
+                                        onChange={handleInput}
+                                        helperText={t(
+                                            '(Нажмите отправить если не знаете номер)'
+                                        )}
+                                        errorMsg={getErrorMsg(
+                                            errors.phone,
+                                            touched.phone,
+                                            t
+                                        )}
+                                    />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={8} sm={6}>
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    className={classes.userData}
+                                >
+                                    {isFetch ? (
+                                        <CustomCircularProgress />
+                                    ) : !!buyer ? (
+                                        <>
+                                            <Avatar src={buyer.avatar ?? ''} />
+                                            <Typography
+                                                variant="subtitle2"
+                                                noWrap
+                                            >
+                                                {buyer.name}
+                                                <br />
                                                 {buyer.surname}
                                             </Typography>
                                         </>
-                                        : <Typography>{t('user_not_found')}</Typography>}
-                            </Box>
+                                    ) : (
+                                        <Typography>
+                                            {t('user_not_found')}
+                                        </Typography>
+                                    )}
+                                </Box>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomButton
+                                type="submit"
+                                className={classes.submitBtn}
+                            >
+                                <Typography variant="subtitle1">
+                                    {t('common:send')}
+                                </Typography>
+                            </CustomButton>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <CustomButton type='submit' className={classes.submitBtn}>
-                            <Typography variant='subtitle1'>{t('common:send')}</Typography>
-                        </CustomButton>
-                    </Grid>
-                </Grid>;
-            case "restore":
+                );
+            case 'restore':
             case 'edit_post':
             case 'confirm':
             case 'rise_in_tape':
-                return <List
-                    disablePadding
-                    component="nav"
-                    aria-label="main"
-                    className={classes.settingsList}
-                >
-                    <CustomButton type='submit'>
-                        <ListItemText
-                            primary={t('common:yes')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </CustomButton>
-                    <CustomButton onClick={handlePrevMenu}>
-                        <ListItemText
-                            primary={t('common:no')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </CustomButton>
-                </List>;
+                return (
+                    <List
+                        disablePadding
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                    >
+                        <CustomButton type="submit">
+                            <ListItemText
+                                primary={t('common:yes')}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </CustomButton>
+                        <CustomButton onClick={handlePrevMenu}>
+                            <ListItemText
+                                primary={t('common:no')}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </CustomButton>
+                    </List>
+                );
         }
     };
 
     const classes = useStyles();
     return (
         <CabinetModal
-            maxWidth='xs'
+            maxWidth="xs"
             openDialog={open}
             handleCloseDialog={handleClose}
             handlePrevMenu={handlePrevMenu}
             hasPrevBtn={status !== 'settings'}
         >
-            {isFetch
-                ? <CustomCircularProgress/>
-                : <CustomFormikProvider formik={formik}>
+            {isFetch ? (
+                <CustomCircularProgress />
+            ) : (
+                <CustomFormikProvider formik={formik}>
                     {status === 'settings' && (
-                        <Typography className={classes.title} variant="h6" align='center'>
+                        <Typography
+                            className={classes.title}
+                            variant="h6"
+                            align="center"
+                        >
                             {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
                         </Typography>
                     )}
                     {titleTxt && (
                         <Typography
-                            variant='h6'
-                            align='center'
+                            variant="h6"
+                            align="center"
                             className={classes.title}
                         >
                             {t(titleTxt)}
                         </Typography>
                     )}
                     {getModalContent()}
-                </CustomFormikProvider>}
+                </CustomFormikProvider>
+            )}
         </CabinetModal>
     );
 };

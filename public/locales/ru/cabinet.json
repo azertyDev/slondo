@@ -62,7 +62,7 @@
   "rise_in_tape": "Поднять в ленте",
   "rise_post_in_tape": "Поднять объявление в ленте?",
   "rise_auction_in_tape": "Поднять аукцион в ленте?",
-  "can_use_in_week": "Можно использовать 3 раза в неделю",
+  "raise_tape_left": "Осталось поднятий {{value}}",
   "sold_on_slondo": "Продал на SLONDO",
   "winner": "Победитель",
   "seller": "Продавец",

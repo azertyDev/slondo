@@ -7,6 +7,9 @@ export const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             marginTop: 0
         },
+        '& div.top-posts': {
+            marginBottom: '20px'
+        },
         '& div.right-content-adv-wrapper': {
             height: '200px',
             [theme.breakpoints.down('xs')]: {

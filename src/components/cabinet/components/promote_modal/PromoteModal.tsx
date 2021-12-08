@@ -11,10 +11,18 @@ type PromoteModalProps = {
     fullWidth?: boolean;
     openDialog: boolean;
     handleCloseDialog: () => void;
+    handleRefresh: () => Promise<void>;
 };
 
 export const PromoteModal: FC<PromoteModalProps> = props => {
-    const {postId, maxWidth, fullWidth, openDialog, handleCloseDialog} = props;
+    const {
+        postId,
+        maxWidth,
+        fullWidth,
+        openDialog,
+        handleRefresh,
+        handleCloseDialog
+    } = props;
 
     const [isFetch, setIsFetch] = useState(false);
 
@@ -100,6 +108,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             setIsFetch(true);
 
             await promoteAPI.activateServices(postId, servicesIds, paymentType);
+            await handleRefresh();
 
             setIsFetch(false);
         } catch (e) {

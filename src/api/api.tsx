@@ -21,7 +21,7 @@ const testb = `${TESTB_URL}/api/`;
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: production
+    baseURL: testb
 });
 
 const setTokenToHeader = () => {

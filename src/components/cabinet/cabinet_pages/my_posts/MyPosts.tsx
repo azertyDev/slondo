@@ -203,6 +203,7 @@ export const MyPosts: FC = () => {
             <PromoteModal
                 postId={selectedPost.id}
                 openDialog={promoteOpen}
+                handleRefresh={handleRefresh}
                 handleCloseDialog={handleClosePromote}
             />
         </>

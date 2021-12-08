@@ -109,5 +109,6 @@ export const initCardData: CardDataType = {
     status: '',
     subscribed: false,
     title: '',
-    user_id: null
+    user_id: null,
+    slondo_services: []
 };

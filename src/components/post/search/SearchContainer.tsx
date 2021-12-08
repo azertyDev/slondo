@@ -328,27 +328,26 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
             }
 
             if (q !== '') query.title = q;
-            // if (searchTermFromUrl) query.title = searchTermFromUrl;
             if (ctgr) query.category_id = ctgr.id;
             if (subctgr) query.sub_category_id = subctgr.id;
             if (typectgr) query.type_id = typectgr.id;
 
             setIsFetch(true);
 
-            const [posts] = await Promise.all([
+            const [posts, topPosts] = await Promise.all([
                 userAPI.getPostsByFilters(query),
-                // userAPI.getPostsByFilters({
-                //     ...query,
-                //     itemsPerPage: 10,
-                //     is_top: 1
-                // })
+                userAPI.getPostsByFilters({
+                    ...query,
+                    itemsPerPage: 10,
+                    is_top: 1
+                })
             ]);
 
             setIsFetch(false);
 
             if (posts.total) {
                 setPosts(posts.data);
-                // setTopPosts(topPosts.data);
+                setTopPosts(topPosts.data);
                 setItemsCount(posts.total);
                 isNotFound && setIsNotFound(false);
             } else {

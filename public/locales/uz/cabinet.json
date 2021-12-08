@@ -62,7 +62,7 @@
   "rise_in_tape": "Lentada ko'tarmoq",
   "rise_post_in_tape": "E'lonni lentada ko'tarmoqchimisiz?",
   "rise_auction_in_tape": "Auksionni lentada ko'tarmoqchimisiz?",
-  "can_use_in_week": "Haftasiga uch marta ishlatsa bo'ladi",
+  "raise_tape_left": "Lentada k'otarish qo'lgan soni {{value}}",
   "sold_on_slondo": "Slondoda sotildi",
   "winner": "G'olib",
   "seller": "Sotuvchi",

@@ -50,6 +50,7 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
     const {t} = useTranslation('filters');
     const [listView, setListView] = useState(false);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const hasTopPosts = topPosts.length !== 0;
 
     const classes = useStyles();
     return (
@@ -68,102 +69,112 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                         <CustomCircularProgress />
                     ) : (
                         <>
-                            {/*<div>*/}
-                            {/*    <Box*/}
-                            {/*        mb={1}*/}
-                            {/*        display="flex"*/}
-                            {/*        alignItems="center"*/}
-                            {/*        justifyContent="space-between"*/}
-                            {/*    >*/}
-                            {/*        <Typography variant="h5" component="p">*/}
-                            {/*            {t('common:topPosts')}*/}
-                            {/*        </Typography>*/}
-                            {/*        <Box className="view-btns">*/}
-                            {/*            <IconButton*/}
-                            {/*                className={*/}
-                            {/*                    listView ? '' : 'selected'*/}
-                            {/*                }*/}
-                            {/*                onClick={() => setListView(false)}*/}
-                            {/*            >*/}
-                            {/*                <GridViewIcon />*/}
-                            {/*            </IconButton>*/}
-                            {/*            <IconButton*/}
-                            {/*                className={*/}
-                            {/*                    listView ? 'selected' : ''*/}
-                            {/*                }*/}
-                            {/*                onClick={() => setListView(true)}*/}
-                            {/*            >*/}
-                            {/*                <ListViewIcon />*/}
-                            {/*            </IconButton>*/}
-                            {/*        </Box>*/}
-                            {/*    </Box>*/}
-                            {/*    <Grid container spacing={isMdDown ? 1 : 2}>*/}
-                            {/*        {topPosts.map((cardData, i) => {*/}
-                            {/*            const {*/}
-                            {/*                price,*/}
-                            {/*                sum,*/}
-                            {/*                usd,*/}
-                            {/*                currency,*/}
-                            {/*                ...other*/}
-                            {/*            } = cardData;*/}
+                            <div className="top-posts">
+                                <Box
+                                    mb={1}
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent={
+                                        hasTopPosts
+                                            ? 'space-between'
+                                            : 'flex-end'
+                                    }
+                                >
+                                    {hasTopPosts && (
+                                        <Typography variant="h5" component="p">
+                                            {t('common:topPosts')}
+                                        </Typography>
+                                    )}
+                                    <Box className="view-btns">
+                                        <IconButton
+                                            className={
+                                                listView ? '' : 'selected'
+                                            }
+                                            onClick={() => setListView(false)}
+                                        >
+                                            <GridViewIcon />
+                                        </IconButton>
+                                        <IconButton
+                                            className={
+                                                listView ? 'selected' : ''
+                                            }
+                                            onClick={() => setListView(true)}
+                                        >
+                                            <ListViewIcon />
+                                        </IconButton>
+                                    </Box>
+                                </Box>
+                                {hasTopPosts && (
+                                    <Grid container spacing={isMdDown ? 1 : 2}>
+                                        {topPosts.map((cardData, i) => {
+                                            const {
+                                                price,
+                                                sum,
+                                                usd,
+                                                currency,
+                                                ...other
+                                            } = cardData;
 
-                            {/*            const {by_currency} = query;*/}
+                                            const {by_currency} = query;
 
-                            {/*            const isUE = by_currency === 'уе';*/}
-                            {/*            const isSum = by_currency === 'sum';*/}
+                                            const isUE = by_currency === 'уе';
+                                            const isSum = by_currency === 'sum';
 
-                            {/*            const curCurrency = isUE*/}
-                            {/*                ? {name: 'уе'}*/}
-                            {/*                : isSum*/}
-                            {/*                ? {name: 'sum'}*/}
-                            {/*                : currency;*/}
+                                            const curCurrency = isUE
+                                                ? {name: 'уе'}
+                                                : isSum
+                                                ? {name: 'sum'}
+                                                : currency;
 
-                            {/*            return (*/}
-                            {/*                <Fragment key={i}>*/}
-                            {/*                    {listView ? (*/}
-                            {/*                        <Grid item xs={12}>*/}
-                            {/*                            <ListCard*/}
-                            {/*                                {...other}*/}
-                            {/*                                currency={*/}
-                            {/*                                    curCurrency*/}
-                            {/*                                }*/}
-                            {/*                                price={*/}
-                            {/*                                    isUE*/}
-                            {/*                                        ? usd*/}
-                            {/*                                        : isSum*/}
-                            {/*                                        ? sum*/}
-                            {/*                                        : price*/}
-                            {/*                                }*/}
-                            {/*                            />*/}
-                            {/*                        </Grid>*/}
-                            {/*                    ) : (*/}
-                            {/*                        <Grid*/}
-                            {/*                            xs={6}*/}
-                            {/*                            md={4}*/}
-                            {/*                            lg={3}*/}
-                            {/*                            item*/}
-                            {/*                        >*/}
-                            {/*                            <GridCard*/}
-                            {/*                                {...other}*/}
-                            {/*                                isFetch={isFetch}*/}
-                            {/*                                currency={*/}
-                            {/*                                    curCurrency*/}
-                            {/*                                }*/}
-                            {/*                                price={*/}
-                            {/*                                    isUE*/}
-                            {/*                                        ? usd*/}
-                            {/*                                        : isSum*/}
-                            {/*                                        ? sum*/}
-                            {/*                                        : price*/}
-                            {/*                                }*/}
-                            {/*                            />*/}
-                            {/*                        </Grid>*/}
-                            {/*                    )}*/}
-                            {/*                </Fragment>*/}
-                            {/*            );*/}
-                            {/*        })}*/}
-                            {/*    </Grid>*/}
-                            {/*</div>*/}
+                                            return (
+                                                <Fragment key={i}>
+                                                    {listView ? (
+                                                        <Grid item xs={12}>
+                                                            <ListCard
+                                                                {...other}
+                                                                currency={
+                                                                    curCurrency
+                                                                }
+                                                                price={
+                                                                    isUE
+                                                                        ? usd
+                                                                        : isSum
+                                                                        ? sum
+                                                                        : price
+                                                                }
+                                                            />
+                                                        </Grid>
+                                                    ) : (
+                                                        <Grid
+                                                            xs={6}
+                                                            md={4}
+                                                            lg={3}
+                                                            item
+                                                        >
+                                                            <GridCard
+                                                                {...other}
+                                                                isFetch={
+                                                                    isFetch
+                                                                }
+                                                                currency={
+                                                                    curCurrency
+                                                                }
+                                                                price={
+                                                                    isUE
+                                                                        ? usd
+                                                                        : isSum
+                                                                        ? sum
+                                                                        : price
+                                                                }
+                                                            />
+                                                        </Grid>
+                                                    )}
+                                                </Fragment>
+                                            );
+                                        })}
+                                    </Grid>
+                                )}
+                            </div>
                             <div>
                                 <Box
                                     mb={1}
