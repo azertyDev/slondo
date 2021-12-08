@@ -13,6 +13,7 @@ import {ErrorCtx} from "@src/context";
 import {initCardData} from "@src/common_data/common";
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
+import {PromoteModal} from '@src/components/cabinet/components/promote_modal/PromoteModal';
 
 export const MyAuctions: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -50,6 +51,12 @@ export const MyAuctions: FC = () => {
         handleModalOpen: openNotificationsModal
     } = useModal();
 
+    const {
+        modalOpen: promoteOpen,
+        handleModalClose: handleClosePromote,
+        handleModalOpen: handleOpenPromote
+    } = useModal();
+
     const handleDetailedOpen = (post: CardDataType) => () => {
         unstable_batchedUpdates(() => {
             openDetailedModal();
@@ -69,6 +76,11 @@ export const MyAuctions: FC = () => {
             handleOpenSettings();
             setSelectedAuction(post);
         });
+    };
+
+    const handlePromoteOpen = post => () => {
+        handleOpenPromote();
+        setSelectedAuction(post);
     };
 
     const handleDeactivate = (ads_id?: number) => async () => {
@@ -178,6 +190,7 @@ export const MyAuctions: FC = () => {
                 tabsData={tabsData}
                 fetchFirstTabPosts={firstTabFetch}
                 fetchSecondTabPosts={secondTabFetch}
+                handlePromoteOpen={handlePromoteOpen}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
@@ -200,6 +213,11 @@ export const MyAuctions: FC = () => {
                 open={notificationsOpen}
                 handleRefresh={handleRefresh}
                 onClose={closeNotificationsModal}
+            />
+            <PromoteModal
+                postId={selectedAuction.id}
+                openDialog={promoteOpen}
+                handleCloseDialog={handleClosePromote}
             />
         </>
     );

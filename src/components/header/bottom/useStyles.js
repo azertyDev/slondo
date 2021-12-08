@@ -26,11 +26,7 @@ export const useStyles = makeStyles((theme) => ({
             '& a': {
                 width: '100%',
                 display: 'flex',
-                alignItems: 'center',
-                '& svg': {
-                    width: '100%',
-                    height: '90%'
-                }
+                alignItems: 'center'
             }
         },
         '& div.MuiFormControl-root': {

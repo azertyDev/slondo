@@ -42,8 +42,6 @@ export const Bottom: FC<BottomProps> = props => {
         setAuthModalOpen
     } = useContext(AuthCtx);
 
-    console.log(useContext(AuthCtx).user);
-    
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const isScrollBreak = useScrollTrigger({
@@ -108,7 +106,10 @@ export const Bottom: FC<BottomProps> = props => {
                                     >
                                         <Link href="/">
                                             <a onClick={handlePageReload}>
-                                                <Logo />
+                                                <Logo
+                                                    width="100%"
+                                                    height="100%"
+                                                />
                                             </a>
                                         </Link>
                                     </Grid>

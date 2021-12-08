@@ -41,7 +41,7 @@ const App = props => {
 
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketTestb);
+    const socket = useSocket(socketProduction);
     const userLocation = useUserLocation();
     const showExitPrompt = useExitPrompt(false);
 

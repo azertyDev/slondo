@@ -17,7 +17,8 @@ export const initUser: UserInfo = {
         number_of_notifications: 0,
         number_of_messages: 0,
         number_of_ratings: 0
-    }
+    },
+    balance: 0
 };
 
 export const useUser = () => {

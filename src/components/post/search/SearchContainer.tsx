@@ -10,9 +10,9 @@ import {
     toUrlParams,
     transformCyrillic
 } from '@root/src/helpers';
-import {CategoriesCtx, ErrorCtx, SearchCtx} from '@root/src/context';
+import {CategoriesCtx, ErrorCtx} from '@root/src/context';
 import {getSEOContent} from '@root/src/common_data/seo_content';
-import {Box, Container, Grid} from '@material-ui/core';
+import {Container, Grid} from '@material-ui/core';
 import {AdvType} from '@root/interfaces/Adv';
 import {useFormik} from 'formik';
 import {useModal} from '@root/src/hooks';
@@ -30,7 +30,6 @@ import {SEOTextComponent} from '../../elements/seo_text_component/SEOTextCompone
 import {SearchResult} from './search_result/SearchResult';
 import {SearchPostMobile} from '../../mobile/post/search_post/SearchMobile';
 import {SearchPostDesktop} from '../../desktop/post/search_post/SearchDesktop';
-import {BottomAdv} from '../../elements/adv/bottom/BottomAdv';
 
 type SearchContainerProps = {
     isMobileView: boolean;
@@ -162,6 +161,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
     };
 
     const [posts, setPosts] = useState([]);
+    const [topPosts, setTopPosts] = useState([]);
     const [isFetch, setIsFetch] = useState(false);
     const [itemsCount, setItemsCount] = useState(0);
     const [isNotFound, setIsNotFound] = useState(false);
@@ -335,13 +335,21 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
 
             setIsFetch(true);
 
-            const {data, total} = await userAPI.getPostsByFilters(query);
+            const [posts] = await Promise.all([
+                userAPI.getPostsByFilters(query),
+                // userAPI.getPostsByFilters({
+                //     ...query,
+                //     itemsPerPage: 10,
+                //     is_top: 1
+                // })
+            ]);
 
             setIsFetch(false);
 
-            if (total) {
-                setPosts(data);
-                setItemsCount(total);
+            if (posts.total) {
+                setPosts(posts.data);
+                // setTopPosts(topPosts.data);
+                setItemsCount(posts.total);
                 isNotFound && setIsNotFound(false);
             } else {
                 setItemsCount(0);
@@ -419,6 +427,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                         )}
                         <SearchResult
                             posts={posts}
+                            topPosts={topPosts}
                             isFetch={isFetch}
                             rightAdv={right}
                             bottomAdv={bottom}

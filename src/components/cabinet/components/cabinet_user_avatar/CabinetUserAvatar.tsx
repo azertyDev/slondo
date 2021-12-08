@@ -36,10 +36,12 @@ export const CabinetUserAvatar: FC<CabinetUserAvatarProps> = props => {
                 <UserInfoWithAvatar user={user} />
             </div>
             <Grid container spacing={1}>
-                <Grid item xs={12}>
-                    <Typography>{t('bonuses')}</Typography>
-                    <Typography>{balance}</Typography>
-                </Grid>
+                {!!balance && (
+                    <Grid item xs={12}>
+                        <Typography>{t('bonuses')}</Typography>
+                        <Typography>{balance}</Typography>
+                    </Grid>
+                )}
                 <Grid item xs={4}>
                     <CustomBadge badgeContent={user.observer.number_of_reviews}>
                         <ListItem

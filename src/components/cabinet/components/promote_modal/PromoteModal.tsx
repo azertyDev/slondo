@@ -37,7 +37,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
         try {
             setIsFetch(true);
 
-            const services = normalizeServiceData(
+            const services = normalizeServicesData(
                 await promoteAPI.getServicesById(postId)
             );
 
@@ -159,7 +159,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
     );
 };
 
-function normalizeServiceData(data) {
+function normalizeServicesData(data) {
     const keys = Object.keys(data);
 
     return keys.map(k => {
@@ -168,7 +168,7 @@ function normalizeServiceData(data) {
                 id,
                 price,
                 bonus,
-                value: expired ?? quantity
+                value: expired ? expired / 24 : quantity
             };
         });
 

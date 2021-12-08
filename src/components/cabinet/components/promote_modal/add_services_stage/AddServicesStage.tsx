@@ -45,23 +45,27 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                 <>
                     {!!selectedServices.length && (
                         <Box p={{xs: 2}}>
-                            {selectedServices.map((srv, index) => {
-                                return (
-                                    <div key={srv.id}>
-                                        {t(srv.name)}&nbsp;
-                                        {srv.value}&nbsp;
-                                        {declOfNum(srv.value, locale, srv.name)}
-                                        &nbsp;
-                                        {srv.price}&nbsp;
-                                        {t('filters:sum')}
-                                        <CustomButton
-                                            onClick={handleRemoveService(index)}
-                                        >
-                                            X
-                                        </CustomButton>
-                                    </div>
-                                );
-                            })}
+                            {selectedServices.map(
+                                ({id, name, value, price}, index) => {
+                                    return (
+                                        <div key={id}>
+                                            {t(name)}&nbsp;
+                                            {value}&nbsp;
+                                            {declOfNum(value, locale, name)}
+                                            &nbsp;
+                                            {price}&nbsp;
+                                            {t('filters:sum')}
+                                            <CustomButton
+                                                onClick={handleRemoveService(
+                                                    index
+                                                )}
+                                            >
+                                                X
+                                            </CustomButton>
+                                        </div>
+                                    );
+                                }
+                            )}
                         </Box>
                     )}
                     {services.length !== 0 && (
@@ -99,12 +103,6 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                         >
                                             {selectedService.options.map(
                                                 ({id, value}) => {
-                                                    if (
-                                                        selectedService.name !==
-                                                        'raise_tape'
-                                                    )
-                                                        value = value / 24;
-
                                                     return (
                                                         <MenuItem
                                                             key={id}

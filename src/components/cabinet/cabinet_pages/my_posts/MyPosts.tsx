@@ -35,12 +35,6 @@ export const MyPosts: FC = () => {
         useState(initialPostsState);
 
     const {
-        modalOpen: promoteOpen,
-        handleModalClose: handleClosePromote,
-        handleModalOpen: handleOpenPromote
-    } = useModal();
-
-    const {
         modalOpen: settingsOpen,
         handleModalClose: handleCloseSettings,
         handleModalOpen: handleOpenSettings
@@ -56,10 +50,11 @@ export const MyPosts: FC = () => {
         handleModalOpen: openNotificationsModal
     } = useModal();
 
-    const handlePromoteOpen = post => () => {
-        handleOpenPromote();
-        setSelectedPost(post);
-    };
+    const {
+        modalOpen: promoteOpen,
+        handleModalClose: handleClosePromote,
+        handleModalOpen: handleOpenPromote
+    } = useModal();
 
     const handleDetailedOpen = post => () => {
         openDetailedModal();
@@ -73,6 +68,11 @@ export const MyPosts: FC = () => {
 
     const handleSettingsOpen = (post: CardDataType) => () => {
         handleOpenSettings();
+        setSelectedPost(post);
+    };
+
+    const handlePromoteOpen = post => () => {
+        handleOpenPromote();
         setSelectedPost(post);
     };
 
@@ -182,11 +182,6 @@ export const MyPosts: FC = () => {
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <PromoteModal
-                postId={selectedPost.id}
-                openDialog={promoteOpen}
-                handleCloseDialog={handleClosePromote}
-            />
             <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
@@ -204,6 +199,11 @@ export const MyPosts: FC = () => {
                 open={notificationsOpen}
                 handleRefresh={handleRefresh}
                 onClose={closeNotificationsModal}
+            />
+            <PromoteModal
+                postId={selectedPost.id}
+                openDialog={promoteOpen}
+                handleCloseDialog={handleClosePromote}
             />
         </>
     );

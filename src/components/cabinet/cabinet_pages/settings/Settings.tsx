@@ -29,7 +29,8 @@ export const Settings: FC = () => {
         avatar: user.avatar,
         available_start_time: user.available_start_time ?? '09:00',
         available_end_time: user.available_end_time ?? '18:00',
-        available_days: user.available_days ?? [...WEEK_DAYS]
+        available_days: user.available_days ?? [...WEEK_DAYS],
+        balance: 0
     };
 
     const [isFetch, setIsFetch] = useState(false);
