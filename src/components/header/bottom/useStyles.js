@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: '#F8F7FA',
         transition: 'box-shadow 0.5s',
@@ -26,7 +26,10 @@ export const useStyles = makeStyles((theme) => ({
             '& a': {
                 width: '100%',
                 display: 'flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                '& svg': {
+                    marginBottom: '8px'
+                }
             }
         },
         '& div.MuiFormControl-root': {
@@ -93,16 +96,17 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         // Adaptive
-        '& div.category-menu > button, & div.select-menu, & div.create-ad, button.bottom-sign-button': {
-            '& h6': {
-                [theme.breakpoints.down('lg')]: {
-                    fontSize: '.69rem'
-                },
-                [theme.breakpoints.up('lg')]: {
-                    fontSize: '.875rem'
+        '& div.category-menu > button, & div.select-menu, & div.create-ad, button.bottom-sign-button':
+            {
+                '& h6': {
+                    [theme.breakpoints.down('lg')]: {
+                        fontSize: '.69rem'
+                    },
+                    [theme.breakpoints.up('lg')]: {
+                        fontSize: '.875rem'
+                    }
                 }
-            }
-        },
+            },
         '& div.translate-local': {
             display: 'flex',
             alignItems: 'center',

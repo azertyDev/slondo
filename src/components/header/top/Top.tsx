@@ -41,7 +41,6 @@ export const Top: FC<TopHeaderPropsType> = props => {
         auth,
         setAuthModalOpen
     } = useContext(AuthCtx);
-    const {user} = useContext(AuthCtx);
 
     const {pathname} = useRouter();
     const trigger = useScrollTrigger({threshold: 53});
@@ -117,13 +116,14 @@ export const Top: FC<TopHeaderPropsType> = props => {
                             <Toolbar>
                                 <Grid
                                     container
-                                    justifyContent="space-between"
                                     alignItems="center"
+                                    justifyContent="space-between"
                                 >
                                     <Grid>
                                         <IconButton
                                             size="small"
                                             onClick={handleDrawerOpen}
+                                            style={{paddingTop: '13px'}}
                                         >
                                             <div className="burger-menu">
                                                 <CategorySortIcon />
