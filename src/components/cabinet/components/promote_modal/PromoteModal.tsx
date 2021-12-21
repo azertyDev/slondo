@@ -1,33 +1,59 @@
-import {FC, useState, useEffect} from 'react';
-import {promoteAPI} from '@root/src/api/api';
+import {FC, useState, useEffect, useContext} from 'react';
 import {ResponsiveModal} from '@root/src/components/elements/responsive_modal/ResponsiveModal';
-import {useStyles} from './useStyles';
 import {AddServicesStage} from '@src/components/cabinet/components/promote_modal/add_services_stage/AddServicesStage';
 import {PaymentStage} from '@src/components/cabinet/components/promote_modal/payment_stage/PaymentStage';
+import {Box, Grid, IconButton, Typography} from '@material-ui/core';
+import {useTranslation} from 'react-i18next';
+import {bonusAPI, paymeAPI, servicesAPI} from '@src/api/paid_api';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {ConfirmStage} from '@src/components/cabinet/components/promote_modal/confirm_stage/ConfirmStage';
+import {CardInfoStage} from '@src/components/cabinet/components/promote_modal/card_info_stage/CardInfoStage';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {codeSchema} from '@root/validation_schemas/authRegSchema';
+import {cardNumExpSchema} from '@root/validation_schemas/paymentCardSchema';
+import {SuccessStage} from '@src/components/cabinet/components/promote_modal/success_stage/SuccesStage';
+import {ErrorCtx} from '@src/context';
+import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
+import {BackspaceIcon, DeleteIcon} from '@src/components/elements/icons';
+import {RaiseTapeIcon, TopIcon, TurboSaleIcon} from '@src/assets/icons';
+import {Check} from '@material-ui/icons';
+import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
 type PromoteModalProps = {
-    postId: number;
-    maxWidth?: number;
+    postId: string;
+    postType: string;
     fullWidth?: boolean;
     openDialog: boolean;
     handleCloseDialog: () => void;
     handleRefresh: () => Promise<void>;
 };
 
+export type PayType = 'bonus' | 'payme';
+export type Statuses =
+    | 'service'
+    | 'payment'
+    | 'smsConfirm'
+    | 'success'
+    | PayType;
+
 export const PromoteModal: FC<PromoteModalProps> = props => {
     const {
         postId,
-        maxWidth,
+        postType,
         fullWidth,
         openDialog,
         handleRefresh,
         handleCloseDialog
     } = props;
 
+    const {locale} = useRouter();
+    const {setErrorMsg} = useContext(ErrorCtx);
+
+    const {t} = useTranslation('cabinet');
     const [isFetch, setIsFetch] = useState(false);
 
-    const [paymentStage, setPaymentStage] = useState(false);
-    const [paymentType, setPaymentType] = useState<'bonus' | 'sum'>('bonus');
+    const [stageStatus, setStageStatus] = useState<Statuses>('service');
 
     const initService = {name: null, options: []};
 
@@ -35,25 +61,50 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     const [selectedServices, setSelectedServices] = useState([]);
+    const servicesIds = selectedServices.map(({id}) => ({id}));
+
     const [services, setServices] = useState([]);
+
+    const amount = selectedServices.reduce((sum, serv) => {
+        sum += serv.price;
+        return sum;
+    }, 0);
+
+    const [token, setToken] = useState(null);
 
     const filteredServices = services.filter(srv =>
         selectedServices.every(s => s.name !== srv.name)
     );
+
+    const isSmsConfirm = stageStatus === 'smsConfirm';
+    const isServiceStage = stageStatus === 'service';
+
+    const submitBtnTxt = (() => {
+        switch (stageStatus) {
+            case 'payment':
+                return 'to_checkout';
+            case 'bonus':
+                return 'common:confirm';
+            case 'smsConfirm':
+                return 'common:send';
+            default:
+                return 'next';
+        }
+    })();
 
     const fetchServices = async () => {
         try {
             setIsFetch(true);
 
             const services = normalizeServicesData(
-                await promoteAPI.getServicesById(postId)
+                await servicesAPI.getServicesByPostId(postId)
             );
 
             setIsFetch(false);
             setServices(services);
         } catch (e) {
             setIsFetch(false);
-            console.error(e.message);
+            setErrorMsg(e.message);
         }
     };
 
@@ -62,8 +113,8 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
         setSelectedService(initService);
     };
 
-    const switchPaymentStage = () => {
-        setPaymentStage(!paymentStage);
+    const handleStage = (payType: PayType) => () => {
+        setStageStatus(payType);
     };
 
     const handleAddService = () => {
@@ -103,66 +154,285 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
 
     const activateServices = async () => {
         try {
-            const servicesIds = selectedServices.map(({id}) => ({id}));
-
             setIsFetch(true);
 
-            await promoteAPI.activateServices(postId, servicesIds, paymentType);
-            await handleRefresh();
+            if (stageStatus === 'bonus') {
+                await bonusAPI.activate(postId, servicesIds);
+                setStageStatus('success');
+            }
+
+            if (stageStatus === 'payme') {
+                const {cardNumber, expireDate} = formik.values;
+                const number = cardNumber.replace(/\s/g, '');
+                const expire = expireDate.replace(/\//, '');
+
+                const {token} = await paymeAPI.activate(number, expire, amount);
+
+                setToken(token);
+                setStageStatus('smsConfirm');
+            }
 
             setIsFetch(false);
         } catch (e) {
+            setErrorMsg(e.message);
             setIsFetch(false);
         }
-
-        handleCloseDialog();
     };
 
-    useEffect(() => {
-        postId && fetchServices();
-    }, [postId]);
+    const codeVerify = async () => {
+        try {
+            setIsFetch(true);
 
-    useEffect(() => {
-        if (openDialog) {
-            resetService();
-            setPaymentStage(false);
-            setSelectedServices([]);
+            if (stageStatus === 'smsConfirm') {
+                const {code} = formik.values;
+
+                const res = await paymeAPI.codeVerify(
+                    postId,
+                    code,
+                    amount,
+                    token
+                );
+
+                await paymeAPI.receiptsPay(
+                    postId,
+                    res.id,
+                    res.token,
+                    servicesIds
+                );
+            }
+
+            handleRefresh();
+
+            setStageStatus('success');
+
+            setIsFetch(false);
+        } catch (e) {
+            setErrorMsg(e.message);
+            setIsFetch(false);
         }
-    }, [openDialog]);
+    };
 
-    const classes = useStyles();
-    return (
-        <ResponsiveModal
-            maxWidth={maxWidth}
-            fullWidth={fullWidth}
-            openDialog={openDialog}
-            handleCloseDialog={handleCloseDialog}
-        >
-            <div className={classes.root}>
-                {paymentStage ? (
-                    <PaymentStage
-                        isFetch={isFetch}
-                        declOfNum={declOfNum}
-                        paymentType={paymentType}
-                        selectedServices={selectedServices}
-                        activateServices={activateServices}
-                        switchPaymentStage={switchPaymentStage}
-                    />
-                ) : (
+    const handlePrevStage = () => {
+        switch (stageStatus) {
+            case 'payment':
+                setStageStatus('service');
+                break;
+            case 'bonus':
+            case 'payme':
+            case 'smsConfirm':
+                formik.setValues(initCardData);
+                setStageStatus('payment');
+        }
+        formik.setErrors({});
+    };
+
+    const showBackArrow =
+        stageStatus !== 'service' && stageStatus !== 'success';
+
+    const showNextBtn =
+        (stageStatus === 'service' && selectedServices.length !== 0) ||
+        stageStatus === 'bonus';
+
+    const showSelectedServicesList =
+        !!selectedServices.length &&
+        (stageStatus === 'service' ||
+            stageStatus === 'bonus' ||
+            stageStatus === 'payment');
+
+    const initCardData = {
+        code: '',
+        expireDate: '__/__',
+        cardNumber: '____ ____ ____ ____'
+    };
+
+    const onSubmit = async () => {
+        switch (stageStatus) {
+            case 'service':
+                setStageStatus('payment');
+                break;
+            case 'bonus':
+            case 'payme':
+                await activateServices();
+                break;
+            case 'smsConfirm':
+                await codeVerify();
+        }
+    };
+
+    const formik = useFormik({
+        onSubmit,
+        initialValues: initCardData,
+        validationSchema:
+            stageStatus === 'payme'
+                ? cardNumExpSchema
+                : isSmsConfirm
+                ? codeSchema
+                : null
+    });
+
+    const reset = () => {
+        formik.setErrors({});
+        formik.setTouched({});
+        formik.setValues(initCardData);
+        resetService();
+        setSelectedServices([]);
+        setStageStatus('service');
+    };
+
+    const top = (
+        <>
+            <Box
+                display="flex"
+                padding="15px 10px"
+                justifyContent={showBackArrow ? 'space-between' : 'flex-end'}
+            >
+                {showBackArrow && (
+                    <IconButton disableTouchRipple onClick={handlePrevStage}>
+                        <BackspaceIcon />
+                    </IconButton>
+                )}
+                <CloseBtn handleClose={handleCloseDialog} />
+            </Box>
+            <Box>
+                <Typography className="post-num" variant="subtitle1">
+                    {t(`common:${postType}`)} №: {postId}
+                </Typography>
+            </Box>
+        </>
+    );
+    const stage = (() => {
+        switch (stageStatus) {
+            case 'service':
+                return (
                     <AddServicesStage
                         isFetch={isFetch}
                         declOfNum={declOfNum}
                         services={filteredServices}
                         selectedOption={selectedOption}
                         selectedService={selectedService}
-                        selectedServices={selectedServices}
                         handleAddService={handleAddService}
-                        switchPaymentStage={switchPaymentStage}
                         handleSelectOption={handleSelectOption}
                         handleSelectService={handleSelectService}
-                        handleRemoveService={handleRemoveService}
                     />
-                )}
+                );
+            case 'payment':
+                return <PaymentStage handleStage={handleStage} />;
+            case 'bonus':
+                return <ConfirmStage amount={amount} />;
+            case 'payme':
+            case 'smsConfirm':
+                return (
+                    <CardInfoStage
+                        formik={formik}
+                        isSmsConfirm={isSmsConfirm}
+                    />
+                );
+            case 'success':
+                return <SuccessStage handleClose={handleCloseDialog} />;
+        }
+    })();
+
+    const selectedServicesList = (
+        <div className="selected-service-wrapper">
+            {selectedServices.map(({id, name, value, price}, index) => {
+                return (
+                    <Grid item container spacing={1} key={id} xs={12}>
+                        <Grid
+                            item
+                            container
+                            xs={isServiceStage ? 10 : 12}
+                            sm={isServiceStage ? 11 : 12}
+                            alignItems="center"
+                            justifyContent="space-between"
+                            className={`selected-service ${name}`}
+                        >
+                            <Box
+                                className="service-name"
+                                display="flex"
+                                alignItems="center"
+                            >
+                                {serviceIcons[name]}
+                                <Typography>{t(name)}</Typography>
+                            </Box>
+                            <Typography className="service-value">
+                                {value}&nbsp;
+                                {declOfNum(value, locale, name)}
+                            </Typography>
+                            <Box
+                                display="flex"
+                                alignItems="flex-end"
+                                className="price"
+                            >
+                                <Typography>{price}&nbsp;</Typography>
+                                <Typography>{t('filters:sum')}</Typography>
+                            </Box>
+                            <Box
+                                className="added"
+                                display="flex"
+                                alignItems="center"
+                            >
+                                <span>{t('added')}</span>
+                                <Check />
+                            </Box>
+                        </Grid>
+                        {isServiceStage && (
+                            <Grid
+                                item
+                                container
+                                xs={2}
+                                sm={1}
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <IconButton
+                                    className="remove-btn"
+                                    onClick={handleRemoveService(index)}
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Grid>
+                        )}
+                    </Grid>
+                );
+            })}
+        </div>
+    );
+
+    useEffect(() => {
+        postId && fetchServices();
+    }, [postId]);
+
+    useEffect(() => {
+        openDialog && reset();
+    }, [openDialog]);
+
+    const classes = useStyles();
+    return (
+        <ResponsiveModal
+            fullWidth={fullWidth}
+            openDialog={openDialog}
+            handleCloseDialog={handleCloseDialog}
+        >
+            <div className={classes.root}>
+                <FormikProvider value={formik}>
+                    <Form onSubmit={formik.handleSubmit}>
+                        <div className="top-wrapper">{top}</div>
+                        <div className="content-wrapper">
+                            {showSelectedServicesList && selectedServicesList}
+                            {stage}
+                        </div>
+                        {showNextBtn && (
+                            <div className="bottom-wrapper">
+                                <CustomButton
+                                    className="next-btn"
+                                    type="submit"
+                                >
+                                    {t(submitBtnTxt)}
+                                </CustomButton>
+                            </div>
+                        )}
+                    </Form>
+                </FormikProvider>
             </div>
         </ResponsiveModal>
     );
@@ -184,6 +454,12 @@ function normalizeServicesData(data) {
         return {name: k, options};
     });
 }
+
+export const serviceIcons = {
+    top: <TopIcon />,
+    raise_tape: <RaiseTapeIcon />,
+    turbo_sale: <TurboSaleIcon />
+};
 
 function declOfNum(n, locale, serviceName) {
     n = Math.abs(n) % 100;

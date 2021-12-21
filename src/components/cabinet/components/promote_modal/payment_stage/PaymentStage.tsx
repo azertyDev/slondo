@@ -1,55 +1,42 @@
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Box, Typography} from '@material-ui/core';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {useRouter} from 'next/router';
+import {Grid, IconButton, Typography} from '@material-ui/core';
+import {PayType} from '@src/components/cabinet/components/promote_modal/PromoteModal';
+import {BonusesIcon} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 type PaymentStageProps = {
-    isFetch: boolean;
-    selectedServices;
-    paymentType: 'bonus' | 'sum';
-    activateServices: () => void;
-    switchPaymentStage: () => void;
-    declOfNum: (n: number, locale: string, serviceName: string) => string;
+    handleStage: (stage: PayType) => () => void;
 };
 
 export const PaymentStage: FC<PaymentStageProps> = props => {
-    const {
-        isFetch,
-        paymentType,
-        selectedServices,
-        declOfNum,
-        activateServices,
-        switchPaymentStage
-    } = props;
-
-    const {locale} = useRouter();
+    const {handleStage} = props;
     const {t} = useTranslation('cabinet');
 
+    const classes = useStyles();
     return (
-        <div>
-            <CustomButton onClick={switchPaymentStage}>
-                {t('common:back')}
-            </CustomButton>
-            <Box p={{xs: 2}}>
-                {selectedServices.map(srv => {
-                    return (
-                        <div key={srv.id}>
-                            {t(srv.name)}&nbsp;
-                            {srv.value}&nbsp;
-                            {declOfNum(srv.value, locale, srv.name)}&nbsp;
-                            {srv.price}&nbsp;
-                            {t('filters:sum')}
-                        </div>
-                    );
-                })}
-            </Box>
-            <Typography variant="subtitle1">
-                {t('payment_type')} - {paymentType}
+        <div className={classes.root}>
+            <Typography className="select-service-title" variant="subtitle1">
+                {t('payment_type')}
             </Typography>
-            <CustomButton disabled={isFetch} onClick={activateServices}>
-                {t('activate')}
-            </CustomButton>
+            <Grid
+                container
+                item
+                xs={12}
+                spacing={2}
+                className="pay-icons-wrapper"
+            >
+                <Grid item xs={12} sm={4}>
+                    <IconButton onClick={handleStage('bonus')}>
+                        <BonusesIcon />
+                    </IconButton>
+                </Grid>
+                {/*<Grid item xs={12} sm={4}>*/}
+                {/*    <IconButton onClick={handleStage('payme')}>*/}
+                {/*        <PaymeIcon />*/}
+                {/*    </IconButton>*/}
+                {/*</Grid>*/}
+            </Grid>
         </div>
     );
 };

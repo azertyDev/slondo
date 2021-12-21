@@ -1,250 +1,24 @@
-import Axios from 'axios';
 import {UserInfo} from '@root/interfaces/Auth';
-import {cookies, transformCyrillic} from '@src/helpers';
+import {setTokenToHeader, transformCyrillic} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from '@root/interfaces/Locations';
 import {
-    DEV_URL,
     POSTS_PER_PAGE,
     ITEMS_PER_PAGE,
-    MESSAGES_PER_PAGE,
-    PRODUCTION_URL,
-    SUBS_PER_PAGE,
-    TESTB_URL
+    SUBS_PER_PAGE
 } from '@src/constants';
-
-const production = `${PRODUCTION_URL}/api`;
-const local = `${DEV_URL}/slondo/public/api/`;
-const testb = `${TESTB_URL}/api/`;
-
-const instance = Axios.create({
-    withCredentials: true,
-    baseURL: testb
-});
-
-const setTokenToHeader = () => {
-    const token = cookies.get('slondo_auth');
-
-    if (token) {
-        return {
-            headers: {
-                'Cross-Origin-Embedder-Policy': 'require-corp',
-                'Cross-Origin-Opener-Policy': 'same-origin',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        };
-    }
-};
-
-export const promoteAPI = {
-    getServicesById: (postId: number) => {
-        return instance
-            .get(`services/paid/${postId}`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    activateServices: (post_id: number, services, payment_type: string) => {
-        const params = {
-            post_id,
-            services,
-            payment_type
-        };
-
-        return instance
-            .post(`paid/service/activate`, params, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
-
-export const adsAPI = {
-    getAds: (main = 0, lang = 'ru'): Promise<any> => {
-        const params = {main, lang};
-        return instance
-            .get(`post/reclame`, {params})
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
-
-export const chatAPI = {
-    resetUnreadCount: contact_id => {
-        const params = {contact_id};
-        return instance
-            .post(`contact/reset`, params, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    getContactById: (userId): Promise<any> => {
-        return instance
-            .get(`contact/${userId}`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    removeUser: (userId: number): Promise<any> => {
-        return instance
-            .delete(`contact/${userId}`, setTokenToHeader())
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    blockUser: (userId: number): Promise<any> => {
-        return instance
-            .post(`contact/block/${userId}`, {}, setTokenToHeader())
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    sendMessage: (form): Promise<any> => {
-        return instance
-            .post(`message/send`, form, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    getMessages: (
-        receiver_id: number,
-        page: number,
-        itemsPerPage = MESSAGES_PER_PAGE
-    ): Promise<any> => {
-        const params = {
-            receiver_id,
-            page,
-            itemsPerPage
-        };
-        return instance
-            .get(`message/byReceiverId`, {params, ...setTokenToHeader()})
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    getUserContacts: (itemsPerPage = 50): Promise<any> => {
-        const params = {
-            itemsPerPage
-        };
-        return instance
-            .get(`contact/all`, {params, ...setTokenToHeader()})
-            .then(res => res.data.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
-
-export const myUzCardAPI = {
-    p2pHold: (paymentData: string): Promise<any> => {
-        return instance
-            .post(`uzcard/p2p/createHold`, paymentData, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    performDismiss: (postId, isPerform = false): Promise<any> => {
-        return instance
-            .post(
-                `uzcard/p2p/${isPerform ? 'performHold' : 'dismissHold'}`,
-                postId,
-                setTokenToHeader()
-            )
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    createCard: (cardData: string): Promise<any> => {
-        return instance
-            .post(`uzcard/card/create`, cardData, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    confirmSmsCode: (data: string): Promise<any> => {
-        return instance
-            .post(`uzcard/card/confirm`, data, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    getUserCards: (): Promise<any> => {
-        return instance
-            .get(`uzcard/cards/all`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    removeUserCard: (cardId: number): Promise<any> => {
-        return instance
-            .delete(`uzcard/card/delete/${cardId}`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
-
-export const userCabinetAPI = {
-    getPurchases: (params): Promise<any> => {
-        return instance
-            .get('regular/post/purchased', {params, ...setTokenToHeader()})
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    },
-    getArchivePurchases: (params): Promise<any> => {
-        return instance
-            .get('regular/archivePost/purchased', {
-                params,
-                ...setTokenToHeader()
-            })
-            .then(res => res.data)
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
-
-export const postAPI = {
-    complaint: (ads_id: number, complaint: string): Promise<any> => {
-        return instance
-            .post(
-                `regular/post/complaint`,
-                {ads_id, complaint},
-                setTokenToHeader()
-            )
-            .catch(({response}) => {
-                throw response.data;
-            });
-    }
-};
+import {axiosInstance} from '@src/api/axios_instance';
 
 export const userAPI = {
     feedback: (form): Promise<any> => {
-        return instance.post(`feedback`, form).catch(err => {
+        return axiosInstance.post(`feedback`, form).catch(err => {
             throw err;
         });
     },
     getPostsByFilters: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get('posts/filter', {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(({response}) => {
@@ -258,7 +32,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
-        return instance
+        return axiosInstance
             .post(`login`, form)
             .then(res => res.data)
             .catch(({response}) => {
@@ -266,7 +40,7 @@ export const userAPI = {
             });
     },
     getMainSliderData: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get('slider/main', {params})
             .then(res => res.data)
             .catch(({response}) => {
@@ -276,7 +50,7 @@ export const userAPI = {
     register: (phone: string): Promise<any> => {
         const form = new FormData();
         form.set('phone', phone);
-        return instance
+        return axiosInstance
             .post(`register`, form)
             .then(res => res.data)
             .catch(({response}) => {
@@ -286,7 +60,7 @@ export const userAPI = {
     getSmsCode: (phone: string): Promise<unknown> => {
         const form = new FormData();
         form.set('phone', phone);
-        return instance
+        return axiosInstance
             .post(`recoveryRequest`, form)
             .then(res => res.data)
             .catch(({response}) => {
@@ -294,7 +68,7 @@ export const userAPI = {
             });
     },
     confirmSmsCode: (phone: string, code: string): Promise<unknown> => {
-        return instance
+        return axiosInstance
             .get(`checkShortCode?phone=${phone}&code=${code}`)
             .then(res => res.data)
             .catch(({response}) => {
@@ -310,17 +84,17 @@ export const userAPI = {
         form.set('phone', phone);
         form.set('code', code);
         form.set('password', newPassword);
-        return instance
+        return axiosInstance
             .post(`recovery`, form)
             .then(res => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
     },
-    favoriteAds: (id: number): Promise<{message: string}> => {
+    favoriteAds: (id: string): Promise<{message: string}> => {
         const form = new FormData();
         form.set('ads_id', `${id}`);
-        return instance
+        return axiosInstance
             .post(`regular/post/favorite`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -333,7 +107,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`regular/post/get/favorites`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
@@ -341,7 +115,7 @@ export const userAPI = {
             });
     },
     getMyPosts: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/posts`, {
                 params,
                 ...setTokenToHeader()
@@ -352,7 +126,7 @@ export const userAPI = {
             });
     },
     getParticipatingAucs: params => {
-        return instance
+        return axiosInstance
             .get(`regular/user/auctions/participating`, {
                 params,
                 ...setTokenToHeader()
@@ -367,7 +141,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`regular/user/${subsPath}/all`, {
                 params,
                 ...setTokenToHeader()
@@ -378,7 +152,7 @@ export const userAPI = {
             });
     },
     follow: (id): Promise<{message: string}> => {
-        return instance
+        return axiosInstance
             .post(
                 `regular/user/subscribe?user_id=${id}`,
                 {},
@@ -390,7 +164,7 @@ export const userAPI = {
             });
     },
     getCategories: (): Promise<CategoryType[]> => {
-        return instance
+        return axiosInstance
             .get(`categories/all`)
             .then(res => {
                 return res.data;
@@ -400,7 +174,7 @@ export const userAPI = {
             });
     },
     getFiltersByCtgr: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`subcategory`, {params})
             .then(res => res.data)
             .catch(err => {
@@ -412,7 +186,7 @@ export const userAPI = {
             model_id: modelId,
             year_id: yearId
         };
-        return instance
+        return axiosInstance
             .get(`regular/cars/params/getByManufacturerYear`, {params})
             .then(res => res.data)
             .catch(err => {
@@ -429,7 +203,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`post/all`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
@@ -440,7 +214,7 @@ export const userAPI = {
         const params = {
             id: postId
         };
-        return instance
+        return axiosInstance
             .get(`getPostById`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
@@ -458,7 +232,7 @@ export const userAPI = {
             });
         };
 
-        return instance
+        return axiosInstance
             .get(`location`)
             .then(res => transFromCyrillic(res.data))
             .catch(err => {
@@ -466,7 +240,7 @@ export const userAPI = {
             });
     },
     createPost: (form: FormData): Promise<string> => {
-        return instance
+        return axiosInstance
             .post(`regular/post/new`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -474,7 +248,7 @@ export const userAPI = {
             });
     },
     editPost: (form: FormData, postId): Promise<string> => {
-        return instance
+        return axiosInstance
             .post(`regular/post/edit/${postId}`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -485,7 +259,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', id);
         form.set('bet', bet);
-        return instance
+        return axiosInstance
             .post(`regular/auction/nextBet`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -493,7 +267,7 @@ export const userAPI = {
             });
     },
     getAuctionBets: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`auction/allBets`, {params})
             .then(res => res.data)
             .catch(err => {
@@ -501,7 +275,7 @@ export const userAPI = {
             });
     },
     getPostAuthorPhones: (postId: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`getPhone/${postId}`)
             .then(res => res.data)
             .catch(err => {
@@ -512,15 +286,15 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', auctionId);
         form.set('ads_id', postId);
-        return instance
+        return axiosInstance
             .post(`regular/auction/buyNow`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    deactivateAuction: (ads_id: number): Promise<any> => {
-        return instance
+    deactivateAuction: (ads_id: string): Promise<any> => {
+        return axiosInstance
             .post(`regular/auction/deactivate`, {ads_id}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -528,7 +302,7 @@ export const userAPI = {
             });
     },
     deactivatePost: (data): Promise<any> => {
-        return instance
+        return axiosInstance
             .post(`regular/post/deactivate`, data, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -536,7 +310,7 @@ export const userAPI = {
             });
     },
     getUserByPhoneNumber: (params: {phone: string}): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/byPhone`, {
                 params,
                 ...setTokenToHeader()
@@ -547,7 +321,7 @@ export const userAPI = {
             });
     },
     restoreFromArchive: (ads_id: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -555,15 +329,15 @@ export const userAPI = {
             });
     },
     deleteArchivePost: (ads_id: number): Promise<{message: string}> => {
-        return instance
+        return axiosInstance
             .delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    rejectVictory: (ads_id: number): Promise<any> => {
-        return instance
+    rejectVictory: (ads_id: string): Promise<any> => {
+        return axiosInstance
             .post(`regular/auction/reject`, {ads_id}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -571,7 +345,7 @@ export const userAPI = {
             });
     },
     offerThePrice: (auction_id: number, price: string): Promise<any> => {
-        return instance
+        return axiosInstance
             .post(
                 `regular/auction/offerThePrice`,
                 {
@@ -586,7 +360,7 @@ export const userAPI = {
             });
     },
     getAllOffersById: (auction_id: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(
                 `regular/auction/allOffers?auction_id=${auction_id}`,
                 setTokenToHeader()
@@ -597,7 +371,7 @@ export const userAPI = {
             });
     },
     acceptOffer: (offer_id: number, is_accepted: boolean): Promise<any> => {
-        return instance
+        return axiosInstance
             .post(
                 `regular/auction/acceptOfferThePrice`,
                 {
@@ -612,7 +386,7 @@ export const userAPI = {
             });
     },
     changeUserInfo: (userInfo): Promise<any> => {
-        return instance
+        return axiosInstance
             .post(`regular/user/info`, userInfo, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -620,7 +394,7 @@ export const userAPI = {
             });
     },
     getUserInfo: (): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/info`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -630,7 +404,7 @@ export const userAPI = {
     changeUserAvatar: (avatar): Promise<any> => {
         const formData = new FormData();
         formData.append('avatar', avatar);
-        return instance
+        return axiosInstance
             .post(`regular/user/avatar`, formData, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -638,7 +412,7 @@ export const userAPI = {
             });
     },
     deleteUserAvatar: (id: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .delete(`regular/user/avatar/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -646,7 +420,7 @@ export const userAPI = {
             });
     },
     getAllNotifications: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/notification`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
@@ -654,7 +428,7 @@ export const userAPI = {
             });
     },
     deleteUserNotification: (id: number): Promise<{message?: string}> => {
-        return instance
+        return axiosInstance
             .delete(`regular/user/notification/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -662,7 +436,7 @@ export const userAPI = {
             });
     },
     deleteAllNotification: (user_id: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -670,15 +444,15 @@ export const userAPI = {
             });
     },
     ricePostInTape: (post_id: number): Promise<any> => {
-        return instance
-            .post(`regular/user/post/rise/${post_id}`, {}, setTokenToHeader())
+        return axiosInstance
+            .post(`paid/service/raiseInTape/${post_id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
     getPhoneByUserId: (user_id: number): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/phone/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -686,7 +460,7 @@ export const userAPI = {
             });
     },
     getNotificationById: (params): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/post/notifications`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
@@ -694,7 +468,7 @@ export const userAPI = {
             });
     },
     getUserObserver: (): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`regular/user/observer`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -705,7 +479,7 @@ export const userAPI = {
         const params = {
             user_id
         };
-        return instance
+        return axiosInstance
             .get(`user/rating`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
@@ -713,7 +487,7 @@ export const userAPI = {
             });
     },
     setUserRating: (data): Promise<any> => {
-        return instance
+        return axiosInstance
             .post('regular/user/rating', {...data}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -730,15 +504,15 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`regular/post/returned`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    deleteBlockedPost: (postId: number): Promise<any> => {
-        return instance
+    deleteBlockedPost: (postId: string): Promise<any> => {
+        return axiosInstance
             .delete(`regular/post/returned/${postId}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -746,7 +520,7 @@ export const userAPI = {
             });
     },
     getAllUserRating: (): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`user/rating`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -757,7 +531,7 @@ export const userAPI = {
         comment_id: number,
         comment: string
     ): Promise<{message: string}> => {
-        return instance
+        return axiosInstance
             .post(
                 'regular/user/comment',
                 {
@@ -772,7 +546,7 @@ export const userAPI = {
             });
     },
     getUserInfoById: (user_id: string): Promise<any> => {
-        return instance
+        return axiosInstance
             .get(`user/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -793,7 +567,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`post`, {params})
             .then(res => res.data)
             .catch(err => {
@@ -806,7 +580,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`user/subscribers/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
@@ -819,7 +593,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`user/subscriptions/byUserId`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {
@@ -831,7 +605,7 @@ export const userAPI = {
             page,
             itemsPerPage
         };
-        return instance
+        return axiosInstance
             .get(`post/popular`, {params, ...setTokenToHeader()})
             .then(res => res.data)
             .catch(err => {

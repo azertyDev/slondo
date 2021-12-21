@@ -8,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
             marginTop: 0
         },
         '& div.top-posts': {
-            marginBottom: '20px'
+            marginBottom: '40px'
         },
         '& div.right-content-adv-wrapper': {
             height: '200px',

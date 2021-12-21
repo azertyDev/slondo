@@ -21,7 +21,7 @@ import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings'
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {ChatContainer} from '@src/components/elements/chat_component/ChatContainer';
-import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
+import {CabinetSidebar} from '@src/components/cabinet/components/cabinet_sidebar/CabinetSidebar';
 import {useStyles} from './useStyles';
 
 export type CommonModalType = {

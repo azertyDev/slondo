@@ -8,11 +8,11 @@ import {useTranslation} from 'next-i18next';
 import {complaintSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {TEXT_LIMIT} from '@src/constants';
 import {getErrorMsg} from '@src/helpers';
-import {postAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {postAPI} from '@src/api/post_api';
 import {useStyles} from './useStyles';
 
 type ComplaintModalProps = {

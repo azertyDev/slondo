@@ -12,10 +12,11 @@ import ReactInputMask from 'react-input-mask';
 import {paymentCardSchema} from '@root/validation_schemas/paymentCardSchema';
 import {codeSchema, userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
-import {myUzCardAPI, userAPI} from '@src/api/api';
+import {userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from 'react-dom';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useModal} from '@src/hooks';
+import {myUzCardAPI} from '@src/api/paid_api';
 import {useStyles} from './useStyles';
 
 type UserPaymentCardProps = {

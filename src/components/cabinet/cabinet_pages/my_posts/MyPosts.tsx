@@ -201,6 +201,7 @@ export const MyPosts: FC = () => {
                 onClose={closeNotificationsModal}
             />
             <PromoteModal
+                postType='post'
                 postId={selectedPost.id}
                 openDialog={promoteOpen}
                 handleRefresh={handleRefresh}

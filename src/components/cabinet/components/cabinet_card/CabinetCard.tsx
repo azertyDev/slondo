@@ -11,44 +11,69 @@ import {
 import Link from 'next/link';
 import Countdown from 'react-countdown';
 import {useTranslation} from 'react-i18next';
-import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
-import {Box, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {
+    formatNumber,
+    numberPrettier,
+    priceTransform,
+    transformCyrillic,
+    weekDaysHelper
+} from '@src/helpers';
+import {
+    Box,
+    Grid,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
-    cardData: CardDataType
-}
+    cardData: CardDataType;
+};
 
 export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
-    const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
+    const isAuction =
+        cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
 
     const hasService = Boolean(
-        cardData.delivery
-        || cardData.exchange
-        || cardData.safe_deal
-        || cardData.available_days
-        || cardData.auto_renewal
-        || cardData.auction?.auto_renewal
+        cardData.delivery ||
+            cardData.exchange ||
+            cardData.safe_deal ||
+            cardData.available_days ||
+            cardData.auto_renewal ||
+            cardData.auction?.auto_renewal
     );
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
-            <Typography variant={isXsDown ? 'subtitle2' : 'subtitle1'} component='p' className='color-silver'>
-                {completed ? t('auction:auc_end') : `${t('auction:auc_end_across')}: `}&nbsp;
+            <Typography
+                variant={isXsDown ? 'subtitle2' : 'subtitle1'}
+                component="p"
+                className="color-silver"
+            >
+                {completed
+                    ? t('auction:auc_end')
+                    : `${t('auction:auc_end_across')}: `}
+                &nbsp;
             </Typography>
             {!completed && (
                 <Box display="flex">
-                    <Typography variant={isXsDown ? 'subtitle2' : 'subtitle1'} component='p'>
-                        {formatNumber(days)}{t('common:d')} &nbsp;
-                        {formatNumber(hours)}{t('common:h')}
-                        : {formatNumber(minutes)}{t('common:m')}
-                        : {formatNumber(seconds)}{t('common:s')}
+                    <Typography
+                        variant={isXsDown ? 'subtitle2' : 'subtitle1'}
+                        component="p"
+                    >
+                        {formatNumber(days)}
+                        {t('common:d')} &nbsp;
+                        {formatNumber(hours)}
+                        {t('common:h')}: {formatNumber(minutes)}
+                        {t('common:m')}: {formatNumber(seconds)}
+                        {t('common:s')}
                     </Typography>
                 </Box>
             )}
@@ -67,7 +92,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     return (
         <div className={classes.root}>
             <Link href={url}>
-                <a target='_blank' className='card' title={cardData.title}>
+                <a target="_blank" className="card" title={cardData.title}>
                     <Grid container>
                         <Grid item xs={6} sm={4} md={3} className="img">
                             <Typography
@@ -76,20 +101,24 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                 variant="caption"
                                 className={cardData.ads_type}
                             >
-                                {t(cardData.ads_type === 'exauc' && isXsDown ? 'common:auc' : cardData.ads_type)}
+                                {t(
+                                    cardData.ads_type === 'exauc' && isXsDown
+                                        ? 'common:auc'
+                                        : cardData.ads_type
+                                )}
                             </Typography>
                             {cardData.observer && (
                                 <Box
                                     width={1}
                                     bottom={0}
-                                    padding='5px'
-                                    display='flex'
-                                    position='absolute'
-                                    className='observer-block'
-                                    justifyContent='space-between'
+                                    padding="5px"
+                                    display="flex"
+                                    position="absolute"
+                                    className="observer-block"
+                                    justifyContent="space-between"
                                 >
                                     <span>
-                                        <EyeIcon/>
+                                        <EyeIcon />
                                         <Typography
                                             noWrap
                                             variant="caption"
@@ -99,77 +128,120 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                         </Typography>
                                     </span>
                                     <span>
-                                        <FavoriteBorderIcon/>
+                                        <FavoriteBorderIcon />
                                         <Typography
                                             noWrap
                                             variant="caption"
                                             color="initial"
                                         >
-                                            {cardData.observer?.number_of_favorites}
+                                            {
+                                                cardData.observer
+                                                    ?.number_of_favorites
+                                            }
                                         </Typography>
                                     </span>
                                 </Box>
                             )}
                         </Grid>
-                        <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
+                        <Grid
+                            item
+                            xs={6}
+                            sm={8}
+                            md={9}
+                            container
+                            alignContent="space-between"
+                            className="content"
+                        >
                             <Grid item xs={12} md={7} lg={8}>
-                                <Typography
-                                    variant="h3"
-                                    color="initial"
-                                >
+                                <Typography variant="h3" color="initial">
                                     {cardData.title}
                                 </Typography>
                             </Grid>
                             {!isAuction && (
-                                <Grid item xs={12} sm={8} className="description">
-                                    {!hasService
-                                        ? <Typography variant='subtitle2' component='p'>
+                                <Grid
+                                    item
+                                    xs={12}
+                                    sm={8}
+                                    className="description"
+                                >
+                                    {!hasService ? (
+                                        <Typography
+                                            variant="subtitle2"
+                                            component="p"
+                                        >
                                             {cardData.description}
                                         </Typography>
-                                        : <Box className='services'>
+                                    ) : (
+                                        <Box className="services">
                                             {!!cardData.delivery && (
                                                 <div className="delivery">
-                                                    <DeliveryIcon/>
-                                                    {!isXsDown && <Typography variant="body1">
-                                                        {t('common:delivery')}
-                                                    </Typography>}
+                                                    <DeliveryIcon />
+                                                    {!isXsDown && (
+                                                        <Typography variant="body1">
+                                                            {t(
+                                                                'common:delivery'
+                                                            )}
+                                                        </Typography>
+                                                    )}
                                                 </div>
                                             )}
                                             {!!cardData.available_days && (
                                                 <div className="available">
-                                                    <PhoneIcon/>
-                                                    {!isXsDown && <Typography variant="body1">
-                                                        {weekDaysHelper(cardData.available_days, t)}&nbsp;
-                                                        {(cardData.available_start_time || cardData.available_end_time) && `${cardData.available_start_time}-${cardData.available_end_time}`}
-                                                    </Typography>}
+                                                    <PhoneIcon />
+                                                    {!isXsDown && (
+                                                        <Typography variant="body1">
+                                                            {weekDaysHelper(
+                                                                cardData.available_days,
+                                                                t
+                                                            )}
+                                                            &nbsp;
+                                                            {(cardData.available_start_time ||
+                                                                cardData.available_end_time) &&
+                                                                `${cardData.available_start_time}-${cardData.available_end_time}`}
+                                                        </Typography>
+                                                    )}
                                                 </div>
                                             )}
                                             {!!cardData.exchange && (
                                                 <div className="exchange">
-                                                    <SwapIcon/>
-                                                    {!isXsDown && <Typography variant="body1">
-                                                        {t('common:exchange')}
-                                                    </Typography>}
+                                                    <SwapIcon />
+                                                    {!isXsDown && (
+                                                        <Typography variant="body1">
+                                                            {t(
+                                                                'common:exchange'
+                                                            )}
+                                                        </Typography>
+                                                    )}
                                                 </div>
                                             )}
                                             {!!cardData.safe_deal && (
                                                 <div className="safe_deal">
-                                                    <SafeIcon/>
-                                                    {!isXsDown && <Typography variant="body1">
-                                                        {t('common:safe_deal')}
-                                                    </Typography>}
+                                                    <SafeIcon />
+                                                    {!isXsDown && (
+                                                        <Typography variant="body1">
+                                                            {t(
+                                                                'common:safe_deal'
+                                                            )}
+                                                        </Typography>
+                                                    )}
                                                 </div>
                                             )}
-                                            {(!!cardData.auto_renewal || !!cardData.auction?.auto_renewal) && (
+                                            {(!!cardData.auto_renewal ||
+                                                !!cardData.auction
+                                                    ?.auto_renewal) && (
                                                 <div className="safe_deal">
-                                                    <AutoRenewalIcon/>
-                                                    {!isXsDown && <Typography variant="body1">
-                                                        {t('common:auto_ren')}
-                                                    </Typography>}
+                                                    <AutoRenewalIcon />
+                                                    {!isXsDown && (
+                                                        <Typography variant="body1">
+                                                            {t(
+                                                                'common:auto_ren'
+                                                            )}
+                                                        </Typography>
+                                                    )}
                                                 </div>
                                             )}
                                         </Box>
-                                    }
+                                    )}
                                 </Grid>
                             )}
                             {isAuction && (
@@ -177,12 +249,16 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                     item
                                     xs={12}
                                     container
-                                    alignItems='center'
+                                    alignItems="center"
                                 >
-                                    <Typography variant='subtitle2' component='p'>
-                                            <span className='color-silver'>
-                                                {t('auction:bets')}:
-                                            </span>&nbsp;
+                                    <Typography
+                                        variant="subtitle2"
+                                        component="p"
+                                    >
+                                        <span className="color-silver">
+                                            {t('auction:bets')}:
+                                        </span>
+                                        &nbsp;
                                         {cardData.auction?.number_of_bets}
                                     </Typography>
                                 </Grid>
@@ -191,7 +267,9 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                 <Grid item xs={12} md={6}>
                                     <Countdown
                                         renderer={timer}
-                                        date={new Date(cardData.expiration_at).getTime()}
+                                        date={new Date(
+                                            cardData.expiration_at
+                                        ).getTime()}
                                     />
                                 </Grid>
                             )}
@@ -200,45 +278,63 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                 xs={12}
                                 container
                                 zeroMinWidth
-                                direction='column'
+                                direction="column"
                                 md={isAuction ? 6 : 12}
-                                alignItems={isSmDown ? 'flex-start' : 'flex-end'}
+                                alignItems={
+                                    isSmDown ? 'flex-start' : 'flex-end'
+                                }
                             >
-                                {isAuction
-                                    ? hasBet &&
-                                    <>
-                                        <Typography
-                                            component='p'
-                                            variant='subtitle1'
-                                            className='color-silver'
-                                        >
-                                            {t('common:currentRate')}
-                                        </Typography>
-                                        <Typography
-                                            noWrap
-                                            variant="h6"
-                                            component='p'
-                                            color="initial"
-                                        >
-                                            {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
-                                            <span>
-                                                {t(`common:${cardData.currency.name}`)}
-                                            </span>
-                                        </Typography>
-                                    </>
-                                    : <Typography
+                                {isAuction ? (
+                                    hasBet && (
+                                        <>
+                                            <Typography
+                                                component="p"
+                                                variant="subtitle1"
+                                                className="color-silver"
+                                            >
+                                                {t('common:currentRate')}
+                                            </Typography>
+                                            <Typography
+                                                noWrap
+                                                variant="h6"
+                                                component="p"
+                                                color="initial"
+                                            >
+                                                {numberPrettier(
+                                                    cardData.auction?.bet?.bet
+                                                )}
+                                                &nbsp;
+                                                <span>
+                                                    {t(
+                                                        `common:${cardData.currency.name}`
+                                                    )}
+                                                </span>
+                                            </Typography>
+                                        </>
+                                    )
+                                ) : (
+                                    <Typography
                                         noWrap
                                         variant="h6"
-                                        component='p'
+                                        component="p"
                                         color="initial"
                                     >
-                                        {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
+                                        {t(
+                                            `post:${priceTransform(
+                                                price,
+                                                jobOrService
+                                            )}`
+                                        )}
+                                        &nbsp;
                                         {price !== 0 && (
                                             <span>
-                                                {t(`common:${cardData.currency.name}`)}
+                                                {t(
+                                                    `common:${cardData.currency.name}`
+                                                )}
                                             </span>
                                         )}
-                                    </Typography>}
+                                    </Typography>
+                                )}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -247,4 +343,3 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
         </div>
     );
 };
-

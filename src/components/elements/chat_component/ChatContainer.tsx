@@ -1,63 +1,68 @@
-import {FC, MouseEvent, useCallback, useContext, useEffect, useRef, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
-import {Grid, useMediaQuery, useTheme} from "@material-ui/core";
-import {chatAPI} from "@src/api/api";
+import {
+    FC,
+    MouseEvent,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
+import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {Chat} from './chat/Chat';
 import {Contacts} from './contacts/Contacts';
-import {ErrorCtx, SocketCtx} from "@src/context";
-import {useModal} from "@src/hooks";
-import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
-import {useTranslation} from "next-i18next";
+import {ErrorCtx, SocketCtx} from '@src/context';
+import {useModal} from '@src/hooks';
+import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
+import {useTranslation} from 'next-i18next';
+import {chatAPI} from '@root/src/api/chat_api';
 import {useStyles} from './useStyles';
 
 export type MessageType = {
-    author: { id: number },
-    message_id: number,
+    author: {id: number};
+    message_id: number;
     message: {
-        text: string,
+        text: string;
         images: {
-            id: number,
+            id: number;
             url: {
-                default: string,
-                original: string,
-                extra: string
-            }
-        }[],
-        created_at: string
-    }
+                default: string;
+                original: string;
+                extra: string;
+            };
+        }[];
+        created_at: string;
+    };
 };
 
 type ChatContainerProps = {
-    initContactId?: number,
-    hideContacts?: boolean,
-    handleChatClose?
+    initContactId?: number;
+    hideContacts?: boolean;
+    handleChatClose?;
 };
 
 export type ContactType = {
-    id: number,
-    isBlocked: boolean,
-    locked: boolean,
-    sys: number,
-    numberOfMessage: number,
+    id: number;
+    isBlocked: boolean;
+    locked: boolean;
+    sys: number;
+    numberOfMessage: number;
     contact: {
-        id: number,
-        name: string,
-        avatar: string
-    }
-}
+        id: number;
+        name: string;
+        avatar: string;
+    };
+};
 
 export type OptionsType = 'block_user' | 'unblock_user' | 'remove_user';
 
 const onlineListChannel = 'updateUserStatus';
 const messagesChannel = 'private-channel:App\\Events\\PrivateMessageEvent';
-const contactsUpdateChannel = 'contact-update-channel:App\\Events\\ContactUpdateEvent';
+const contactsUpdateChannel =
+    'contact-update-channel:App\\Events\\ContactUpdateEvent';
 
-export const ChatContainer: FC<ChatContainerProps> = (props) => {
-    const {
-        initContactId = null,
-        hideContacts = false,
-        handleChatClose
-    } = props;
+export const ChatContainer: FC<ChatContainerProps> = props => {
+    const {initContactId = null, hideContacts = false, handleChatClose} = props;
 
     const socket = useContext(SocketCtx);
 
@@ -81,7 +86,8 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     const [page, setPage] = useState(1);
     const [isFetch, setIsFetch] = useState(false);
 
-    const [selectedContact, setSelectedContact] = useState<ContactType>(initContact);
+    const [selectedContact, setSelectedContact] =
+        useState<ContactType>(initContact);
     const {contact} = selectedContact;
 
     const [contacts, setContacts] = useState<ContactType[]>([]);
@@ -106,11 +112,7 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         'remove_user'
     ];
 
-    const {
-        modalOpen,
-        handleModalOpen,
-        handleModalClose
-    } = useModal();
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
     const handleAnchor = (event: MouseEvent<HTMLElement>) => {
         setMenuAnchor(event.currentTarget);
@@ -121,29 +123,33 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     };
 
     const scrollToBottom = () => {
-        messagesBottomRef.current && (
-            messagesBottomRef.current
-                .scrollIntoView({block: "end", inline: 'start'})
-        );
+        messagesBottomRef.current &&
+            messagesBottomRef.current.scrollIntoView({
+                block: 'end',
+                inline: 'start'
+            });
     };
 
-    const firstMessageRef = useCallback(node => {
-        if (isFetch) return;
-        if (messageRef.current) messageRef.current.disconnect();
+    const firstMessageRef = useCallback(
+        node => {
+            if (isFetch) return;
+            if (messageRef.current) messageRef.current.disconnect();
 
-        messageRef.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting && hasMoreMsgs) {
-                setPage(page + 1);
-            }
-        });
+            messageRef.current = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting && hasMoreMsgs) {
+                    setPage(page + 1);
+                }
+            });
 
-        if (node) messageRef.current.observe(node);
-    }, [isFetch, hasMoreMsgs]);
+            if (node) messageRef.current.observe(node);
+        },
+        [isFetch, hasMoreMsgs]
+    );
 
     const resetUnreadCount = async () => {
         try {
-            currentContact.current?.id
-            && await chatAPI.resetUnreadCount(currentContact.current.id);
+            currentContact.current?.id &&
+                (await chatAPI.resetUnreadCount(currentContact.current.id));
         } catch (e) {
             setErrorMsg(e.mesage);
         }
@@ -161,10 +167,13 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         try {
             const contacts = await chatAPI.getUserContacts();
 
-            const unreadList = contacts.reduce((list, {contact, numberOfMessage}) => {
-                list[contact.id] = numberOfMessage;
-                return list;
-            }, {});
+            const unreadList = contacts.reduce(
+                (list, {contact, numberOfMessage}) => {
+                    list[contact.id] = numberOfMessage;
+                    return list;
+                },
+                {}
+            );
 
             unstable_batchedUpdates(() => {
                 setContacts(contacts);
@@ -201,7 +210,10 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     const selectContact = (selectedContact: ContactType) => () => {
         unstable_batchedUpdates(async () => {
             currentContact.current = selectedContact;
-            setUnreadMsgList({...unreadMsgList, [selectedContact.contact.id]: 0});
+            setUnreadMsgList({
+                ...unreadMsgList,
+                [selectedContact.contact.id]: 0
+            });
             if (selectedContact.contact.id !== contact.id) {
                 setPage(1);
                 setSelectedContact(selectedContact);
@@ -216,14 +228,8 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
             form.append('message', message);
             form.append('receiver_id', contact.id.toString());
 
-
-            const {
-                message_id,
-                author,
-                text,
-                images,
-                created_at
-            } = await chatAPI.sendMessage(form);
+            const {message_id, author, text, images, created_at} =
+                await chatAPI.sendMessage(form);
 
             unstable_batchedUpdates(async () => {
                 await setMessages([
@@ -259,22 +265,20 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     };
 
     const removeUser = async () => {
-        await chatAPI.removeUser(contact.id)
-            .catch(e => setErrorMsg(e.message));
+        await chatAPI.removeUser(contact.id).catch(e => setErrorMsg(e.message));
     };
 
     const blockUser = async () => {
-        await chatAPI.blockUser(contact.id)
-            .catch(e => setErrorMsg(e.message));
+        await chatAPI.blockUser(contact.id).catch(e => setErrorMsg(e.message));
     };
 
     const handleMenu = (option: OptionsType) => () => {
         switch (option) {
-            case "block_user":
-            case "unblock_user":
+            case 'block_user':
+            case 'unblock_user':
                 blockUser();
                 break;
-            case "remove_user":
+            case 'remove_user':
                 handleModalOpen();
         }
         setMenuAnchor(null);
@@ -287,17 +291,12 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         }
     };
 
-    const onlineListListener = async (list) => {
+    const onlineListListener = async list => {
         setOnlineList(list);
     };
 
     const messageChannelListener = (msgData: any) => {
-        const {
-            sender_id,
-            message_id,
-            text,
-            created_at
-        } = msgData;
+        const {sender_id, message_id, text, created_at} = msgData;
 
         const msg = {
             message_id,
@@ -311,9 +310,9 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
         unstable_batchedUpdates(async () => {
             await setMsgBuffer(msg);
             scrollToBottom();
-            currentContact?.current
-            && sender_id === currentContact.current.contact.id
-            && resetUnreadCount();
+            currentContact?.current &&
+                sender_id === currentContact.current.contact.id &&
+                resetUnreadCount();
         });
     };
 
@@ -327,9 +326,9 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     }, [contact.id, page]);
 
     useEffect(() => {
-        msgBuffer
-        && contact.id === msgBuffer.author.id
-        && setMessages([msgBuffer, ...messages]);
+        msgBuffer &&
+            contact.id === msgBuffer.author.id &&
+            setMessages([msgBuffer, ...messages]);
     }, [msgBuffer]);
 
     useEffect(() => {
@@ -343,8 +342,8 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
     const classes = useStyles({hideContacts});
     return (
         <Grid container className={classes.root}>
-            {contacts.length > 1 || contact.id
-                ? <>
+            {contacts.length > 1 || contact.id ? (
+                <>
                     {!hideContacts && (contact.id === null || !isXsDown) && (
                         <Grid item xs={12} sm={5}>
                             <Contacts
@@ -383,14 +382,13 @@ export const ChatContainer: FC<ChatContainerProps> = (props) => {
                         handleConfirm={removeUser}
                         cancelTxt={t('cancel')}
                         handleClose={handleModalClose}
-                        confirmTxt={t('cabinet:confirm')}
+                        confirmTxt={t('cabinet:confirm_stage')}
                         title={t('remove_contact_confirm')}
                     />
                 </>
-                : <div>
-                    {t('no_messages')}
-                </div>
-            }
+            ) : (
+                <div>{t('no_messages')}</div>
+            )}
         </Grid>
     );
 };

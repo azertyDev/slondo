@@ -1,13 +1,34 @@
 {
-  "activate": "Faollashtirish",
+  "service": {
+    "default": {
+      "header": "Tezroq soting",
+      "description": "Tez sotish uchun reklama xizmatini tanlang."
+    },
+    "top": {
+      "header": "Topga ko'tarish",
+      "description": "Sizning e'loningiz «TOP» stikeri bilan ajratiladi va sahifaning boshiga joylashtiriladi. Xaridorlar albatta sizning taklifiningizni e'tibor qaratishadi."
+    },
+    "turbo_sale": {
+      "header": "Turbo so'tuv",
+      "description": "E'loningiz «Turbo sotuv» stikeri bilan belgilanadi va xar 6 soatda e'lonlar ro'yhatining boshidan joy oladi. Xaridorlar sizning e'loningizni e'tiborsiz qoldirmaydilar."
+    },
+    "raise_tape": {
+      "header": "Lentada ko'tarish",
+      "description": "E'loningiz ro'yhat boshida paydo bo'ladi. Xaridorlar taklifingizga e'tibor qaratadilar."
+    }
+  },
+  "service_success_paid": "Xizmat to'lovi muvaffaqiyatli amalga oshirildi",
+  "to_write_off": "Echib o'lishga {{amount}}",
+  "added": "Tanlangan",
+  "to_checkout": "To'lovga o'tish",
   "add_service": "Xizmatni qo'shish",
-  "next": "Oldinga",
+  "next": "Keyingi",
   "top": "Top",
-  "turbo_sale": "Turbo so'tuvi",
+  "turbo_sale": "Turbo so'tuv",
   "raise_tape": "Lentada ko'tarish",
-  "select_service": "Xizmatni tanlang",
-  "payment_type": "To'lov turi",
-  "bonuses": "Bonuslar",
+  "select_service": "Xizmatni tanlash",
+  "payment_type": "To'lov turini tanlang",
+  "bonuses": "bonus",
   "auth_require": "Chat ishlatish uchun saytga kirish shart",
   "main": "Shaxsiy kabinet",
   "restore": "qayta tiklash",

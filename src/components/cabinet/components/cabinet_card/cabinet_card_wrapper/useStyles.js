@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: '10px',
             '& button': {
                 height: '32px',
-                padding: '2px 18px',
+                padding: '2px 13px',
                 borderRadius: 5,
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',

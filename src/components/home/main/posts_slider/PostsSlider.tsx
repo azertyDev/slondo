@@ -5,8 +5,8 @@ import {Typography} from '@material-ui/core';
 import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 import {unstable_batchedUpdates} from 'react-dom';
 import {HomePageCtx, AuthCtx} from '@src/context';
-import {useStyles} from './useStyles';
 import {Slider} from '@root/src/components/elements/slider/Slider';
+import {useStyles} from './useStyles';
 
 const config = {
     itemClass: 'slide-item',
@@ -23,6 +23,7 @@ export const PostsSlider: FC = () => {
     const {
         auth: {isAuth}
     } = useContext(AuthCtx);
+
     const {postsSliderData} = useContext(HomePageCtx);
 
     const [isFetch, setIsFetch] = useState(false);
@@ -58,19 +59,29 @@ export const PostsSlider: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography className="title" variant="h2">
-                {t('popularPosts')}
-            </Typography>
-            {!!errMsg ? (
-                <div className="error-wrapper">
-                    <Typography className="error-text">{errMsg}</Typography>
-                </div>
-            ) : (
-                <Slider config={config}>
-                    {data.map(card => (
-                        <GridCard {...card} key={card.id} isFetch={isFetch} />
-                    ))}
-                </Slider>
+            {data.length !== 0 && (
+                <>
+                    <Typography className="title" variant="h2">
+                        {t('popularPosts')}
+                    </Typography>
+                    {!!errMsg ? (
+                        <div className="error-wrapper">
+                            <Typography className="error-text">
+                                {errMsg}
+                            </Typography>
+                        </div>
+                    ) : (
+                        <Slider config={config}>
+                            {data.map(card => (
+                                <GridCard
+                                    {...card}
+                                    key={card.id}
+                                    isFetch={isFetch}
+                                />
+                            ))}
+                        </Slider>
+                    )}
+                </>
             )}
         </div>
     );

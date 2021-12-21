@@ -83,7 +83,7 @@ export const MyAuctions: FC = () => {
         setSelectedAuction(post);
     };
 
-    const handleDeactivate = (ads_id?: number) => async () => {
+    const handleDeactivate = (ads_id?: string) => async () => {
         try {
             unstable_batchedUpdates(async () => {
                 setIsFetch(true);
@@ -215,6 +215,7 @@ export const MyAuctions: FC = () => {
                 onClose={closeNotificationsModal}
             />
             <PromoteModal
+                postType='auc'
                 postId={selectedAuction.id}
                 openDialog={promoteOpen}
                 handleRefresh={handleRefresh}

@@ -9,14 +9,14 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {getErrorMsg} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from "@src/context";
 import {TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type RatingModalPropsType = {
-    postId: number,
+    postId: string,
     user,
     open,
     handleCloseRating

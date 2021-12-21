@@ -1,6 +1,7 @@
 import {FC, useContext} from 'react';
 import {AuthCtx} from '@src/context';
 import {
+    Box,
     Grid,
     List,
     ListItem,
@@ -11,6 +12,7 @@ import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
+import {CabinetBonusIcon} from '@src/components/elements/icons';
 
 type CabinetUserAvatarProps = {
     page: string;
@@ -37,10 +39,15 @@ export const CabinetUserAvatar: FC<CabinetUserAvatarProps> = props => {
             </div>
             <Grid container spacing={1}>
                 {!!balance && (
-                    <Grid item xs={12}>
-                        <Typography>{t('bonuses')}</Typography>
-                        <Typography>{balance}</Typography>
-                    </Grid>
+                    <div className="user-balance">
+                        <CabinetBonusIcon />
+                        <Box display="flex">
+                            <Typography variant="subtitle1">
+                                {t('bonuses')}:
+                            </Typography>
+                            <Typography>{balance}</Typography>
+                        </Box>
+                    </div>
                 )}
                 <Grid item xs={4}>
                     <CustomBadge badgeContent={user.observer.number_of_reviews}>

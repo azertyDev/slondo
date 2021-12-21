@@ -6,13 +6,14 @@ import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {initCardData} from '@src/common_data/common';
 import {CardDataType} from '@root/interfaces/CardData';
-import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
 import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
+import {myUzCardAPI} from '@src/api/paid_api';
+import {cabinetAPI} from '@root/src/api/cabinet_api';
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -77,7 +78,7 @@ export const MyPurchases: FC = () => {
 
             setIsFetch(true);
 
-            const {data, total} = await userCabinetAPI.getPurchases(params);
+            const {data, total} = await cabinetAPI.getPurchases(params);
 
             unstable_batchedUpdates(() => {
                 secondSubTab

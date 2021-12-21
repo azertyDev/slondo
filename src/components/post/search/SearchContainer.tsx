@@ -16,7 +16,7 @@ import {Container, Grid} from '@material-ui/core';
 import {AdvType} from '@root/interfaces/Adv';
 import {useFormik} from 'formik';
 import {useModal} from '@root/src/hooks';
-import {adsAPI, userAPI} from '@root/src/api/api';
+import {userAPI} from '@src/api/api';
 import {POSTS_PER_PAGE} from '@root/src/constants';
 import {postTypes} from '@root/src/common_data/post_types';
 import {getInitStateByCategory, initStates} from './initStates';
@@ -30,6 +30,7 @@ import {SEOTextComponent} from '../../elements/seo_text_component/SEOTextCompone
 import {SearchResult} from './search_result/SearchResult';
 import {SearchPostMobile} from '../../mobile/post/search_post/SearchMobile';
 import {SearchPostDesktop} from '../../desktop/post/search_post/SearchDesktop';
+import {adsAPI} from '@root/src/api/adv_api';
 
 type SearchContainerProps = {
     isMobileView: boolean;

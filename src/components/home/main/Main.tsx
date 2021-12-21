@@ -18,11 +18,11 @@ import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
 import {INNER_URLS} from "@src/constants";
 import {useStyles} from './useStyles';
-import {adsAPI} from "@src/api/api";
 import {RightAdv} from "@src/components/elements/adv/right/RightAdv";
 import {AdvType} from "@root/interfaces/Adv";
 import {useRouter} from "next/router";
 import {AuthCtx} from "@src/context";
+import {adsAPI} from '@root/src/api/adv_api';
 
 export const Main: FC<{ seoTxt: string }> = ({seoTxt}) => {
     const {push} = useRouter();

@@ -24,9 +24,9 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
 import {AuthCtx} from '@src/context/AuthCtx';
-import {CabinetUserAvatar} from '../components/cabinet_user_avatar/CabinetUserAvatar';
-import {useStyles} from './useStyles';
+import {CabinetUserAvatar} from '../cabinet_user_avatar/CabinetUserAvatar';
 import {SocketCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type SidebarMenuPropsType = {
     clearAnchor?: () => void

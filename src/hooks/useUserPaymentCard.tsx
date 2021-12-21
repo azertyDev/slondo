@@ -1,16 +1,16 @@
 import {useState} from 'react';
-import {myUzCardAPI} from '@src/api/api';
+import {myUzCardAPI} from '../api/paid_api';
 
 export const useUserPaymentCard = () => {
     type UserCardType = {
-        id: number,
-        cardId: number,
-        cardName: string,
-        owner: string,
-        balance: number,
-        expireDate: string,
-        number: number
-    }
+        id: number;
+        cardId: number;
+        cardName: string;
+        owner: string;
+        balance: number;
+        expireDate: string;
+        number: number;
+    };
 
     const initUserCard: UserCardType = {
         id: null,

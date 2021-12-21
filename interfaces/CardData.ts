@@ -7,6 +7,7 @@ export interface CardData {
 }
 
 export type CardDataType = {
+    id: string;
     ads_type: string;
     adsable: {
         id: number;
@@ -63,7 +64,6 @@ export type CardDataType = {
     district: IdNameType;
     expiration_at: string;
     favorite: boolean;
-    id: number;
     image: string;
     price: number;
     region: IdNameType;

@@ -1,4 +1,5 @@
 {
+  "close": "Yopish",
   "topPosts": "Top e'lonlar",
   "services": "Xizmatlar",
   "no_messages": "Sizda hali hech qanday xabar yo'q",
@@ -65,6 +66,7 @@
   "auction_ren": "Auksion",
   "auto_ren": "Vaqtni avto uzaytirish",
   "hide": "Berkitish",
+  "bonus": "bonus",
   "sum": "so'm",
   "ye": "у.е.",
   "allPosts": "Barcha e'lonlar",

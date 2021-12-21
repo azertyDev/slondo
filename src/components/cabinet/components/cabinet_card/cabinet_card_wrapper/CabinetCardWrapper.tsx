@@ -28,7 +28,7 @@ type CabinetCardPropsType = {
     handleSettingsOpen?: () => void;
     handlePromoteOpen?: () => void;
     handleNotificationsOpen?: () => void;
-    handleOpenModal?: (id: number) => () => void;
+    handleOpenModal?: (id: string) => () => void;
 };
 
 export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
@@ -102,7 +102,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                     <Hidden mdUp>
                         <Grid
                             item
-                            xs={5}
+                            xs={7}
                             sm={4}
                             container
                             justifyContent="center"
@@ -110,7 +110,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                             {page?.includes('favorite') ? (
                                 <Grid
                                     item
-                                    xs={6}
+                                    xs={4}
                                     container
                                     justifyContent="center"
                                 >
@@ -122,12 +122,43 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                 </Grid>
                             ) : (
                                 <>
+                                    {isPublic && (
+                                        <Grid
+                                            item
+                                            xs={4}
+                                            container
+                                            justifyContent="center"
+                                        >
+                                            <CustomButton
+                                                className="icons"
+                                                onClick={handlePromoteOpen}
+                                            >
+                                                <RocketIcon />
+                                            </CustomButton>
+                                        </Grid>
+                                    )}
+                                    {creator && (isPublic || isArchive) && (
+                                        <Grid
+                                            item
+                                            xs={4}
+                                            container
+                                            justifyContent="center"
+                                        >
+                                            <CustomButton
+                                                className="icons"
+                                                disabled={!allowSettings}
+                                                onClick={handleSettingsOpen}
+                                            >
+                                                <SettingsIcon />
+                                            </CustomButton>
+                                        </Grid>
+                                    )}
                                     {creator &&
                                         !isBanned &&
                                         handleNotificationsOpen && (
                                             <Grid
                                                 item
-                                                xs={6}
+                                                xs={4}
                                                 container
                                                 justifyContent="center"
                                             >
@@ -141,22 +172,6 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                                 </CustomButton>
                                             </Grid>
                                         )}
-                                    {creator && (isPublic || isArchive) && (
-                                        <Grid
-                                            item
-                                            xs={6}
-                                            container
-                                            justifyContent="center"
-                                        >
-                                            <CustomButton
-                                                className="icons"
-                                                disabled={!allowSettings}
-                                                onClick={handleSettingsOpen}
-                                            >
-                                                <SettingsIcon />
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
                                 </>
                             )}
                         </Grid>
@@ -171,7 +186,7 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                 isSold ||
                                 isSuspend ||
                                 isReject
-                                    ? 7
+                                    ? 5
                                     : 12
                             }
                             sm={
