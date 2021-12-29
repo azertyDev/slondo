@@ -149,8 +149,8 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                             sm={8}
                             md={9}
                             container
-                            alignContent="space-between"
                             className="content"
+                            alignContent="space-between"
                         >
                             <Grid item xs={12} md={7} lg={8}>
                                 <Typography variant="h3" color="initial">

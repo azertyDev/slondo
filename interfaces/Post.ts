@@ -13,7 +13,7 @@ export type PostType = IdNameType & {
         delivery?: boolean;
         buy_now?: boolean;
         reserve_price?: boolean;
-        auto_renewal?: boolean;
+        auto_ren?: boolean;
     };
     subtitle: string;
 };

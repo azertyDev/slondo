@@ -17,7 +17,7 @@ export const useStyles = makeStyles({
             width: '100%',
             marginBottom: '8px',
             '& > svg': {
-                marginRight: '10px'
+                margin: '0 10px 0 4px'
             },
             '& > div': {
                 '& > h6': {

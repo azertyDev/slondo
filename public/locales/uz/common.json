@@ -1,4 +1,5 @@
 {
+  "top": "Top",
   "close": "Yopish",
   "topPosts": "Top e'lonlar",
   "services": "Xizmatlar",
@@ -64,7 +65,7 @@
   "post_auto_renewal": "{{type}} vaqtini avto uzaytirish",
   "post_ren": "E'lon",
   "auction_ren": "Auksion",
-  "auto_ren": "Vaqtni avto uzaytirish",
+  "auto_ren": "Vaqtni avtomatik uzaytirish",
   "hide": "Berkitish",
   "bonus": "bonus",
   "sum": "so'm",

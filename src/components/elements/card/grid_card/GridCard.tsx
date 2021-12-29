@@ -2,22 +2,31 @@ import {FC, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import Skeleton from '@material-ui/lab/Skeleton';
-import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
+import {
+    Card,
+    CardActionArea,
+    CardContent,
+    CardMedia,
+    IconButton,
+    Tooltip,
+    Typography
+} from '@material-ui/core';
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {priceTransform, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {AuthCtx} from "@src/context/AuthCtx";
-import {ErrorCtx} from "@src/context";
-import {useDate} from "@src/hooks";
+import {AuthCtx} from '@src/context/AuthCtx';
+import {ErrorCtx} from '@src/context';
+import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
+import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
 
 type CardItemProps = {
-    isFetch?: boolean
+    isFetch?: boolean;
 } & CardDataType;
 
-export const GridCard: FC<CardItemProps> = (props) => {
+export const GridCard: FC<CardItemProps> = props => {
     const {
         id,
         isFetch = false,
@@ -34,13 +43,16 @@ export const GridCard: FC<CardItemProps> = (props) => {
         city,
         creator,
         favorite,
-        category
+        category,
+        is_top
     } = props;
 
     const isFavorite = true;
-    const {t} = useTranslation('common');
+    const {t} = useTranslation();
     const {setErrorMsg} = useContext(ErrorCtx);
-    const {auth: {isAuth}} = useContext(AuthCtx);
+    const {
+        auth: {isAuth}
+    } = useContext(AuthCtx);
     const translatedTitle = transformCyrillic(title);
     const [liked, setLiked] = useState(favorite);
     const {time} = useDate()(created_at);
@@ -48,7 +60,9 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const ctgrName = category.mark;
     const url = `/obyavlenie/${translatedTitle}-${id}`;
     const jobOrService = ctgrName === 'job' || ctgrName === 'service';
-    const postLocation = `${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`;
+    const postLocation = `${
+        city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''
+    } ${t(`locations:${region.name}.name`)}`;
 
     const handleFavorite = async () => {
         try {
@@ -67,31 +81,34 @@ export const GridCard: FC<CardItemProps> = (props) => {
     return (
         <div className={classes.root}>
             {isAuth && !creator && (
-                <IconButton
-                    className="favorite-btn"
-                    onClick={handleFavorite}
-                >
-                    {liked
-                        ? <FavoriteIcon/>
-                        : <FavoritedIcon/>}
+                <IconButton className="favorite-btn" onClick={handleFavorite}>
+                    {liked ? <FavoriteIcon /> : <FavoritedIcon />}
                 </IconButton>
             )}
             <Link href={url}>
-                <a target='_blank'>
+                <a target="_blank">
                     <Card elevation={0} title={title}>
-                        {isFetch
-                            ? <Skeleton
+                        {isFetch ? (
+                            <Skeleton
                                 variant="rect"
                                 className={classes.skeleton}
                             />
-                            : <CardMedia
+                        ) : (
+                            <CardMedia
                                 className="card-media"
                                 image={image ?? '/img/default.png'}
                             >
                                 <div className="card-header">
                                     <div className="post_type">
-                                        <Typography variant="subtitle2" component='p'>
-                                            {t(ads_type === 'exauc' ? 'auc' : `${ads_type}`)}
+                                        <Typography
+                                            variant="subtitle2"
+                                            component="p"
+                                        >
+                                            {t(
+                                                ads_type === 'exauc'
+                                                    ? 'auc'
+                                                    : `${ads_type}`
+                                            )}
                                         </Typography>
                                     </div>
                                     <div className="icons">
@@ -101,7 +118,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 title={t('delivery')}
                                             >
                                                 <span>
-                                                    <DeliveryIcon/>
+                                                    <DeliveryIcon />
                                                 </span>
                                             </Tooltip>
                                         )}
@@ -111,7 +128,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 title={t('safe_deal')}
                                             >
                                                 <span>
-                                                    <SafeIcon/>
+                                                    <SafeIcon />
                                                 </span>
                                             </Tooltip>
                                         )}
@@ -121,28 +138,29 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 title={t('exchange')}
                                             >
                                                 <span>
-                                                    <SwapIcon/>
+                                                    <SwapIcon />
                                                 </span>
                                             </Tooltip>
                                         )}
                                     </div>
                                 </div>
                             </CardMedia>
-                        }
+                        )}
                         <CardActionArea>
                             <CardContent>
-                                {isFetch
-                                    ? <>
-                                        <Skeleton variant="rect"/>
-                                        <Skeleton variant="rect"/>
-                                        <Skeleton variant="rect"/>
-                                        <br/>
-                                        <Skeleton variant="rect"/>
+                                {isFetch ? (
+                                    <>
+                                        <Skeleton variant="rect" />
+                                        <Skeleton variant="rect" />
+                                        <Skeleton variant="rect" />
+                                        <br />
+                                        <Skeleton variant="rect" />
                                     </>
-                                    : <>
+                                ) : (
+                                    <>
                                         <Typography
                                             noWrap
-                                            component='p'
+                                            component="p"
                                             color="initial"
                                             variant="subtitle1"
                                             classes={{root: classes.title}}
@@ -150,11 +168,17 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             {title}
                                         </Typography>
                                         <Typography
-                                            component='p'
-                                            className='price'
-                                            variant='subtitle1'
+                                            component="p"
+                                            className="price"
+                                            variant="subtitle1"
                                         >
-                                            {t(`post:${priceTransform(price, jobOrService)}`)}&nbsp;
+                                            {t(
+                                                `post:${priceTransform(
+                                                    price,
+                                                    jobOrService
+                                                )}`
+                                            )}
+                                            &nbsp;
                                             {price !== 0 && (
                                                 <span>
                                                     {t(`${currency.name}`)}
@@ -164,21 +188,27 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         {region?.id !== null && (
                                             <Typography
                                                 noWrap
-                                                component='p'
+                                                component="p"
                                                 variant="caption"
-                                                classes={{root: classes.mobileFont}}
+                                                classes={{
+                                                    root: classes.mobileFont
+                                                }}
                                             >
                                                 {postLocation}
                                             </Typography>
                                         )}
                                         <Typography
-                                            component='p'
+                                            component="p"
                                             variant="caption"
                                             classes={{root: classes.mobileFont}}
                                         >
                                             {time}
                                         </Typography>
-                                    </>}
+                                    </>
+                                )}
+                                {!!is_top && (
+                                    <TopSticker className="top-sticker" />
+                                )}
                             </CardContent>
                         </CardActionArea>
                     </Card>
@@ -187,5 +217,3 @@ export const GridCard: FC<CardItemProps> = (props) => {
         </div>
     );
 };
-
-

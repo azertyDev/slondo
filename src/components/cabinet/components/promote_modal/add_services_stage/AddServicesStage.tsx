@@ -10,10 +10,9 @@ import {
 } from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
-import {Add} from '@material-ui/icons';
 import {serviceIcons} from '@src/components/cabinet/components/promote_modal/PromoteModal';
-import {useStyles} from './useStyles';
 import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
 type AddServicesStageProps = {
     isFetch: boolean;
@@ -94,7 +93,7 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                         </Grid>
                         {selectedOption && (
                             <>
-                                <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={3}>
                                     <Box display="flex" alignItems="center">
                                         <FormControl>
                                             <Select
@@ -139,7 +138,8 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                     item
                                     container
                                     xs={12}
-                                    sm={4}
+                                    sm={3}
+                                    justifyContent='center'
                                     alignItems="center"
                                     className="price-wrapper"
                                 >
@@ -149,6 +149,20 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                     <span>{t('filters:sum')}</span>
                                 </Grid>
                             </>
+                        )}
+                        {selectedService.name && (
+                            <Grid
+                                item
+                                xs={12}
+                                sm={2}
+                            >
+                                <CustomButton
+                                    onClick={handleAddService}
+                                    className="select-service"
+                                >
+                                    <Typography>{t('select')}</Typography>
+                                </CustomButton>
+                            </Grid>
                         )}
                     </Grid>
                 )}
@@ -180,15 +194,6 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                             className={`${selectedServiceName}-bg`}
                         />
                     </Grid>
-                )}
-                {selectedService.name && (
-                    <CustomButton
-                        onClick={handleAddService}
-                        className="add-service"
-                    >
-                        <Typography>{t('add_service')}</Typography>
-                        <Add />
-                    </CustomButton>
                 )}
             </>
         </div>

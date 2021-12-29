@@ -9,7 +9,6 @@ export const useStyles = makeStyles(theme => ({
             display: 'none'
         },
         '& div.top-wrapper': {
-            marginBottom: '20px',
             '& button': {
                 width: '28px',
                 padding: 0,
@@ -17,8 +16,15 @@ export const useStyles = makeStyles(theme => ({
                     background: 'inherit'
                 }
             },
-            '& h6.post-num': {
-                textAlign: 'center'
+            '& h6': {
+                textAlign: 'center',
+                '&.sell-faster': {
+                    fontSize: '1.2rem',
+                    marginBottom: '15px'
+                },
+                '&.post-num': {
+                    fontSize: '.85rem'
+                }
             }
         },
         '& div.content-wrapper': {
@@ -34,7 +40,7 @@ export const useStyles = makeStyles(theme => ({
             },
             '& div.selected-service-wrapper': {
                 width: '100%',
-                padding: '0 8px',
+                paddingLeft: '5px',
                 marginBottom: '10px',
                 '& > div': {
                     minHeight: '50px',

@@ -70,20 +70,16 @@ export const useStyles = makeStyles(theme => ({
             },
             '& div.raise_tape-bg': {
                 backgroundImage: 'url(/img/services/raise_tape.png)'
-            },
-            [theme.breakpoints.down('xs')]: {
-                minHeight: '485px'
             }
         },
-        '& button.add-service': {
+        '& button.select-service': {
             width: '100%',
-            background:
-                'linear-gradient(180deg, rgba(253, 89, 0, 0.1) 0%, rgba(255, 168, 0, 0.1) 100%)',
-            '& > p, & > svg': {
-                color: '#F2994A'
-            },
-            '& > svg': {
-                marginLeft: '10px'
+            height: '100%',
+            background: '#fff',
+            border: '1px solid #2F80ED',
+            borderRadius: '8px',
+            '& > p': {
+                color: '#2F80ED'
             }
         }
     }

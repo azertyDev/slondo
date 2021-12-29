@@ -1,4 +1,8 @@
 {
+  "tariff": {
+    "header": "Tarif degan nima?",
+    "description": "Каждую минуту на Слондо появляются тысячи новых объявлений. А чтобы покупатели быстрее обратили внимание именно на ваше предложение, вы можете прорекламировать объявление на Слондо с помощью наших услуг."
+  },
   "service": {
     "default": {
       "header": "Tezroq soting",
@@ -6,24 +10,33 @@
     },
     "top": {
       "header": "Topga ko'tarish",
-      "description": "Sizning e'loningiz «TOP» stikeri bilan ajratiladi va sahifaning boshiga joylashtiriladi. Xaridorlar albatta sizning taklifiningizni e'tibor qaratishadi."
+      "description": "Sizning e'loningiz «TOP» stikeri bilan ajratiladi va sahifaning boshiga joylashtiriladi. Xaridorlar albatta sizning taklifiningizni e'tibor qaratishadi.",
+      "full_description": "TOPga ko’tarish – bu moderatsiyadan o‘tgan barcha e’lonlar uchun mavjud reklama xizmati. Xizmatni sotib olgandan so'ng, e'lon oddiy e'lonlar ro'yxatining yuqori qismida joylashadi. TOPga ko’tarilgan barcha e’lonlar rotatsiyada joylashadi va e’lonlar tasodifiy tartibda saxifada 4 tagacha joylashtiriladi. Sahifa yangilanganda yoki boshqasiga o'tilganda, qolgan 4 ta topga ko’tarilgan e’lonlar joylashtiriladi. Yuqoriga ko'tarilgan barcha e’lonlar sahifada ko'rsatilishi uchun teng imkoniyatga ega bo’lishadi. TOPga ko'tarilgan e’lon yaratilgan sanaga ko'ra oddiy e'lonlar orasidan ham joy oladi. Xizmatni 3, 7 yoki 30 kunga faollashtirish mumkin. Xizmat faollashtirilgan kunlar bilan bir vaqtda, aniq tanlangan kunlarda tugaydi. E'lon o'chirilganda, \"TOPga ko'tarish\" xizmati ham o'chiriladi. E'lon qayta yoqilganda, xizmat o'chirilgandan keyin qolgan kunlar soni bilan faollashtiriladi."
     },
     "turbo_sale": {
       "header": "Turbo so'tuv",
-      "description": "E'loningiz «Turbo sotuv» stikeri bilan belgilanadi va xar 6 soatda e'lonlar ro'yhatining boshidan joy oladi. Xaridorlar sizning e'loningizni e'tiborsiz qoldirmaydilar."
+      "description": "E'loningiz «Turbo sotuv» stikeri bilan belgilanadi va xar 6 soatda e'lonlar ro'yhatining boshidan joy oladi. Xaridorlar sizning e'loningizni e'tiborsiz qoldirmaydilar.",
+      "full_description": "Turbo sotuv – barcha moderatsiyadan o’tgan e’lonlar uchun mavjud bo'lgan reklama xizmati. Xizmatni sotib olgandan so'ng, har 6 soatda e’lonni lentada ko'tarish xizmati ishka tushadi va u e'lonlar ro'yxatining yuqori qismida paydo bo'ladi. “Turbo sotuv” xizmatini 3, 7 yoki 30 kunga yoqish mumkin. Faollashtirilgandan 6 soat o'tgach, lentada birinchi ko'tarish ishga tushiriladi. Xizmat faollashtirilgan kunlar bilan bir vaqtda, aniq tanlangan kunlarda tugaydi. E'lon o'chirilganda, \"Turbo sotuv\" xizmati ham o'chiriladi. E'lon qayta yoqilganda, xizmat o'chirilgandan keyin qolgan kunlar soni bilan faollashtiriladi."
     },
     "raise_tape": {
       "header": "Lentada ko'tarish",
-      "description": "E'loningiz ro'yhat boshida paydo bo'ladi. Xaridorlar taklifingizga e'tibor qaratadilar."
+      "description": "E'loningiz ro'yhat boshida paydo bo'ladi. Xaridorlar taklifingizga e'tibor qaratadilar.",
+      "full_description": "Lentada ko’tarish – barcha moderatsiyadan o’tgan e’lonlar uchun mavjud bo'lgan reklama xizmati. Xizmatni faollashtirgandan so'ng, e'lon xuddi hozirgina joylashtirilgandek ro'yxatning yuqori qismida paydo bo'ladi. Yangi yoki ko'tarilgan e’lon paydo bo'lguncha u lentaning yuqori qismida qoladi. “Lentada ko’tarish” xizmati e’lonning amal qilish muddatiga ta’sir qilmaydi, shuningdek, u e’lon qilinganidan keyin 30 kun o‘tgach o‘chiriladi."
     }
   },
+  "offer": "taklif",
+  "payme_offer": "Davom etish tugmasini bosish orqali siz {{offer}} shartlariga rozilik bildirasiz",
+  "fill_card_data": "Karta ma'lumotlarini to'ldiring",
+  "card_data_term": "Sizning kartangiz ma'lumotlari ushbu xizmatga o'tkazilmaydi va Payme xizmatining xavfsiz hududida saqlanadi.",
+  "sell_faster": "Tezroq soting",
+  "promote": "reklama qilish",
   "service_success_paid": "Xizmat to'lovi muvaffaqiyatli amalga oshirildi",
   "to_write_off": "Echib o'lishga {{amount}}",
   "added": "Tanlangan",
   "to_checkout": "To'lovga o'tish",
-  "add_service": "Xizmatni qo'shish",
-  "next": "Keyingi",
-  "top": "Top",
+  "select": "Tanlash",
+  "continue": "Davom etish",
+  "top": "Topga ko'tarish",
   "turbo_sale": "Turbo so'tuv",
   "raise_tape": "Lentada ko'tarish",
   "select_service": "Xizmatni tanlash",
@@ -114,7 +127,7 @@
   "subscribe": "Obuna bo'lish",
   "notifications": "Bildiruvlar",
   "messages": "Xabarlar",
-  "paidServices": "Pullik xizmatlar",
+  "paid_services": "Pullik xizmatlar",
   "statistics": "Statistika",
   "purchases": "Xaridlar",
   "myPurchases": "Xaridlarim",

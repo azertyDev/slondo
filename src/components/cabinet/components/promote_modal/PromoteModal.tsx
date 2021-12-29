@@ -8,7 +8,7 @@ import {bonusAPI, paymeAPI, servicesAPI} from '@src/api/paid_api';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmStage} from '@src/components/cabinet/components/promote_modal/confirm_stage/ConfirmStage';
 import {CardInfoStage} from '@src/components/cabinet/components/promote_modal/card_info_stage/CardInfoStage';
-import {Form, FormikProvider, useFormik} from 'formik';
+import {FormikProvider, useFormik} from 'formik';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {cardNumExpSchema} from '@root/validation_schemas/paymentCardSchema';
 import {SuccessStage} from '@src/components/cabinet/components/promote_modal/success_stage/SuccesStage';
@@ -88,7 +88,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             case 'smsConfirm':
                 return 'common:send';
             default:
-                return 'next';
+                return 'continue';
         }
     })();
 
@@ -220,6 +220,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             case 'bonus':
             case 'payme':
             case 'smsConfirm':
+                formik.resetForm();
                 formik.setValues(initCardData);
                 setStageStatus('payment');
         }
@@ -229,9 +230,11 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
     const showBackArrow =
         stageStatus !== 'service' && stageStatus !== 'success';
 
+    const showTop = stageStatus === 'service';
+
     const showNextBtn =
-        (stageStatus === 'service' && selectedServices.length !== 0) ||
-        stageStatus === 'bonus';
+        stageStatus === 'bonus' ||
+        (stageStatus === 'service' && selectedServices.length !== 0);
 
     const showSelectedServicesList =
         !!selectedServices.length &&
@@ -293,11 +296,20 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                 )}
                 <CloseBtn handleClose={handleCloseDialog} />
             </Box>
-            <Box>
-                <Typography className="post-num" variant="subtitle1">
-                    {t(`common:${postType}`)} №: {postId}
-                </Typography>
-            </Box>
+            {showTop && (
+                <Box>
+                    <Typography
+                        className="sell-faster"
+                        variant="subtitle1"
+                        style={{fontWeight: 700}}
+                    >
+                        {t('sell_faster')}
+                    </Typography>
+                    <Typography className="post-num" variant="subtitle1">
+                        {t(`common:${postType}`)} №: {postId}
+                    </Typography>
+                </Box>
+            )}
         </>
     );
     const stage = (() => {
@@ -415,7 +427,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
         >
             <div className={classes.root}>
                 <FormikProvider value={formik}>
-                    <Form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={formik.handleSubmit}>
                         <div className="top-wrapper">{top}</div>
                         <div className="content-wrapper">
                             {showSelectedServicesList && selectedServicesList}
@@ -431,7 +443,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                                 </CustomButton>
                             </div>
                         )}
-                    </Form>
+                    </form>
                 </FormikProvider>
             </div>
         </ResponsiveModal>

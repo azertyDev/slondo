@@ -1,30 +1,29 @@
 import {FC, useContext, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
+import {unstable_batchedUpdates} from 'react-dom';
 import {Box, IconButton, Paper, Typography} from '@material-ui/core';
 import {Error} from '@material-ui/icons';
 import {CloseIcon} from '@src/components/elements/icons';
-import {userAPI} from "@src/api/api";
-import {useTranslation} from "next-i18next";
-import {ErrorCtx} from "@src/context";
-import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
-import {ITEMS_PER_PAGE} from "@src/constants";
+import {userAPI} from '@src/api/api';
+import {useTranslation} from 'next-i18next';
+import {ErrorCtx} from '@src/context';
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {ITEMS_PER_PAGE} from '@src/constants';
 import {useStyles} from './useStyles';
 
 export type NotificationDataType = {
-    isPersonal?: boolean,
-    id: number,
-    user_name: string,
-    value: number,
-    title: string,
-    message: string,
-    ads_id: number,
-    created_at: string,
-    handleRefresh: () => void,
-    setNotifications,
-    handleOpenSnackbar
+    isPersonal?: boolean;
+    id: number;
+    user_name: string;
+    value: number;
+    title: string;
+    message: string;
+    ads_id: number;
+    created_at: string;
+    handleRefresh: () => void;
+    setNotifications;
 };
 
-export const NotificationCard: FC<NotificationDataType> = (props) => {
+export const NotificationCard: FC<NotificationDataType> = props => {
     const {
         isPersonal,
         id,
@@ -35,8 +34,7 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
         user_name,
         created_at,
         handleRefresh,
-        setNotifications,
-        handleOpenSnackbar
+        setNotifications
     } = props;
 
     const {t} = useTranslation('notifications');
@@ -75,7 +73,6 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
 
             unstable_batchedUpdates(() => {
                 handleRefresh();
-                handleOpenSnackbar();
                 setNotifications(data);
                 setIsFetch(false);
             });
@@ -90,26 +87,27 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
     const classes = useStyles();
     return (
         <>
-            <Typography variant='subtitle1' gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
                 {date.toLocaleDateString()}
             </Typography>
             <Paper elevation={0} className={classes.root}>
-                {isFetch
-                    ? <CustomCircularProgress/>
-                    : <>
+                {isFetch ? (
+                    <CustomCircularProgress />
+                ) : (
+                    <>
                         <Box
                             mr={1}
-                            display='flex'
-                            alignItems='center'
-                            flexDirection='column'
-                            justifyContent='center'
+                            display="flex"
+                            alignItems="center"
+                            flexDirection="column"
+                            justifyContent="center"
                         >
-                            <Error color='secondary'/>
-                            <Typography variant='caption'>
+                            <Error color="secondary" />
+                            <Typography variant="caption">
                                 {`${date.getHours()}:${date.getMinutes()}`}
                             </Typography>
                         </Box>
-                        <Box width='100%'>
+                        <Box width="100%">
                             <Box>
                                 {!!title && (
                                     <Typography variant="h6" color="initial">
@@ -117,7 +115,11 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
                                     </Typography>
                                 )}
                                 <Typography variant="subtitle1" color="initial">
-                                    {t(`descriptions.${message}`, {ads_id, user_name, value})}
+                                    {t(`descriptions.${message}`, {
+                                        ads_id,
+                                        user_name,
+                                        value
+                                    })}
                                 </Typography>
                             </Box>
                             {/*<Box display='flex' justifyContent='flex-end'>*/}
@@ -148,10 +150,11 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
                         </Box>
                         {isPersonal && (
                             <IconButton onClick={handleDeleteNotification}>
-                                <CloseIcon/>
+                                <CloseIcon />
                             </IconButton>
                         )}
-                    </>}
+                    </>
+                )}
             </Paper>
         </>
     );

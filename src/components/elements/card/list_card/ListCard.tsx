@@ -13,6 +13,7 @@ import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {userAPI} from '@src/api/api';
+import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
 
 export const ListCard: FC<CardDataType> = (props) => {
     const {
@@ -31,7 +32,8 @@ export const ListCard: FC<CardDataType> = (props) => {
         currency,
         city,
         region,
-        image
+        image,
+        is_top
     } = props;
 
     const {t} = useTranslation('common');
@@ -242,6 +244,9 @@ export const ListCard: FC<CardDataType> = (props) => {
                                 </Hidden>
                             </Grid>
                         </Grid>
+                        {!!is_top && (
+                            <TopSticker className="top-sticker" />
+                        )}
                     </Grid>
                 </a>
             </Link>

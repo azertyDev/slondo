@@ -212,10 +212,10 @@ export const Bottom: FC<BottomProps> = props => {
                             item
                             container
                             spacing={1}
+                            sm={7}
+                            xs={12}
                             alignItems="center"
                             className="multi-actions"
-                            xs={12}
-                            sm={7}
                         >
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">

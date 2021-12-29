@@ -212,14 +212,13 @@ export const CabinetSidebar: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
-                                disabled
                                 disableGutters
-                                selected={page === 'paidServices'}
+                                selected={page === 'paid_services'}
                                 classes={{selected: classes.selected}}
-                                onClick={handleListItemClick('paidServices')}
+                                onClick={handleListItemClick('paid_services')}
                             >
                                 <WalletIcon/>
-                                <ListItemText primary={t('paidServices')}/>
+                                <ListItemText primary={t('paid_services')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>

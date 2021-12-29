@@ -71,6 +71,7 @@ export type CardDataType = {
     subscribed: boolean;
     title: string;
     user_id: number;
+    is_top?: number;
 };
 
 type serviceType = {

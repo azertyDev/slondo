@@ -22,6 +22,7 @@ import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {ChatContainer} from '@src/components/elements/chat_component/ChatContainer';
 import {CabinetSidebar} from '@src/components/cabinet/components/cabinet_sidebar/CabinetSidebar';
+import {PaidServices} from '@src/components/cabinet/cabinet_pages/paid_services/PaidServices';
 import {useStyles} from './useStyles';
 
 export type CommonModalType = {
@@ -36,7 +37,7 @@ const Cabinet: FC = () => {
         query: {page},
         push
     } = useRouter();
-    
+
     const {t} = useTranslation('cabinet');
     const title = t(page);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -67,6 +68,8 @@ const Cabinet: FC = () => {
                 return <Ratings />;
             case 'safe_deal':
                 return <SafeDeal />;
+            case 'paid_services':
+                return <PaidServices />;
             case 'settings':
                 return <Settings />;
             case 'subs':

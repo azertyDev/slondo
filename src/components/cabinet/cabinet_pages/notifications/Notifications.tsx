@@ -4,12 +4,10 @@ import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
-import {useModal} from '@src/hooks/useModal';
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {Box, CircularProgress, Typography} from "@material-ui/core";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
-import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
 import {AuthCtx, ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
@@ -31,8 +29,6 @@ export const Notifications: FC = () => {
     const {user} = useContext(AuthCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
     const {t} = useTranslation('notifications');
-
-    const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
     const [isFetch, setIsFetch] = useState(false);
     const [notifications, setNotifications] = useState<notificationType[]>([]);
@@ -116,7 +112,6 @@ export const Notifications: FC = () => {
                         isPersonal
                         setNotifications={setNotifications}
                         handleRefresh={fetchAllNotification}
-                        handleOpenSnackbar={handleOpenSnackbar}
                     />
                 </Box>
             )
@@ -142,11 +137,5 @@ export const Notifications: FC = () => {
                 <CustomButton onClick={handleCloseModal}>{t('common:no')}</CustomButton>
             </Box>
         </CustomModal>
-        <CustomSnackbar
-            severity="success"
-            message={t('successfully_removed')}
-            openSnackbar={openSnackbar}
-            handleCloseSnackbar={handleCloseSnackbar}
-        />
     </div>;
 };

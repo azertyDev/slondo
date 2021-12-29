@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         border: 0,
         height: '176px',
@@ -63,7 +63,8 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px 0px 0px 10px',
-                    backgroundImage: ({image}) => `url(${image ?? '/img/default.png'})`,
+                    backgroundImage: ({image}) =>
+                        `url(${image ?? '/img/default.png'})`,
                     '& > span.MuiTypography-caption': {
                         position: 'absolute',
                         top: '3px',
@@ -115,6 +116,7 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     },
                     '& p.price': {
+                        paddingBottom: '15px',
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '1.2rem'
                         }
@@ -135,6 +137,12 @@ export const useStyles = makeStyles((theme) => ({
                     color: '#BDBDBD'
                 }
             }
+        },
+        '& div.top-sticker': {
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            borderRadius: '10px 0'
         }
     }
 }));

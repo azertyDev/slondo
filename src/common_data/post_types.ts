@@ -70,7 +70,7 @@ export const postTypes: PostType[] = [
             delivery: true,
             buy_now: true,
             reserve_price: false,
-            auto_renewal: false
+            auto_ren: false
         }
     },
     {
@@ -117,7 +117,7 @@ export const postTypes: PostType[] = [
             delivery: true,
             buy_now: true,
             reserve_price: true,
-            auto_renewal: true
+            auto_ren: true
         }
     }
 ];

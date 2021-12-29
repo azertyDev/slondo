@@ -1,4 +1,4 @@
-export const CabinetBonusIcon = ({width = 30, height = 30, color = '#B6B4BF'}) => {
+export const CabinetBonusIcon = ({width = 25, height = 25, color = '#B6B4BF'}) => {
     return (
         <svg
             width={width}

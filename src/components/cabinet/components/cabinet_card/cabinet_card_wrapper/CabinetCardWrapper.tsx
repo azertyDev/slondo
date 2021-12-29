@@ -49,13 +49,13 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
     const {category, adsable, ads_type, status, creator} = cardData;
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
     const isPublic = status === 'public';
     const isSold = status === 'sold';
     const isSuspend = status === 'suspended';
     const isArchive = status === 'archive';
     const isHistory = status === 'history';
     const isModeration = status === 'moderation';
-    const isBanned = status === 'banned';
     const isReject = status === 'reject' || 'refuse';
 
     const allowSettings = isPublic || isArchive;
@@ -100,20 +100,9 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                 <CabinetCard cardData={cardData} />
                 <Grid container spacing={1} className="bottom-btns">
                     <Hidden mdUp>
-                        <Grid
-                            item
-                            xs={7}
-                            sm={4}
-                            container
-                            justifyContent="center"
-                        >
+                        <Grid item xs={7} sm={4} container>
                             {page?.includes('favorite') ? (
-                                <Grid
-                                    item
-                                    xs={4}
-                                    container
-                                    justifyContent="center"
-                                >
+                                <Grid item xs={4} container>
                                     <CustomButton
                                         onClick={handleOpenModal(cardData.id)}
                                     >
@@ -121,14 +110,10 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                     </CustomButton>
                                 </Grid>
                             ) : (
-                                <>
-                                    {isPublic && (
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            container
-                                            justifyContent="center"
-                                        >
+                                creator &&
+                                isPublic && (
+                                    <>
+                                        <Grid item xs={4} container>
                                             <CustomButton
                                                 className="icons"
                                                 onClick={handlePromoteOpen}
@@ -136,32 +121,8 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                                 <RocketIcon />
                                             </CustomButton>
                                         </Grid>
-                                    )}
-                                    {creator && (isPublic || isArchive) && (
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            container
-                                            justifyContent="center"
-                                        >
-                                            <CustomButton
-                                                className="icons"
-                                                disabled={!allowSettings}
-                                                onClick={handleSettingsOpen}
-                                            >
-                                                <SettingsIcon />
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
-                                    {creator &&
-                                        !isBanned &&
-                                        handleNotificationsOpen && (
-                                            <Grid
-                                                item
-                                                xs={4}
-                                                container
-                                                justifyContent="center"
-                                            >
+                                        {handleNotificationsOpen && (
+                                            <Grid item xs={4} container>
                                                 <CustomButton
                                                     className="icons"
                                                     onClick={
@@ -172,11 +133,23 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                                 </CustomButton>
                                             </Grid>
                                         )}
-                                </>
+                                        {isArchive && (
+                                            <Grid item xs={4} container>
+                                                <CustomButton
+                                                    className="icons"
+                                                    disabled={!allowSettings}
+                                                    onClick={handleSettingsOpen}
+                                                >
+                                                    <SettingsIcon />
+                                                </CustomButton>
+                                            </Grid>
+                                        )}
+                                    </>
+                                )
                             )}
                         </Grid>
                     </Hidden>
-                    {handleDetailedOpen && (
+                    {!isModeration && handleDetailedOpen && (
                         <Grid
                             item
                             md={12}
@@ -222,37 +195,37 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                 <CloseIcon />
                             </CustomButton>
                         ) : (
-                            <>
-                                {creator && (isPublic || isArchive) && (
-                                    <>
-                                        {isPublic && (
-                                            <CustomButton
-                                                className="icons"
-                                                onClick={handlePromoteOpen}
-                                            >
-                                                <RocketIcon />
-                                            </CustomButton>
-                                        )}
-                                        <CustomButton
-                                            className="icons"
-                                            disabled={!allowSettings}
-                                            onClick={handleSettingsOpen}
+                            creator &&
+                            isPublic && (
+                                <>
+                                    <CustomButton
+                                        className="rocket-icon"
+                                        onClick={handlePromoteOpen}
+                                    >
+                                        <RocketIcon />
+                                        <Typography
+                                            style={{fontSize: '.75rem'}}
                                         >
-                                            <SettingsIcon />
-                                        </CustomButton>
-                                    </>
-                                )}
-                                {creator &&
-                                    handleNotificationsOpen &&
-                                    !isBanned && (
+                                            {t('promote')}
+                                        </Typography>
+                                    </CustomButton>
+                                    {handleNotificationsOpen && (
                                         <CustomButton
-                                            className="icons"
                                             onClick={handleNotificationsOpen}
                                         >
                                             <NotificationIcon />
                                         </CustomButton>
                                     )}
-                            </>
+                                    {isArchive && (
+                                        <CustomButton
+                                            disabled={!allowSettings}
+                                            onClick={handleSettingsOpen}
+                                        >
+                                            <SettingsIcon />
+                                        </CustomButton>
+                                    )}
+                                </>
+                            )
                         )}
                     </div>
                 </Hidden>

@@ -5,12 +5,21 @@ export const useStyles = makeStyles(() => ({
         '& h6.select-service-title': {
             marginBottom: '10px'
         },
-        '& div.pay-icons-wrapper': {
-            '& > div > button': {
+        '& div.pay-types-wrapper': {
+            '& > div > div': {
                 width: '100%',
                 height: '100px',
+                borderRadius: 0,
+                cursor: 'pointer',
                 backgroundColor: '#f3f3f3',
-                borderRadius: 0
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                '&.bonuses-bg': {
+                    backgroundImage: 'url(/img/services/bonuses.png)'
+                },
+                '&.payme-bg': {
+                    backgroundImage: 'url(/img/services/payme.png)'
+                }
             }
         }
     }

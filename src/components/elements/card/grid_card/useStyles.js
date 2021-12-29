@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         position: 'relative',
         height: '345px',
@@ -75,11 +75,10 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             padding: '2px 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: ({ads_type}) => (
+                            backgroundColor: ({ads_type}) =>
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
-                                    : 'rgba(242, 153, 74, .65)'
-                            ),
+                                    : 'rgba(242, 153, 74, .65)',
                             [theme.breakpoints.down('xs')]: {
                                 fontSize: '0.75rem'
                             }
@@ -151,6 +150,12 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.875rem'
             }
+        },
+        '& div.top-sticker': {
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            borderRadius: '10px 0 0'
         }
     },
     title: {

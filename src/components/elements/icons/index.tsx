@@ -106,7 +106,5 @@ export {StationWagonIcon} from './car_icons/StationWagonIcon';
 export {SuvIcon} from './car_icons/SuvIcon';
 export {TargaIcon} from './car_icons/TargaIcon';
 export {VanIcon} from './car_icons/VanIcon';
-export {BonusesIcon} from './payed_services/BonusesIcon';
-export {PaymeIcon} from './payed_services/Payme';
 export {DeleteIcon} from './common/DeleteIcon';
 export {CabinetBonusIcon} from './common/BonusIcon';

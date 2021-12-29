@@ -68,6 +68,7 @@
   "suggestPriceRule": "Taklif etilgan narx boshlang'ich narxdan yoki tikilgan narxdan kam bo'lmasligi kerak",
   "suggest": "Taklif qilish",
   "enterPrice": "Narxni kiriting",
+  "auto_renewal": "Avtomatik yangilash",
   "buyNowRule": {
     "firstPart": "“Tasdiqlash” tugmasini bosgach, Siz tovarni",
     "secondPart": "so'mga sotib olasiz"

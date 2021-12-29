@@ -1,12 +1,10 @@
 import {FC} from 'react';
-import {Card, Grid, TextField, Typography} from '@material-ui/core';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {useTranslation} from 'react-i18next';
-import {useHandlers} from '@src/hooks/useHandlers';
-import {getErrorMsg} from '@src/helpers';
+import {useRouter} from 'next/router';
+import {Box, Card, Grid, TextField, Typography} from '@material-ui/core';
+import {Trans, useTranslation} from 'react-i18next';
 import ReactInputMask from 'react-input-mask';
-import {useStyles} from './useStyles';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {useStyles} from './useStyles';
 
 type CardInfoProps = {
     isSmsConfirm: boolean;
@@ -16,86 +14,86 @@ type CardInfoProps = {
 export const CardInfoStage: FC<CardInfoProps> = props => {
     const {formik, isSmsConfirm} = props;
 
+    const {locale} = useRouter();
     const {t} = useTranslation('cabinet');
 
     const {values, setValues, errors, touched} = formik;
 
     const {cardNumber, expireDate, code} = values;
 
-    const {handleNumericInput, handleInput} = useHandlers(values, setValues);
+    const handleInput =
+        name =>
+        ({target}) => {
+            setValues({...values, [name]: target.value});
+        };
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Grid container spacing={2}>
-                <Card className={classes.paymentCard}>
-                    <Grid container spacing={1} alignContent="space-around">
+            <Card className={classes.paymentCard}>
+                <Grid container spacing={1} className="card-data">
+                    <Grid container item xs={12} sm={6}>
                         {isSmsConfirm ? (
-                            <Grid item sm={6} xs={12}>
-                                <FormikField
-                                    t={t}
-                                    name="code"
+                            <Grid item sm={8} xs={12}>
+                                <label htmlFor="code">
+                                    <Typography
+                                        variant="subtitle2"
+                                        gutterBottom
+                                    >
+                                        {t('type_sms_code')}:
+                                    </Typography>
+                                </label>
+                                <TextField
+                                    fullWidth
                                     autoFocus
+                                    focused={false}
                                     value={code}
-                                    placeholder={t('type_sms_code')}
-                                    onChange={handleNumericInput}
-                                    errorMsg={getErrorMsg(
-                                        errors.code,
-                                        touched.code,
-                                        t
-                                    )}
+                                    size="small"
+                                    variant="outlined"
+                                    onChange={handleInput('code')}
+                                    className={
+                                        errors.code && touched.code
+                                            ? 'error-border'
+                                            : ''
+                                    }
                                 />
                             </Grid>
                         ) : (
                             <>
-                                <Grid container item xs={12}>
-                                    <Grid item xs={12} sm={6} md={5} lg={5}>
-                                        <label htmlFor="cardNumber">
-                                            <Typography
-                                                variant="subtitle2"
-                                                gutterBottom
-                                            >
-                                                {t('card_number')}:
-                                            </Typography>
-                                        </label>
-                                        <ReactInputMask
-                                            alwaysShowMask
-                                            value={cardNumber}
-                                            mask="9999 9999 9999 9999"
-                                            onChange={handleInput}
+                                <Box maxWidth="184px" mb="20px">
+                                    <label htmlFor="cardNumber">
+                                        <Typography
+                                            variant="subtitle2"
+                                            gutterBottom
                                         >
-                                            {() => (
-                                                <TextField
-                                                    id="cardNumber"
-                                                    fullWidth
-                                                    focused={false}
-                                                    size="small"
-                                                    name="cardNumber"
-                                                    variant="outlined"
-                                                    className={
-                                                        errors.cardNumber &&
-                                                        touched.cardNumber
-                                                            ? 'error-border'
-                                                            : ''
-                                                    }
-                                                />
-                                            )}
-                                        </ReactInputMask>
-                                        {errors.cardNumber &&
-                                            touched.cardNumber && (
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    className="error-text"
-                                                >
-                                                    {t(
-                                                        `errors:${errors.cardNumber}`
-                                                    )}
-                                                </Typography>
-                                            )}
-                                    </Grid>
-                                </Grid>
-                                <Grid container item xs={12}>
-                                    <Grid item xs={6} sm={4} md={3} lg={3}>
+                                            {t('card_number')}:
+                                        </Typography>
+                                    </label>
+                                    <ReactInputMask
+                                        alwaysShowMask
+                                        value={cardNumber}
+                                        mask="9999 9999 9999 9999"
+                                        onChange={handleInput('cardNumber')}
+                                    >
+                                        {() => (
+                                            <TextField
+                                                fullWidth
+                                                autoFocus
+                                                focused={false}
+                                                size="small"
+                                                variant="outlined"
+                                                className={
+                                                    errors.cardNumber &&
+                                                    touched.cardNumber
+                                                        ? 'error-border'
+                                                        : ''
+                                                }
+                                            />
+                                        )}
+                                    </ReactInputMask>
+                                </Box>
+                                <Box width="100%">
+                                    <Box maxWidth="100px">
                                         <label htmlFor="expireDate">
                                             <Typography
                                                 variant="subtitle2"
@@ -108,14 +106,12 @@ export const CardInfoStage: FC<CardInfoProps> = props => {
                                             mask="99/99"
                                             alwaysShowMask
                                             value={expireDate}
-                                            onChange={handleInput}
+                                            onChange={handleInput('expireDate')}
                                         >
                                             {() => (
                                                 <TextField
                                                     fullWidth
-                                                    id="expireDate"
                                                     focused={false}
-                                                    name="expireDate"
                                                     variant="outlined"
                                                     className={
                                                         errors.expireDate &&
@@ -126,27 +122,42 @@ export const CardInfoStage: FC<CardInfoProps> = props => {
                                                 />
                                             )}
                                         </ReactInputMask>
-                                        {errors.expireDate &&
-                                            touched.expireDate && (
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    className="error-text"
-                                                >
-                                                    {t(
-                                                        `errors:${errors.expireDate}`
-                                                    )}
-                                                </Typography>
-                                            )}
-                                    </Grid>
-                                </Grid>
+                                    </Box>
+                                </Box>
                             </>
                         )}
                     </Grid>
-                </Card>
-            </Grid>
-            <CustomButton className="next-btn" type="submit">
-                {t(`common:${isSmsConfirm ? 'send' : 'apply'}`)}
-            </CustomButton>
+                </Grid>
+                {!isSmsConfirm && (
+                    <Box display="flex" className="card-data-term">
+                        <Typography>{t('card_data_term')}</Typography>
+                    </Box>
+                )}
+            </Card>
+            <div className="submit-btn-wrapper">
+                <CustomButton type="submit">
+                    {t(isSmsConfirm ? 'common:send' : 'continue')}
+                </CustomButton>
+            </div>
+            {!isSmsConfirm && (
+                <div className="payme-term-wrapper">
+                    <Typography>
+                        <Trans
+                            components={{
+                                a: (
+                                    <a
+                                        target="_blank"
+                                        href={`https://cdn.payme.uz/terms/${locale}/main.html`}
+                                    />
+                                )
+                            }}
+                            defaults={t('payme_offer', {
+                                offer: `<a>${t('offer')}</a>`
+                            })}
+                        />
+                    </Typography>
+                </div>
+            )}
         </div>
     );
 };
