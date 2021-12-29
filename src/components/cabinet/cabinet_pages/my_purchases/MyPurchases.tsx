@@ -9,7 +9,7 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
-import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
+import {NotificationModal} from '@src/components/cabinet/components/notification_modal/NotificationModal';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
 import {myUzCardAPI} from '@src/api/paid_api';

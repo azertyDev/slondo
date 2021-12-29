@@ -7,7 +7,7 @@ import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
-import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
+import {NotificationModal} from '@src/components/cabinet/components/notification_modal/NotificationModal';
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
 import {initCardData} from "@src/common_data/common";
