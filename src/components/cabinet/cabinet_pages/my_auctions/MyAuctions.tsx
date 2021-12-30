@@ -1,19 +1,23 @@
 import {FC, useContext, useState} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet.js';
+import {
+    DoubleTabType,
+    InitPostsType,
+    TabsType
+} from '@root/interfaces/Cabinet.js';
 import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
 import {NotificationModal} from '@src/components/cabinet/components/notification_modal/NotificationModal';
-import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
-import {ErrorCtx} from "@src/context";
-import {initCardData} from "@src/common_data/common";
+import {SettingsModal} from '@src/components/cabinet/components/settings_modal/SettingsModal';
+import {ErrorCtx} from '@src/context';
+import {initCardData} from '@src/common_data/common';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
+import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
 import {PromoteModal} from '@src/components/cabinet/components/promote_modal/PromoteModal';
+import {usePagination} from '@src/hooks';
 
 export const MyAuctions: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -25,13 +29,15 @@ export const MyAuctions: FC = () => {
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initCardData);
+    const [selectedAuction, setSelectedAuction] =
+        useState<CardDataType>(initCardData);
 
     const [auctionData, setAuctionData] = useState(initialState);
     const [auctionArchiveData, setAuctionArchiveData] = useState(initialState);
 
     const [participatingData, setParticipatingData] = useState(initialState);
-    const [participatingArchiveData, setParticipatingArchiveData] = useState(initialState);
+    const [participatingArchiveData, setParticipatingArchiveData] =
+        useState(initialState);
 
     const {
         modalOpen: settingsOpen,
@@ -58,24 +64,18 @@ export const MyAuctions: FC = () => {
     } = useModal();
 
     const handleDetailedOpen = (post: CardDataType) => () => {
-        unstable_batchedUpdates(() => {
-            openDetailedModal();
-            setSelectedAuction(post);
-        });
+        openDetailedModal();
+        setSelectedAuction(post);
     };
 
     const handleNotificationsOpen = (post: CardDataType) => () => {
-        unstable_batchedUpdates(() => {
-            openNotificationsModal();
-            setSelectedAuction(post);
-        });
+        openNotificationsModal();
+        setSelectedAuction(post);
     };
 
     const handleSettingsOpen = (post: CardDataType) => () => {
-        unstable_batchedUpdates(() => {
-            handleOpenSettings();
-            setSelectedAuction(post);
-        });
+        handleOpenSettings();
+        setSelectedAuction(post);
     };
 
     const handlePromoteOpen = post => () => {
@@ -85,60 +85,90 @@ export const MyAuctions: FC = () => {
 
     const handleDeactivate = (ads_id?: string) => async () => {
         try {
-            unstable_batchedUpdates(async () => {
-                setIsFetch(true);
-                await userAPI.deactivatePost(ads_id);
-                await handleRefresh();
-                closeDetailedModal();
-                setIsFetch(false);
-            });
-        } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
-        }
-    };
-
-    const fetchTabPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
-        try {
-            const params = {
-                archive: secondSubTab ? 1 : 0,
-                page,
-                itemsPerPage: ITEMS_PER_PAGE
-            };
-
             setIsFetch(true);
-
-            const {data, total} = await (
-                secondTab
-                    ? userAPI.getParticipatingAucs(params)
-                    : userAPI.getMyPosts({...params, type: 'auc', secure: 0})
-            );
-
-            unstable_batchedUpdates(() => {
-                secondTab
-                    ? secondSubTab ? setParticipatingArchiveData({data, total}) : setParticipatingData({data, total})
-                    : secondSubTab ? setAuctionArchiveData({data, total}) : setAuctionData({data, total});
-                setIsFetch(false);
-            });
+            await userAPI.deactivatePost(ads_id);
+            await refresh();
+            closeDetailedModal();
+            setIsFetch(false);
         } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
+            setIsFetch(false);
+            setErrorMsg(e.message);
         }
     };
 
-    const firstTabFetch = fetchTabPosts();
-    const secondTabFetch = fetchTabPosts(true);
+    const getAuctions =
+        (isArch = false) =>
+        async (page = 1) => {
+            try {
+                const params = {
+                    archive: isArch ? 1 : 0,
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE
+                };
 
-    const handleRefresh = async () => {
+                setIsFetch(true);
+
+                const {data, total} = await userAPI.getMyPosts({
+                    ...params,
+                    type: 'auc',
+                    secure: 0
+                });
+
+                isArch
+                    ? setAuctionArchiveData({data, total})
+                    : setAuctionData({data, total});
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
+
+    const getParticipatingAuctions =
+        (isArch = false) =>
+        async (page = 1) => {
+            try {
+                setIsFetch(true);
+
+                const {data, total} = await userAPI.getParticipatingAucs({
+                    page,
+                    archive: isArch ? 1 : 0,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
+
+                isArch
+                    ? setParticipatingArchiveData({data, total})
+                    : setParticipatingData({data, total});
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
+
+    const [aucPagination, aucPage, fetchAuctions] = usePagination(
+        getAuctions()
+    );
+
+    const [archAucPagination, archAucPage, fetchArchAuctions] = usePagination(
+        getAuctions(true)
+    );
+
+    const [participatingPagination, participatingPage, fetchParticipating] =
+        usePagination(getParticipatingAuctions());
+
+    const [
+        archParticipatingPagination,
+        archParticipatingPage,
+        fetchArchParticipating
+    ] = usePagination(getParticipatingAuctions(true));
+
+    const refresh = async () => {
         await Promise.all([
-            firstTabFetch(),
-            secondTabFetch(),
-            firstTabFetch(1, true),
-            secondTabFetch(1, true)
+            fetchAuctions(),
+            fetchArchAuctions(),
+            fetchParticipating(),
+            fetchArchParticipating()
         ]);
     };
 
@@ -150,18 +180,20 @@ export const MyAuctions: FC = () => {
                 innerFirstTab: {
                     posts: auctionData.data,
                     total: auctionData.total,
-                    emptyPage: <EmptyPage
-                        link={INNER_URLS.create_post}
-                        tutorialLink={INNER_URLS.create_auc_guide}
-                        label={t('cabinet:empty.auction')}
-                        tutorialText={t('post:howToCreateAuc')}
-                        action={t('cabinet:empty.create_auction')}
-                    />
+                    emptyPage: (
+                        <EmptyPage
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_auc_guide}
+                            label={t('cabinet:empty.auction')}
+                            tutorialText={t('post:howToCreateAuc')}
+                            action={t('cabinet:empty.create_auction')}
+                        />
+                    )
                 },
                 innerSecondTab: {
                     posts: auctionArchiveData.data,
                     total: auctionArchiveData.total,
-                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    emptyPage: <EmptyPage label={t('empty.archive')} />
                 }
             }
         },
@@ -172,12 +204,12 @@ export const MyAuctions: FC = () => {
                 innerFirstTab: {
                     posts: participatingData.data,
                     total: participatingData.total,
-                    emptyPage: <EmptyPage label={t('empty.no_participating')}/>
+                    emptyPage: <EmptyPage label={t('empty.no_participating')} />
                 },
                 innerSecondTab: {
                     posts: participatingArchiveData.data,
                     total: participatingArchiveData.total,
-                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    emptyPage: <EmptyPage label={t('empty.archive')} />
                 }
             }
         }
@@ -188,37 +220,47 @@ export const MyAuctions: FC = () => {
             <DoubleTabs
                 isFetch={isFetch}
                 tabsData={tabsData}
-                fetchFirstTabPosts={firstTabFetch}
-                fetchSecondTabPosts={secondTabFetch}
+                pages={[
+                    aucPage,
+                    archAucPage,
+                    participatingPage,
+                    archParticipatingPage
+                ]}
                 handlePromoteOpen={handlePromoteOpen}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
+                paginationHandlers={[
+                    aucPagination,
+                    archAucPagination,
+                    participatingPagination,
+                    archParticipatingPagination
+                ]}
             />
             <DetailedModal
                 post={selectedAuction}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 handleDeactivate={handleDeactivate(selectedAuction.id)}
             />
             <SettingsModal
                 post={selectedAuction}
                 open={settingsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={handleCloseSettings}
             />
             <NotificationModal
                 post={selectedAuction}
                 open={notificationsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={closeNotificationsModal}
             />
             <PromoteModal
-                postType='auc'
+                postType="auc"
                 postId={selectedAuction.id}
                 openDialog={promoteOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 handleCloseDialog={handleClosePromote}
             />
         </>

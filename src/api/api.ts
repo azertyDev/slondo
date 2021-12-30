@@ -4,11 +4,7 @@ import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {CityType, RegionType} from '@root/interfaces/Locations';
-import {
-    POSTS_PER_PAGE,
-    ITEMS_PER_PAGE,
-    SUBS_PER_PAGE
-} from '@src/constants';
+import {POSTS_PER_PAGE, ITEMS_PER_PAGE, SUBS_PER_PAGE} from '@src/constants';
 import {axiosInstance} from '@src/api/axios_instance';
 
 export const userAPI = {
@@ -553,20 +549,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserPosts: (
-        user_id,
-        type,
-        archive = 0,
-        page,
-        itemsPerPage = ITEMS_PER_PAGE
-    ) => {
-        const params = {
-            user_id,
-            type,
-            archive,
-            page,
-            itemsPerPage
-        };
+    getUserPosts: params => {
         return axiosInstance
             .get(`post`, {params})
             .then(res => res.data)

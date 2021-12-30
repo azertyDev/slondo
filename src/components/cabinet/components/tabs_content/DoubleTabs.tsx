@@ -1,6 +1,5 @@
-import {FC, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
-import {unstable_batchedUpdates} from 'react-dom';
+import {FC, useState} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
@@ -12,49 +11,42 @@ import {useStyles} from './useStyles';
 type TabsContentPropsType = {
     isFetch: boolean;
     tabsData: TabsType<DoubleTabType>;
-    fetchFirstTabPosts: (page?: number, secondSubTab?: boolean) => void;
-    fetchSecondTabPosts?: (page?: number, secondSubTab?: boolean) => void;
     handleSafeDeal?: (post, perform?: boolean) => () => void;
     handleDetailedOpen?: (v) => () => void;
     handleSettingsOpen?: (v) => () => void;
     handleNotificationsOpen?: (v) => () => void;
     handlePromoteOpen?: (post) => () => void;
+    pages: [number, number, number?, number?];
+    paginationHandlers: [
+        PaginationType,
+        PaginationType,
+        PaginationType?,
+        PaginationType?
+    ];
 };
 
-type TabPages = {
-    firstPage: number;
-    secondPage: number;
-    thirdPage: number;
-    fourthPage: number;
-};
+type PaginationType = (page: number) => void;
 
 export const DoubleTabs: FC<TabsContentPropsType> = props => {
     const {
         isFetch,
         tabsData,
-        fetchFirstTabPosts,
-        fetchSecondTabPosts,
         handleDetailedOpen,
         handleSettingsOpen,
         handleNotificationsOpen,
         handlePromoteOpen,
-        handleSafeDeal
+        handleSafeDeal,
+        pages,
+        paginationHandlers
     } = props;
-
-    const initPages = {
-        firstPage: 1,
-        secondPage: 1,
-        thirdPage: 1,
-        fourthPage: 1
-    };
 
     const {
         query: {page}
     } = useRouter();
     const {firstTab, secondTab} = tabsData;
 
-    const [pages, setPages] = useState<TabPages>(initPages);
-    const {firstPage, secondPage, thirdPage, fourthPage} = pages;
+    const [firstPage, secondPage, thirdPage, fourthPage] = pages;
+    const [firstPag, secondPag, thirdPag, fourthPag] = paginationHandlers;
 
     const [tabIndex, setTabIndex] = useState(0);
     const [innerTabIndex, setInnerTabIndex] = useState(0);
@@ -66,16 +58,13 @@ export const DoubleTabs: FC<TabsContentPropsType> = props => {
             subTab ? setInnerTabIndex(index) : setTabIndex(index);
         };
 
-    const handlePagePagination = (_, pageNum) => {
-        let pageKey = '';
+    const handlePagePagination = (_, pageNum: number) => {
         switch (tabIndex) {
             case 0:
-                pageKey = isFirstInnerTab ? 'firstPage' : 'secondPage';
-                break;
+                return isFirstInnerTab ? firstPag(pageNum) : secondPag(pageNum);
             case 1:
-                pageKey = isFirstInnerTab ? 'thirdPage' : 'fourthPage';
+                return isFirstInnerTab ? thirdPag(pageNum) : fourthPag(pageNum);
         }
-        setPages({...pages, [pageKey]: pageNum});
     };
 
     const getCurrPage = () => {
@@ -83,7 +72,7 @@ export const DoubleTabs: FC<TabsContentPropsType> = props => {
             case 0:
                 return isFirstInnerTab ? firstPage : secondPage;
             case 1:
-                return isFirstInnerTab ? thirdPage : firstPage;
+                return isFirstInnerTab ? thirdPage : fourthPage;
         }
     };
 
@@ -99,36 +88,6 @@ export const DoubleTabs: FC<TabsContentPropsType> = props => {
                     : secondTab.innerTabsData.innerSecondTab.total;
         }
     };
-
-    const fetchByPage = async () => {
-        switch (tabIndex) {
-            case 0:
-                await fetchFirstTabPosts(
-                    isFirstInnerTab ? firstPage : secondPage,
-                    !isFirstInnerTab
-                );
-                break;
-            case 1:
-                await fetchSecondTabPosts(
-                    isFirstInnerTab ? thirdPage : fourthPage,
-                    !isFirstInnerTab
-                );
-        }
-    };
-
-    useEffect(() => {
-        fetchByPage();
-    }, [firstPage, secondPage, thirdPage, fourthPage]);
-
-    useEffect(() => {
-        unstable_batchedUpdates(() => {
-            fetchFirstTabPosts(1, true);
-            if (fetchSecondTabPosts) {
-                fetchSecondTabPosts();
-                fetchSecondTabPosts(1, true);
-            }
-        });
-    }, []);
 
     const classes = useStyles({page, tabIndex});
     return (

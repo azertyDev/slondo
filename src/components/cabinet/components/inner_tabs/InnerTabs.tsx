@@ -77,11 +77,21 @@ export const InnerTabs: FC<CabinetModalPropsType> = props => {
                         <Box mb={3} key={data.id}>
                             <CabinetCardWrapper
                                 cardData={data}
-                                handlePromoteOpen={handlePromoteOpen(data)}
-                                handleDetailedOpen={handleDetailedOpen(data)}
-                                handleNotificationsOpen={handleNotificationsOpen(
-                                    data
-                                )}
+                                handlePromoteOpen={
+                                    handlePromoteOpen
+                                        ? handlePromoteOpen(data)
+                                        : null
+                                }
+                                handleDetailedOpen={
+                                    handleDetailedOpen
+                                        ? handleDetailedOpen(data)
+                                        : null
+                                }
+                                handleNotificationsOpen={
+                                    handleNotificationsOpen
+                                        ? handleNotificationsOpen(data)
+                                        : null
+                                }
                                 handleSettingsOpen={
                                     handleSettingsOpen
                                         ? handleSettingsOpen(data)

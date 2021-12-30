@@ -158,6 +158,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
 
             if (stageStatus === 'bonus') {
                 await bonusAPI.activate(postId, servicesIds);
+                handleRefresh();
                 setStageStatus('success');
             }
 

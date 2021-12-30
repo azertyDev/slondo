@@ -110,30 +110,35 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                     </CustomButton>
                                 </Grid>
                             ) : (
-                                creator &&
-                                isPublic && (
+                                creator && (
                                     <>
-                                        <Grid item xs={4} container>
-                                            <CustomButton
-                                                className="icons"
-                                                onClick={handlePromoteOpen}
-                                            >
-                                                <RocketIcon />
-                                            </CustomButton>
-                                        </Grid>
-                                        {handleNotificationsOpen && (
-                                            <Grid item xs={4} container>
-                                                <CustomButton
-                                                    className="icons"
-                                                    onClick={
-                                                        handleNotificationsOpen
-                                                    }
-                                                >
-                                                    <NotificationIcon />
-                                                </CustomButton>
-                                            </Grid>
+                                        {isPublic && (
+                                            <>
+                                                <Grid item xs={4} container>
+                                                    <CustomButton
+                                                        className="icons"
+                                                        onClick={
+                                                            handlePromoteOpen
+                                                        }
+                                                    >
+                                                        <RocketIcon />
+                                                    </CustomButton>
+                                                </Grid>
+                                                {handleNotificationsOpen && (
+                                                    <Grid item xs={4} container>
+                                                        <CustomButton
+                                                            className="icons"
+                                                            onClick={
+                                                                handleNotificationsOpen
+                                                            }
+                                                        >
+                                                            <NotificationIcon />
+                                                        </CustomButton>
+                                                    </Grid>
+                                                )}
+                                            </>
                                         )}
-                                        {isArchive && (
+                                        {(isPublic || isArchive) && (
                                             <Grid item xs={4} container>
                                                 <CustomButton
                                                     className="icons"
@@ -195,28 +200,33 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                                 <CloseIcon />
                             </CustomButton>
                         ) : (
-                            creator &&
-                            isPublic && (
+                            creator && (
                                 <>
-                                    <CustomButton
-                                        className="rocket-icon"
-                                        onClick={handlePromoteOpen}
-                                    >
-                                        <RocketIcon />
-                                        <Typography
-                                            style={{fontSize: '.75rem'}}
-                                        >
-                                            {t('promote')}
-                                        </Typography>
-                                    </CustomButton>
-                                    {handleNotificationsOpen && (
-                                        <CustomButton
-                                            onClick={handleNotificationsOpen}
-                                        >
-                                            <NotificationIcon />
-                                        </CustomButton>
+                                    {isPublic && (
+                                        <>
+                                            <CustomButton
+                                                className="rocket-icon"
+                                                onClick={handlePromoteOpen}
+                                            >
+                                                <RocketIcon />
+                                                <Typography
+                                                    style={{fontSize: '.75rem'}}
+                                                >
+                                                    {t('promote')}
+                                                </Typography>
+                                            </CustomButton>
+                                            {handleNotificationsOpen && (
+                                                <CustomButton
+                                                    onClick={
+                                                        handleNotificationsOpen
+                                                    }
+                                                >
+                                                    <NotificationIcon />
+                                                </CustomButton>
+                                            )}
+                                        </>
                                     )}
-                                    {isArchive && (
+                                    {(isPublic || isArchive) && (
                                         <CustomButton
                                             disabled={!allowSettings}
                                             onClick={handleSettingsOpen}

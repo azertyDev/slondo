@@ -1,6 +1,5 @@
 import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {unstable_batchedUpdates} from 'react-dom';
 import {useTranslation} from 'next-i18next';
 import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
@@ -14,6 +13,7 @@ import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage
 import {initCardData} from '@src/common_data/common';
 import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
 import {PromoteModal} from '../../components/promote_modal/PromoteModal';
+import {usePagination} from '@src/hooks';
 
 export const MyPosts: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -76,46 +76,70 @@ export const MyPosts: FC = () => {
         setSelectedPost(post);
     };
 
-    const fetchTabPosts =
-        (secondTab = false) =>
-        async (page = 1, secondSubTab = false) => {
+    const getPosts =
+        (isSafeShop = false) =>
+        async (page = 1) => {
             try {
-                const params = {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getMyPosts({
                     type: 'post',
-                    archive: secondSubTab ? 1 : 0,
-                    secure: secondTab ? 1 : 0,
+                    archive: 0,
+                    secure: isSafeShop ? 1 : 0,
                     page,
                     itemsPerPage: ITEMS_PER_PAGE
-                };
-                setIsFetch(true);
-                const {data, total} = await userAPI.getMyPosts(params);
-                unstable_batchedUpdates(() => {
-                    secondTab
-                        ? secondSubTab
-                            ? setArchiveSecurePostData({data, total})
-                            : setSecurePosts({data, total})
-                        : secondSubTab
-                        ? setArchivePostData({data, total})
-                        : setPostData({data, total});
-                    setIsFetch(false);
                 });
+                isSafeShop
+                    ? setSecurePosts({data, total})
+                    : setPostData({data, total});
+                setIsFetch(false);
             } catch (e) {
-                unstable_batchedUpdates(() => {
-                    setIsFetch(false);
-                    setErrorMsg(e.message);
-                });
+                setIsFetch(false);
+                setErrorMsg(e.message);
             }
         };
 
-    const firstTabFetch = fetchTabPosts();
-    const secondTabFetch = fetchTabPosts(true);
+    const getArchPosts =
+        (isSafeShop = false) =>
+        async (page = 1) => {
+            try {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getMyPosts({
+                    type: 'post',
+                    archive: 1,
+                    secure: isSafeShop ? 1 : 0,
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
+                isSafeShop
+                    ? setArchiveSecurePostData({data, total})
+                    : setArchivePostData({data, total});
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
 
-    const handleRefresh = async () => {
+    const [postsPagination, postPage, fetchPosts] = usePagination(getPosts());
+
+    const [safePostsPagination, safePostPage, fetchSafePosts] =
+        usePagination(getPosts(true));
+
+    const [archPostsPagination, archPostsPage, fetchArchPosts] = usePagination(
+        getArchPosts()
+    );
+    const [
+        secureArchPostsPagination,
+        secureArchPostsPage,
+        fetchSecureArchPosts
+    ] = usePagination(getArchPosts(true));
+
+    const refresh = async () => {
         await Promise.all([
-            firstTabFetch(),
-            secondTabFetch(),
-            firstTabFetch(1, true),
-            secondTabFetch(1, true)
+            fetchPosts(),
+            fetchSafePosts(),
+            fetchArchPosts(),
+            fetchSecureArchPosts()
         ]);
     };
 
@@ -175,36 +199,46 @@ export const MyPosts: FC = () => {
             <DoubleTabs
                 isFetch={isFetch}
                 tabsData={tabsData}
-                fetchFirstTabPosts={firstTabFetch}
-                fetchSecondTabPosts={secondTabFetch}
+                pages={[
+                    postPage,
+                    safePostPage,
+                    archPostsPage,
+                    secureArchPostsPage
+                ]}
                 handlePromoteOpen={handlePromoteOpen}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
+                paginationHandlers={[
+                    postsPagination,
+                    safePostsPagination,
+                    archPostsPagination,
+                    secureArchPostsPagination
+                ]}
             />
             <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
             />
             <SettingsModal
                 post={selectedPost}
                 open={settingsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={handleCloseSettings}
             />
             <NotificationModal
                 post={selectedPost}
                 open={notificationsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={closeNotificationsModal}
             />
             <PromoteModal
-                postType='post'
+                postType="post"
                 postId={selectedPost.id}
                 openDialog={promoteOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 handleCloseDialog={handleClosePromote}
             />
         </>
