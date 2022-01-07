@@ -23,13 +23,13 @@ import {FilterIcon} from '@src/components/elements/icons';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useLocation} from '@src/hooks/use_location/useLocation';
 import {CustomFormikProvider} from '@root/src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {useStyles} from './useStyles';
 import {ActionButtons} from './ActionButtons';
 import {SearchCar} from './categories_forms/car/SearchCar';
 import {SearchTransport} from './categories_forms/transport/SearchTransport';
 import {SearchEstate} from './categories_forms/estate/SearchEstate';
 import {SearchJob} from './categories_forms/job/SearchJob';
 import {SearchRegular} from './categories_forms/regular/SearchRegular';
+import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
     formik;
@@ -76,7 +76,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         delivery,
         by_currency,
         page = '1',
-        by_filtering = 'created_at',
+        by_filtering = 'services_at',
         ...urlFiltersParams
     } = urlParams as {[p: string]: string};
 
@@ -257,7 +257,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                     classes={{root: classes.select}}
                 >
                     <Select onChange={handleSort} value={values.by_filtering}>
-                        <MenuItem value="created_at">{t('by_date')}</MenuItem>
+                        <MenuItem value="services_at">{t('by_date')}</MenuItem>
                         <MenuItem value="price">{t('by_price')}</MenuItem>
                     </Select>
                 </FormControl>

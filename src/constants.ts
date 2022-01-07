@@ -19,6 +19,7 @@ export const ITEMS_PER_PAGE = 16;
 export const BETS_PER_PAGE = 10;
 export const SUBS_PER_PAGE = 10;
 export const POSTS_PER_PAGE = 40;
+export const TOP_POSTS_PER_PAGE = 4;
 export const UPLOAD_FILES_LIMIT = 8;
 export const CONFIRM_SECONDS = 120;
 export const TITLE_LIMIT = 70;

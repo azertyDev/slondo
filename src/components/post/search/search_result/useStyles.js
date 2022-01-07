@@ -10,6 +10,12 @@ export const useStyles = makeStyles(theme => ({
         '& div.top-posts': {
             marginBottom: '40px'
         },
+        '& p.show-all': {
+            width: '100%',
+            margin: '8px 8px 0',
+            textAlign: 'end',
+            cursor: 'pointer'
+        },
         '& div.right-content-adv-wrapper': {
             height: '200px',
             [theme.breakpoints.down('xs')]: {

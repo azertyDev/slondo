@@ -172,6 +172,9 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                                 </Fragment>
                                             );
                                         })}
+                                        <Typography className="show-all">
+                                            {t('show_all')}
+                                        </Typography>
                                     </Grid>
                                 )}
                             </div>

@@ -17,7 +17,7 @@ import {AdvType} from '@root/interfaces/Adv';
 import {useFormik} from 'formik';
 import {useModal} from '@root/src/hooks';
 import {userAPI} from '@src/api/api';
-import {POSTS_PER_PAGE} from '@root/src/constants';
+import {POSTS_PER_PAGE, TOP_POSTS_PER_PAGE} from '@root/src/constants';
 import {postTypes} from '@root/src/common_data/post_types';
 import {getInitStateByCategory, initStates} from './initStates';
 import {SearchProps} from '@root/interfaces/Post';
@@ -124,7 +124,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
         safe_deal = false,
         exchange = false,
         delivery = false,
-        by_filtering = 'created_at',
+        by_filtering = 'services_at',
         page = '1'
     } = urlParams as {[p: string]: string};
 
@@ -339,7 +339,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                 userAPI.getPostsByFilters(query),
                 userAPI.getPostsByFilters({
                     ...query,
-                    itemsPerPage: 10,
+                    itemsPerPage: TOP_POSTS_PER_PAGE,
                     is_top: 1
                 })
             ]);

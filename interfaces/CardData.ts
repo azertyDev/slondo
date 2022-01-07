@@ -72,6 +72,7 @@ export type CardDataType = {
     title: string;
     user_id: number;
     is_top?: number;
+    is_turbo?: number;
 };
 
 type serviceType = {

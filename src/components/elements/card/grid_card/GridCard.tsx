@@ -44,8 +44,15 @@ export const GridCard: FC<CardItemProps> = props => {
         creator,
         favorite,
         category,
-        is_top
+        slondo_services
     } = props;
+
+    const {top, turbo_sale} = slondo_services
+        ? slondo_services.reduce<any>((keys, item) => {
+              keys[item.service.name] = true;
+              return keys;
+          }, {})
+        : {top: false, turbo_sale: false};
 
     const isFavorite = true;
     const {t} = useTranslation();
@@ -206,9 +213,7 @@ export const GridCard: FC<CardItemProps> = props => {
                                         </Typography>
                                     </>
                                 )}
-                                {!!is_top && (
-                                    <TopSticker className="top-sticker" />
-                                )}
+                                {top && <TopSticker className="top-sticker" />}
                             </CardContent>
                         </CardActionArea>
                     </Card>

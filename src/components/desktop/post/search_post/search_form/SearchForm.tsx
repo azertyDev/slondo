@@ -63,7 +63,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
         delivery,
         by_currency,
         page = '1',
-        by_filtering = 'created_at',
+        by_filtering = 'services_at',
         ...urlFiltersParams
     } = urlParams as {[p: string]: string};
 
@@ -305,7 +305,7 @@ export const SearchForm: FC<SearchFormPropsType> = props => {
                                         onChange={handleSort}
                                         value={values.by_filtering}
                                     >
-                                        <MenuItem value="created_at">
+                                        <MenuItem value="services_at">
                                             {t('by_date')}
                                         </MenuItem>
                                         <MenuItem value="price">
