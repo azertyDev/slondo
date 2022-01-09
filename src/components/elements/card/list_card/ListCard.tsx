@@ -14,6 +14,7 @@ import {useStyles} from './useStyles';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {userAPI} from '@src/api/api';
 import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
+import {TurboSticker} from '@src/components/elements/card/turbo_sticker/TurboSticker';
 
 export const ListCard: FC<CardDataType> = (props) => {
     const {
@@ -33,7 +34,7 @@ export const ListCard: FC<CardDataType> = (props) => {
         city,
         region,
         image,
-        is_top
+        slondo_services
     } = props;
 
     const {t} = useTranslation('common');
@@ -49,7 +50,6 @@ export const ListCard: FC<CardDataType> = (props) => {
         || !!exchange
         || !!safe_deal;
 
-
     const translatedTitle = transformCyrillic(title);
 
     const url = `/obyavlenie/${translatedTitle}-${id}`;
@@ -60,6 +60,13 @@ export const ListCard: FC<CardDataType> = (props) => {
 
     const regionName = t(`locations:${region.name}.name`);
     const locationName = city ? `${t(`locations:${region.name}.${city.name}`)}, ${regionName}` : regionName;
+
+    const {top = false, turbo_sale = false} = slondo_services
+        ? slondo_services.reduce<any>((keys, item) => {
+            keys[item.service.name] = true;
+            return keys;
+        }, {})
+        : {};
 
     const handleFavorite = async () => {
         try {
@@ -138,6 +145,7 @@ export const ListCard: FC<CardDataType> = (props) => {
                         <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
                             <Grid item xs={12} sm={10} lg={7}>
                                 <Typography
+                                    noWrap
                                     variant="h3"
                                     color="initial"
                                 >
@@ -244,7 +252,10 @@ export const ListCard: FC<CardDataType> = (props) => {
                                 </Hidden>
                             </Grid>
                         </Grid>
-                        {!!is_top && (
+                        {turbo_sale && (
+                            <TurboSticker className="turbo-sticker" />
+                        )}
+                        {top && (
                             <TopSticker className="top-sticker" />
                         )}
                     </Grid>

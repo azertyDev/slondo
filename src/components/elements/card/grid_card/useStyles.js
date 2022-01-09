@@ -52,6 +52,7 @@ export const useStyles = makeStyles(theme => ({
                 }
             },
             '& > div.card-media': {
+                position: 'relative',
                 backgroundColor: '#f2f2f2',
                 height: '240px',
                 [theme.breakpoints.down('xs')]: {
@@ -156,6 +157,12 @@ export const useStyles = makeStyles(theme => ({
             bottom: 0,
             right: 0,
             borderRadius: '10px 0 0'
+        },
+        '& div.turbo-sticker': {
+            position: 'absolute',
+            bottom: '10px',
+            right: 0,
+            borderRadius: '50px 0 0 50px'
         }
     },
     title: {

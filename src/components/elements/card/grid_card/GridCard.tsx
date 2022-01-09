@@ -21,6 +21,7 @@ import {ErrorCtx} from '@src/context';
 import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
 import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
+import {TurboSticker} from '@src/components/elements/card/turbo_sticker/TurboSticker';
 
 type CardItemProps = {
     isFetch?: boolean;
@@ -47,12 +48,12 @@ export const GridCard: FC<CardItemProps> = props => {
         slondo_services
     } = props;
 
-    const {top, turbo_sale} = slondo_services
+    const {top = false, turbo_sale = false} = slondo_services
         ? slondo_services.reduce<any>((keys, item) => {
               keys[item.service.name] = true;
               return keys;
           }, {})
-        : {top: false, turbo_sale: false};
+        : {};
 
     const isFavorite = true;
     const {t} = useTranslation();
@@ -151,6 +152,9 @@ export const GridCard: FC<CardItemProps> = props => {
                                         )}
                                     </div>
                                 </div>
+                                {turbo_sale && (
+                                    <TurboSticker className="turbo-sticker" />
+                                )}
                             </CardMedia>
                         )}
                         <CardActionArea>

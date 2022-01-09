@@ -31,19 +31,19 @@ export const useStyles = makeStyles(theme => ({
                 width: '25px',
                 height: '25px'
             },
-            [theme.breakpoints.between('480', '567')]: {
+            [theme.breakpoints.between(480, 567)]: {
                 top: '5px',
                 left: '44%'
             },
-            [theme.breakpoints.down('480')]: {
+            [theme.breakpoints.down(480)]: {
                 top: '5px',
                 left: '42%'
             },
-            [theme.breakpoints.down('430')]: {
+            [theme.breakpoints.down(430)]: {
                 left: '41%'
             },
 
-            [theme.breakpoints.down('360')]: {
+            [theme.breakpoints.down(360)]: {
                 left: '40.5%'
             },
             '&:hover': {
@@ -122,9 +122,7 @@ export const useStyles = makeStyles(theme => ({
                         }
                     },
                     '& h3': {
-                        display: '-webkit-box',
                         WebkitLineClamp: 2,
-                        overflow: 'hidden',
                         WebkitBoxOrient: 'vertical',
                         fontSize: '1.2rem',
                         lineHeight: '16px',
@@ -143,6 +141,12 @@ export const useStyles = makeStyles(theme => ({
             right: 0,
             bottom: 0,
             borderRadius: '10px 0'
+        },
+        '& div.turbo-sticker': {
+            position: 'absolute',
+            bottom: 'calc(50% - 13px)',
+            right: 0,
+            borderRadius: '50px 0 0 50px'
         }
     }
 }));

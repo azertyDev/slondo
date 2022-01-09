@@ -29,7 +29,9 @@ type SearchResultPropsType = {
     bottomAdv;
     posts;
     topPosts;
-    itemsCount: number;
+    postTotal: number;
+    topPostTotal: number;
+    switchShowAll: () => void;
     handlePagePagination: (_, page) => void;
 };
 
@@ -41,12 +43,16 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
         isNotFound,
         rightAdv,
         bottomAdv,
-        itemsCount,
+        postTotal,
+        topPostTotal,
+        switchShowAll,
         searchTermFromUrl,
         handlePagePagination
     } = props;
 
     const {locale, query} = useRouter();
+    const allTop = !!query.all_top;
+
     const {t} = useTranslation('filters');
     const [listView, setListView] = useState(false);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
@@ -172,102 +178,75 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                                 </Fragment>
                                             );
                                         })}
-                                        <Typography className="show-all">
-                                            {t('show_all')}
-                                        </Typography>
+                                        {topPostTotal > 4 && (
+                                            <Typography
+                                                className="show-all"
+                                                onClick={switchShowAll}
+                                            >
+                                                {t(
+                                                    allTop
+                                                        ? 'back_to_list'
+                                                        : 'show_all'
+                                                )}
+                                            </Typography>
+                                        )}
                                     </Grid>
                                 )}
                             </div>
-                            <div>
-                                <Box
-                                    mb={1}
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                >
-                                    <Typography variant="h5" component="p">
-                                        {t('common:allPosts')}
-                                    </Typography>
-                                </Box>
-                                <Grid container spacing={isMdDown ? 1 : 2}>
-                                    {posts.map((cardData, i) => {
-                                        const {
-                                            price,
-                                            sum,
-                                            usd,
-                                            currency,
-                                            ...other
-                                        } = cardData;
+                            {!allTop && (
+                                <div>
+                                    <Box
+                                        mb={1}
+                                        display="flex"
+                                        alignItems="center"
+                                        justifyContent="space-between"
+                                    >
+                                        <Typography variant="h5" component="p">
+                                            {t('common:allPosts')}
+                                        </Typography>
+                                    </Box>
+                                    <Grid container spacing={isMdDown ? 1 : 2}>
+                                        {posts.map((cardData, i) => {
+                                            const {
+                                                price,
+                                                sum,
+                                                usd,
+                                                currency,
+                                                ...other
+                                            } = cardData;
 
-                                        const {by_currency} = query;
+                                            const {by_currency} = query;
 
-                                        const isUE = by_currency === 'уе';
-                                        const isSum = by_currency === 'sum';
+                                            const isUE = by_currency === 'уе';
+                                            const isSum = by_currency === 'sum';
 
-                                        const curCurrency = isUE
-                                            ? {name: 'уе'}
-                                            : isSum
-                                            ? {name: 'sum'}
-                                            : currency;
+                                            const curCurrency = isUE
+                                                ? {name: 'уе'}
+                                                : isSum
+                                                ? {name: 'sum'}
+                                                : currency;
 
-                                        const isAdvSlot =
-                                            locale !== 'uz' &&
-                                            (i + 1) % 10 === 0;
+                                            const isAdvSlot =
+                                                locale !== 'uz' &&
+                                                (i + 1) % 10 === 0;
 
-                                        const isRightAdvSlot =
-                                            isMdDown && i === 6;
+                                            const isRightAdvSlot =
+                                                isMdDown && i === 6;
 
-                                        return (
-                                            <Fragment key={i}>
-                                                {isRightAdvSlot && (
-                                                    <Grid item xs={12}>
-                                                        <RightAdv
-                                                            mobile
-                                                            adv={rightAdv}
-                                                        />
-                                                    </Grid>
-                                                )}
-                                                {listView ? (
-                                                    <Grid item xs={12}>
-                                                        <ListCard
-                                                            {...other}
-                                                            currency={
-                                                                curCurrency
-                                                            }
-                                                            price={
-                                                                isUE
-                                                                    ? usd
-                                                                    : isSum
-                                                                    ? sum
-                                                                    : price
-                                                            }
-                                                        />
-                                                    </Grid>
-                                                ) : (
-                                                    <>
-                                                        {isAdvSlot && (
-                                                            <Grid
-                                                                item
-                                                                xs={6}
-                                                                md={4}
-                                                                lg={3}
-                                                            >
-                                                                <div className="content-adv-wrapper">
-                                                                    <ContentAdv />
-                                                                </div>
-                                                            </Grid>
-                                                        )}
-                                                        <Grid
-                                                            xs={6}
-                                                            md={4}
-                                                            lg={3}
-                                                            item
-                                                        >
-                                                            <GridCard
+                                            return (
+                                                <Fragment key={i}>
+                                                    {isRightAdvSlot && (
+                                                        <Grid item xs={12}>
+                                                            <RightAdv
+                                                                mobile
+                                                                adv={rightAdv}
+                                                            />
+                                                        </Grid>
+                                                    )}
+                                                    {listView ? (
+                                                        <Grid item xs={12}>
+                                                            <ListCard
                                                                 {...other}
-                                                                isFetch={
-                                                                    isFetch
-                                                                }
                                                                 currency={
                                                                     curCurrency
                                                                 }
@@ -280,29 +259,65 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
                                                                 }
                                                             />
                                                         </Grid>
-                                                    </>
-                                                )}
-                                            </Fragment>
-                                        );
-                                    })}
-                                </Grid>
-                                <div
-                                    style={{
-                                        width: '100%',
-                                        margin: '70px 0 20px'
-                                    }}
-                                >
-                                    <CustomPagination
-                                        totalItems={itemsCount}
-                                        itemsPerPage={POSTS_PER_PAGE}
-                                        handlePagePagination={
-                                            handlePagePagination
-                                        }
-                                    />
+                                                    ) : (
+                                                        <>
+                                                            {isAdvSlot && (
+                                                                <Grid
+                                                                    item
+                                                                    xs={6}
+                                                                    md={4}
+                                                                    lg={3}
+                                                                >
+                                                                    <div className="content-adv-wrapper">
+                                                                        <ContentAdv />
+                                                                    </div>
+                                                                </Grid>
+                                                            )}
+                                                            <Grid
+                                                                xs={6}
+                                                                md={4}
+                                                                lg={3}
+                                                                item
+                                                            >
+                                                                <GridCard
+                                                                    {...other}
+                                                                    isFetch={
+                                                                        isFetch
+                                                                    }
+                                                                    currency={
+                                                                        curCurrency
+                                                                    }
+                                                                    price={
+                                                                        isUE
+                                                                            ? usd
+                                                                            : isSum
+                                                                            ? sum
+                                                                            : price
+                                                                    }
+                                                                />
+                                                            </Grid>
+                                                        </>
+                                                    )}
+                                                </Fragment>
+                                            );
+                                        })}
+                                    </Grid>
                                 </div>
-                            </div>
+                            )}
                         </>
                     )}
+                    <div
+                        style={{
+                            width: '100%',
+                            margin: '70px 0 20px'
+                        }}
+                    >
+                        <CustomPagination
+                            totalItems={allTop ? topPostTotal : postTotal}
+                            itemsPerPage={POSTS_PER_PAGE}
+                            handlePagePagination={handlePagePagination}
+                        />
+                    </div>
                     <BottomAdv adv={bottomAdv} />
                 </Grid>
                 <Hidden mdDown>

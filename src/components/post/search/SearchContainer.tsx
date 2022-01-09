@@ -51,7 +51,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
     } = props;
 
     const {locale, asPath, query, push} = useRouter();
-    const {path, gclid, by_currency = null, ...urlParams} = query;
+    const {path, gclid, by_currency = null, all_top, ...urlParams} = query;
     const [queryLoc] = path as string[];
 
     const {region = null, city = null} = getLocationByURL(queryLoc, regions);
@@ -163,8 +163,11 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
 
     const [posts, setPosts] = useState([]);
     const [topPosts, setTopPosts] = useState([]);
+
+    const [postTotal, setPostTotal] = useState(0);
+    const [topPostTotal, setTopPostTotal] = useState(0);
+
     const [isFetch, setIsFetch] = useState(false);
-    const [itemsCount, setItemsCount] = useState(0);
     const [isNotFound, setIsNotFound] = useState(false);
     const [filtersState, setFilters] = useState(filters);
 
@@ -188,7 +191,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
     };
 
     async function onSubmit() {
-        await generateUrl(values);
+        await generateUrl({...values, all_top});
         handleModalClose();
     }
 
@@ -335,26 +338,32 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
 
             setIsFetch(true);
 
-            const [posts, topPosts] = await Promise.all([
-                userAPI.getPostsByFilters(query),
-                userAPI.getPostsByFilters({
+            const {data, total} = await userAPI.getPostsByFilters(query);
+
+            const {data: topData, total: topTotal} =
+                await userAPI.getPostsByFilters({
                     ...query,
-                    itemsPerPage: TOP_POSTS_PER_PAGE,
-                    is_top: 1
-                })
-            ]);
+                    is_top: 1,
+                    itemsPerPage: all_top ? POSTS_PER_PAGE : TOP_POSTS_PER_PAGE
+                });
 
-            setIsFetch(false);
-
-            if (posts.total) {
-                setPosts(posts.data);
-                setTopPosts(topPosts.data);
-                setItemsCount(posts.total);
+            if (total) {
+                setPosts(data);
+                setPostTotal(total);
                 isNotFound && setIsNotFound(false);
             } else {
-                setItemsCount(0);
+                setPostTotal(0);
                 setIsNotFound(true);
             }
+
+            if (topTotal) {
+                setTopPosts(topData);
+                setTopPostTotal(topTotal);
+            } else {
+                setTopPostTotal(0);
+            }
+
+            setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
             setErrorMsg(e.message);
@@ -375,6 +384,12 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
         } catch (e) {
             setErrorMsg(e.message);
         }
+    };
+
+    const switchShowAll = () => {
+        const vals = {...values, all_top: !all_top, page: 1};
+        setValues(vals);
+        isMobileView && generateUrl(vals);
     };
 
     useEffect(() => {
@@ -426,14 +441,16 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                             />
                         )}
                         <SearchResult
-                            posts={posts}
-                            topPosts={topPosts}
                             isFetch={isFetch}
                             rightAdv={right}
                             bottomAdv={bottom}
                             isNotFound={isNotFound}
-                            itemsCount={itemsCount}
+                            posts={posts}
+                            topPosts={topPosts}
+                            postTotal={postTotal}
+                            topPostTotal={topPostTotal}
                             searchTermFromUrl={searchTermFromUrl}
+                            switchShowAll={switchShowAll}
                             handlePagePagination={handlePagePagination}
                         />
                         {!!seoTxt && <SEOTextComponent text={seoTxt} />}
