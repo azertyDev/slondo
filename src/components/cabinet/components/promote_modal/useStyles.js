@@ -29,15 +29,6 @@ export const useStyles = makeStyles(theme => ({
         },
         '& div.content-wrapper': {
             padding: '20px',
-            '& div.top': {
-                background: 'rgba(255, 168, 0, 0.15)'
-            },
-            '& div.turbo_sale': {
-                background: '#FFF2F2'
-            },
-            '& div.raise_tape': {
-                background: 'rgba(40, 104, 244, 0.05)'
-            },
             '& div.selected-service-wrapper': {
                 width: '100%',
                 paddingLeft: '5px',

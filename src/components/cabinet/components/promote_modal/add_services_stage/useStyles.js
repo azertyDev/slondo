@@ -12,6 +12,9 @@ export const useStyles = makeStyles(theme => ({
                     paddingLeft: '16px',
                     paddingRight: '32px'
                 },
+                '& div.MuiSelect-root:focus': {
+                    borderRadius: '8px'
+                },
                 '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
                     {
                         borderColor: 'rgba(0, 0, 0, 0.23)',
@@ -32,12 +35,27 @@ export const useStyles = makeStyles(theme => ({
             minHeight: '260px',
             marginBottom: '15px',
             background: '#f9f9f9',
+            borderRadius: '8px',
+            '&.top': {
+                background:
+                    'linear-gradient(90.62deg, rgba(243, 133, 34, 0.05) 0.56%, rgba(255, 184, 0, 0.05) 99.49%)'
+            },
+            '&.turbo_sale': {
+                background: '#FFF2F2'
+            },
+            '&.raise_tape': {
+                background: 'rgba(40, 104, 244, 0.05)'
+            },
             '& div.description': {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
-                padding: '10px 15px',
+                padding: '10px',
+                paddingLeft: '80px',
+                [theme.breakpoints.down('sm')]: {
+                    paddingLeft: '10px',
+                },
                 '& div.service-header': {
                     marginBottom: '15px',
                     '& > svg': {
@@ -48,9 +66,27 @@ export const useStyles = makeStyles(theme => ({
                     }
                 },
                 '& > p': {
-                    fontSize: '.8rem',
-                    lineHeight: '17px',
+                    fontSize: '.85rem',
+                    lineHeight: '18px',
                     textAlign: 'start'
+                },
+                '&.top, &.turbo_sale, &.raise_tape': {
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '115px',
+                    backgroundPosition: '-45px center',
+                    [theme.breakpoints.down('sm')]: {
+                        backgroundPosition: 'bottom',
+                        backgroundSize: 'auto',
+                    }
+                },
+                '&.top': {
+                    backgroundImage: 'url(/img/services/top_frame.svg)'
+                },
+                '&.turbo_sale': {
+                    backgroundImage: 'url(/img/services/turbo_frame.svg)'
+                },
+                '&.raise_tape': {
+                    backgroundImage: 'url(/img/services/raise_tape_frame.svg)'
                 }
             },
             '& div.default-bg, & div.top-bg, & div.turbo_sale-bg, & div.raise_tape-bg':
@@ -59,6 +95,12 @@ export const useStyles = makeStyles(theme => ({
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat'
                 },
+            '& div.service-bg': {
+                marginTop: '75px',
+                [theme.breakpoints.down('sm')]: {
+                    marginTop: 0
+                }
+            },
             '& div.default-bg': {
                 backgroundImage: 'url(/img/services/default.png)'
             },

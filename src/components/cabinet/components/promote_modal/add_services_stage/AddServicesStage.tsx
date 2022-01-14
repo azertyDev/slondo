@@ -4,6 +4,7 @@ import {
     Box,
     FormControl,
     Grid,
+    Hidden,
     MenuItem,
     Select,
     Typography
@@ -139,7 +140,7 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                     container
                                     xs={12}
                                     sm={3}
-                                    justifyContent='center'
+                                    justifyContent="center"
                                     alignItems="center"
                                     className="price-wrapper"
                                 >
@@ -151,11 +152,7 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                             </>
                         )}
                         {selectedService.name && (
-                            <Grid
-                                item
-                                xs={12}
-                                sm={2}
-                            >
+                            <Grid item xs={12} sm={2}>
                                 <CustomButton
                                     onClick={handleAddService}
                                     className="select-service"
@@ -167,8 +164,16 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                     </Grid>
                 )}
                 {servicesExist && (
-                    <Grid container className="description-wrapper">
-                        <Grid item xs={12} sm={5} className="description">
+                    <Grid
+                        container
+                        className={`description-wrapper ${selectedServiceName}`}
+                    >
+                        <Grid
+                            item
+                            xs={12}
+                            sm={5}
+                            className={`description ${selectedServiceName}`}
+                        >
                             <Box
                                 display="flex"
                                 alignItems="center"
@@ -187,12 +192,14 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                 )}
                             </Typography>
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={7}
-                            className={`${selectedServiceName}-bg`}
-                        />
+                        <Hidden smDown>
+                            <Grid
+                                item
+                                sm={7}
+                                xs={12}
+                                className={`service-bg ${selectedServiceName}-bg`}
+                            />
+                        </Hidden>
                     </Grid>
                 )}
             </>

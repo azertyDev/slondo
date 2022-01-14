@@ -8,11 +8,7 @@ export const TopSticker: FC<{className?: string}> = ({className = ''}) => {
     const classes = useStyles();
     return (
         <div className={`${classes.root} ${className}`}>
-            <Typography
-                style={{color: '#fff', fontSize: '.75rem', fontWeight: 700}}
-            >
-                {t('top')}
-            </Typography>
+            <Typography>{t('top')}</Typography>
         </div>
     );
 };

@@ -300,8 +300,8 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             {showTop && (
                 <Box>
                     <Typography
-                        className="sell-faster"
                         variant="subtitle1"
+                        className="sell-faster"
                         style={{fontWeight: 700}}
                     >
                         {t('sell_faster')}
@@ -313,6 +313,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             )}
         </>
     );
+
     const stage = (() => {
         switch (stageStatus) {
             case 'service':
@@ -360,9 +361,9 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                             className={`selected-service ${name}`}
                         >
                             <Box
-                                className="service-name"
                                 display="flex"
                                 alignItems="center"
+                                className="service-name"
                             >
                                 {serviceIcons[name]}
                                 <Typography>{t(name)}</Typography>
@@ -380,8 +381,8 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                                 <Typography>{t('filters:sum')}</Typography>
                             </Box>
                             <Box
-                                className="added"
                                 display="flex"
+                                className="added"
                                 alignItems="center"
                             >
                                 <span>{t('added')}</span>

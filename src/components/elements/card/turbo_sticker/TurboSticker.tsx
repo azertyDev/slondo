@@ -10,11 +10,7 @@ export const TurboSticker: FC<{className?: string}> = ({className = ''}) => {
     return (
         <div className={`${classes.root} ${className}`}>
             <TurboRocket />
-            <Typography
-                style={{color: '#fff', fontSize: '.75rem', fontWeight: 700}}
-            >
-                {t('turbo')}
-            </Typography>
+            <Typography>{t('turbo')}</Typography>
         </div>
     );
 };

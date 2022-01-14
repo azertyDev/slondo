@@ -71,7 +71,6 @@ export const useStyles = makeStyles(theme => ({
                     '& > div.post_type': {
                         display: 'inline-flex',
                         '& > p': {
-                            // lineHeight: '1.2',
                             letterSpacing: '0.4px',
                             borderRadius: '3px',
                             padding: '2px 5px',
@@ -98,11 +97,6 @@ export const useStyles = makeStyles(theme => ({
                                 background: 'rgba(255, 255, 255, 0.6)',
                                 borderRadius: '100%',
                                 marginRight: '5px'
-                                // '& > svg': {
-                                //     '& > path': {
-                                //         fill: '#838383'
-                                //     }
-                                // }
                             }
                         }
                     }
