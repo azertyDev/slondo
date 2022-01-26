@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -12,21 +12,18 @@ export const useStyles = makeStyles(() => ({
         '& h2.title': {
             marginBottom: '15px'
         },
-        '& div.slider': {
+        '& div.react-multi-carousel-list': {
             margin: '0 -6px',
-            '& div.slick-slide': {
+            '& li.slide-item': {
                 padding: '14px 7px',
-                marginTop: '-7px',
+                marginTop: '-7px'
             },
-            '& button.slick-prev': {
-                left: '-5px',
+            '& button.react-multiple-carousel__arrow--left': {
+                left: 0
             },
-            '& button.slick-next': {
-                right: '-5px',
-            },
-            '& button.slick-disabled': {
-                display: 'none',
-            },
-        },
-    },
+            '& button.react-multiple-carousel__arrow--right': {
+                right: 0
+            }
+        }
+    }
 }));

@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         border: 0,
         zIndex: 20,
@@ -31,7 +31,8 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px 0px 0px 10px',
-                    backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/default.png'})`,
+                    backgroundImage: ({cardData}) =>
+                        `url(${cardData.image ?? '/img/default.png'})`,
                     '& > span.MuiTypography-caption': {
                         position: 'absolute',
                         top: '3px',
@@ -72,12 +73,15 @@ export const useStyles = makeStyles((theme) => ({
                         padding: '10px'
                     },
                     '& h3': {
+                        maxWidth: '350px',
                         fontSize: theme.typography.h6.fontSize,
                         [theme.breakpoints.down('lg')]: {
-                            fontSize: theme.typography.pxToRem(16)
+                            fontSize: '1rem',
+                            maxWidth: '274px'
                         },
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: theme.typography.pxToRem(14)
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: '.875rem',
+                            maxWidth: '180px'
                         }
                     }
                 },

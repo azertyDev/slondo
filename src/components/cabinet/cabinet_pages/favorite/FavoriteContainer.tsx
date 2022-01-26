@@ -26,13 +26,13 @@ export const FavoriteContainer: FC = () => {
     const [isFetch, setIsFetch] = useState(false);
     const [favoritePostData, setFavoritePostData] = useState(initialFavoriteState);
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
-    const [postId, setPostId] = useState<number>(null);
+    const [postId, setPostId] = useState(null);
     const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
 
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
-    const handleOpenModal = (id: number) => () => {
+    const handleOpenModal = (id: string) => () => {
         handleModalOpen();
         setPostId(id);
     };

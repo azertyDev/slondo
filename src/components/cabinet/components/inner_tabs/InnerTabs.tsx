@@ -1,5 +1,12 @@
 import {FC} from 'react';
-import {Box, CircularProgress, Grid, Tab, Tabs, Typography} from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    Grid,
+    Tab,
+    Tabs,
+    Typography
+} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -7,18 +14,19 @@ import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
 type CabinetModalPropsType = {
-    isFetch: boolean,
-    handleSafeDeal?: (post, perform?: boolean) => () => void,
-    onChange,
-    fstTabData,
-    secTabData,
-    childTabValue,
-    handleDetailedOpen,
-    handleSettingsOpen?,
-    handleNotificationsOpen
+    isFetch: boolean;
+    onChange;
+    fstTabData;
+    secTabData;
+    childTabValue;
+    handleDetailedOpen;
+    handleSettingsOpen?;
+    handleNotificationsOpen;
+    handlePromoteOpen?: (post) => () => void;
+    handleSafeDeal?: (post, perform?: boolean) => () => void;
 };
 
-export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
+export const InnerTabs: FC<CabinetModalPropsType> = props => {
     const {
         isFetch,
         onChange,
@@ -26,6 +34,7 @@ export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
         secTabData,
         childTabValue,
         handleSafeDeal,
+        handlePromoteOpen,
         handleDetailedOpen,
         handleSettingsOpen,
         handleNotificationsOpen
@@ -59,68 +68,104 @@ export const InnerTabs: FC<CabinetModalPropsType> = (props) => {
                 />
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch
-                    ? <CircularProgress/>
-                    : fstTabData.posts.length === 0
-                        ? fstTabData.emptyPage
-                        : fstTabData.posts.map((data) => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCardWrapper
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    handleSettingsOpen={handleSettingsOpen ? handleSettingsOpen(data) : null}
-                                />
-                                {!!handleSafeDeal && (
-                                    <Box mt={1}>
-                                        <Grid container spacing={1}>
-                                            <Grid item xs={12} sm={9}>
-                                                <CustomButton
-                                                    color='secondary'
-                                                    classes={{
-                                                        root: classes.button
-                                                    }}
-                                                    onClick={handleSafeDeal(data, true)}
+                {isFetch ? (
+                    <CircularProgress />
+                ) : fstTabData.posts.length === 0 ? (
+                    fstTabData.emptyPage
+                ) : (
+                    fstTabData.posts.map(data => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCardWrapper
+                                cardData={data}
+                                handlePromoteOpen={
+                                    handlePromoteOpen
+                                        ? handlePromoteOpen(data)
+                                        : null
+                                }
+                                handleDetailedOpen={
+                                    handleDetailedOpen
+                                        ? handleDetailedOpen(data)
+                                        : null
+                                }
+                                handleNotificationsOpen={
+                                    handleNotificationsOpen
+                                        ? handleNotificationsOpen(data)
+                                        : null
+                                }
+                                handleSettingsOpen={
+                                    handleSettingsOpen
+                                        ? handleSettingsOpen(data)
+                                        : null
+                                }
+                            />
+                            {!!handleSafeDeal && (
+                                <Box mt={1}>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12} sm={9}>
+                                            <CustomButton
+                                                color="secondary"
+                                                classes={{
+                                                    root: classes.button
+                                                }}
+                                                onClick={handleSafeDeal(
+                                                    data,
+                                                    true
+                                                )}
+                                            >
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    component="p"
                                                 >
-                                                    <Typography variant='subtitle1' component='p'>
-                                                        {t('completePurchase')}
-                                                    </Typography>
-                                                </CustomButton>
-                                            </Grid>
-                                            <Grid item xs={12} sm={3}>
-                                                <CustomButton
-                                                    color='silver'
-                                                    classes={{
-                                                        root: classes.button
-                                                    }}
-                                                    onClick={handleSafeDeal(data)}
-                                                >
-                                                    <Typography variant='subtitle1' component='p'>
-                                                        {t('common:reject')}
-                                                    </Typography>
-                                                </CustomButton>
-                                            </Grid>
+                                                    {t('completePurchase')}
+                                                </Typography>
+                                            </CustomButton>
                                         </Grid>
-                                    </Box>
-                                )}
-                            </Box>
-                        ))}
+                                        <Grid item xs={12} sm={3}>
+                                            <CustomButton
+                                                color="silver"
+                                                classes={{
+                                                    root: classes.button
+                                                }}
+                                                onClick={handleSafeDeal(data)}
+                                            >
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    component="p"
+                                                >
+                                                    {t('common:reject')}
+                                                </Typography>
+                                            </CustomButton>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            )}
+                        </Box>
+                    ))
+                )}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch
-                    ? <CircularProgress/>
-                    : secTabData.posts.length === 0
-                        ? secTabData.emptyPage
-                        : secTabData.posts.map((data) => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCardWrapper
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    handleSettingsOpen={handleSettingsOpen ? handleSettingsOpen(data) : null}
-                                />
-                            </Box>
-                        ))}
+                {isFetch ? (
+                    <CircularProgress />
+                ) : secTabData.posts.length === 0 ? (
+                    secTabData.emptyPage
+                ) : (
+                    secTabData.posts.map(data => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCardWrapper
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen(data)}
+                                handleNotificationsOpen={handleNotificationsOpen(
+                                    data
+                                )}
+                                handleSettingsOpen={
+                                    handleSettingsOpen
+                                        ? handleSettingsOpen(data)
+                                        : null
+                                }
+                            />
+                        </Box>
+                    ))
+                )}
             </CustomTabPanel>
         </>
     );

@@ -1,11 +1,12 @@
 import {FC, useContext, useState} from 'react';
-import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
 import {InitPostsType, DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {ErrorCtx} from '@src/context';
 import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
 import {useTranslation} from 'next-i18next';
 import {ProfilePageProps} from '@src/components/user_profile/UserProfile';
+import {usePagination} from '@src/hooks';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -19,35 +20,68 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
     const [isFetch, setIsFetch] = useState(false);
 
     const [posts, setPosts] = useState(initUserPostsState);
-    const [postsArch, setPostsArch] = useState(initUserPostsState);
+    const [archPosts, setArchPosts] = useState(initUserPostsState);
 
-    const [auctions, setAuctions] = useState(initUserPostsState);
-    const [auctionsArch, setAuctionsArch] = useState(initUserPostsState);
+    const [safePosts, setSafePosts] = useState(initUserPostsState);
+    const [safeArchPosts, setArchSafePosts] = useState(initUserPostsState);
 
-    const fetchUserPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
-        try {
-            const type = secondTab ? 'auc' : 'post';
-            const archive = secondSubTab ? 1 : 0;
+    const getPosts =
+        (isSafeShop = false) =>
+        async (page = 1, secondSubTab = false) => {
+            try {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getUserPosts({
+                    user_id,
+                    type: 'post',
+                    archive: 0,
+                    page,
+                    secure: isSafeShop ? 1 : 0,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
 
-            setIsFetch(true);
-            const {data, total} = await userAPI.getUserPosts(user_id, type, archive, page);
-
-            unstable_batchedUpdates(async () => {
                 setIsFetch(false);
-                secondTab
-                    ? secondSubTab ? setAuctionsArch({data, total}) : setAuctions({data, total})
-                    : secondSubTab ? setPostsArch({data, total}) : setPosts({data, total});
-            });
-        } catch (e) {
-            unstable_batchedUpdates(async () => {
+                isSafeShop
+                    ? setSafePosts({data, total})
+                    : setPosts({data, total});
+            } catch (e) {
                 setIsFetch(false);
                 setErrorMsg(e.message);
-            });
-        }
-    };
+            }
+        };
 
-    const firstTabFetch = fetchUserPosts();
-    const secondTabFetch = fetchUserPosts(true);
+    const getArchPosts =
+        (isSafeShop = false) =>
+        async (page = 1) => {
+            try {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getUserPosts({
+                    user_id,
+                    type: 'post',
+                    archive: 1,
+                    page,
+                    secure: isSafeShop ? 1 : 0,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
+
+                setIsFetch(false);
+                isSafeShop
+                    ? setArchSafePosts({data, total})
+                    : setArchPosts({data, total});
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
+
+    const [postPagination, postPage] = usePagination(getPosts());
+
+    const [archPostPagination, archPostPage] = usePagination(getArchPosts());
+
+    const [safePostPagination, safePostPage] = usePagination(getPosts(true));
+
+    const [safeArchPostPagination, safeArchPostPage] = usePagination(
+        getArchPosts(true)
+    );
 
     const tabsData: TabsType<DoubleTabType> = {
         firstTab: {
@@ -60,8 +94,8 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
                     emptyPage: null
                 },
                 innerSecondTab: {
-                    posts: postsArch.data,
-                    total: postsArch.total,
+                    posts: archPosts.data,
+                    total: archPosts.total,
                     emptyPage: null
                 }
             }
@@ -71,13 +105,13 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
             title: t('securePosts'),
             innerTabsData: {
                 innerFirstTab: {
-                    posts: auctions.data,
-                    total: auctions.total,
+                    posts: [],
+                    total: 0,
                     emptyPage: null
                 },
                 innerSecondTab: {
-                    total: auctionsArch.total,
-                    posts: auctionsArch.data,
+                    posts: [],
+                    total: 0,
                     emptyPage: null
                 }
             }
@@ -88,10 +122,16 @@ export const UserPosts: FC<ProfilePageProps> = ({user_id}) => {
         <DoubleTabs
             isFetch={isFetch}
             tabsData={tabsData}
-            fetchFirstTabPosts={firstTabFetch}
+            pages={[postPage, archPostPage, safePostPage, safeArchPostPage]}
+            handlePromoteOpen={() => null}
             handleDetailedOpen={() => null}
             handleNotificationsOpen={() => null}
-            fetchSecondTabPosts={secondTabFetch}
+            paginationHandlers={[
+                postPagination,
+                archPostPagination,
+                safePostPagination,
+                safeArchPostPagination
+            ]}
         />
     );
 };

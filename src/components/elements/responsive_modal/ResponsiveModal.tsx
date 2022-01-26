@@ -5,15 +5,15 @@ import {useTheme} from '@material-ui/core/styles';
 import {useStyles} from './useStyles';
 
 type ResponsiveDialogPropsType = {
-    openDialog: boolean,
-    keepMounted?: boolean,
-    handleCloseDialog: () => void,
-    maxWidth?,
-    fullWidth?: boolean
-    fullScreen?: boolean
+    openDialog: boolean;
+    keepMounted?: boolean;
+    handleCloseDialog: () => void;
+    maxWidth?;
+    fullWidth?: boolean;
+    fullScreen?: boolean;
 };
 
-export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
+export const ResponsiveModal: FC<ResponsiveDialogPropsType> = props => {
     const {
         keepMounted,
         openDialog,

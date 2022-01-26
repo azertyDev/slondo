@@ -1,43 +1,55 @@
-import Script from "next/script";
+import Script from 'next/script';
 import {browser} from 'process';
 import {useEffect} from 'react';
 import theme from '@src/theme';
-import {userAPI} from "@src/api/api";
+import {userAPI} from '@src/api/api';
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import {AuthCtx, ErrorCtx, SearchCtx, ExitPromptCtx, UserLocationCtx, SocketCtx} from "@src/context";
+import {
+    AuthCtx,
+    ErrorCtx,
+    SearchCtx,
+    ExitPromptCtx,
+    UserLocationCtx,
+    SocketCtx
+} from '@src/context';
 import {
     useAuth,
     useError,
     useSearch,
     useSocket,
     useUserLocation
-} from "@src/hooks";
-import {useExitPrompt} from "@src/hooks/useExitPrompt";
-import {DEV_URL, PRODUCTION_URL} from "@src/constants";
+} from '@src/hooks';
+import {useExitPrompt} from '@src/hooks/useExitPrompt';
+import {DEV_URL, PRODUCTION_URL, TESTB_URL} from '@src/constants';
 
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
-import "../slick.min.css";
+import '../slick.min.css';
+import {cookieOpts, cookies} from '@src/helpers';
 
 const socketDev = `${DEV_URL}:8005`;
+const socketTestb = `${TESTB_URL}:8005`;
 const socketProduction = `${PRODUCTION_URL}:8005`;
 
-const App = (props) => {
+const userObsChannel = 'user-observer-channel:App\\Events\\UserObserverEvent';
+
+const App = props => {
     const {Component, pageProps} = props;
 
     const auth = useAuth();
+    const user = auth.user;
+
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketProduction);
+    const socket = useSocket(socketTestb);
     const userLocation = useUserLocation();
     const showExitPrompt = useExitPrompt(false);
 
-    const user = auth.user;
-
     if (browser) {
         const regions = localStorage.getItem('regions');
-        !regions && userAPI.getLocations()
-            .then(regs => {
+
+        !regions &&
+            userAPI.getLocations().then(regs => {
                 localStorage.setItem('regions', JSON.stringify(regs));
             });
     }
@@ -49,12 +61,19 @@ const App = (props) => {
     }, []);
 
     useEffect(() => {
-        if (browser && socket) {
+        if (browser && socket && user.id !== null) {
             socket.on('connect', () => {
-                if (user.id !== null) {
-                    socket.emit('user_connected', user.id);
-                }
+                socket.emit('user_connected', user.id);
             });
+
+            socket.on(userObsChannel, data => {
+                const {balance, ...observer} = data;
+                const userData = {...user, balance, observer};
+
+                auth.addUser(userData);
+                cookies.set('slondo_user', userData, cookieOpts);
+            });
+
             return () => {
                 socket.off('connect', () => {
                     socket.emit('disconnect');
@@ -71,10 +90,10 @@ const App = (props) => {
                         <UserLocationCtx.Provider value={userLocation}>
                             <SearchCtx.Provider value={search}>
                                 <ThemeProvider theme={theme}>
-                                    <CssBaseline/>
+                                    <CssBaseline />
                                     <Script
-                                        id='gtag-init'
-                                        strategy='afterInteractive'
+                                        id="gtag-init"
+                                        strategy="afterInteractive"
                                         dangerouslySetInnerHTML={{
                                             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                                             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -85,15 +104,14 @@ const App = (props) => {
                                     />
                                     <noscript
                                         dangerouslySetInnerHTML={{
-                                            __html:
-                                                `<iframe
-                                                    height="0"
-                                                    width="0"
-                                                    style="display:none;visibility:hidden"
-                                                    src="https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC" 
+                                            __html: `<iframe
+                                                    height='0'
+                                                    width='0'
+                                                    style='display:none;visibility:hidden'
+                                                    src='https://www.googletagmanager.com/ns.html?id=GTM-MPMDTGC'
                                                 />`
-                                        }}>
-                                    </noscript>
+                                        }}
+                                    />
                                     <Component {...pageProps} />
                                 </ThemeProvider>
                             </SearchCtx.Provider>

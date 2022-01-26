@@ -235,14 +235,13 @@ export const MainMenu: FC<MainMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
-                                disabled
                                 disableGutters
-                                selected={page === 'paidServices'}
-                                onClick={handleListItemClick('paidServices')}
+                                selected={page === 'paid_services'}
+                                onClick={handleListItemClick('paid_services')}
                                 classes={{selected: classes.selected}}
                             >
                                 <WalletIcon/>
-                                <ListItemText primary={t('paidServices')}/>
+                                <ListItemText primary={t('paid_services')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>

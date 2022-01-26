@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         border: 0,
         height: '176px',
@@ -31,19 +31,19 @@ export const useStyles = makeStyles((theme) => ({
                 width: '25px',
                 height: '25px'
             },
-            [theme.breakpoints.between('480', '567')]: {
+            [theme.breakpoints.between(480, 567)]: {
                 top: '5px',
                 left: '44%'
             },
-            [theme.breakpoints.down('480')]: {
+            [theme.breakpoints.down(480)]: {
                 top: '5px',
                 left: '42%'
             },
-            [theme.breakpoints.down('430')]: {
+            [theme.breakpoints.down(430)]: {
                 left: '41%'
             },
 
-            [theme.breakpoints.down('360')]: {
+            [theme.breakpoints.down(360)]: {
                 left: '40.5%'
             },
             '&:hover': {
@@ -63,7 +63,8 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px 0px 0px 10px',
-                    backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/default.png'})`,
+                    backgroundImage: ({image}) =>
+                        `url(${image ?? '/img/default.png'})`,
                     '& > span.MuiTypography-caption': {
                         position: 'absolute',
                         top: '3px',
@@ -115,14 +116,13 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     },
                     '& p.price': {
+                        paddingBottom: '15px',
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '1.2rem'
                         }
                     },
                     '& h3': {
-                        display: '-webkit-box',
                         WebkitLineClamp: 2,
-                        overflow: 'hidden',
                         WebkitBoxOrient: 'vertical',
                         fontSize: '1.2rem',
                         lineHeight: '16px',
@@ -135,6 +135,18 @@ export const useStyles = makeStyles((theme) => ({
                     color: '#BDBDBD'
                 }
             }
+        },
+        '& div.top-sticker': {
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            borderRadius: '10px 0'
+        },
+        '& div.turbo-sticker': {
+            position: 'absolute',
+            bottom: 'calc(50% - 13px)',
+            right: 0,
+            borderRadius: '50px 0 0 50px'
         }
     }
 }));

@@ -62,7 +62,8 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     if (isSingleField) {
                         vals[k] = filters[k].find(v => v.id === +urlParams[k]);
                     } else {
-                        vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
+                        vals[k] = filters[k]
+                            .filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
                 } else if ((isBooleanField || isStringField) && (!values[k] || values[k] === '')) {
                     vals[k] = isBooleanField || urlParams[k];

@@ -1,10 +1,10 @@
 import {FC, useContext} from 'react';
-import {RegularParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/regular_params/RegularParams';
-import {CarParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/car_params/CarParams';
-import {EstateParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/estate_params/EstateParams';
-import {TransportParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/transport_params/TransportParams';
-import {JobParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/job_params/JobParams';
-import {ElectronicsParams} from '@src/components/post/create_post/third_step/third_form/categories_forms/electronics_params/ElectronicsParams';
+import {RegularParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/regular_params/RegularParams';
+import {CarParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/car_params/CarParams';
+import {EstateParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/estate_params/EstateParams';
+import {TransportParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/transport_params/TransportParams';
+import {JobParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/job_params/JobParams';
+import {ElectronicsParams} from '@root/src/components/post/create_post/third_step/third_form/categories_forms/electronics_params/ElectronicsParams';
 import {dotRegEx} from "@src/common_data/reg_exs";
 import {AuthCtx} from "@src/context";
 import {useStyles} from './useStyles';

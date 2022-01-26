@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
     root: {
         position: 'relative',
         height: '345px',
@@ -52,6 +52,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& > div.card-media': {
+                position: 'relative',
                 backgroundColor: '#f2f2f2',
                 height: '240px',
                 [theme.breakpoints.down('xs')]: {
@@ -70,16 +71,14 @@ export const useStyles = makeStyles((theme) => ({
                     '& > div.post_type': {
                         display: 'inline-flex',
                         '& > p': {
-                            // lineHeight: '1.2',
                             letterSpacing: '0.4px',
                             borderRadius: '3px',
                             padding: '2px 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: ({ads_type}) => (
+                            backgroundColor: ({ads_type}) =>
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
-                                    : 'rgba(242, 153, 74, .65)'
-                            ),
+                                    : 'rgba(242, 153, 74, .65)',
                             [theme.breakpoints.down('xs')]: {
                                 fontSize: '0.75rem'
                             }
@@ -98,11 +97,6 @@ export const useStyles = makeStyles((theme) => ({
                                 background: 'rgba(255, 255, 255, 0.6)',
                                 borderRadius: '100%',
                                 marginRight: '5px'
-                                // '& > svg': {
-                                //     '& > path': {
-                                //         fill: '#838383'
-                                //     }
-                                // }
                             }
                         }
                     }
@@ -151,6 +145,18 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('xs')]: {
                 fontSize: '0.875rem'
             }
+        },
+        '& div.top-sticker': {
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            borderRadius: '10px 0 0'
+        },
+        '& div.turbo-sticker': {
+            position: 'absolute',
+            bottom: '10px',
+            right: 0,
+            borderRadius: '50px 0 0 50px'
         }
     },
     title: {

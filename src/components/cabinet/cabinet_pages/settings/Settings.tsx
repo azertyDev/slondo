@@ -15,7 +15,7 @@ import {ChangePasswordModal} from "./change_password_modal/ChangePasswordModal";
 import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import LockIcon from "@material-ui/icons/Lock";
-import {AvailableDays} from "@src/components/post/create_post/third_step/first_form/available_days/AvailableDays";
+import {AvailableDays} from "@root/src/components/post/create_post/third_step/first_form/available_days/AvailableDays";
 import {useStyles, SettingsButton} from "./useStyles";
 
 export const Settings: FC = () => {
@@ -29,7 +29,8 @@ export const Settings: FC = () => {
         avatar: user.avatar,
         available_start_time: user.available_start_time ?? '09:00',
         available_end_time: user.available_end_time ?? '18:00',
-        available_days: user.available_days ?? [...WEEK_DAYS]
+        available_days: user.available_days ?? [...WEEK_DAYS],
+        balance: 0
     };
 
     const [isFetch, setIsFetch] = useState(false);

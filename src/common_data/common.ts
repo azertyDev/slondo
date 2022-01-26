@@ -1,31 +1,5 @@
 import {CardDataType} from '@root/interfaces/CardData';
 
-export const cabinetURLs = [
-    '/cabinet/main',
-    '/cabinet/rating',
-    '/cabinet/subs',
-    '/cabinet/banned',
-    '/cabinet/posts',
-    '/cabinet/auctions',
-    '/cabinet/purchases',
-    '/cabinet/favorite',
-    '/cabinet/notifications',
-    '/cabinet/messages',
-    '/cabinet/safe_deal',
-    '/cabinet/settings',
-    '/uz/cabinet/main',
-    '/uz/cabinet/rating',
-    '/uz/cabinet/subs',
-    '/uz/cabinet/banned',
-    '/uz/cabinet/posts',
-    '/uz/cabinet/auctions',
-    '/uz/cabinet/purchases',
-    '/uz/cabinet/favorite',
-    '/uz/cabinet/notifications',
-    '/uz/cabinet/safe_deal',
-    '/uz/cabinet/settings'
-];
-
 export const months = [
     'january',
     'february',
@@ -109,5 +83,6 @@ export const initCardData: CardDataType = {
     status: '',
     subscribed: false,
     title: '',
-    user_id: null
+    user_id: null,
+    slondo_services: []
 };

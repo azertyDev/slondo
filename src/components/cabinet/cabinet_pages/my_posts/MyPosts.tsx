@@ -1,18 +1,19 @@
 import {FC, useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
 import {DoubleTabType, InitPostsType, TabsType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {INNER_URLS, ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
-import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
-import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
-import {ErrorCtx} from "@src/context";
+import {NotificationModal} from '@src/components/cabinet/components/notification_modal/NotificationModal';
+import {SettingsModal} from '@src/components/cabinet/components/settings_modal/SettingsModal';
+import {ErrorCtx} from '@src/context';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {initCardData} from "@src/common_data/common";
-import {DoubleTabs} from "@src/components/cabinet/components/tabs_content/DoubleTabs";
+import {initCardData} from '@src/common_data/common';
+import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
+import {PromoteModal} from '../../components/promote_modal/PromoteModal';
+import {usePagination} from '@src/hooks';
 
 export const MyPosts: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -30,7 +31,8 @@ export const MyPosts: FC = () => {
     const [archivePostData, setArchivePostData] = useState(initialPostsState);
 
     const [securePosts, setSecurePosts] = useState(initialPostsState);
-    const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
+    const [archiveSecurePostData, setArchiveSecurePostData] =
+        useState(initialPostsState);
 
     const {
         modalOpen: settingsOpen,
@@ -48,7 +50,13 @@ export const MyPosts: FC = () => {
         handleModalOpen: openNotificationsModal
     } = useModal();
 
-    const handleDetailedOpen = (post) => () => {
+    const {
+        modalOpen: promoteOpen,
+        handleModalClose: handleClosePromote,
+        handleModalOpen: handleOpenPromote
+    } = useModal();
+
+    const handleDetailedOpen = post => () => {
         openDetailedModal();
         setSelectedPost(post);
     };
@@ -63,40 +71,75 @@ export const MyPosts: FC = () => {
         setSelectedPost(post);
     };
 
-    const fetchTabPosts = (secondTab = false) => async (page = 1, secondSubTab = false) => {
-        try {
-            const params = {
-                type: 'post',
-                archive: secondSubTab ? 1 : 0,
-                secure: secondTab ? 1 : 0,
-                page,
-                itemsPerPage: ITEMS_PER_PAGE
-            };
-            setIsFetch(true);
-            const {data, total} = await userAPI.getMyPosts(params);
-            unstable_batchedUpdates(() => {
-                secondTab
-                    ? secondSubTab ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
-                    : secondSubTab ? setArchivePostData({data, total}) : setPostData({data, total});
-                setIsFetch(false);
-            });
-        } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
-        }
+    const handlePromoteOpen = post => () => {
+        handleOpenPromote();
+        setSelectedPost(post);
     };
 
-    const firstTabFetch = fetchTabPosts();
-    const secondTabFetch = fetchTabPosts(true);
+    const getPosts =
+        (isSafeShop = false) =>
+        async (page = 1) => {
+            try {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getMyPosts({
+                    type: 'post',
+                    archive: 0,
+                    secure: isSafeShop ? 1 : 0,
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
+                isSafeShop
+                    ? setSecurePosts({data, total})
+                    : setPostData({data, total});
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
 
-    const handleRefresh = async () => {
+    const getArchPosts =
+        (isSafeShop = false) =>
+        async (page = 1) => {
+            try {
+                setIsFetch(true);
+                const {data, total} = await userAPI.getMyPosts({
+                    type: 'post',
+                    archive: 1,
+                    secure: isSafeShop ? 1 : 0,
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE
+                });
+                isSafeShop
+                    ? setArchiveSecurePostData({data, total})
+                    : setArchivePostData({data, total});
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            }
+        };
+
+    const [postsPagination, postPage, fetchPosts] = usePagination(getPosts());
+
+    const [safePostsPagination, safePostPage, fetchSafePosts] =
+        usePagination(getPosts(true));
+
+    const [archPostsPagination, archPostsPage, fetchArchPosts] = usePagination(
+        getArchPosts()
+    );
+    const [
+        secureArchPostsPagination,
+        secureArchPostsPage,
+        fetchSecureArchPosts
+    ] = usePagination(getArchPosts(true));
+
+    const refresh = async () => {
         await Promise.all([
-            firstTabFetch(),
-            secondTabFetch(),
-            firstTabFetch(1, true),
-            secondTabFetch(1, true)
+            fetchPosts(),
+            fetchSafePosts(),
+            fetchArchPosts(),
+            fetchSecureArchPosts()
         ]);
     };
 
@@ -108,18 +151,20 @@ export const MyPosts: FC = () => {
                 innerFirstTab: {
                     posts: postData.data,
                     total: postData.total,
-                    emptyPage: <EmptyPage
-                        link={INNER_URLS.create_post}
-                        tutorialLink={INNER_URLS.create_post_guide}
-                        label={t('cabinet:empty.post')}
-                        tutorialText={t('post:howToCreatePost')}
-                        action={t('cabinet:empty.create_post')}
-                    />
+                    emptyPage: (
+                        <EmptyPage
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_post_guide}
+                            label={t('cabinet:empty.post')}
+                            tutorialText={t('post:howToCreatePost')}
+                            action={t('cabinet:empty.create_post')}
+                        />
+                    )
                 },
                 innerSecondTab: {
                     posts: archivePostData.data,
                     total: archivePostData.total,
-                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    emptyPage: <EmptyPage label={t('empty.archive')} />
                 }
             }
         },
@@ -130,18 +175,20 @@ export const MyPosts: FC = () => {
                 innerFirstTab: {
                     posts: securePosts.data,
                     total: securePosts.total,
-                    emptyPage: <EmptyPage
-                        link={INNER_URLS.create_post}
-                        tutorialLink={INNER_URLS.create_post_guide}
-                        label={t('cabinet:empty.post')}
-                        action={t('header:createPost')}
-                        tutorialText={t('post:howToCreatePost')}
-                    />
+                    emptyPage: (
+                        <EmptyPage
+                            link={INNER_URLS.create_post}
+                            tutorialLink={INNER_URLS.create_post_guide}
+                            label={t('cabinet:empty.post')}
+                            action={t('header:createPost')}
+                            tutorialText={t('post:howToCreatePost')}
+                        />
+                    )
                 },
                 innerSecondTab: {
                     posts: archiveSecurePostData.data,
                     total: archiveSecurePostData.total,
-                    emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    emptyPage: <EmptyPage label={t('empty.archive')} />
                 }
             }
         }
@@ -152,29 +199,47 @@ export const MyPosts: FC = () => {
             <DoubleTabs
                 isFetch={isFetch}
                 tabsData={tabsData}
-                fetchFirstTabPosts={firstTabFetch}
-                fetchSecondTabPosts={secondTabFetch}
+                pages={[
+                    postPage,
+                    safePostPage,
+                    archPostsPage,
+                    secureArchPostsPage
+                ]}
+                handlePromoteOpen={handlePromoteOpen}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
                 handleNotificationsOpen={handleNotificationsOpen}
+                paginationHandlers={[
+                    postsPagination,
+                    safePostsPagination,
+                    archPostsPagination,
+                    secureArchPostsPagination
+                ]}
             />
             <DetailedModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
             />
             <SettingsModal
                 post={selectedPost}
                 open={settingsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={handleCloseSettings}
             />
             <NotificationModal
                 post={selectedPost}
                 open={notificationsOpen}
-                handleRefresh={handleRefresh}
+                handleRefresh={refresh}
                 onClose={closeNotificationsModal}
+            />
+            <PromoteModal
+                postType="post"
+                postId={selectedPost.id}
+                openDialog={promoteOpen}
+                handleRefresh={refresh}
+                handleCloseDialog={handleClosePromote}
             />
         </>
     );

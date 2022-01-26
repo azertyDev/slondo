@@ -1,5 +1,5 @@
 import {GetStaticProps} from 'next';
-import CreatePost from '@src/components/post/create_post/CreatePost';
+import CreatePost from '@root/src/components/post/create_post/CreatePost';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {userAPI} from "@src/api/api";
 

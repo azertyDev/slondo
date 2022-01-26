@@ -1,71 +1,24 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
-        '& .react-multiple-carousel__arrow': {
+        '& button.react-multiple-carousel__arrow': {
             opacity: '0.7',
-            background: '#ffffff',
+            background: '#fff',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.15)',
-            minWidth: 36,
-            minHeight: 36,
+            minWidth: '36px',
+            minHeight: '36px',
+            transition: 'all .2s',
             '&:before': {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#4E4E4E'
+                color: '#4E4E4E',
+                fontWeight: 600
             }
-        }
-    },
-    arrows: {
-        display: 'flex',
-        justifyContent: 'center',
-        width: '36px',
-        height: '36px',
-        backgroundColor: theme.palette.primary.white,
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.15)',
-        zIndex: 20,
-        position: 'absolute',
-        '& > span.MuiIconButton-label': {
-            position: 'relative',
-            width: '10px',
-            height: '10px',
-            marginLeft: '-2.5px',
-            transform: 'rotate(-45deg)',
+        },
+        '& button.react-multiple-carousel__arrow:hover': {
+            backgroundColor: '#845CAB',
+            opacity: 1,
             '&:before': {
-                content: '""',
-                position: 'absolute',
-                bottom: '0px',
-                right: '0px',
-                // background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                background: '#4E4E4E',
-                width: 'inherit',
-                height: '2.5px'
-            },
-            '&:after': {
-                content: '""',
-                position: 'absolute',
-                top: '0px',
-                right: '0px',
-                // background: 'linear-gradient(49.94deg, #AD66D5 19.03%, #675EAA 72.72%)',
-                background: '#4E4E4E',
-                height: 'inherit',
-                width: '2.5px'
-            }
-        },
-        '&.right': {
-            right: '70px'
-        },
-        '&.left': {
-            left: '70px',
-            '& > span.MuiIconButton-label': {
-                marginRight: '-6.5px',
-                transform: 'rotate(135deg)'
-            }
-        },
-        '&:hover': {
-            backgroundColor: theme.palette.primary.secondary,
-            '& > span:before, & > span:after': {
-                background: `${theme.palette.primary.white} !important`
+                color: '#fff'
             }
         }
     }

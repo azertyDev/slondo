@@ -11,6 +11,23 @@ export const useStyles = makeStyles({
         '& div.user-info-wrapper': {
             marginBottom: '15px'
         },
+        '& div.user-balance': {
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            marginBottom: '8px',
+            '& > svg': {
+                margin: '0 10px 0 4px'
+            },
+            '& > div': {
+                '& > h6': {
+                    marginRight: '5px'
+                },
+                '& > p': {
+                    fontWeight: 600
+                }
+            }
+        },
         '&:last-child': {
             marginBottom: 0
         },

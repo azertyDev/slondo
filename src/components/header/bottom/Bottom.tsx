@@ -1,7 +1,7 @@
 import {cloneElement, FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {
     AppBar,
     Avatar,
@@ -20,30 +20,36 @@ import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import {useLocation} from "@src/hooks/use_location/useLocation";
-import {AuthCtx} from "@src/context";
-import {INNER_URLS} from "@src/constants";
+import {useLocation} from '@src/hooks/use_location/useLocation';
+import {AuthCtx} from '@src/context';
+import {INNER_URLS} from '@src/constants';
 import {MainMenu} from '@src/components/header/main_menu/MainMenu';
 import {useStyles} from './useStyles';
 
 type BottomProps = {
-    handleDrawerOpen: () => void
-    handlePageReload: () => void
-}
+    handleDrawerOpen: () => void;
+    handlePageReload: () => void;
+};
 
-export const Bottom: FC<BottomProps> = (props) => {
-    const {
-        handleDrawerOpen,
-        handlePageReload
-    } = props;
+export const Bottom: FC<BottomProps> = props => {
+    const {handleDrawerOpen, handlePageReload} = props;
 
     const {pathname, push} = useRouter();
     const {t} = useTranslation('header');
-    const {user: {avatar}, auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-    const isScrollBreak = useScrollTrigger({disableHysteresis: true, threshold: 53});
+    const {
+        user: {avatar},
+        auth: {isAuth},
+        setAuthModalOpen
+    } = useContext(AuthCtx);
 
-    const handleClick = (event) => {
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+    const isScrollBreak = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 53
+    });
+
+    const handleClick = event => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -55,7 +61,7 @@ export const Bottom: FC<BottomProps> = (props) => {
         setAuthModalOpen(true);
     };
 
-    const pushUrl = (url) => async () => {
+    const pushUrl = url => async () => {
         if (isAuth) {
             await push(url);
         } else {
@@ -66,10 +72,7 @@ export const Bottom: FC<BottomProps> = (props) => {
     const open = Boolean(anchorEl);
     const popoverId = open ? 'simple-popover' : undefined;
 
-    const {
-        locElement,
-        locationModal
-    } = useLocation({saveToCookies: true});
+    const {locElement, locationModal} = useLocation({saveToCookies: true});
 
     const classes = useStyles();
     return (
@@ -103,7 +106,10 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     >
                                         <Link href="/">
                                             <a onClick={handlePageReload}>
-                                                <Logo/>
+                                                <Logo
+                                                    width="100%"
+                                                    height="100%"
+                                                />
                                             </a>
                                         </Link>
                                     </Grid>
@@ -119,7 +125,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                                             onClick={handleDrawerOpen}
                                             className="bottom-category-button header-button"
                                         >
-                                            <CategorySortIcon/>
+                                            <CategorySortIcon />
                                             <Typography variant="subtitle2">
                                                 {t('header:categories')}
                                             </Typography>
@@ -134,19 +140,21 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     className="search-block"
                                 >
                                     <Grid item xs>
-                                        <HeaderSearchForm/>
+                                        <HeaderSearchForm />
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
                                     <CustomButton
                                         color="primary"
                                         className="header-button create-post-btn"
-                                        onClick={pushUrl(INNER_URLS.create_post)}
+                                        onClick={pushUrl(
+                                            INNER_URLS.create_post
+                                        )}
                                     >
                                         <Typography variant="subtitle2">
                                             {t('header:createPost')}
                                         </Typography>
-                                        <AddIcon/>
+                                        <AddIcon />
                                     </CustomButton>
                                 </Grid>
                                 <Grid
@@ -156,21 +164,33 @@ export const Bottom: FC<BottomProps> = (props) => {
                                     alignItems="center"
                                     justifyContent="center"
                                 >
-                                    {isAuth
-                                        ? <span onClick={handleClick} className='avatar'>
-                                            <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'}/>
+                                    {isAuth ? (
+                                        <span
+                                            onClick={handleClick}
+                                            className="avatar"
+                                        >
+                                            <Avatar
+                                                alt="Avatar"
+                                                src={
+                                                    avatar ?? '/img/avatar.svg'
+                                                }
+                                            />
                                         </span>
-                                        : <CustomButton
-                                            color='silver'
+                                    ) : (
+                                        <CustomButton
+                                            color="silver"
                                             onClick={handleAuthModalOpen}
                                             className="bottom-sign-button header-button"
                                         >
-                                            <Typography variant="subtitle2" component='p'>
+                                            <Typography
+                                                variant="subtitle2"
+                                                component="p"
+                                            >
                                                 {t('auth_reg:signIn')}
                                             </Typography>
-                                            <SignIcon/>
+                                            <SignIcon />
                                         </CustomButton>
-                                    }
+                                    )}
                                 </Grid>
                             </Grid>
                         </Container>
@@ -179,28 +199,34 @@ export const Bottom: FC<BottomProps> = (props) => {
             </Hidden>
             {/* ========================== Adaptive ======================= */}
             <Hidden lgUp>
-                <Container maxWidth='xl'>
+                <Container maxWidth="xl">
                     <Grid container spacing={1}>
                         <Grid item xs={12} className="translate-local">
-                            <Box width='80%'>
+                            <Box width="80%">
                                 {locElement}
                                 {locationModal}
                             </Box>
-                            <Localization/>
+                            <Localization />
                         </Grid>
                         <Grid
                             item
                             container
                             spacing={1}
-                            alignItems="center"
-                            className='multi-actions'
-                            xs={12}
                             sm={7}
+                            xs={12}
+                            alignItems="center"
+                            className="multi-actions"
                         >
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
-                                    <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon/>
+                                    <a
+                                        className={
+                                            pathname === '/help'
+                                                ? 'selected'
+                                                : ''
+                                        }
+                                    >
+                                        <QuestionIcon />
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
@@ -209,8 +235,14 @@ export const Bottom: FC<BottomProps> = (props) => {
                             </Grid>
                             <Grid item sm={5} md={4}>
                                 <Link href="/help/feedback">
-                                    <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <FeedbackIcon/>
+                                    <a
+                                        className={
+                                            pathname === '/help'
+                                                ? 'selected'
+                                                : ''
+                                        }
+                                    >
+                                        <FeedbackIcon />
                                         <Typography variant="subtitle1">
                                             {t('footer:feedback')}
                                         </Typography>
@@ -236,7 +268,7 @@ export const Bottom: FC<BottomProps> = (props) => {
                     horizontal: 'right'
                 }}
             >
-                <MainMenu clearAnchor={handleClose}/>
+                <MainMenu clearAnchor={handleClose} />
             </Popover>
         </div>
     );

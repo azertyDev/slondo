@@ -30,7 +30,8 @@ export const Ratings: FC = () => {
             phone: '',
             avatar: '',
             created_at: '',
-            available_days: []
+            available_days: [],
+            balance: 0
         },
         comment: {
             id: null,

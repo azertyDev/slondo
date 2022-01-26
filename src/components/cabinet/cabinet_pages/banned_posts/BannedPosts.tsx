@@ -4,7 +4,14 @@ import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from '@src/context';
 import {SingleTabs} from '@src/components/cabinet/components/tabs_content/SingleTabs';
-import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {
+    Box,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Typography
+} from '@material-ui/core';
 import {ArrowBack} from '@material-ui/icons';
 import {InitPostsType, SingleTabType, TabsType} from '@root/interfaces/Cabinet';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
@@ -25,8 +32,12 @@ export const BannedPosts: FC = () => {
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [postData, setPostData] = useState<InitPostsType>(initialBannedPostsState);
-    const [aucData, setAucData] = useState<InitPostsType>(initialBannedPostsState);
+    const [postData, setPostData] = useState<InitPostsType>(
+        initialBannedPostsState
+    );
+    const [aucData, setAucData] = useState<InitPostsType>(
+        initialBannedPostsState
+    );
     const [selectedPost, setSelectedPost] = useState(initCardData);
     const [modalContentIndex, setModalContentIndex] = useState(1);
 
@@ -36,10 +47,10 @@ export const BannedPosts: FC = () => {
         handleModalClose: closeDetailedModal
     } = useModal();
 
-    const handleModalContentIndex = (index) => () => {
+    const handleModalContentIndex = index => () => {
         setModalContentIndex(index);
     };
-    const handleDetailedOpen = (post) => () => {
+    const handleDetailedOpen = post => () => {
         openDetailedModal();
         setSelectedPost(post);
     };
@@ -66,10 +77,8 @@ export const BannedPosts: FC = () => {
         }
     };
     const handleRefresh = () => {
-        unstable_batchedUpdates(() => {
-            fetchBannedPostsData();
-            fetchBannedPostsData(1, true);
-        });
+        fetchBannedPostsData();
+        fetchBannedPostsData(1, true);
     };
     const handleDelete = async () => {
         try {
@@ -89,76 +98,86 @@ export const BannedPosts: FC = () => {
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
-                return <>
-                    <List
-                        component="nav"
-                        aria-label="main"
-                        className={classes.settingsList}
-                        disablePadding
-                    >
-                        <ListItem
-                            button
-                            onClick={handleModalContentIndex(2)}
+                return (
+                    <>
+                        <List
+                            component="nav"
+                            aria-label="main"
+                            className={classes.settingsList}
+                            disablePadding
                         >
-                            <ListItemText
-                                primary={t('common:remove')}
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText
-                                primary={t('auction:edit')}
-                            />
-                        </ListItem>
-                    </List>
-                </>;
+                            <ListItem
+                                button
+                                onClick={handleModalContentIndex(2)}
+                            >
+                                <ListItemText
+                                    primary={t('common:remove')}
+                                    primaryTypographyProps={{
+                                        variant: 'subtitle1'
+                                    }}
+                                />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemText primary={t('auction:edit')} />
+                            </ListItem>
+                        </List>
+                    </>
+                );
             case 2:
-                return <>
-                    <Typography variant='h6' className="title">
-                        {t('common:areYouSure')}
-                    </Typography>
-                    <Box display='flex' flexDirection='column'>
-                        <CustomButton onClick={handleDelete}>{t('common:yes')}</CustomButton>
-                        <CustomButton onClick={handlePrevMenu}>{t('common:return')}</CustomButton>
-                    </Box>
-                </>;
+                return (
+                    <>
+                        <Typography variant="h6" className="title">
+                            {t('common:areYouSure')}
+                        </Typography>
+                        <Box display="flex" flexDirection="column">
+                            <CustomButton onClick={handleDelete}>
+                                {t('common:yes')}
+                            </CustomButton>
+                            <CustomButton onClick={handlePrevMenu}>
+                                {t('common:return')}
+                            </CustomButton>
+                        </Box>
+                    </>
+                );
         }
     };
     const ModalContent = () => (
         <>
-            {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
+            {modalContentIndex === 1 ? (
+                <Typography className="title" variant="h6">
                     {t('common:post')} № {selectedPost.id}
                 </Typography>
-                : modalContentIndex !== 5 && (
-                <IconButton
-                    className='prev-btn'
-                    aria-label="back"
-                    size="medium"
-                    onClick={handlePrevMenu}
-                >
-                    <ArrowBack fontSize="inherit"/>
-                </IconButton>
+            ) : (
+                modalContentIndex !== 5 && (
+                    <IconButton
+                        className="prev-btn"
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBack fontSize="inherit" />
+                    </IconButton>
+                )
             )}
             {getModalContent()}
         </>
     );
 
-    const bannedPosts = (posts) => (
+    const bannedPosts = posts => (
         <div className={classes.root}>
-            {posts.data.map(data =>
+            {posts.data.map(data => (
                 <Box mb={3} key={data.id}>
                     <CabinetCardWrapper
                         cardData={data}
                         handleDetailedOpen={handleDetailedOpen(data)}
                     />
                 </Box>
-            )}
+            ))}
             <ResponsiveModal
                 openDialog={detailedModalOpen}
                 handleCloseDialog={closeDetailedModal}
             >
-                <ModalContent/>
+                <ModalContent />
             </ResponsiveModal>
         </div>
     );

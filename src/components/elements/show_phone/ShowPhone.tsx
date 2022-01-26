@@ -92,7 +92,10 @@ export const ShowPhone: FC<{ postId: number }> = ({postId}) => {
                         ? <CustomCircularProgress color='secondary'/>
                         : <>
                             {!isIncognito && (
-                                <a href={`tel:${phone}`} className={classes.phoneWrapper}>
+                                <a
+                                    href={`tel:+${phone}`}
+                                    className={classes.phoneWrapper}
+                                >
                                     <Typography variant="subtitle1" color="initial">
                                         {phone}
                                     </Typography>

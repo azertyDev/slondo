@@ -78,9 +78,8 @@ export const useStyles = makeStyles((theme) => ({
         minHeight: '280px',
         padding: '20px 30px',
         borderRadius: '20px',
-        backgroundImage: ({hasCard}) => hasCard && 'url(/img/card-bg.png)',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
+        backgroundPosition: 'center !important',
+        backgroundSize: 'cover !important',
         backgroundRepeat: 'no-repeat',
         boxShadow: '0px 0px 25px rgba(103, 94, 170, 0.15)',
         '&.MuiPaper-root': {

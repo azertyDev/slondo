@@ -22,17 +22,17 @@ import {useStyles} from './useStyles';
 
 type SyncSlidersProps = {
     post: {
-        title: string,
-        description: string
-    },
-    isCreator: boolean,
+        title: string;
+        description: string;
+    };
+    isCreator: boolean;
     imgs: {
         alt: string;
-        url: { default: string, extra: string };
-    }[],
-    handleFavorite: () => void,
-    isFavorite: boolean,
-    favoriteCount: number
+        url: {default: string; extra: string};
+    }[];
+    handleFavorite: () => void;
+    isFavorite: boolean;
+    favoriteCount: number;
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
@@ -90,28 +90,22 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
         variableWidth: true,
         focusOnSelect: true,
         arrows: !isMdDown,
-        dots: isMdDown,
-        // customPaging: function(i) {
-        //     return <div className="dot"></div>;
-        // },
-        // dotsClass: 'slick-dots slick-thumb'
+        dots: isMdDown
     };
 
     const classes = useStyles({isFavorite});
     return (
         <div className={classes.root}>
-            <div className='first-slider'>
-                <CustomSlider
-                    {...settings}
-                >
-                    {imgs.map((img, i) =>
+            <div className="first-slider">
+                <CustomSlider {...settings}>
+                    {imgs.map((img, i) => (
                         <img
                             key={i}
                             alt={img.alt}
                             src={img.url.extra}
                             onClick={handleSliderOpen}
                         />
-                    )}
+                    ))}
                 </CustomSlider>
                 <div className="icon-buttons">
                     <Hidden lgUp>
@@ -119,19 +113,22 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                             onClick={handlePrevPath}
                             className="backspace-btn"
                         >
-                            <ChevronLeft/>
+                            <ChevronLeft />
                         </IconButton>
                     </Hidden>
                     {!!imgs.length && (
-                        <div className='share-favo-btns'>
+                        <div className="share-favo-btns">
                             {isAuth && !isCreator && (
                                 <Box className="favorite-count">
-                                    <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                        <FavoriteBorder/>
+                                    <IconButton
+                                        className="favorite-btn"
+                                        onClick={handleFavorite}
+                                    >
+                                        <FavoriteBorder />
                                     </IconButton>
                                     {favoriteCount !== 0 && (
                                         <div>
-                                            <Typography variant='subtitle1'>
+                                            <Typography variant="subtitle1">
                                                 {favoriteCount}
                                             </Typography>
                                         </div>
@@ -141,7 +138,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                             <ClickAwayListener onClickAway={handleCloseTooltip}>
                                 <Tooltip
                                     arrow
-                                    placement='bottom'
+                                    placement="bottom"
                                     open={openTooltip}
                                     disableFocusListener
                                     disableHoverListener
@@ -150,8 +147,11 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                                     title={t('common:copied')}
                                     PopperProps={{disablePortal: true}}
                                 >
-                                    <IconButton className="share-btn" onClick={handleShare}>
-                                        <Share/>
+                                    <IconButton
+                                        className="share-btn"
+                                        onClick={handleShare}
+                                    >
+                                        <Share />
                                     </IconButton>
                                 </Tooltip>
                             </ClickAwayListener>
@@ -160,7 +160,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                 </div>
             </div>
             {!isMdDown && imgsCount > 1 && (
-                <div className='second-slider'>
+                <div className="second-slider">
                     <CustomSlider
                         ref={ref2}
                         asNavFor={ref3.current}
@@ -168,9 +168,9 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                         focusOnSelect={true}
                         slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     >
-                        {imgs.map(({url, alt}, i) =>
-                            <img key={i} alt={alt} src={url.extra}/>
-                        )}
+                        {imgs.map(({url, alt}, i) => (
+                            <img key={i} alt={alt} src={url.extra} />
+                        ))}
                     </CustomSlider>
                 </div>
             )}
@@ -180,18 +180,18 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                 className={classes.modal}
                 onClose={handleSliderClose}
             >
-                <div className='modal-root'>
-                    <div className='close-title'>
+                <div className="modal-root">
+                    <div className="close-title">
                         <div className="close-wrapper">
                             <IconButton onClick={handleSliderClose}>
-                                <CloseIcon/>
+                                <CloseIcon />
                             </IconButton>
                         </div>
                         <Typography className="title" variant="h6">
                             {post.title}
                         </Typography>
                     </div>
-                    <div className='first-slider'>
+                    <div className="first-slider">
                         <CustomSlider
                             ref={ref3}
                             asNavFor={isMdDown ? ref1.current : ref4.current}
@@ -199,7 +199,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                             arrows={!isMdDown}
                             centerMode={!isMdDown}
                         >
-                            {imgs?.map((img, i) =>
+                            {imgs?.map((img, i) => (
                                 <InnerImageZoom
                                     key={i}
                                     moveType="drag"
@@ -208,11 +208,11 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                                     className="image-zoom"
                                     fullscreenOnMobile={true}
                                 />
-                            )}
+                            ))}
                         </CustomSlider>
                     </div>
                     {!isMdDown && imgsCount > 1 && (
-                        <Container maxWidth='lg' className='second-slider'>
+                        <Container maxWidth="lg" className="second-slider">
                             <CustomSlider
                                 ref={ref4}
                                 asNavFor={ref1.current}
@@ -220,15 +220,14 @@ export const SyncSliders: FC<SyncSlidersProps> = (props: SyncSlidersProps) => {
                                 focusOnSelect={true}
                                 slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                             >
-                                {imgs?.map(({url, alt}, i) =>
-                                    <img key={i} alt={alt} src={url.extra}/>
-                                )}
+                                {imgs?.map(({url, alt}, i) => (
+                                    <img key={i} alt={alt} src={url.extra} />
+                                ))}
                             </CustomSlider>
                         </Container>
                     )}
                 </div>
             </Modal>
         </div>
-
     );
 };

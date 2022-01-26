@@ -5,7 +5,9 @@ import {
     Hidden,
     InputBase,
     IconButton,
-    Typography, useMediaQuery, useTheme
+    Typography,
+    useMediaQuery,
+    useTheme
 } from '@material-ui/core';
 import {SearchCtx} from '@src/context';
 import {Search_icon} from '@src/components/elements/icons';
@@ -16,39 +18,39 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {useStyles} from './useStyles';
 
 export const HeaderSearchForm: FC = () => {
-    const {push, query: {path}} = useRouter();
+    const {
+        push,
+        query: {path}
+    } = useRouter();
+
     const {t} = useTranslation('common');
     const {setTerm} = useContext(SearchCtx);
-    const searchTermFromUrl = useRouter().query.q as string || '';
+    const searchTermFromUrl = (useRouter().query.q as string) || '';
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const handleSubmit = async ({searchTerm}) => {
-        const [userLocation] = path as string[] || [];
-        let location = 'uzbekistan';
+        const [userLocation] = (path as string[]) || [];
 
-        if (userLocation) {
-            location = userLocation;
-        }
+        const location = userLocation ?? 'uzbekistan';
 
-        const url = `/${location}${searchTerm !== '' ? `?q=${searchTerm}` : ''}`;
+        const url = `/${location}${
+            searchTerm !== '' ? `?q=${searchTerm}` : ''
+        }`;
 
+        setTerm(searchTerm);
         await push(url);
     };
 
     const handleChange = ({target: {value}}) => {
-        setTerm(value);
         setValues({searchTerm: value});
     };
 
     const formik = useFormik({
-        initialValues: {searchTerm: ''},
-        onSubmit: handleSubmit
+        onSubmit: handleSubmit,
+        initialValues: {searchTerm: ''}
     });
 
-    const {
-        values,
-        setValues
-    } = formik;
+    const {values, setValues} = formik;
 
     useEffect(() => {
         setTerm(searchTermFromUrl);
@@ -64,7 +66,7 @@ export const HeaderSearchForm: FC = () => {
                     aria-label="search"
                     disabled
                 >
-                    <Search_icon/>
+                    <Search_icon />
                 </IconButton>
                 <InputBase
                     id="input-base"
@@ -75,8 +77,12 @@ export const HeaderSearchForm: FC = () => {
                     inputProps={{'aria-label': 'search category'}}
                 />
                 <Hidden mdDown>
-                    <CustomButton type='submit' className={classes.searchButton} color='silver'>
-                        <Typography variant="subtitle2" component='p'>
+                    <CustomButton
+                        type="submit"
+                        className={classes.searchButton}
+                        color="silver"
+                    >
+                        <Typography variant="subtitle2" component="p">
                             {t('searchBtn')}
                         </Typography>
                     </CustomButton>

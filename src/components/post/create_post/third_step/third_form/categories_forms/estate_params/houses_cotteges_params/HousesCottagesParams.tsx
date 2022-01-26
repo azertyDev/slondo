@@ -10,7 +10,7 @@ import {CommonParamsPropsType} from '../../../ThirdForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
 import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
-import {PostTitle} from '@src/components/post/create_post/third_step/third_form/post_title/PostTitle';
+import {PostTitle} from '@root/src/components/post/create_post/third_step/third_form/post_title/PostTitle';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';

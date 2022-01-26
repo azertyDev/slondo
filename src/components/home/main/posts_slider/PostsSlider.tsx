@@ -1,22 +1,33 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {Typography} from "@material-ui/core";
-import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
-import {settings} from "@src/components/home/main/posts_slider/sliderSettings";
-import {GridCard} from "@src/components/elements/card/grid_card/GridCard";
-import {unstable_batchedUpdates} from "react-dom";
-import {HomePageCtx, AuthCtx} from "@src/context";
-import {useStyles} from "./useStyles";
+import {Typography} from '@material-ui/core';
+import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
+import {unstable_batchedUpdates} from 'react-dom';
+import {HomePageCtx, AuthCtx} from '@src/context';
+import {Slider} from '@root/src/components/elements/slider/Slider';
+import {useStyles} from './useStyles';
+
+const config = {
+    itemClass: 'slide-item',
+    responsive: {
+        desktop: {
+            breakpoint: {max: 1920, min: 992},
+            items: 4
+        }
+    }
+};
 
 export const PostsSlider: FC = () => {
     const {t} = useTranslation('main');
-    const {auth: {isAuth}} = useContext(AuthCtx);
+    const {
+        auth: {isAuth}
+    } = useContext(AuthCtx);
+
     const {postsSliderData} = useContext(HomePageCtx);
 
     const [isFetch, setIsFetch] = useState(false);
     const [errMsg, setErrorMsg] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
     const [popularPosts, setPopularPosts] = useState(postsSliderData);
 
     const {data} = popularPosts;
@@ -24,7 +35,7 @@ export const PostsSlider: FC = () => {
     const setFetchedCardData = async () => {
         try {
             setIsFetch(true);
-            const {data, total} = await userAPI.getPopular(currentPage);
+            const {data, total} = await userAPI.getPopular(1);
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
@@ -42,30 +53,36 @@ export const PostsSlider: FC = () => {
     };
 
     useEffect(() => {
-        (currentPage !== 1 || isAuth) && setFetchedCardData();
-    }, [currentPage, isAuth]);
+        setFetchedCardData();
+    }, [isAuth]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography className="title" variant="h2">
-                {t('popularPosts')}
-            </Typography>
-            <div className="slider">
-                {!!errMsg
-                    ? <div className="error-wrapper">
-                        <Typography className="error-text">{errMsg}</Typography>
-                    </div>
-                    : <CustomSlider {...settings}>
-                        {data.map(card =>
-                            <GridCard
-                                isFetch={isFetch}
-                                key={card.id}
-                                {...card}
-                            />
-                        )}
-                    </CustomSlider>}
-            </div>
+            {data.length !== 0 && (
+                <>
+                    <Typography className="title" variant="h2">
+                        {t('popularPosts')}
+                    </Typography>
+                    {!!errMsg ? (
+                        <div className="error-wrapper">
+                            <Typography className="error-text">
+                                {errMsg}
+                            </Typography>
+                        </div>
+                    ) : (
+                        <Slider config={config}>
+                            {data.map(card => (
+                                <GridCard
+                                    {...card}
+                                    key={card.id}
+                                    isFetch={isFetch}
+                                />
+                            ))}
+                        </Slider>
+                    )}
+                </>
+            )}
         </div>
     );
 };

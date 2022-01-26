@@ -7,27 +7,37 @@ import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {Trans, useTranslation} from 'react-i18next';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {cookieOpts, cookies, formatCardData, getErrorMsg, phonePrepare} from '@src/helpers';
+import {
+    cookieOpts,
+    cookies,
+    formatCardData,
+    getErrorMsg,
+    phonePrepare
+} from '@src/helpers';
 import ReactInputMask from 'react-input-mask';
 import {paymentCardSchema} from '@root/validation_schemas/paymentCardSchema';
-import {codeSchema} from '@root/validation_schemas/authRegSchema';
+import {
+    codeSchema,
+    userInfoSchema
+} from '@root/validation_schemas/authRegSchema';
 import {LinkText} from '@src/components/elements/safe_deal/PostInfo';
-import {myUzCardAPI, userAPI} from '@src/api/api';
+import {userAPI} from '@src/api/api';
 import {unstable_batchedUpdates} from 'react-dom';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useModal} from '@src/hooks';
+import {myUzCardAPI} from '@src/api/paid_api';
 import {useStyles} from './useStyles';
 
 type UserPaymentCardProps = {
-    userCard,
-    isFetchUserCard: boolean,
-    hasPost?: boolean,
-    onClose?: () => void,
-    handleResetUserCard: () => void,
-    fetchUserCard: () => Promise<void>
-}
+    userCard;
+    isFetchUserCard: boolean;
+    hasPost?: boolean;
+    onClose?: () => void;
+    handleResetUserCard: () => void;
+    fetchUserCard: () => Promise<void>;
+};
 
-export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
+export const UserPaymentCard: FC<UserPaymentCardProps> = props => {
     const {
         hasPost,
         onClose,
@@ -154,33 +164,28 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         }
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = values => {
         isSmsConfirm
             ? confirmSmsCode(values)
-            : hasCard ? handleConfirmOpen() : addCard(values);
+            : hasCard
+            ? handleConfirmOpen()
+            : addCard(values);
     };
 
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
-        validationSchema: hasCard ? null : isSmsConfirm ? codeSchema : paymentCardSchema
+        validationSchema: hasCard
+            ? null
+            : isSmsConfirm
+            ? codeSchema.concat(userInfoSchema)
+            : paymentCardSchema
     });
 
-    const {
-        values,
-        setValues,
-        errors,
-        touched,
-        setTouched,
-        handleChange
-    } = formik;
+    const {values, setValues, errors, touched, setTouched, handleChange} =
+        formik;
 
-    const {
-        cardName,
-        cardNumber,
-        expireDate,
-        code
-    } = values;
+    const {cardName, cardNumber, expireDate, code} = values;
 
     const {handleNumericInput, handleInput} = useHandlers(values, setValues);
 
@@ -195,7 +200,9 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         if (hasCard) {
             userVals.cardName = userCard.cardName;
             userVals.cardNumber = userCard.number;
-            userVals.expireDate = `${userCard.expireDate.slice(2)}/${userCard.expireDate.slice(0, 2)}`;
+            userVals.expireDate = `${userCard.expireDate.slice(
+                2
+            )}/${userCard.expireDate.slice(0, 2)}`;
         }
 
         setValues(userVals);
@@ -206,13 +213,17 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
         <div className={classes.root}>
             <FormikProvider value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
-                    {isFetchUserCard
-                        ? <CustomCircularProgress/>
-                        : <>
+                    {isFetchUserCard ? (
+                        <CustomCircularProgress />
+                    ) : (
+                        <>
                             <Grid container spacing={3}>
                                 {!hasCard && (
                                     <Grid item xs={12}>
-                                        <Typography variant='subtitle1' component='p'>
+                                        <Typography
+                                            variant="subtitle1"
+                                            component="p"
+                                        >
                                             {t('add_card_for_safe_deal')}
                                         </Typography>
                                     </Grid>
@@ -220,13 +231,16 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                 <Grid container item spacing={4}>
                                     <Grid item xs={12} lg={10}>
                                         {!hasCard && (
-                                            <Typography variant='subtitle1' gutterBottom>
+                                            <Typography
+                                                variant="subtitle1"
+                                                gutterBottom
+                                            >
                                                 {t('common:personalData')}
                                             </Typography>
                                         )}
                                         <FormikField
                                             t={t}
-                                            name='name'
+                                            name="name"
                                             disabled={hasCard}
                                             value={values.name}
                                             onChange={handleChange}
@@ -242,11 +256,13 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                     <Grid item xs={12} lg={10}>
                                         <FormikField
                                             t={t}
-                                            name='surname'
+                                            name="surname"
                                             disabled={hasCard}
                                             value={values.surname}
                                             onChange={handleChange}
-                                            placeholder={t('filters:user_surname')}
+                                            placeholder={t(
+                                                'filters:user_surname'
+                                            )}
                                             errorMsg={getErrorMsg(
                                                 errors.surname,
                                                 touched.surname,
@@ -256,65 +272,117 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                         />
                                     </Grid>
                                 </Grid>
-                                <Grid container item xs={12} lg={10}>
+                                <Grid container item xs={12}>
                                     {!hasCard && (
                                         <>
-                                            <Grid item xs={12} container direction='column'>
-                                                <Typography variant='subtitle1' gutterBottom>
+                                            <Grid
+                                                item
+                                                xs={12}
+                                                container
+                                                direction="column"
+                                            >
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    gutterBottom
+                                                >
                                                     {t('common:addCard')}
-                                                    <span className='error-text'>*</span>
+                                                    <span className="error-text">
+                                                        *
+                                                    </span>
                                                 </Typography>
-                                                <Box display='flex' alignItems='center' mb={1}>
-                                                    <img src='/img/uzcard.png' alt='uzcard' className='uzcard' />
-                                                    <Typography className='error-text' variant='subtitle2'>
+                                                <Box
+                                                    display="flex"
+                                                    alignItems="center"
+                                                    mb={1}
+                                                >
+                                                    <img
+                                                        src="/img/uzcard.png"
+                                                        alt="uzcard"
+                                                        className="uzcard"
+                                                    />
+                                                    <Typography
+                                                        className="error-text"
+                                                        variant="subtitle2"
+                                                    >
                                                         {t('common:onlyUzcard')}
                                                     </Typography>
                                                 </Box>
                                             </Grid>
                                         </>
                                     )}
-                                    <Card className={classes.paymentCard}>
-                                        <Grid container spacing={1} alignContent='space-between'>
-                                            {isSmsConfirm
-                                                ? <>
-                                                    <Grid
-                                                        item
-                                                        sm={6}
-                                                        xs={12}
-                                                    >
+                                    <Card
+                                        className={classes.paymentCard}
+                                        style={{
+                                            backgroundImage:
+                                                hasCard &&
+                                                'url(/img/card-bg.png)'
+                                        }}
+                                    >
+                                        <Grid
+                                            container
+                                            spacing={1}
+                                            alignContent="space-between"
+                                        >
+                                            {isSmsConfirm ? (
+                                                <>
+                                                    <Grid item sm={6} xs={12}>
                                                         <FormikField
                                                             t={t}
                                                             name="code"
                                                             autoFocus
                                                             value={code}
-                                                            placeholder={t('type_sms_code')}
-                                                            onChange={handleNumericInput}
-                                                            errorMsg={getErrorMsg(errors.code, touched.code, t)}
+                                                            placeholder={t(
+                                                                'type_sms_code'
+                                                            )}
+                                                            onChange={
+                                                                handleNumericInput
+                                                            }
+                                                            errorMsg={getErrorMsg(
+                                                                errors.code,
+                                                                touched.code,
+                                                                t
+                                                            )}
                                                         />
                                                     </Grid>
                                                 </>
-                                                : <>
+                                            ) : (
+                                                <>
                                                     <Grid
                                                         item
                                                         xs={12}
                                                         sm={10}
                                                         md={8}
                                                     >
-                                                        {hasCard
-                                                            ? <Typography variant='subtitle1'>
-                                                                {userCard.cardName}
+                                                        {hasCard ? (
+                                                            <Typography variant="subtitle1">
+                                                                {
+                                                                    userCard.cardName
+                                                                }
                                                             </Typography>
-                                                            : <FormikField
+                                                        ) : (
+                                                            <FormikField
                                                                 t={t}
                                                                 name="cardName"
                                                                 value={cardName}
-                                                                disabled={hasCard}
-                                                                placeholder={t('cardName')}
-                                                                labelText={t('cardName')}
-                                                                onChange={handleInput}
-                                                                errorMsg={getErrorMsg(errors.cardName, touched.cardName, t)}
+                                                                disabled={
+                                                                    hasCard
+                                                                }
+                                                                placeholder={t(
+                                                                    'cardName'
+                                                                )}
+                                                                labelText={t(
+                                                                    'cardName'
+                                                                )}
+                                                                onChange={
+                                                                    handleInput
+                                                                }
+                                                                errorMsg={getErrorMsg(
+                                                                    errors.cardName,
+                                                                    touched.cardName,
+                                                                    t
+                                                                )}
                                                             />
-                                                        }
+                                                        )}
                                                     </Grid>
                                                     <Grid
                                                         item
@@ -323,40 +391,74 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                         md={5}
                                                         lg={5}
                                                     >
-                                                        {hasCard
-                                                            ? <Typography variant='subtitle2' gutterBottom>
-                                                                {t('card_number')}:&nbsp; {userCard.number}
+                                                        {hasCard ? (
+                                                            <Typography
+                                                                variant="subtitle2"
+                                                                gutterBottom
+                                                            >
+                                                                {t(
+                                                                    'card_number'
+                                                                )}
+                                                                :&nbsp;{' '}
+                                                                {
+                                                                    userCard.number
+                                                                }
                                                             </Typography>
-                                                            : <>
+                                                        ) : (
+                                                            <>
                                                                 <label htmlFor="cardNumber">
-                                                                    <Typography variant="subtitle2" gutterBottom>
-                                                                        {t('card_number')}:
+                                                                    <Typography
+                                                                        variant="subtitle2"
+                                                                        gutterBottom
+                                                                    >
+                                                                        {t(
+                                                                            'card_number'
+                                                                        )}
+                                                                        :
                                                                     </Typography>
                                                                 </label>
                                                                 <ReactInputMask
                                                                     alwaysShowMask
-                                                                    value={cardNumber}
-                                                                    mask='9999 9999 9999 9999'
-                                                                    onChange={handleInput}
+                                                                    value={
+                                                                        cardNumber
+                                                                    }
+                                                                    mask="9999 9999 9999 9999"
+                                                                    onChange={
+                                                                        handleInput
+                                                                    }
                                                                 >
-                                                                    {() => <TextField
-                                                                        id='cardNumber'
-                                                                        fullWidth
-                                                                        focused={false}
-                                                                        size='small'
-                                                                        name="cardNumber"
-                                                                        variant="outlined"
-                                                                        className={errors.cardNumber && touched.cardNumber ? 'error-border' : ''}
-                                                                    />}
+                                                                    {() => (
+                                                                        <TextField
+                                                                            id="cardNumber"
+                                                                            fullWidth
+                                                                            focused={
+                                                                                false
+                                                                            }
+                                                                            size="small"
+                                                                            name="cardNumber"
+                                                                            variant="outlined"
+                                                                            className={
+                                                                                errors.cardNumber &&
+                                                                                touched.cardNumber
+                                                                                    ? 'error-border'
+                                                                                    : ''
+                                                                            }
+                                                                        />
+                                                                    )}
                                                                 </ReactInputMask>
-                                                                {errors.cardNumber && touched.cardNumber && (
-                                                                    <Typography variant="subtitle2"
-                                                                                className='error-text'>
-                                                                        {t(`errors:${errors.cardNumber}`)}
-                                                                    </Typography>
-                                                                )}
+                                                                {errors.cardNumber &&
+                                                                    touched.cardNumber && (
+                                                                        <Typography
+                                                                            variant="subtitle2"
+                                                                            className="error-text"
+                                                                        >
+                                                                            {t(
+                                                                                `errors:${errors.cardNumber}`
+                                                                            )}
+                                                                        </Typography>
+                                                                    )}
                                                             </>
-                                                        }
+                                                        )}
                                                     </Grid>
                                                     <Grid
                                                         item
@@ -365,50 +467,95 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                         md={3}
                                                         lg={3}
                                                     >
-                                                        {hasCard
-                                                            ? <Typography variant='subtitle2' gutterBottom>
-                                                                {t('expiration_date')}:&nbsp; {expireDate}
+                                                        {hasCard ? (
+                                                            <Typography
+                                                                variant="subtitle2"
+                                                                gutterBottom
+                                                            >
+                                                                {t(
+                                                                    'expiration_date'
+                                                                )}
+                                                                :&nbsp;{' '}
+                                                                {expireDate}
                                                             </Typography>
-                                                            : <>
+                                                        ) : (
+                                                            <>
                                                                 <label htmlFor="expireDate">
-                                                                    <Typography variant='subtitle2' gutterBottom>
-                                                                        {t('expiration_date')}:
+                                                                    <Typography
+                                                                        variant="subtitle2"
+                                                                        gutterBottom
+                                                                    >
+                                                                        {t(
+                                                                            'expiration_date'
+                                                                        )}
+                                                                        :
                                                                     </Typography>
                                                                 </label>
                                                                 <ReactInputMask
-                                                                    mask='99/99'
+                                                                    mask="99/99"
                                                                     alwaysShowMask
-                                                                    value={expireDate}
-                                                                    onChange={handleInput}
+                                                                    value={
+                                                                        expireDate
+                                                                    }
+                                                                    onChange={
+                                                                        handleInput
+                                                                    }
                                                                 >
-                                                                    {() => <TextField
-                                                                        fullWidth
-                                                                        id='expireDate'
-                                                                        focused={false}
-                                                                        name="expireDate"
-                                                                        variant="outlined"
-                                                                        className={errors.expireDate && touched.expireDate ? 'error-border' : ''}
-                                                                    />}
+                                                                    {() => (
+                                                                        <TextField
+                                                                            fullWidth
+                                                                            id="expireDate"
+                                                                            focused={
+                                                                                false
+                                                                            }
+                                                                            name="expireDate"
+                                                                            variant="outlined"
+                                                                            className={
+                                                                                errors.expireDate &&
+                                                                                touched.expireDate
+                                                                                    ? 'error-border'
+                                                                                    : ''
+                                                                            }
+                                                                        />
+                                                                    )}
                                                                 </ReactInputMask>
-                                                                {errors.expireDate && touched.expireDate && (
-                                                                    <Typography variant="subtitle2"
-                                                                                className='error-text'>
-                                                                        {t(`errors:${errors.expireDate}`)}
-                                                                    </Typography>
-                                                                )}
+                                                                {errors.expireDate &&
+                                                                    touched.expireDate && (
+                                                                        <Typography
+                                                                            variant="subtitle2"
+                                                                            className="error-text"
+                                                                        >
+                                                                            {t(
+                                                                                `errors:${errors.expireDate}`
+                                                                            )}
+                                                                        </Typography>
+                                                                    )}
                                                             </>
-                                                        }
+                                                        )}
                                                     </Grid>
                                                     {hasCard && (
                                                         <Grid
                                                             item
                                                             xs={12}
-                                                            sm={hasCard ? 12 : 4}
+                                                            sm={
+                                                                hasCard ? 12 : 4
+                                                            }
                                                         >
-                                                            <Typography variant='subtitle2' gutterBottom>
-                                                                {t('balance')}:&nbsp;
-                                                                {userCard.balance}&nbsp;
-                                                                <span>{t('common:sum')}</span>
+                                                            <Typography
+                                                                variant="subtitle2"
+                                                                gutterBottom
+                                                            >
+                                                                {t('balance')}
+                                                                :&nbsp;
+                                                                {
+                                                                    userCard.balance
+                                                                }
+                                                                &nbsp;
+                                                                <span>
+                                                                    {t(
+                                                                        'common:sum'
+                                                                    )}
+                                                                </span>
                                                             </Typography>
                                                         </Grid>
                                                     )}
@@ -418,59 +565,93 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                                         sm={10}
                                                         md={8}
                                                     >
-                                                        {hasCard
-                                                            ? <Typography>{userCard.owner}</Typography>
-                                                            : <>
+                                                        {hasCard ? (
+                                                            <Typography>
+                                                                {userCard.owner}
+                                                            </Typography>
+                                                        ) : (
+                                                            <>
                                                                 <label htmlFor="phone">
-                                                                    <Typography variant='subtitle2' gutterBottom>
-                                                                        {t('auth_reg:enter_phone')}
+                                                                    <Typography
+                                                                        variant="subtitle2"
+                                                                        gutterBottom
+                                                                    >
+                                                                        {t(
+                                                                            'auth_reg:enter_phone'
+                                                                        )}
                                                                     </Typography>
                                                                 </label>
                                                                 <FormikField
                                                                     t={t}
-                                                                    id='phone'
-                                                                    type='tel'
+                                                                    id="phone"
+                                                                    type="tel"
                                                                     name="phone"
-                                                                    disabled={hasCard}
-                                                                    value={expireDate}
-                                                                    onChange={handleInput}
-                                                                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
+                                                                    disabled={
+                                                                        hasCard
+                                                                    }
+                                                                    value={
+                                                                        expireDate
+                                                                    }
+                                                                    onChange={
+                                                                        handleInput
+                                                                    }
+                                                                    errorMsg={getErrorMsg(
+                                                                        errors.phone,
+                                                                        touched.phone,
+                                                                        t
+                                                                    )}
                                                                 />
-                                                            </>}
+                                                            </>
+                                                        )}
                                                     </Grid>
-                                                </>}
+                                                </>
+                                            )}
                                         </Grid>
                                     </Card>
                                 </Grid>
-                                <Grid container item xs={12} lg={10} justifyContent='center'>
+                                <Grid
+                                    container
+                                    item
+                                    xs={12}
+                                    lg={10}
+                                    justifyContent="center"
+                                >
                                     <CustomButton
-                                        type='submit'
+                                        type="submit"
                                         disabled={isFetch}
-                                        className='submit-btn'
+                                        className="submit-btn"
                                     >
-                                        {t(`common:${hasCard
-                                            ? 'remove'
-                                            : isSmsConfirm ? 'send' : 'apply'}`)}
+                                        {t(
+                                            `common:${
+                                                hasCard
+                                                    ? 'remove'
+                                                    : isSmsConfirm
+                                                    ? 'send'
+                                                    : 'apply'
+                                            }`
+                                        )}
                                     </CustomButton>
                                     {!hasCard && (
                                         <>
                                             <Typography
-                                                component='p'
-                                                align='center'
-                                                variant='subtitle1'
-                                                color='textSecondary'
+                                                component="p"
+                                                align="center"
+                                                variant="subtitle1"
+                                                color="textSecondary"
                                             >
                                                 <Trans
                                                     t={t}
                                                     i18nKey="post:safeDealCondition"
-                                                    components={[<LinkText href='/help/safe_deal_offer' />]}
+                                                    components={[
+                                                        <LinkText href="/help/safe_deal_offer" />
+                                                    ]}
                                                 />
                                             </Typography>
-                                            <LinkText href='/help/safe_shopping/concept'>
+                                            <LinkText href="/help/safe_shopping/concept">
                                                 <Typography
-                                                    component='p'
-                                                    align='center'
-                                                    variant='subtitle1'
+                                                    component="p"
+                                                    align="center"
+                                                    variant="subtitle1"
                                                 >
                                                     {t('post:whySafeDealNeed')}
                                                 </Typography>
@@ -480,7 +661,7 @@ export const UserPaymentCard: FC<UserPaymentCardProps> = (props) => {
                                 </Grid>
                             </Grid>
                         </>
-                    }
+                    )}
                 </Form>
             </FormikProvider>
             <ConfirmModal

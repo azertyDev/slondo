@@ -3,10 +3,10 @@ import Link from 'next/link';
 import {FacebookIcon} from '@src/components/elements/icons/social_icons/FacebookIcon';
 import {InstagramIcon} from '@src/components/elements/icons/social_icons/InstagramIcon';
 // import {YoutubeIcon} from '@src/components/elements/icons/social_icons/YoutubeIcon';
-// import {TelegramIcon} from '@src/components/elements/icons/social_icons/TelegramIcon';
+import {TelegramIcon} from '@src/components/elements/icons/social_icons/TelegramIcon';
 import {useStyles} from './useStyles';
-import {Typography} from "@material-ui/core";
-import {useTranslation} from "next-i18next";
+import {Typography} from '@material-ui/core';
+import {useTranslation} from 'next-i18next';
 
 export const SocialsBlock: FC = () => {
     const {t} = useTranslation('common');
@@ -19,23 +19,23 @@ export const SocialsBlock: FC = () => {
             </Typography>
             <div>
                 <Link href="https://www.facebook.com/Slondo.uz/">
-                    <a target='_blank'>
-                        <FacebookIcon/>
+                    <a target="_blank">
+                        <FacebookIcon />
                     </a>
                 </Link>
                 <Link href="https://www.instagram.com/slondouz/">
-                    <a target='_blank'>
-                        <InstagramIcon/>
+                    <a target="_blank">
+                        <InstagramIcon />
+                    </a>
+                </Link>
+                <Link href="https://telegram.me/slondo">
+                    <a target="_blank">
+                        <TelegramIcon />
                     </a>
                 </Link>
                 {/*<Link href="#">*/}
                 {/*    <a>*/}
                 {/*        <YoutubeIcon/>*/}
-                {/*    </a>*/}
-                {/*</Link>*/}
-                {/*<Link href="#">*/}
-                {/*    <a>*/}
-                {/*        <TelegramIcon/>*/}
                 {/*    </a>*/}
                 {/*</Link>*/}
             </div>

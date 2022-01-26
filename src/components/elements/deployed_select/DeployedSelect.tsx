@@ -42,15 +42,20 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                 </Typography>
             </label>
             <Grid container className='options'>
-                {options.map(item =>
-                    <Grid key={item.id} item xs={6}>
+                {options.map((item, i) =>
+                    <Grid key={i} item xs={6}>
                         <CustomButton
-                            key={item.id}
                             onClick={handleClick(item)}
-                            className={values[name]?.id === item.id ? 'selected' : ''}
+                            className={
+                                item.id
+                                    ? item.id === values[name]?.id ? 'selected' : ''
+                                    : item === values[name] ? 'selected' : ''
+                            }
                         >
                             <Typography variant='subtitle1'>
-                                {t(categoryName ? `${categoryName}.${item.name}.name` : `${item.name}`)}
+                                {t(categoryName
+                                    ? `${categoryName}.${item.name}.name`
+                                    : `${item.name ?? item}`)}
                             </Typography>
                         </CustomButton>
                     </Grid>
@@ -58,9 +63,9 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
             </Grid>
             {errorMsg !== '' && (
                 <Typography variant="subtitle1">
-                        <span className='error-text'>
-                            {errorMsg}
-                        </span>
+                    <span className='error-text'>
+                        {errorMsg}
+                    </span>
                 </Typography>
             )}
         </FormControl>
