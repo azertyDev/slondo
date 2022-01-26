@@ -3,6 +3,11 @@
   "remove_notifications": "Удалить уведомления?",
   "successfully_removed": "Уведомление удалено!",
   "titles": {
+    "top_completed": "Услуга «Поднять в топ» окончена",
+    "turbo_sale_completed": "Услуга «Турбо продажа» окончена",
+    "activated_raise_tape": "Вы приобрели услугу «Поднять в ленте», количество {{value}}",
+    "activated_top_service": "Вы активировали услугу «Поднять в топ» на {{value}}",
+    "activated_turbo_sale": "Вы активировали услугу «Турбо продажа» на {{value}}",
     "get_five_star": "Получите оценку 5 звезд",
     "new_rating": "Новая оценка",
     "service_activated": "Активирована услуга",

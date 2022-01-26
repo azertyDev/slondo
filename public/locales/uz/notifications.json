@@ -3,6 +3,11 @@
   "remove_notifications": "Barcha bildirgilarni ochirmoqchimisiz?",
   "successfully_removed": "Bildirgi ochirildi!",
   "titles": {
+    "top_completed": "«Topga ko'tarish» xizmati tugadi",
+    "turbo_sale_completed": "«Turbo sotuv» xizmati tugadi",
+    "activated_raise_tape": "Siz «Lentada ko’tarish» xizmatini xarid qildingiz, soni {{value}}",
+    "activated_top_service": "Siz «Topga ko'tarish» xizmatini {{value}} kunga faollashtirdingiz",
+    "activated_turbo_sale": "Siz «Turbo sotuv» xizmatini {{value}} kunga faollashtirdingiz",
     "get_five_star": "5 yulduzli bahoni qo’lga kiriting",
     "new_rating": "Yangi baho",
     "service_activated": "Xizmat faollashtirildi",

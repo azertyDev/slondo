@@ -3,8 +3,8 @@ import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
 import {Typography} from '@material-ui/core';
 import {transformCyrillic} from '@root/src/helpers';
-import {CategoriesCtx, UserLocationCtx} from "@src/context";
-import {Slider} from "@src/components/elements/slider/Slider";
+import {CategoriesCtx, UserLocationCtx} from '@src/context';
+import {Slider} from '@src/components/elements/slider/Slider';
 import {useStyles} from './useStyles';
 
 export const CategoriesSlider: FC = () => {
@@ -13,7 +13,9 @@ export const CategoriesSlider: FC = () => {
     const categories = useContext(CategoriesCtx);
 
     const userLocation = region
-        ? city ? city.ru_name : region.ru_name
+        ? city
+            ? city.ru_name
+            : region.ru_name
         : 'uzbekistan';
 
     const classes = useStyles();
@@ -29,18 +31,17 @@ export const CategoriesSlider: FC = () => {
                         return (
                             <Link
                                 key={i}
-                                href={`/${userLocation}/${transformCyrillic(ru_name)}`}
+                                href={`/${userLocation}/${transformCyrillic(
+                                    ru_name
+                                )}`}
                             >
                                 <a title={ctgrName}>
                                     <div className="category">
                                         <div className="bg-layer">
-                                            <img
-                                                alt={ctgrName}
-                                                src={iconUrl}
-                                            />
+                                            <img alt={ctgrName} src={iconUrl} />
                                         </div>
                                         <span className="category-name">
-                                            <Typography variant='h4'>
+                                            <Typography variant="h4">
                                                 {ctgrName}
                                             </Typography>
                                         </span>
@@ -60,7 +61,7 @@ const config = {
     partialVisible: true,
     responsive: {
         desktop: {
-            breakpoint: {max: 1920, min: 1440},
+            breakpoint: {max: 3000, min: 1440},
             items: 7
         },
         laptop: {

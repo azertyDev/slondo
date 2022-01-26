@@ -8,6 +8,7 @@ import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from '@src/context';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ITEMS_PER_PAGE} from '@src/constants';
+import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 export type NotificationDataType = {
@@ -37,29 +38,13 @@ export const NotificationCard: FC<NotificationDataType> = props => {
         setNotifications
     } = props;
 
+    const {locale} = useRouter();
     const {t} = useTranslation('notifications');
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const date = new Date(created_at);
 
     const [isFetch, setIsFetch] = useState(false);
-    // const [phone, setPhone] = useState(null);
-
-    // const fetchUserPhone = async () => {
-    //     try {
-    //         setIsFetch(true);
-    //         const {phone} = await userAPI.getPhoneByUserId(ads_id);
-    //         unstable_batchedUpdates(() => {
-    //             setPhone(phone);
-    //             setIsFetch(false);
-    //         });
-    //     } catch (e) {
-    //         unstable_batchedUpdates(() => {
-    //             setIsFetch(false);
-    //             setErrorMsg(e.message);
-    //         });
-    //     }
-    // };
 
     const handleDeleteNotification = async () => {
         try {
@@ -109,44 +94,34 @@ export const NotificationCard: FC<NotificationDataType> = props => {
                         </Box>
                         <Box width="100%">
                             <Box>
-                                {!!title && (
+                                {title && (
                                     <Typography variant="h6" color="initial">
-                                        {t(`titles.${title}`)}
+                                        {t(`titles.${title}`, {
+                                            value:
+                                                locale === 'ru' &&
+                                                title !== 'activated_raise_tape'
+                                                    ? `${value / 24} ${
+                                                          value / 24 > 4
+                                                              ? 'дней'
+                                                              : 'дня'
+                                                      }`
+                                                    : value
+                                        })}
                                     </Typography>
                                 )}
-                                <Typography variant="subtitle1" color="initial">
-                                    {t(`descriptions.${message}`, {
-                                        ads_id,
-                                        user_name,
-                                        value
-                                    })}
-                                </Typography>
+                                {message && (
+                                    <Typography
+                                        variant="subtitle1"
+                                        color="initial"
+                                    >
+                                        {t(`descriptions.${message}`, {
+                                            ads_id,
+                                            user_name,
+                                            value
+                                        })}
+                                    </Typography>
+                                )}
                             </Box>
-                            {/*<Box display='flex' justifyContent='flex-end'>*/}
-                            {/*    {phone*/}
-                            {/*        ? <Button*/}
-                            {/*            size="small"*/}
-                            {/*            color="secondary"*/}
-                            {/*            className='forward-to-btn'*/}
-                            {/*        >*/}
-                            {/*            <Typography variant='subtitle1' color="secondary">*/}
-                            {/*                {phone}*/}
-                            {/*            </Typography>*/}
-                            {/*        </Button>*/}
-                            {/*        : isFetch*/}
-                            {/*            ? <CustomCircularProgress/>*/}
-                            {/*            : <Button*/}
-                            {/*                size="small"*/}
-                            {/*                color="secondary"*/}
-                            {/*                className='forward-to-btn'*/}
-                            {/*                onClick={fetchUserPhone}*/}
-                            {/*            >*/}
-                            {/*                <Phone className='phone-icon'/>*/}
-                            {/*                <Typography variant='subtitle1' color="secondary">*/}
-                            {/*                    {t('show_phone')}*/}
-                            {/*                </Typography>*/}
-                            {/*            </Button>}*/}
-                            {/*</Box>*/}
                         </Box>
                         {isPersonal && (
                             <IconButton onClick={handleDeleteNotification}>
