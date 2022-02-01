@@ -125,6 +125,23 @@ export const useStyles = makeStyles(theme => ({
                 '& .color-silver': {
                     color: '#BDBDBD'
                 }
+            },
+            '& div.service-btns': {
+                position: 'absolute',
+                top: '50%',
+                right: 0,
+                transform: 'translate(0%, -50%)',
+                '& div': {
+                    width: 80,
+                    height: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50px 0 0 50px',
+                    '&.turbo-sticker': {
+                        marginBottom: 5
+                    }
+                }
             }
         }
     }

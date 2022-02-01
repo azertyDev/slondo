@@ -10,7 +10,7 @@ export const useStyles = makeStyles(theme => ({
             color: '#fff'
         },
         [theme.breakpoints.down('md')]: {
-            padding: '4px 10px'
+            padding: '4px 15px'
         },
         [theme.breakpoints.down('lg')]: {
             padding: '4px 12px'

@@ -25,6 +25,9 @@ export const useStyles = makeStyles(theme => ({
             justifyContent: 'space-between',
             alignItems: 'center',
             marginBottom: 10,
+            [theme.breakpoints.down('xs')]: {
+                justifyContent: 'flex-end'
+            },
             '& a': {
                 fontSize: '.75rem',
                 '&:hover': {
@@ -36,9 +39,6 @@ export const useStyles = makeStyles(theme => ({
             },
             '& p.MuiTypography-subtitle1': {
                 marginRight: 10,
-                [theme.breakpoints.down('xs')]: {
-                    marginRight: 0
-                },
                 '& span': {
                     color: '#838383'
                 }
@@ -49,16 +49,16 @@ export const useStyles = makeStyles(theme => ({
                     status === 'public'
                         ? '1px solid #90BE27'
                         : status === 'blocked' ||
-                          status === 'reject' ||
-                          status === 'refuse'
+                        status === 'reject' ||
+                        status === 'refuse'
                         ? '1px solid #F08F8F'
                         : status === 'suspended' || status === 'moderation'
-                        ? '1px solid #7DBCF6'
-                        : status === 'archive' ||
-                          status === 'history' ||
-                          status === 'sold'
-                        ? '1px solid #BDBDBD'
-                        : '1px solid #7DBCF6',
+                            ? '1px solid #7DBCF6'
+                            : status === 'archive' ||
+                            status === 'history' ||
+                            status === 'sold'
+                                ? '1px solid #BDBDBD'
+                                : '1px solid #7DBCF6',
 
                 borderRadius: '3px',
                 '& .MuiTypography-subtitle2': {
@@ -66,19 +66,43 @@ export const useStyles = makeStyles(theme => ({
                         status === 'public'
                             ? '#90BE27'
                             : status === 'blocked' ||
-                              status === 'reject' ||
-                              status === 'refuse'
+                            status === 'reject' ||
+                            status === 'refuse'
                             ? '#F08F8F'
                             : status === 'suspended' || status === 'moderation'
-                            ? '#7DBCF6'
-                            : status === 'archive' ||
-                              status === 'history' ||
-                              status === 'sold'
-                            ? '#BDBDBD'
-                            : '#7DBCF6',
+                                ? '#7DBCF6'
+                                : status === 'archive' ||
+                                status === 'history' ||
+                                status === 'sold'
+                                    ? '#BDBDBD'
+                                    : '#7DBCF6',
 
                     [theme.breakpoints.down('xs')]: {
                         fontSize: '.75rem'
+                    }
+                }
+            },
+            '& div.services': {
+                display: 'flex',
+                alignItems: 'center',
+                marginRight: 10,
+                '& .top': {
+                    '& svg': {
+                        marginRight: 5
+                    }
+                },
+                '& div.service-item': {
+                    display: 'flex',
+                    '&:not(:last-child)': {
+                        marginRight: 20,
+                        [theme.breakpoints.down('xs')]: {
+                            marginRight: 0
+                        }
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        '& p': {
+                            display: 'none'
+                        }
                     }
                 }
             }

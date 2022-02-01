@@ -1,32 +1,22 @@
 import {FC} from 'react';
 import {
-    EyeIcon,
-    SafeIcon,
-    SwapIcon,
-    PhoneIcon,
     AutoRenewalIcon,
     DeliveryIcon,
-    FavoriteBorderIcon
+    EyeIcon,
+    FavoriteBorderIcon,
+    PhoneIcon,
+    SafeIcon,
+    SwapIcon
 } from '@src/components/elements/icons';
 import Link from 'next/link';
 import Countdown from 'react-countdown';
 import {useTranslation} from 'react-i18next';
-import {
-    formatNumber,
-    numberPrettier,
-    priceTransform,
-    transformCyrillic,
-    weekDaysHelper
-} from '@src/helpers';
-import {
-    Box,
-    Grid,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from '@material-ui/core';
+import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
+import {TurboSticker} from '@src/components/elements/card/turbo_sticker/TurboSticker';
+import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
 
 type ListCardPropsType = {
     cardData: CardDataType;
@@ -40,14 +30,20 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
     const isAuction =
         cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
+    const {top = false, turbo_sale = false} = cardData.slondo_services
+        ? cardData.slondo_services.reduce<any>((keys, item) => {
+            keys[item.service.name] = true;
+            return keys;
+        }, {})
+        : {};
 
     const hasService = Boolean(
         cardData.delivery ||
-            cardData.exchange ||
-            cardData.safe_deal ||
-            cardData.available_days ||
-            cardData.auto_renewal ||
-            cardData.auction?.auto_renewal
+        cardData.exchange ||
+        cardData.safe_deal ||
+        cardData.available_days ||
+        cardData.auto_renewal ||
+        cardData.auction?.auto_renewal
     );
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
@@ -197,7 +193,7 @@ export const CabinetCard: FC<ListCardPropsType> = ({cardData}) => {
                                                             &nbsp;
                                                             {(cardData.available_start_time ||
                                                                 cardData.available_end_time) &&
-                                                                `${cardData.available_start_time}-${cardData.available_end_time}`}
+                                                            `${cardData.available_start_time}-${cardData.available_end_time}`}
                                                         </Typography>
                                                     )}
                                                 </div>
