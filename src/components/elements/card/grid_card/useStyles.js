@@ -160,7 +160,7 @@ export const useStyles = makeStyles(theme => ({
         },
         '& div.turbo-sticker': {
             right: 0,
-            bottom: 20,
+            bottom: 23,
             position: 'absolute',
             borderRadius: '8px 0px 0px 8px',
             padding: '7px 15px',
