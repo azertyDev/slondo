@@ -85,7 +85,7 @@ export const GridCard: FC<CardItemProps> = props => {
         setLiked(favorite);
     }, [favorite]);
 
-    const classes = useStyles({ads_type, isFavorite});
+    const classes = useStyles({ads_type, isFavorite, turbo_sale, top});
     return (
         <div className={classes.root}>
             {isAuth && !creator && (
