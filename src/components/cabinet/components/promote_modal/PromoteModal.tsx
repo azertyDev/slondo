@@ -15,7 +15,7 @@ import {SuccessStage} from '@src/components/cabinet/components/promote_modal/suc
 import {ErrorCtx} from '@src/context';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {BackspaceIcon, DeleteIcon} from '@src/components/elements/icons';
-import {RaiseTapeIcon, TopIcon, TurboSaleIcon} from '@src/assets/icons';
+import {RaiseTapeIcon, TopBorderedIcon, TurboSaleIcon} from '@src/assets/icons';
 import {Check} from '@material-ui/icons';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
@@ -470,7 +470,7 @@ function normalizeServicesData(data) {
 }
 
 export const serviceIcons = {
-    top: <TopIcon />,
+    top: <TopBorderedIcon />,
     raise_tape: <RaiseTapeIcon />,
     turbo_sale: <TurboSaleIcon />
 };

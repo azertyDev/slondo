@@ -8,9 +8,9 @@ export const useStyles = makeStyles(theme => ({
             height: '233px'
         },
         '& .region': {
-            maxWidth: 145,
+            maxWidth: ({turbo_sale}) => turbo_sale ? 145 : 'auto',
             [theme.breakpoints.down('xs')]: {
-                maxWidth: 85
+                maxWidth: ({turbo_sale}) => turbo_sale ? 85 : 'auto'
             }
         },
         '& a': {
@@ -165,7 +165,7 @@ export const useStyles = makeStyles(theme => ({
             borderRadius: '8px 0px 0px 8px',
             padding: '7px 15px',
             [theme.breakpoints.down('xs')]: {
-            padding: '5px 10px',
+                padding: '5px 10px',
                 fontSize: '0.875rem'
             }
         }

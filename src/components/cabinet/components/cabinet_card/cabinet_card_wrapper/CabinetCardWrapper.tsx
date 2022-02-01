@@ -10,7 +10,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';
 import {TurboRocket} from '@src/assets/icons';
-import TopIcon from '@src/assets/icons/Top.svg';
+import TopIcon from '@src/assets/icons/top.svg';
 
 type CabinetCardPropsType = {
     cardData: CardDataType;
