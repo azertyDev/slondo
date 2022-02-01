@@ -254,10 +254,10 @@ export const ListCard: FC<CardDataType> = (props) => {
                         </Grid>
                         <Box className='services'>
                             {turbo_sale && (
-                                <TurboSticker className="turbo-sticker" />
+                                <TurboSticker className="turbo-sticker service-item" />
                             )}
                             {top && (
-                                <TopSticker className="top-sticker" />
+                                <TopSticker className="top-sticker service-item" />
                             )}
                         </Box>
                     </Grid>
