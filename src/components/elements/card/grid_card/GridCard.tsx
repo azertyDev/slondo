@@ -19,9 +19,9 @@ import {userAPI} from '@src/api/api';
 import {AuthCtx} from '@src/context/AuthCtx';
 import {ErrorCtx} from '@src/context';
 import {useDate} from '@src/hooks';
-import {useStyles} from './useStyles';
 import {TopSticker} from '@src/components/elements/card/top_sticker/TopSticker';
 import {TurboSticker} from '@src/components/elements/card/turbo_sticker/TurboSticker';
+import {useStyles} from './useStyles';
 
 type CardItemProps = {
     isFetch?: boolean;

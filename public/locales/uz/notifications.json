@@ -5,9 +5,6 @@
   "titles": {
     "top_completed": "«Topga ko'tarish» xizmati tugadi",
     "turbo_sale_completed": "«Turbo sotuv» xizmati tugadi",
-    "activated_raise_tape": "Siz «Lentada ko’tarish» xizmatini xarid qildingiz, soni {{value}}",
-    "activated_top_service": "Siz «Topga ko'tarish» xizmatini {{value}} kunga faollashtirdingiz",
-    "activated_turbo_sale": "Siz «Turbo sotuv» xizmatini {{value}} kunga faollashtirdingiz",
     "get_five_star": "5 yulduzli bahoni qo’lga kiriting",
     "new_rating": "Yangi baho",
     "service_activated": "Xizmat faollashtirildi",
@@ -35,6 +32,11 @@
     "auto_renewal_activated": "«Auksion avtouzaytirish» imkoniyati ishga tushdi"
   },
   "descriptions": {
+    "top_expired": "«Topga ko'tarish» xizmati tugadi",
+    "turbo_sale_expired": "«Turbo sotuv» xizmati tugadi",
+    "activated_raise_tape": "Siz «Lentada ko’tarish» xizmatini xarid qildingiz, soni {{value}}",
+    "activated_top_service": "Siz «Topga ko'tarish» xizmatini {{value}} kunga faollashtirdingiz",
+    "activated_turbo_sale": "Siz «Turbo sotuv» xizmatini {{value}} kunga faollashtirdingiz",
     "secure_post_failed_moderation": "Xavfsiz xaridli № {{ads_id}} e'lon moderatsiya tomonidan rad etildi",
     "secure_post_successfully": "Tabriklaymiz, № {{ads_id}} Sonli e’lon bo’yicha Xavfsiz Xarid muvaffaqiyatli amalga oshirildi. Mablag’ sotuvchining kartasiga yuborildi",
     "secure_purchase_successfully": "Tabriklaymiz, № {{ads_id}} Sonli e’lon bo’yicha Xavfsiz Xarid muvaffaqiyatli amalga oshirildi. Mablag’ sotuvchining kartasiga yuborildi",
@@ -58,7 +60,6 @@
     "buyer_refused_post": "{{user_name}} foydalanuvchi № {{ads_id}} raqamli e’lon bo’yicha Xavfsiz Xaridni bekor qildi . E’lon yana Slondoda faollashtirildi",
     "buyer_paid_secure_post": "№ {{ads_id}} sonli Xavfsiz Xarid bo’yicha e’lonning  to’lovi {{user_name}} foydalanuvchi tomonidan to’landi.Mahsulotni yetkazish uchun,xaridor bilan bog’laning,bitimni yakunlang",
     "secure_post_published": "Tabriklaymiz, Sizning № {{ads_id}} sonli, xavfsiz xarid bo’yicha e’loningiz  Slondoda chop etildi",
-    "registered_on_slondo": "O’zingiz haqingizdagi ma’lumotni kiriting: Ismingiz, sharfingiz, avatarni yuklang va 5 yulduzni qo’lga kiriting",
-    "activated_raise_tape": "{{ads_id}} sonli e’londa Siz «Lentada tepaga surish» xizmatini faollashtirdingiz "
+    "registered_on_slondo": "O’zingiz haqingizdagi ma’lumotni kiriting: Ismingiz, sharfingiz, avatarni yuklang va 5 yulduzni qo’lga kiriting"
   }
 }

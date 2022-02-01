@@ -58,8 +58,6 @@ export const SearchResult: FC<SearchResultPropsType> = props => {
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const hasTopPosts = topPosts.length !== 0;
 
-    console.log('topPosts', topPosts);
-
     const classes = useStyles();
     return (
         <div className={classes.root}>

@@ -96,17 +96,7 @@ export const NotificationCard: FC<NotificationDataType> = props => {
                             <Box>
                                 {title && (
                                     <Typography variant="h6" color="initial">
-                                        {t(`titles.${title}`, {
-                                            value:
-                                                locale === 'ru' &&
-                                                title !== 'activated_raise_tape'
-                                                    ? `${value / 24} ${
-                                                          value / 24 > 4
-                                                              ? 'дней'
-                                                              : 'дня'
-                                                      }`
-                                                    : value
-                                        })}
+                                        {t(`titles.${title}`)}
                                     </Typography>
                                 )}
                                 {message && (
@@ -117,7 +107,15 @@ export const NotificationCard: FC<NotificationDataType> = props => {
                                         {t(`descriptions.${message}`, {
                                             ads_id,
                                             user_name,
-                                            value
+                                            value:
+                                                locale === 'ru' &&
+                                                message !== 'activated_raise_tape'
+                                                    ? `${value / 24} ${
+                                                          value / 24 > 4
+                                                              ? 'дней'
+                                                              : 'дня'
+                                                      }`
+                                                    : value
                                         })}
                                     </Typography>
                                 )}

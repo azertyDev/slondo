@@ -24,6 +24,7 @@
       "full_description": "Lentada ko’tarish – barcha moderatsiyadan o’tgan e’lonlar uchun mavjud bo'lgan reklama xizmati. Xizmatni faollashtirgandan so'ng, e'lon xuddi hozirgina joylashtirilgandek ro'yxatning yuqori qismida paydo bo'ladi. Yangi yoki ko'tarilgan e’lon paydo bo'lguncha u lentaning yuqori qismida qoladi. “Lentada ko’tarish” xizmati e’lonning amal qilish muddatiga ta’sir qilmaydi, shuningdek, u e’lon qilinganidan keyin 30 kun o‘tgach o‘chiriladi."
     }
   },
+  "not_enough_bonus": "Bonuslar yetarli emas!",
   "offer": "taklif",
   "payme_offer": "Davom etish tugmasini bosish orqali siz {{offer}} shartlariga rozilik bildirasiz",
   "fill_card_data": "Karta ma'lumotlarini to'ldiring",

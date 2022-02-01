@@ -12,7 +12,7 @@ import {FormikProvider, useFormik} from 'formik';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {cardNumExpSchema} from '@root/validation_schemas/paymentCardSchema';
 import {SuccessStage} from '@src/components/cabinet/components/promote_modal/success_stage/SuccesStage';
-import {ErrorCtx} from '@src/context';
+import {AuthCtx, ErrorCtx} from '@src/context';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {BackspaceIcon, DeleteIcon} from '@src/components/elements/icons';
 import {RaiseTapeIcon, TopBorderedIcon, TurboSaleIcon} from '@src/assets/icons';
@@ -49,6 +49,7 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
 
     const {locale} = useRouter();
     const {setErrorMsg} = useContext(ErrorCtx);
+    const {user} = useContext(AuthCtx);
 
     const {t} = useTranslation('cabinet');
     const [isFetch, setIsFetch] = useState(false);
@@ -91,6 +92,8 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                 return 'continue';
         }
     })();
+
+    const notEnoughBonus = stageStatus === 'bonus' && user.balance < +amount;
 
     const fetchServices = async () => {
         try {
@@ -332,7 +335,12 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
             case 'payment':
                 return <PaymentStage handleStage={handleStage} />;
             case 'bonus':
-                return <ConfirmStage amount={amount} />;
+                return (
+                    <ConfirmStage
+                        amount={amount}
+                        notEnoughBonus={notEnoughBonus}
+                    />
+                );
             case 'payme':
             case 'smsConfirm':
                 return (
@@ -438,8 +446,9 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                         {showNextBtn && (
                             <div className="bottom-wrapper">
                                 <CustomButton
-                                    className="next-btn"
                                     type="submit"
+                                    className="next-btn"
+                                    disabled={notEnoughBonus}
                                 >
                                     {t(submitBtnTxt)}
                                 </CustomButton>
