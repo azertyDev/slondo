@@ -146,22 +146,29 @@ export const useStyles = makeStyles(theme => ({
                 top: '40%',
                 right: 0,
                 transform: 'translate(0%, -50%)',
-                display: 'block',
+                display: 'block'
+            },
+            '& div.service-item': {
+                '&:not(:last-child)': {
+                    marginRight: 10,
+                    [theme.breakpoints.down('xs')]: {
+                        marginRight: 0
+                    }
+                }
             },
             '& div.top-sticker': {
                 padding: '6px 20px',
                 borderRadius: '0px 0px 8px 8px',
                 [theme.breakpoints.down('xs')]: {
-                    borderRadius: '8px 0px 0px 8px',
+                    borderRadius: '8px 0px 0px 8px'
                 }
-
             },
             '& div.turbo-sticker': {
                 padding: '6px 15px',
                 borderRadius: '0px 0px 8px 8px',
                 [theme.breakpoints.down('xs')]: {
                     marginBottom: 5,
-                    borderRadius: '8px 0px 0px 8px',
+                    borderRadius: '8px 0px 0px 8px'
                 }
             }
         }
