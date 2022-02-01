@@ -20,6 +20,7 @@ export const useStyles = makeStyles(theme => ({
             OTransition: 'all 0.05s ease-out',
             boxShadow: 'rgb(0 0 0 / 11%) 0px 4px 14px 0px'
         },
+
         '& button.favorite-btn': {
             zIndex: 1,
             top: '10px',
@@ -136,17 +137,34 @@ export const useStyles = makeStyles(theme => ({
                 }
             }
         },
-        '& div.top-sticker': {
+        '& div.services': {
+            display: 'flex',
             position: 'absolute',
-            right: 0,
-            bottom: 0,
-            borderRadius: '10px 0'
-        },
-        '& div.turbo-sticker': {
-            position: 'absolute',
-            bottom: 'calc(50% - 13px)',
-            right: 0,
-            borderRadius: '50px 0 0 50px'
+            right: 50,
+            top: 0,
+            [theme.breakpoints.down('xs')]: {
+                top: '40%',
+                right: 0,
+                transform: 'translate(0%, -50%)',
+                display: 'block',
+            },
+            '& div.top-sticker': {
+                padding: '6px 20px',
+                borderRadius: '0px 0px 8px 8px',
+                [theme.breakpoints.down('xs')]: {
+                    borderRadius: '8px 0px 0px 8px',
+                }
+
+            },
+            '& div.turbo-sticker': {
+                padding: '6px 15px',
+                borderRadius: '0px 0px 8px 8px',
+                [theme.breakpoints.down('xs')]: {
+                    marginBottom: 5,
+                    borderRadius: '8px 0px 0px 8px',
+                }
+            }
         }
+
     }
 }));

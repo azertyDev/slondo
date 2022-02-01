@@ -3,24 +3,14 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
-import {
-    Box,
-    Grid,
-    Hidden,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {
-    CloseIcon,
-    NotificationIcon,
-    RocketIcon,
-    SettingsIcon
-} from '@src/components/elements/icons';
+import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';
+import {TurboRocket} from '@src/assets/icons';
+import TopIcon from '@src/assets/icons/Top.svg';
 
 type CabinetCardPropsType = {
     cardData: CardDataType;
@@ -44,9 +34,15 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
     const {
         query: {page}
     } = useRouter();
-    const {t} = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'common']);
 
     const {category, adsable, ads_type, status, creator} = cardData;
+    const {top = false, turbo_sale = false} = cardData.slondo_services
+        ? cardData.slondo_services.reduce<any>((keys, item) => {
+            keys[item.service.name] = true;
+            return keys;
+        }, {})
+        : {};
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
@@ -72,27 +68,43 @@ export const CabinetCardWrapper: FC<CabinetCardPropsType> = props => {
                             subcategory={adsable?.sub_category.name}
                         />
                     </Hidden>
-                    <Box
-                        display="flex"
-                        alignItems="center"
-                        width={isXsDown ? 1 : 'auto'}
-                        justifyContent={isXsDown ? 'space-between' : ''}
-                    >
-                        <Typography
-                            variant="subtitle1"
-                            color="initial"
-                            component="p"
+                    <Box display='flex'>
+                        <Box className='services'>
+                            {top && (
+                                <div className='service-item top'>
+                                    <TopIcon />
+                                    <Typography>{t('common:top')}</Typography>
+                                </div>
+                            )}
+                            {turbo_sale && (
+                                <div className='service-item turbo'>
+                                    <TurboRocket />
+                                    <Typography>{t('common:turbo')}</Typography>
+                                </div>
+                            )}
+                        </Box>
+                        <Box
+                            display='flex'
+                            alignItems="center"
+                            width={isXsDown ? 1 : 'auto'}
+                            justifyContent={isXsDown ? 'space-between' : ''}
                         >
+                            <Typography
+                                variant="subtitle1"
+                                color="initial"
+                                component="p"
+                            >
                             <span className={ads_type}>
                                 {t(`common:${ads_type}`)} №:&nbsp;
                             </span>
-                            {cardData.id}
-                        </Typography>
-                        <div className="status">
-                            <Typography variant="subtitle2" component="p">
-                                {t(status)}
+                                {cardData.id}
                             </Typography>
-                        </div>
+                            <div className="status">
+                                <Typography variant="subtitle2" component="p">
+                                    {t(status)}
+                                </Typography>
+                            </div>
+                        </Box>
                     </Box>
                 </div>
             </Box>

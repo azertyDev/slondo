@@ -7,7 +7,7 @@ import {
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
-import {Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useDate} from '@src/hooks';
 import {useStyles} from './useStyles';
@@ -252,12 +252,14 @@ export const ListCard: FC<CardDataType> = (props) => {
                                 </Hidden>
                             </Grid>
                         </Grid>
-                        {turbo_sale && (
-                            <TurboSticker className="turbo-sticker" />
-                        )}
-                        {top && (
-                            <TopSticker className="top-sticker" />
-                        )}
+                        <Box className='services'>
+                            {turbo_sale && (
+                                <TurboSticker className="turbo-sticker" />
+                            )}
+                            {top && (
+                                <TopSticker className="top-sticker" />
+                            )}
+                        </Box>
                     </Grid>
                 </a>
             </Link>

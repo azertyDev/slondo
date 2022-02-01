@@ -152,9 +152,6 @@ export const GridCard: FC<CardItemProps> = props => {
                                         )}
                                     </div>
                                 </div>
-                                {turbo_sale && (
-                                    <TurboSticker className="turbo-sticker" />
-                                )}
                             </CardMedia>
                         )}
                         <CardActionArea>
@@ -201,6 +198,7 @@ export const GridCard: FC<CardItemProps> = props => {
                                                 noWrap
                                                 component="p"
                                                 variant="caption"
+                                                className='region'
                                                 classes={{
                                                     root: classes.mobileFont
                                                 }}
@@ -216,6 +214,9 @@ export const GridCard: FC<CardItemProps> = props => {
                                             {time}
                                         </Typography>
                                     </>
+                                )}
+                                {turbo_sale && (
+                                    <TurboSticker className="turbo-sticker" />
                                 )}
                                 {top && <TopSticker className="top-sticker" />}
                             </CardContent>

@@ -7,6 +7,12 @@ export const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('xs')]: {
             height: '233px'
         },
+        '& .region': {
+            maxWidth: 145,
+            [theme.breakpoints.down('xs')]: {
+                maxWidth: 85
+            }
+        },
         '& a': {
             textDecoration: 'none'
         },
@@ -153,10 +159,15 @@ export const useStyles = makeStyles(theme => ({
             borderRadius: '10px 0 0'
         },
         '& div.turbo-sticker': {
-            position: 'absolute',
-            bottom: '10px',
             right: 0,
-            borderRadius: '50px 0 0 50px'
+            bottom: 20,
+            position: 'absolute',
+            borderRadius: '8px 0px 0px 8px',
+            padding: '7px 15px',
+            [theme.breakpoints.down('xs')]: {
+            padding: '5px 10px',
+                fontSize: '0.875rem'
+            }
         }
     },
     title: {
