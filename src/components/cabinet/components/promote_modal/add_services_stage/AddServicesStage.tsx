@@ -192,14 +192,12 @@ export const AddServicesStage: FC<AddServicesStageProps> = props => {
                                 )}
                             </Typography>
                         </Grid>
-                        <Hidden smDown>
-                            <Grid
-                                item
-                                sm={7}
-                                xs={12}
-                                className={`service-bg ${selectedServiceName}-bg`}
-                            />
-                        </Hidden>
+                        <Grid
+                            item
+                            sm={7}
+                            xs={12}
+                            className={`service-bg ${selectedServiceName}-bg`}
+                        />
                     </Grid>
                 )}
             </>

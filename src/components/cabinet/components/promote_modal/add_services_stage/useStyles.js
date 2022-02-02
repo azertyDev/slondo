@@ -54,7 +54,7 @@ export const useStyles = makeStyles(theme => ({
                 padding: '10px',
                 paddingLeft: '80px',
                 [theme.breakpoints.down('sm')]: {
-                    paddingLeft: '10px',
+                    paddingLeft: '10px'
                 },
                 '& div.service-header': {
                     marginBottom: '15px',
@@ -76,7 +76,7 @@ export const useStyles = makeStyles(theme => ({
                     backgroundPosition: '-45px center',
                     [theme.breakpoints.down('sm')]: {
                         backgroundPosition: 'bottom',
-                        backgroundSize: 'auto',
+                        backgroundSize: 'auto'
                     }
                 },
                 '&.top': {
@@ -99,6 +99,11 @@ export const useStyles = makeStyles(theme => ({
                 marginTop: '75px',
                 [theme.breakpoints.down('sm')]: {
                     marginTop: 0
+                },
+                '&.top-bg, &.turbo_sale-bg, &.raise_tape-bg': {
+                    [theme.breakpoints.down('sm')]: {
+                        display: 'none'
+                    }
                 }
             },
             '& div.default-bg': {
