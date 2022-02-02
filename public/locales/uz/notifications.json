@@ -32,6 +32,11 @@
     "auto_renewal_activated": "«Auksion avtouzaytirish» imkoniyati ishga tushdi"
   },
   "descriptions": {
+    "top_bonus_received": "Siz 3\\7\\30 kunga «Topga ko'tarish» xizmatini ishlatgan uchun {{value}} bonusga ega bo'ldingiz",
+    "turbo_sale_bonus_received": "Siz 3\\7\\30 kunga «Turbo sotuv» xizmatini ishlatgan uchun {{value}} bonusga ega bo'ldingiz",
+    "raise_tape_bonus_received": "Siz «Lentada ko’tarish» xizmatini ishlatgan uchun {{value}} bonusga ega bo'ldingiz",
+    "purchased_raise_tape": "Siz «Lentada ko’tarish» xizmatini sotib oldingiz",
+    "post_raised_tape": "Sizning e'loningiz lentada ko'tarildi",
     "top_expired": "«Topga ko'tarish» xizmati tugadi",
     "turbo_sale_expired": "«Turbo sotuv» xizmati tugadi",
     "activated_raise_tape": "Siz «Lentada ko’tarish» xizmatini xarid qildingiz, soni {{value}}",

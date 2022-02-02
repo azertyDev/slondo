@@ -1,9 +1,9 @@
 import {FC, useState, useEffect, useContext} from 'react';
+import {useTranslation} from 'react-i18next';
 import {ResponsiveModal} from '@root/src/components/elements/responsive_modal/ResponsiveModal';
 import {AddServicesStage} from '@src/components/cabinet/components/promote_modal/add_services_stage/AddServicesStage';
 import {PaymentStage} from '@src/components/cabinet/components/promote_modal/payment_stage/PaymentStage';
 import {Box, Grid, IconButton, Typography} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
 import {bonusAPI, paymeAPI, servicesAPI} from '@src/api/paid_api';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmStage} from '@src/components/cabinet/components/promote_modal/confirm_stage/ConfirmStage';
@@ -362,11 +362,11 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
                         <Grid
                             item
                             container
-                            xs={isServiceStage ? 10 : 12}
-                            sm={isServiceStage ? 11 : 12}
                             alignItems="center"
                             justifyContent="space-between"
                             className={`selected-service ${name}`}
+                            xs={isServiceStage ? 10 : 12}
+                            sm={isServiceStage ? 11 : 12}
                         >
                             <Box
                                 display="flex"

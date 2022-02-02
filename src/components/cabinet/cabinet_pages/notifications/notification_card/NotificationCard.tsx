@@ -9,6 +9,7 @@ import {ErrorCtx} from '@src/context';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useRouter} from 'next/router';
+import {formatNumber} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 export type NotificationDataType = {
@@ -89,7 +90,7 @@ export const NotificationCard: FC<NotificationDataType> = props => {
                         >
                             <Error color="secondary" />
                             <Typography variant="caption">
-                                {`${date.getHours()}:${date.getMinutes()}`}
+                                {`${formatNumber(date.getHours())}:${formatNumber(date.getMinutes())}`}
                             </Typography>
                         </Box>
                         <Box width="100%">
