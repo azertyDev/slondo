@@ -21,7 +21,7 @@ import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 type PromoteModalProps = {
-    postId: string;
+    post: any;
     postType: string;
     fullWidth?: boolean;
     openDialog: boolean;
@@ -39,13 +39,15 @@ export type Statuses =
 
 export const PromoteModal: FC<PromoteModalProps> = props => {
     const {
-        postId,
+        post,
         postType,
         fullWidth,
         openDialog,
         handleRefresh,
         handleCloseDialog
     } = props;
+
+    const postId = post.id;
 
     const {locale} = useRouter();
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -421,8 +423,8 @@ export const PromoteModal: FC<PromoteModalProps> = props => {
     );
 
     useEffect(() => {
-        postId && fetchServices();
-    }, [postId]);
+        post.status === 'public' && postId && fetchServices();
+    }, [post]);
 
     useEffect(() => {
         openDialog && reset();

@@ -34,8 +34,6 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
     });
 };
 
-export default Cabinet;
-
 const cabinetURLs = [
     '/cabinet/main',
     '/cabinet/rating',
@@ -63,3 +61,5 @@ const cabinetURLs = [
     '/uz/cabinet/paid_services',
     '/uz/cabinet/settings'
 ];
+
+export default Cabinet;

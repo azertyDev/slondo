@@ -258,7 +258,7 @@ export const MyAuctions: FC = () => {
             />
             <PromoteModal
                 postType="auc"
-                postId={selectedAuction.id}
+                post={selectedAuction}
                 openDialog={promoteOpen}
                 handleRefresh={refresh}
                 handleCloseDialog={handleClosePromote}

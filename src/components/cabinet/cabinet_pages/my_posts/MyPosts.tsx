@@ -39,11 +39,13 @@ export const MyPosts: FC = () => {
         handleModalClose: handleCloseSettings,
         handleModalOpen: handleOpenSettings
     } = useModal();
+
     const {
         modalOpen: detailedModalOpen,
         handleModalClose: closeDetailedModal,
         handleModalOpen: openDetailedModal
     } = useModal();
+
     const {
         modalOpen: notificationsOpen,
         handleModalClose: closeNotificationsModal,
@@ -128,6 +130,7 @@ export const MyPosts: FC = () => {
     const [archPostsPagination, archPostsPage, fetchArchPosts] = usePagination(
         getArchPosts()
     );
+
     const [
         secureArchPostsPagination,
         secureArchPostsPage,
@@ -236,7 +239,7 @@ export const MyPosts: FC = () => {
             />
             <PromoteModal
                 postType="post"
-                postId={selectedPost.id}
+                post={selectedPost}
                 openDialog={promoteOpen}
                 handleRefresh={refresh}
                 handleCloseDialog={handleClosePromote}
