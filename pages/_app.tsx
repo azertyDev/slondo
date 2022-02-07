@@ -29,7 +29,7 @@ import {cookieOpts, cookies} from '@src/helpers';
 
 const socketDev = `${DEV_URL}:8005`;
 const socketTestb = `${TESTB_URL}:8005`;
-const socketProduction = `${PROD_URL}:8005`;
+const socketProd = `${PROD_URL}:8005`;
 
 const userObsChannel = 'user-observer-channel:App\\Events\\UserObserverEvent';
 
@@ -41,7 +41,7 @@ const App = props => {
 
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketTestb);
+    const socket = useSocket(socketProd);
     const userLocation = useUserLocation();
     const showExitPrompt = useExitPrompt(false);
 
