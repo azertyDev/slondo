@@ -29,9 +29,9 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
     return (
         <ResponsiveModal
             openDialog={openDialog}
-            handleCloseDialog={handleCloseDialog}
             maxWidth={maxWidth}
             fullWidth={fullWidth}
+            handleCloseDialog={handleCloseDialog}
         >
             <ModalHeader
                 title={title}

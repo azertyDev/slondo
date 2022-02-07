@@ -2,7 +2,7 @@ export const SERVER_URL = `${
     process.env.SERVER_URL || 'http://localhost:3317'
 }`;
 export const DEV_URL = 'http://192.168.100.101';
-export const PRODUCTION_URL = 'https://backend.slondo.uz';
+export const PROD_URL = 'https://backend.slondo.uz';
 export const TESTB_URL = 'https://backend.testb.uz';
 
 export const INNER_URLS = {
@@ -10,7 +10,7 @@ export const INNER_URLS = {
     create_post_guide: '/help/post/create',
     create_auc_guide: '/help/auction/create_auction'
 };
-export const PRODUCTION_URL_API = `${PRODUCTION_URL}/api`;
+export const PROD_URL_API = `${PROD_URL}/api`;
 export const LOCAL_URL_API = `${DEV_URL}/slondo/public/api/`;
 export const TEST_URL_API = `${TESTB_URL}/api/`;
 

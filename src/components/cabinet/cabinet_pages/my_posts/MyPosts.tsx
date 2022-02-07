@@ -239,7 +239,7 @@ export const MyPosts: FC = () => {
             />
             <PromoteModal
                 postType="post"
-                post={selectedPost}
+                postId={selectedPost.id}
                 openDialog={promoteOpen}
                 handleRefresh={refresh}
                 handleCloseDialog={handleClosePromote}

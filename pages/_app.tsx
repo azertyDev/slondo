@@ -21,7 +21,7 @@ import {
     useUserLocation
 } from '@src/hooks';
 import {useExitPrompt} from '@src/hooks/useExitPrompt';
-import {DEV_URL, PRODUCTION_URL, TESTB_URL} from '@src/constants';
+import {DEV_URL, PROD_URL, TESTB_URL} from '@src/constants';
 
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import '../slick.min.css';
@@ -29,7 +29,7 @@ import {cookieOpts, cookies} from '@src/helpers';
 
 const socketDev = `${DEV_URL}:8005`;
 const socketTestb = `${TESTB_URL}:8005`;
-const socketProduction = `${PRODUCTION_URL}:8005`;
+const socketProduction = `${PROD_URL}:8005`;
 
 const userObsChannel = 'user-observer-channel:App\\Events\\UserObserverEvent';
 

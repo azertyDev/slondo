@@ -8,8 +8,8 @@ import {notificationType} from '@src/components/cabinet/cabinet_pages/notificati
 import {CommonModalType} from '@src/components/cabinet/Cabinet';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {NotificationCard} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard';
-import {ErrorCtx} from '@src/context';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {ErrorCtx} from '@src/context';
 
 export const NotificationModal: FC<CommonModalType> = props => {
     const {post, open, onClose} = props;
@@ -50,8 +50,8 @@ export const NotificationModal: FC<CommonModalType> = props => {
     };
 
     useEffect(() => {
-        post.id !== null && fetchNotifications();
-    }, [open, post.id, page]);
+        open && post.id !== null && fetchNotifications();
+    }, [open, page]);
 
     return (
         <CabinetModal
