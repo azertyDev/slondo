@@ -110,7 +110,7 @@ export const NotificationCard: FC<NotificationDataType> = props => {
                                             user_name,
                                             value:
                                                 locale === 'ru' &&
-                                                message !== 'activated_raise_tape'
+                                                message !== 'purchased_raise_tape'
                                                     ? `${value / 24} ${
                                                           value / 24 > 4
                                                               ? 'дней'

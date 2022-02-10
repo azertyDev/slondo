@@ -352,6 +352,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                 setPostTotal(total);
                 isNotFound && setIsNotFound(false);
             } else {
+                setPosts([]);
                 setPostTotal(0);
                 setIsNotFound(true);
             }
@@ -360,6 +361,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                 setTopPosts(topData);
                 setTopPostTotal(topTotal);
             } else {
+                setTopPosts([]);
                 setTopPostTotal(0);
             }
 

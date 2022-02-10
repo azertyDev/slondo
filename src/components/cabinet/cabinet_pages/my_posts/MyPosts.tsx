@@ -124,16 +124,17 @@ export const MyPosts: FC = () => {
 
     const [postsPagination, postPage, fetchPosts] = usePagination(getPosts());
 
-    const [safePostsPagination, safePostPage, fetchSafePosts] =
-        usePagination(getPosts(true));
+    const [safePostsPagination, safePostPage, fetchSafePosts] = usePagination(
+        getPosts(true)
+    );
 
     const [archPostsPagination, archPostsPage, fetchArchPosts] = usePagination(
         getArchPosts()
     );
 
     const [
-        secureArchPostsPagination,
-        secureArchPostsPage,
+        safeArchPostsPagination,
+        safeArchPostsPage,
         fetchSecureArchPosts
     ] = usePagination(getArchPosts(true));
 
@@ -204,9 +205,9 @@ export const MyPosts: FC = () => {
                 tabsData={tabsData}
                 pages={[
                     postPage,
-                    safePostPage,
                     archPostsPage,
-                    secureArchPostsPage
+                    safePostPage,
+                    safeArchPostsPage
                 ]}
                 handlePromoteOpen={handlePromoteOpen}
                 handleDetailedOpen={handleDetailedOpen}
@@ -214,9 +215,9 @@ export const MyPosts: FC = () => {
                 handleNotificationsOpen={handleNotificationsOpen}
                 paginationHandlers={[
                     postsPagination,
-                    safePostsPagination,
                     archPostsPagination,
-                    secureArchPostsPagination
+                    safePostsPagination,
+                    safeArchPostsPagination
                 ]}
             />
             <DetailedModal
