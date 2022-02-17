@@ -4,9 +4,8 @@ import {CloseIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
 type ModalPropsType = {
-    handleModalClose: () => void,
-    openModal: boolean,
-    handleRemoveFavorite?: () => void,
+    openModal: boolean;
+    handleModalClose: () => void;
 }
 
 export const CustomModal: FC<ModalPropsType> = (props) => {

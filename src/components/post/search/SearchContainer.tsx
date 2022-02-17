@@ -11,7 +11,7 @@ import {
     transformCyrillic
 } from '@root/src/helpers';
 import {CategoriesCtx, ErrorCtx} from '@root/src/context';
-import {getSEOContent} from '@root/src/common_data/seo_content';
+import {defaultSEOContent, getSEOContent} from '@root/src/common_data/seo_content';
 import {Container, Grid} from '@material-ui/core';
 import {AdvType} from '@root/interfaces/Adv';
 import {useFormik} from 'formik';
@@ -79,8 +79,8 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
         location: userLocation
     });
 
-    let seoTitle = seoContent.title;
-    const seoTxt = seoContent.text;
+    let seoTitle = seoContent?.title ?? defaultSEOContent[locale].title;
+    const seoTxt = seoContent?.text ?? defaultSEOContent[locale].text;
 
     const description = searchTermFromUrl
         ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${userLocation}${
