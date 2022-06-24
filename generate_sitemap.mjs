@@ -1,20 +1,25 @@
 import fs from 'fs';
 import Axios from "axios";
 import CyrillicToTranslit from "cyrillic-to-translit-js";
+import https from 'https';
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+});
 
 const transFromCyrillic = (locations) => {
     const transform = new CyrillicToTranslit().transform;
 
-    return locations.map(l => {
-        l.ru_name = transform(l.ru_name)
+    return locations.map(loc => {
+        loc.ru_name = transform(loc.ru_name)
             .toLowerCase()
             .replace(/\s+/g, '-');
 
-        if (l.cities) {
-            l.cities = transFromCyrillic(l.cities);
+        if (loc.cities) {
+            loc.cities = transFromCyrillic(loc.cities);
         }
 
-        return l;
+        return loc;
     });
 };
 
@@ -22,6 +27,7 @@ const getLocationsNames = async () => {
     const names = [];
 
     const regions = await Axios.create({
+        httpsAgent: agent,
         withCredentials: true,
         baseURL: 'https://backend.slondo.uz/api/'
     })

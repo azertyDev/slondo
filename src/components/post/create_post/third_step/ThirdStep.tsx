@@ -190,6 +190,7 @@ export const ThirdStep: FC<{ backURL: string }> = ({backURL}) => {
     const toPublish = async () => {
         try {
             const form = new FormData();
+
             const {
                 params,
                 commonParams,

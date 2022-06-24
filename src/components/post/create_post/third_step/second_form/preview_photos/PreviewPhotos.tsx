@@ -65,9 +65,7 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                             </CustomButton>
                                         </Box>
                                         : <>
-                                            <label
-                                                htmlFor={`upload-${index}`}
-                                            >
+                                            <label htmlFor={`upload-${index}`}>
                                                 <Box
                                                     display='flex'
                                                     component='span'
@@ -97,7 +95,10 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <DragDropContext enableDefaultSensors={true} onDragEnd={handleOnDragEnd}>
+            <DragDropContext
+                enableDefaultSensors
+                onDragEnd={handleOnDragEnd}
+            >
                 {getDndRow()}
             </DragDropContext>
         </div>
