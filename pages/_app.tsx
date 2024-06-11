@@ -1,17 +1,13 @@
-import Script from 'next/script';
-import {browser} from 'process';
-import {useEffect} from 'react';
-import theme from '@src/theme';
-import {userAPI} from '@src/api/api';
-import {appWithTranslation} from 'next-i18next';
-import {ThemeProvider, CssBaseline} from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { userAPI } from '@src/api/api';
+import { DEV_URL, PROD_URL, TESTB_URL } from '@src/constants';
 import {
     AuthCtx,
     ErrorCtx,
-    SearchCtx,
     ExitPromptCtx,
-    UserLocationCtx,
-    SocketCtx
+    SearchCtx,
+    SocketCtx,
+    UserLocationCtx
 } from '@src/context';
 import {
     useAuth,
@@ -20,14 +16,18 @@ import {
     useSocket,
     useUserLocation
 } from '@src/hooks';
-import {useExitPrompt} from '@src/hooks/useExitPrompt';
-import {DEV_URL, PROD_URL, TESTB_URL} from '@src/constants';
+import { useExitPrompt } from '@src/hooks/useExitPrompt';
+import theme from '@src/theme';
+import { appWithTranslation } from 'next-i18next';
+import Script from 'next/script';
+import { browser } from 'process';
+import { useEffect } from 'react';
 
+import { cookieOpts, cookies } from '@root/src/helpers';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 import '../slick.min.css';
-import {cookieOpts, cookies} from '@src/helpers';
 
-const socketDev = `${DEV_URL}:8005`;
+const socketDev = `${DEV_URL}`;
 const socketTestb = `${TESTB_URL}:8005`;
 const socketProd = `${PROD_URL}:8005`;
 
@@ -41,7 +41,7 @@ const App = props => {
 
     const error = useError();
     const search = useSearch();
-    const socket = useSocket(socketProd);
+    const socket = useSocket(socketDev);
     const userLocation = useUserLocation();
     const showExitPrompt = useExitPrompt(false);
 

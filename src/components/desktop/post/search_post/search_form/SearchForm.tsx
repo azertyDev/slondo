@@ -9,7 +9,7 @@ import {
     useTheme
 } from '@material-ui/core';
 import {useRouter} from 'next/router';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';

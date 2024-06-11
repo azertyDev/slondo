@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {useRouter} from 'next/router';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {DropResult} from 'react-beautiful-dnd';
 import {unstable_batchedUpdates} from 'react-dom';
 import {Box, Grid, Typography} from '@material-ui/core';

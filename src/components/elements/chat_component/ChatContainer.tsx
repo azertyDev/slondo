@@ -8,7 +8,7 @@ import {
     useState
 } from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {Chat} from './chat/Chat';
 import {Contacts} from './contacts/Contacts';
 import {ErrorCtx, SocketCtx} from '@src/context';
@@ -387,7 +387,7 @@ export const ChatContainer: FC<ChatContainerProps> = props => {
                     />
                 </>
             ) : (
-                <div>{t('no_messages')}</div>
+                <Box p={2} width='100%'>{t('no_messages')}</Box>
             )}
         </Grid>
     );

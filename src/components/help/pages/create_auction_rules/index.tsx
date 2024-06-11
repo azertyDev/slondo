@@ -1,5 +1,5 @@
 import {Box, Grid, Typography} from '@material-ui/core';
-import {useTranslation, Trans} from 'react-i18next';
+import {useTranslation, Trans} from 'next-i18next';
 import {useStyles} from '../useStyles';
 
 export const CreateAuctionRules = () => {

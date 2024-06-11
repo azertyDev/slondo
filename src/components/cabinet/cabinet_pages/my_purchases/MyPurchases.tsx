@@ -1,19 +1,19 @@
-import {FC, useContext, useState} from 'react';
-import {unstable_batchedUpdates} from 'react-dom';
-import {ErrorCtx} from '@src/context';
-import {useModal, usePagination} from '@src/hooks';
-import {useTranslation} from 'react-i18next';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {initCardData} from '@src/common_data/common';
-import {CardDataType} from '@root/interfaces/CardData';
-import {DoubleTabType, TabsType} from '@root/interfaces/Cabinet';
-import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
-import {DetailedModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
-import {NotificationModal} from '@src/components/cabinet/components/notification_modal/NotificationModal';
-import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {DoubleTabs} from '@src/components/cabinet/components/tabs_content/DoubleTabs';
-import {myUzCardAPI} from '@src/api/paid_api';
-import {cabinetAPI} from '@root/src/api/cabinet_api';
+import { DoubleTabType, TabsType } from '@root/interfaces/Cabinet';
+import { CardDataType } from '@root/interfaces/CardData';
+import { cabinetAPI } from '@root/src/api/cabinet_api';
+import { myUzCardAPI } from '@src/api/paid_api';
+import { initCardData } from '@src/common_data/common';
+import { DetailedModal } from '@src/components/cabinet/components/detailed_post_modal/DetailedModal';
+import { EmptyPage } from '@src/components/cabinet/components/empty_page/EmptyPage';
+import { NotificationModal } from '@src/components/cabinet/components/notification_modal/NotificationModal';
+import { DoubleTabs } from '@src/components/cabinet/components/tabs_content/DoubleTabs';
+import { ConfirmModal } from '@src/components/elements/confirm_modal/Confirm_modal';
+import { ITEMS_PER_PAGE } from '@src/constants';
+import { ErrorCtx } from '@src/context';
+import { useModal, usePagination } from '@src/hooks';
+import { useTranslation } from 'next-i18next';
+import { FC, useContext, useState } from 'react';
+import { unstable_batchedUpdates } from 'react-dom';
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -128,12 +128,12 @@ export const MyPurchases: FC = () => {
             title: t('myPurchases'),
             innerTabsData: {
                 innerFirstTab: {
-                    posts: purchases.data,
+                    posts: purchases?.data,
                     total: purchases.total,
                     emptyPage: <EmptyPage label={t('cabinet:empty.purchase')} />
                 },
                 innerSecondTab: {
-                    posts: archivePurchases.data,
+                    posts: archivePurchases?.data,
                     total: archivePurchases.total,
                     emptyPage: <EmptyPage label={t('empty.archive')} />
                 }

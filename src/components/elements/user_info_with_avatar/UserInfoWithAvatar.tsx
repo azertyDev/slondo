@@ -1,6 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 import {INCOGNITO_NAMES} from "@src/constants";
 import {AuthCtx, ErrorCtx} from "@src/context";

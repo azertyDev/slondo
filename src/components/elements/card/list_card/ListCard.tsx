@@ -5,7 +5,7 @@ import {
     DeliveryIcon, FavoriteIcon, FavoritedIcon
 } from '@src/components/elements/icons';
 import Link from 'next/link';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {numberPrettier, priceTransform, transformCyrillic} from '@src/helpers';
 import {Box, Grid, Hidden, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';

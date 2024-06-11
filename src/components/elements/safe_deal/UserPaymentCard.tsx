@@ -5,7 +5,7 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
-import {Trans, useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'next-i18next';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {
     cookieOpts,

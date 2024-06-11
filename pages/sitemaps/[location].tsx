@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-extra-semi */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {userAPI} from "@src/api/api";
-import {GetServerSideProps} from 'next';
-import {getSitemap, transformCyrillic} from "@src/helpers";
-import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import { userAPI } from "@src/api/api";
+import { PageNotFound } from "@src/components/page_not_found/PageNotFound";
+import { getSitemap, transformCyrillic } from "@src/helpers";
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const xmlRegEx = new RegExp(/\.xml$/);

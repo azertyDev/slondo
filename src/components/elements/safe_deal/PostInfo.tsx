@@ -1,6 +1,6 @@
 import {FC, ReactNode} from 'react';
 import Link from 'next/link';
-import {useTranslation, Trans} from 'react-i18next';
+import {useTranslation, Trans} from 'next-i18next';
 import {Box, Grid, Paper, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';

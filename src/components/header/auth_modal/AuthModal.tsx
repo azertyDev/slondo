@@ -1,14 +1,10 @@
-import {FC, ReactNode, useContext, useEffect, useState} from 'react';
-import Link from "next/link";
-import {userAPI} from '@src/api/api';
-import {useTranslation} from 'next-i18next';
-import {unstable_batchedUpdates} from 'react-dom';
-import {Form, FormikProvider, useFormik} from 'formik';
-import {Box, Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
-import {cookieOpts, cookies, getErrorMsg, getTime, phonePrepare} from '@src/helpers';
-import {useHandlers} from '@src/hooks/useHandlers';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {signInSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
+import { Box, Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery } from '@material-ui/core';
+import { useTheme } from "@material-ui/core/styles";
+import { codeSchema, passwordConfirmSchema, phoneSchema, signInSchema } from '@root/validation_schemas/authRegSchema';
+import { userAPI } from '@src/api/api';
+import { CustomButton } from "@src/components/elements/custom_button/CustomButton";
+import { CustomTabPanel } from "@src/components/elements/custom_tab_panel/CustomTabPanel";
+import { FormikField } from '@src/components/elements/formik_field/FormikField';
 import {
     AdsIcon,
     BonusIcon,
@@ -17,14 +13,18 @@ import {
     SafeBuyingIcon,
     TorgIcon
 } from '@src/components/elements/icons';
-import {AuthCtx} from '@src/context/AuthCtx';
-import {CONFIRM_SECONDS} from '@src/constants';
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {useTheme} from "@material-ui/core/styles";
-import {SocketCtx} from "@src/context";
-import {useStyles} from './useStyles';
+import { ResponsiveModal } from "@src/components/elements/responsive_modal/ResponsiveModal";
+import { CONFIRM_SECONDS } from '@src/constants';
+import { SocketCtx } from "@src/context";
+import { AuthCtx } from '@src/context/AuthCtx';
+import { cookieOpts, cookies, getErrorMsg, getTime, phonePrepare } from '@src/helpers';
+import { useHandlers } from '@src/hooks/useHandlers';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useTranslation } from 'next-i18next';
+import Link from "next/link";
+import { FC, ReactNode, useContext, useEffect, useState } from 'react';
+import { unstable_batchedUpdates } from 'react-dom';
+import { useStyles } from './useStyles';
 
 export type SubmitTxtType = 'signIn'
     | 'send'

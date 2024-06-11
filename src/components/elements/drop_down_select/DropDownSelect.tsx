@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {getTime, isRequired} from '@src/helpers';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {noTranslatableFields} from "@src/common_data/fields_keys";
 import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';

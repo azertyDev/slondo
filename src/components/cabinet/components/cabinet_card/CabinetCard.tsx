@@ -10,7 +10,7 @@ import {
 } from '@src/components/elements/icons';
 import Link from 'next/link';
 import Countdown from 'react-countdown';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {formatNumber, numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';

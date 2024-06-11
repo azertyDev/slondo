@@ -70,10 +70,10 @@ export const InnerTabs: FC<CabinetModalPropsType> = props => {
             <CustomTabPanel value={childTabValue} index={0}>
                 {isFetch ? (
                     <CircularProgress />
-                ) : fstTabData.posts.length === 0 ? (
+                ) : fstTabData.posts?.length === 0 ? (
                     fstTabData.emptyPage
                 ) : (
-                    fstTabData.posts.map(data => (
+                    fstTabData.posts?.map(data => (
                         <Box mb={3} key={data.id}>
                             <CabinetCardWrapper
                                 cardData={data}

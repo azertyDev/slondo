@@ -1,7 +1,7 @@
 import {FC, useContext} from 'react';
 import Link from 'next/link';
 import {Breadcrumbs, Typography} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {transformCyrillic} from '@src/helpers';
 import {useStyles} from './useStyles';
 import {CategoriesCtx} from '@src/context';

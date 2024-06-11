@@ -1,6 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {cookieOpts, cookies, getErrorMsg, timeFormat} from '@src/helpers';
 import {Form, FormikProvider, useFormik} from 'formik';

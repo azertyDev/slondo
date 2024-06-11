@@ -1,7 +1,7 @@
 import {FC, useContext, useState} from 'react';
 import {useFormik} from 'formik';
 import {object, string} from 'yup';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {Button, Grid, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';

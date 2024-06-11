@@ -1,6 +1,15 @@
-import {FC, useState, useEffect, useContext} from 'react';
-import {useRouter} from 'next/router';
-import {useTranslation} from 'react-i18next';
+import {Container, Grid} from '@material-ui/core';
+import {AdvType} from '@root/interfaces/Adv';
+import {SearchProps} from '@root/interfaces/Post';
+import ErrorPage from '@root/pages/_error';
+import {adsAPI} from '@root/src/api/adv_api';
+import {postTypes} from '@root/src/common_data/post_types';
+import {
+    defaultSEOContent,
+    getSEOContent
+} from '@root/src/common_data/seo_content';
+import {POSTS_PER_PAGE, TOP_POSTS_PER_PAGE} from '@root/src/constants';
+import {CategoriesCtx, ErrorCtx} from '@root/src/context';
 import {
     categoriesNormalize,
     getCtgrsByCyrillicNames,
@@ -10,27 +19,21 @@ import {
     toUrlParams,
     transformCyrillic
 } from '@root/src/helpers';
-import {CategoriesCtx, ErrorCtx} from '@root/src/context';
-import {defaultSEOContent, getSEOContent} from '@root/src/common_data/seo_content';
-import {Container, Grid} from '@material-ui/core';
-import {AdvType} from '@root/interfaces/Adv';
-import {useFormik} from 'formik';
 import {useModal} from '@root/src/hooks';
 import {userAPI} from '@src/api/api';
-import {POSTS_PER_PAGE, TOP_POSTS_PER_PAGE} from '@root/src/constants';
-import {postTypes} from '@root/src/common_data/post_types';
-import {getInitStateByCategory, initStates} from './initStates';
-import {SearchProps} from '@root/interfaces/Post';
-import ErrorPage from '@root/pages/_error';
-import {ErrorModal} from '../../error_modal/ErrorModal';
-import {CustomHead} from '../../head/CustomHead';
-import {SearchHeader} from './search_header/SearchHeader';
-import {Footer} from '../../footer/Footer';
-import {SEOTextComponent} from '../../elements/seo_text_component/SEOTextComponent';
-import {SearchResult} from './search_result/SearchResult';
-import {SearchPostMobile} from '../../mobile/post/search_post/SearchMobile';
+import {useFormik} from 'formik';
+import {useTranslation} from 'next-i18next';
+import {useRouter} from 'next/router';
+import {FC, useContext, useEffect, useState} from 'react';
 import {SearchPostDesktop} from '../../desktop/post/search_post/SearchDesktop';
-import {adsAPI} from '@root/src/api/adv_api';
+import {SEOTextComponent} from '../../elements/seo_text_component/SEOTextComponent';
+import {ErrorModal} from '../../error_modal/ErrorModal';
+import {Footer} from '../../footer/Footer';
+import {CustomHead} from '../../head/CustomHead';
+import {SearchPostMobile} from '../../mobile/post/search_post/SearchMobile';
+import {getInitStateByCategory, initStates} from './initStates';
+import {SearchHeader} from './search_header/SearchHeader';
+import {SearchResult} from './search_result/SearchResult';
 
 type SearchContainerProps = {
     isMobileView: boolean;
@@ -43,7 +46,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
         isMobileView,
         statusCode,
         regions,
-        filters,
+        filters = [],
         location,
         site_categories,
         urlCategories,
@@ -215,7 +218,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
                         manufacturer: manufacturersDataNormalize(filters)
                     };
                 } else {
-                    filters = {...filters.default_param};
+                    filters = {...filters?.default_param};
                 }
             }
 
@@ -368,7 +371,7 @@ export const SearchContainer: FC<SearchContainerProps> = props => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            setErrorMsg(e.message);
+            setErrorMsg(e?.message);
         }
     };
 

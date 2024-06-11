@@ -1,13 +1,13 @@
-import {FC} from 'react';
-import {useTranslation} from "next-i18next";
-import {Grid, Hidden, Typography} from '@material-ui/core';
-import {ArrowBack} from '@material-ui/icons';
-import {LocationIcon} from '@src/components/elements/icons';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import { Grid, Hidden, Typography } from '@material-ui/core';
+import { ArrowBack } from '@material-ui/icons';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
-import {useStyles} from './useStyles';
+import { ModalHeader } from '@src/components/cabinet/components/modal_header/ModalHeader';
+import { CustomButton } from '@src/components/elements/custom_button/CustomButton';
+import { LocationIcon } from '@src/components/elements/icons';
+import { ResponsiveModal } from '@src/components/elements/responsive_modal/ResponsiveModal';
+import { useTranslation } from "next-i18next";
+import { FC } from 'react';
+import { useStyles } from './useStyles';
 
 type LocationModalPropsType = {
     region,
@@ -73,7 +73,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                             </Typography>
                         </Grid>
                         <Grid container className='locals-table'>
-                            {separatedLocations.map((col, i) => (
+                            {separatedLocations?.map((col, i) => (
                                 <Grid
                                     item
                                     key={i}

@@ -1,8 +1,8 @@
-import {ChangeEvent, FC} from 'react';
-import {Hidden, Typography} from '@material-ui/core';
+import { Hidden, Typography } from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
-import {useTranslation} from "react-i18next";
-import {useStyles} from './useStyles';
+import { useTranslation } from "next-i18next";
+import { ChangeEvent, FC } from 'react';
+import { useStyles } from './useStyles';
 
 type RatingPropsType = {
     readOnly?: boolean,

@@ -10,7 +10,7 @@ const agent = new https.Agent({
 const transFromCyrillic = (locations) => {
     const transform = new CyrillicToTranslit().transform;
 
-    return locations.map(loc => {
+    return locations?.map(loc => {
         loc.ru_name = transform(loc.ru_name)
             .toLowerCase()
             .replace(/\s+/g, '-');

@@ -1,5 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {AuthCtx, ErrorCtx} from '@src/context';
 import {useDate, useModal} from '@src/hooks';
@@ -123,7 +123,7 @@ export const Ratings: FC = () => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box width={1} my={2} p='5px 30px' className='ratingHeader'>
+                    <Box width={1} my={2} p={2} className='ratingHeader'>
                         <Typography variant='h6'>
                             {t('reviews_rating')}
                         </Typography>

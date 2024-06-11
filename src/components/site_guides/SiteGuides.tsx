@@ -3,7 +3,7 @@ import {AppBar, Container, Grid, Toolbar, useScrollTrigger} from '@material-ui/c
 import Link from 'next/link';
 import {Logo} from '../elements/icons';
 import {Localization} from '../header/top/localization/Localization';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {SafeShoppingGuide} from '@src/components/site_guides/SafeShoppingGuide';
 import {AuctionGuide} from '@src/components/site_guides/AuctionGuide';
 import {useRouter} from 'next/router';

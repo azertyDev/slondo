@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {Grid, Typography} from '@material-ui/core';
 import {PayType} from '@src/components/cabinet/components/promote_modal/PromoteModal';
 import {useStyles} from './useStyles';

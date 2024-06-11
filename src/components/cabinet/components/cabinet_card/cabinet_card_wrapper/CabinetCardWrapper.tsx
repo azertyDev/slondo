@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {

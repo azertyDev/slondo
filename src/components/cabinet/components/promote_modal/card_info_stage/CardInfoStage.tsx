@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {Box, Card, Grid, TextField, Typography} from '@material-ui/core';
-import {Trans, useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'next-i18next';
 import ReactInputMask from 'react-input-mask';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';

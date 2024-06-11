@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {BETS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';

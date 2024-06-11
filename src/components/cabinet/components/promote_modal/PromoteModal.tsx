@@ -1,5 +1,5 @@
 import {FC, useState, useEffect, useContext} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {ResponsiveModal} from '@root/src/components/elements/responsive_modal/ResponsiveModal';
 import {AddServicesStage} from '@src/components/cabinet/components/promote_modal/add_services_stage/AddServicesStage';
 import {PaymentStage} from '@src/components/cabinet/components/promote_modal/payment_stage/PaymentStage';

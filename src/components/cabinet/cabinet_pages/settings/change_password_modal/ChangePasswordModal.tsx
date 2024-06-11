@@ -1,7 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {useFormik} from 'formik';
 import {codeSchema, passwordConfirmSchema} from '@root/validation_schemas/authRegSchema';

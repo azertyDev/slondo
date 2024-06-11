@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Grid} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {CommonFiltersType} from '../../SearchForm';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 

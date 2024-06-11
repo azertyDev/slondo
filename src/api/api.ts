@@ -1,11 +1,11 @@
-import {UserInfo} from '@root/interfaces/Auth';
-import {setTokenToHeader, transformCyrillic} from '@src/helpers';
-import {CategoryType} from '@root/interfaces/Categories';
-import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
+import {UserInfo} from '@root/interfaces/Auth';
+import {CardDataType} from '@root/interfaces/CardData';
+import {CategoryType} from '@root/interfaces/Categories';
 import {CityType, RegionType} from '@root/interfaces/Locations';
-import {POSTS_PER_PAGE, ITEMS_PER_PAGE, SUBS_PER_PAGE} from '@src/constants';
 import {axiosInstance} from '@src/api/axios_instance';
+import {ITEMS_PER_PAGE, POSTS_PER_PAGE, SUBS_PER_PAGE} from '@src/constants';
+import {setTokenToHeader, transformCyrillic} from '@src/helpers';
 
 export const userAPI = {
     feedback: (form): Promise<any> => {
@@ -219,7 +219,7 @@ export const userAPI = {
     },
     getLocations: (): Promise<RegionType[]> => {
         const transFromCyrillic = (locations: RegionType[] | CityType[]) => {
-            return locations.map((l: RegionType) => {
+            return locations?.map((l: RegionType) => {
                 l.ru_name = transformCyrillic(l.ru_name);
                 if (l.cities) {
                     l.cities = transFromCyrillic(l.cities);

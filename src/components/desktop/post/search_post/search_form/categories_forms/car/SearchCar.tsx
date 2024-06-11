@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Grid} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
@@ -62,7 +62,7 @@ export const SearchCar: FC<CommonFiltersType> = props => {
                         }}
                     />
                 </Grid>
-                {Object.keys(filters).length !== 0 && (
+                {Object.keys(filters ?? []).length !== 0 && (
                     <>
                         <Grid item container sm={4} xs={12}>
                             <DropDownSelect
@@ -102,7 +102,7 @@ export const SearchCar: FC<CommonFiltersType> = props => {
                     </>
                 )}
             </Grid>
-            {Object.keys(filters).length !== 0 && (
+            {Object.keys(filters ?? []).length !== 0 && (
                 <ShowHide
                     className="add-params"
                     showTxt={t('common:externalParams')}

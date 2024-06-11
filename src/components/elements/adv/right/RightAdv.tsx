@@ -1,9 +1,9 @@
-import {FC} from 'react';
-import Link from 'next/link';
-import {useStyles} from '../useStyles';
-import {AdvType} from '@root/interfaces/Adv';
 import {useScrollTrigger} from '@material-ui/core';
+import {AdvType} from '@root/interfaces/Adv';
 import {GAdv} from '@src/components/elements/adv/GAdv';
+import Link from 'next/link';
+import {FC} from 'react';
+import {useStyles} from '../useStyles';
 
 declare global {
     interface Window {
@@ -22,7 +22,7 @@ export const RightAdv: FC<RightAdvProps> = ({
     threshold,
     mobile = false
 }) => {
-    const {google_ads, image, mobile_image, url} = adv;
+    const {google_ads, image, mobile_image, url} = adv ?? {};
 
     const trigger = useScrollTrigger({disableHysteresis: true, threshold});
     const isScrollBreak = threshold ? trigger : null;

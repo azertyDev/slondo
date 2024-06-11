@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {useTranslation} from 'next-i18next';

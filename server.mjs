@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-/* eslint-disable @typescript-eslint/no-varrom s */
-import next from 'next';
 import cluster from 'cluster';
-import {config} from 'dotenv';
-import {cpus} from 'os';
-import {parse} from 'url';
-import {createServer} from 'http';
+import { config } from 'dotenv';
+import { createServer } from 'http';
+import next from 'next';
+import { cpus } from 'os';
+import { parse } from 'url';
 
 config();
 const port = 3317;

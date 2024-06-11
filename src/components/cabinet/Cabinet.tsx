@@ -1,13 +1,8 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {
-    Grid,
-    Hidden,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from '@material-ui/core';
+import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import Hidden from '@material-ui/core/Hidden';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';

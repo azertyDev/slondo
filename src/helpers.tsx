@@ -1,30 +1,30 @@
-import {Fragment} from 'react';
-import {WithT} from 'i18next';
-import Cookies from 'universal-cookie';
-import {TFunction} from 'next-i18next';
-import {Grid} from '@material-ui/core';
-import {GetServerSidePropsContext} from 'next';
-import {IdNameType} from '@root/interfaces/Post';
-import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {categoryIcons} from '@src/common_data/categories_icons';
-import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
+import { Grid } from '@material-ui/core';
 import {
     CategoryType,
     SubcategoryType,
     TypeCategory
 } from '@root/interfaces/Categories';
-import {
-    cardDataRegEx,
-    searchTxtRegEx,
-    URLReservedMarks
-} from '@src/common_data/reg_exs';
+import { CityType, RegionType } from '@root/interfaces/Locations';
+import { IdNameType } from '@root/interfaces/Post';
+import { categoryIcons } from '@src/common_data/categories_icons';
 import {
     excludeFields,
     optionFields,
     requireFields,
     singleFields
 } from '@src/common_data/fields_keys';
-import {CityType, RegionType} from '@root/interfaces/Locations';
+import {
+    URLReservedMarks,
+    cardDataRegEx,
+    searchTxtRegEx
+} from '@src/common_data/reg_exs';
+import { DropDownSelect } from '@src/components/elements/drop_down_select/DropDownSelect';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
+import { WithT } from 'i18next';
+import { GetServerSidePropsContext } from 'next';
+import { TFunction } from 'next-i18next';
+import { Fragment } from 'react';
+import Cookies from 'universal-cookie';
 
 export const cookies = new Cookies();
 export const cookieOpts: {
@@ -41,8 +41,8 @@ export const setTokenToHeader = () => {
     if (token) {
         return {
             headers: {
-                'Cross-Origin-Embedder-Policy': 'require-corp',
-                'Cross-Origin-Opener-Policy': 'same-origin',
+                // 'Cross-Origin-Embedder-Policy': 'require-corp',
+                // 'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
@@ -94,7 +94,7 @@ export function getCtgrsByCyrillicNames(
 export const categoriesNormalize = (categories: any[]): CategoryType[] => {
     const normalizedCategories = [];
 
-    categories.forEach(ctgr => {
+    categories?.forEach(ctgr => {
         const {mark, ...other} = ctgr;
 
         // remove empty type categories
@@ -406,7 +406,7 @@ export const formatCardData = (data: string, isDate = false) => {
 };
 
 export const transformCyrillic = (title: string): string => {
-    const transform = new CyrillicToTranslit().transform;
+    const transform = CyrillicToTranslit().transform;
     return transform(title)
         .toLowerCase()
         .replace(URLReservedMarks, '')

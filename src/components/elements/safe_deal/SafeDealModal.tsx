@@ -7,7 +7,7 @@ import {ErrorCtx} from '@src/context';
 import {PostInfo} from '@src/components/elements/safe_deal/PostInfo';
 import {useUserPaymentCard} from '@src/hooks';
 import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {numberPrettier} from '@src/helpers';
 import {myUzCardAPI} from '@src/api/paid_api';
 

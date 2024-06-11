@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {CommonFiltersType} from '../../SearchForm';
 
 type SearchRegularPropsType = {

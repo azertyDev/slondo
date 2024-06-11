@@ -1,15 +1,11 @@
-import {GetServerSideProps} from 'next';
-import {userAPI} from '@src/api/api';
-import {SearchContainer} from '@root/src/components/post/search/SearchContainer';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import { SearchContainer } from '@root/src/components/post/search/SearchContainer';
+import { userAPI } from '@src/api/api';
 import {
-    categoriesNormalize,
     checkIsMobileView,
-    getCtgrsByCyrillicNames,
-    getLocationByURL,
-    manufacturersDataNormalize,
-    normalizeFiltersByCategory
+    getLocationByURL
 } from '@src/helpers';
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps: GetServerSideProps = async ({
     locale,
@@ -28,39 +24,39 @@ export const getServerSideProps: GetServerSideProps = async ({
         userAPI.getLocations()
     ]);
 
-    const siteCategories = categoriesNormalize(site_categories);
+    // const siteCategories = categoriesNormalize(site_categories);
 
-    const [category, subcategory, type] = getCtgrsByCyrillicNames(
-        urlCategories,
-        siteCategories
-    );
+    // const [category, subcategory, type] = getCtgrsByCyrillicNames(
+    //     urlCategories,
+    //     siteCategories
+    // );
 
-    let filters: any = {};
+    // let filters: any = {};
 
-    if (category) {
-        const params: any = {
-            category_id: category.id
-        };
+    // if (category) {
+    //     const params: any = {
+    //         category_id: category.id
+    //     };
 
-        if (subcategory?.id) params.sub_category_id = subcategory.id;
+    //     if (subcategory?.id) params.sub_category_id = subcategory.id;
 
-        if (type?.id) params.type_id = type.id;
+    //     if (type?.id) params.type_id = type.id;
 
-        filters = await userAPI.getFiltersByCtgr(params);
+    //     filters = await userAPI.getFiltersByCtgr(params);
 
-        if (category.name === 'car') {
-            if (subcategory?.name === 'made_uzbekistan') {
-                filters = {
-                    ...filters.default_param,
-                    manufacturer: manufacturersDataNormalize(filters)
-                };
-            } else {
-                filters = {...filters.default_param};
-            }
-        }
+    //     if (category.name === 'car') {
+    //         if (subcategory?.name === 'made_uzbekistan') {
+    //             filters = {
+    //                 ...filters.default_param,
+    //                 manufacturer: manufacturersDataNormalize(filters)
+    //             };
+    //         } else {
+    //             filters = {...filters.default_param};
+    //         }
+    //     }
 
-        filters = normalizeFiltersByCategory(filters, type);
-    }
+    //     filters = normalizeFiltersByCategory(filters, type);
+    // }
 
     const {region, city} = getLocationByURL(locationName, regions);
 
@@ -81,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         props: {
             isMobileView,
             regions,
-            filters,
+            // filters,
             urlCategories,
             location,
             site_categories,

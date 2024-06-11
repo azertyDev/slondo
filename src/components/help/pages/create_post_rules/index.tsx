@@ -1,6 +1,6 @@
 import {Box, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../useStyles';
-import {Trans, useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'next-i18next';
 import {ReactNode} from 'react';
 import Link from 'next/link';
 

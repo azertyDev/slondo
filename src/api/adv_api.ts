@@ -1,4 +1,4 @@
-import {axiosInstance} from '@src/api/axios_instance';
+import { axiosInstance } from '@src/api/axios_instance';
 
 export const adsAPI = {
     getAds: (main = 0, lang = 'ru'): Promise<any> => {

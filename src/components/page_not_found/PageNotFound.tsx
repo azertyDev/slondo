@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import {AppBar, Box, Container, Grid, Toolbar, Typography} from '@material-ui/core';
 import Link from 'next/link';

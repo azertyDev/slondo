@@ -1,6 +1,6 @@
 import {Box, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../../useStyles';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 
 export const Advanced = () => {
     const {t} = useTranslation('help');

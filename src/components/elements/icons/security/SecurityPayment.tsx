@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const SecurityPaymentIcon = () => {
     return (
@@ -65,7 +64,7 @@ export const SecurityPaymentIcon = () => {
                     <stop stopColor="#FFE600" stopOpacity="0" />
                     <stop offset="1" stopColor="#F59500" />
                 </linearGradient>
-                <linearGradient id="paint6yyyyyyrvcbnqw_linear" x1="74.0722" y1="51.3678" x2="0.3317" y2="61.5788"
+                <linearGradient id="paint6yyyyyyrvcbnqw_linear" x1="74.0722" y1="51.3678" x2="0.3000" y2="61.5788"
                                 gradientUnits="userSpaceOnUse">
                     <stop stopColor="#FFF465" />
                     <stop offset="1" stopColor="#FFE600" />

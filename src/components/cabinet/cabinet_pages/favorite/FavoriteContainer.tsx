@@ -6,7 +6,7 @@ import {Box} from '@material-ui/core';
 import {ErrorCtx} from '@src/context';
 import {useTranslation} from 'next-i18next';
 import {useModal} from '@src/hooks/useModal';
-import {unstable_batchedUpdates} from "react-dom";
+import {unstable_batchedUpdates} from 'react-dom';
 import {initCardData} from '@src/common_data/common';
 import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCardWrapper} from '@src/components/cabinet/components/cabinet_card/cabinet_card_wrapper/CabinetCardWrapper';
@@ -24,13 +24,20 @@ export const FavoriteContainer: FC = () => {
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [favoritePostData, setFavoritePostData] = useState(initialFavoriteState);
-    const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
+    const [favoritePostData, setFavoritePostData] =
+        useState(initialFavoriteState);
+    const [favoriteAucData, setFavoriteAucData] =
+        useState(initialFavoriteState);
     const [postId, setPostId] = useState(null);
-    const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
+    const [selectedPost, setSelectedPost] =
+        useState<CardDataType>(initCardData);
 
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
-    const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
+    const {
+        modalOpen: detailedModalOpen,
+        handleModalClose: closeDetailedModal,
+        handleModalOpen: openDetailedModal
+    } = useModal();
 
     const handleOpenModal = (id: string) => () => {
         handleModalOpen();
@@ -75,10 +82,10 @@ export const FavoriteContainer: FC = () => {
         setSelectedPost(post);
     };
 
-    const getFavoritePosts = (posts) => {
+    const getFavoritePosts = posts => {
         return (
             <>
-                {posts.map(data =>
+                {posts.map(data => (
                     <Box mb={3} key={data.id}>
                         <CabinetCardWrapper
                             cardData={data}
@@ -86,7 +93,7 @@ export const FavoriteContainer: FC = () => {
                             handleDetailedOpen={handleDetailedModal(data)}
                         />
                     </Box>
-                )}
+                ))}
             </>
         );
     };
@@ -97,14 +104,14 @@ export const FavoriteContainer: FC = () => {
             title: t('posts'),
             total: favoritePostData.total,
             component: getFavoritePosts(favoritePostData.data),
-            emptyPage: <EmptyPage label={t('cabinet:empty.favorite.title')}/>
+            emptyPage: <EmptyPage label={t('cabinet:empty.favorite.title')} />
         },
         secondTab: {
             id: 1,
             total: favoriteAucData.total,
             title: t('auctions'),
             component: getFavoritePosts(favoriteAucData.data),
-            emptyPage: <EmptyPage label={t('cabinet:empty.favorite.title')}/>
+            emptyPage: <EmptyPage label={t('cabinet:empty.favorite.title')} />
         }
     };
 

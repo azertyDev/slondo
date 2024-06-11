@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'next-i18next';
 import {
     CabrioletIcon,
     CoupeIcon,
