@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  nextjs-dev:
+  dev:
     build: .
     ports:
       - '3317:3317'
