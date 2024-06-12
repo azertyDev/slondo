@@ -20,4 +20,4 @@ ENV NODE_ENV=development
 EXPOSE 3317
 
 # Команда для запуска dev сервера Next.js
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start-mem"]
