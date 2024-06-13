@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
+      "start:local": "next start -p 3317",
       "build": "NODE_OPTIONS=--max_old_space_size=4096 next build",
       "start": "node server.mjs",
       "start-mem": "node --max-old-space-size=4096 server.mjs",

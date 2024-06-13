@@ -43,7 +43,6 @@ export const PostsTabs: FC<{rightAdvData}> = ({rightAdvData}) => {
     const [tabValue, setTabValue] = useState(0);
     const [postCurrPage, setPostCurrPage] = useState(1);
     const [auctionCurrPage, setAuctionCurrPage] = useState(1);
-    console.log(tabValue);
 
     const [postCards, setPostCards] = useState(posts);
     const [auctionCards, setAuctionCards] = useState({

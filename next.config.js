@@ -11,6 +11,7 @@ module.exports = {
 
         return config;
     },
+    output: 'standalone',
     swcMinify: false,
     i18n
 };

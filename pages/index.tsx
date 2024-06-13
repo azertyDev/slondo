@@ -12,6 +12,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
             userAPI.getCards()
         ]);
 
+        console.log(process.env.NODE_ENV);
+
         return {
             props: {
                 homePageData,
