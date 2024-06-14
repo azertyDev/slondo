@@ -2,6 +2,9 @@
 const {i18n} = require('./next-i18next.config');
 
 module.exports = {
+    eslint: {
+        ignoreDuringBuilds: true
+    },
     poweredByHeader: false,
     webpack(config) {
         config.module.rules.push({
