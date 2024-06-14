@@ -93,7 +93,7 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
                 district,
                 available_days,
                 ...otherData
-            } = await userAPI.getPostById(initPostData.id);
+            } = await userAPI.getPostById(initPostData?.id);
 
             if (available_days) {
                 otherData.available_days = available_days.map(day => {
@@ -181,7 +181,7 @@ export const ShowPostContainer: FC<ShowPostProps> = (props) => {
                 >
                     <ChatContainer
                         hideContacts
-                        initContactId={postData.author.id}
+                        initContactId={postData?.author?.id}
                         handleChatClose={handleChatClose}
                     />
                 </ResponsiveModal>
