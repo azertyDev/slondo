@@ -6,6 +6,7 @@ import {CityType, RegionType} from '@root/interfaces/Locations';
 import {axiosInstance} from '@src/api/axios_instance';
 import {ITEMS_PER_PAGE, POSTS_PER_PAGE, SUBS_PER_PAGE} from '@src/constants';
 import {setTokenToHeader, transformCyrillic} from '@src/helpers';
+import {siteCategories} from '@src/common_data/site_categories';
 
 export const userAPI = {
     feedback: (form): Promise<any> => {
@@ -159,11 +160,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCategories: (): Promise<CategoryType[]> => {
+    getCategories: (): Promise<any> => {
         return axiosInstance
             .get(`categories/all`)
             .then(res => {
-                return res?.data;
+                return siteCategories;
             })
             .catch(err => {
                 throw err;
