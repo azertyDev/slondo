@@ -2,7 +2,6 @@ export const SERVER_URL = `${
     process.env.SERVER_URL || 'http://localhost:3317'
 }`;
 export const DEV_URL = 'http://185.196.214.35:8099';
-// export const PROD_URL = 'https://backend.slondo.uz';
 export const PROD_URL = 'https://slondo.uz';
 export const TESTB_URL = 'https://backend.testb.uz';
 

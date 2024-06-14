@@ -7,7 +7,7 @@ const agent = new https.Agent({
 });
 
 export const axiosInstance = Axios.create({
-    // httpsAgent: agent,
-    // withCredentials: true,
+    httpsAgent: agent,
+    withCredentials: true,
     baseURL: PROD_URL_API
 });
