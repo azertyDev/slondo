@@ -54,7 +54,7 @@ export const SettingsModal: FC<CommonModalType> = props => {
     const isPublic = post.status === 'public';
 
     const raiseTapeCount =
-        post.slondo_services.find(srv => srv.service.name === 'raise_tape')
+        post.slondo_services?.find(srv => srv.service.name === 'raise_tape')
             ?.quantity || 0;
 
     const [buyer, setBuyer] = useState(initBuyer);

@@ -132,11 +132,8 @@ export const MyPosts: FC = () => {
         getArchPosts()
     );
 
-    const [
-        safeArchPostsPagination,
-        safeArchPostsPage,
-        fetchSecureArchPosts
-    ] = usePagination(getArchPosts(true));
+    const [safeArchPostsPagination, safeArchPostsPage, fetchSecureArchPosts] =
+        usePagination(getArchPosts(true));
 
     const refresh = async () => {
         await Promise.all([
