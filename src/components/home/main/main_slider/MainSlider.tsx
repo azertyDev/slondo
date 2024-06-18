@@ -1,6 +1,9 @@
-import { HomePageCtx } from '@src/context';
-import { FC, useContext } from 'react';
-import { useStyles } from './useStyles';
+import {HomePageCtx} from '@src/context';
+import {FC, useContext} from 'react';
+import {useStyles} from './useStyles';
+import {Slider} from '@root/src/components/elements/slider/Slider';
+import Link from 'next/link';
+import {Box, Typography} from '@material-ui/core';
 
 const config = {
     itemClass: 'slide-item',
@@ -31,8 +34,8 @@ export const MainSlider: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {/* <Slider config={config}> */}
-            {/* {mainSliderData.map(({id, img, title, description, url}) => (
+            <Slider config={config}>
+                {mainSliderData.map(({id, img, title, description, url}) => (
                     <Link href={url} key={id}>
                         <a target="_blank" rel="nofollow">
                             <Box position="relative">
@@ -55,8 +58,8 @@ export const MainSlider: FC = () => {
                             </Box>
                         </a>
                     </Link>
-                ))} */}
-            {/* </Slider> */}
+                ))}
+            </Slider>
         </div>
     );
 };
