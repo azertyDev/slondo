@@ -6,17 +6,23 @@ import {cookieOpts, cookies, getErrorMsg, timeFormat} from '@src/helpers';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/upload_avatar_form/UploadAvatarForm';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
-import {AuthCtx, ErrorCtx} from "@src/context";
-import {Box, Button, CircularProgress, Grid, Typography} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import {UserInfo} from "@root/interfaces/Auth";
-import {WEEK_DAYS} from "@src/common_data/common";
-import {ChangePasswordModal} from "./change_password_modal/ChangePasswordModal";
-import {avalTimeSchema} from "@root/validation_schemas/postSchemas";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
-import LockIcon from "@material-ui/icons/Lock";
-import {AvailableDays} from "@root/src/components/post/create_post/third_step/first_form/available_days/AvailableDays";
-import {useStyles, SettingsButton} from "./useStyles";
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Grid,
+    Typography
+} from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import {UserInfo} from '@root/interfaces/Auth';
+import {WEEK_DAYS} from '@src/common_data/common';
+import {ChangePasswordModal} from './change_password_modal/ChangePasswordModal';
+import {avalTimeSchema} from '@root/validation_schemas/postSchemas';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import LockIcon from '@material-ui/icons/Lock';
+import {AvailableDays} from '@root/src/components/post/create_post/third_step/first_form/available_days/AvailableDays';
+import {useStyles, SettingsButton} from './useStyles';
 
 export const Settings: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -24,12 +30,12 @@ export const Settings: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const initUserInfo = {
-        name: user.name,
-        surname: user.surname ?? '',
-        avatar: user.avatar,
-        available_start_time: user.available_start_time ?? '09:00',
-        available_end_time: user.available_end_time ?? '18:00',
-        available_days: user.available_days ?? [...WEEK_DAYS],
+        name: user?.name,
+        surname: user?.surname ?? '',
+        avatar: user?.avatar,
+        available_start_time: user?.available_start_time ?? '09:00',
+        available_end_time: user?.available_end_time ?? '18:00',
+        available_days: user?.available_days ?? [...WEEK_DAYS],
         balance: 0
     };
 
@@ -66,7 +72,8 @@ export const Settings: FC = () => {
             }
 
             if (timeEditable) {
-                newUserInfo.available_start_time = timeFormat(available_start_time);
+                newUserInfo.available_start_time =
+                    timeFormat(available_start_time);
                 newUserInfo.available_end_time = timeFormat(available_end_time);
                 newUserInfo.available_days = available_days;
             }
@@ -98,7 +105,9 @@ export const Settings: FC = () => {
 
     const formik = useFormik<UserInfo>({
         initialValues: initUserInfo,
-        validationSchema: timeEditable ? userInfoSchema.concat(avalTimeSchema) : userInfoSchema,
+        validationSchema: timeEditable
+            ? userInfoSchema.concat(avalTimeSchema)
+            : userInfoSchema,
         onSubmit
     });
 
@@ -126,7 +135,7 @@ export const Settings: FC = () => {
         setEditable(!editable);
     };
 
-    const handleUpload = (event) => {
+    const handleUpload = event => {
         setValues({...values, avatar: event.target.files[0]});
     };
 
@@ -179,24 +188,12 @@ export const Settings: FC = () => {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
-            <Grid container direction='column' spacing={4}>
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    spacing={1}
-                    direction='column'
-                >
+            <Grid container direction="column" spacing={4}>
+                <Grid item container xs={12} spacing={1} direction="column">
                     <Grid item xs={12}>
-                        <Typography
-                            variant='h6'
-                            gutterBottom
-                            component='p'
-                        >
-                            <strong>
-                                {t('cabinet:personalData')}
-                            </strong>
-                            <span className='hint'>
+                        <Typography variant="h6" gutterBottom component="p">
+                            <strong>{t('cabinet:personalData')}</strong>
+                            <span className="hint">
                                 {t('cabinet:editHint')}
                             </span>
                         </Typography>
@@ -204,13 +201,15 @@ export const Settings: FC = () => {
                     {!editable && (
                         <Grid item xs={12}>
                             <Button
-                                variant='text'
-                                color='secondary'
+                                variant="text"
+                                color="secondary"
                                 onClick={handleAllowEdit}
                                 className={classes.editButton}
-                                startIcon={!editable && <EditIcon fontSize='small'/>}
+                                startIcon={
+                                    !editable && <EditIcon fontSize="small" />
+                                }
                             >
-                                <Typography variant='subtitle1'>
+                                <Typography variant="subtitle1">
                                     {t('cabinet:edit')}
                                 </Typography>
                             </Button>
@@ -229,12 +228,20 @@ export const Settings: FC = () => {
                                 <Grid item xs={12}>
                                     {uploadAvatarForm}
                                 </Grid>
-                                <Grid item container xs={12} sm={8} md={8} lg={6} spacing={2}>
+                                <Grid
+                                    item
+                                    container
+                                    xs={12}
+                                    sm={8}
+                                    md={8}
+                                    lg={6}
+                                    spacing={2}
+                                >
                                     <Grid item xs={12}>
                                         <FormikField
                                             t={t}
-                                            name='name'
-                                            labelText='user_name'
+                                            name="name"
+                                            labelText="user_name"
                                             value={values.name}
                                             onChange={handleChange}
                                             disabled={!editable}
@@ -249,8 +256,8 @@ export const Settings: FC = () => {
                                     <Grid item xs={12}>
                                         <FormikField
                                             t={t}
-                                            name='surname'
-                                            labelText='user_surname'
+                                            name="surname"
+                                            labelText="user_surname"
                                             value={values.surname}
                                             onChange={handleChange}
                                             disabled={!editable}
@@ -266,28 +273,35 @@ export const Settings: FC = () => {
                                         <FormikField
                                             t={t}
                                             disabled
-                                            name='phone'
+                                            name="phone"
                                             value={user.phone}
                                             onChange={handleChange}
-                                            labelText='phone_number'
+                                            labelText="phone_number"
                                         />
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button
-                                        variant='text'
-                                        color='secondary'
+                                        variant="text"
+                                        color="secondary"
                                         disabled={!editable}
-                                        component='span'
+                                        component="span"
                                         onClick={handleOpenModal}
                                         className={classes.recoveryBtn}
                                         startIcon={
                                             <span className={classes.icon}>
-                                                <LockIcon color={editable ? 'secondary' : 'action'} fontSize='small'/>
+                                                <LockIcon
+                                                    color={
+                                                        editable
+                                                            ? 'secondary'
+                                                            : 'action'
+                                                    }
+                                                    fontSize="small"
+                                                />
                                             </span>
                                         }
                                     >
-                                        <Typography variant='subtitle1'>
+                                        <Typography variant="subtitle1">
                                             {t('auth_reg:change_password')}
                                         </Typography>
                                     </Button>
@@ -302,9 +316,12 @@ export const Settings: FC = () => {
                                         errors={errors}
                                         touched={touched}
                                         time={{
-                                            available_days: values.available_days,
-                                            available_start_time: values.available_start_time,
-                                            available_end_time: values.available_end_time
+                                            available_days:
+                                                values.available_days,
+                                            available_start_time:
+                                                values.available_start_time,
+                                            available_end_time:
+                                                values.available_end_time
                                         }}
                                     />
                                 </Grid>
@@ -321,30 +338,38 @@ export const Settings: FC = () => {
                                         <Grid item xs={6} sm={6} lg={3}>
                                             <SettingsButton
                                                 disableElevation
-                                                color='secondary'
+                                                color="secondary"
                                                 disabled={!editable}
                                                 className={classes.button}
                                                 onClick={handleCancel}
                                             >
-                                                <Typography variant='subtitle1'>
+                                                <Typography variant="subtitle1">
                                                     {t('common:cancel')}
                                                 </Typography>
                                             </SettingsButton>
                                         </Grid>
                                         <Grid item xs={6} sm={6} lg={3}>
                                             <SettingsButton
-                                                type='submit'
-                                                color='primary'
+                                                type="submit"
+                                                color="primary"
                                                 size="large"
                                                 disableElevation
                                                 className={classes.button}
-                                                disabled={isSubmitting || !editable}
+                                                disabled={
+                                                    isSubmitting || !editable
+                                                }
                                                 startIcon={
-                                                    isSubmitting &&
-                                                    <CircularProgress size={24} className={classes.progress}/>
+                                                    isSubmitting && (
+                                                        <CircularProgress
+                                                            size={24}
+                                                            className={
+                                                                classes.progress
+                                                            }
+                                                        />
+                                                    )
                                                 }
                                             >
-                                                <Typography variant='subtitle1'>
+                                                <Typography variant="subtitle1">
                                                     {t('common:accept')}
                                                 </Typography>
                                             </SettingsButton>

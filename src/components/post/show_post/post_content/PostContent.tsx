@@ -7,7 +7,10 @@ import {
     useTheme
 } from '@material-ui/core';
 import {userAPI} from '@src/api/api';
-import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
+import {
+    booleanFields,
+    noTranslatableFields
+} from '@src/common_data/fields_keys';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
 import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
@@ -16,27 +19,32 @@ import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/services_icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {numberPrettier, priceTransform, transformCyrillic, weekDaysHelper} from '@src/helpers';
+import {
+    numberPrettier,
+    priceTransform,
+    transformCyrillic,
+    weekDaysHelper
+} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AutoRenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@root/src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerAuctionInfo} from '@root/src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
-import {ComplaintModal} from "@root/src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
-import {ShowPhone} from "@src/components/elements/show_phone/ShowPhone";
+import {ComplaintModal} from '@root/src/components/post/show_post/post_content/complaint_modal/ComplaintModal';
+import {ShowPhone} from '@src/components/elements/show_phone/ShowPhone';
 import {AuthCtx, CategoriesCtx, ErrorCtx} from '@src/context';
-import {useTranslation} from "next-i18next";
-import {useDate, useModal} from "@src/hooks";
+import {useTranslation} from 'next-i18next';
+import {useDate, useModal} from '@src/hooks';
 import {useStyles} from './useStyles';
 
 type PostContentTypes = {
-    post,
-    auctionInfo,
-    handleSafeDeal: () => void,
-    handleChatOpen: () => void,
-    setFetchedPostData: () => Promise<void>
+    post;
+    auctionInfo;
+    handleSafeDeal: () => void;
+    handleChatOpen: () => void;
+    setFetchedPostData: () => Promise<void>;
 };
 
-export const PostContent: FC<PostContentTypes> = (props) => {
+export const PostContent: FC<PostContentTypes> = props => {
     const {
         post,
         auctionInfo,
@@ -50,23 +58,25 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const transKey = post.category.name;
+    const transKey = post.category?.name;
     const isExAuc = post.ads_type.mark === 'exauc';
     const isAuction = post.ads_type.mark === 'auc' || isExAuc;
     const self = post.author.id === user.id;
 
-    const mainCtgr = siteCategories.find(ctgr => ctgr.name === post.category.name);
-    const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === post.adsable?.sub_category.name);
-    const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === post.adsable?.type?.name);
+    const mainCtgr = siteCategories.find(
+        ctgr => ctgr?.name === post.category?.name
+    );
+    const subCtgr = mainCtgr?.subcategory?.find(
+        subCtgr => subCtgr?.name === post.adsable?.sub_category?.name
+    );
+    const typeCtgr = subCtgr?.type?.find(
+        typeCtgr => typeCtgr?.name === post.adsable?.type?.name
+    );
 
     const {
         model,
-        observer: {
-            number_of_views,
-            number_of_favorites
-        }
+        observer: {number_of_views, number_of_favorites}
     } = post;
-
 
     const {
         auth: {isAuth},
@@ -76,7 +86,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const [favCount, setFavCount] = useState(0);
     const [favorite, setFavorite] = useState(false);
 
-    const jobOrService = post.category.name === 'job' || post.category.name === 'service';
+    const jobOrService =
+        post.category?.name === 'job' || post.category?.name === 'service';
 
     const {
         modalOpen: complainOpen,
@@ -123,14 +134,18 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}.name`)}:
+                        {t(`filters:${transKey}.${key}?.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {model[key]
-                            .map((param) => {
-                                return t(`filters:${isNoTrans
-                                    ? `${param.name}`
-                                    : `${transKey}.${param.name}.name`}`);
+                            .map(param => {
+                                return t(
+                                    `filters:${
+                                        isNoTrans
+                                            ? `${param?.name}`
+                                            : `${transKey}.${param?.name}?.name`
+                                    }`
+                                );
                             })
                             .join(', ')}
                     </Typography>
@@ -140,10 +155,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}.name`)}:
+                        {t(`filters:${transKey}.${key}?.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
-                        {t(`common:${transKey === 'electronics' ? 'has' : 'yes'}`)}
+                        {t(
+                            `common:${
+                                transKey === 'electronics' ? 'has' : 'yes'
+                            }`
+                        )}
                     </Typography>
                 </li>
             );
@@ -151,7 +170,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${isNoTrans ? `${key}` : `${transKey}.${key}.name`}`)}:
+                        {t(
+                            `filters:${
+                                isNoTrans
+                                    ? `${key}`
+                                    : `${transKey}.${key}?.name`
+                            }`
+                        )}
+                        :
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span
@@ -166,12 +192,16 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         />
                     )}
                     <Typography variant="subtitle1" className="value">
-                        {typeof model[key] === 'string' || typeof model[key] === 'number'
+                        {typeof model[key] === 'string' ||
+                        typeof model[key] === 'number'
                             ? model[key]
-                            : t(`filters:${
-                                isNoTrans
-                                    ? `${model[key].name}`
-                                    : `${transKey}.${model[key]?.name}.name`}`)}
+                            : t(
+                                  `filters:${
+                                      isNoTrans
+                                          ? `${model[key]?.name}`
+                                          : `${transKey}.${model[key]?.name}?.name`
+                                  }`
+                              )}
                     </Typography>
                 </li>
             );
@@ -192,17 +222,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <BreadcrumbsComponent
                         category={transKey}
                         type={post.adsable?.type?.name}
-                        subcategory={post.adsable?.sub_category.name}
+                        subcategory={post.adsable?.sub_category?.name}
                     />
                 </div>
             </Hidden>
             <Hidden mdDown>
                 <div className="post-header">
-                    <div className='post-type'>
-                        <Typography
-                            variant="h6"
-                            className={post.ads_type.mark}
-                        >
+                    <div className="post-type">
+                        <Typography variant="h6" className={post.ads_type.mark}>
                             {t(`common:${post.ads_type.mark}`)}
                         </Typography>
                     </div>
@@ -233,11 +260,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     handleFavorite={handleFavorite}
                 />
                 <Hidden lgUp>
-                    <div className='post-type-adaptive'>
-                        <Typography
-                            variant="h6"
-                            className={post.ads_type.mark}
-                        >
+                    <div className="post-type-adaptive">
+                        <Typography variant="h6" className={post.ads_type.mark}>
                             {t(`common:${post.ads_type.mark}`)}
                         </Typography>
                     </div>
@@ -247,15 +271,16 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <div className="post-header">
                         <div>
-                            <Typography variant='h6' className="price">
+                            <Typography variant="h6" className="price">
                                 {getPrice()}&nbsp;
-                                {post.price !== 0 && (
-                                    t(`common:${post.currency.name}`)
-                                )}
+                                {post.price !== 0 &&
+                                    t(`common:${post.currency?.name}`)}
                                 {!!post.condition?.name && (
                                     <div className="condition">
                                         <Typography variant="h6">
-                                            {t(`${post.model?.condition?.name}`)}
+                                            {t(
+                                                `${post.model?.condition?.name}`
+                                            )}
                                         </Typography>
                                     </div>
                                 )}
@@ -278,8 +303,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             {t('views')}: {number_of_views}
                         </Typography>
                         {!self && (
-                            <Typography variant="subtitle1" onClick={handleComplaintModalOpen}>
-                                {t('complain')} <WarningIcon/>
+                            <Typography
+                                variant="subtitle1"
+                                onClick={handleComplaintModalOpen}
+                            >
+                                {t('complain')} <WarningIcon />
                             </Typography>
                         )}
                     </div>
@@ -287,7 +315,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="post-bonus">
                     {!!post.delivery && (
                         <span className="delivery">
-                            <DeliveryIcon/>
+                            <DeliveryIcon />
                             <Typography variant="subtitle1">
                                 {t('common:delivery')}
                             </Typography>
@@ -295,7 +323,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.safe_deal && (
                         <span className="safe_deal">
-                            <SafeIcon/>
+                            <SafeIcon />
                             <Typography variant="subtitle1">
                                 {t('common:safe_deal')}
                             </Typography>
@@ -303,7 +331,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.exchange && (
                         <span className="exchange">
-                            <SwapIcon/>
+                            <SwapIcon />
                             <Typography variant="subtitle1">
                                 {t('common:exchange')}
                             </Typography>
@@ -311,10 +339,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.available_start_time && (
                         <span className="available">
-                            <PhoneIcon/>
+                            <PhoneIcon />
                             {!!post.available_days?.length && (
                                 <Typography variant="subtitle1" color="primary">
-                                    {weekDaysHelper(post.available_days, t)}&nbsp;
+                                    {weekDaysHelper(post.available_days, t)}
+                                    &nbsp;
                                 </Typography>
                             )}
                             <Typography variant="subtitle1">
@@ -324,8 +353,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     {!!post.auction?.auto_renewal && (
                         <span className="auto-renewal">
-                                <AutoRenewalIcon/>
-                                <Typography variant="subtitle1">
+                            <AutoRenewalIcon />
+                            <Typography variant="subtitle1">
                                 {t('common:auto_ren')}
                             </Typography>
                         </span>
@@ -333,14 +362,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 <Hidden lgUp>
                     <div className="contact">
-                        <ShowPhone postId={post.id}/>
+                        <ShowPhone postId={post.id} />
                         {!self && (
                             <CustomButton
-                                color='silver'
-                                className='write-msg'
+                                color="silver"
+                                className="write-msg"
                                 onClick={handleChatOpen}
                             >
-                                <Typography variant='subtitle1'>
+                                <Typography variant="subtitle1">
                                     {t('writeMessage')}
                                 </Typography>
                             </CustomButton>
@@ -360,20 +389,43 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             {t(`locations:location`)}:
                         </Typography>
                     </Hidden>
-                    <div className='location-text'>
+                    <div className="location-text">
                         <LocationIcon />
                         <Typography variant="subtitle1">
-                            {`${t(`locations:${post.region.name}.name`) ?? ''}`}
-                            {post.city?.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
+                            {`${
+                                t(`locations:${post.region?.name}?.name`) ?? ''
+                            }`}
+                            {post.city?.name
+                                ? `, ${t(
+                                      `locations:${post.region?.name}.${post.city?.name}`
+                                  )}`
+                                : ''}
                         </Typography>
                     </div>
                 </div>
                 <div className="post-category">
                     <div>
                         <Typography variant="subtitle1" color="initial">
-                            {t(`categories:${mainCtgr.name}.name`)}
-                            {subCtgr && <>&nbsp;- {t(`categories:${mainCtgr?.name}.${subCtgr?.name}.name`)}</>}
-                            {typeCtgr && <>&nbsp;- <span> {t(`categories:${mainCtgr?.name}.${subCtgr?.name}.${typeCtgr?.name}.name`)}</span></>}
+                            {t(`categories:${mainCtgr?.name}?.name`)}
+                            {subCtgr && (
+                                <>
+                                    &nbsp;-{' '}
+                                    {t(
+                                        `categories:${mainCtgr?.name}.${subCtgr?.name}?.name`
+                                    )}
+                                </>
+                            )}
+                            {typeCtgr && (
+                                <>
+                                    &nbsp;-{' '}
+                                    <span>
+                                        {' '}
+                                        {t(
+                                            `categories:${mainCtgr?.name}.${subCtgr?.name}.${typeCtgr?.name}?.name`
+                                        )}
+                                    </span>
+                                </>
+                            )}
                         </Typography>
                     </div>
                 </div>
@@ -384,9 +436,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </Hidden>
                     <Typography
-                        component='span'
+                        component="span"
                         variant="subtitle1"
-                        className='description'
+                        className="description"
                     >
                         <pre>{post.description}</pre>
                     </Typography>
@@ -398,7 +450,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                         <span>
                             <Typography variant="body2">
-                                {numberPrettier(post.price)} {t(`common:${post.currency.name}`)}
+                                {numberPrettier(post.price)}{' '}
+                                {t(`common:${post.currency?.name}`)}
                             </Typography>
                         </span>
                     </div>
@@ -415,7 +468,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 )}
                 <Hidden lgUp>
                     <div className="post-info">
-                        <div className='info-wrapper'>
+                        <div className="info-wrapper">
                             <Typography variant="subtitle1">
                                 <span>{t('common:post')} №:</span> {post.id}
                             </Typography>
