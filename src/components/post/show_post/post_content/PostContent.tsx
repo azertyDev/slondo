@@ -73,10 +73,7 @@ export const PostContent: FC<PostContentTypes> = props => {
         typeCtgr => typeCtgr?.name === post.adsable?.type?.name
     );
 
-    const {
-        model,
-        observer: {number_of_views, number_of_favorites}
-    } = post;
+    const {model} = post;
 
     const {
         auth: {isAuth},
@@ -211,7 +208,8 @@ export const PostContent: FC<PostContentTypes> = props => {
 
     useEffect(() => {
         setFavorite(post.favorite);
-        !!number_of_favorites && setFavCount(number_of_favorites);
+        !!post?.observer?.number_of_favorites &&
+            setFavCount(post?.observer?.number_of_favorites);
     }, [post]);
 
     const classes = useStyles();
@@ -229,7 +227,10 @@ export const PostContent: FC<PostContentTypes> = props => {
             <Hidden mdDown>
                 <div className="post-header">
                     <div className="post-type">
-                        <Typography variant="h6" className={post.ads_type?.mark}>
+                        <Typography
+                            variant="h6"
+                            className={post.ads_type?.mark}
+                        >
                             {t(`common:${post.ads_type?.mark}`)}
                         </Typography>
                     </div>
@@ -261,7 +262,10 @@ export const PostContent: FC<PostContentTypes> = props => {
                 />
                 <Hidden lgUp>
                     <div className="post-type-adaptive">
-                        <Typography variant="h6" className={post.ads_type?.mark}>
+                        <Typography
+                            variant="h6"
+                            className={post.ads_type?.mark}
+                        >
                             {t(`common:${post.ads_type?.mark}`)}
                         </Typography>
                     </div>
@@ -300,7 +304,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                             {t('published')}: {time}
                         </Typography>
                         <Typography variant="subtitle1">
-                            {t('views')}: {number_of_views}
+                            {t('views')}: {post?.observer?.number_of_views}
                         </Typography>
                         {!self && (
                             <Typography
@@ -483,7 +487,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
-                                {t('views')}: {number_of_views}
+                                {t('views')}: {post?.observer?.number_of_views}
                             </Typography>
                         </div>
                         <CustomButton
