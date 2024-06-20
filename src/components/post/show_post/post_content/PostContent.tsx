@@ -59,9 +59,9 @@ export const PostContent: FC<PostContentTypes> = props => {
     const {user} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const transKey = post.category?.name;
-    const isExAuc = post.ads_type.mark === 'exauc';
-    const isAuction = post.ads_type.mark === 'auc' || isExAuc;
-    const self = post.author.id === user.id;
+    const isExAuc = post.ads_type?.mark === 'exauc';
+    const isAuction = post.ads_type?.mark === 'auc' || isExAuc;
+    const self = post.author?.id === user?.id;
 
     const mainCtgr = siteCategories.find(
         ctgr => ctgr?.name === post.category?.name
@@ -109,7 +109,7 @@ export const PostContent: FC<PostContentTypes> = props => {
         try {
             setFavorite(!favorite);
             setFavCount(favorite ? favCount - 1 : favCount + 1);
-            userAPI.favoriteAds(post.id);
+            userAPI.favoriteAds(post?.id);
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -229,8 +229,8 @@ export const PostContent: FC<PostContentTypes> = props => {
             <Hidden mdDown>
                 <div className="post-header">
                     <div className="post-type">
-                        <Typography variant="h6" className={post.ads_type.mark}>
-                            {t(`common:${post.ads_type.mark}`)}
+                        <Typography variant="h6" className={post.ads_type?.mark}>
+                            {t(`common:${post.ads_type?.mark}`)}
                         </Typography>
                     </div>
                     <div className="title">
@@ -261,8 +261,8 @@ export const PostContent: FC<PostContentTypes> = props => {
                 />
                 <Hidden lgUp>
                     <div className="post-type-adaptive">
-                        <Typography variant="h6" className={post.ads_type.mark}>
-                            {t(`common:${post.ads_type.mark}`)}
+                        <Typography variant="h6" className={post.ads_type?.mark}>
+                            {t(`common:${post.ads_type?.mark}`)}
                         </Typography>
                     </div>
                 </Hidden>
@@ -294,7 +294,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                 <Hidden mdDown>
                     <div className="post-info">
                         <Typography variant="subtitle1">
-                            <span>{t('common:post')} №:</span> {post.id}
+                            <span>{t('common:post')} №:</span> {post?.id}
                         </Typography>
                         <Typography variant="subtitle1">
                             {t('published')}: {time}
@@ -362,7 +362,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                 </div>
                 <Hidden lgUp>
                     <div className="contact">
-                        <ShowPhone postId={post.id} />
+                        <ShowPhone postId={post?.id} />
                         {!self && (
                             <CustomButton
                                 color="silver"
@@ -470,7 +470,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                     <div className="post-info">
                         <div className="info-wrapper">
                             <Typography variant="subtitle1">
-                                <span>{t('common:post')} №:</span> {post.id}
+                                <span>{t('common:post')} №:</span> {post?.id}
                             </Typography>
                             <Hidden xsDown>
                                 <Typography variant="subtitle1">
@@ -505,7 +505,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                 </Hidden>
             </Container>
             <ComplaintModal
-                postId={post.id}
+                postId={post?.id}
                 open={complainOpen}
                 onClose={handleComplainClose}
             />
