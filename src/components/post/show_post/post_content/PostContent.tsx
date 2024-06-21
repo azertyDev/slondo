@@ -19,12 +19,7 @@ import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/services_icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {
-    numberPrettier,
-    priceTransform,
-    transformCyrillic,
-    weekDaysHelper
-} from '@src/helpers';
+import {numberPrettier, priceTransform} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AutoRenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@root/src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
@@ -55,6 +50,7 @@ export const PostContent: FC<PostContentTypes> = props => {
 
     const siteCategories = useContext(CategoriesCtx);
     const {t} = useTranslation('post');
+
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user} = useContext(AuthCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
@@ -131,7 +127,7 @@ export const PostContent: FC<PostContentTypes> = props => {
             items.push(
                 <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}?.name`)}:
+                        {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {model[key]
@@ -140,7 +136,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                                     `filters:${
                                         isNoTrans
                                             ? `${param?.name}`
-                                            : `${transKey}.${param?.name}?.name`
+                                            : `${transKey}.${param?.name}.name`
                                     }`
                                 );
                             })
@@ -152,7 +148,7 @@ export const PostContent: FC<PostContentTypes> = props => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${transKey}.${key}?.name`)}:
+                        {t(`filters:${transKey}.${key}.name`)}:
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {t(
@@ -169,9 +165,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                     <Typography variant="subtitle1" className="key">
                         {t(
                             `filters:${
-                                isNoTrans
-                                    ? `${key}`
-                                    : `${transKey}.${key}?.name`
+                                isNoTrans ? `${key}` : `${transKey}.${key}.name`
                             }`
                         )}
                         :
@@ -196,7 +190,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                                   `filters:${
                                       isNoTrans
                                           ? `${model[key]?.name}`
-                                          : `${transKey}.${model[key]?.name}?.name`
+                                          : `${transKey}.${model[key]?.name}.name`
                                   }`
                               )}
                     </Typography>
@@ -397,7 +391,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                         <LocationIcon />
                         <Typography variant="subtitle1">
                             {`${
-                                t(`locations:${post.region?.name}?.name`) ?? ''
+                                t(`locations:${post.region?.name}.name`) ?? ''
                             }`}
                             {post.city?.name
                                 ? `, ${t(
@@ -410,12 +404,12 @@ export const PostContent: FC<PostContentTypes> = props => {
                 <div className="post-category">
                     <div>
                         <Typography variant="subtitle1" color="initial">
-                            {t(`categories:${mainCtgr?.name}?.name`)}
+                            {t(`categories:${mainCtgr?.name}.name`)}
                             {subCtgr && (
                                 <>
                                     &nbsp;-{' '}
                                     {t(
-                                        `categories:${mainCtgr?.name}.${subCtgr?.name}?.name`
+                                        `categories:${mainCtgr?.name}.${subCtgr?.name}.name`
                                     )}
                                 </>
                             )}
@@ -425,7 +419,7 @@ export const PostContent: FC<PostContentTypes> = props => {
                                     <span>
                                         {' '}
                                         {t(
-                                            `categories:${mainCtgr?.name}.${subCtgr?.name}.${typeCtgr?.name}?.name`
+                                            `categories:${mainCtgr?.name}.${subCtgr?.name}.${typeCtgr?.name}.name`
                                         )}
                                     </span>
                                 </>
