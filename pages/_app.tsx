@@ -61,9 +61,9 @@ const App = props => {
     }, []);
 
     useEffect(() => {
-        if (browser && socket && user.id !== null) {
+        if (browser && socket && user?.id !== null) {
             socket.on('connect', () => {
-                socket.emit('user_connected', user.id);
+                socket.emit('user_connected', user?.id);
             });
 
             socket.on(userObsChannel, data => {

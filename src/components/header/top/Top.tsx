@@ -36,11 +36,7 @@ export const Top: FC<TopHeaderPropsType> = props => {
     const {positionStatic, handleDrawerOpen, handlePageReload} = props;
 
     const {t} = useTranslation('header');
-    const {
-        user: {avatar},
-        auth,
-        setAuthModalOpen
-    } = useContext(AuthCtx);
+    const {user, auth, setAuthModalOpen} = useContext(AuthCtx);
 
     const {pathname} = useRouter();
     const trigger = useScrollTrigger({threshold: 53});
@@ -147,7 +143,7 @@ export const Top: FC<TopHeaderPropsType> = props => {
                                                 >
                                                     <Avatar
                                                         alt="Avatar"
-                                                        src={avatar}
+                                                        src={user?.avatar}
                                                     />
                                                 </CustomButton>
                                             </a>

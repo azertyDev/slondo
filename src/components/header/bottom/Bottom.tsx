@@ -37,7 +37,7 @@ export const Bottom: FC<BottomProps> = props => {
     const {pathname, push} = useRouter();
     const {t} = useTranslation('header');
     const {
-        user: {avatar},
+        user,
         auth: {isAuth},
         setAuthModalOpen
     } = useContext(AuthCtx);
@@ -172,7 +172,8 @@ export const Bottom: FC<BottomProps> = props => {
                                             <Avatar
                                                 alt="Avatar"
                                                 src={
-                                                    avatar ?? '/img/avatar.svg'
+                                                    user?.avatar ??
+                                                    '/img/avatar.svg'
                                                 }
                                             />
                                         </span>
