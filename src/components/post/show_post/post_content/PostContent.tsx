@@ -19,7 +19,7 @@ import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/services_icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {numberPrettier, priceTransform} from '@src/helpers';
+import {numberPrettier, priceTransform, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AutoRenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@root/src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
